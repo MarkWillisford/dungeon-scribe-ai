@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
-  Alert,
   AppState,
   type AppStateStatus,
   View,
@@ -11,6 +10,7 @@ import {
   ActivityIndicator,
   FlatList,
 } from 'react-native';
+import { showAlert } from '@/utils/crossPlatformAlert';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTheme } from '@/hooks/useTheme';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
@@ -224,7 +224,7 @@ export default function CombatTrackerScreen() {
   // Show stabilization prompt when End Turn triggers it while the character is dying
   useEffect(() => {
     if (!pendingStabilizationPrompt) return;
-    Alert.alert(
+    showAlert(
       'Stabilization Check',
       'Make a DC 10 Constitution check — did you stabilize?',
       [
@@ -310,12 +310,14 @@ export default function CombatTrackerScreen() {
     (characterId: string) => {
       const hp = character!.combatStats.hitPoints;
       const charMaxHP = hp.base + hp.constitution + hp.favoredClass + hp.other;
-      Alert.alert('New Session', 'This will reset your current HP, buffs, and spell slots.', [
+      showAlert('New Session', 'This will reset your current HP, buffs, and spell slots.', [
         { text: 'Cancel', style: 'cancel' },
         {
           text: 'Start New Session',
           style: 'destructive',
           onPress: async () => {
+            const pools = character!.resources;
+            const initialResourcePools = Object.fromEntries(pools.map((p) => [p.id, p.max]));
             try {
               if (userId) {
                 await PlaySessionService.create(userId, characterId, {
@@ -336,14 +338,14 @@ export default function CombatTrackerScreen() {
                   },
                   spellSlotsUsed: {},
                   preparedSpellsCast: {},
-                  resourcePools: {},
+                  resourcePools: initialResourcePools,
                   round: 0,
                 });
               }
-              dispatch(initNewSession({ maxHP: charMaxHP }));
+              dispatch(initNewSession({ maxHP: charMaxHP, pools }));
               setSessionCharacterId(characterId);
-            } catch {
-              Alert.alert('Error', 'Failed to start session. Please try again.');
+            } catch (err) {
+              showAlert('Error', 'Failed to start session. Please try again.');
             }
           },
         },
@@ -356,7 +358,7 @@ export default function CombatTrackerScreen() {
     async (characterId: string) => {
       if (!userId) return;
       if (!character || characterId !== (character.info.firebaseId ?? character.info.id)) {
-        Alert.alert(
+        showAlert(
           'Resume Unavailable',
           'Select that character first in the Characters tab, then resume the session.',
         );
@@ -369,13 +371,10 @@ export default function CombatTrackerScreen() {
           setSessionCharacterId(characterId);
           // playView → 'tracker' automatically because currentHP becomes non-null
         } else {
-          Alert.alert('Resume Failed', 'Session data is unavailable. Please start a new session.');
+          showAlert('Resume Failed', 'Session data is unavailable. Please start a new session.');
         }
       } catch {
-        Alert.alert(
-          'Resume Failed',
-          'Could not load session. Check your connection and try again.',
-        );
+        showAlert('Resume Failed', 'Could not load session. Check your connection and try again.');
       }
     },
     [dispatch, userId, character],
@@ -398,7 +397,7 @@ export default function CombatTrackerScreen() {
 
   const handleLongRest = useCallback(() => {
     if (!character || currentHP === null) return;
-    Alert.alert(
+    showAlert(
       'Long Rest',
       'Take a long rest? This restores HP, spell slots, and per-rest resources.',
       [
@@ -745,7 +744,7 @@ function SessionPicker({
         await onResumeSession(characterId);
       } catch (error) {
         console.warn('Failed to resume session:', error);
-        Alert.alert('Resume Failed', 'Could not load the saved session. Please try again.');
+        showAlert('Resume Failed', 'Could not load the saved session. Please try again.');
       } finally {
         setResuming(null);
       }
@@ -774,6 +773,7 @@ function SessionPicker({
           renderItem={({ item }) => {
             const hasSession = activeSet.has(item.id);
             const isLoading = resuming === item.id;
+
             return (
               <View
                 style={[

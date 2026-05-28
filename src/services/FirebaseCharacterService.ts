@@ -15,7 +15,10 @@ import type { Character } from '@/types';
 import type { CharacterSummary } from '@/types/character';
 import type { EquipmentSlot } from '@/types/equipment';
 import type { ItemSlot } from '@/types/magicItems';
+import type { ClassFeature } from '@/types/classes';
+import type { ResourcePoolDefinition } from '@/types/resources';
 import { PRESET_PF1E_STANDARD } from '@data/rulesets/presets';
+import { ALL_CLASS_CHOICE_DEFINITIONS } from '@data/classChoiceDefinitions';
 
 export class FirebaseCharacterService {
   private static readonly COLLECTION = 'characters';
@@ -75,7 +78,14 @@ export class FirebaseCharacterService {
   }
 
   /**
-   * Get a single character by ID
+   * Get a single character by ID.
+   *
+   * After deserializing the character document, we fetch the corresponding
+   * class documents from Firestore and merge their classFeatureResourcePools
+   * onto the character's stored class features. This allows
+   * ResourcePoolService.computePools() (called inside
+   * ModifierPipelineService.recalculate()) to find pool definitions without
+   * needing async Firestore access of its own.
    */
   static async getCharacter(characterId: string): Promise<Character> {
     const docRef = doc(db, this.COLLECTION, characterId);
@@ -87,14 +97,137 @@ export class FirebaseCharacterService {
 
     const data = docSnap.data();
     const character = this.deserializeFromFirestore(data);
+    let enriched = character;
+    try {
+      enriched = await this.mergeClassFeatureResourcePools(character);
+    } catch (err) {
+      console.warn(
+        '[FirebaseCharacterService] mergeClassFeatureResourcePools failed, returning base character',
+        err,
+      );
+    }
 
     return {
-      ...character,
+      ...enriched,
       info: {
-        ...character.info,
+        ...enriched.info,
         firebaseId: docSnap.id,
       },
     };
+  }
+
+  /**
+   * Load class documents from Firestore and merge two things onto the character:
+   *
+   * 1. classFeatures: if a class entry has an empty array (characters created
+   *    before features were persisted on the entry), inject features from the
+   *    class doc filtered to levels the character has actually reached.
+   *
+   * 2. classFeatureResourcePools: attach the ResourcePoolDefinition onto each
+   *    matching feature by name so ResourcePoolService.computePools() can work
+   *    without its own async Firestore access.
+   *
+   * Uses the class doc snaps already fetched — no extra DB calls.
+   */
+  private static async mergeClassFeatureResourcePools(character: Character): Promise<Character> {
+    const classIds = character.classes.classes.map((cls) => this.classDocId(cls.name));
+    const uniqueIds = [...new Set(classIds)];
+    if (uniqueIds.length === 0) return character;
+
+    const classDocSnaps = await Promise.all(uniqueIds.map((id) => getDoc(doc(db, 'classes', id))));
+
+    const poolsByClassId = new Map<string, Record<string, ResourcePoolDefinition>>();
+    const featuresByClassId = new Map<string, ClassFeature[]>();
+
+    for (const snap of classDocSnaps) {
+      if (!snap.exists()) continue;
+      const data = snap.data();
+      const pools = data.classFeatureResourcePools as
+        | Record<string, ResourcePoolDefinition>
+        | undefined;
+      if (pools) poolsByClassId.set(snap.id, pools);
+      const features = data.classFeatures as ClassFeature[] | undefined;
+      if (features?.length) featuresByClassId.set(snap.id, features);
+    }
+
+    if (poolsByClassId.size === 0 && featuresByClassId.size === 0) return character;
+
+    const enrichedClasses = character.classes.classes.map((cls) => {
+      const docId = this.classDocId(cls.name);
+      const poolMap = poolsByClassId.get(docId);
+      const firestoreFeatures = featuresByClassId.get(docId);
+
+      // Merge Firestore features into the stored array, adding any that are
+      // missing (e.g. features gained after level-up that were never persisted).
+      const storedFeatures = Array.isArray(cls.classFeatures) ? cls.classFeatures : [];
+      const normalizedStored = storedFeatures.map((f) => ({
+        ...f,
+        effects: f.effects ?? [],
+      }));
+      const missingFeatures = (firestoreFeatures ?? [])
+        .filter((f) => f.level <= cls.level)
+        .filter(
+          (f) =>
+            !normalizedStored.some(
+              (existing) => existing.name === f.name && existing.level === f.level,
+            ),
+        )
+        .map((f) => ({ ...f, effects: f.effects ?? [] }));
+      let baseFeatures = [...normalizedStored, ...missingFeatures];
+
+      // Inject features granted by class choices that predate the grantsFeature system.
+      // For each choice on this class, check if the selected option grants a feature
+      // and inject it if it's missing from the stored features.
+      const choiceDefs = ALL_CLASS_CHOICE_DEFINITIONS.filter(
+        (d) => d.className === cls.name.toLowerCase(),
+      );
+      for (const choice of cls.classChoices ?? []) {
+        const def = choiceDefs.find((d) => d.featureName === choice.featureName);
+        if (!def?.optionGroups) continue;
+        const selectedId = Array.isArray(choice.selection) ? choice.selection[0] : choice.selection;
+        const option = def.optionGroups.flatMap((g) => g.options).find((o) => o.id === selectedId);
+        if (!option?.grantsFeature) continue;
+        if (!baseFeatures.some((f) => f.name === option.grantsFeature!.name)) {
+          baseFeatures = [...baseFeatures, { ...option.grantsFeature, effects: [] }];
+        }
+      }
+
+      if (!poolMap) return { ...cls, classFeatures: baseFeatures };
+
+      // classFeatures is still empty (no classFeatures field on the Firestore class doc).
+      // Synthesize minimal stubs from the pool definitions so computePools() can find them.
+      if (baseFeatures.length === 0) {
+        const synthetic: ClassFeature[] = Object.entries(poolMap).map(([name, poolDef]) => ({
+          name,
+          description: '',
+          level: 1,
+          effects: [],
+          resourcePool: poolDef,
+        }));
+        return { ...cls, classFeatures: synthetic };
+      }
+
+      const enrichedFeatures = baseFeatures.map((feature) => {
+        if (feature.resourcePool) return feature;
+        const poolDef = poolMap[feature.name];
+        return poolDef ? { ...feature, resourcePool: poolDef } : feature;
+      });
+
+      return { ...cls, classFeatures: enrichedFeatures };
+    });
+
+    return {
+      ...character,
+      classes: { ...character.classes, classes: enrichedClasses },
+    };
+  }
+
+  /** Derive the Firestore document ID for a class from its display name. */
+  private static classDocId(className: string): string {
+    return className
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-|-$/g, '');
   }
 
   /**
