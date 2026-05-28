@@ -198,7 +198,8 @@ describe('PlaySessionService', () => {
 
       const result = await PlaySessionService.get('user-1', 'char-corrupt-abilities');
       // 'yes' is not a boolean so power_attack should not migrate
-      expect(result!.combatAbilities.activeToggles['power_attack']).toBeFalsy();
+      expect(result!.combatAbilities.activeToggles['power_attack']).toBeUndefined();
+      expect('power_attack' in result!.combatAbilities.activeToggles).toBe(false);
       expect(result!.combatAbilities.combatExpertisePenalty).toBe(1);
       // rage: true is a valid boolean → migrates
       expect(result!.combatAbilities.activeToggles['rage']).toBe(true);

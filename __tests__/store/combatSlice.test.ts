@@ -170,8 +170,10 @@ describe('toggleCombatAbility', () => {
   });
 
   it('toggles twoWeaponFighting named field', () => {
-    const state = combatReducer(undefined, toggleCombatAbility('twoWeaponFighting'));
+    let state = combatReducer(undefined, toggleCombatAbility('twoWeaponFighting'));
     expect(state.combatAbilities.twoWeaponFighting).toBe(true);
+    state = combatReducer(state, toggleCombatAbility('twoWeaponFighting'));
+    expect(state.combatAbilities.twoWeaponFighting).toBe(false);
   });
 });
 
