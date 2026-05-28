@@ -629,6 +629,7 @@ const characterEntrySlice = createSlice({
         choice: ClassChoice;
         grantedFeature?: { name: string; description: string; level: number };
         removedFeatureName?: string;
+        removedFeatureLevel?: number;
       }>,
     ) {
       const cls = state.character.classes.classes.find(
@@ -636,7 +637,8 @@ const characterEntrySlice = createSlice({
       );
       if (cls) {
         if (!cls.classChoices) cls.classChoices = [];
-        const { choiceIndex, choice, grantedFeature, removedFeatureName } = action.payload;
+        const { choiceIndex, choice, grantedFeature, removedFeatureName, removedFeatureLevel } =
+          action.payload;
         const sameFeatureIndices = cls.classChoices
           .map((ch, i) => ({ ch, i }))
           .filter(({ ch }) => ch.featureName === choice.featureName)
@@ -648,7 +650,9 @@ const characterEntrySlice = createSlice({
         }
         if (removedFeatureName) {
           cls.classFeatures = (cls.classFeatures ?? []).filter(
-            (f) => f.name !== removedFeatureName,
+            (f) =>
+              f.name !== removedFeatureName ||
+              (removedFeatureLevel !== undefined && f.level !== removedFeatureLevel),
           );
         }
         if (grantedFeature) {
