@@ -679,6 +679,7 @@ describe('initFromSession', () => {
     expect(state.combatAbilities.activeToggles['power_attack']).toBe(true);
     expect(state.combatAbilities.activeToggles['rage']).toBe(true);
     expect(state.combatAbilities.twoWeaponFighting).toBe(true);
+    expect(state.combatAbilities.activeToggles['deadly_aim']).toBeUndefined();
   });
 
   it('restores the round counter', () => {
