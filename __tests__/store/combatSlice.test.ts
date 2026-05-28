@@ -81,9 +81,8 @@ describe('combatSlice initial state', () => {
 
   it('starts with all combat abilities off', () => {
     const state = getInitialState();
-    expect(state.combatAbilities.powerAttack).toBe(false);
-    expect(state.combatAbilities.rage).toBe(false);
-    expect(state.combatAbilities.haste).toBe(false);
+    expect(state.combatAbilities.activeToggles).toEqual({});
+    expect(state.combatAbilities.twoWeaponFighting).toBe(false);
   });
 
   it('starts with null HP (no active session)', () => {
@@ -157,22 +156,22 @@ describe('clearAllBuffs', () => {
 // ----------------------------------------------------------------
 
 describe('toggleCombatAbility', () => {
-  it('toggles powerAttack', () => {
-    let state = combatReducer(undefined, toggleCombatAbility('powerAttack'));
-    expect(state.combatAbilities.powerAttack).toBe(true);
-    state = combatReducer(state, toggleCombatAbility('powerAttack'));
-    expect(state.combatAbilities.powerAttack).toBe(false);
+  it('toggles a feat ID in activeToggles', () => {
+    let state = combatReducer(undefined, toggleCombatAbility('power_attack'));
+    expect(state.combatAbilities.activeToggles['power_attack']).toBe(true);
+    state = combatReducer(state, toggleCombatAbility('power_attack'));
+    expect(state.combatAbilities.activeToggles['power_attack']).toBe(false);
   });
 
-  it('toggles rage independently of other abilities', () => {
+  it('toggles feat IDs independently', () => {
     let state = combatReducer(undefined, toggleCombatAbility('rage'));
-    expect(state.combatAbilities.rage).toBe(true);
-    expect(state.combatAbilities.powerAttack).toBe(false);
+    expect(state.combatAbilities.activeToggles['rage']).toBe(true);
+    expect(state.combatAbilities.activeToggles['power_attack']).toBeFalsy();
   });
 
-  it('toggles haste', () => {
-    const state = combatReducer(undefined, toggleCombatAbility('haste'));
-    expect(state.combatAbilities.haste).toBe(true);
+  it('toggles twoWeaponFighting named field', () => {
+    const state = combatReducer(undefined, toggleCombatAbility('twoWeaponFighting'));
+    expect(state.combatAbilities.twoWeaponFighting).toBe(true);
   });
 });
 
@@ -539,7 +538,7 @@ describe('resetCombat', () => {
     state = combatReducer(state, resetCombat());
 
     expect(state.activeBuffs).toHaveLength(0);
-    expect(state.combatAbilities.powerAttack).toBe(false);
+    expect(state.combatAbilities.activeToggles).toEqual({});
     expect(state.currentHP).toBeNull();
     expect(state.round).toBe(0);
     expect(state.isStaggered).toBe(false);
@@ -571,10 +570,10 @@ describe('initNewSession', () => {
 
   it('clears active buffs and resets combat abilities', () => {
     let state = combatReducer(undefined, addBuff(makeBuff()));
-    state = combatReducer(state, toggleCombatAbility('powerAttack'));
+    state = combatReducer(state, toggleCombatAbility('power_attack'));
     state = combatReducer(state, initNewSession({ maxHP: 40 }));
     expect(state.activeBuffs).toHaveLength(0);
-    expect(state.combatAbilities.powerAttack).toBe(false);
+    expect(state.combatAbilities.activeToggles).toEqual({});
   });
 
   it('resets the round counter to 0', () => {
@@ -620,14 +619,9 @@ function makeSessionDoc(overrides: Partial<PlaySessionDoc> = {}): PlaySessionDoc
     tempHP: 5,
     activeBuffs: [makeBuff({ id: 'session_buff', name: 'Session Buff', duration: 4 })],
     combatAbilities: {
-      powerAttack: true,
-      deadlyAim: false,
-      rage: false,
+      activeToggles: { power_attack: true },
       twoWeaponFighting: false,
       twoWeaponFightingLightOffhand: false,
-      haste: true,
-      flurryOfBlows: false,
-      combatExpertise: false,
       combatExpertisePenalty: 2,
     },
     spellSlotsUsed: { wizard: [0, 2, 1] },
@@ -660,9 +654,29 @@ describe('initFromSession', () => {
 
   it('restores combatAbilities from the session doc', () => {
     const state = combatReducer(undefined, initFromSession(makeSessionDoc()));
-    expect(state.combatAbilities.powerAttack).toBe(true);
-    expect(state.combatAbilities.haste).toBe(true);
+    expect(state.combatAbilities.activeToggles['power_attack']).toBe(true);
     expect(state.combatAbilities.combatExpertisePenalty).toBe(2);
+  });
+
+  it('migrates old flat-boolean combatAbilities format', () => {
+    const legacyDoc = {
+      ...makeSessionDoc(),
+      combatAbilities: {
+        powerAttack: true,
+        deadlyAim: false,
+        rage: true,
+        twoWeaponFighting: true,
+        twoWeaponFightingLightOffhand: false,
+        haste: false,
+        flurryOfBlows: false,
+        combatExpertise: false,
+        combatExpertisePenalty: 1,
+      },
+    } as unknown as PlaySessionDoc;
+    const state = combatReducer(undefined, initFromSession(legacyDoc));
+    expect(state.combatAbilities.activeToggles['power_attack']).toBe(true);
+    expect(state.combatAbilities.activeToggles['rage']).toBe(true);
+    expect(state.combatAbilities.twoWeaponFighting).toBe(true);
   });
 
   it('restores the round counter', () => {
@@ -696,7 +710,7 @@ describe('initFromSession', () => {
     delete doc.combatAbilities;
     const state = combatReducer(undefined, initFromSession(doc as unknown as PlaySessionDoc));
     expect(state.activeBuffs).toHaveLength(0);
-    expect(state.combatAbilities.powerAttack).toBe(false);
+    expect(state.combatAbilities.activeToggles).toEqual({});
     expect(state.combatAbilities.combatExpertisePenalty).toBe(1);
   });
 });

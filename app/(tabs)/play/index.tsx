@@ -108,6 +108,10 @@ export default function CombatTrackerScreen() {
     spellSlotsUsed,
   } = useAppSelector((s) => s.combat);
 
+  const isRageActive = useAppSelector(
+    (s) => s.combat.combatAbilities.activeToggles['rage'] ?? false,
+  );
+
   const [activeTab, setActiveTab] = useState<CombatTab>('playsheet');
   // sessionCheckDone tracks whether the Firestore session lookup has completed.
   // Initialize to true if we're already in a session (currentHP not null) so
@@ -280,7 +284,7 @@ export default function CombatTrackerScreen() {
 
   const handleToggleCombatAbility = useCallback(
     (key: Parameters<typeof toggleCombatAbility>[0]) => {
-      if (key === 'rage' && combatAbilities.rage && character && currentHP !== null) {
+      if (key === 'rage' && isRageActive && character && currentHP !== null) {
         const result = CombatService.calculateRageEndHPAdjustment(character, currentHP, tempHP);
         dispatch(
           applyRageEndHPLoss({ newCurrentHP: result.newCurrentHP, newTempHP: result.newTempHP }),
@@ -288,7 +292,7 @@ export default function CombatTrackerScreen() {
       }
       dispatch(toggleCombatAbility(key));
     },
-    [combatAbilities.rage, character, currentHP, tempHP, dispatch],
+    [isRageActive, character, currentHP, tempHP, dispatch],
   );
 
   const handleStartTurn = useCallback(() => {
@@ -326,14 +330,9 @@ export default function CombatTrackerScreen() {
                   tempHP: 0,
                   activeBuffs: [],
                   combatAbilities: {
-                    powerAttack: false,
-                    deadlyAim: false,
-                    rage: false,
+                    activeToggles: {},
                     twoWeaponFighting: false,
                     twoWeaponFightingLightOffhand: false,
-                    haste: false,
-                    flurryOfBlows: false,
-                    combatExpertise: false,
                     combatExpertisePenalty: 1,
                   },
                   spellSlotsUsed: {},
@@ -651,6 +650,7 @@ export default function CombatTrackerScreen() {
 
           <CombatAbilityToggles
             abilities={combatAbilities}
+            character={character}
             bab={bab}
             onToggle={handleToggleCombatAbility}
             onSetExpertisePenalty={(v) => dispatch(setCombatExpertisePenalty(v))}

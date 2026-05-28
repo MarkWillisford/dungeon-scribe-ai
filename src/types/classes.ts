@@ -81,8 +81,11 @@ export interface ClassChoice {
 }
 
 export interface ClassFeature {
+  id?: string;
   name: string;
   description: string;
+  shortDescription?: string;
+  activationMode?: 'passive' | 'toggle' | 'conditional';
   level: number;
   uses?: {
     perDay?: number;

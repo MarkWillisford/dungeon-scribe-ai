@@ -1,5 +1,12 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
-import { Buff, BuffPackage, CombatAbilityState, RollRecord, SavedBuff } from '@/types/buff';
+import {
+  Buff,
+  BuffPackage,
+  CombatAbilityState,
+  LEGACY_COMBAT_ABILITY_MIGRATION,
+  RollRecord,
+  SavedBuff,
+} from '@/types/buff';
 import type { PlaySessionDoc } from '@/types/playSession';
 import type { ResourcePool } from '@/types/resources';
 import { NonLethalService } from '@/services/NonLethalService';
@@ -49,14 +56,9 @@ interface CombatState {
 }
 
 const defaultCombatAbilities: CombatAbilityState = {
-  powerAttack: false,
-  deadlyAim: false,
-  rage: false,
+  activeToggles: {},
   twoWeaponFighting: false,
   twoWeaponFightingLightOffhand: false,
-  haste: false,
-  flurryOfBlows: false,
-  combatExpertise: false,
   combatExpertisePenalty: 1,
 };
 
@@ -118,12 +120,16 @@ const combatSlice = createSlice({
 
     // ---- Combat abilities ----
 
-    toggleCombatAbility(
-      state,
-      action: PayloadAction<keyof Omit<CombatAbilityState, 'combatExpertisePenalty'>>,
-    ) {
+    toggleCombatAbility(state, action: PayloadAction<string>) {
       const key = action.payload;
-      (state.combatAbilities[key] as boolean) = !state.combatAbilities[key];
+      if (key === 'twoWeaponFighting') {
+        state.combatAbilities.twoWeaponFighting = !state.combatAbilities.twoWeaponFighting;
+      } else if (key === 'twoWeaponFightingLightOffhand') {
+        state.combatAbilities.twoWeaponFightingLightOffhand =
+          !state.combatAbilities.twoWeaponFightingLightOffhand;
+      } else {
+        state.combatAbilities.activeToggles[key] = !state.combatAbilities.activeToggles[key];
+      }
     },
 
     setCombatExpertisePenalty(state, action: PayloadAction<number>) {
@@ -427,7 +433,26 @@ const combatSlice = createSlice({
       state.tempHP = s.tempHP;
       state.nonlethalDamage = s.nonlethalDamage;
       state.activeBuffs = s.activeBuffs.map((buff) => ({ ...buff }));
-      state.combatAbilities = { ...defaultCombatAbilities, ...(s.combatAbilities ?? {}) };
+      const raw = (s.combatAbilities ?? {}) as unknown as Record<string, unknown>;
+      let activeToggles: Record<string, boolean> = {};
+      if (raw.activeToggles && typeof raw.activeToggles === 'object') {
+        const at = raw.activeToggles as Record<string, unknown>;
+        for (const [k, v] of Object.entries(at)) {
+          if (typeof v === 'boolean') activeToggles[k] = v;
+        }
+      } else {
+        // Migrate from old flat-boolean format
+        for (const [camelKey, featId] of Object.entries(LEGACY_COMBAT_ABILITY_MIGRATION)) {
+          if (raw[camelKey] === true) activeToggles[featId] = true;
+        }
+      }
+      state.combatAbilities = {
+        activeToggles,
+        twoWeaponFighting: raw.twoWeaponFighting === true,
+        twoWeaponFightingLightOffhand: raw.twoWeaponFightingLightOffhand === true,
+        combatExpertisePenalty:
+          typeof raw.combatExpertisePenalty === 'number' ? raw.combatExpertisePenalty : 1,
+      };
       state.round = s.round;
       state.resourcePools = s.resourcePools ?? {};
       state.preparedSpellsCast = s.preparedSpellsCast ?? {};

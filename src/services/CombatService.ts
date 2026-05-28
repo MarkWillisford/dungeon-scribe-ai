@@ -45,9 +45,10 @@ export class CombatService {
   static getCombatAbilityEffects(character: Character, abilities: CombatAbilityState): Effect[] {
     const effects: Effect[] = [];
     const bab = character.combatStats.attackBonuses.baseAttack[0] ?? 0;
+    const toggles = abilities.activeToggles;
 
     // Power Attack
-    if (abilities.powerAttack) {
+    if (toggles['power_attack']) {
       const { penalty, damageBonus } = this.getPowerAttackValues(bab);
       effects.push({
         type: 'penalty',
@@ -65,8 +66,8 @@ export class CombatService {
       });
     }
 
-    // Deadly Aim (ranged equivalent of Power Attack)
-    if (abilities.deadlyAim) {
+    // Deadly Aim
+    if (toggles['deadly_aim']) {
       const { penalty, damageBonus } = this.getDeadlyAimValues(bab);
       effects.push({
         type: 'penalty',
@@ -85,7 +86,7 @@ export class CombatService {
     }
 
     // Rage — +4 morale STR, +4 morale CON, +2 morale Will, -2 AC penalty
-    if (abilities.rage) {
+    if (toggles['rage']) {
       effects.push(
         {
           type: 'bonus',
@@ -108,52 +109,12 @@ export class CombatService {
           value: 2,
           source: 'Rage',
         },
-        {
-          type: 'penalty',
-          bonusType: BonusType.UNTYPED,
-          target: 'ac',
-          value: -2,
-          source: 'Rage',
-        },
-      );
-    }
-
-    // Haste — +1 untyped attack, +1 dodge AC, +1 dodge Reflex, +30 enhancement speed
-    if (abilities.haste) {
-      effects.push(
-        {
-          type: 'bonus',
-          bonusType: BonusType.UNTYPED,
-          target: 'attack.all',
-          value: 1,
-          source: 'Haste',
-        },
-        {
-          type: 'bonus',
-          bonusType: BonusType.DODGE,
-          target: 'ac.dodge',
-          value: 1,
-          source: 'Haste',
-        },
-        {
-          type: 'bonus',
-          bonusType: BonusType.DODGE,
-          target: 'save.reflex',
-          value: 1,
-          source: 'Haste',
-        },
-        {
-          type: 'bonus',
-          bonusType: BonusType.ENHANCEMENT,
-          target: 'speed.base',
-          value: 30,
-          source: 'Haste',
-        },
+        { type: 'penalty', bonusType: BonusType.UNTYPED, target: 'ac', value: -2, source: 'Rage' },
       );
     }
 
     // Combat Expertise — variable attack penalty, equal dodge bonus to AC
-    if (abilities.combatExpertise) {
+    if (toggles['combat_expertise']) {
       const p = abilities.combatExpertisePenalty;
       effects.push(
         {
@@ -180,14 +141,13 @@ export class CombatService {
       );
     }
 
-    // Two-Weapon Fighting — main-hand penalty (off-hand tracked separately in future)
+    // Two-Weapon Fighting — always available; TWF feat reduces the penalties
     if (abilities.twoWeaponFighting) {
       const hasTWFFeat = character.feats.feats.some((f) => f.featId === 'two_weapon_fighting');
       const lightOffhand = abilities.twoWeaponFightingLightOffhand;
       // Without feat: -6 main / -10 off-hand (-4/-8 with light off-hand)
       // With feat:    -4 main / -4 off-hand  (-2/-2 with light off-hand)
       const mainPenalty = hasTWFFeat ? (lightOffhand ? -2 : -4) : lightOffhand ? -4 : -6;
-
       effects.push({
         type: 'penalty',
         bonusType: BonusType.UNTYPED,
@@ -372,14 +332,9 @@ export class CombatService {
    */
   static defaultAbilities(): CombatAbilityState {
     return {
-      powerAttack: false,
-      deadlyAim: false,
-      rage: false,
+      activeToggles: {},
       twoWeaponFighting: false,
       twoWeaponFightingLightOffhand: false,
-      haste: false,
-      flurryOfBlows: false,
-      combatExpertise: false,
       combatExpertisePenalty: 1,
     };
   }

@@ -94,7 +94,7 @@ describe('CombatService.getCombatAbilityEffects', () => {
   it('Power Attack produces melee attack penalty and damage bonus', () => {
     const effects = CombatService.getCombatAbilityEffects(fighter, {
       ...defaultAbilities,
-      powerAttack: true,
+      activeToggles: { power_attack: true },
     });
     const attackEffect = effects.find((e) => e.target === 'attack.melee');
     const damageEffect = effects.find((e) => e.target === 'damage.melee');
@@ -107,7 +107,7 @@ describe('CombatService.getCombatAbilityEffects', () => {
   it('Deadly Aim produces ranged attack penalty and damage bonus', () => {
     const effects = CombatService.getCombatAbilityEffects(fighter, {
       ...defaultAbilities,
-      deadlyAim: true,
+      activeToggles: { deadly_aim: true },
     });
     expect(effects.find((e) => e.target === 'attack.ranged')?.value).toBeLessThan(0);
     expect(effects.find((e) => e.target === 'damage.ranged')?.value).toBeGreaterThan(0);
@@ -116,7 +116,7 @@ describe('CombatService.getCombatAbilityEffects', () => {
   it('Rage produces STR, CON, Will bonuses and AC penalty', () => {
     const effects = CombatService.getCombatAbilityEffects(fighter, {
       ...defaultAbilities,
-      rage: true,
+      activeToggles: { rage: true },
     });
     const strEffect = effects.find((e) => e.target === 'ability.str');
     const conEffect = effects.find((e) => e.target === 'ability.con');
@@ -130,21 +130,10 @@ describe('CombatService.getCombatAbilityEffects', () => {
     expect(acEffect?.value).toBe(-2);
   });
 
-  it('Haste produces dodge AC, dodge Reflex, untyped attack, enhancement speed', () => {
-    const effects = CombatService.getCombatAbilityEffects(fighter, {
-      ...defaultAbilities,
-      haste: true,
-    });
-    expect(effects.find((e) => e.target === 'ac.dodge' && e.source === 'Haste')?.value).toBe(1);
-    expect(effects.find((e) => e.target === 'save.reflex')?.bonusType).toBe(BonusType.DODGE);
-    expect(effects.find((e) => e.target === 'attack.all')?.value).toBe(1);
-    expect(effects.find((e) => e.target === 'speed.base')?.value).toBe(30);
-  });
-
   it('Combat Expertise applies penalty to attacks and dodge bonus to AC', () => {
     const effects = CombatService.getCombatAbilityEffects(fighter, {
       ...defaultAbilities,
-      combatExpertise: true,
+      activeToggles: { combat_expertise: true },
       combatExpertisePenalty: 3,
     });
     expect(effects.find((e) => e.target === 'attack.melee')?.value).toBe(-3);
@@ -352,7 +341,7 @@ describe('CombatService.calculateAllTotals', () => {
     const base = CombatService.calculateAllTotals(fighter, [], defaultAbilities);
     const withPA = CombatService.calculateAllTotals(fighter, [], {
       ...defaultAbilities,
-      powerAttack: true,
+      activeToggles: { power_attack: true },
     });
     expect(withPA.meleeAttack[0]).toBeLessThan(base.meleeAttack[0]);
   });
@@ -362,7 +351,7 @@ describe('CombatService.calculateAllTotals', () => {
     const base = CombatService.calculateAllTotals(fighter, [], defaultAbilities);
     const withRage = CombatService.calculateAllTotals(fighter, [], {
       ...defaultAbilities,
-      rage: true,
+      activeToggles: { rage: true },
     });
     // Rage adds +4 STR → +2 STR mod → +2 melee attack
     expect(withRage.meleeAttack[0]).toBe(base.meleeAttack[0] + 2);
@@ -373,20 +362,9 @@ describe('CombatService.calculateAllTotals', () => {
     const base = CombatService.calculateAllTotals(fighter, [], defaultAbilities);
     const withRage = CombatService.calculateAllTotals(fighter, [], {
       ...defaultAbilities,
-      rage: true,
+      activeToggles: { rage: true },
     });
     expect(withRage.ac.total).toBe(base.ac.total - 2);
-  });
-
-  it('Haste adds +1 to all attacks and +1 dodge AC', () => {
-    const fighter = makeFighter();
-    const base = CombatService.calculateAllTotals(fighter, [], defaultAbilities);
-    const withHaste = CombatService.calculateAllTotals(fighter, [], {
-      ...defaultAbilities,
-      haste: true,
-    });
-    expect(withHaste.meleeAttack[0]).toBe(base.meleeAttack[0] + 1);
-    expect(withHaste.ac.total).toBe(base.ac.total + 1);
   });
 
   it('skill buffs are included in skill totals', () => {
