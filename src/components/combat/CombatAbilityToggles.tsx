@@ -4,7 +4,7 @@ import { useTheme } from '@/hooks/useTheme';
 import { CombatAbilityState } from '@/types/buff';
 import { Character } from '@/types';
 import { FeatRegistryService } from '@/services/FeatRegistryService';
-import type { FeatDefinition } from '@/types/feats';
+import type { Effect } from '@/types/base';
 
 interface CombatAbilityTogglesProps {
   abilities: CombatAbilityState;
@@ -15,12 +15,20 @@ interface CombatAbilityTogglesProps {
   testID?: string;
 }
 
+interface ToggleEntry {
+  id: string;
+  name: string;
+  description: string;
+  shortDescription?: string;
+  effects: Effect[];
+}
+
 interface ResolvedEffect {
   target: string;
   value: number;
 }
 
-// Evaluate a feat effect value that may be a number or a BAB-based formula string.
+// Evaluate an effect value that may be a number or a BAB-based formula string.
 function resolveEffectValue(value: number | string, bab: number): number | null {
   if (typeof value === 'number') return value;
   const basePenalty = Math.floor(bab / 4) + 1;
@@ -37,11 +45,11 @@ function resolveEffectValue(value: number | string, bab: number): number | null 
   return null;
 }
 
-function buildPreview(featId: string, def: FeatDefinition, bab: number): string | null {
-  if (!def.effects || def.effects.length === 0) return null;
+function buildPreview(entry: ToggleEntry, bab: number): string | null {
+  if (!entry.effects || entry.effects.length === 0) return null;
 
   const resolved: ResolvedEffect[] = [];
-  for (const effect of def.effects) {
+  for (const effect of entry.effects) {
     const val = resolveEffectValue(effect.value, bab);
     if (val !== null) resolved.push({ target: effect.target, value: val });
   }
@@ -53,7 +61,7 @@ function buildPreview(featId: string, def: FeatDefinition, bab: number): string 
     if (r.target.startsWith('attack')) parts.push(`${sign}${r.value} atk`);
     else if (r.target.startsWith('damage')) {
       // Power Attack: also show two-handed variant (+50%)
-      if (featId === 'power_attack') {
+      if (entry.id === 'power_attack') {
         const thValue = Math.abs(r.value) + Math.floor(Math.abs(r.value) / 2);
         parts.push(`${sign}${r.value} dmg (+${thValue} two-handed)`);
       } else {
@@ -86,25 +94,52 @@ export function CombatAbilityToggles({
 }: CombatAbilityTogglesProps) {
   const { colors, fantasy } = useTheme();
 
-  const toggleableFeats = useMemo(() => {
+  const toggleableAbilities = useMemo((): ToggleEntry[] => {
     if (!character) return [];
-    return character.feats.feats.flatMap((charFeat) => {
+
+    const fromFeats: ToggleEntry[] = character.feats.feats.flatMap((charFeat) => {
       const def = FeatRegistryService.getFeat(charFeat.featId);
       if (!def || def.activationMode !== 'toggle') return [];
-      return [{ id: charFeat.featId, def }];
+      return [
+        {
+          id: charFeat.featId,
+          name: def.name,
+          description: def.description,
+          shortDescription: def.shortDescription,
+          effects: def.effects ?? [],
+        },
+      ];
     });
+
+    const fromClassFeatures: ToggleEntry[] = character.classes.classes.flatMap((cls) =>
+      (cls.classFeatures ?? []).flatMap((feature) => {
+        if (feature.activationMode !== 'toggle' || !feature.id) return [];
+        return [
+          {
+            id: feature.id,
+            name: feature.name,
+            description: feature.description,
+            shortDescription: feature.shortDescription,
+            effects: feature.effects ?? [],
+          },
+        ];
+      }),
+    );
+
+    return [...fromFeats, ...fromClassFeatures];
   }, [character]);
 
-  if (toggleableFeats.length === 0) return null;
+  if (toggleableAbilities.length === 0) return null;
 
   return (
     <View testID={testID} style={styles.container}>
       <Text style={[styles.sectionHeader, { color: fantasy.gold }]}>Combat Abilities</Text>
 
-      {toggleableFeats.map(({ id, def }) => {
+      {toggleableAbilities.map((entry) => {
+        const { id } = entry;
         const isOn = abilities.activeToggles[id] === true;
         const color = id === 'combat_expertise' ? CE_COLOR : TOGGLE_COLOR;
-        const preview = isOn ? buildPreview(id, def, bab) : null;
+        const preview = isOn ? buildPreview(entry, bab) : null;
 
         return (
           <View key={id}>
@@ -117,7 +152,7 @@ export function CombatAbilityToggles({
                 },
               ]}
               onPress={() => onToggle(id)}
-              accessibilityLabel={`Toggle ${def.name}`}
+              accessibilityLabel={`Toggle ${entry.name}`}
               accessibilityState={{ checked: isOn }}
             >
               <View style={styles.abilityLeft}>
@@ -138,10 +173,10 @@ export function CombatAbilityToggles({
                   <Text
                     style={[styles.abilityLabel, { color: isOn ? color : colors.text.primary }]}
                   >
-                    {def.name}
+                    {entry.name}
                   </Text>
                   <Text style={[styles.abilityDesc, { color: colors.text.tertiary }]}>
-                    {def.shortDescription ?? def.description}
+                    {entry.shortDescription ?? entry.description}
                   </Text>
                 </View>
               </View>
