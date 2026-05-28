@@ -18,6 +18,7 @@ import type { ItemSlot } from '@/types/magicItems';
 import type { ClassFeature } from '@/types/classes';
 import type { ResourcePoolDefinition } from '@/types/resources';
 import { PRESET_PF1E_STANDARD } from '@data/rulesets/presets';
+import { ALL_CLASS_CHOICE_DEFINITIONS } from '@data/classChoiceDefinitions';
 
 export class FirebaseCharacterService {
   private static readonly COLLECTION = 'characters';
@@ -100,7 +101,10 @@ export class FirebaseCharacterService {
     try {
       enriched = await this.mergeClassFeatureResourcePools(character);
     } catch (err) {
-      console.warn('[FirebaseCharacterService] mergeClassFeatureResourcePools failed, returning base character', err);
+      console.warn(
+        '[FirebaseCharacterService] mergeClassFeatureResourcePools failed, returning base character',
+        err,
+      );
     }
 
     return {
@@ -163,10 +167,30 @@ export class FirebaseCharacterService {
       const missingFeatures = (firestoreFeatures ?? [])
         .filter((f) => f.level <= cls.level)
         .filter(
-          (f) => !normalizedStored.some((existing) => existing.name === f.name && existing.level === f.level),
+          (f) =>
+            !normalizedStored.some(
+              (existing) => existing.name === f.name && existing.level === f.level,
+            ),
         )
         .map((f) => ({ ...f, effects: f.effects ?? [] }));
       let baseFeatures = [...normalizedStored, ...missingFeatures];
+
+      // Inject features granted by class choices that predate the grantsFeature system.
+      // For each choice on this class, check if the selected option grants a feature
+      // and inject it if it's missing from the stored features.
+      const choiceDefs = ALL_CLASS_CHOICE_DEFINITIONS.filter(
+        (d) => d.className === cls.name.toLowerCase(),
+      );
+      for (const choice of cls.classChoices ?? []) {
+        const def = choiceDefs.find((d) => d.featureName === choice.featureName);
+        if (!def?.optionGroups) continue;
+        const selectedId = Array.isArray(choice.selection) ? choice.selection[0] : choice.selection;
+        const option = def.optionGroups.flatMap((g) => g.options).find((o) => o.id === selectedId);
+        if (!option?.grantsFeature) continue;
+        if (!baseFeatures.some((f) => f.name === option.grantsFeature!.name)) {
+          baseFeatures = [...baseFeatures, { ...option.grantsFeature, effects: [] }];
+        }
+      }
 
       if (!poolMap) return { ...cls, classFeatures: baseFeatures };
 

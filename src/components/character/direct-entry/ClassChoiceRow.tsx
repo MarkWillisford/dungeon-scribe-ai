@@ -337,6 +337,13 @@ export function ClassChoiceRow({
     const wasCompanion = COMPANION_KEYS.has((currentChoice?.selection as string) ?? '');
     const nowCompanion = COMPANION_KEYS.has(item.key);
 
+    const allOptions = definition.optionGroups?.flatMap((g) => g.options) ?? [];
+    const selectedOption = allOptions.find((o) => o.id === item.key);
+    const previousOptionId = currentChoice?.selection as string | undefined;
+    const previousOption = previousOptionId
+      ? allOptions.find((o) => o.id === previousOptionId)
+      : undefined;
+
     dispatch(
       upsertClassChoice({
         classId,
@@ -346,6 +353,8 @@ export function ClassChoiceRow({
           takenAtLevel,
           selection: item.key,
         },
+        grantedFeature: selectedOption?.grantsFeature,
+        removedFeatureName: previousOption?.grantsFeature?.name,
       }),
     );
     setPickerOpen(false);

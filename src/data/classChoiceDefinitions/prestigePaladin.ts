@@ -104,6 +104,12 @@ export const prestigePaladinDefinitions: ClassChoiceDefinition[] = [
             name: 'Channel Energy',
             description:
               'Gains channel positive energy as a cleric. Uses class level + 3 as effective cleric level (Charisma-based DC and uses per day).',
+            grantsFeature: {
+              name: 'Channel Energy (PP)',
+              description:
+                'Gains channel positive energy as a cleric, treating class level + 3 as effective cleric level for dice and DC (Charisma-based). Uses per day: 3 + Charisma modifier.',
+              level: 1,
+            },
           },
         ],
       },

@@ -181,5 +181,185 @@
       "restRecoveryMode": "full",
       "specialRechargeNote": "Regain 1 grit on confirmed critical hit with a firearm or killing blow with a firearm"
     }
+  },
+  {
+    "classId": "radiant-servant-of-milani",
+    "className": "Radiant Servant of Milani",
+    "featureName": "Turn Undead",
+    "resourcePool": {
+      "id": "turn_undead_uses",
+      "name": "Turn Undead",
+      "rechargeOn": "rest",
+      "maxFormula": "3 + chaMod",
+      "restRecoveryMode": "full"
+    }
+  },
+  {
+    "classId": "radiant-servant-of-milani",
+    "className": "Radiant Servant of Milani",
+    "featureName": "Extra Greater Turning",
+    "resourcePool": {
+      "id": "greater_turning_uses",
+      "name": "Greater Turning",
+      "rechargeOn": "rest",
+      "maxFormula": "3 + chaMod",
+      "restRecoveryMode": "full"
+    }
+  },
+  {
+    "classId": "prestige-paladin",
+    "className": "Prestige Paladin",
+    "featureName": "Channel Energy (PP)",
+    "resourcePool": {
+      "id": "pp_channel_energy_uses",
+      "name": "Channel Energy (PP)",
+      "rechargeOn": "rest",
+      "maxFormula": "3 + chaMod",
+      "restRecoveryMode": "full"
+    }
+  },
+  {
+    "classId": "prestige-paladin",
+    "className": "Prestige Paladin",
+    "featureName": "Smite Evil (1/day)",
+    "resourcePool": {
+      "id": "smite_evil_uses",
+      "name": "Smite Evil",
+      "rechargeOn": "rest",
+      "maxFormula": "1",
+      "restRecoveryMode": "full"
+    }
+  },
+  {
+    "classId": "prestige-paladin",
+    "className": "Prestige Paladin",
+    "featureName": "Smite Evil (2/day)",
+    "resourcePool": {
+      "id": "smite_evil_uses",
+      "name": "Smite Evil",
+      "rechargeOn": "rest",
+      "maxFormula": "1",
+      "restRecoveryMode": "full"
+    }
+  },
+  {
+    "classId": "prestige-paladin",
+    "className": "Prestige Paladin",
+    "featureName": "Smite Evil (3/day)",
+    "resourcePool": {
+      "id": "smite_evil_uses",
+      "name": "Smite Evil",
+      "rechargeOn": "rest",
+      "maxFormula": "1",
+      "restRecoveryMode": "full"
+    }
+  },
+  {
+    "classId": "prestige-paladin",
+    "className": "Prestige Paladin",
+    "featureName": "Smite Evil (4/day)",
+    "resourcePool": {
+      "id": "smite_evil_uses",
+      "name": "Smite Evil",
+      "rechargeOn": "rest",
+      "maxFormula": "1",
+      "restRecoveryMode": "full"
+    }
+  },
+  {
+    "classId": "prestige-paladin",
+    "className": "Prestige Paladin",
+    "featureName": "Lay on Hands",
+    "resourcePool": {
+      "id": "lay_on_hands_uses",
+      "name": "Lay on Hands",
+      "rechargeOn": "rest",
+      "maxFormula": "prestigePaladinLevel + chaMod + 3",
+      "restRecoveryMode": "full"
+    }
+  },
+  {
+    "classId": "dweomerkeeper",
+    "className": "Dweomerkeeper",
+    "featureName": "Supernatural Spell (1/day)",
+    "resourcePool": {
+      "id": "supernatural_spell_uses",
+      "name": "Supernatural Spell",
+      "rechargeOn": "rest",
+      "maxFormula": "1",
+      "restRecoveryMode": "full"
+    }
+  },
+  {
+    "classId": "dweomerkeeper",
+    "className": "Dweomerkeeper",
+    "featureName": "Supernatural Spell (2/day)",
+    "resourcePool": {
+      "id": "supernatural_spell_uses",
+      "name": "Supernatural Spell",
+      "rechargeOn": "rest",
+      "maxFormula": "1",
+      "restRecoveryMode": "full"
+    }
+  },
+  {
+    "classId": "dweomerkeeper",
+    "className": "Dweomerkeeper",
+    "featureName": "Supernatural Spell (3/day)",
+    "resourcePool": {
+      "id": "supernatural_spell_uses",
+      "name": "Supernatural Spell",
+      "rechargeOn": "rest",
+      "maxFormula": "1",
+      "restRecoveryMode": "full"
+    }
+  },
+  {
+    "classId": "dweomerkeeper",
+    "className": "Dweomerkeeper",
+    "featureName": "Supernatural Spell (4/day)",
+    "resourcePool": {
+      "id": "supernatural_spell_uses",
+      "name": "Supernatural Spell",
+      "rechargeOn": "rest",
+      "maxFormula": "1",
+      "restRecoveryMode": "full"
+    }
+  },
+  {
+    "classId": "hathran",
+    "className": "Hathran",
+    "featureName": "Universal Spirit Magic (1/day)",
+    "resourcePool": {
+      "id": "universal_spirit_magic_uses",
+      "name": "Universal Spirit Magic",
+      "rechargeOn": "rest",
+      "maxFormula": "1",
+      "restRecoveryMode": "full"
+    }
+  },
+  {
+    "classId": "hathran",
+    "className": "Hathran",
+    "featureName": "Universal Spirit Magic (2/day)",
+    "resourcePool": {
+      "id": "universal_spirit_magic_uses",
+      "name": "Universal Spirit Magic",
+      "rechargeOn": "rest",
+      "maxFormula": "1",
+      "restRecoveryMode": "full"
+    }
+  },
+  {
+    "classId": "hathran",
+    "className": "Hathran",
+    "featureName": "Universal Spirit Magic (3/day)",
+    "resourcePool": {
+      "id": "universal_spirit_magic_uses",
+      "name": "Universal Spirit Magic",
+      "rechargeOn": "rest",
+      "maxFormula": "1",
+      "restRecoveryMode": "full"
+    }
   }
 ]

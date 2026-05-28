@@ -72,6 +72,13 @@ export interface ClassChoiceOption {
     label: string; // 'Choose a subtype'
     options: string[]; // allowed subtype values
   };
+  // If set, selecting this option injects a classFeature with this name/description/level
+  // onto the class entry. Deselecting it (by switching to another option) removes it.
+  grantsFeature?: {
+    name: string;
+    description: string;
+    level: number;
+  };
 }
 
 // ---- Class Choice Definition ----
