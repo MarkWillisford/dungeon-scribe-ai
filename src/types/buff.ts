@@ -45,6 +45,15 @@ export interface CombatAbilityState {
   combatExpertisePenalty: number; // 1–5 (sub-option for Combat Expertise feat)
 }
 
+// Maps legacy flat-boolean field names to feat IDs for session migration
+export const LEGACY_COMBAT_ABILITY_MIGRATION: Record<string, string> = {
+  powerAttack: 'power_attack',
+  deadlyAim: 'deadly_aim',
+  rage: 'rage',
+  flurryOfBlows: 'flurry_of_blows',
+  combatExpertise: 'combat_expertise',
+};
+
 // A single roll result stored in the session log
 export interface RollRecord {
   id: string;

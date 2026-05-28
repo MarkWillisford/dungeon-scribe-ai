@@ -10,6 +10,7 @@ import {
 } from 'firebase/firestore';
 import { db } from '@config/firebase';
 import type { PlaySessionDoc } from '@/types/playSession';
+import { LEGACY_COMBAT_ABILITY_MIGRATION } from '@/types/buff';
 
 type PlaySessionUpdate = Partial<
   Omit<PlaySessionDoc, 'characterId' | 'userId' | 'createdAt' | 'updatedAt'>
@@ -207,14 +208,7 @@ export class PlaySessionService {
       }
     } else {
       // Migrate from old flat-boolean format
-      const migration: Record<string, string> = {
-        powerAttack: 'power_attack',
-        deadlyAim: 'deadly_aim',
-        rage: 'rage',
-        flurryOfBlows: 'flurry_of_blows',
-        combatExpertise: 'combat_expertise',
-      };
-      for (const [camelKey, featId] of Object.entries(migration)) {
+      for (const [camelKey, featId] of Object.entries(LEGACY_COMBAT_ABILITY_MIGRATION)) {
         if (raw[camelKey] === true) activeToggles[featId] = true;
       }
     }

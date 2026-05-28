@@ -1,5 +1,12 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
-import { Buff, BuffPackage, CombatAbilityState, RollRecord, SavedBuff } from '@/types/buff';
+import {
+  Buff,
+  BuffPackage,
+  CombatAbilityState,
+  LEGACY_COMBAT_ABILITY_MIGRATION,
+  RollRecord,
+  SavedBuff,
+} from '@/types/buff';
 import type { PlaySessionDoc } from '@/types/playSession';
 import type { ResourcePool } from '@/types/resources';
 import { NonLethalService } from '@/services/NonLethalService';
@@ -435,14 +442,7 @@ const combatSlice = createSlice({
         }
       } else {
         // Migrate from old flat-boolean format
-        const migration: Record<string, string> = {
-          powerAttack: 'power_attack',
-          deadlyAim: 'deadly_aim',
-          rage: 'rage',
-          flurryOfBlows: 'flurry_of_blows',
-          combatExpertise: 'combat_expertise',
-        };
-        for (const [camelKey, featId] of Object.entries(migration)) {
+        for (const [camelKey, featId] of Object.entries(LEGACY_COMBAT_ABILITY_MIGRATION)) {
           if (raw[camelKey] === true) activeToggles[featId] = true;
         }
       }
