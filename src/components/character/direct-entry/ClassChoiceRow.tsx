@@ -355,6 +355,7 @@ export function ClassChoiceRow({
         },
         grantedFeature: selectedOption?.grantsFeature,
         removedFeatureName: previousOption?.grantsFeature?.name,
+        removedFeatureLevel: previousOption?.grantsFeature?.level,
       }),
     );
     setPickerOpen(false);

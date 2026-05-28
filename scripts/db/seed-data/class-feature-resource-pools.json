@@ -238,7 +238,7 @@
       "id": "smite_evil_uses",
       "name": "Smite Evil",
       "rechargeOn": "rest",
-      "maxFormula": "1",
+      "maxFormula": "2",
       "restRecoveryMode": "full"
     }
   },
@@ -250,7 +250,7 @@
       "id": "smite_evil_uses",
       "name": "Smite Evil",
       "rechargeOn": "rest",
-      "maxFormula": "1",
+      "maxFormula": "3",
       "restRecoveryMode": "full"
     }
   },
@@ -262,7 +262,7 @@
       "id": "smite_evil_uses",
       "name": "Smite Evil",
       "rechargeOn": "rest",
-      "maxFormula": "1",
+      "maxFormula": "4",
       "restRecoveryMode": "full"
     }
   },
@@ -298,7 +298,7 @@
       "id": "supernatural_spell_uses",
       "name": "Supernatural Spell",
       "rechargeOn": "rest",
-      "maxFormula": "1",
+      "maxFormula": "2",
       "restRecoveryMode": "full"
     }
   },
@@ -310,7 +310,7 @@
       "id": "supernatural_spell_uses",
       "name": "Supernatural Spell",
       "rechargeOn": "rest",
-      "maxFormula": "1",
+      "maxFormula": "3",
       "restRecoveryMode": "full"
     }
   },
@@ -322,7 +322,7 @@
       "id": "supernatural_spell_uses",
       "name": "Supernatural Spell",
       "rechargeOn": "rest",
-      "maxFormula": "1",
+      "maxFormula": "4",
       "restRecoveryMode": "full"
     }
   },
@@ -346,7 +346,7 @@
       "id": "universal_spirit_magic_uses",
       "name": "Universal Spirit Magic",
       "rechargeOn": "rest",
-      "maxFormula": "1",
+      "maxFormula": "2",
       "restRecoveryMode": "full"
     }
   },
@@ -358,7 +358,7 @@
       "id": "universal_spirit_magic_uses",
       "name": "Universal Spirit Magic",
       "rechargeOn": "rest",
-      "maxFormula": "1",
+      "maxFormula": "3",
       "restRecoveryMode": "full"
     }
   }

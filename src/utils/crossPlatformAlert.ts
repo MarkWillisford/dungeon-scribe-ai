@@ -30,8 +30,8 @@ export function showAlert(
     return;
   }
 
-  const confirmButton = buttons.find((b) => b.style !== 'cancel');
-  const cancelButton = buttons.find((b) => b.style === 'cancel');
+  const cancelButton = buttons.find((b) => b.style === 'cancel') ?? buttons[0];
+  const confirmButton = buttons.find((b) => b.style !== 'cancel') ?? buttons[1] ?? buttons[0];
   const label = message ? `${title}\n\n${message}` : title;
 
   if (window.confirm(label)) {
