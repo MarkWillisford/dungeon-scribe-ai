@@ -199,28 +199,33 @@ export class PlaySessionService {
   private static normalizeCombatAbilities(
     raw: Record<string, unknown>,
   ): PlaySessionDoc['combatAbilities'] {
-    const defaults = PlaySessionService.defaultCombatAbilities();
+    let activeToggles: Record<string, boolean> = {};
+    if (raw.activeToggles && typeof raw.activeToggles === 'object') {
+      const at = raw.activeToggles as Record<string, unknown>;
+      for (const [k, v] of Object.entries(at)) {
+        if (typeof v === 'boolean') activeToggles[k] = v;
+      }
+    } else {
+      // Migrate from old flat-boolean format
+      const migration: Record<string, string> = {
+        powerAttack: 'power_attack',
+        deadlyAim: 'deadly_aim',
+        rage: 'rage',
+        flurryOfBlows: 'flurry_of_blows',
+        combatExpertise: 'combat_expertise',
+      };
+      for (const [camelKey, featId] of Object.entries(migration)) {
+        if (raw[camelKey] === true) activeToggles[featId] = true;
+      }
+    }
     return {
-      powerAttack: typeof raw.powerAttack === 'boolean' ? raw.powerAttack : defaults.powerAttack,
-      deadlyAim: typeof raw.deadlyAim === 'boolean' ? raw.deadlyAim : defaults.deadlyAim,
-      rage: typeof raw.rage === 'boolean' ? raw.rage : defaults.rage,
-      twoWeaponFighting:
-        typeof raw.twoWeaponFighting === 'boolean'
-          ? raw.twoWeaponFighting
-          : defaults.twoWeaponFighting,
+      activeToggles,
+      twoWeaponFighting: typeof raw.twoWeaponFighting === 'boolean' ? raw.twoWeaponFighting : false,
       twoWeaponFightingLightOffhand:
         typeof raw.twoWeaponFightingLightOffhand === 'boolean'
           ? raw.twoWeaponFightingLightOffhand
-          : defaults.twoWeaponFightingLightOffhand,
-      haste: typeof raw.haste === 'boolean' ? raw.haste : defaults.haste,
-      flurryOfBlows:
-        typeof raw.flurryOfBlows === 'boolean' ? raw.flurryOfBlows : defaults.flurryOfBlows,
-      combatExpertise:
-        typeof raw.combatExpertise === 'boolean' ? raw.combatExpertise : defaults.combatExpertise,
-      combatExpertisePenalty: PlaySessionService.asNumber(
-        raw.combatExpertisePenalty,
-        defaults.combatExpertisePenalty,
-      ),
+          : false,
+      combatExpertisePenalty: PlaySessionService.asNumber(raw.combatExpertisePenalty, 1),
     };
   }
 
@@ -234,14 +239,9 @@ export class PlaySessionService {
 
   private static defaultCombatAbilities(): PlaySessionDoc['combatAbilities'] {
     return {
-      powerAttack: false,
-      deadlyAim: false,
-      rage: false,
+      activeToggles: {},
       twoWeaponFighting: false,
       twoWeaponFightingLightOffhand: false,
-      haste: false,
-      flurryOfBlows: false,
-      combatExpertise: false,
       combatExpertisePenalty: 1,
     };
   }

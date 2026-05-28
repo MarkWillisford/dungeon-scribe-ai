@@ -280,7 +280,12 @@ export default function CombatTrackerScreen() {
 
   const handleToggleCombatAbility = useCallback(
     (key: Parameters<typeof toggleCombatAbility>[0]) => {
-      if (key === 'rage' && combatAbilities.rage && character && currentHP !== null) {
+      if (
+        key === 'rage' &&
+        combatAbilities.activeToggles['rage'] &&
+        character &&
+        currentHP !== null
+      ) {
         const result = CombatService.calculateRageEndHPAdjustment(character, currentHP, tempHP);
         dispatch(
           applyRageEndHPLoss({ newCurrentHP: result.newCurrentHP, newTempHP: result.newTempHP }),
@@ -288,7 +293,7 @@ export default function CombatTrackerScreen() {
       }
       dispatch(toggleCombatAbility(key));
     },
-    [combatAbilities.rage, character, currentHP, tempHP, dispatch],
+    [combatAbilities.activeToggles, character, currentHP, tempHP, dispatch],
   );
 
   const handleStartTurn = useCallback(() => {
@@ -326,14 +331,9 @@ export default function CombatTrackerScreen() {
                   tempHP: 0,
                   activeBuffs: [],
                   combatAbilities: {
-                    powerAttack: false,
-                    deadlyAim: false,
-                    rage: false,
+                    activeToggles: {},
                     twoWeaponFighting: false,
                     twoWeaponFightingLightOffhand: false,
-                    haste: false,
-                    flurryOfBlows: false,
-                    combatExpertise: false,
                     combatExpertisePenalty: 1,
                   },
                   spellSlotsUsed: {},
@@ -651,6 +651,7 @@ export default function CombatTrackerScreen() {
 
           <CombatAbilityToggles
             abilities={combatAbilities}
+            character={character}
             bab={bab}
             onToggle={handleToggleCombatAbility}
             onSetExpertisePenalty={(v) => dispatch(setCombatExpertisePenalty(v))}

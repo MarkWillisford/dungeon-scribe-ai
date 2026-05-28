@@ -39,14 +39,9 @@ function makeSessionDoc(overrides: Partial<PlaySessionDoc> = {}): PlaySessionDoc
     tempHP: 5,
     activeBuffs: [],
     combatAbilities: {
-      powerAttack: false,
-      deadlyAim: false,
-      rage: false,
+      activeToggles: {},
       twoWeaponFighting: false,
       twoWeaponFightingLightOffhand: false,
-      haste: false,
-      flurryOfBlows: false,
-      combatExpertise: false,
       combatExpertisePenalty: 1,
     },
     spellSlotsUsed: {},
@@ -79,14 +74,9 @@ describe('PlaySessionService', () => {
         tempHP: 0,
         activeBuffs: [],
         combatAbilities: {
-          powerAttack: false,
-          deadlyAim: false,
-          rage: false,
+          activeToggles: {},
           twoWeaponFighting: false,
           twoWeaponFightingLightOffhand: false,
-          haste: false,
-          flurryOfBlows: false,
-          combatExpertise: false,
           combatExpertisePenalty: 1,
         },
         spellSlotsUsed: {},
@@ -111,14 +101,9 @@ describe('PlaySessionService', () => {
         tempHP: 0,
         activeBuffs: [],
         combatAbilities: {
-          powerAttack: false,
-          deadlyAim: false,
-          rage: false,
+          activeToggles: {},
           twoWeaponFighting: false,
           twoWeaponFightingLightOffhand: false,
-          haste: false,
-          flurryOfBlows: false,
-          combatExpertise: false,
           combatExpertisePenalty: 1,
         },
         spellSlotsUsed: {},
@@ -206,14 +191,17 @@ describe('PlaySessionService', () => {
         data: () => ({
           userId: 'user-1',
           currentHP: 10,
+          // Old format with corrupt types — powerAttack is a string (invalid), rage is valid boolean
           combatAbilities: { powerAttack: 'yes', combatExpertisePenalty: 'bad', rage: true },
         }),
       });
 
       const result = await PlaySessionService.get('user-1', 'char-corrupt-abilities');
-      expect(result!.combatAbilities.powerAttack).toBe(false);
+      // 'yes' is not a boolean so power_attack should not migrate
+      expect(result!.combatAbilities.activeToggles['power_attack']).toBeFalsy();
       expect(result!.combatAbilities.combatExpertisePenalty).toBe(1);
-      expect(result!.combatAbilities.rage).toBe(true);
+      // rage: true is a valid boolean → migrates
+      expect(result!.combatAbilities.activeToggles['rage']).toBe(true);
     });
 
     it('normalizes spellSlotsUsed with string values to 0', async () => {

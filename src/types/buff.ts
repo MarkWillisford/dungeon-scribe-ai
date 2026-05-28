@@ -36,15 +36,13 @@ export interface BuffPackage {
 
 // Active state of combat ability toggles (lives in combatSlice)
 export interface CombatAbilityState {
-  powerAttack: boolean;
-  deadlyAim: boolean;
-  rage: boolean;
+  // Keyed by feat ID or class-feature ID. Populated from the character's
+  // feats/class features where activationMode === 'toggle'.
+  activeToggles: Record<string, boolean>;
+  // TWF is always available — anyone can dual-wield; feats only reduce the penalties
   twoWeaponFighting: boolean;
   twoWeaponFightingLightOffhand: boolean; // true = light off-hand (smaller penalty)
-  haste: boolean;
-  flurryOfBlows: boolean;
-  combatExpertise: boolean;
-  combatExpertisePenalty: number; // 1–5 (variable input for Combat Expertise)
+  combatExpertisePenalty: number; // 1–5 (sub-option for Combat Expertise feat)
 }
 
 // A single roll result stored in the session log
