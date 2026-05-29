@@ -456,8 +456,17 @@ export const CORE_CLASSES_EXPANDED: ExpandedClassData[] = [
       {
         name: 'Channel Energy 1d6',
         level: 1,
+        id: 'channel-energy',
+        shortDescription: '30-ft burst heal/harm (3 + CHA mod/day)',
         description:
           'A cleric can release a wave of energy by channeling the power of her faith through her holy symbol. This energy can heal living creatures or harm undead, or vice versa for evil clerics. Channeling energy causes a burst that affects all creatures of one type in a 30-foot radius centered on the cleric. A cleric may channel energy a number of times per day equal to 3 + her Charisma modifier.',
+        resourcePool: {
+          id: 'channel_energy',
+          name: 'Channel Energy',
+          rechargeOn: 'rest',
+          maxFormula: '3 + chaMod',
+          restRecoveryMode: 'full',
+        },
       },
       {
         name: 'Domains',
@@ -619,8 +628,19 @@ export const CORE_CLASSES_EXPANDED: ExpandedClassData[] = [
       {
         name: 'Wild Shape 1/day',
         level: 4,
+        id: 'wild-shape',
+        shortDescription: 'Transform into an animal (uses/day scale with level)',
+        activationMode: 'toggle',
         description:
           'At 4th level, a druid gains the ability to turn herself into any Small or Medium animal and back again once per day. This ability functions like the beast shape I spell.',
+        resourcePool: {
+          id: 'wild_shape',
+          name: 'Wild Shape',
+          rechargeOn: 'rest',
+          maxFormula: 'floor((druidLevel - 2) / 2)',
+          restRecoveryMode: 'full',
+          specialRechargeNote: 'At level 20, wild shape is at will.',
+        },
       },
       { name: 'Wild Shape 2/day', level: 6, description: 'Wild shape usage increases to 2/day.' },
       { name: 'Wild Shape 3/day', level: 8, description: 'Wild shape usage increases to 3/day.' },
@@ -1200,6 +1220,9 @@ export const CORE_CLASSES_EXPANDED: ExpandedClassData[] = [
       {
         name: 'Favored Enemy',
         level: 1,
+        id: 'favored-enemy',
+        shortDescription: '+2 attack, damage, and skills vs. favored enemy type',
+        activationMode: 'toggle',
         description:
           'At 1st level, a ranger selects a creature type. He gains a +2 bonus on Bluff, Knowledge, Perception, Sense Motive, and Survival checks, as well as weapon attack and damage rolls against creatures of his selected type.',
       },
@@ -1229,6 +1252,9 @@ export const CORE_CLASSES_EXPANDED: ExpandedClassData[] = [
       {
         name: 'Favored Terrain',
         level: 3,
+        id: 'favored-terrain',
+        shortDescription: '+2 initiative and skills in favored terrain type',
+        activationMode: 'toggle',
         description:
           'At 3rd level, a ranger may select a type of terrain. He gains a +2 bonus on initiative checks and Knowledge (geography), Perception, Stealth, and Survival skill checks in this terrain.',
       },

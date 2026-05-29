@@ -476,8 +476,18 @@ export const BASE_CLASSES_EXPANDED: ExpandedClassData[] = [
       {
         name: 'Judgment 1/day',
         level: 1,
+        id: 'judgment',
+        shortDescription: 'Swift action — choose one of 9 judgment types (lasts until combat ends)',
+        activationMode: 'toggle',
         description:
           'Starting at 1st level, an inquisitor can pronounce judgment upon her foes as a swift action. Once activated, it lasts until combat ends. There are nine types: Destruction, Healing, Justice, Piercing, Protection, Purity, Resiliency, Resistance, and Smiting.',
+        resourcePool: {
+          id: 'judgment',
+          name: 'Judgment',
+          rechargeOn: 'rest',
+          maxFormula: 'floor((inquisitorLevel + 2) / 3)',
+          restRecoveryMode: 'full',
+        },
       },
       {
         name: 'Monster Lore',
@@ -531,8 +541,19 @@ export const BASE_CLASSES_EXPANDED: ExpandedClassData[] = [
       {
         name: 'Bane',
         level: 5,
+        id: 'bane',
+        shortDescription:
+          'Swift action — imbue weapon with bane vs. chosen creature type (inquisitor level rounds/day)',
+        activationMode: 'toggle',
         description:
           "At 5th level, an inquisitor can imbue one of her weapons with the bane weapon special ability as a swift action. This can be used for a number of rounds per day equal to the inquisitor's level.",
+        resourcePool: {
+          id: 'bane_rounds',
+          name: 'Bane',
+          rechargeOn: 'rest',
+          maxFormula: 'inquisitorLevel',
+          restRecoveryMode: 'full',
+        },
       },
       {
         name: 'Discern Lies',
