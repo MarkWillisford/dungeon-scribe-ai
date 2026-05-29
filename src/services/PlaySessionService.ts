@@ -219,7 +219,7 @@ export class PlaySessionService {
         typeof raw.twoWeaponFightingLightOffhand === 'boolean'
           ? raw.twoWeaponFightingLightOffhand
           : false,
-      combatExpertisePenalty: PlaySessionService.asNumber(raw.combatExpertisePenalty, 1),
+      combatExpertisePenalty: Math.max(1, Math.min(5, PlaySessionService.asNumber(raw.combatExpertisePenalty, 1))),
     };
   }
 

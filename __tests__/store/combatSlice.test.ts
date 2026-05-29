@@ -170,8 +170,10 @@ describe('toggleCombatAbility', () => {
   });
 
   it('toggles twoWeaponFighting named field', () => {
-    const state = combatReducer(undefined, toggleCombatAbility('twoWeaponFighting'));
+    let state = combatReducer(undefined, toggleCombatAbility('twoWeaponFighting'));
     expect(state.combatAbilities.twoWeaponFighting).toBe(true);
+    state = combatReducer(state, toggleCombatAbility('twoWeaponFighting'));
+    expect(state.combatAbilities.twoWeaponFighting).toBe(false);
   });
 });
 
@@ -677,6 +679,7 @@ describe('initFromSession', () => {
     expect(state.combatAbilities.activeToggles['power_attack']).toBe(true);
     expect(state.combatAbilities.activeToggles['rage']).toBe(true);
     expect(state.combatAbilities.twoWeaponFighting).toBe(true);
+    expect(state.combatAbilities.activeToggles['deadly_aim']).toBeUndefined();
   });
 
   it('restores the round counter', () => {

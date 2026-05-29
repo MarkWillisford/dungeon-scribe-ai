@@ -451,7 +451,9 @@ const combatSlice = createSlice({
         twoWeaponFighting: raw.twoWeaponFighting === true,
         twoWeaponFightingLightOffhand: raw.twoWeaponFightingLightOffhand === true,
         combatExpertisePenalty:
-          typeof raw.combatExpertisePenalty === 'number' ? raw.combatExpertisePenalty : 1,
+          typeof raw.combatExpertisePenalty === 'number'
+            ? Math.max(1, Math.min(5, raw.combatExpertisePenalty))
+            : 1,
       };
       state.round = s.round;
       state.resourcePools = s.resourcePools ?? {};
