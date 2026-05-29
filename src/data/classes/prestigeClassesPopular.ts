@@ -903,6 +903,10 @@ export const PRESTIGE_CLASSES_POPULAR: ExpandedClassData[] = [
       {
         name: "Hunter's Instinct",
         level: 6,
+        id: 'quarry',
+        activationMode: 'toggle',
+        shortDescription:
+          'Swift — designate one target as quarry (+4 attack, reroll one miss/round)',
         description:
           "At 6th level, the mammoth rider gains the ranger's quarry class feature, or improved quarry if she already possesses quarry. This works on any creature regardless of favored enemy status.",
       },
