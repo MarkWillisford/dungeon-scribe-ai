@@ -1,4 +1,4 @@
-// Batch 020 | first: 'Waxwork Creature' | last: 'Saint' | count: 18
+// Batch 020 | first: 'Waxwork Creature' | last: 'Redeemed Mord-Sith Creature' | count: 19
 
 import { TemplateDefinition } from '../types';
 
@@ -1019,6 +1019,136 @@ export const TEMPLATES_BATCH_020: TemplateDefinition[] = [
     sourceInfo: { type: 'official', publication: 'Book of Exalted Deeds' },
     verificationStatus: 'needs_review',
     visibility: 'global',
+    rev: 1,
+  },
+
+  // 494. Redeemed Mord-Sith Creature (CR +1 or +2)
+  {
+    id: 'redeemed-mord-sith-creature',
+    name: 'Redeemed Mord-Sith Creature',
+    description:
+      'A creature that has undergone the Mord-Sith transformation but been redeemed retains the core disciplines of the order — redirection, spelldrinker, and agiel techniques — while discarding its darker aspects. CR increases by +1 for creatures with fewer than 10 HD and by +2 for creatures with 10 or more HD.',
+
+    acquisitionType: 'acquired',
+    isSimpleTemplate: false,
+
+    prerequisites: [
+      { type: 'alignment', allowed: ['lawful good', 'lawful neutral', 'lawful evil'] },
+    ],
+
+    abilityScoreChanges: [{ ability: 'CHA', change: 4 }],
+
+    crTiers: [
+      {
+        tierIndex: 0,
+        minHD: 1,
+        maxHD: 9,
+        crValue: 1,
+        label: '1–9 HD',
+        features: [
+          {
+            scalingType: 'flat',
+            name: 'Agiel Strike (Ex)',
+            id: 'agiel-strike',
+            activationMode: 'conditional',
+            shortDescription: 'Unarmed/agiel melee attacks deal +1d6 pain damage (Fort negates)',
+            description:
+              "The creature's unarmed strikes and agiel attacks deal an additional 1d6 points of pain damage. A successful Fortitude save (DC 10 + 1/2 HD + Cha modifier) negates the pain damage. The creature may use this ability a number of times per day equal to 3 + its Charisma modifier.",
+            resourcePool: {
+              id: 'agiel-strike-pool',
+              name: 'Agiel Strike',
+              rechargeOn: 'rest',
+              maxFormula: '3 + chaMod',
+              restRecoveryMode: 'full',
+            },
+          },
+          {
+            scalingType: 'flat',
+            name: 'Spelldrinker (Su)',
+            id: 'spelldrinker',
+            activationMode: 'passive',
+            shortDescription: 'Immune to spells/SLAs that allow spell resistance',
+            description:
+              'The creature is immune to any spell or spell-like ability that allows spell resistance. When a spell that allows SR targets the creature and fails to penetrate, the creature absorbs the magical energy and heals 1 hit point per spell level.',
+          },
+          {
+            scalingType: 'flat',
+            name: 'Redirection (Ex)',
+            id: 'redirection',
+            activationMode: 'conditional',
+            shortDescription: 'Redirect targeted spells/SLAs to a new target (uses = HD/day)',
+            description:
+              'As an immediate action, the creature can redirect a spell or spell-like ability that targets it to another creature within 30 feet. The redirected effect uses the original attack roll and saving throw DC. The creature may use this ability a number of times per day equal to its total HD.',
+            resourcePool: {
+              id: 'redirection-pool',
+              name: 'Redirection',
+              rechargeOn: 'rest',
+              maxFormula: 'level',
+              restRecoveryMode: 'full',
+            },
+          },
+          {
+            scalingType: 'flat',
+            name: 'Spell Resistance (Ex)',
+            id: 'spell-resistance',
+            activationMode: 'passive',
+            shortDescription: 'SR = 10 + HD',
+            description: 'The creature gains spell resistance equal to 10 + its total HD.',
+          },
+        ],
+      },
+      {
+        tierIndex: 1,
+        minHD: 10,
+        crValue: 1,
+        label: '10+ HD',
+        features: [
+          {
+            scalingType: 'hd_threshold',
+            name: 'AC Bonus (Ex)',
+            id: 'ac-bonus',
+            minimumHD: 10,
+            activationMode: 'passive',
+            shortDescription: 'Add CHA modifier to AC when unarmored and unencumbered',
+            description:
+              'When the creature is unarmored and unencumbered, it adds its Charisma modifier (if positive) as a deflection bonus to its Armor Class.',
+          },
+          {
+            scalingType: 'hd_threshold',
+            name: 'Improved Spell Resistance (Ex)',
+            id: 'improved-spell-resistance',
+            minimumHD: 10,
+            activationMode: 'passive',
+            shortDescription: 'SR increases by +5 (total SR = 15 + HD)',
+            description:
+              "At 10 or more HD, the creature's spell resistance increases by an additional 5, for a total of 15 + its total HD.",
+          },
+          {
+            scalingType: 'hd_threshold',
+            name: 'Counterstrike (Ex)',
+            id: 'counterstrike',
+            minimumHD: 10,
+            activationMode: 'conditional',
+            shortDescription: 'Immediate action melee attack when a spell fails to penetrate SR',
+            description:
+              "Whenever a spell or spell-like ability fails to penetrate the creature's spell resistance, the creature may make a single melee attack as an immediate action against the caster, provided the caster is within reach. The creature may use this ability a number of times per day equal to 3 + its Charisma modifier.",
+            resourcePool: {
+              id: 'counterstrike-pool',
+              name: 'Counterstrike',
+              rechargeOn: 'rest',
+              maxFormula: '3 + chaMod',
+              restRecoveryMode: 'full',
+            },
+          },
+        ],
+      },
+    ],
+
+    features: [],
+
+    sourceInfo: { type: 'homebrew', createdBy: 'Mark Willisford' },
+    verificationStatus: 'needs_review',
+    visibility: 'campaign',
     rev: 1,
   },
 ];
