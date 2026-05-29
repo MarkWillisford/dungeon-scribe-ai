@@ -188,12 +188,25 @@ const HATHRAN: CampaignClass = {
     {
       name: 'Awe of the Wychlaran (–2)',
       level: 3,
+      id: 'awe-of-the-wychlaran',
+      activationMode: 'toggle',
+      shortDescription:
+        'Mendev characters of equal/lower level take –2 on attacks and opposed skill checks vs. you',
       description:
         "Any character from the Mendev region whose character level is equal to or lower than the Hathran's takes a –2 penalty on attack rolls and opposed skill checks made against her.",
     },
     {
       name: 'Universal Spirit Magic (1/day)',
       level: 3,
+      id: 'universal-spirit-magic',
+      shortDescription: 'Use Mendev Spirit Magic outside Mendev (uses/day scale with level)',
+      resourcePool: {
+        id: 'universal_spirit_magic',
+        name: 'Universal Spirit Magic',
+        rechargeOn: 'rest',
+        maxFormula: 'floor(hathranLevel / 3)',
+        restRecoveryMode: 'full',
+      },
       description:
         'Once per day, the Hathran may use her Mendev Spirit Magic ability outside the borders of Mendev.',
     },
@@ -212,11 +225,13 @@ const HATHRAN: CampaignClass = {
     {
       name: 'Universal Spirit Magic (2/day)',
       level: 6,
+      id: 'universal-spirit-magic',
       description: 'The Hathran may use her Spirit Magic ability outside Mendev twice per day.',
     },
     {
       name: 'Awe of the Wychlaran (–4)',
       level: 7,
+      id: 'awe-of-the-wychlaran',
       description: 'The penalty from Awe of the Wychlaran increases to –4.',
     },
     {
@@ -228,12 +243,14 @@ const HATHRAN: CampaignClass = {
     {
       name: 'Universal Spirit Magic (3/day)',
       level: 9,
+      id: 'universal-spirit-magic',
       description:
         'The Hathran may use her Spirit Magic ability outside Mendev three times per day.',
     },
     {
       name: 'Awe of the Wychlaran (–6)',
       level: 10,
+      id: 'awe-of-the-wychlaran',
       description: 'The penalty from Awe of the Wychlaran increases to –6.',
     },
     {
@@ -311,6 +328,16 @@ const DWEOMERKEEPER: CampaignClass = {
     {
       name: 'Supernatural Spell (1/day)',
       level: 4,
+      id: 'supernatural-spell',
+      shortDescription:
+        'Standard — cast a spell as a supernatural ability (no components, ignores SR; uses/day scale with level)',
+      resourcePool: {
+        id: 'supernatural_spell',
+        name: 'Supernatural Spell',
+        rechargeOn: 'rest',
+        maxFormula: 'max(0, floor(dweomerkeeperLevel / 2) - 1)',
+        restRecoveryMode: 'full',
+      },
       description:
         'Once per day, the Dweomerkeeper may cast any one spell with a casting time of 1 standard action or less as a supernatural ability: no components required, no attacks of opportunity provoked, spell resistance ignored. The spell is still expended normally.',
     },
@@ -322,6 +349,7 @@ const DWEOMERKEEPER: CampaignClass = {
     {
       name: 'Supernatural Spell (2/day)',
       level: 6,
+      id: 'supernatural-spell',
       description: 'The Dweomerkeeper gains a second daily use of Supernatural Spell.',
     },
     {
@@ -332,6 +360,7 @@ const DWEOMERKEEPER: CampaignClass = {
     {
       name: 'Supernatural Spell (3/day)',
       level: 8,
+      id: 'supernatural-spell',
       description: 'The Dweomerkeeper gains a third daily use of Supernatural Spell.',
     },
     {
@@ -348,6 +377,7 @@ const DWEOMERKEEPER: CampaignClass = {
     {
       name: 'Supernatural Spell (4/day)',
       level: 10,
+      id: 'supernatural-spell',
       description: 'The Dweomerkeeper gains a fourth daily use of Supernatural Spell.',
     },
   ],
@@ -421,6 +451,18 @@ const RADIANT_SERVANT_OF_MILANI: CampaignClass = {
     {
       name: 'Extra Greater Turning',
       level: 1,
+      id: 'extra-greater-turning',
+      shortDescription:
+        'Greater turning (3 + CHA mod/day) if Sun domain — destroys instead of turning',
+      resourcePool: {
+        id: 'extra_greater_turning',
+        name: 'Extra Greater Turning',
+        rechargeOn: 'rest',
+        maxFormula: '3 + chaMod',
+        restRecoveryMode: 'full',
+        specialRechargeNote:
+          'Requires Sun domain. Replaces the normal once-per-day greater turning.',
+      },
       description:
         'If the Radiant Servant has access to the Sun domain, she can perform a greater turning a number of times per day equal to 3 + her Charisma modifier (replacing the normal once-per-day granted power).',
     },
@@ -457,6 +499,9 @@ const RADIANT_SERVANT_OF_MILANI: CampaignClass = {
     {
       name: 'Positive Energy Burst',
       level: 8,
+      id: 'positive-energy-burst',
+      shortDescription:
+        'Standard — 1d6/level to all undead in 100 ft (Ref DC 10 + level for half); costs 2 channel attempts',
       description:
         'As a standard action, the Radiant Servant creates a burst of positive energy dealing 1d6 damage per class level to all undead within 100 feet (Reflex DC 10 + class level for half). This supernatural ability costs 2 channel attempts and cannot be used with fewer than 2 remaining.',
     },
@@ -528,6 +573,17 @@ const PRESTIGE_PALADIN: CampaignClass = {
     {
       name: 'Smite Evil (1/day)',
       level: 1,
+      id: 'smite-evil',
+      activationMode: 'toggle',
+      shortDescription:
+        'Swift — +CHA bonus attack, +level damage vs. evil (uses/day scale with level)',
+      resourcePool: {
+        id: 'smite_evil',
+        name: 'Smite Evil',
+        rechargeOn: 'rest',
+        maxFormula: 'floor(prestigePaladinLevel / 5) + 1',
+        restRecoveryMode: 'full',
+      },
       description:
         'As the standard paladin ability. The Prestige Paladin uses his class level + 3 as his effective paladin level for all smite evil calculations (attack bonus, damage, and DR bypass).',
     },
@@ -552,12 +608,24 @@ const PRESTIGE_PALADIN: CampaignClass = {
     {
       name: 'Lay on Hands',
       level: 2,
+      id: 'lay-on-hands',
+      shortDescription: 'Touch heal (½ level + 3 d6); uses/day = level + CHA mod + 3',
+      resourcePool: {
+        id: 'lay_on_hands',
+        name: 'Lay on Hands',
+        rechargeOn: 'rest',
+        maxFormula: 'prestigePaladinLevel + chaMod + 3',
+        restRecoveryMode: 'full',
+      },
       description:
         'As the standard paladin ability. Heals a number of d6 equal to ½ class level + 3. Usable a number of times per day equal to class level + Charisma modifier + 3.',
     },
     {
       name: 'Divine Bond',
       level: 2,
+      id: 'divine-bond',
+      activationMode: 'toggle',
+      shortDescription: 'Swift — bond weapon with spirit or enhance mount (1 min/level)',
       description:
         'As the standard paladin ability. Treat effective paladin level as 3 higher than actual class level for this ability.',
     },
@@ -588,6 +656,7 @@ const PRESTIGE_PALADIN: CampaignClass = {
     {
       name: 'Smite Evil (2/day)',
       level: 5,
+      id: 'smite-evil',
       description: 'The Prestige Paladin may use Smite Evil twice per day.',
     },
     {
@@ -616,6 +685,7 @@ const PRESTIGE_PALADIN: CampaignClass = {
     {
       name: 'Smite Evil (3/day)',
       level: 10,
+      id: 'smite-evil',
       description: 'The Prestige Paladin may use Smite Evil three times per day.',
     },
     {
@@ -650,6 +720,7 @@ const PRESTIGE_PALADIN: CampaignClass = {
     {
       name: 'Smite Evil (4/day)',
       level: 15,
+      id: 'smite-evil',
       description: 'The Prestige Paladin may use Smite Evil four times per day.',
     },
     {
@@ -726,12 +797,27 @@ const NEMESIS: CampaignClass = {
     {
       name: 'Shield of Wings (fire resist 5)',
       level: 1,
+      id: 'shield-of-wings',
+      activationMode: 'toggle',
+      shortDescription:
+        'Swift — manifest fly speed 40 ft (avg) for nemesisLevel + CHA mod rounds (also grants fire resistance)',
+      resourcePool: {
+        id: 'shield_of_wings',
+        name: 'Shield of Wings',
+        rechargeOn: 'rest',
+        maxFormula: 'nemesisLevel + chaMod',
+        restRecoveryMode: 'full',
+      },
       description:
         'The Nemesis gains fire resistance 5. As a swift action, he can manifest four burning wings to gain a fly speed of 40 ft (average) for a number of rounds equal to Nemesis level + Cha modifier (non-consecutive). Wings can be dismissed as a swift action. While the wings are active, and for a number of minutes equal to the rounds spent flying after dismissal, the Nemesis loses the fire resistance granted by this ability.',
     },
     {
       name: 'Divine Retribution +2 (3 rounds, standard action)',
       level: 1,
+      id: 'divine-retribution',
+      activationMode: 'toggle',
+      shortDescription:
+        'Study evil outsider (3 rounds) — +2 attack, damage, and skills vs. target; enables death attack',
       description:
         "By studying a visible evil outsider for 3 consecutive rounds and succeeding on a Knowledge (planes) check, the Nemesis gains a +2 bonus on Bluff, Disguise, Intimidate, Knowledge, Perception, Sense Motive, Stealth, and Survival checks, on attack rolls, and on weapon damage rolls against that target. The DCs of the Nemesis's class abilities against that target also increase by 2. Only one target can be studied at a time. Bonuses persist until the target dies, the Nemesis studies a new target, or the bonuses are ended as a free action.\n\nDeath Attack (longsword sneak attack only): If the Nemesis makes a sneak attack with a longsword against a studied target and it deals damage, he may end his study as an immediate action. The sneak attack then functions as a death attack: the target must succeed on a Fortitude save (DC 10 + Nemesis level + Cha modifier) or die or be paralyzed for 1d6 + Nemesis level rounds (Nemesis's choice). On a successful save, the attack is a normal sneak attack. The death attack fails if the target is aware of the Nemesis or recognizes him as an enemy.",
     },
@@ -756,6 +842,7 @@ const NEMESIS: CampaignClass = {
     {
       name: 'Shield of Wings (fire resist 10)',
       level: 3,
+      id: 'shield-of-wings',
       description: 'Fire resistance increases to 10. Wings ability unchanged from 1st level.',
     },
     {
@@ -767,6 +854,16 @@ const NEMESIS: CampaignClass = {
     {
       name: 'Heavenly Fire',
       level: 4,
+      id: 'heavenly-fire',
+      shortDescription:
+        'On sneak attack vs. studied target — extra divine fire damage (Nemesis level uses/day)',
+      resourcePool: {
+        id: 'heavenly_fire',
+        name: 'Heavenly Fire',
+        rechargeOn: 'rest',
+        maxFormula: 'nemesisLevel',
+        restRecoveryMode: 'full',
+      },
       description:
         'When the Nemesis deals sneak attack damage to a target he has successfully studied with Divine Retribution, the sneak attack wreathes the target in blue celestial flame. The target must succeed on a Fortitude save (DC 10 + Nemesis level + Cha modifier) or take additional damage equal to 1d6 per 2 class levels. This damage is divine in nature and bypasses fire resistance and immunity. On a successful save, the target takes only the normal sneak attack damage. Usable a number of times per day equal to Nemesis level, no more than once per round.',
     },
@@ -784,12 +881,14 @@ const NEMESIS: CampaignClass = {
     {
       name: 'Divine Retribution +4 (2 rounds, move action)',
       level: 5,
+      id: 'divine-retribution',
       description:
         'Studying an evil outsider now requires only 2 consecutive rounds (down from 3) and is a move action (down from standard). The Nemesis can simultaneously maintain Divine Retribution bonuses against 2 evil outsiders at once (up from 1). All other rules remain as described at 1st level.',
     },
     {
       name: 'Shield of Wings (fire resist 30)',
       level: 6,
+      id: 'shield-of-wings',
       description: 'Fire resistance increases to 30. Wings ability unchanged from 1st level.',
     },
     {
@@ -818,6 +917,7 @@ const NEMESIS: CampaignClass = {
     {
       name: 'Shield of Wings (fire immunity)',
       level: 9,
+      id: 'shield-of-wings',
       description:
         'Fire resistance becomes full immunity to fire. Wings ability unchanged from 1st level.',
     },
@@ -830,6 +930,7 @@ const NEMESIS: CampaignClass = {
     {
       name: 'Divine Retribution (immediate, +2 bonus increase, 3 targets)',
       level: 10,
+      id: 'divine-retribution',
       description:
         'All bonuses from Divine Retribution (attack/damage/skills/DCs) increase by a further +2. Divine Retribution can now be activated as an immediate action when the target is unaware of the Nemesis. The Nemesis can simultaneously study 3 evil outsiders at once. The death attack effect can now be triggered by any sneak attack against the studied target (not only longsword attacks), activated as an immediate action.',
     },
