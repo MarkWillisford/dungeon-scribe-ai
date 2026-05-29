@@ -1034,6 +1034,17 @@ export const TEMPLATES_BATCH_016: TemplateDefinition[] = [
           {
             scalingType: 'flat',
             name: 'Rage (Ex)',
+            id: 'rage',
+            activationMode: 'toggle',
+            shortDescription:
+              'Rage for 4 + HD + CON mod rounds/day (+4 STR/CON, will bonus, –2 AC)',
+            resourcePool: {
+              id: 'rage',
+              name: 'Rage',
+              rechargeOn: 'rest',
+              maxFormula: '4 + level + conMod',
+              restRecoveryMode: 'full',
+            },
             description:
               'The creature can rage for a number of rounds per day equal to 4 + its HD + its Constitution modifier. While raging it gains the standard benefits of the barbarian rage ability, using its HD as its barbarian level to determine effects and bonuses. It cannot cast spells or use skills that require patience while raging.',
           },
@@ -1059,6 +1070,17 @@ export const TEMPLATES_BATCH_016: TemplateDefinition[] = [
           {
             scalingType: 'flat',
             name: 'Greater Rage (Ex)',
+            id: 'rage',
+            activationMode: 'toggle',
+            shortDescription:
+              'Greater Rage for 4 + HD + CON mod rounds/day (enhanced bonuses over standard rage)',
+            resourcePool: {
+              id: 'rage',
+              name: 'Rage',
+              rechargeOn: 'rest',
+              maxFormula: '4 + level + conMod',
+              restRecoveryMode: 'full',
+            },
             description:
               'The creature can rage for a number of rounds per day equal to 4 + its HD + its Constitution modifier, using greater rage (as the barbarian class feature at 11th level). While raging it gains enhanced bonuses over standard rage.',
           },
@@ -1181,6 +1203,16 @@ export const TEMPLATES_BATCH_016: TemplateDefinition[] = [
           {
             scalingType: 'flat',
             name: 'Channel Energy (Su)',
+            id: 'channel-energy',
+            shortDescription:
+              'Burst heal/harm in 30 ft (effective cleric level = HD – 2; 3 + CHA mod/day)',
+            resourcePool: {
+              id: 'channel_energy',
+              name: 'Channel Energy',
+              rechargeOn: 'rest',
+              maxFormula: '3 + chaMod',
+              restRecoveryMode: 'full',
+            },
             description:
               "The creature can channel energy a number of times per day equal to 3 + its Charisma modifier. Good-aligned creatures channel positive energy; evil-aligned creatures channel negative energy; neutral creatures choose at creation. The effective cleric level for determining the amount of energy channeled equals the creature's HD – 2 (minimum 1).",
           },
@@ -1202,6 +1234,16 @@ export const TEMPLATES_BATCH_016: TemplateDefinition[] = [
           {
             scalingType: 'flat',
             name: 'Channel Energy (Su)',
+            id: 'channel-energy',
+            shortDescription:
+              'Burst heal/harm in 30 ft (effective cleric level = HD – 2; 3 + CHA mod/day)',
+            resourcePool: {
+              id: 'channel_energy',
+              name: 'Channel Energy',
+              rechargeOn: 'rest',
+              maxFormula: '3 + chaMod',
+              restRecoveryMode: 'full',
+            },
             description:
               'Channel energy as above, with effective cleric level equal to HD – 2 (minimum 1). More powerful channeling at this HD range.',
           },
@@ -1222,6 +1264,16 @@ export const TEMPLATES_BATCH_016: TemplateDefinition[] = [
           {
             scalingType: 'flat',
             name: 'Channel Energy (Su)',
+            id: 'channel-energy',
+            shortDescription:
+              'Burst heal/harm in 30 ft (effective cleric level = HD – 2; 3 + CHA mod/day)',
+            resourcePool: {
+              id: 'channel_energy',
+              name: 'Channel Energy',
+              rechargeOn: 'rest',
+              maxFormula: '3 + chaMod',
+              restRecoveryMode: 'full',
+            },
             description:
               'Channel energy as above, with effective cleric level equal to HD – 2. At this HD range the channeling is powerful enough to affect large numbers of creatures at significant range.',
           },
@@ -1308,6 +1360,17 @@ export const TEMPLATES_BATCH_016: TemplateDefinition[] = [
           {
             scalingType: 'flat',
             name: 'Wild Shape (Su)',
+            id: 'wild-shape',
+            activationMode: 'toggle',
+            shortDescription:
+              'Transform (effective druid level = HD – 3; uses/day scale with level)',
+            resourcePool: {
+              id: 'wild_shape',
+              name: 'Wild Shape',
+              rechargeOn: 'rest',
+              maxFormula: 'max(0, floor((level - 5) / 2))',
+              restRecoveryMode: 'full',
+            },
             description:
               "Available to creatures with 7 or more HD. The creature's effective druid level for wild shape equals its HD – 3. This determines how many times per day wild shape can be used, how long each use lasts, and what forms are available.",
           },
@@ -1344,6 +1407,17 @@ export const TEMPLATES_BATCH_016: TemplateDefinition[] = [
           {
             scalingType: 'flat',
             name: 'Wild Shape (Su)',
+            id: 'wild-shape',
+            activationMode: 'toggle',
+            shortDescription:
+              'Transform (effective druid level = HD – 3; uses/day scale with level)',
+            resourcePool: {
+              id: 'wild_shape',
+              name: 'Wild Shape',
+              rechargeOn: 'rest',
+              maxFormula: 'max(0, floor((level - 5) / 2))',
+              restRecoveryMode: 'full',
+            },
             description:
               "The creature's effective druid level for wild shape equals its HD – 3, granting powerful and numerous transformations at this HD range.",
           },
@@ -1623,6 +1697,16 @@ export const TEMPLATES_BATCH_016: TemplateDefinition[] = [
           {
             scalingType: 'flat',
             name: 'Smite Evil (Su)',
+            id: 'smite-evil',
+            activationMode: 'toggle',
+            shortDescription: 'Swift — +CHA mod attack, +HD damage vs. evil (1/day)',
+            resourcePool: {
+              id: 'smite_evil',
+              name: 'Smite Evil',
+              rechargeOn: 'rest',
+              maxFormula: '1',
+              restRecoveryMode: 'full',
+            },
             description:
               "Once per day, the creature can smite evil. It adds its Charisma modifier to attack rolls and its HD to damage rolls against an evil target for the rest of the encounter. The target also loses any deflection bonus to AC against the creature's attacks for the duration.",
           },
@@ -1653,6 +1737,16 @@ export const TEMPLATES_BATCH_016: TemplateDefinition[] = [
           {
             scalingType: 'flat',
             name: 'Smite Evil (Su)',
+            id: 'smite-evil',
+            activationMode: 'toggle',
+            shortDescription: 'Swift — +CHA mod attack, +HD damage vs. evil (1/day)',
+            resourcePool: {
+              id: 'smite_evil',
+              name: 'Smite Evil',
+              rechargeOn: 'rest',
+              maxFormula: '1',
+              restRecoveryMode: 'full',
+            },
             description:
               'Once per day, smite evil as above, adding Charisma modifier to attacks and HD to damage against an evil target.',
           },

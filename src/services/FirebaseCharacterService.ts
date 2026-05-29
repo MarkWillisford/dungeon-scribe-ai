@@ -17,6 +17,7 @@ import type { EquipmentSlot } from '@/types/equipment';
 import type { ItemSlot } from '@/types/magicItems';
 import type { ClassFeature } from '@/types/classes';
 import type { ResourcePoolDefinition } from '@/types/resources';
+import type { TemplateFeature } from '@/types/templates';
 import { PRESET_PF1E_STANDARD } from '@data/rulesets/presets';
 import { ALL_CLASS_CHOICE_DEFINITIONS } from '@data/classChoiceDefinitions';
 
@@ -103,6 +104,14 @@ export class FirebaseCharacterService {
     } catch (err) {
       console.warn(
         '[FirebaseCharacterService] mergeClassFeatureResourcePools failed, returning base character',
+        err,
+      );
+    }
+    try {
+      enriched = await this.mergeTemplateFeatures(enriched);
+    } catch (err) {
+      console.warn(
+        '[FirebaseCharacterService] mergeTemplateFeatures failed, returning base character',
         err,
       );
     }
@@ -220,6 +229,62 @@ export class FirebaseCharacterService {
       ...character,
       classes: { ...character.classes, classes: enrichedClasses },
     };
+  }
+
+  /**
+   * Load template documents from Firestore and inject toggle-capable features
+   * onto each AppliedTemplate that has none yet.
+   *
+   * For crTier templates, features are drawn from the highest paid tier.
+   * For flat templates (no crTiers), features are drawn from the top-level array.
+   * Only features with an `id` field are injected (toggle/pool capable features).
+   */
+  private static async mergeTemplateFeatures(character: Character): Promise<Character> {
+    const appliedTemplates = character.appliedTemplates ?? [];
+    const needsInjection = appliedTemplates.filter((t) => !t.features || t.features.length === 0);
+    if (needsInjection.length === 0) return character;
+
+    const uniqueIds = [...new Set(needsInjection.map((t) => t.templateId))];
+    const snaps = await Promise.all(uniqueIds.map((id) => getDoc(doc(db, 'templates', id))));
+
+    const templateDocsById = new Map<string, Record<string, unknown>>();
+    for (const snap of snaps) {
+      if (snap.exists()) templateDocsById.set(snap.id, snap.data());
+    }
+
+    if (templateDocsById.size === 0) return character;
+
+    const enriched = appliedTemplates.map((tpl) => {
+      if (tpl.features && tpl.features.length > 0) return tpl;
+
+      const templateDoc = templateDocsById.get(tpl.templateId);
+      if (!templateDoc) return tpl;
+
+      const crTiers = templateDoc.crTiers as
+        | Array<{ tierIndex: number; features: TemplateFeature[] }>
+        | undefined;
+
+      let candidateFeatures: TemplateFeature[] = [];
+      if (crTiers && crTiers.length > 0 && tpl.paidTiers.length > 0) {
+        const highestTierIdx = Math.max(...tpl.paidTiers);
+        const activeTier = crTiers.find((t) => t.tierIndex === highestTierIdx);
+        candidateFeatures = activeTier?.features ?? [];
+      } else if (!crTiers || crTiers.length === 0) {
+        candidateFeatures = (templateDoc.features as TemplateFeature[] | undefined) ?? [];
+      }
+
+      const toggleFeatures = candidateFeatures.filter(
+        (f): f is TemplateFeature & { id: string } =>
+          (f.scalingType === 'flat' || f.scalingType === 'hd_threshold') &&
+          'id' in f &&
+          typeof (f as { id?: unknown }).id === 'string',
+      );
+
+      if (toggleFeatures.length === 0) return tpl;
+      return { ...tpl, features: toggleFeatures };
+    });
+
+    return { ...character, appliedTemplates: enriched };
   }
 
   /** Derive the Firestore document ID for a class from its display name. */

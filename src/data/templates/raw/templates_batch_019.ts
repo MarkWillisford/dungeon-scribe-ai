@@ -12,14 +12,10 @@ export const TEMPLATES_BATCH_019: TemplateDefinition[] = [
     crAdjustment: 1,
     acquisitionType: 'acquired',
     isSimpleTemplate: false,
-    prerequisites: [
-      { type: 'special', description: 'Must be a troll' },
-    ],
+    prerequisites: [{ type: 'special', description: 'Must be a troll' }],
     typeChange: 'undead',
     subtypeGains: ['incorporeal'],
-    abilityScoreChanges: [
-      { ability: 'CHA', change: 6 },
-    ],
+    abilityScoreChanges: [{ ability: 'CHA', change: 6 }],
     abilityScoreChangeNote:
       'Loses Strength and Constitution scores (incorporeal undead). Gains +6 Charisma. Fly speed 30 ft. (perfect). Loses base creature regeneration and fast healing.',
     immunities: ['physical contact effects'],
@@ -27,7 +23,8 @@ export const TEMPLATES_BATCH_019: TemplateDefinition[] = [
       {
         scalingType: 'flat',
         name: 'Channel Resistance +4',
-        description: 'The spectral troll gains +4 channel resistance against channeled energy effects.',
+        description:
+          'The spectral troll gains +4 channel resistance against channeled energy effects.',
       },
       {
         scalingType: 'flat',
@@ -54,7 +51,11 @@ export const TEMPLATES_BATCH_019: TemplateDefinition[] = [
           'The spectral troll disappears in direct sunlight and reappears when night falls.',
       },
     ],
-    sourceInfo: { type: 'third_party', publisher: 'Frog God Games', publication: 'Tome of Horrors Complete' },
+    sourceInfo: {
+      type: 'third_party',
+      publisher: 'Frog God Games',
+      publication: 'Tome of Horrors Complete',
+    },
     verificationStatus: 'needs_review',
     visibility: 'global',
     rev: 1,
@@ -65,7 +66,7 @@ export const TEMPLATES_BATCH_019: TemplateDefinition[] = [
     id: 'spell-inscribed-undead',
     name: 'Spell-Inscribed Undead Template',
     description:
-      'Specially treated undead whose forms are inscribed with magical formulae and arcane runes, allowing them to use spells granted by their creator. The template is more effective when the undead is intelligent. The creator must possess the Craft Wondrous Item feat and the ability to cast the inscribed spells; creation takes a number of days equal to the undead\'s Charisma score and costs 150 gp per spell.',
+      "Specially treated undead whose forms are inscribed with magical formulae and arcane runes, allowing them to use spells granted by their creator. The template is more effective when the undead is intelligent. The creator must possess the Craft Wondrous Item feat and the ability to cast the inscribed spells; creation takes a number of days equal to the undead's Charisma score and costs 150 gp per spell.",
     crAdjustment: 1,
     acquisitionType: 'acquired',
     isSimpleTemplate: false,
@@ -83,21 +84,27 @@ export const TEMPLATES_BATCH_019: TemplateDefinition[] = [
       {
         scalingType: 'flat',
         name: 'Spell Resistance',
-        description: 'Gains spell resistance equal to 10 + its Charisma modifier, or retains existing SR if that is higher.',
+        description:
+          'Gains spell resistance equal to 10 + its Charisma modifier, or retains existing SR if that is higher.',
       },
       {
         scalingType: 'flat',
         name: 'Saving Throw Bonus vs. Spells',
-        description: 'Gains a +2 bonus on all saving throws against spells and spell-like abilities.',
+        description:
+          'Gains a +2 bonus on all saving throws against spells and spell-like abilities.',
       },
       {
         scalingType: 'flat',
         name: 'Inscribed Spell-Like Abilities (Sp)',
         description:
-          'The undead gains spell-like abilities granted by its creator based on its Charisma score. Caster level equals the undead\'s Hit Dice; save DCs are Charisma-based.',
+          "The undead gains spell-like abilities granted by its creator based on its Charisma score. Caster level equals the undead's Hit Dice; save DCs are Charisma-based.",
       },
     ],
-    sourceInfo: { type: 'third_party', publisher: 'Orphaned Bookworm Productions', publication: 'Breath of Life: The Archivist' },
+    sourceInfo: {
+      type: 'third_party',
+      publisher: 'Orphaned Bookworm Productions',
+      publication: 'Breath of Life: The Archivist',
+    },
     verificationStatus: 'needs_review',
     visibility: 'global',
     rev: 1,
@@ -108,11 +115,15 @@ export const TEMPLATES_BATCH_019: TemplateDefinition[] = [
     id: 'spellgorged-zombie',
     name: 'Spellgorged Zombie Template',
     description:
-      'A programmed undead creature created from an arcane or divine spellcaster\'s corpse via create greater undead, designed to store and deploy spells on command. The spellgorged zombie holds spell levels equal to its Hit Dice and uses the original caster\'s caster level and save DCs. Unlike normal zombies, these retain weapon proficiencies and natural attacks.',
+      "A programmed undead creature created from an arcane or divine spellcaster's corpse via create greater undead, designed to store and deploy spells on command. The spellgorged zombie holds spell levels equal to its Hit Dice and uses the original caster's caster level and save DCs. Unlike normal zombies, these retain weapon proficiencies and natural attacks.",
     acquisitionType: 'acquired',
     isSimpleTemplate: false,
     prerequisites: [
-      { type: 'special', description: 'Must be the corpse of an arcane or divine spellcaster; created via create greater undead' },
+      {
+        type: 'special',
+        description:
+          'Must be the corpse of an arcane or divine spellcaster; created via create greater undead',
+      },
     ],
     crTiers: [
       { tierIndex: 0, minHD: 1, maxHD: 1, crValue: 0.5, label: '1 HD', features: [] },
@@ -137,10 +148,14 @@ export const TEMPLATES_BATCH_019: TemplateDefinition[] = [
         scalingType: 'flat',
         name: 'Spell Storing (Su)',
         description:
-          'The spellgorged zombie holds a total number of spell levels equal to its Hit Dice. Spells are cast at the original caster\'s caster level and use the original caster\'s save DCs. No material components or arcane spell failure apply.',
+          "The spellgorged zombie holds a total number of spell levels equal to its Hit Dice. Spells are cast at the original caster's caster level and use the original caster's save DCs. No material components or arcane spell failure apply.",
       },
     ],
-    sourceInfo: { type: 'third_party', publisher: 'Frog God Games', publication: 'Tome of Horrors Complete' },
+    sourceInfo: {
+      type: 'third_party',
+      publisher: 'Frog God Games',
+      publication: 'Tome of Horrors Complete',
+    },
     verificationStatus: 'needs_review',
     visibility: 'global',
     rev: 1,
@@ -175,10 +190,14 @@ export const TEMPLATES_BATCH_019: TemplateDefinition[] = [
         scalingType: 'flat',
         name: 'Eldritch Severance (Su)',
         description:
-          'The spellspurned can make a melee touch attack that applies greater dispel magic (caster level equals the creature\'s Hit Dice). Against magic items, this suppresses their magical abilities while the spellspurned touches them and for 1d4 minutes afterward. At 15 or more Hit Dice, this improves to mage\'s disjunction.',
+          "The spellspurned can make a melee touch attack that applies greater dispel magic (caster level equals the creature's Hit Dice). Against magic items, this suppresses their magical abilities while the spellspurned touches them and for 1d4 minutes afterward. At 15 or more Hit Dice, this improves to mage's disjunction.",
       },
     ],
-    sourceInfo: { type: 'third_party', publisher: 'Legendary Games', publication: 'Arcforge Universe Cyclopedia' },
+    sourceInfo: {
+      type: 'third_party',
+      publisher: 'Legendary Games',
+      publication: 'Arcforge Universe Cyclopedia',
+    },
     verificationStatus: 'needs_review',
     visibility: 'global',
     rev: 1,
@@ -189,13 +208,11 @@ export const TEMPLATES_BATCH_019: TemplateDefinition[] = [
     id: 'spirit-elk-maddened-creature',
     name: 'Spirit Elk-Maddened Creature',
     description:
-      'Creatures transformed by the Spirit Elk\'s influence become solitary, maddened beings. While retaining their physical form, they gain enhanced strength and partial access to the Spirit Elk\'s powers, driving them to seek out challenging combat until they are defeated.',
+      "Creatures transformed by the Spirit Elk's influence become solitary, maddened beings. While retaining their physical form, they gain enhanced strength and partial access to the Spirit Elk's powers, driving them to seek out challenging combat until they are defeated.",
     crAdjustment: 1,
     acquisitionType: 'acquired',
     isSimpleTemplate: false,
-    prerequisites: [
-      { type: 'special', description: 'Any animal or humanoid creature' },
-    ],
+    prerequisites: [{ type: 'special', description: 'Any animal or humanoid creature' }],
     abilityScoreChanges: [
       { ability: 'STR', change: 4 },
       { ability: 'DEX', change: 2 },
@@ -211,7 +228,11 @@ export const TEMPLATES_BATCH_019: TemplateDefinition[] = [
     immunities: ['fatigue'],
     fastHealing: '10',
     features: [],
-    sourceInfo: { type: 'third_party', publisher: "Varyag's Forge", publication: 'Magical Bestiary' },
+    sourceInfo: {
+      type: 'third_party',
+      publisher: "Varyag's Forge",
+      publication: 'Magical Bestiary',
+    },
     verificationStatus: 'needs_review',
     visibility: 'global',
     rev: 1,
@@ -231,7 +252,8 @@ export const TEMPLATES_BATCH_019: TemplateDefinition[] = [
       {
         scalingType: 'flat',
         name: 'Occult Scent (sense)',
-        description: 'The spirit-touched creature can detect occult energies and bound spirits through its supernatural sense of smell.',
+        description:
+          'The spirit-touched creature can detect occult energies and bound spirits through its supernatural sense of smell.',
       },
       {
         scalingType: 'flat',
@@ -245,7 +267,11 @@ export const TEMPLATES_BATCH_019: TemplateDefinition[] = [
         description: 'Gains the Amateur Pactmaker feat regardless of prerequisites.',
       },
     ],
-    sourceInfo: { type: 'third_party', publisher: 'Radiance House', publication: 'Pact Magic Unbound: Grimoire of Lost Souls' },
+    sourceInfo: {
+      type: 'third_party',
+      publisher: 'Radiance House',
+      publication: 'Pact Magic Unbound: Grimoire of Lost Souls',
+    },
     verificationStatus: 'needs_review',
     visibility: 'global',
     rev: 1,
@@ -260,16 +286,12 @@ export const TEMPLATES_BATCH_019: TemplateDefinition[] = [
     crAdjustment: 1,
     acquisitionType: 'acquired',
     isSimpleTemplate: false,
-    prerequisites: [
-      { type: 'creature_type', allowed: ['vermin'] },
-    ],
+    prerequisites: [{ type: 'creature_type', allowed: ['vermin'] }],
     typeChange: 'undead',
     subtypeGains: ['augmented'],
-    abilityScoreChanges: [
-      { ability: 'STR', change: 4 },
-    ],
+    abilityScoreChanges: [{ ability: 'STR', change: 4 }],
     abilityScoreChangeNote:
-      'Intelligence becomes 10 (gained from template). Charisma equals base creature\'s Constitution score. Constitution score removed (undead). Alignment always chaotic evil. Gains 2 additional HD. Skills: 4 + Int modifier per HD; Climb, Fly, Perception, Stealth are class skills. Languages: understands Abyssal but cannot speak. Bonus feat: Toughness.',
+      "Intelligence becomes 10 (gained from template). Charisma equals base creature's Constitution score. Constitution score removed (undead). Alignment always chaotic evil. Gains 2 additional HD. Skills: 4 + Int modifier per HD; Climb, Fly, Perception, Stealth are class skills. Languages: understands Abyssal but cannot speak. Bonus feat: Toughness.",
     naturalArmorChange: 2,
     features: [
       {
@@ -296,9 +318,7 @@ export const TEMPLATES_BATCH_019: TemplateDefinition[] = [
     isSimpleTemplate: false,
     typeChange: 'aberration',
     typeChangeNote: 'Does not recalculate skills or Hit Dice when type changes.',
-    abilityScoreChanges: [
-      { ability: 'CHA', change: 2 },
-    ],
+    abilityScoreChanges: [{ ability: 'CHA', change: 2 }],
     immunities: ['cold', 'confusion', 'fear', 'insanity'],
     features: [
       {
@@ -309,12 +329,14 @@ export const TEMPLATES_BATCH_019: TemplateDefinition[] = [
       {
         scalingType: 'flat',
         name: 'Alien Anatomy (Ex)',
-        description: 'The star-borne creature has a 50% fortification chance against critical hits and sneak attacks.',
+        description:
+          'The star-borne creature has a 50% fortification chance against critical hits and sneak attacks.',
       },
       {
         scalingType: 'flat',
         name: 'No Breath (Ex)',
-        description: 'The star-borne creature does not breathe and is immune to effects requiring breathing.',
+        description:
+          'The star-borne creature does not breathe and is immune to effects requiring breathing.',
       },
       {
         scalingType: 'flat',
@@ -329,7 +351,11 @@ export const TEMPLATES_BATCH_019: TemplateDefinition[] = [
           'Any creature that makes mental contact with the star-borne creature must make a Will save. On a failed save, the creature is confused for 1d6 rounds. On a successful save, it is staggered for 1 round.',
       },
     ],
-    sourceInfo: { type: 'third_party', publisher: 'Legendary Games', publication: 'Legendary Witches' },
+    sourceInfo: {
+      type: 'third_party',
+      publisher: 'Legendary Games',
+      publication: 'Legendary Witches',
+    },
     verificationStatus: 'needs_review',
     visibility: 'global',
     rev: 1,
@@ -344,9 +370,7 @@ export const TEMPLATES_BATCH_019: TemplateDefinition[] = [
     crAdjustment: 2,
     acquisitionType: 'inherited',
     isSimpleTemplate: false,
-    prerequisites: [
-      { type: 'creature_type', allowed: ['construct'] },
-    ],
+    prerequisites: [{ type: 'creature_type', allowed: ['construct'] }],
     subtypeGains: ['clockwork', 'augmented'],
     abilityScoreChanges: [
       { ability: 'STR', change: 4 },
@@ -370,13 +394,14 @@ export const TEMPLATES_BATCH_019: TemplateDefinition[] = [
       {
         scalingType: 'flat',
         name: 'Increased Locomotion (Ex)',
-        description: 'All movement speeds increase by 10 feet. The construct gains the Run feat as a bonus feat.',
+        description:
+          'All movement speeds increase by 10 feet. The construct gains the Run feat as a bonus feat.',
       },
       {
         scalingType: 'flat',
         name: 'Steam Engine (Ex)',
         description:
-          'The construct\'s steam engine operates for 1 week per Hit Die before requiring maintenance. Using special attacks reduces remaining operation time by 1 day per use.',
+          "The construct's steam engine operates for 1 week per Hit Die before requiring maintenance. Using special attacks reduces remaining operation time by 1 day per use.",
       },
       {
         scalingType: 'flat',
@@ -387,7 +412,8 @@ export const TEMPLATES_BATCH_019: TemplateDefinition[] = [
       {
         scalingType: 'flat',
         name: 'Steam Blast (Ex)',
-        description: 'Ranged touch attack dealing 1d6 fire damage per 2 Hit Dice, with a 30-foot range.',
+        description:
+          'Ranged touch attack dealing 1d6 fire damage per 2 Hit Dice, with a 30-foot range.',
       },
       {
         scalingType: 'flat',
@@ -404,10 +430,14 @@ export const TEMPLATES_BATCH_019: TemplateDefinition[] = [
       {
         scalingType: 'flat',
         name: 'Steam-Charged Melee',
-        description: 'All melee attacks deal an additional 1d6 fire damage (2d6 during active Heat Management).',
+        description:
+          'All melee attacks deal an additional 1d6 fire damage (2d6 during active Heat Management).',
       },
     ],
-    sourceInfo: { type: 'official', publication: 'Pathfinder Campaign Setting: Construct Handbook' },
+    sourceInfo: {
+      type: 'official',
+      publication: 'Pathfinder Campaign Setting: Construct Handbook',
+    },
     verificationStatus: 'needs_review',
     visibility: 'global',
     rev: 1,
@@ -422,13 +452,9 @@ export const TEMPLATES_BATCH_019: TemplateDefinition[] = [
     crAdjustment: 0,
     acquisitionType: 'acquired',
     isSimpleTemplate: true,
-    prerequisites: [
-      { type: 'creature_type', allowed: ['construct'] },
-    ],
+    prerequisites: [{ type: 'creature_type', allowed: ['construct'] }],
     subtypeGains: ['steampowered'],
-    abilityScoreChanges: [
-      { ability: 'STR', change: 2 },
-    ],
+    abilityScoreChanges: [{ ability: 'STR', change: 2 }],
     abilityScoreChangeNote:
       'Strength bonus increases by an additional +2 for every size category above Medium.',
     features: [
@@ -441,10 +467,15 @@ export const TEMPLATES_BATCH_019: TemplateDefinition[] = [
       {
         scalingType: 'flat',
         name: 'Cold Vulnerability (Ex)',
-        description: 'Steampowered constructs take 150% as much damage as normal from cold attacks.',
+        description:
+          'Steampowered constructs take 150% as much damage as normal from cold attacks.',
       },
     ],
-    sourceInfo: { type: 'third_party', publisher: 'Drop Dead Studios', publication: 'Ultimate Engineering' },
+    sourceInfo: {
+      type: 'third_party',
+      publisher: 'Drop Dead Studios',
+      publication: 'Ultimate Engineering',
+    },
     verificationStatus: 'needs_review',
     visibility: 'global',
     rev: 1,
@@ -460,7 +491,11 @@ export const TEMPLATES_BATCH_019: TemplateDefinition[] = [
     acquisitionType: 'acquired',
     isSimpleTemplate: false,
     prerequisites: [
-      { type: 'special', description: 'Living creature with 5 or more Hit Dice (typically humanoids, fey, or monstrous humanoids)' },
+      {
+        type: 'special',
+        description:
+          'Living creature with 5 or more Hit Dice (typically humanoids, fey, or monstrous humanoids)',
+      },
     ],
     typeChange: 'undead',
     subtypeGains: ['augmented'],
@@ -503,7 +538,8 @@ export const TEMPLATES_BATCH_019: TemplateDefinition[] = [
       {
         scalingType: 'flat',
         name: 'Create Spawn (Su)',
-        description: 'Creatures slain by the stellar vampire become vampire spawn under the creator\'s control.',
+        description:
+          "Creatures slain by the stellar vampire become vampire spawn under the creator's control.",
       },
       {
         scalingType: 'flat',
@@ -521,7 +557,7 @@ export const TEMPLATES_BATCH_019: TemplateDefinition[] = [
         scalingType: 'flat',
         name: 'Vitality Drain (Su)',
         description:
-          'The stellar vampire\'s natural weapons inflict one negative level plus 1d6 electricity damage per 4 Hit Dice.',
+          "The stellar vampire's natural weapons inflict one negative level plus 1d6 electricity damage per 4 Hit Dice.",
       },
       {
         scalingType: 'flat',
@@ -532,7 +568,8 @@ export const TEMPLATES_BATCH_019: TemplateDefinition[] = [
       {
         scalingType: 'flat',
         name: 'Energy Vampire (Su)',
-        description: 'Fast healing doubles in areas of direct sunlight or powerful non-magical energy.',
+        description:
+          'Fast healing doubles in areas of direct sunlight or powerful non-magical energy.',
       },
       {
         scalingType: 'flat',
@@ -551,7 +588,11 @@ export const TEMPLATES_BATCH_019: TemplateDefinition[] = [
           'Garlic aversion (must stay 5 feet away); recoils from mirrors and holy symbols; cannot enter private dwellings uninvited; submersion in water staggers (round 1) then destroys (round 2); a wooden stake through the heart instantly slays (head must also be severed and body anointed with holy water for permanent death). Direct sunlight causes no harm.',
       },
     ],
-    sourceInfo: { type: 'third_party', publisher: 'Legendary Games', publication: 'Pathfinder Roleplaying Game: The World of Vampire Hunter D' },
+    sourceInfo: {
+      type: 'third_party',
+      publisher: 'Legendary Games',
+      publication: 'Pathfinder Roleplaying Game: The World of Vampire Hunter D',
+    },
     verificationStatus: 'needs_review',
     visibility: 'global',
     rev: 1,
@@ -566,15 +607,12 @@ export const TEMPLATES_BATCH_019: TemplateDefinition[] = [
     crAdjustment: 3,
     acquisitionType: 'acquired',
     isSimpleTemplate: false,
-    prerequisites: [
-      { type: 'creature_type', allowed: ['construct'] },
-    ],
+    prerequisites: [{ type: 'creature_type', allowed: ['construct'] }],
     abilityScoreChanges: [
       { ability: 'STR', change: 4 },
       { ability: 'DEX', change: 2 },
     ],
-    abilityScoreChangeNote:
-      'Charisma becomes at least 12 (if base score is lower).',
+    abilityScoreChangeNote: 'Charisma becomes at least 12 (if base score is lower).',
     naturalArmorChange: 4,
     immunities: ['cold', 'sonic'],
     fastHealing: '5',
@@ -599,10 +637,15 @@ export const TEMPLATES_BATCH_019: TemplateDefinition[] = [
       {
         scalingType: 'flat',
         name: 'Negative Energy-Charged (Su)',
-        description: 'The still engine takes damage from positive energy effects as if it were an undead creature.',
+        description:
+          'The still engine takes damage from positive energy effects as if it were an undead creature.',
       },
     ],
-    sourceInfo: { type: 'third_party', publisher: 'Legendary Games', publication: 'Arcforge Universe Cyclopedia' },
+    sourceInfo: {
+      type: 'third_party',
+      publisher: 'Legendary Games',
+      publication: 'Arcforge Universe Cyclopedia',
+    },
     verificationStatus: 'needs_review',
     visibility: 'global',
     rev: 1,
@@ -617,9 +660,7 @@ export const TEMPLATES_BATCH_019: TemplateDefinition[] = [
     crAdjustment: 3,
     acquisitionType: 'inherited',
     isSimpleTemplate: false,
-    prerequisites: [
-      { type: 'special', description: 'Any living corporeal creature' },
-    ],
+    prerequisites: [{ type: 'special', description: 'Any living corporeal creature' }],
     typeChange: 'construct',
     abilityScoreChanges: [
       { ability: 'STR', change: 4 },
@@ -635,7 +676,8 @@ export const TEMPLATES_BATCH_019: TemplateDefinition[] = [
       {
         scalingType: 'flat',
         name: 'Hardness 8',
-        description: 'The stone idol creature has Hardness 8 and takes half damage from energy and ranged attacks.',
+        description:
+          'The stone idol creature has Hardness 8 and takes half damage from energy and ranged attacks.',
       },
       {
         scalingType: 'flat',
@@ -657,7 +699,8 @@ export const TEMPLATES_BATCH_019: TemplateDefinition[] = [
       {
         scalingType: 'flat',
         name: "Creator's Failsafe (Su)",
-        description: "The stone idol's creator is immune to the idol's special attacks while maintaining control over it.",
+        description:
+          "The stone idol's creator is immune to the idol's special attacks while maintaining control over it.",
       },
       {
         scalingType: 'flat',
@@ -672,7 +715,11 @@ export const TEMPLATES_BATCH_019: TemplateDefinition[] = [
           'When control conditions are triggered, the creator must succeed at an opposed Charisma check or lose control of the stone idol.',
       },
     ],
-    sourceInfo: { type: 'third_party', publisher: 'Green Ronin Publishing', publication: 'Advanced Bestiary' },
+    sourceInfo: {
+      type: 'third_party',
+      publisher: 'Green Ronin Publishing',
+      publication: 'Advanced Bestiary',
+    },
     verificationStatus: 'needs_review',
     visibility: 'global',
     rev: 1,
@@ -717,7 +764,8 @@ export const TEMPLATES_BATCH_019: TemplateDefinition[] = [
       {
         scalingType: 'flat',
         name: 'Positive Energy Affinity (Su)',
-        description: 'Healing spells and effects are twice as effective when applied to the sublime creature.',
+        description:
+          'Healing spells and effects are twice as effective when applied to the sublime creature.',
       },
       {
         scalingType: 'flat',
@@ -741,7 +789,11 @@ export const TEMPLATES_BATCH_019: TemplateDefinition[] = [
         description: 'Gains a +4 racial bonus to Diplomacy checks.',
       },
     ],
-    sourceInfo: { type: 'third_party', publisher: 'Rite Publishing', publication: 'Pathways Bestiary' },
+    sourceInfo: {
+      type: 'third_party',
+      publisher: 'Rite Publishing',
+      publication: 'Pathways Bestiary',
+    },
     verificationStatus: 'needs_review',
     visibility: 'global',
     rev: 1,
@@ -783,6 +835,10 @@ export const TEMPLATES_BATCH_019: TemplateDefinition[] = [
       {
         scalingType: 'flat',
         name: 'Enchanting Presence (Su)',
+        id: 'enchanting-presence',
+        activationMode: 'toggle',
+        shortDescription:
+          'Free action — creatures within 30 ft shift one step friendlier (Will negates, once/round)',
         description:
           'Once per round as a free action, all creatures within 30 feet have their attitude toward the suzerain shifted one step in a positive direction (Will save negates).',
       },
@@ -790,11 +846,20 @@ export const TEMPLATES_BATCH_019: TemplateDefinition[] = [
         scalingType: 'flat',
         name: 'Inspiring Example (Ex)',
         description:
-          'All allies within 60 feet gain a morale bonus on attack rolls, damage rolls, and saving throws equal to the suzerain\'s Charisma modifier.',
+          "All allies within 60 feet gain a morale bonus on attack rolls, damage rolls, and saving throws equal to the suzerain's Charisma modifier.",
       },
       {
         scalingType: 'flat',
         name: 'Stirring Speech (Su)',
+        id: 'stirring-speech',
+        shortDescription: 'Use inspire greatness bardic performance (CHA mod/day)',
+        resourcePool: {
+          id: 'stirring_speech',
+          name: 'Stirring Speech',
+          rechargeOn: 'rest',
+          maxFormula: 'chaMod',
+          restRecoveryMode: 'full',
+        },
         description:
           'The suzerain can use the inspire greatness bardic performance ability a number of times per day equal to its Charisma modifier.',
       },
@@ -806,10 +871,15 @@ export const TEMPLATES_BATCH_019: TemplateDefinition[] = [
       {
         scalingType: 'flat',
         name: 'Skill Bonuses',
-        description: '+8 racial bonus to Bluff, +14 racial bonus to Diplomacy, +6 racial bonus to Intimidate.',
+        description:
+          '+8 racial bonus to Bluff, +14 racial bonus to Diplomacy, +6 racial bonus to Intimidate.',
       },
     ],
-    sourceInfo: { type: 'third_party', publisher: 'Green Ronin Publishing', publication: 'Advanced Bestiary' },
+    sourceInfo: {
+      type: 'third_party',
+      publisher: 'Green Ronin Publishing',
+      publication: 'Advanced Bestiary',
+    },
     verificationStatus: 'needs_review',
     visibility: 'global',
     rev: 1,
@@ -825,7 +895,11 @@ export const TEMPLATES_BATCH_019: TemplateDefinition[] = [
     acquisitionType: 'inherited',
     isSimpleTemplate: false,
     prerequisites: [
-      { type: 'special', description: 'Any living or undead corporeal creature with Intelligence and Charisma scores of at least 3' },
+      {
+        type: 'special',
+        description:
+          'Any living or undead corporeal creature with Intelligence and Charisma scores of at least 3',
+      },
     ],
     typeChange: 'plant',
     subtypeGains: ['augmented', 'aquatic'],
@@ -864,7 +938,8 @@ export const TEMPLATES_BATCH_019: TemplateDefinition[] = [
       {
         scalingType: 'flat',
         name: 'Trackless Step (Ex)',
-        description: 'The swamp lord leaves no trail in natural surroundings and cannot be tracked unless it chooses to leave a trail.',
+        description:
+          'The swamp lord leaves no trail in natural surroundings and cannot be tracked unless it chooses to leave a trail.',
       },
       {
         scalingType: 'hd_formula',
@@ -880,7 +955,11 @@ export const TEMPLATES_BATCH_019: TemplateDefinition[] = [
           '+5 racial bonus to Knowledge (nature), Perception, Stealth, and Survival; +10 racial bonus to Escape Artist; additional +10 to Stealth in marshes or forests. Knowledge (nature) can be used untrained.',
       },
     ],
-    sourceInfo: { type: 'third_party', publisher: 'Green Ronin Publishing', publication: 'Advanced Bestiary' },
+    sourceInfo: {
+      type: 'third_party',
+      publisher: 'Green Ronin Publishing',
+      publication: 'Advanced Bestiary',
+    },
     verificationStatus: 'needs_review',
     visibility: 'global',
     rev: 1,
@@ -895,12 +974,8 @@ export const TEMPLATES_BATCH_019: TemplateDefinition[] = [
     crAdjustment: 1,
     acquisitionType: 'acquired',
     isSimpleTemplate: false,
-    prerequisites: [
-      { type: 'special', description: 'Any living corporeal creature' },
-    ],
-    abilityScoreChanges: [
-      { ability: 'CON', change: 4 },
-    ],
+    prerequisites: [{ type: 'special', description: 'Any living corporeal creature' }],
+    abilityScoreChanges: [{ ability: 'CON', change: 4 }],
     features: [
       {
         scalingType: 'flat',
@@ -911,10 +986,15 @@ export const TEMPLATES_BATCH_019: TemplateDefinition[] = [
       {
         scalingType: 'flat',
         name: 'Verminous Innards (Ex)',
-        description: 'Effects that grant bonuses against vermin also apply against the swarmblooded creature.',
+        description:
+          'Effects that grant bonuses against vermin also apply against the swarmblooded creature.',
       },
     ],
-    sourceInfo: { type: 'third_party', publisher: 'Green Ronin Publishing', publication: 'Advanced Bestiary' },
+    sourceInfo: {
+      type: 'third_party',
+      publisher: 'Green Ronin Publishing',
+      publication: 'Advanced Bestiary',
+    },
     verificationStatus: 'needs_review',
     visibility: 'global',
     rev: 1,
@@ -932,18 +1012,20 @@ export const TEMPLATES_BATCH_019: TemplateDefinition[] = [
     typeChange: 'construct',
     subtypeGains: ['robot'],
     abilityScoreChangeNote:
-      'If the base creature\'s Intelligence score is less than 10, it becomes 10. No Constitution score (construct). All racial Hit Dice become d10s; class Hit Dice are unchanged.',
+      "If the base creature's Intelligence score is less than 10, it becomes 10. No Constitution score (construct). All racial Hit Dice become d10s; class Hit Dice are unchanged.",
     immunities: ['all construct immunities'],
     features: [
       {
         scalingType: 'flat',
         name: 'Vulnerability: Critical Hits and Electricity',
-        description: 'Unlike most constructs, synthetics are vulnerable to critical hits and electricity damage.',
+        description:
+          'Unlike most constructs, synthetics are vulnerable to critical hits and electricity damage.',
       },
       {
         scalingType: 'flat',
         name: 'Mimicry (Ex)',
-        description: 'The synthetic gains a +8 racial bonus to Disguise checks to impersonate the original creature it was modeled after.',
+        description:
+          'The synthetic gains a +8 racial bonus to Disguise checks to impersonate the original creature it was modeled after.',
       },
       {
         scalingType: 'flat',
@@ -952,7 +1034,11 @@ export const TEMPLATES_BATCH_019: TemplateDefinition[] = [
           'The synthetic gains a number of robot upgrades equal to its CR. Reducing upgrades to zero may reduce the CR adjustment to +0.',
       },
     ],
-    sourceInfo: { type: 'third_party', publisher: 'Legendary Games', publication: 'Arcforge Universe Cyclopedia' },
+    sourceInfo: {
+      type: 'third_party',
+      publisher: 'Legendary Games',
+      publication: 'Arcforge Universe Cyclopedia',
+    },
     verificationStatus: 'needs_review',
     visibility: 'global',
     rev: 1,
@@ -974,8 +1060,16 @@ export const TEMPLATES_BATCH_019: TemplateDefinition[] = [
         crValue: 0,
         label: '1–4 HD (no CR change)',
         features: [
-          { scalingType: 'flat', name: 'Acid Resistance 5', description: 'Resistance 5 to acid damage.' },
-          { scalingType: 'flat', name: 'Electricity Resistance 5', description: 'Resistance 5 to electricity damage.' },
+          {
+            scalingType: 'flat',
+            name: 'Acid Resistance 5',
+            description: 'Resistance 5 to acid damage.',
+          },
+          {
+            scalingType: 'flat',
+            name: 'Electricity Resistance 5',
+            description: 'Resistance 5 to electricity damage.',
+          },
         ],
       },
       {
@@ -985,8 +1079,16 @@ export const TEMPLATES_BATCH_019: TemplateDefinition[] = [
         crValue: 1,
         label: '5–10 HD (CR +1)',
         features: [
-          { scalingType: 'flat', name: 'Acid Resistance 10', description: 'Resistance 10 to acid damage.' },
-          { scalingType: 'flat', name: 'Electricity Resistance 10', description: 'Resistance 10 to electricity damage.' },
+          {
+            scalingType: 'flat',
+            name: 'Acid Resistance 10',
+            description: 'Resistance 10 to acid damage.',
+          },
+          {
+            scalingType: 'flat',
+            name: 'Electricity Resistance 10',
+            description: 'Resistance 10 to electricity damage.',
+          },
           { scalingType: 'flat', name: 'Damage Reduction 5/magic', description: 'DR 5/magic.' },
         ],
       },
@@ -996,8 +1098,16 @@ export const TEMPLATES_BATCH_019: TemplateDefinition[] = [
         crValue: 2,
         label: '11+ HD (CR +2)',
         features: [
-          { scalingType: 'flat', name: 'Acid Resistance 15', description: 'Resistance 15 to acid damage.' },
-          { scalingType: 'flat', name: 'Electricity Resistance 15', description: 'Resistance 15 to electricity damage.' },
+          {
+            scalingType: 'flat',
+            name: 'Acid Resistance 15',
+            description: 'Resistance 15 to acid damage.',
+          },
+          {
+            scalingType: 'flat',
+            name: 'Electricity Resistance 15',
+            description: 'Resistance 15 to electricity damage.',
+          },
           { scalingType: 'flat', name: 'Damage Reduction 10/magic', description: 'DR 10/magic.' },
         ],
       },
@@ -1132,7 +1242,14 @@ export const TEMPLATES_BATCH_019: TemplateDefinition[] = [
     ],
     abilityScoreChangeNote:
       'Natural armor converts to a deflection bonus equal to Charisma modifier or +1, whichever is higher. Gains perfect fly speed equal to former fly speed or twice highest land speed.',
-    immunities: ['cold', 'fire', 'electricity', 'sonic', 'inhaled poisons and gases', 'fog and cloud-based attacks and spells'],
+    immunities: [
+      'cold',
+      'fire',
+      'electricity',
+      'sonic',
+      'inhaled poisons and gases',
+      'fog and cloud-based attacks and spells',
+    ],
     features: [
       {
         scalingType: 'flat',
@@ -1143,7 +1260,8 @@ export const TEMPLATES_BATCH_019: TemplateDefinition[] = [
       {
         scalingType: 'flat',
         name: 'Cloud Sight (Ex)',
-        description: 'The tempest creature can see through all obscuring conditions caused by weather, fog, and similar effects.',
+        description:
+          'The tempest creature can see through all obscuring conditions caused by weather, fog, and similar effects.',
       },
       {
         scalingType: 'flat',
@@ -1172,10 +1290,15 @@ export const TEMPLATES_BATCH_019: TemplateDefinition[] = [
       {
         scalingType: 'flat',
         name: 'Vulnerabilities',
-        description: 'The tempest creature is nauseated by effects with the earth descriptor and by silence effects.',
+        description:
+          'The tempest creature is nauseated by effects with the earth descriptor and by silence effects.',
       },
     ],
-    sourceInfo: { type: 'third_party', publisher: 'Rite Publishing', publication: 'Pathways Bestiary' },
+    sourceInfo: {
+      type: 'third_party',
+      publisher: 'Rite Publishing',
+      publication: 'Pathways Bestiary',
+    },
     verificationStatus: 'needs_review',
     visibility: 'global',
     rev: 1,
@@ -1203,7 +1326,8 @@ export const TEMPLATES_BATCH_019: TemplateDefinition[] = [
           {
             scalingType: 'flat',
             name: 'Acid Bite (Ex)',
-            description: 'Melee bite attack deals an additional 1d6 acid damage (Medium or smaller creatures).',
+            description:
+              'Melee bite attack deals an additional 1d6 acid damage (Medium or smaller creatures).',
           },
         ],
       },
@@ -1217,7 +1341,8 @@ export const TEMPLATES_BATCH_019: TemplateDefinition[] = [
           {
             scalingType: 'flat',
             name: 'Acid Bite (Ex)',
-            description: 'Melee bite attack deals an additional 2d6 acid damage (Large or larger creatures).',
+            description:
+              'Melee bite attack deals an additional 2d6 acid damage (Large or larger creatures).',
           },
         ],
       },
@@ -1242,7 +1367,8 @@ export const TEMPLATES_BATCH_019: TemplateDefinition[] = [
       {
         scalingType: 'flat',
         name: 'Darkvision 60 ft.',
-        description: 'The tenebrous creature gains darkvision with a 60-foot range if it does not already have it.',
+        description:
+          'The tenebrous creature gains darkvision with a 60-foot range if it does not already have it.',
       },
       {
         scalingType: 'flat',
@@ -1254,10 +1380,14 @@ export const TEMPLATES_BATCH_019: TemplateDefinition[] = [
         scalingType: 'flat',
         name: 'Bristles (Ex)',
         description:
-          'Opponents attacking the tenebrous creature with natural weapons, unarmed attacks, or handheld weapons must succeed on a Reflex save or contact the bristles, causing paralysis for 1d4 rounds followed by Constitution damage (1d6 to 3d6 depending on the creature\'s HD).',
+          "Opponents attacking the tenebrous creature with natural weapons, unarmed attacks, or handheld weapons must succeed on a Reflex save or contact the bristles, causing paralysis for 1d4 rounds followed by Constitution damage (1d6 to 3d6 depending on the creature's HD).",
       },
     ],
-    sourceInfo: { type: 'third_party', publisher: 'Frog God Games', publication: 'Tome of Horrors Complete' },
+    sourceInfo: {
+      type: 'third_party',
+      publisher: 'Frog God Games',
+      publication: 'Tome of Horrors Complete',
+    },
     verificationStatus: 'needs_review',
     visibility: 'global',
     rev: 1,
@@ -1272,11 +1402,9 @@ export const TEMPLATES_BATCH_019: TemplateDefinition[] = [
     crAdjustment: 1,
     acquisitionType: 'either',
     isSimpleTemplate: false,
-    abilityScoreChanges: [
-      { ability: 'CHA', change: 2 },
-    ],
+    abilityScoreChanges: [{ ability: 'CHA', change: 2 }],
     abilityScoreChangeNote:
-      'Charisma increases by +2 if the head creature has higher Charisma. Intelligence adopts the head creature\'s Intelligence –2 (minimum 2) if it is higher. Wisdom adopts the head creature\'s Wisdom –2 (minimum 2) if it is higher. Animals become Magical Beasts and Humanoids become Monstrous Humanoids (both gain augmented subtype).',
+      "Charisma increases by +2 if the head creature has higher Charisma. Intelligence adopts the head creature's Intelligence –2 (minimum 2) if it is higher. Wisdom adopts the head creature's Wisdom –2 (minimum 2) if it is higher. Animals become Magical Beasts and Humanoids become Monstrous Humanoids (both gain augmented subtype).",
     naturalArmorChange: 1,
     features: [
       {
@@ -1288,7 +1416,8 @@ export const TEMPLATES_BATCH_019: TemplateDefinition[] = [
       {
         scalingType: 'flat',
         name: 'Head-Based Senses',
-        description: 'Gains the enhanced senses of the head creature (e.g., darkvision, scent, tremorsense).',
+        description:
+          'Gains the enhanced senses of the head creature (e.g., darkvision, scent, tremorsense).',
       },
       {
         scalingType: 'flat',
@@ -1297,7 +1426,11 @@ export const TEMPLATES_BATCH_019: TemplateDefinition[] = [
           'Gains bite, gore, or other head-based attacks from the head creature. May also gain conditional abilities such as quills, a tongue attack, water breathing, speech, or trunk usage depending on the head species.',
       },
     ],
-    sourceInfo: { type: 'third_party', publisher: 'Green Ronin Publishing', publication: 'Advanced Bestiary' },
+    sourceInfo: {
+      type: 'third_party',
+      publisher: 'Green Ronin Publishing',
+      publication: 'Advanced Bestiary',
+    },
     verificationStatus: 'needs_review',
     visibility: 'global',
     rev: 1,
@@ -1317,7 +1450,7 @@ export const TEMPLATES_BATCH_019: TemplateDefinition[] = [
       {
         scalingType: 'flat',
         name: 'Alignment Change',
-        description: 'The terror creature\'s alignment shifts to neutral evil.',
+        description: "The terror creature's alignment shifts to neutral evil.",
       },
       {
         scalingType: 'flat',
@@ -1328,7 +1461,7 @@ export const TEMPLATES_BATCH_019: TemplateDefinition[] = [
         scalingType: 'flat',
         name: 'Fear Aura (Su)',
         description:
-          'All creatures within 20 feet of the terror creature are affected as by the fear spell (Will save DC 10 + 1/2 terror creature\'s racial HD + Charisma modifier negates).',
+          "All creatures within 20 feet of the terror creature are affected as by the fear spell (Will save DC 10 + 1/2 terror creature's racial HD + Charisma modifier negates).",
       },
       {
         scalingType: 'flat',
@@ -1411,10 +1544,14 @@ export const TEMPLATES_BATCH_019: TemplateDefinition[] = [
         scalingType: 'flat',
         name: 'Special Attacks by HD Tier',
         description:
-          'Gains one special attack per HD tier from groups A, B, or C (determined by the base animal\'s natural attacks and abilities).',
+          "Gains one special attack per HD tier from groups A, B, or C (determined by the base animal's natural attacks and abilities).",
       },
     ],
-    sourceInfo: { type: 'third_party', publisher: 'Frog God Games', publication: 'Tome of Horrors Complete' },
+    sourceInfo: {
+      type: 'third_party',
+      publisher: 'Frog God Games',
+      publication: 'Tome of Horrors Complete',
+    },
     verificationStatus: 'needs_review',
     visibility: 'global',
     rev: 1,
