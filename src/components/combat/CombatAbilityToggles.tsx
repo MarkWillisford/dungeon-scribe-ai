@@ -126,7 +126,23 @@ export function CombatAbilityToggles({
       }),
     );
 
-    return [...fromFeats, ...fromClassFeatures];
+    const fromTemplateFeatures: ToggleEntry[] = (character.appliedTemplates ?? []).flatMap((tpl) =>
+      (tpl.features ?? []).flatMap((feature) => {
+        if (feature.scalingType !== 'flat' && feature.scalingType !== 'hd_threshold') return [];
+        if (feature.activationMode !== 'toggle' || !feature.id) return [];
+        return [
+          {
+            id: feature.id,
+            name: feature.name,
+            description: feature.description,
+            shortDescription: feature.shortDescription,
+            effects: feature.effects ?? [],
+          },
+        ];
+      }),
+    );
+
+    return [...fromFeats, ...fromClassFeatures, ...fromTemplateFeatures];
   }, [character]);
 
   if (toggleableAbilities.length === 0) return null;
