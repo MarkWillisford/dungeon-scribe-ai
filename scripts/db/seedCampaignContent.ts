@@ -1214,13 +1214,23 @@ const LEADER_OF_THE_FAITH: CampaignClass = {
       description: 'Gain another Secondary Ability selection.',
     },
   ],
-  spellcasting: { type: 'None', casting: 'None' },
+  spellcasting: {
+    type: 'Divine',
+    casting: 'Prepared',
+    spellList:
+      'Optionally advances existing divine spellcasting class (at levels 2–5 and 7–9)',
+  },
+  advancesSpellcasting: {
+    mode: 'single',
+    tradition: 'divine',
+    atLevels: [2, 3, 4, 5, 7, 8, 9],
+  },
   prerequisites: {
     skills: [
-      { name: 'Diplomacy, Intimidate, or Sense Motive', ranks: 5 },
       { name: 'Knowledge (religion)', ranks: 5 },
     ],
     special: [
+      '5 ranks in Diplomacy, Intimidate, or Sense Motive',
       'At least 1 level in a divine class (Cleric, Evangelist, Exalted, Inquisitor, Oracle, Paladin, Ranger, or Sentinel)',
       "Must be within one step of chosen deity's alignment",
     ],

@@ -1100,7 +1100,7 @@ export const TEMPLATES_BATCH_020: TemplateDefinition[] = [
       {
         tierIndex: 1,
         minHD: 10,
-        crValue: 1,
+        crValue: 2,
         label: '10+ HD',
         features: [
           {
