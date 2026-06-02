@@ -144,7 +144,11 @@ export class FirebaseCharacterService {
     // full ClassFeature data on the character document, so the catalog is never
     // consulted at load time. The fetch only runs for legacy characters whose
     // classFeatures array is empty (i.e., created before feature snapshotting existed).
-    const needsMerge = character.classes.classes.some((cls) => cls.classFeatures.length === 0);
+    const needsMerge = character.classes.classes.some(
+      (cls) =>
+        cls.classFeatures.length === 0 ||
+        cls.classFeatures.some((f) => f.id !== undefined && f.resourcePool === undefined),
+    );
     if (!needsMerge) return character;
 
     const classIds = character.classes.classes.map((cls) => this.classDocId(cls.name));
