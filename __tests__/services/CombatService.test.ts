@@ -131,10 +131,30 @@ describe('CombatService.getCombatAbilityEffects', () => {
   });
 
   it('Combat Expertise applies penalty to attacks and dodge bonus to AC', () => {
+    // fighter is level 1 (BAB 1): Math.floor(1/4)+1 = 1
     const effects = CombatService.getCombatAbilityEffects(fighter, {
       ...defaultAbilities,
       activeToggles: { combat_expertise: true },
-      combatExpertisePenalty: 3,
+    });
+    expect(effects.find((e) => e.target === 'attack.melee')?.value).toBe(-1);
+    expect(effects.find((e) => e.target === 'attack.ranged')?.value).toBe(-1);
+    expect(
+      effects.find((e) => e.target === 'ac.dodge' && e.source === 'Combat Expertise')?.value,
+    ).toBe(1);
+  });
+
+  it('Combat Expertise penalty scales with BAB (BAB 8 → penalty 3)', () => {
+    const highBabFighter = { ...fighter } as typeof fighter;
+    highBabFighter.combatStats = {
+      ...fighter.combatStats,
+      attackBonuses: {
+        ...fighter.combatStats.attackBonuses,
+        baseAttack: [8],
+      },
+    };
+    const effects = CombatService.getCombatAbilityEffects(highBabFighter, {
+      ...defaultAbilities,
+      activeToggles: { combat_expertise: true },
     });
     expect(effects.find((e) => e.target === 'attack.melee')?.value).toBe(-3);
     expect(effects.find((e) => e.target === 'attack.ranged')?.value).toBe(-3);

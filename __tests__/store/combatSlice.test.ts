@@ -4,7 +4,6 @@ import combatReducer, {
   toggleBuff,
   clearAllBuffs,
   toggleCombatAbility,
-  setCombatExpertisePenalty,
   initHP,
   adjustHP,
   addTempHP,
@@ -174,23 +173,6 @@ describe('toggleCombatAbility', () => {
     expect(state.combatAbilities.twoWeaponFighting).toBe(true);
     state = combatReducer(state, toggleCombatAbility('twoWeaponFighting'));
     expect(state.combatAbilities.twoWeaponFighting).toBe(false);
-  });
-});
-
-describe('setCombatExpertisePenalty', () => {
-  it('sets penalty within 1–5', () => {
-    const state = combatReducer(undefined, setCombatExpertisePenalty(3));
-    expect(state.combatAbilities.combatExpertisePenalty).toBe(3);
-  });
-
-  it('clamps to minimum 1', () => {
-    const state = combatReducer(undefined, setCombatExpertisePenalty(0));
-    expect(state.combatAbilities.combatExpertisePenalty).toBe(1);
-  });
-
-  it('clamps to maximum 5', () => {
-    const state = combatReducer(undefined, setCombatExpertisePenalty(10));
-    expect(state.combatAbilities.combatExpertisePenalty).toBe(5);
   });
 });
 
@@ -624,7 +606,6 @@ function makeSessionDoc(overrides: Partial<PlaySessionDoc> = {}): PlaySessionDoc
       activeToggles: { power_attack: true },
       twoWeaponFighting: false,
       twoWeaponFightingLightOffhand: false,
-      combatExpertisePenalty: 2,
     },
     spellSlotsUsed: { wizard: [0, 2, 1] },
     preparedSpellsCast: { '0': true },
@@ -657,7 +638,6 @@ describe('initFromSession', () => {
   it('restores combatAbilities from the session doc', () => {
     const state = combatReducer(undefined, initFromSession(makeSessionDoc()));
     expect(state.combatAbilities.activeToggles['power_attack']).toBe(true);
-    expect(state.combatAbilities.combatExpertisePenalty).toBe(2);
   });
 
   it('migrates old flat-boolean combatAbilities format', () => {
@@ -672,7 +652,6 @@ describe('initFromSession', () => {
         haste: false,
         flurryOfBlows: false,
         combatExpertise: false,
-        combatExpertisePenalty: 1,
       },
     } as unknown as PlaySessionDoc;
     const state = combatReducer(undefined, initFromSession(legacyDoc));
@@ -714,7 +693,6 @@ describe('initFromSession', () => {
     const state = combatReducer(undefined, initFromSession(doc as unknown as PlaySessionDoc));
     expect(state.activeBuffs).toHaveLength(0);
     expect(state.combatAbilities.activeToggles).toEqual({});
-    expect(state.combatAbilities.combatExpertisePenalty).toBe(1);
   });
 });
 

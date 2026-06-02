@@ -67,9 +67,9 @@ export class EquipmentService {
       (g) => g.id !== itemId,
     );
 
-    for (const [slot, equippedItemId] of updatedCharacter.equipment.equippedSlots.entries()) {
-      if (equippedItemId === itemId) {
-        updatedCharacter.equipment.equippedSlots.delete(slot);
+    for (const slot of Object.keys(updatedCharacter.equipment.equippedSlots) as EquipmentSlot[]) {
+      if (updatedCharacter.equipment.equippedSlots[slot] === itemId) {
+        delete updatedCharacter.equipment.equippedSlots[slot];
       }
     }
 
@@ -99,13 +99,13 @@ export class EquipmentService {
     const updatedCharacter = { ...character };
 
     if (slot === EquipmentSlot.TWO_HANDED) {
-      updatedCharacter.equipment.equippedSlots.delete(EquipmentSlot.MAIN_HAND);
-      updatedCharacter.equipment.equippedSlots.delete(EquipmentSlot.OFF_HAND);
+      delete updatedCharacter.equipment.equippedSlots[EquipmentSlot.MAIN_HAND];
+      delete updatedCharacter.equipment.equippedSlots[EquipmentSlot.OFF_HAND];
     } else if (slot === EquipmentSlot.MAIN_HAND || slot === EquipmentSlot.OFF_HAND) {
-      updatedCharacter.equipment.equippedSlots.delete(EquipmentSlot.TWO_HANDED);
+      delete updatedCharacter.equipment.equippedSlots[EquipmentSlot.TWO_HANDED];
     }
 
-    updatedCharacter.equipment.equippedSlots.set(slot, itemId);
+    updatedCharacter.equipment.equippedSlots[slot] = itemId;
     this.setItemEquippedStatus(updatedCharacter, itemId, true);
 
     return {
@@ -118,10 +118,10 @@ export class EquipmentService {
 
   static unequipItem(character: Character, slot: EquipmentSlot): Character {
     const updatedCharacter = { ...character };
-    const itemId = updatedCharacter.equipment.equippedSlots.get(slot);
+    const itemId = updatedCharacter.equipment.equippedSlots[slot];
 
     if (itemId) {
-      updatedCharacter.equipment.equippedSlots.delete(slot);
+      delete updatedCharacter.equipment.equippedSlots[slot];
       this.setItemEquippedStatus(updatedCharacter, itemId, false);
     }
 
@@ -281,7 +281,7 @@ export class EquipmentService {
   ): (Weapon | Armor | Shield | CharacterMagicItem | Gear)[] {
     const equippedItems: (Weapon | Armor | Shield | CharacterMagicItem | Gear)[] = [];
 
-    for (const itemId of character.equipment.equippedSlots.values()) {
+    for (const itemId of Object.values(character.equipment.equippedSlots)) {
       const item = this.findItemById(character, itemId);
       if (item) {
         equippedItems.push(item);
@@ -339,7 +339,7 @@ export class EquipmentService {
     item: Weapon | Armor | Shield | CharacterMagicItem | Gear,
     slot: EquipmentSlot,
   ): ValidationResult {
-    const currentlyEquipped = character.equipment.equippedSlots.get(slot);
+    const currentlyEquipped = character.equipment.equippedSlots[slot];
     const itemId = this.isMagicItem(item) ? item.instanceId : item.id;
 
     if (currentlyEquipped && currentlyEquipped !== itemId) {

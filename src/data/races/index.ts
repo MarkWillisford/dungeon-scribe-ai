@@ -1,3 +1,6 @@
+// SEEDING ONLY — do not use in runtime app code.
+// This array seeds Firestore. All runtime reads go through GameDataService → FirestoreGameDataConnector.
+
 // Barrel export for race data — single source of truth for all race information
 
 export type { RaceCategory, RacePowerTier, RacialTraitData, ExpandedRaceData } from './types';

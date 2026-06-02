@@ -115,7 +115,7 @@ export class CombatService {
 
     // Combat Expertise — variable attack penalty, equal dodge bonus to AC
     if (toggles['combat_expertise']) {
-      const p = abilities.combatExpertisePenalty;
+      const p = Math.floor(bab / 4) + 1;
       effects.push(
         {
           type: 'penalty',
@@ -371,7 +371,6 @@ export class CombatService {
       activeToggles: {},
       twoWeaponFighting: false,
       twoWeaponFightingLightOffhand: false,
-      combatExpertisePenalty: 1,
     };
   }
 }
