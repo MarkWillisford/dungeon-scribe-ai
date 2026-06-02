@@ -18,6 +18,7 @@ import type { ResourcePoolDefinition } from '@/types/resources';
 import type { TemplateFeature } from '@/types/templates';
 import { PRESET_PF1E_STANDARD } from '@data/rulesets/presets';
 import { ALL_CLASS_CHOICE_DEFINITIONS } from '@data/classChoiceDefinitions';
+import { CharacterService } from '@/services/CharacterService';
 
 export class FirebaseCharacterService {
   private static readonly COLLECTION = 'characters';
@@ -365,9 +366,11 @@ export class FirebaseCharacterService {
       character.companions = [];
     }
 
-    // Schema migration: backfill equippedSlots for documents written before the equipment feature
+    // Schema migration: backfill equipment/equippedSlots for legacy documents
+    character.equipment ??= CharacterService.createDefaultEquipment();
     character.equipment.equippedSlots ??= {};
     for (const companion of character.companions) {
+      companion.equipment ??= { armor: [], weapons: [], magicItems: [], gear: [], equippedSlots: {} };
       companion.equipment.equippedSlots ??= {};
     }
 

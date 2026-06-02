@@ -332,5 +332,29 @@ describe('FirebaseCharacterService', () => {
       expect(result.ruleset).toBeDefined();
       expect(result.ruleset.id).toBeDefined();
     });
+
+    test('backfills missing equipment for pre-equipment legacy documents', async () => {
+      const character = createTestCharacter();
+      const base = JSON.parse(JSON.stringify(character));
+      delete base.equipment;
+      mockGetDoc(base);
+
+      const result = await FirebaseCharacterService.getCharacter('char-deser-legacy');
+      expect(result.equipment).toBeDefined();
+      expect(result.equipment.equippedSlots).toEqual({});
+      expect(Array.isArray(result.equipment.weapons)).toBe(true);
+    });
+
+    test('backfills missing companion equipment for pre-equipment legacy documents', async () => {
+      const character = createTestCharacter();
+      const base = JSON.parse(JSON.stringify(character));
+      base.equipment.equippedSlots = {};
+      base.companions = [{ instanceId: 'c1', equipment: undefined }];
+      mockGetDoc(base);
+
+      const result = await FirebaseCharacterService.getCharacter('char-deser-companion');
+      expect(result.companions[0].equipment).toBeDefined();
+      expect(result.companions[0].equipment.equippedSlots).toEqual({});
+    });
   });
 });
