@@ -81,9 +81,12 @@ export class FirebaseCharacterService {
   /**
    * Get a single character by ID.
    *
-   * After deserializing the character document, we fetch the corresponding
-   * class documents from Firestore and merge their classFeatureResourcePools
-   * onto the character's stored class features. This allows
+   * After deserializing the character document, we attempt to merge
+   * classFeatureResourcePools from Firestore class documents onto the
+   * character's stored class features. For modern characters whose class
+   * features are already fully snapshotted, this fetch is skipped by the
+   * guard inside mergeClassFeatureResourcePools. The fetch only runs for
+   * legacy characters that lack complete feature snapshots. This allows
    * ResourcePoolService.computePools() (called inside
    * ModifierPipelineService.recalculate()) to find pool definitions without
    * needing async Firestore access of its own.
