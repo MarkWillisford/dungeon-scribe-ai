@@ -365,6 +365,12 @@ export class FirebaseCharacterService {
       character.companions = [];
     }
 
+    // Schema migration: backfill equippedSlots for documents written before the equipment feature
+    character.equipment.equippedSlots ??= {};
+    for (const companion of character.companions) {
+      companion.equipment.equippedSlots ??= {};
+    }
+
     return character;
   }
 }
