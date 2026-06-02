@@ -57,9 +57,9 @@ function applySmiteEvilPatch(features: ClassFeatureDoc[]): {
       updated.id = 'smite-evil';
       updated.activationMode = 'toggle';
       updated.shortDescription = SMITE_SHORT_DESCRIPTION;
+      changeCount++;
     }
 
-    changeCount++;
     return updated;
   });
 
