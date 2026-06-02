@@ -661,7 +661,7 @@ export class CharacterService {
       shields: [],
       magicItems: [],
       gear: [],
-      equippedSlots: new Map(),
+      equippedSlots: {},
       encumbranceSettings: {
         enabled: false,
         variant: EncumbranceVariant.CORE_RULES,
@@ -734,19 +734,23 @@ export class CharacterService {
     return SaveProgression.Poor;
   }
 
-  // Used by the old 6-step wizard (create.tsx) only. Strips toggle fields (id,
-  // activationMode, effects) — see issue #213 for the proper snapshot-at-selection fix.
   private static getLevel1ClassFeatures(className: string): ClassFeature[] {
     const classData = getClassByName(className);
     if (classData) {
       return classData.classFeatures
         .filter((feature) => feature.level === 1)
-        .map((feature) => ({
-          name: feature.name,
-          description: feature.description ?? '',
-          level: feature.level,
-          effects: [],
-        }));
+        .map(
+          (feature): ClassFeature => ({
+            name: feature.name,
+            description: feature.description ?? '',
+            level: feature.level,
+            id: feature.id,
+            shortDescription: feature.shortDescription,
+            activationMode: feature.activationMode,
+            resourcePool: feature.resourcePool,
+            effects: feature.effects ?? [],
+          }),
+        );
     }
     return [];
   }

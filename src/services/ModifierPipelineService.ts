@@ -66,13 +66,6 @@ export class ModifierPipelineService {
   static recalculate(character: Character): Character {
     const c = JSON.parse(JSON.stringify(character)) as Character;
 
-    // Reconstitute Map after deep clone
-    if (!(c.equipment.equippedSlots instanceof Map)) {
-      c.equipment.equippedSlots = new Map(
-        Object.entries(c.equipment.equippedSlots || {}),
-      ) as Character['equipment']['equippedSlots'];
-    }
-
     // Phase 1: Collect all active effects from every source
     const allEffects = this.collectAllEffects(c);
 

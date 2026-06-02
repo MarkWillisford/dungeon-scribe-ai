@@ -59,7 +59,6 @@ const defaultCombatAbilities: CombatAbilityState = {
   activeToggles: {},
   twoWeaponFighting: false,
   twoWeaponFightingLightOffhand: false,
-  combatExpertisePenalty: 1,
 };
 
 const initialState: CombatState = {
@@ -130,11 +129,6 @@ const combatSlice = createSlice({
       } else {
         state.combatAbilities.activeToggles[key] = !state.combatAbilities.activeToggles[key];
       }
-    },
-
-    setCombatExpertisePenalty(state, action: PayloadAction<number>) {
-      const value = Math.max(1, Math.min(5, action.payload));
-      state.combatAbilities.combatExpertisePenalty = value;
     },
 
     // ---- HP tracking ----
@@ -450,10 +444,6 @@ const combatSlice = createSlice({
         activeToggles,
         twoWeaponFighting: raw.twoWeaponFighting === true,
         twoWeaponFightingLightOffhand: raw.twoWeaponFightingLightOffhand === true,
-        combatExpertisePenalty:
-          typeof raw.combatExpertisePenalty === 'number'
-            ? Math.max(1, Math.min(5, raw.combatExpertisePenalty))
-            : 1,
       };
       state.round = s.round;
       state.resourcePools = s.resourcePools ?? {};
@@ -549,7 +539,6 @@ export const {
   updateBuffDuration,
   clearAllBuffs,
   toggleCombatAbility,
-  setCombatExpertisePenalty,
   initHP,
   setCurrentHP,
   adjustHP,

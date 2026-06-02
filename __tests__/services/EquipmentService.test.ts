@@ -87,7 +87,7 @@ describe('EquipmentService', () => {
       );
 
       expect(result.isValid).toBe(true);
-      expect(result.data!.equipment.equippedSlots.get(EquipmentSlot.MAIN_HAND)).toBe(weaponId);
+      expect(result.data!.equipment.equippedSlots[EquipmentSlot.MAIN_HAND]).toBe(weaponId);
     });
 
     test('should unequip item and remove bonuses', async () => {
@@ -98,10 +98,10 @@ describe('EquipmentService', () => {
 
       let result = EquipmentService.equipItem(updatedCharacter, weaponId, EquipmentSlot.MAIN_HAND);
       updatedCharacter = result.data!;
-      expect(updatedCharacter.equipment.equippedSlots.get(EquipmentSlot.MAIN_HAND)).toBe(weaponId);
+      expect(updatedCharacter.equipment.equippedSlots[EquipmentSlot.MAIN_HAND]).toBe(weaponId);
 
       updatedCharacter = EquipmentService.unequipItem(updatedCharacter, EquipmentSlot.MAIN_HAND);
-      expect(updatedCharacter.equipment.equippedSlots.get(EquipmentSlot.MAIN_HAND)).toBeUndefined();
+      expect(updatedCharacter.equipment.equippedSlots[EquipmentSlot.MAIN_HAND]).toBeUndefined();
     });
   });
 
@@ -323,8 +323,8 @@ describe('EquipmentService', () => {
       result = EquipmentService.equipItem(updatedCharacter, greatswordId, EquipmentSlot.TWO_HANDED);
 
       expect(result.isValid).toBe(true);
-      expect(result.data!.equipment.equippedSlots.get(EquipmentSlot.MAIN_HAND)).toBeUndefined();
-      expect(result.data!.equipment.equippedSlots.get(EquipmentSlot.TWO_HANDED)).toBe(greatswordId);
+      expect(result.data!.equipment.equippedSlots[EquipmentSlot.MAIN_HAND]).toBeUndefined();
+      expect(result.data!.equipment.equippedSlots[EquipmentSlot.TWO_HANDED]).toBe(greatswordId);
     });
   });
 });
