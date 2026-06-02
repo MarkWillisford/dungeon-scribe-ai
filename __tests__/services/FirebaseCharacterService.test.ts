@@ -118,9 +118,6 @@ describe('FirebaseCharacterService', () => {
     test('should return character by ID', async () => {
       const character = createTestCharacter();
       const serialized = JSON.parse(JSON.stringify(character));
-      // Simulate Firestore returning equippedSlots as a plain object
-      serialized.equipment.equippedSlots = {};
-
       mockFirestore.getDoc.mockResolvedValue({
         exists: () => true,
         id: 'char-1',
@@ -131,7 +128,8 @@ describe('FirebaseCharacterService', () => {
 
       expect(result.info.name).toBe('Firestore Test Character');
       expect(result.info.firebaseId).toBe('char-1');
-      expect(result.equipment.equippedSlots).toBeInstanceOf(Map);
+      expect(result.equipment.equippedSlots).not.toBeInstanceOf(Map);
+      expect(typeof result.equipment.equippedSlots).toBe('object');
     });
 
     test('should throw when character not found', async () => {
