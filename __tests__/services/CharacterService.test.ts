@@ -2,6 +2,7 @@ import { CharacterService } from '@services/CharacterService';
 import { CreateCharacterParams, AbilityScoreMethod } from '@/types/character';
 import { Size, Alignment, BonusType } from '@/types/base';
 import { Race } from '@/types/race';
+import { getClassByName } from '@data/classes/index';
 
 describe('CharacterService', () => {
   const mockRace: Race = {
@@ -339,22 +340,29 @@ describe('CharacterService', () => {
     });
 
     test('feature with id in static data retains id on the character', () => {
-      // Build a tiny mock that injects a feature with id/activationMode/resourcePool
-      // directly via getClassByName — we mock the module to control static data.
-      // We use Fighter which has known level-1 features; the important thing here
-      // is that getLevel1ClassFeatures spreads the source object rather than
-      // reconstructing with stripped fields.
+      // Compare stored features directly against the static class data to verify that
+      // optional fields (id, activationMode, resourcePool) present in the source are
+      // not stripped during snapshotting.
       const character = CharacterService.createDefaultCharacter(mockCreateParams);
-      const cls = character.classes.classes[0];
-      // The snapshot must not remove optional fields that exist in the source.
-      // Verify no feature has been reconstructed with only the four stripped fields
-      // by checking that the feature's own keys are at least those four.
-      for (const feature of cls.classFeatures) {
-        const keys = Object.keys(feature);
-        expect(keys).toContain('name');
-        expect(keys).toContain('description');
-        expect(keys).toContain('level');
-        expect(keys).toContain('effects');
+      const storedFeatures = character.classes.classes[0].classFeatures;
+
+      const staticClass = getClassByName('Fighter');
+      expect(staticClass).toBeDefined();
+      const level1StaticFeatures = staticClass!.classFeatures.filter((f) => f.level === 1);
+
+      for (const staticFeature of level1StaticFeatures) {
+        const stored = storedFeatures.find((f) => f.name === staticFeature.name && f.level === staticFeature.level);
+        expect(stored).toBeDefined();
+
+        if (staticFeature.id !== undefined) {
+          expect(stored!.id).toBe(staticFeature.id);
+        }
+        if (staticFeature.activationMode !== undefined) {
+          expect(stored!.activationMode).toBe(staticFeature.activationMode);
+        }
+        if (staticFeature.resourcePool !== undefined) {
+          expect(stored!.resourcePool).toEqual(staticFeature.resourcePool);
+        }
       }
     });
   });
