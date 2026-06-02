@@ -99,7 +99,7 @@ jest.mock('react-native', () => {
     Modal: (props: any) => {
       const { visible, children, ...rest } = props;
       if (!visible) return null;
-      return React.createElement('Modal', rest, children);
+      return React.createElement('Modal', { ...rest, visible }, children);
     },
     Alert: { alert: jest.fn() },
     Animated: {

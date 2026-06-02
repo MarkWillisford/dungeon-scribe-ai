@@ -92,15 +92,17 @@ describe('FeatSlotList — Add bonus slot modal', () => {
     expect(typeof modals[0].props.onShow).toBe('function');
   });
 
-  it('pressing Add bonus slot sets modal visible', () => {
-    const { getAllByRole } = render(<FeatSlotList />);
+  it('pressing Add bonus slot sets modal visible=true on same instance', () => {
+    const { getAllByRole, rerender } = render(<FeatSlotList />);
     const buttons = getAllByRole('button');
     const addButton = buttons.find((b) => b.props.accessibilityLabel === 'Add bonus feat slot');
     expect(addButton).toBeTruthy();
     fireEvent.press(addButton!);
-    // After pressing, modal visible state should be true — re-render to verify
-    const modals = findByType(render(<FeatSlotList />).tree, 'Modal');
+    // Re-render the same instance so the updated bonusLabelVisible state is reflected
+    const updatedTree = rerender();
+    const modals = findByType(updatedTree, 'Modal');
     expect(modals.length).toBeGreaterThan(0);
+    expect(modals[0].props.visible).toBe(true);
   });
 
   it('pressing Add Slot dispatches addFeatSlot action', () => {
