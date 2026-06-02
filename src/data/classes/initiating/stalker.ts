@@ -87,8 +87,17 @@ export const STALKER_CLASS: ExpandedClassData = {
     {
       name: 'Ki Pool',
       level: 1,
+      id: 'ki-pool',
+      shortDescription: 'Supernatural energy pool (1/2 level + WIS mod points)',
       description:
         "At 1st level, a stalker gains a pool of ki points, supernatural energy he can use to accomplish amazing feats. The number of points in the stalker's ki pool is equal to 1/2 his stalker level + his Wisdom modifier (minimum of 1). At 1st level, the stalker may spend 1 point of ki to grant himself a +4 insight bonus to a single Perception or Sense Motive check as an immediate action, as he uses his ki to feel out the vibrations of others and their hidden motives. At 5th level, the stalker may spend one point of ki as a swift action to read his target opponent, and may apply his deadly strike to all martial strikes initiated by the stalker for a number of rounds equal to his stalker initiation modifier against this target. Successful critical hits during this time extend the duration by one round (no more than one extension per round). At 7th level, the stalker may spend 1 point from his ki pool to gain a +4 insight bonus on a saving throw as an immediate action. At 9th level, the stalker may delve into his subconscious in battle and remember key lessons from his training. The stalker gains moments of martial insight a number of times per day equal to his Wisdom modifier. By spending one ki point as a swift action, he can trade one readied maneuver for another known maneuver of the same level or lower. The new maneuver is immediately readied and accessible for use, and its recovery follows normal rules. The ki pool is replenished each day after 8 hours of rest and meditation; these hours do not need to be consecutive. If the stalker possesses levels in another class that grants points to a ki pool, stalker levels stack with the levels of that class to determine the total number of ki points in the combined pool, but only one ability score modifier is added to the total.",
+      resourcePool: {
+        id: 'stalker_ki',
+        name: 'Ki Pool',
+        rechargeOn: 'rest',
+        maxFormula: 'max(1, floor(stalkerLevel / 2) + wisMod)',
+        restRecoveryMode: 'full',
+      },
     },
     {
       name: 'Deadly Strike',
@@ -111,6 +120,9 @@ export const STALKER_CLASS: ExpandedClassData = {
     {
       name: 'Stalker Art: Alacrity',
       level: 1,
+      id: 'stalker-art-alacrity',
+      shortDescription: 'Swift, 1 ki — +30 ft. speed for 1 minute (fatigue after)',
+      activationMode: 'toggle',
       description:
         'The stalker gains a +10-ft. enhancement bonus to his base speed and he may add his stalker initiation modifier to Acrobatics checks, due to his nimble and finely honed body. These benefits apply only when he is wearing no armor or light armor, not using a shield, and not carrying a medium or heavy load. As a swift action, the stalker may spend one point of ki to increase the enhancement bonus to an additional 30 feet for one minute, becoming fatigued afterward for 1d4 minutes.',
     },
@@ -128,6 +140,9 @@ export const STALKER_CLASS: ExpandedClassData = {
     {
       name: 'Stalker Art: Combat Precognition',
       level: 1,
+      id: 'stalker-art-combat-precognition',
+      shortDescription: 'Immediate, 1 ki — attackers roll twice, take worse result (1 round)',
+      activationMode: 'toggle',
       description:
         "Spending one point of ki as an immediate action forces opponents who attack the stalker to roll their attack rolls twice and take the worse of the two results due to the stalker's precognitive abilities. This art lasts for one round. This is a supernatural ability.",
     },
@@ -182,8 +197,17 @@ export const STALKER_CLASS: ExpandedClassData = {
     {
       name: 'Stalker Art: Ki Vampirism',
       level: 11,
+      id: 'stalker-art-ki-vampirism',
+      shortDescription: 'Immediate on kill/crit — regain 1 ki (3 + WIS mod/day)',
       description:
         'If the stalker reduces a living foe to 0 or fewer hit points with a martial strike or scores a successful critical hit, he may regain 1 point of ki as an immediate action. The stalker may use this ability a number of times per day equal to 3 + his stalker initiation modifier. This ability does not function against constructs, undead, or creatures with fewer than 1/2 HD. This is a supernatural ability. Minimum stalker level 11.',
+      resourcePool: {
+        id: 'ki_vampirism',
+        name: 'Ki Vampirism',
+        rechargeOn: 'rest',
+        maxFormula: '3 + wisMod',
+        restRecoveryMode: 'full',
+      },
     },
     {
       name: "Stalker Art: Killer's Implements",
@@ -212,12 +236,19 @@ export const STALKER_CLASS: ExpandedClassData = {
     {
       name: 'Stalker Art: Murderous Insight',
       level: 1,
+      id: 'stalker-art-murderous-insight',
+      shortDescription:
+        'Swift, 1 ki — roll twice on one attack/round, take higher (1 + WIS mod rounds)',
+      activationMode: 'toggle',
       description:
         'The stalker designates his combat senses towards ending the lives of his opponents and gains momentary flashes of insight in how to best accomplish this. The stalker can activate this ability by spending one point of ki as a swift action; for a number of rounds equal to 1 + his stalker initiation modifier, he can roll twice on a single attack roll each round and take the higher value. This is a supernatural ability.',
     },
     {
       name: 'Stalker Art: Obfuscation',
       level: 7,
+      id: 'stalker-art-obfuscation',
+      shortDescription: 'Full-round, 1+ ki — psychic cloud mind field for WIS mod minutes',
+      activationMode: 'toggle',
       description:
         "The stalker knows how to maintain a quiet, innocuous attitude as if he were nothing more than a part of the scenery. The stalker spends a point of ki as a full-round action to activate his obfuscation, and as long as he remains in a non-threatening posture (carrying no weapons in hand and moving at half his base speed), the stalker radiates a psychic field that causes others to ignore his presence for a number of minutes equal to his stalker initiation modifier. Subjects who would normally react to the stalker's presence must make a Will save (DC 15 + his stalker initiation modifier) or be under the influence of the cloud mind psionic power. The DC increases by +1 for every 2 additional ki points spent (maximum increase equal to his initiation modifier). This is a supernatural ability. Minimum stalker level 7.",
     },
@@ -230,6 +261,9 @@ export const STALKER_CLASS: ExpandedClassData = {
     {
       name: 'Stalker Art: Precocious Step',
       level: 1,
+      id: 'stalker-art-precocious-step',
+      shortDescription: 'Swift, 1 ki — move without provoking AoO for WIS mod rounds',
+      activationMode: 'toggle',
       description:
         'By relying on his combat insight to steer him effortlessly through a dangerous spot, the stalker may spend one point of ki as a swift action and move without provoking attacks of opportunity for a number of rounds equal to his stalker initiation modifier (minimum 1). This is a supernatural ability.',
     },
@@ -318,8 +352,18 @@ export const STALKER_CLASS: ExpandedClassData = {
     {
       name: 'Dual Strike',
       level: 10,
+      id: 'dual-strike',
+      shortDescription:
+        'Full-round — initiate two strikes simultaneously (uses/day scale with level)',
       description:
         "Once per day at 10th level, the stalker's deadly skill in combat improves, allowing him to initiate two martial strikes as a full-round action. The strikes the stalker initiates must have an initiation action of one standard action, and he must have both strikes readied. Boosts may not be applied to a dual strike due to the need to concentrate on two separate martial movements. When a dual strike is used, the action must be declared beforehand, and both strikes are resolved separately and are expended. At 14th level, the stalker may use dual strike 2/day, and at 18th level, 3/day.",
+      resourcePool: {
+        id: 'dual_strike',
+        name: 'Dual Strike',
+        rechargeOn: 'rest',
+        maxFormula: 'floor((stalkerLevel - 6) / 4)',
+        restRecoveryMode: 'full',
+      },
     },
     {
       name: 'Dodge Bonus Increase',

@@ -734,6 +734,8 @@ export class CharacterService {
     return SaveProgression.Poor;
   }
 
+  // Used by the old 6-step wizard (create.tsx) only. Strips toggle fields (id,
+  // activationMode, effects) — see issue #213 for the proper snapshot-at-selection fix.
   private static getLevel1ClassFeatures(className: string): ClassFeature[] {
     const classData = getClassByName(className);
     if (classData) {

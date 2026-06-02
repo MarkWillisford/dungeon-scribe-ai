@@ -1,3 +1,6 @@
+// SEEDING ONLY — do not use in runtime app code.
+// This array seeds Firestore. All runtime reads go through GameDataService → FirestoreGameDataConnector.
+
 import { DomainEntry } from '@/types/classOptions';
 import { batch_001 } from './raw/domains_batch_001';
 import { batch_002 } from './raw/domains_batch_002';

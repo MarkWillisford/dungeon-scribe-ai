@@ -1,3 +1,6 @@
+// SEEDING ONLY — do not use in runtime app code.
+// This array seeds Firestore. All runtime reads go through GameDataService → FirestoreGameDataConnector.
+
 // src/data/animalCompanions/index.ts
 // Combined barrel — merges all raw batches into a single export.
 // Batch count: 8  |  Total entries: ~220
