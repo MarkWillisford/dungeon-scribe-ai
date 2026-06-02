@@ -80,9 +80,12 @@ export class FirebaseCharacterService {
   /**
    * Get a single character by ID.
    *
-   * After deserializing the character document, we fetch the corresponding
-   * class documents from Firestore and merge their classFeatureResourcePools
-   * onto the character's stored class features. This allows
+   * After deserializing the character document, we attempt to merge
+   * classFeatureResourcePools from Firestore class documents onto the
+   * character's stored class features. For modern characters whose class
+   * features are already fully snapshotted, this fetch is skipped by the
+   * guard inside mergeClassFeatureResourcePools. The fetch only runs for
+   * legacy characters that lack complete feature snapshots. This allows
    * ResourcePoolService.computePools() (called inside
    * ModifierPipelineService.recalculate()) to find pool definitions without
    * needing async Firestore access of its own.
@@ -138,6 +141,18 @@ export class FirebaseCharacterService {
    * Uses the class doc snaps already fetched — no extra DB calls.
    */
   private static async mergeClassFeatureResourcePools(character: Character): Promise<Character> {
+    // Skip the Firestore fetch when every class entry already has features stored.
+    // Characters created (or last saved) with the snapshot-on-selection system carry
+    // full ClassFeature data on the character document, so the catalog is never
+    // consulted at load time. The fetch only runs for legacy characters whose
+    // classFeatures array is empty (i.e., created before feature snapshotting existed).
+    const needsMerge = character.classes.classes.some(
+      (cls) =>
+        cls.classFeatures.length === 0 ||
+        cls.classFeatures.some((f) => f.id !== undefined && f.resourcePool === undefined),
+    );
+    if (!needsMerge) return character;
+
     const classIds = character.classes.classes.map((cls) => this.classDocId(cls.name));
     const uniqueIds = [...new Set(classIds)];
     if (uniqueIds.length === 0) return character;

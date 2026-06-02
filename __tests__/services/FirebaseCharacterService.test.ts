@@ -141,6 +141,52 @@ describe('FirebaseCharacterService', () => {
         'Character not found',
       );
     });
+
+    test('does not fetch class docs when all class entries already have features', async () => {
+      // createTestCharacter() creates a character with non-empty classFeatures
+      // (getLevel1ClassFeatures returns at least the level-1 features for Fighter).
+      // The merge guard must skip the Firestore class-doc fetch in this case.
+      const character = createTestCharacter();
+      const serialized = JSON.parse(JSON.stringify(character));
+      serialized.equipment.equippedSlots = {};
+
+      // Confirm the test precondition: features are non-empty.
+      expect(serialized.classes.classes[0].classFeatures.length).toBeGreaterThan(0);
+
+      mockFirestore.getDoc.mockResolvedValue({
+        exists: () => true,
+        id: 'char-no-class-fetch',
+        data: () => serialized,
+      });
+
+      await FirebaseCharacterService.getCharacter('char-no-class-fetch');
+
+      // Only one getDoc call should have been made: the character document itself.
+      // No additional calls for class catalog documents.
+      expect(mockFirestore.getDoc).toHaveBeenCalledTimes(1);
+    });
+
+    test('still fetches class docs when a class entry has empty features (legacy backfill)', async () => {
+      const character = createTestCharacter();
+      const serialized = JSON.parse(JSON.stringify(character));
+      serialized.equipment.equippedSlots = {};
+      // Simulate a legacy character whose classFeatures were never persisted.
+      serialized.classes.classes[0].classFeatures = [];
+
+      mockFirestore.getDoc
+        .mockResolvedValueOnce({
+          exists: () => true,
+          id: 'char-legacy',
+          data: () => serialized,
+        })
+        // The class doc lookup that follows — return empty so the merge is a no-op.
+        .mockResolvedValueOnce({ exists: () => false });
+
+      await FirebaseCharacterService.getCharacter('char-legacy');
+
+      // Character doc + at least one class doc fetch.
+      expect(mockFirestore.getDoc).toHaveBeenCalledTimes(2);
+    });
   });
 
   describe('delete', () => {

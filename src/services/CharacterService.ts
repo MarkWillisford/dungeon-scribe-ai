@@ -7,7 +7,7 @@ import { Race } from '@/types/race';
 import { Alignment, BABProgression, SaveProgression, Size } from '@/types/base';
 import { ClassFeature } from '@/types/classes';
 import { AbilityScoreService } from '@services/AbilityScoreService';
-import { getClassByName } from '@data/classes';
+import { getClassByName } from '@data/classes/index';
 import { PRESET_PF1E_STANDARD } from '@data/rulesets/presets';
 
 const PLACEHOLDER_RACE: Race = {
@@ -734,19 +734,23 @@ export class CharacterService {
     return SaveProgression.Poor;
   }
 
-  // Used by the old 6-step wizard (create.tsx) only. Strips toggle fields (id,
-  // activationMode, effects) — see issue #213 for the proper snapshot-at-selection fix.
   private static getLevel1ClassFeatures(className: string): ClassFeature[] {
     const classData = getClassByName(className);
     if (classData) {
       return classData.classFeatures
         .filter((feature) => feature.level === 1)
-        .map((feature) => ({
-          name: feature.name,
-          description: feature.description ?? '',
-          level: feature.level,
-          effects: [],
-        }));
+        .map(
+          (feature): ClassFeature => ({
+            name: feature.name,
+            description: feature.description ?? '',
+            level: feature.level,
+            id: feature.id,
+            shortDescription: feature.shortDescription,
+            activationMode: feature.activationMode,
+            resourcePool: feature.resourcePool,
+            effects: feature.effects ?? [],
+          }),
+        );
     }
     return [];
   }
