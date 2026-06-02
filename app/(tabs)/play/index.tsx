@@ -332,7 +332,6 @@ export default function CombatTrackerScreen() {
                     activeToggles: {},
                     twoWeaponFighting: false,
                     twoWeaponFightingLightOffhand: false,
-                    combatExpertisePenalty: 1,
                   },
                   spellSlotsUsed: {},
                   preparedSpellsCast: {},

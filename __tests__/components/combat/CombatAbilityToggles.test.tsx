@@ -126,7 +126,6 @@ const defaultAbilities: CombatAbilityState = {
   activeToggles: {},
   twoWeaponFighting: false,
   twoWeaponFightingLightOffhand: false,
-  combatExpertisePenalty: 1,
 };
 
 function makeProps(overrides = {}) {

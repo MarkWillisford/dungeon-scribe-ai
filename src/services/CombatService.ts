@@ -335,7 +335,6 @@ export class CombatService {
       activeToggles: {},
       twoWeaponFighting: false,
       twoWeaponFightingLightOffhand: false,
-      combatExpertisePenalty: 1,
     };
   }
 }
