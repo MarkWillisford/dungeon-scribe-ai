@@ -6,7 +6,7 @@ The TypeScript files in this directory exist only to seed Firestore via the scri
 
 ## Runtime data path
 
-```
+```text
 GameDataService  →  FirestoreGameDataConnector  →  Firestore
 ```
 
