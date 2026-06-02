@@ -1,3 +1,6 @@
+// SEEDING ONLY — do not use in runtime app code.
+// This array seeds Firestore. All runtime reads go through GameDataService → FirestoreGameDataConnector.
+
 import { ClassOptionBase } from '@/types/classOptions';
 import { batch_001 } from './raw/ragepowers_batch_001';
 import { batch_002 } from './raw/ragepowers_batch_002';

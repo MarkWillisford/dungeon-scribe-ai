@@ -1,3 +1,6 @@
+// SEEDING ONLY — do not use in runtime app code.
+// This array seeds Firestore. All runtime reads go through GameDataService → FirestoreGameDataConnector.
+
 import { ClassChoiceDefinition } from '@/types/classChoices';
 import { fighterDefinitions } from './fighter';
 import { clericDefinitions } from './cleric';
