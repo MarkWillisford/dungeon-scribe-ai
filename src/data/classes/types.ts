@@ -3,7 +3,9 @@
 // Mechanical effects will be handled by a separate system.
 
 import { BABProgression, SaveProgression } from '@/types/base';
+import type { Effect } from '@/types/base';
 import type { RecoveryMechanics } from '@/types/initiating';
+import type { ResourcePoolDefinition } from '@/types/resources';
 
 export type ClassCategory =
   | 'Core'
@@ -18,6 +20,13 @@ export interface ClassFeatureData {
   name: string;
   level: number;
   description: string;
+  // Toggle/resource fields — populated for abilities that appear in the combat panel.
+  // Snapshotted onto the character at selection time (see issue #213).
+  id?: string;
+  shortDescription?: string;
+  activationMode?: 'passive' | 'toggle' | 'conditional';
+  effects?: Effect[];
+  resourcePool?: ResourcePoolDefinition;
 }
 
 export interface PrestigePrerequisites {
