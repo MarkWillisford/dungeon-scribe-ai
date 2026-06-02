@@ -1,3 +1,6 @@
+// SEEDING ONLY — do not use in runtime app code.
+// This array seeds Firestore. All runtime reads go through GameDataService → FirestoreGameDataConnector.
+
 // Eidolon Subtypes — Unchained Summoner.
 // Source: Pathfinder Unchained (Paizo), expanded by Planar Adventures and other
 // supplements for psychic / aberrant variants.

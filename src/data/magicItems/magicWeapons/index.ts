@@ -1,3 +1,6 @@
+// SEEDING ONLY — do not use in runtime app code.
+// This array seeds Firestore. All runtime reads go through GameDataService → FirestoreGameDataConnector.
+
 // Magic Weapons — re-exports all batch files
 // Engineer 2 (Doug)
 
@@ -29,15 +32,30 @@ import { weaponAbilitiesBatch2 } from './weaponAbilities-batch2';
 import { weaponAbilitiesBatch3 } from './weaponAbilities-batch3';
 
 export const ALL_MAGIC_WEAPONS: MagicWeaponDefinition[] = [
-  ...specificWeaponsBatch1, ...specificWeaponsBatch2, ...specificWeaponsBatch3,
-  ...specificWeaponsBatch4, ...specificWeaponsBatch5, ...specificWeaponsBatch5b,
-  ...specificWeaponsBatch6, ...specificWeaponsBatch7, ...specificWeaponsBatch8,
-  ...specificWeaponsBatch9, ...specificWeaponsBatch10, ...specificWeaponsBatch11,
-  ...specificWeaponsBatch12, ...specificWeaponsBatch13, ...specificWeaponsBatch14,
-  ...specificWeaponsBatch15, ...specificWeaponsBatch16, ...specificWeaponsBatch17,
-  ...specificWeaponsBatch18, ...specificWeaponsBatch19,
+  ...specificWeaponsBatch1,
+  ...specificWeaponsBatch2,
+  ...specificWeaponsBatch3,
+  ...specificWeaponsBatch4,
+  ...specificWeaponsBatch5,
+  ...specificWeaponsBatch5b,
+  ...specificWeaponsBatch6,
+  ...specificWeaponsBatch7,
+  ...specificWeaponsBatch8,
+  ...specificWeaponsBatch9,
+  ...specificWeaponsBatch10,
+  ...specificWeaponsBatch11,
+  ...specificWeaponsBatch12,
+  ...specificWeaponsBatch13,
+  ...specificWeaponsBatch14,
+  ...specificWeaponsBatch15,
+  ...specificWeaponsBatch16,
+  ...specificWeaponsBatch17,
+  ...specificWeaponsBatch18,
+  ...specificWeaponsBatch19,
 ];
 
 export const ALL_WEAPON_ABILITIES: ItemSpecialAbility[] = [
-  ...weaponAbilitiesBatch1, ...weaponAbilitiesBatch2, ...weaponAbilitiesBatch3,
+  ...weaponAbilitiesBatch1,
+  ...weaponAbilitiesBatch2,
+  ...weaponAbilitiesBatch3,
 ];

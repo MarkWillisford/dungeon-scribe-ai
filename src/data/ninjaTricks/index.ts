@@ -1,3 +1,6 @@
+// SEEDING ONLY — do not use in runtime app code.
+// This array seeds Firestore. All runtime reads go through GameDataService → FirestoreGameDataConnector.
+
 import type { NinjaTrickEntry } from '@/types/classOptions';
 import { ninjaTricksStandard } from './ninjaTricks-standard';
 import { ninjaTricksMaster } from './ninjaTricks-master';

@@ -32,12 +32,27 @@ src/
   services/    — Business logic (pure) + Firebase I/O
   config/      — Firebase init, environment config
   theme/       — Colors, fonts, shadows, animations (HL visual port)
-  data/        — Static game data (races, classes)
+  data/        — SEEDING INFRASTRUCTURE ONLY — see "Data Architecture" below
   components/  — Reusable UI components
   hooks/       — Custom React hooks
 __tests__/     — Jest tests (services, store, components, integration)
 e2e/           — Maestro E2E tests
 ```
+
+## Data Architecture
+
+**`src/data/` is seeding infrastructure, not runtime code.** The TypeScript arrays in this directory (`ALL_FEATS`, `ALL_TRAITS`, etc.) exist solely to populate Firestore via the seed scripts in `scripts/db/`. They will be deleted once production seeding is complete. Do not modify them to fix bugs or add features.
+
+**All runtime game data comes from Firestore**, accessed through `GameDataService` → `FirestoreGameDataConnector`. When diagnosing a data bug or adding a new data field, the correct files to look at are:
+
+- `src/services/GameDataService.ts` — the public data access API
+- `src/services/FirestoreGameDataConnector.ts` — the Firestore implementation
+- `src/services/StaticGameDataConnector.ts` — test double only; imports `src/data/` by design
+
+The only legitimate non-seeding imports from `src/data/` are:
+
+- `StaticGameDataConnector.ts` — test isolation, intentional
+- Type imports (interfaces, not data arrays) — always fine
 
 ## Architecture
 
