@@ -1,3 +1,6 @@
+// SEEDING ONLY — do not use in runtime app code.
+// This array seeds Firestore. All runtime reads go through GameDataService → FirestoreGameDataConnector.
+
 // Maneuvers — barrel export for the initiating system catalog.
 // Raw per-discipline files live in raw/ and are spread into ALL_MANEUVERS.
 //

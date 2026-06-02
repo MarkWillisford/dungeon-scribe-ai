@@ -1,3 +1,6 @@
+// SEEDING ONLY — do not use in runtime app code.
+// This array seeds Firestore. All runtime reads go through GameDataService → FirestoreGameDataConnector.
+
 // Martial Traditions — barrel export for the initiating system catalog.
 // All traditions live in traditions.ts (Path of War: Expanded only; PoW base has none).
 //

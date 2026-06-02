@@ -1,3 +1,6 @@
+// SEEDING ONLY — do not use in runtime app code.
+// This array seeds Firestore. All runtime reads go through GameDataService → FirestoreGameDataConnector.
+
 import type { AlchemistDiscoveryEntry } from '@/types/classOptions';
 import { alchemistDiscoveriesApg } from './raw/alchemist-discoveries-apg';
 import { alchemistDiscoveriesUm } from './raw/alchemist-discoveries-um';
