@@ -157,8 +157,8 @@ export class CombatService {
       });
     }
 
-    // Smite Evil — +CHA mod to melee attack, +paladin level to melee damage,
-    // +CHA mod deflection bonus to AC (vs. declared target only — applied globally as a tracker simplification)
+    // Smite Evil: +CHA mod to melee attack, +paladin level to melee damage,
+    // +CHA mod deflection bonus to AC (vs. declared target only, applied globally as a tracker simplification)
     if (toggles['smite-evil']) {
       const chaMod = character.abilityScores.cha.modifier;
       const SMITE_CLASS_NAMES = new Set(['Paladin', 'Prestige Paladin']);

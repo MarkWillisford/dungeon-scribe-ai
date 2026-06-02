@@ -1,5 +1,5 @@
 /**
- * patchSmiteEvil.ts — Patch the Firestore `classes/paladin` document to add
+ * patchSmiteEvil.ts: Patch the Firestore `classes/paladin` document to add
  * toggle data (id, activationMode, shortDescription) to all Smite Evil class
  * feature entries.
  *
@@ -40,7 +40,7 @@ interface ClassFeatureDoc {
 }
 
 const SMITE_SHORT_DESCRIPTION =
-  'Swift — +CHA bonus to attack, +paladin level to damage, +CHA deflection to AC vs. target';
+  'Swift: +CHA bonus to attack, +paladin level to damage, +CHA deflection to AC vs. target';
 
 function applySmiteEvilPatch(features: ClassFeatureDoc[]): {
   patched: ClassFeatureDoc[];
@@ -80,7 +80,7 @@ async function patchPaladinSmiteEvil(): Promise<void> {
   const { patched, changeCount } = applySmiteEvilPatch(features);
 
   if (changeCount === 0) {
-    console.log('  No Smite Evil features found — nothing to patch.');
+    console.log('  No Smite Evil features found, nothing to patch.');
     return;
   }
 
@@ -105,7 +105,7 @@ async function patchPaladinSmiteEvil(): Promise<void> {
 async function main(): Promise<void> {
   console.log(`\n=== patchSmiteEvil ===`);
   console.log(`Project: ${PROJECT_ID}`);
-  if (DRY_RUN) console.log('[DRY RUN] — no writes will be performed.\n');
+  if (DRY_RUN) console.log('[DRY RUN] no writes will be performed.\n');
 
   console.log('\nPatching classes/paladin Smite Evil entries...');
   await patchPaladinSmiteEvil();

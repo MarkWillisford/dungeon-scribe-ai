@@ -1092,7 +1092,7 @@ export const CORE_CLASSES_EXPANDED: ExpandedClassData[] = [
         id: 'smite-evil',
         activationMode: 'toggle',
         shortDescription:
-          'Swift — +CHA bonus to attack, +paladin level to damage, +CHA deflection to AC vs. target',
+          'Swift: +CHA bonus to attack, +paladin level to damage, +CHA deflection to AC vs. target',
         description:
           'Once per day, a paladin can call out to the powers of good to aid her. As a swift action, she adds her Charisma bonus to attack rolls and her paladin level to damage rolls against the target of her smite. She also gains a deflection bonus equal to her Charisma modifier to AC against the target.',
       },
