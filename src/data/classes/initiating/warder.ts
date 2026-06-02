@@ -77,6 +77,9 @@ export const WARDER_CLASS: ExpandedClassData = {
     {
       name: 'Defensive Focus',
       level: 1,
+      id: 'defensive-focus',
+      shortDescription: 'Full-round action — expand threatened area, bonus CMD, AoO while in reach',
+      activationMode: 'toggle',
       description:
         'At 1st level, the defensive prowess of the warder is second to none, allowing her to focus her actions purely on defending himself and her allies in ways that cannot be replicated. The warder gains the Combat Reflexes feat as a bonus feat, using her warder initiation modifier in place of her Dexterity modifier to determine the number of additional attacks of opportunity she may make each round. When recovering warder maneuvers as a full round action, the warder sets up a defensive perimeter around herself to defend her allies, increasing her threatened area by 5 feet + 5 feet for every five initiator levels she possesses. Until the beginning of her next turn, she may make attacks of opportunity against any opponent in this threatened area that provokes attacks of opportunity. She may move as part of these attacks of opportunity, provided her total movement before her next turn does not exceed her speed (his movement provokes attacks of opportunity as normal). Additionally, while using defensive focus, the warder adds her warder initiation modifier plus her class level to her CMD for the purposes of defending against enemies trying to use the Acrobatics skill to prevent her from getting attacks of opportunity against them.',
     },
@@ -89,8 +92,19 @@ export const WARDER_CLASS: ExpandedClassData = {
     {
       name: "Armiger's Mark",
       level: 2,
+      id: 'armigers-mark',
+      shortDescription:
+        'Free action on hit — mark foe, -4 attack vs. non-warder (uses/day scale with level)',
+      activationMode: 'toggle',
       description:
         "At 2nd level, a warder is trained in how best to control her enemies and how they behave in battle, urging them to throw their all against the warder's indomitable armor and unyielding shield. With a sharp blade, a clever taunt, or something that otherwise attracts her foe, the warder can direct the attention of enemies towards himself. Whenever the warder attacks a foe in combat and inflicts at least 1 point of damage, as a free action she may mark them as her foe (she may even mark a foe during an attack of opportunity and may make the free action to do so, even though it is not her turn) and attempt to continue to force them to engage the warder only. The target is aware of being marked, and the mark remains for a number of rounds equal to her warder initiation modifier (minimum of 1). Marked targets suffer a -4 penalty to attack rolls against foes that are not the warder, and arcane spellcasters suffer an increase in arcane spell failure of 10% + 1% per two warder levels until the mark expires. The warder may only maintain a number of marks equal to 3 + her warder initiation modifier at a time, and she may make a number of marks per day equal to 1/2 warder level + warder initiation modifier. At 8th level, this penalty increases to -6, and it increases again to -8 at 16th level. This ability functions on creatures with an Intelligence score of 1 or more, allowing her to mark animals and other beasts as well as sentient beings, but not mindless creatures such as skeletons. Multiple armiger's marks overlap (do not stack). At 9th level, the warder may expend two uses of her armiger's mark to make a grand challenge to all enemies within a 30 ft. radius and mark them with her words alone. Creatures affected must make a Will save (DC 10 + 1/2 warder level + warder initiation modifier) against the warder's mark ability or suffer the penalties of being marked for a number of rounds equal to her warder initiation modifier. This does not count against her normal marking limit. This is a language-dependent ability and does not affect creatures of less than 1 Intelligence. At 16th level, the armiger's mark improves to allow her to recover an expended maneuver whenever she reduces a marked opponent's hit points to 0 or less (this can only trigger once per marked opponent).",
+      resourcePool: {
+        id: 'armigers_mark',
+        name: "Armiger's Mark",
+        rechargeOn: 'rest',
+        maxFormula: 'floor(warderLevel / 2) + intMod',
+        restRecoveryMode: 'full',
+      },
     },
     {
       name: 'Bonus Feat',
@@ -107,8 +121,19 @@ export const WARDER_CLASS: ExpandedClassData = {
     {
       name: 'Extended Defense',
       level: 5,
+      id: 'extended-defense',
+      shortDescription:
+        'Immediate action — initiate a readied counter as free action until next turn',
+      activationMode: 'toggle',
       description:
         "Upon reaching 5th level, the warder becomes ever more skilled at adapting to the flow of combat. Once per day, the warder may activate Extended Defense as an immediate action. When she does, the character chooses a counter she has readied; she may initiate that counter as a free action (even on another's turn) at will until the beginning of her next turn. At the beginning of her next turn, the chosen counter is expended. Every three levels beyond this (8th, 11th, 14th, and 17th levels), she may use this ability an additional time per day. This ability can only be used with counters that negate attacks or allow the warder to use another roll in place of a saving throw.",
+      resourcePool: {
+        id: 'extended_defense',
+        name: 'Extended Defense',
+        rechargeOn: 'rest',
+        maxFormula: 'floor((warderLevel - 2) / 3)',
+        restRecoveryMode: 'full',
+      },
     },
     {
       name: 'Clad in Steel',

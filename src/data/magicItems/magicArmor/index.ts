@@ -1,3 +1,6 @@
+// SEEDING ONLY — do not use in runtime app code.
+// This array seeds Firestore. All runtime reads go through GameDataService → FirestoreGameDataConnector.
+
 // Magic Armor & Shields — re-exports all batch files
 // Engineer 2 (Doug)
 
@@ -27,21 +30,34 @@ import { specificShieldsBatch3 } from './specificShields-batch3';
 import { specificShieldsFill } from './specificShields-fill';
 
 export const ALL_MAGIC_ARMOR: MagicArmorDefinition[] = [
-  ...specificArmorBatch1, ...specificArmorBatch2, ...specificArmorBatch3,
-  ...specificArmorBatch4, ...specificArmorBatch5, ...specificArmorBatch6,
-  ...specificArmorBatch7, ...specificArmorFill,
+  ...specificArmorBatch1,
+  ...specificArmorBatch2,
+  ...specificArmorBatch3,
+  ...specificArmorBatch4,
+  ...specificArmorBatch5,
+  ...specificArmorBatch6,
+  ...specificArmorBatch7,
+  ...specificArmorFill,
 ];
 
 export const ALL_MAGIC_SHIELDS: MagicShieldDefinition[] = [
-  ...specificShieldsBatch1, ...specificShieldsBatch2, ...specificShieldsBatch3,
+  ...specificShieldsBatch1,
+  ...specificShieldsBatch2,
+  ...specificShieldsBatch3,
   ...specificShieldsFill,
 ];
 
 export const ALL_ARMOR_ABILITIES: ItemSpecialAbility[] = [
-  ...armorAbilitiesBatch1, ...armorAbilitiesBatch2, ...armorAbilitiesBatch3,
-  ...armorAbilitiesBatch4, ...armorAbilitiesBatch5, ...armorAbilitiesFill,
+  ...armorAbilitiesBatch1,
+  ...armorAbilitiesBatch2,
+  ...armorAbilitiesBatch3,
+  ...armorAbilitiesBatch4,
+  ...armorAbilitiesBatch5,
+  ...armorAbilitiesFill,
 ];
 
 export const ALL_SHIELD_ABILITIES: ItemSpecialAbility[] = [
-  ...shieldAbilitiesBatch1, ...shieldAbilitiesBatch2, ...shieldAbilitiesBatch3,
+  ...shieldAbilitiesBatch1,
+  ...shieldAbilitiesBatch2,
+  ...shieldAbilitiesBatch3,
 ];

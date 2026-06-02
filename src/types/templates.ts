@@ -1,3 +1,6 @@
+import type { Effect } from './base';
+import type { ResourcePoolDefinition } from './resources';
+
 // ---- Level-Up Decision History ----
 
 export type LevelUpDecision =
@@ -28,6 +31,9 @@ export interface AppliedTemplate {
   isFreeGrant?: boolean;
   freeGrantNote?: string;
   grantedBy?: string;
+  // Toggle/pool features injected at load time from the Firestore template doc.
+  // Only features with activationMode or resourcePool are stored here.
+  features?: TemplateFeature[];
 }
 
 // ---- Granted Bonuses (free — no ECL impact) ----
@@ -57,6 +63,12 @@ export interface FlatFeature {
   scalingType: 'flat';
   name: string;
   description: string;
+  // Toggle/resource fields — populate for abilities that appear in the combat panel.
+  id?: string;
+  activationMode?: 'passive' | 'toggle' | 'conditional';
+  shortDescription?: string;
+  effects?: Effect[];
+  resourcePool?: ResourcePoolDefinition;
 }
 
 export interface HDThresholdFeature {
@@ -64,6 +76,11 @@ export interface HDThresholdFeature {
   name: string;
   description: string;
   minimumHD: number; // Feature activates when totalHD >= minimumHD
+  id?: string;
+  activationMode?: 'passive' | 'toggle' | 'conditional';
+  shortDescription?: string;
+  effects?: Effect[];
+  resourcePool?: ResourcePoolDefinition;
 }
 
 export interface HDFormulaFeature {

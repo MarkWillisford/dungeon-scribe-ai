@@ -1,3 +1,6 @@
+// SEEDING ONLY — do not use in runtime app code.
+// This array seeds Firestore. All runtime reads go through GameDataService → FirestoreGameDataConnector.
+
 // Disciplines — barrel export for the initiating system catalog.
 // Individual disciplines live in pow.ts (10) and pow-extended.ts (10),
 // plus tob.ts once Tome of Battle scraping is in scope.

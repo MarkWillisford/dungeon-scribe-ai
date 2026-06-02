@@ -1,3 +1,6 @@
+// SEEDING ONLY — do not use in runtime app code.
+// This array seeds Firestore. All runtime reads go through GameDataService → FirestoreGameDataConnector.
+
 // Staves — re-exports all batch files
 // Engineer 2 (Doug)
 import type { StaffDefinition } from '@/types/magicItems';
