@@ -1,3 +1,6 @@
+// SEEDING ONLY — do not use in runtime app code.
+// This array seeds Firestore. All runtime reads go through GameDataService → FirestoreGameDataConnector.
+
 // Ioun Stones — re-exports all batch files
 // Engineer 1 (Mark): all 47 standard stones + cracked/flawed variants
 
@@ -6,7 +9,4 @@ import type { IounStoneDefinition } from '@/types/magicItems';
 import { iounStonesBatch1 } from './iounStones-batch1';
 import { iounStonesBatch2 } from './iounStones-batch2';
 
-export const ALL_IOUN_STONES: IounStoneDefinition[] = [
-  ...iounStonesBatch1,
-  ...iounStonesBatch2,
-];
+export const ALL_IOUN_STONES: IounStoneDefinition[] = [...iounStonesBatch1, ...iounStonesBatch2];

@@ -1,10 +1,11 @@
+// SEEDING ONLY - do not use in runtime app code.
+// This array seeds Firestore. All runtime reads go through GameDataService -> FirestoreGameDataConnector.
+
 // Barrel export for template data. 491 templates across 20 batch files.
 // Static seed data only; authoritative copy lives in Firestore at runtime.
-// Batch 018 re-scraped the H-I range already covered by batches 009-010 and still
-// contains some overlapping ids (hemodynamic-construct, herald-of-the-apocalypse,
-// hero-killer-creature, hivemind-swarm, hiveskin-creature, hungry, hydran-serpent,
-// ice-elemental, icy-creature). The Map deduplication below keeps the last occurrence
-// per id (batch 018 wins for those remaining duplicates).
+// Batch 018 re-scraped the H-I range already covered by batches 009-010; the Map
+// deduplication below keeps the last occurrence per id (batch 018 wins) to match
+// the seed script's last-write-wins upsert behavior.
 // holy-creature was removed from batch 018 (issue #214); canonical copy is in batch 010.
 
 export type {

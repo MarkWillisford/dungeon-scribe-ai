@@ -1,3 +1,6 @@
+// SEEDING ONLY — do not use in runtime app code.
+// This array seeds Firestore. All runtime reads go through GameDataService → FirestoreGameDataConnector.
+
 import type { KineticistWildTalentEntry } from '@/types/classOptions';
 import { wildTalentsInfusionsBatch1 } from './raw/wildTalents_infusions_batch1';
 import { wildTalentsInfusionsBatch2 } from './raw/wildTalents_infusions_batch2';
@@ -24,11 +27,11 @@ export const ALL_WILD_TALENTS: KineticistWildTalentEntry[] = [
 ];
 
 export const ALL_INFUSIONS: KineticistWildTalentEntry[] = ALL_WILD_TALENTS.filter(
-  (t) => t.talentType === 'infusion'
+  (t) => t.talentType === 'infusion',
 );
 
 export const ALL_UTILITY_TALENTS: KineticistWildTalentEntry[] = ALL_WILD_TALENTS.filter(
-  (t) => t.talentType === 'utility'
+  (t) => t.talentType === 'utility',
 );
 
 export const getWildTalentById = (id: string): KineticistWildTalentEntry | undefined =>
