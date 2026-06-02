@@ -69,7 +69,7 @@ beforeEach(() => {
   mockDispatch.mockClear();
 });
 
-describe('FeatSlotList — Add bonus slot modal', () => {
+describe('FeatSlotList - Add bonus slot modal', () => {
   it('renders the Add bonus slot button', () => {
     const { getAllByRole } = render(<FeatSlotList />);
     const buttons = getAllByRole('button');
