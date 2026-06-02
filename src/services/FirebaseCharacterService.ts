@@ -317,7 +317,7 @@ export class FirebaseCharacterService {
   }
 
   /**
-   * Serialize character for Firestore (Map -> Record conversion)
+   * Serialize character for Firestore (Date -> ISO string conversion)
    */
   private static serializeForFirestore(character: Character): Record<string, unknown> {
     const serialized = JSON.parse(JSON.stringify(character));
@@ -331,7 +331,7 @@ export class FirebaseCharacterService {
   }
 
   /**
-   * Deserialize character from Firestore (Record -> Map conversion)
+   * Deserialize character from Firestore (timestamp deserialization and schema migration)
    */
   private static deserializeFromFirestore(data: Record<string, unknown>): Character {
     const character = data as unknown as Character;
