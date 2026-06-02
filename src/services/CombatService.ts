@@ -115,7 +115,7 @@ export class CombatService {
 
     // Combat Expertise — variable attack penalty, equal dodge bonus to AC
     if (toggles['combat_expertise']) {
-      const p = abilities.combatExpertisePenalty;
+      const p = Math.floor(bab / 4) + 1;
       effects.push(
         {
           type: 'penalty',
@@ -155,6 +155,42 @@ export class CombatService {
         value: mainPenalty,
         source: 'Two-Weapon Fighting',
       });
+    }
+
+    // Smite Evil: +CHA mod to melee attack, +paladin level to melee damage,
+    // +CHA mod deflection bonus to AC (vs. declared target only, applied globally as a tracker simplification)
+    if (toggles['smite-evil']) {
+      const chaMod = character.abilityScores.cha.modifier;
+      const SMITE_CLASS_NAMES = new Set(['Paladin', 'Prestige Paladin']);
+      const smiteLevel = character.classes.classes
+        .filter((cls) => SMITE_CLASS_NAMES.has(cls.name))
+        .reduce((sum, cls) => sum + cls.level, 0);
+
+      if (chaMod > 0) {
+        effects.push({
+          type: 'bonus',
+          bonusType: BonusType.UNTYPED,
+          target: 'attack.melee',
+          value: chaMod,
+          source: 'Smite Evil',
+        });
+        effects.push({
+          type: 'bonus',
+          bonusType: BonusType.DEFLECTION,
+          target: 'ac.deflection',
+          value: chaMod,
+          source: 'Smite Evil',
+        });
+      }
+      if (smiteLevel > 0) {
+        effects.push({
+          type: 'bonus',
+          bonusType: BonusType.UNTYPED,
+          target: 'damage.melee',
+          value: smiteLevel,
+          source: 'Smite Evil',
+        });
+      }
     }
 
     return effects;
@@ -335,7 +371,6 @@ export class CombatService {
       activeToggles: {},
       twoWeaponFighting: false,
       twoWeaponFightingLightOffhand: false,
-      combatExpertisePenalty: 1,
     };
   }
 }

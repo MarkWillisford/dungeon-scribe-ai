@@ -175,7 +175,7 @@ describe('Equipment Management Integration', () => {
 
       bonuses = EquipmentService.calculateEquipmentBonuses(updated);
       expect(bonuses.acBonuses).toHaveLength(0);
-      expect(updated.equipment.equippedSlots.get(EquipmentSlot.BODY)).toBeUndefined();
+      expect(updated.equipment.equippedSlots[EquipmentSlot.BODY]).toBeUndefined();
     });
 
     test('should remove weapon bonuses when weapon is unequipped', async () => {
@@ -428,10 +428,10 @@ describe('Equipment Management Integration', () => {
       expect(result.isValid).toBe(true);
       updated = result.data!;
 
-      expect(updated.equipment.equippedSlots.get(EquipmentSlot.TWO_HANDED)).toBe(weaponId);
+      expect(updated.equipment.equippedSlots[EquipmentSlot.TWO_HANDED]).toBe(weaponId);
       // Main hand and off hand should be cleared
-      expect(updated.equipment.equippedSlots.get(EquipmentSlot.MAIN_HAND)).toBeUndefined();
-      expect(updated.equipment.equippedSlots.get(EquipmentSlot.OFF_HAND)).toBeUndefined();
+      expect(updated.equipment.equippedSlots[EquipmentSlot.MAIN_HAND]).toBeUndefined();
+      expect(updated.equipment.equippedSlots[EquipmentSlot.OFF_HAND]).toBeUndefined();
     });
 
     test('should clear two-handed weapon when equipping a one-handed weapon to main hand', async () => {
@@ -447,14 +447,14 @@ describe('Equipment Management Integration', () => {
       // Equip greatsword two-handed
       let result = EquipmentService.equipItem(updated, greatswordId, EquipmentSlot.TWO_HANDED);
       updated = result.data!;
-      expect(updated.equipment.equippedSlots.get(EquipmentSlot.TWO_HANDED)).toBe(greatswordId);
+      expect(updated.equipment.equippedSlots[EquipmentSlot.TWO_HANDED]).toBe(greatswordId);
 
       // Now equip longsword in main hand -- should clear two-handed
       result = EquipmentService.equipItem(updated, longswordId, EquipmentSlot.MAIN_HAND);
       updated = result.data!;
 
-      expect(updated.equipment.equippedSlots.get(EquipmentSlot.MAIN_HAND)).toBe(longswordId);
-      expect(updated.equipment.equippedSlots.get(EquipmentSlot.TWO_HANDED)).toBeUndefined();
+      expect(updated.equipment.equippedSlots[EquipmentSlot.MAIN_HAND]).toBe(longswordId);
+      expect(updated.equipment.equippedSlots[EquipmentSlot.TWO_HANDED]).toBeUndefined();
     });
 
     test('should equip longbow to TWO_HANDED slot and track attack bonuses', async () => {
@@ -469,7 +469,7 @@ describe('Equipment Management Integration', () => {
       expect(result.isValid).toBe(true);
       updated = result.data!;
 
-      expect(updated.equipment.equippedSlots.get(EquipmentSlot.TWO_HANDED)).toBe(bowId);
+      expect(updated.equipment.equippedSlots[EquipmentSlot.TWO_HANDED]).toBe(bowId);
 
       const bonuses = EquipmentService.calculateEquipmentBonuses(updated);
       expect(bonuses.attackBonuses).toHaveLength(1);
@@ -542,8 +542,8 @@ describe('Equipment Management Integration', () => {
       expect(result.isValid).toBe(true);
       updated = result.data!;
 
-      expect(updated.equipment.equippedSlots.get(EquipmentSlot.MAIN_HAND)).toBe(longswordId);
-      expect(updated.equipment.equippedSlots.get(EquipmentSlot.OFF_HAND)).toBe(daggerId);
+      expect(updated.equipment.equippedSlots[EquipmentSlot.MAIN_HAND]).toBe(longswordId);
+      expect(updated.equipment.equippedSlots[EquipmentSlot.OFF_HAND]).toBe(daggerId);
     });
 
     test('should update total weight as weapons are added and removed', async () => {

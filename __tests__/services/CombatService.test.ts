@@ -131,10 +131,30 @@ describe('CombatService.getCombatAbilityEffects', () => {
   });
 
   it('Combat Expertise applies penalty to attacks and dodge bonus to AC', () => {
+    // fighter is level 1 (BAB 1): Math.floor(1/4)+1 = 1
     const effects = CombatService.getCombatAbilityEffects(fighter, {
       ...defaultAbilities,
       activeToggles: { combat_expertise: true },
-      combatExpertisePenalty: 3,
+    });
+    expect(effects.find((e) => e.target === 'attack.melee')?.value).toBe(-1);
+    expect(effects.find((e) => e.target === 'attack.ranged')?.value).toBe(-1);
+    expect(
+      effects.find((e) => e.target === 'ac.dodge' && e.source === 'Combat Expertise')?.value,
+    ).toBe(1);
+  });
+
+  it('Combat Expertise penalty scales with BAB (BAB 8 → penalty 3)', () => {
+    const highBabFighter = { ...fighter } as typeof fighter;
+    highBabFighter.combatStats = {
+      ...fighter.combatStats,
+      attackBonuses: {
+        ...fighter.combatStats.attackBonuses,
+        baseAttack: [8],
+      },
+    };
+    const effects = CombatService.getCombatAbilityEffects(highBabFighter, {
+      ...defaultAbilities,
+      activeToggles: { combat_expertise: true },
     });
     expect(effects.find((e) => e.target === 'attack.melee')?.value).toBe(-3);
     expect(effects.find((e) => e.target === 'attack.ranged')?.value).toBe(-3);
@@ -159,6 +179,83 @@ describe('CombatService.getCombatAbilityEffects', () => {
       twoWeaponFightingLightOffhand: true,
     });
     expect(effects.find((e) => e.target === 'attack.melee')?.value).toBe(-4);
+  });
+
+  describe('Smite Evil', () => {
+    function makePaladin(chaScore = 16): Character {
+      const char = CharacterService.createDefaultCharacter({
+        name: 'Test Paladin',
+        race: mockRace,
+        selectedClass: 'Paladin',
+        abilityScoreMethod: AbilityScoreMethod.PointBuy,
+        abilityScores: { str: 14, dex: 10, con: 12, int: 8, wis: 14, cha: chaScore },
+        alignment: Alignment.LawfulGood,
+      });
+      return ModifierPipelineService.recalculate(char);
+    }
+
+    it('produces no effects when smite-evil toggle is off', () => {
+      const paladin = makePaladin();
+      const effects = CombatService.getCombatAbilityEffects(paladin, defaultAbilities);
+      expect(effects.every((e) => e.source !== 'Smite Evil')).toBe(true);
+    });
+
+    it('produces attack, damage, and deflection effects when toggle is on and CHA is positive', () => {
+      // CHA 16 → modifier +3; Paladin level 1
+      const paladin = makePaladin(16);
+      const effects = CombatService.getCombatAbilityEffects(paladin, {
+        ...defaultAbilities,
+        activeToggles: { 'smite-evil': true },
+      });
+
+      const attackEffect = effects.find(
+        (e) => e.target === 'attack.melee' && e.source === 'Smite Evil',
+      );
+      const damageEffect = effects.find(
+        (e) => e.target === 'damage.melee' && e.source === 'Smite Evil',
+      );
+      const deflectionEffect = effects.find(
+        (e) => e.target === 'ac.deflection' && e.source === 'Smite Evil',
+      );
+
+      expect(attackEffect).toBeDefined();
+      expect(attackEffect!.value).toBe(3); // +CHA modifier
+      expect(attackEffect!.bonusType).toBe(BonusType.UNTYPED);
+
+      expect(damageEffect).toBeDefined();
+      expect(damageEffect!.value).toBe(1); // +paladin level (1)
+      expect(damageEffect!.bonusType).toBe(BonusType.UNTYPED);
+
+      expect(deflectionEffect).toBeDefined();
+      expect(deflectionEffect!.value).toBe(3); // +CHA modifier
+      expect(deflectionEffect!.bonusType).toBe(BonusType.DEFLECTION);
+    });
+
+    it('omits attack and deflection effects when CHA modifier is not positive', () => {
+      // CHA 8 → modifier -1
+      const paladin = makePaladin(8);
+      const effects = CombatService.getCombatAbilityEffects(paladin, {
+        ...defaultAbilities,
+        activeToggles: { 'smite-evil': true },
+      });
+
+      const smiteEffects = effects.filter((e) => e.source === 'Smite Evil');
+      expect(smiteEffects.find((e) => e.target === 'attack.melee')).toBeUndefined();
+      expect(smiteEffects.find((e) => e.target === 'ac.deflection')).toBeUndefined();
+      // Damage bonus still applies (level 1 paladin)
+      expect(smiteEffects.find((e) => e.target === 'damage.melee')?.value).toBe(1);
+    });
+
+    it('does not produce smite effects for non-paladin characters', () => {
+      const effects = CombatService.getCombatAbilityEffects(fighter, {
+        ...defaultAbilities,
+        activeToggles: { 'smite-evil': true },
+      });
+
+      const smiteEffects = effects.filter((e) => e.source === 'Smite Evil');
+      // No paladin class → smiteLevel = 0, no damage effect; CHA -1 → no attack/deflection
+      expect(smiteEffects).toHaveLength(0);
+    });
   });
 });
 

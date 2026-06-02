@@ -13,13 +13,12 @@ import {
 import { db } from '@config/firebase';
 import type { Character } from '@/types';
 import type { CharacterSummary } from '@/types/character';
-import type { EquipmentSlot } from '@/types/equipment';
-import type { ItemSlot } from '@/types/magicItems';
 import type { ClassFeature } from '@/types/classes';
 import type { ResourcePoolDefinition } from '@/types/resources';
 import type { TemplateFeature } from '@/types/templates';
 import { PRESET_PF1E_STANDARD } from '@data/rulesets/presets';
 import { ALL_CLASS_CHOICE_DEFINITIONS } from '@data/classChoiceDefinitions';
+import { CharacterService } from '@/services/CharacterService';
 
 export class FirebaseCharacterService {
   private static readonly COLLECTION = 'characters';
@@ -334,32 +333,10 @@ export class FirebaseCharacterService {
   }
 
   /**
-   * Serialize character for Firestore (Map -> Record conversion)
+   * Serialize character for Firestore (Date -> ISO string conversion)
    */
   private static serializeForFirestore(character: Character): Record<string, unknown> {
     const serialized = JSON.parse(JSON.stringify(character));
-
-    // Convert equippedSlots Map to plain object for Firestore
-    if (character.equipment?.equippedSlots instanceof Map) {
-      const slotsRecord: Record<string, string> = {};
-      for (const [slot, itemId] of character.equipment.equippedSlots.entries()) {
-        slotsRecord[slot] = itemId;
-      }
-      serialized.equipment.equippedSlots = slotsRecord;
-    }
-
-    // Convert each companion's equippedSlots Map to a plain object for Firestore
-    if (Array.isArray(character.companions) && Array.isArray(serialized.companions)) {
-      character.companions.forEach((companion, index) => {
-        if (companion.equipment?.equippedSlots instanceof Map) {
-          const slotsRecord: Record<string, string> = {};
-          for (const [slot, itemId] of companion.equipment.equippedSlots.entries()) {
-            slotsRecord[slot] = itemId;
-          }
-          serialized.companions[index].equipment.equippedSlots = slotsRecord;
-        }
-      });
-    }
 
     // Convert Date objects to ISO strings (Firestore will use serverTimestamp for created/updated)
     if (serialized.lastUpdated instanceof Date) {
@@ -370,33 +347,10 @@ export class FirebaseCharacterService {
   }
 
   /**
-   * Deserialize character from Firestore (Record -> Map conversion)
+   * Deserialize character from Firestore (timestamp deserialization and schema migration)
    */
   private static deserializeFromFirestore(data: Record<string, unknown>): Character {
     const character = data as unknown as Character;
-
-    // Convert equippedSlots Record back to Map
-    if (character.equipment && !(character.equipment.equippedSlots instanceof Map)) {
-      const slotsRecord = character.equipment.equippedSlots as unknown as Record<string, string>;
-      character.equipment.equippedSlots = new Map(
-        Object.entries(slotsRecord || {}) as [EquipmentSlot, string][],
-      );
-    }
-
-    // Convert each companion's equippedSlots Record back to Map
-    if (Array.isArray(character.companions)) {
-      character.companions.forEach((companion) => {
-        if (companion.equipment && !(companion.equipment.equippedSlots instanceof Map)) {
-          const slotsRecord = companion.equipment.equippedSlots as unknown as Record<
-            string,
-            string
-          >;
-          companion.equipment.equippedSlots = { ...(slotsRecord || {}) } as Partial<
-            Record<ItemSlot, string>
-          >;
-        }
-      });
-    }
 
     // Convert timestamp fields back to Date — handles string (from JSON), Firestore Timestamp, and Date
     if (data.lastUpdated && typeof data.lastUpdated === 'string') {
@@ -425,6 +379,14 @@ export class FirebaseCharacterService {
     // Schema migration: backfill companions for documents written before companions feature
     if (!character.companions) {
       character.companions = [];
+    }
+
+    // Schema migration: backfill equipment/equippedSlots for legacy documents
+    character.equipment ??= CharacterService.createDefaultEquipment();
+    character.equipment.equippedSlots ??= {};
+    for (const companion of character.companions) {
+      companion.equipment ??= { armor: [], weapons: [], magicItems: [], gear: [], equippedSlots: {} };
+      companion.equipment.equippedSlots ??= {};
     }
 
     return character;
