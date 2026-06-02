@@ -65,6 +65,24 @@ function findByType(node: RenderedNode, typeName: string): RenderedNode[] {
   return results;
 }
 
+function getAllText(node: RenderedNode): string[] {
+  const texts: string[] = [];
+  for (const child of node.children) {
+    if (typeof child === 'string') texts.push(child);
+    else texts.push(...getAllText(child));
+  }
+  return texts;
+}
+
+function findAllNodes(node: RenderedNode, pred: (n: RenderedNode) => boolean): RenderedNode[] {
+  const acc: RenderedNode[] = [];
+  if (pred(node)) acc.push(node);
+  for (const c of node.children) {
+    if (typeof c !== 'string') acc.push(...findAllNodes(c, pred));
+  }
+  return acc;
+}
+
 beforeEach(() => {
   mockDispatch.mockClear();
 });
@@ -112,33 +130,19 @@ describe('FeatSlotList - Add bonus slot modal', () => {
     fireEvent.press(addButton!);
 
     const updatedTree = rerender();
-    function findAllNodes(node: RenderedNode, pred: (n: RenderedNode) => boolean): RenderedNode[] {
-      const acc: RenderedNode[] = [];
-      if (pred(node)) acc.push(node);
-      for (const c of node.children) {
-        if (typeof c !== 'string') acc.push(...findAllNodes(c, pred));
-      }
-      return acc;
-    }
+    // Find the innermost Pressable whose text content is exactly "Add Slot"
+    // (not a parent container that merely contains "Add Slot" in its subtree)
     const addSlotBtn = findAllNodes(
       updatedTree,
-      (n) => n.props.accessibilityRole === 'button' && getAllText(n).includes('Add Slot'),
+      (n) =>
+        (n.type === 'Pressable' || n.props.accessibilityRole === 'button') &&
+        getAllText(n).join('').trim() === 'Add Slot',
     );
 
-    function getAllText(node: RenderedNode): string[] {
-      const texts: string[] = [];
-      for (const child of node.children) {
-        if (typeof child === 'string') texts.push(child);
-        else texts.push(...getAllText(child));
-      }
-      return texts;
-    }
-
-    if (addSlotBtn.length > 0) {
-      fireEvent.press(addSlotBtn[0]);
-      expect(mockDispatch).toHaveBeenCalled();
-      const call = mockDispatch.mock.calls[mockDispatch.mock.calls.length - 1][0];
-      expect(call.type).toBe('characterEntry/addFeatSlot');
-    }
+    expect(addSlotBtn.length).toBeGreaterThan(0);
+    fireEvent.press(addSlotBtn[0]);
+    expect(mockDispatch).toHaveBeenCalled();
+    const call = mockDispatch.mock.calls[mockDispatch.mock.calls.length - 1][0];
+    expect(call.type).toBe('characterEntry/addFeatSlot');
   });
 });
