@@ -1,0 +1,3 @@
+# Rename bottom nav "Combat" tab to "Play"
+
+The bottom navigation tab for the live play experience is named **Play**, not Combat. The character detail screen already has a "Combat" tab showing base combat stats — having both named "Combat" caused immediate confusion during design (a user couldn't distinguish between "my character's combat stats on paper" and "the live session surface"). "Play" is also more accurate: the tab covers spells, resource pools, buffs, conditions, and rest recovery — not just combat. The routing path is `app/(tabs)/play/`; the Redux slice retains the name `combatSlice` for now since it predates this decision.
