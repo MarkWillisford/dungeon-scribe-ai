@@ -32,7 +32,6 @@ import {
   nextRound,
   removeBuff,
   resetCombat,
-  setCombatExpertisePenalty,
   setBuffLibrary,
   toggleBuff,
   toggleCombatAbility,
@@ -653,7 +652,6 @@ export default function CombatTrackerScreen() {
             character={character}
             bab={bab}
             onToggle={handleToggleCombatAbility}
-            onSetExpertisePenalty={(v) => dispatch(setCombatExpertisePenalty(v))}
             testID="combat-ability-toggles"
           />
 

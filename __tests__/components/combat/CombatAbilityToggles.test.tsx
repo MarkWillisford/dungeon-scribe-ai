@@ -135,7 +135,6 @@ function makeProps(overrides = {}) {
     character: makeCharacterWithFeats(['power_attack']),
     bab: 6,
     onToggle: jest.fn(),
-    onSetExpertisePenalty: jest.fn(),
     ...overrides,
   };
 }
@@ -186,17 +185,18 @@ describe('CombatAbilityToggles', () => {
       expect(getByText('-2 atk / +4 dmg (+6 two-handed)')).toBeTruthy();
     });
 
-    it('shows Combat Expertise penalty selector when active', () => {
+    it('shows computed penalty and dodge values read-only when Combat Expertise is active', () => {
       (FeatRegistryService.getFeat as jest.Mock).mockImplementation((id: string) => {
         if (id === 'combat_expertise') return mockCombatExpertiseDef;
         return undefined;
       });
       const character = makeCharacterWithFeats(['combat_expertise']);
       const abilities = { ...defaultAbilities, activeToggles: { combat_expertise: true } };
+      // BAB=6: floor(6/4)+1 = 2
       const { getByText } = render(
-        <CombatAbilityToggles {...makeProps({ abilities, character })} />,
+        <CombatAbilityToggles {...makeProps({ abilities, character, bab: 6 })} />,
       );
-      expect(getByText('Penalty: 1')).toBeTruthy();
+      expect(getByText('Penalty: -2 / Dodge: +2')).toBeTruthy();
     });
 
     it('is findable by testID', () => {

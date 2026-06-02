@@ -11,7 +11,6 @@ interface CombatAbilityTogglesProps {
   character: Character | null;
   bab: number;
   onToggle: (key: string) => void;
-  onSetExpertisePenalty: (value: number) => void;
   testID?: string;
 }
 
@@ -89,7 +88,6 @@ export function CombatAbilityToggles({
   character,
   bab,
   onToggle,
-  onSetExpertisePenalty,
   testID,
 }: CombatAbilityTogglesProps) {
   const { colors, fantasy } = useTheme();
@@ -209,7 +207,7 @@ export function CombatAbilityToggles({
               )}
             </Pressable>
 
-            {/* Combat Expertise variable penalty selector */}
+            {/* Combat Expertise: read-only computed penalty/dodge display */}
             {id === 'combat_expertise' && isOn && (
               <View
                 style={[
@@ -218,34 +216,8 @@ export function CombatAbilityToggles({
                 ]}
               >
                 <Text style={[styles.subOptionLabel, { color: colors.text.secondary }]}>
-                  {`Penalty: ${abilities.combatExpertisePenalty}`}
+                  {`Penalty: -${Math.floor(bab / 4) + 1} / Dodge: +${Math.floor(bab / 4) + 1}`}
                 </Text>
-                <View style={styles.penaltyButtons}>
-                  {[1, 2, 3, 4, 5].map((v) => (
-                    <Pressable
-                      key={v}
-                      style={[
-                        styles.penaltyBtn,
-                        {
-                          backgroundColor:
-                            abilities.combatExpertisePenalty === v ? CE_COLOR : colors.bg.secondary,
-                          borderColor: CE_COLOR,
-                        },
-                      ]}
-                      onPress={() => onSetExpertisePenalty(v)}
-                      accessibilityLabel={`Set Combat Expertise penalty to ${v}`}
-                    >
-                      <Text
-                        style={[
-                          styles.penaltyBtnText,
-                          { color: abilities.combatExpertisePenalty === v ? '#FFFFFF' : CE_COLOR },
-                        ]}
-                      >
-                        {v}
-                      </Text>
-                    </Pressable>
-                  ))}
-                </View>
               </View>
             )}
           </View>
@@ -332,22 +304,5 @@ const styles = StyleSheet.create({
   subOptionLabel: {
     fontFamily: 'LibreBaskerville',
     fontSize: 12,
-  },
-  penaltyButtons: {
-    flexDirection: 'row',
-    gap: 4,
-  },
-  penaltyBtn: {
-    width: 32,
-    height: 32,
-    borderWidth: 1,
-    borderRadius: 6,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  penaltyBtnText: {
-    fontFamily: 'Cinzel',
-    fontSize: 13,
-    fontWeight: '700',
   },
 });
