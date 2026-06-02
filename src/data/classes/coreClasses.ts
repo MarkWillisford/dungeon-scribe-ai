@@ -1089,6 +1089,10 @@ export const CORE_CLASSES_EXPANDED: ExpandedClassData[] = [
       {
         name: 'Smite Evil 1/day',
         level: 1,
+        id: 'smite-evil',
+        activationMode: 'toggle',
+        shortDescription:
+          'Swift — +CHA bonus to attack, +paladin level to damage, +CHA deflection to AC vs. target',
         description:
           'Once per day, a paladin can call out to the powers of good to aid her. As a swift action, she adds her Charisma bonus to attack rolls and her paladin level to damage rolls against the target of her smite. She also gains a deflection bonus equal to her Charisma modifier to AC against the target.',
       },
@@ -1128,7 +1132,12 @@ export const CORE_CLASSES_EXPANDED: ExpandedClassData[] = [
         description:
           'When a paladin reaches 4th level, she gains the ability to channel positive energy like a cleric. Using this ability consumes two uses of her lay on hands ability.',
       },
-      { name: 'Smite Evil 2/day', level: 4, description: 'Smite evil usage increases to 2/day.' },
+      {
+        name: 'Smite Evil 2/day',
+        level: 4,
+        id: 'smite-evil',
+        description: 'Smite evil usage increases to 2/day.',
+      },
       {
         name: 'Divine Bond',
         level: 5,
@@ -1136,7 +1145,12 @@ export const CORE_CLASSES_EXPANDED: ExpandedClassData[] = [
           "Upon reaching 5th level, a paladin forms a divine bond with her god. This bond can take one of two forms: an enhancement to the paladin's weapon or a loyal mount.",
       },
       { name: 'Mercy', level: 6, description: 'The paladin selects an additional mercy.' },
-      { name: 'Smite Evil 3/day', level: 7, description: 'Smite evil usage increases to 3/day.' },
+      {
+        name: 'Smite Evil 3/day',
+        level: 7,
+        id: 'smite-evil',
+        description: 'Smite evil usage increases to 3/day.',
+      },
       {
         name: 'Aura of Resolve',
         level: 8,
@@ -1144,7 +1158,12 @@ export const CORE_CLASSES_EXPANDED: ExpandedClassData[] = [
           'At 8th level, a paladin is immune to charm spells and spell-like abilities. Each ally within 10 feet gains a +4 morale bonus on saving throws against charm effects.',
       },
       { name: 'Mercy', level: 9, description: 'The paladin selects an additional mercy.' },
-      { name: 'Smite Evil 4/day', level: 10, description: 'Smite evil usage increases to 4/day.' },
+      {
+        name: 'Smite Evil 4/day',
+        level: 10,
+        id: 'smite-evil',
+        description: 'Smite evil usage increases to 4/day.',
+      },
       {
         name: 'Aura of Justice',
         level: 11,
@@ -1152,7 +1171,12 @@ export const CORE_CLASSES_EXPANDED: ExpandedClassData[] = [
           'At 11th level, a paladin can expend two uses of her smite evil ability to grant the ability to smite evil to all allies within 10 feet, using her bonuses.',
       },
       { name: 'Mercy', level: 12, description: 'The paladin selects an additional mercy.' },
-      { name: 'Smite Evil 5/day', level: 13, description: 'Smite evil usage increases to 5/day.' },
+      {
+        name: 'Smite Evil 5/day',
+        level: 13,
+        id: 'smite-evil',
+        description: 'Smite evil usage increases to 5/day.',
+      },
       {
         name: 'Aura of Faith',
         level: 14,
@@ -1160,7 +1184,12 @@ export const CORE_CLASSES_EXPANDED: ExpandedClassData[] = [
           "At 14th level, a paladin's weapons are treated as good-aligned for overcoming damage reduction. Any attack made against an enemy within 10 feet is treated as good-aligned.",
       },
       { name: 'Mercy', level: 15, description: 'The paladin selects an additional mercy.' },
-      { name: 'Smite Evil 6/day', level: 16, description: 'Smite evil usage increases to 6/day.' },
+      {
+        name: 'Smite Evil 6/day',
+        level: 16,
+        id: 'smite-evil',
+        description: 'Smite evil usage increases to 6/day.',
+      },
       {
         name: 'Aura of Righteousness',
         level: 17,
@@ -1168,7 +1197,12 @@ export const CORE_CLASSES_EXPANDED: ExpandedClassData[] = [
           'At 17th level, a paladin gains DR 5/evil and immunity to compulsion spells and spell-like abilities. Each ally within 10 feet gains a +4 morale bonus on saving throws against compulsion effects.',
       },
       { name: 'Mercy', level: 18, description: 'The paladin selects an additional mercy.' },
-      { name: 'Smite Evil 7/day', level: 19, description: 'Smite evil usage increases to 7/day.' },
+      {
+        name: 'Smite Evil 7/day',
+        level: 19,
+        id: 'smite-evil',
+        description: 'Smite evil usage increases to 7/day.',
+      },
       {
         name: 'Holy Champion',
         level: 20,
