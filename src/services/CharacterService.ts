@@ -7,7 +7,7 @@ import { Race } from '@/types/race';
 import { Alignment, BABProgression, SaveProgression, Size } from '@/types/base';
 import { ClassFeature } from '@/types/classes';
 import { AbilityScoreService } from '@services/AbilityScoreService';
-import { getClassByName } from '@data/classes';
+import { getClassByName } from '@data/classes/index';
 import { PRESET_PF1E_STANDARD } from '@config/rulesetPresets';
 
 const PLACEHOLDER_RACE: Race = {
