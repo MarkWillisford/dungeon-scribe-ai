@@ -54,6 +54,7 @@ interface ResourcePoolContribution {
   source: string; // e.g. "Cleric class feature", "Extra Channel", "Headband of Charisma +2"
   sourceType: 'class_feature' | 'feat' | 'equipment' | 'favored_class_bonus' | 'other';
   value: number;
+  bonusType?: string; // present on feat/equipment contributions; used for typed stacking
 }
 
 interface ResourcePool {
@@ -102,7 +103,9 @@ The existing `FeatEffect` type already supports this target pattern. No type cha
 
 ### Stacking Rules
 
-Resource pool max bonuses stack freely. PF1e imposes no typed bonus restrictions on resource pool maximums. `ResourcePoolService` sums all contributions without deduplication. This is intentionally simpler than the modifier pipeline's typed bonus stacking logic.
+Class feature and favored class bonus contributions always stack -- they are ability definitions, not bonuses, and are always additive.
+
+Feat and equipment contributions follow PF1e typed bonus stacking rules: contributions sharing the same bonus type take only the highest value; untyped and dodge bonuses stack freely. `ResourcePoolService` aggregates feat/equipment contributions by bonus type before summing the final max. See `ResourcePoolService.ts` for the full aggregation logic.
 
 ### Per-Encounter Resources
 

@@ -151,7 +151,7 @@ All new code must maintain the existing 80% overall coverage floor (statements, 
 ## Out of Scope
 
 - Visual redesign of play screen layout and color system (separate workstream, Doug)
-- Condition duration tracking (conditions are toggles only; DM owns when they end)
+- Standalone condition duration tracking -- conditions applied via manual toggle (User Story 24) have no auto-expiry counter; the DM decides when they end. Conditions carried as effects of an active timed buff expire when that buff's duration reaches zero (covered by buff duration tracking in User Story 21)
 - Initiative order / turn order tracking for the full combat encounter
 - Real-time sync or DM-to-player push (single-player app scope)
 - Spell preparation UI (choosing which spells to prepare before a session)
