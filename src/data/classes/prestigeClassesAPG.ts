@@ -263,6 +263,10 @@ export const PRESTIGE_CLASSES_APG: ExpandedClassData[] = [
       {
         name: 'Terrain Dominance',
         level: 6,
+        id: 'terrain-dominance',
+        activationMode: 'toggle',
+        shortDescription:
+          'Terrain-based spell-like ability (1/day or at will, depends on terrain chosen)',
         description:
           'At 6th level, a horizon walker selects a terrain dominance from his list of favored terrains that he has already selected for terrain mastery. He gains spell-like abilities and additional powers associated with that terrain. For example, Cold grants wall of ice 1/day; Forest grants hallucinatory terrain 1/day; Underground grants spider climb at will. The horizon walker gains an additional terrain dominance at 8th and 10th level.',
       },

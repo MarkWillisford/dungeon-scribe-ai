@@ -1,3 +1,6 @@
+// SEEDING ONLY — do not use in runtime app code.
+// This array seeds Firestore. All runtime reads go through GameDataService → FirestoreGameDataConnector.
+
 import type { HexEntry } from '@/types/classOptions';
 import { hexesBatch1 } from './hexes-batch1';
 import { hexesBatch2 } from './hexes-batch2';

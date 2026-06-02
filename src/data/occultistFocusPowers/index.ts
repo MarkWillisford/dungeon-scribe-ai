@@ -1,3 +1,6 @@
+// SEEDING ONLY — do not use in runtime app code.
+// This array seeds Firestore. All runtime reads go through GameDataService → FirestoreGameDataConnector.
+
 import type { OccultistFocusPowerEntry, OccultistSchool } from '@/types/classOptions';
 import { focusPowersBatch1 } from './raw/focusPowers_batch1';
 import { focusPowersBatch2 } from './raw/focusPowers_batch2';

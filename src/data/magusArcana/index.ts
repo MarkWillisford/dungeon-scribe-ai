@@ -1,3 +1,6 @@
+// SEEDING ONLY — do not use in runtime app code.
+// This array seeds Firestore. All runtime reads go through GameDataService → FirestoreGameDataConnector.
+
 import type { MagusArcanaEntry } from '@/types/classOptions';
 import { magusArcanaUm } from './magusArcana-um';
 import { magusArcanaUc } from './magusArcana-uc';
