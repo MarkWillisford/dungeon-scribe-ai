@@ -764,7 +764,7 @@ const mockCharacter: Character = {
     shields: [],
     magicItems: [],
     gear: [],
-    equippedSlots: new Map(),
+    equippedSlots: {},
     encumbranceSettings: { enabled: false, variant: EncumbranceVariant.CORE_RULES },
     totalWeight: 0,
     lightLoad: 76,
