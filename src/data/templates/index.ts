@@ -1,3 +1,6 @@
+// SEEDING ONLY — do not use in runtime app code.
+// This array seeds Firestore. All runtime reads go through GameDataService → FirestoreGameDataConnector.
+
 // Barrel export for template data — 492 templates across 20 batch files.
 // Static seed data only — authoritative copy lives in Firestore at runtime.
 // Batch 018 re-scraped the H–I range already covered by batches 009–010; the Map

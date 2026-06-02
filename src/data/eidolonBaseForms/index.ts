@@ -1,3 +1,6 @@
+// SEEDING ONLY — do not use in runtime app code.
+// This array seeds Firestore. All runtime reads go through GameDataService → FirestoreGameDataConnector.
+
 // Eidolon Base Forms — 7 first-party base forms.
 // Sources: APG (biped, quadruped, serpentine), Bestiary 4 supplementals (aquatic,
 // avian, tauric), Pathfinder Unchained (aberrant).
