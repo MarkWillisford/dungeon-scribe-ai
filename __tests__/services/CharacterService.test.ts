@@ -306,9 +306,6 @@ describe('CharacterService', () => {
 
   describe('getLevel1ClassFeatures snapshot', () => {
     test('snapshots all ClassFeatureData fields including id, activationMode, and effects', () => {
-      // Barbarian gets a non-empty effects array in its Rage feature once toggle data is
-      // populated; for now we verify that whatever the static data carries is preserved,
-      // NOT stripped down to { name, description, level, effects: [] }.
       const character = CharacterService.createDefaultCharacter({
         ...mockCreateParams,
         selectedClass: 'Barbarian',
@@ -316,14 +313,17 @@ describe('CharacterService', () => {
       const features = character.classes.classes[0].classFeatures;
       expect(features.length).toBeGreaterThan(0);
 
-      // Find any feature that has effects set in the static data and verify they were
-      // carried through unchanged.
-      const featureWithEffects = features.find((f) => f.effects.length > 0);
-      // If no static feature has effects yet this test is vacuously true — that is
-      // acceptable; the key assertion is that the OLD stripping code is gone.
-      if (featureWithEffects) {
-        expect(featureWithEffects.effects).not.toEqual([]);
+      // Every stored feature must have an effects field that is an array (never undefined or stripped).
+      for (const feature of features) {
+        expect(Array.isArray(feature.effects)).toBe(true);
       }
+
+      // The stored feature count must match the level-1 features in static class data
+      // (verifying no features were dropped during snapshotting).
+      const staticClass = getClassByName('Barbarian');
+      expect(staticClass).toBeDefined();
+      const level1StaticCount = staticClass!.classFeatures.filter((f) => f.level === 1).length;
+      expect(features.length).toBe(level1StaticCount);
     });
 
     test('features are not reduced to name/description/level/empty-effects when class data has richer fields', () => {
