@@ -139,6 +139,14 @@ export class FirebaseCharacterService {
    * Uses the class doc snaps already fetched — no extra DB calls.
    */
   private static async mergeClassFeatureResourcePools(character: Character): Promise<Character> {
+    // Skip the Firestore fetch when every class entry already has features stored.
+    // Characters created (or last saved) with the snapshot-on-selection system carry
+    // full ClassFeature data on the character document, so the catalog is never
+    // consulted at load time. The fetch only runs for legacy characters whose
+    // classFeatures array is empty (i.e., created before feature snapshotting existed).
+    const needsMerge = character.classes.classes.some((cls) => cls.classFeatures.length === 0);
+    if (!needsMerge) return character;
+
     const classIds = character.classes.classes.map((cls) => this.classDocId(cls.name));
     const uniqueIds = [...new Set(classIds)];
     if (uniqueIds.length === 0) return character;
