@@ -1135,7 +1135,6 @@ export const CORE_CLASSES_EXPANDED: ExpandedClassData[] = [
       {
         name: 'Smite Evil 2/day',
         level: 4,
-        id: 'smite-evil',
         description: 'Smite evil usage increases to 2/day.',
       },
       {
@@ -1148,7 +1147,6 @@ export const CORE_CLASSES_EXPANDED: ExpandedClassData[] = [
       {
         name: 'Smite Evil 3/day',
         level: 7,
-        id: 'smite-evil',
         description: 'Smite evil usage increases to 3/day.',
       },
       {
@@ -1161,7 +1159,6 @@ export const CORE_CLASSES_EXPANDED: ExpandedClassData[] = [
       {
         name: 'Smite Evil 4/day',
         level: 10,
-        id: 'smite-evil',
         description: 'Smite evil usage increases to 4/day.',
       },
       {
@@ -1174,7 +1171,6 @@ export const CORE_CLASSES_EXPANDED: ExpandedClassData[] = [
       {
         name: 'Smite Evil 5/day',
         level: 13,
-        id: 'smite-evil',
         description: 'Smite evil usage increases to 5/day.',
       },
       {
@@ -1187,7 +1183,6 @@ export const CORE_CLASSES_EXPANDED: ExpandedClassData[] = [
       {
         name: 'Smite Evil 6/day',
         level: 16,
-        id: 'smite-evil',
         description: 'Smite evil usage increases to 6/day.',
       },
       {
@@ -1200,7 +1195,6 @@ export const CORE_CLASSES_EXPANDED: ExpandedClassData[] = [
       {
         name: 'Smite Evil 7/day',
         level: 19,
-        id: 'smite-evil',
         description: 'Smite evil usage increases to 7/day.',
       },
       {

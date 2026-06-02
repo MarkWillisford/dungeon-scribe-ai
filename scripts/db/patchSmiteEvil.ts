@@ -51,9 +51,10 @@ function applySmiteEvilPatch(features: ClassFeatureDoc[]): {
     if (!f.name.startsWith('Smite Evil')) return f;
 
     const isFirstEntry = f.level === 1;
-    const updated: ClassFeatureDoc = { ...f, id: 'smite-evil' };
+    const updated: ClassFeatureDoc = { ...f };
 
     if (isFirstEntry) {
+      updated.id = 'smite-evil';
       updated.activationMode = 'toggle';
       updated.shortDescription = SMITE_SHORT_DESCRIPTION;
     }
