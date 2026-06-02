@@ -17,7 +17,7 @@ import type { EquipmentSlot } from '@/types/equipment';
 import type { ItemSlot } from '@/types/magicItems';
 import type { ClassFeature } from '@/types/classes';
 import type { ResourcePoolDefinition } from '@/types/resources';
-import { PRESET_PF1E_STANDARD } from '@data/rulesets/presets';
+import { PRESET_PF1E_STANDARD } from '@config/rulesetPresets';
 import { ALL_CLASS_CHOICE_DEFINITIONS } from '@data/classChoiceDefinitions';
 
 export class FirebaseCharacterService {

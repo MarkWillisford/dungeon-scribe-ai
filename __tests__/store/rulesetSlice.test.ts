@@ -3,7 +3,7 @@ import rulesetReducer, {
   clearRuleset,
   patchActiveRuleset,
 } from '@store/slices/rulesetSlice';
-import { PRESET_PF1E_STANDARD } from '@/data/rulesets/presets';
+import { PRESET_PF1E_STANDARD } from '@/config/rulesetPresets';
 import type { Ruleset } from '@/types/ruleset';
 
 const mockRuleset: Ruleset = {
