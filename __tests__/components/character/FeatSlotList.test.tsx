@@ -130,13 +130,9 @@ describe('FeatSlotList - Add bonus slot modal', () => {
     fireEvent.press(addButton!);
 
     const updatedTree = rerender();
-    // Find the innermost Pressable whose text content is exactly "Add Slot"
-    // (not a parent container that merely contains "Add Slot" in its subtree)
     const addSlotBtn = findAllNodes(
       updatedTree,
-      (n) =>
-        (n.type === 'Pressable' || n.props.accessibilityRole === 'button') &&
-        getAllText(n).join('').trim() === 'Add Slot',
+      (n) => n.props.accessibilityLabel === 'Add bonus feat slot confirm',
     );
 
     expect(addSlotBtn.length).toBeGreaterThan(0);
@@ -144,5 +140,62 @@ describe('FeatSlotList - Add bonus slot modal', () => {
     expect(mockDispatch).toHaveBeenCalled();
     const call = mockDispatch.mock.calls[mockDispatch.mock.calls.length - 1][0];
     expect(call.type).toBe('characterEntry/addFeatSlot');
+  });
+
+  it('pressing Add Slot with no input dispatches with sourceLabel undefined', () => {
+    const { getAllByRole, rerender } = render(<FeatSlotList />);
+    const addButton = getAllByRole('button').find(
+      (b) => b.props.accessibilityLabel === 'Add bonus feat slot',
+    );
+    fireEvent.press(addButton!);
+
+    const updatedTree = rerender();
+    const addSlotBtn = findAllNodes(
+      updatedTree,
+      (n) => n.props.accessibilityLabel === 'Add bonus feat slot confirm',
+    );
+    fireEvent.press(addSlotBtn[0]);
+
+    const call = mockDispatch.mock.calls[mockDispatch.mock.calls.length - 1][0];
+    expect(call.type).toBe('characterEntry/addFeatSlot');
+    expect(call.payload.sourceLabel).toBeUndefined();
+  });
+
+  it('pressing Cancel does not dispatch and closes modal', () => {
+    const { getAllByRole, rerender } = render(<FeatSlotList />);
+    const addButton = getAllByRole('button').find(
+      (b) => b.props.accessibilityLabel === 'Add bonus feat slot',
+    );
+    fireEvent.press(addButton!);
+
+    const updatedTree = rerender();
+    const cancelBtn = findAllNodes(
+      updatedTree,
+      (n) => n.type === 'Pressable' && getAllText(n).join('').trim() === 'Cancel',
+    );
+    expect(cancelBtn.length).toBeGreaterThan(0);
+    fireEvent.press(cancelBtn[0]);
+
+    expect(mockDispatch).not.toHaveBeenCalled();
+    const finalTree = rerender();
+    const modals = findByType(finalTree, 'Modal');
+    expect(modals[0].props.visible).toBe(false);
+  });
+
+  it('onRequestClose closes the modal without dispatching', () => {
+    const { getAllByRole, rerender } = render(<FeatSlotList />);
+    const addButton = getAllByRole('button').find(
+      (b) => b.props.accessibilityLabel === 'Add bonus feat slot',
+    );
+    fireEvent.press(addButton!);
+
+    const updatedTree = rerender();
+    const modals = findByType(updatedTree, 'Modal');
+    expect(modals.length).toBeGreaterThan(0);
+    modals[0].props.onRequestClose();
+
+    const finalTree = rerender();
+    expect(findByType(finalTree, 'Modal')[0].props.visible).toBe(false);
+    expect(mockDispatch).not.toHaveBeenCalled();
   });
 });

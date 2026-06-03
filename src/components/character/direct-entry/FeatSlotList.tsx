@@ -603,6 +603,7 @@ export function FeatSlotList() {
                 </Text>
               </Pressable>
               <Pressable
+                accessibilityLabel="Add bonus feat slot confirm"
                 onPress={() => {
                   const label = bonusLabelText.trim() || undefined;
                   const bonusFeats = character.feats.feats.filter((f) =>
