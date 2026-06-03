@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { View, Text, Pressable, StyleSheet, Modal, TextInput } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
@@ -421,6 +421,7 @@ export function FeatSlotList() {
   const character = useAppSelector((state) => state.characterEntry.character);
   const [bonusLabelVisible, setBonusLabelVisible] = useState(false);
   const [bonusLabelText, setBonusLabelText] = useState('');
+  const bonusLabelInputRef = useRef<TextInput>(null);
 
   // Build the display slot list by merging computed slots with assigned feats
   const featSlots = useMemo<FeatSlotDisplay[]>(() => {
@@ -552,6 +553,7 @@ export function FeatSlotList() {
         transparent
         animationType="fade"
         onRequestClose={() => setBonusLabelVisible(false)}
+        onShow={() => bonusLabelInputRef.current?.focus()}
       >
         <Pressable style={styles.modalOverlay} onPress={() => setBonusLabelVisible(false)}>
           <Pressable
@@ -571,11 +573,11 @@ export function FeatSlotList() {
               Source label (optional)
             </Text>
             <TextInput
+              ref={bonusLabelInputRef}
               value={bonusLabelText}
               onChangeText={setBonusLabelText}
               placeholder="e.g. Fighter 2, Wizard 5..."
               placeholderTextColor={colors.text.tertiary}
-              autoFocus
               style={[
                 styles.modalInput,
                 {
@@ -588,6 +590,8 @@ export function FeatSlotList() {
             <View style={styles.modalButtons}>
               <Pressable
                 onPress={() => setBonusLabelVisible(false)}
+                accessibilityRole="button"
+                accessibilityLabel="Cancel adding bonus feat slot"
                 style={[styles.modalBtn, { borderColor: colors.border.DEFAULT }]}
               >
                 <Text
@@ -601,6 +605,8 @@ export function FeatSlotList() {
                 </Text>
               </Pressable>
               <Pressable
+                accessibilityRole="button"
+                accessibilityLabel="Add bonus feat slot confirm"
                 onPress={() => {
                   const label = bonusLabelText.trim() || undefined;
                   const bonusFeats = character.feats.feats.filter((f) =>
