@@ -42,8 +42,7 @@ export const PRESET_PF1E_STANDARD: Ruleset = {
 export const PRESET_PF1E_SOCIETY: Ruleset = {
   id: 'preset-pf1e-society',
   name: 'PF1e Society',
-  description:
-    'Pathfinder Society organized play rules. Ban list incomplete — research pending.',
+  description: 'Pathfinder Society organized play rules. Ban list incomplete — research pending.',
   visibility: 'global',
   ownerId: SYSTEM_OWNER_ID,
   allowedSources: ['pf1e-official'],

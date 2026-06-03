@@ -8,7 +8,7 @@ import { Alignment, BABProgression, SaveProgression, Size } from '@/types/base';
 import { ClassFeature } from '@/types/classes';
 import { AbilityScoreService } from '@services/AbilityScoreService';
 import { getClassByName } from '@data/classes/index';
-import { PRESET_PF1E_STANDARD } from '@data/rulesets/presets';
+import { PRESET_PF1E_STANDARD } from '@config/rulesetPresets';
 
 const PLACEHOLDER_RACE: Race = {
   name: '',

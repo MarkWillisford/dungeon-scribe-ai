@@ -24,7 +24,7 @@ import {
 import { saveCharacter } from '@/store/thunks/saveCharacter';
 import { CharacterValidationService } from '@/services/CharacterValidationService';
 import { selectClassDataMap } from '@/store/slices/gameDataSlice';
-import { PRESET_PF1E_STANDARD } from '@/data/rulesets/presets';
+import { PRESET_PF1E_STANDARD } from '@/config/rulesetPresets';
 import { ValidationReportSheet } from './ValidationReportSheet';
 import { IdentitySection } from './IdentitySection';
 import { AbilityScoreEntryPanel } from './AbilityScoreEntryPanel';
@@ -214,7 +214,10 @@ export function CharacterEntryScreen() {
       >
         <ScrollView
           style={styles.scrollView}
-          contentContainerStyle={[styles.scrollContent, showValidationFAB && styles.scrollContentFAB]}
+          contentContainerStyle={[
+            styles.scrollContent,
+            showValidationFAB && styles.scrollContentFAB,
+          ]}
           keyboardShouldPersistTaps="handled"
         >
           {activeTab === 'identity' && <IdentitySection />}

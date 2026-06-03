@@ -16,7 +16,7 @@ import type { CharacterSummary } from '@/types/character';
 import type { ClassFeature } from '@/types/classes';
 import type { ResourcePoolDefinition } from '@/types/resources';
 import type { TemplateFeature } from '@/types/templates';
-import { PRESET_PF1E_STANDARD } from '@data/rulesets/presets';
+import { PRESET_PF1E_STANDARD } from '@config/rulesetPresets';
 import { ALL_CLASS_CHOICE_DEFINITIONS } from '@data/classChoiceDefinitions';
 import { CharacterService } from '@/services/CharacterService';
 

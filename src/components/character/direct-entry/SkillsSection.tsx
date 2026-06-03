@@ -4,7 +4,7 @@ import { useTheme } from '@/hooks/useTheme';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { setSkillEntry, removeSkillEntry } from '@/store/slices/characterEntrySlice';
 import type { AbilityKey } from '@/types/abilities';
-import { PRESET_PF1E_STANDARD } from '@/data/rulesets/presets';
+import { PRESET_PF1E_STANDARD } from '@/config/rulesetPresets';
 
 type SkillEntry = { ranks: number; misc: number };
 
