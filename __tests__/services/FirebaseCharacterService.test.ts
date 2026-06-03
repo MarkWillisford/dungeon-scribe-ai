@@ -118,9 +118,6 @@ describe('FirebaseCharacterService', () => {
     test('should return character by ID', async () => {
       const character = createTestCharacter();
       const serialized = JSON.parse(JSON.stringify(character));
-      // Simulate Firestore returning equippedSlots as a plain object
-      serialized.equipment.equippedSlots = {};
-
       mockFirestore.getDoc.mockResolvedValue({
         exists: () => true,
         id: 'char-1',
@@ -131,7 +128,8 @@ describe('FirebaseCharacterService', () => {
 
       expect(result.info.name).toBe('Firestore Test Character');
       expect(result.info.firebaseId).toBe('char-1');
-      expect(result.equipment.equippedSlots).toBeInstanceOf(Map);
+      expect(result.equipment.equippedSlots).not.toBeInstanceOf(Map);
+      expect(typeof result.equipment.equippedSlots).toBe('object');
     });
 
     test('should throw when character not found', async () => {
@@ -142,6 +140,52 @@ describe('FirebaseCharacterService', () => {
       await expect(FirebaseCharacterService.getCharacter('nonexistent')).rejects.toThrow(
         'Character not found',
       );
+    });
+
+    test('does not fetch class docs when all class entries already have features', async () => {
+      // createTestCharacter() creates a character with non-empty classFeatures
+      // (getLevel1ClassFeatures returns at least the level-1 features for Fighter).
+      // The merge guard must skip the Firestore class-doc fetch in this case.
+      const character = createTestCharacter();
+      const serialized = JSON.parse(JSON.stringify(character));
+      serialized.equipment.equippedSlots = {};
+
+      // Confirm the test precondition: features are non-empty.
+      expect(serialized.classes.classes[0].classFeatures.length).toBeGreaterThan(0);
+
+      mockFirestore.getDoc.mockResolvedValue({
+        exists: () => true,
+        id: 'char-no-class-fetch',
+        data: () => serialized,
+      });
+
+      await FirebaseCharacterService.getCharacter('char-no-class-fetch');
+
+      // Only one getDoc call should have been made: the character document itself.
+      // No additional calls for class catalog documents.
+      expect(mockFirestore.getDoc).toHaveBeenCalledTimes(1);
+    });
+
+    test('still fetches class docs when a class entry has empty features (legacy backfill)', async () => {
+      const character = createTestCharacter();
+      const serialized = JSON.parse(JSON.stringify(character));
+      serialized.equipment.equippedSlots = {};
+      // Simulate a legacy character whose classFeatures were never persisted.
+      serialized.classes.classes[0].classFeatures = [];
+
+      mockFirestore.getDoc
+        .mockResolvedValueOnce({
+          exists: () => true,
+          id: 'char-legacy',
+          data: () => serialized,
+        })
+        // The class doc lookup that follows — return empty so the merge is a no-op.
+        .mockResolvedValueOnce({ exists: () => false });
+
+      await FirebaseCharacterService.getCharacter('char-legacy');
+
+      // Character doc + at least one class doc fetch.
+      expect(mockFirestore.getDoc).toHaveBeenCalledTimes(2);
     });
   });
 
@@ -333,6 +377,30 @@ describe('FirebaseCharacterService', () => {
       const result = await FirebaseCharacterService.getCharacter('char-deser-1');
       expect(result.ruleset).toBeDefined();
       expect(result.ruleset.id).toBeDefined();
+    });
+
+    test('backfills missing equipment for pre-equipment legacy documents', async () => {
+      const character = createTestCharacter();
+      const base = JSON.parse(JSON.stringify(character));
+      delete base.equipment;
+      mockGetDoc(base);
+
+      const result = await FirebaseCharacterService.getCharacter('char-deser-legacy');
+      expect(result.equipment).toBeDefined();
+      expect(result.equipment.equippedSlots).toEqual({});
+      expect(Array.isArray(result.equipment.weapons)).toBe(true);
+    });
+
+    test('backfills missing companion equipment for pre-equipment legacy documents', async () => {
+      const character = createTestCharacter();
+      const base = JSON.parse(JSON.stringify(character));
+      base.equipment.equippedSlots = {};
+      base.companions = [{ instanceId: 'c1', equipment: undefined }];
+      mockGetDoc(base);
+
+      const result = await FirebaseCharacterService.getCharacter('char-deser-companion');
+      expect(result.companions[0].equipment).toBeDefined();
+      expect(result.companions[0].equipment.equippedSlots).toEqual({});
     });
   });
 });

@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { addTrait, removeTrait } from '@/store/slices/characterEntrySlice';
 import { SearchPickerSheet, type SearchItem } from '@/components/ui/SearchPickerSheet';
 import { GameDataService } from '@/services/GameDataService';
-import { PRESET_PF1E_STANDARD } from '@/data/rulesets/presets';
+import { PRESET_PF1E_STANDARD } from '@/config/rulesetPresets';
 import type { CharacterTrait, TraitDefinition } from '@/types/traits';
 
 // ---- Category badge colors ----

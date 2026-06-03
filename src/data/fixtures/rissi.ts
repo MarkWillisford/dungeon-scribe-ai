@@ -6,7 +6,7 @@
 // Nothing in the UI should reference this file directly — all data flows through Redux.
 
 import { Alignment, BABProgression, BonusType, SaveProgression, Size } from '@/types/base';
-import { PRESET_PF1E_STANDARD } from '@/data/rulesets/presets';
+import { PRESET_PF1E_STANDARD } from '@/config/rulesetPresets';
 import { CharacterService } from '@/services/CharacterService';
 import type { Character } from '@/types/index';
 import type { AbilityScore } from '@/types/abilities';

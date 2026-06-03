@@ -12,7 +12,7 @@
  * All methods are async. QueryContext is optional — defaults to Redux store.
  */
 
-import { PRESET_PF1E_STANDARD } from '@/data/rulesets/presets';
+import { PRESET_PF1E_STANDARD } from '@/config/rulesetPresets';
 import type { RootState } from '@/store/store';
 import type { Ruleset } from '@/types/ruleset';
 import type { SearchItem } from '@/components/ui/SearchPickerSheet';

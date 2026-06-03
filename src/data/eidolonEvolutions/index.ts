@@ -1,3 +1,6 @@
+// SEEDING ONLY — do not use in runtime app code.
+// This array seeds Firestore. All runtime reads go through GameDataService → FirestoreGameDataConnector.
+
 import type { EidolonEvolutionEntry } from '@/types/classOptions';
 import { eidolonEvolutionsApg1pt } from './raw/eidolonEvolutions_1pt';
 import { eidolonEvolutionsApg2pt } from './raw/eidolonEvolutions_apg_2pt';
@@ -33,7 +36,5 @@ export const getEidolonEvolutionByName = (name: string): EidolonEvolutionEntry |
 export const getEidolonEvolutionsByPointCost = (cost: 1 | 2 | 3 | 4): EidolonEvolutionEntry[] =>
   ALL_EIDOLON_EVOLUTIONS.filter((e) => e.evolutionPointCost === cost);
 
-export const getEvolutionsForSummoner = (
-  summoner: 'apg' | 'unchained',
-): EidolonEvolutionEntry[] =>
+export const getEvolutionsForSummoner = (summoner: 'apg' | 'unchained'): EidolonEvolutionEntry[] =>
   ALL_EIDOLON_EVOLUTIONS.filter((e) => !e.summoner || e.summoner === summoner);

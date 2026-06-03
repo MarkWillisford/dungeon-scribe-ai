@@ -1,6 +1,6 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import type { Ruleset } from '@/types/ruleset';
-import { PRESET_PF1E_STANDARD } from '@/data/rulesets/presets';
+import { PRESET_PF1E_STANDARD } from '@/config/rulesetPresets';
 
 interface RulesetState {
   activeRuleset: Ruleset;

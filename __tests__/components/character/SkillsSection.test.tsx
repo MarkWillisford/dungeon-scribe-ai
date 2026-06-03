@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, fireEvent, type RenderedNode } from '../../helpers/testUtils';
 import { SkillsSection } from '@/components/character/direct-entry/SkillsSection';
-import { PRESET_PF1E_STANDARD, PRESET_GO_NUTS } from '@/data/rulesets/presets';
+import { PRESET_PF1E_STANDARD, PRESET_GO_NUTS } from '@/config/rulesetPresets';
 import type { Ruleset } from '@/types/ruleset';
 
 const mockDispatch = jest.fn();

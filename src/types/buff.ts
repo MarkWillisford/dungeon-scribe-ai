@@ -42,7 +42,6 @@ export interface CombatAbilityState {
   // TWF is always available — anyone can dual-wield; feats only reduce the penalties
   twoWeaponFighting: boolean;
   twoWeaponFightingLightOffhand: boolean; // true = light off-hand (smaller penalty)
-  combatExpertisePenalty: number; // 1–5 (sub-option for Combat Expertise feat)
 }
 
 // Maps legacy flat-boolean field names to feat IDs for session migration

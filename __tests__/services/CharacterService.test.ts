@@ -2,6 +2,7 @@ import { CharacterService } from '@services/CharacterService';
 import { CreateCharacterParams, AbilityScoreMethod } from '@/types/character';
 import { Size, Alignment, BonusType } from '@/types/base';
 import { Race } from '@/types/race';
+import { getClassByName } from '@data/classes/index';
 
 describe('CharacterService', () => {
   const mockRace: Race = {
@@ -300,6 +301,69 @@ describe('CharacterService', () => {
       const imported = CharacterService.importFromJSON(json);
 
       expect(imported.schemaVersion).toBe('1.2.0');
+    });
+  });
+
+  describe('getLevel1ClassFeatures snapshot', () => {
+    test('snapshots all ClassFeatureData fields including id, activationMode, and effects', () => {
+      const character = CharacterService.createDefaultCharacter({
+        ...mockCreateParams,
+        selectedClass: 'Barbarian',
+      });
+      const features = character.classes.classes[0].classFeatures;
+      expect(features.length).toBeGreaterThan(0);
+
+      // Every stored feature must have an effects field that is an array (never undefined or stripped).
+      for (const feature of features) {
+        expect(Array.isArray(feature.effects)).toBe(true);
+      }
+
+      // The stored feature count must match the level-1 features in static class data
+      // (verifying no features were dropped during snapshotting).
+      const staticClass = getClassByName('Barbarian');
+      expect(staticClass).toBeDefined();
+      const level1StaticCount = staticClass!.classFeatures.filter((f) => f.level === 1).length;
+      expect(features.length).toBe(level1StaticCount);
+    });
+
+    test('features are not reduced to name/description/level/empty-effects when class data has richer fields', () => {
+      const character = CharacterService.createDefaultCharacter(mockCreateParams);
+      const features = character.classes.classes[0].classFeatures;
+
+      // Every stored feature must at minimum carry the mandatory fields.
+      for (const feature of features) {
+        expect(typeof feature.name).toBe('string');
+        expect(typeof feature.description).toBe('string');
+        expect(typeof feature.level).toBe('number');
+        expect(Array.isArray(feature.effects)).toBe(true);
+      }
+    });
+
+    test('feature with id in static data retains id on the character', () => {
+      // Compare stored features directly against the static class data to verify that
+      // optional fields (id, activationMode, resourcePool) present in the source are
+      // not stripped during snapshotting.
+      const character = CharacterService.createDefaultCharacter(mockCreateParams);
+      const storedFeatures = character.classes.classes[0].classFeatures;
+
+      const staticClass = getClassByName('Fighter');
+      expect(staticClass).toBeDefined();
+      const level1StaticFeatures = staticClass!.classFeatures.filter((f) => f.level === 1);
+
+      for (const staticFeature of level1StaticFeatures) {
+        const stored = storedFeatures.find((f) => f.name === staticFeature.name && f.level === staticFeature.level);
+        expect(stored).toBeDefined();
+
+        if (staticFeature.id !== undefined) {
+          expect(stored!.id).toBe(staticFeature.id);
+        }
+        if (staticFeature.activationMode !== undefined) {
+          expect(stored!.activationMode).toBe(staticFeature.activationMode);
+        }
+        if (staticFeature.resourcePool !== undefined) {
+          expect(stored!.resourcePool).toEqual(staticFeature.resourcePool);
+        }
+      }
     });
   });
 

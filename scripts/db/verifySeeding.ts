@@ -52,7 +52,7 @@ import { ALL_WARPRIEST_BLESSINGS } from '../../src/data/warpriestBlessings/index
 import { ALL_ALCHEMIST_DISCOVERIES } from '../../src/data/alchemistDiscoveries/index';
 import { ALL_EIDOLON_EVOLUTIONS } from '../../src/data/eidolonEvolutions/index';
 import { ALL_CLASS_CHOICE_DEFINITIONS } from '../../src/data/classChoiceDefinitions/index';
-import { SYSTEM_PRESETS } from '../../src/data/rulesets/presets';
+import { SYSTEM_PRESETS } from '../../src/config/rulesetPresets';
 import { ALL_RINGS } from '../../src/data/magicItems/rings/index';
 import { ALL_STAVES } from '../../src/data/magicItems/staves/index';
 import { ALL_RODS } from '../../src/data/magicItems/rods/index';
