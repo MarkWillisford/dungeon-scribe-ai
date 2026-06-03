@@ -3,26 +3,24 @@ import { render, fireEvent, type RenderedNode } from '../../helpers/testUtils';
 import { FeatSlotList } from '@/components/character/direct-entry/FeatSlotList';
 
 const mockDispatch = jest.fn();
+const mockUseAppSelector = jest.fn((selector: (s: unknown) => unknown) =>
+  selector({
+    characterEntry: {
+      character: {
+        classes: { classes: [] },
+        feats: { feats: [] },
+        info: { race: { name: '' } },
+        spellcasting: { pools: [], knownSpells: [], spellbooks: [] },
+      },
+    },
+    ruleset: { activeRuleset: { optionalRules: { eitrMode: 'off' } } },
+    gameData: { classes: [] },
+  })
+);
 
 jest.mock('@/store/hooks', () => ({
   useAppDispatch: () => mockDispatch,
-  useAppSelector: (selector: (s: unknown) => unknown) =>
-    selector({
-      characterEntry: {
-        character: {
-          classes: { classes: [] },
-          feats: { feats: [] },
-          info: { race: { name: '' } },
-          spellcasting: { pools: [], knownSpells: [], spellbooks: [] },
-        },
-      },
-      ruleset: {
-        activeRuleset: {
-          optionalRules: { eitrMode: 'off' },
-        },
-      },
-      gameData: { classes: [] },
-    }),
+  useAppSelector: (selector: (s: unknown) => unknown) => mockUseAppSelector(selector),
 }));
 
 jest.mock('@/hooks/useTheme', () => ({
@@ -38,7 +36,15 @@ jest.mock('@/hooks/useTheme', () => ({
 }));
 
 jest.mock('@/utils/characterComputations', () => ({
-  computeFeatSlots: () => [],
+  computeFeatSlots: jest.fn(() => []),
+}));
+
+jest.mock('@/components/character/direct-entry/FeatPickerSheet', () => ({
+  FeatPickerSheet: () => null,
+}));
+
+jest.mock('@/components/ui/SearchPickerSheet', () => ({
+  SearchPickerSheet: () => null,
 }));
 
 jest.mock('@/store/slices/gameDataSlice', () => ({
@@ -85,6 +91,7 @@ function findAllNodes(node: RenderedNode, pred: (n: RenderedNode) => boolean): R
 
 beforeEach(() => {
   mockDispatch.mockClear();
+  mockUseAppSelector.mockClear();
 });
 
 describe('FeatSlotList - Add bonus slot modal', () => {
@@ -108,6 +115,13 @@ describe('FeatSlotList - Add bonus slot modal', () => {
     const modals = findByType(result.tree, 'Modal');
     expect(modals.length).toBeGreaterThan(0);
     expect(typeof modals[0].props.onShow).toBe('function');
+  });
+
+  it('onShow callback executes deferred focus path without error', () => {
+    const result = render(<FeatSlotList />);
+    const modals = findByType(result.tree, 'Modal');
+    expect(modals.length).toBeGreaterThan(0);
+    expect(() => modals[0].props.onShow()).not.toThrow();
   });
 
   it('pressing Add bonus slot sets modal visible=true on same instance', () => {
@@ -197,5 +211,164 @@ describe('FeatSlotList - Add bonus slot modal', () => {
     const finalTree = rerender();
     expect(findByType(finalTree, 'Modal')[0].props.visible).toBe(false);
     expect(mockDispatch).not.toHaveBeenCalled();
+  });
+});
+
+describe('FeatSlotList - Slot rendering', () => {
+  const computeFeatSlotsMock = jest.requireMock('@/utils/characterComputations')
+    .computeFeatSlots as jest.Mock;
+
+  // Raw computed slot format (source, availableAt, availableAtLevel only)
+  const rawLevelSlot = { source: 'level', availableAt: 'Level 1', availableAtLevel: 1 };
+  const rawRacialSlot = { source: 'racial', availableAt: 'Race', availableAtLevel: 1 };
+  const rawMythicSlot = { source: 'mythic', availableAt: 'Mythic 1', availableAtLevel: 1 };
+
+  // Bonus feats come from store feats where source starts with 'bonus_'
+  const bonusFeat = {
+    featId: '',
+    name: '',
+    source: 'bonus_1',
+    grantedAtLevel: 2,
+    prereqOverride: false,
+    choices: {},
+    sourceLabel: 'Fighter 2',
+  };
+
+  const assignedFeat = {
+    featId: 'power-attack',
+    name: 'Power Attack',
+    source: 'racial',
+    grantedAtLevel: 1,
+    prereqOverride: false,
+    choices: {},
+  };
+
+  function stateWith(feats: any[]) {
+    return (selector: (s: unknown) => unknown) =>
+      selector({
+        characterEntry: {
+          character: {
+            classes: { classes: [] },
+            feats: { feats: feats },
+            info: { race: { name: '' } },
+            spellcasting: { pools: [], knownSpells: [], spellbooks: [] },
+          },
+        },
+        ruleset: { activeRuleset: { optionalRules: { eitrMode: 'off' } } },
+        gameData: { classes: [] },
+      });
+  }
+
+  beforeEach(() => {
+    mockDispatch.mockClear();
+    mockUseAppSelector.mockClear();
+    computeFeatSlotsMock.mockReturnValue([]);
+  });
+
+  it('renders an unassigned slot row with placeholder label', () => {
+    computeFeatSlotsMock.mockReturnValueOnce([rawLevelSlot]);
+    const { getAllByRole } = render(<FeatSlotList />);
+    const slotBtn = getAllByRole('button').find(
+      (b) => b.props.accessibilityLabel === 'Level 1: —— unassigned ——',
+    );
+    expect(slotBtn).toBeTruthy();
+  });
+
+  it('renders an assigned slot row with feat name', () => {
+    computeFeatSlotsMock.mockReturnValueOnce([rawRacialSlot]);
+    mockUseAppSelector.mockImplementation(stateWith([assignedFeat]));
+    const { getAllByRole } = render(<FeatSlotList />);
+    const slotBtn = getAllByRole('button').find(
+      (b) => b.props.accessibilityLabel === 'Race: Power Attack',
+    );
+    expect(slotBtn).toBeTruthy();
+  });
+
+  it('renders a bonus slot using sourceLabel instead of availableAt', () => {
+    mockUseAppSelector.mockImplementation(stateWith([bonusFeat]));
+    const result = render(<FeatSlotList />);
+    const allText = getAllText(result.tree);
+    expect(allText.some((t) => t === 'Fighter 2')).toBe(true);
+  });
+
+  it('renders SOURCE badge for each slot source type', () => {
+    computeFeatSlotsMock.mockReturnValueOnce([rawLevelSlot, rawRacialSlot, rawMythicSlot]);
+    mockUseAppSelector.mockImplementation(stateWith([bonusFeat]));
+    const result = render(<FeatSlotList />);
+    const allText = getAllText(result.tree);
+    expect(allText.some((t) => t === 'LEVEL')).toBe(true);
+    expect(allText.some((t) => t === 'RACIAL')).toBe(true);
+    expect(allText.some((t) => t === 'BONUS')).toBe(true);
+    expect(allText.some((t) => t === 'MYTHIC')).toBe(true);
+  });
+
+  it('pressing an unassigned slot row does not dispatch', () => {
+    computeFeatSlotsMock.mockReturnValueOnce([rawLevelSlot]);
+    const { getAllByRole } = render(<FeatSlotList />);
+    const slotBtn = getAllByRole('button').find(
+      (b) => b.props.accessibilityLabel === 'Level 1: —— unassigned ——',
+    );
+    expect(slotBtn).toBeTruthy();
+    fireEvent.press(slotBtn!);
+    expect(mockDispatch).not.toHaveBeenCalled();
+  });
+
+  it('unassign button is rendered for assigned slots', () => {
+    computeFeatSlotsMock.mockReturnValueOnce([rawRacialSlot]);
+    mockUseAppSelector.mockImplementation(stateWith([assignedFeat]));
+    const { getAllByRole } = render(<FeatSlotList />);
+    const unassignBtn = getAllByRole('button').find(
+      (b) => b.props.accessibilityLabel === 'Unassign feat',
+    );
+    expect(unassignBtn).toBeTruthy();
+  });
+
+  it('pressing unassign dispatches unassignFeat', () => {
+    computeFeatSlotsMock.mockReturnValueOnce([rawRacialSlot]);
+    mockUseAppSelector.mockImplementation(stateWith([assignedFeat]));
+    const { getAllByRole } = render(<FeatSlotList />);
+    const unassignBtn = getAllByRole('button').find(
+      (b) => b.props.accessibilityLabel === 'Unassign feat',
+    );
+    expect(unassignBtn).toBeTruthy();
+    fireEvent.press(unassignBtn!);
+    expect(mockDispatch).toHaveBeenCalled();
+    const action = mockDispatch.mock.calls[mockDispatch.mock.calls.length - 1][0];
+    expect(action.type).toBe('characterEntry/unassignFeat');
+  });
+
+  it('remove bonus slot button dispatches removeFeatSlot', () => {
+    mockUseAppSelector.mockImplementation(stateWith([bonusFeat]));
+    const { getAllByRole } = render(<FeatSlotList />);
+    const removeBtn = getAllByRole('button').find(
+      (b) => b.props.accessibilityLabel === 'Remove bonus slot',
+    );
+    expect(removeBtn).toBeTruthy();
+    fireEvent.press(removeBtn!);
+    expect(mockDispatch).toHaveBeenCalled();
+    const action = mockDispatch.mock.calls[mockDispatch.mock.calls.length - 1][0];
+    expect(action.type).toBe('characterEntry/removeFeatSlot');
+  });
+
+  it('adding a slot when bonus feats exist uses the correct next index', () => {
+    mockUseAppSelector.mockImplementation(stateWith([bonusFeat]));
+    const { getAllByRole, rerender } = render(<FeatSlotList />);
+    const addButton = getAllByRole('button').find(
+      (b) => b.props.accessibilityLabel === 'Add bonus feat slot',
+    );
+    fireEvent.press(addButton!);
+
+    const updatedTree = rerender();
+    const addSlotBtn = findAllNodes(
+      updatedTree,
+      (n) => n.props.accessibilityLabel === 'Add bonus feat slot confirm',
+    );
+    expect(addSlotBtn.length).toBeGreaterThan(0);
+    fireEvent.press(addSlotBtn[0]);
+
+    expect(mockDispatch).toHaveBeenCalled();
+    const call = mockDispatch.mock.calls[mockDispatch.mock.calls.length - 1][0];
+    expect(call.type).toBe('characterEntry/addFeatSlot');
+    expect(call.payload.availableAtLevel).toBe(2);
   });
 });
