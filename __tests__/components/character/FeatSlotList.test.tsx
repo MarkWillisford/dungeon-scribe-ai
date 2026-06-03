@@ -171,7 +171,7 @@ describe('FeatSlotList - Add bonus slot modal', () => {
     const updatedTree = rerender();
     const cancelBtn = findAllNodes(
       updatedTree,
-      (n) => n.type === 'Pressable' && getAllText(n).join('').trim() === 'Cancel',
+      (n) => n.props.accessibilityLabel === 'Cancel adding bonus feat slot',
     );
     expect(cancelBtn.length).toBeGreaterThan(0);
     fireEvent.press(cancelBtn[0]);

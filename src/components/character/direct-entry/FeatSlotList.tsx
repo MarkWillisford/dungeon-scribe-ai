@@ -590,6 +590,8 @@ export function FeatSlotList() {
             <View style={styles.modalButtons}>
               <Pressable
                 onPress={() => setBonusLabelVisible(false)}
+                accessibilityRole="button"
+                accessibilityLabel="Cancel adding bonus feat slot"
                 style={[styles.modalBtn, { borderColor: colors.border.DEFAULT }]}
               >
                 <Text
@@ -603,6 +605,7 @@ export function FeatSlotList() {
                 </Text>
               </Pressable>
               <Pressable
+                accessibilityRole="button"
                 accessibilityLabel="Add bonus feat slot confirm"
                 onPress={() => {
                   const label = bonusLabelText.trim() || undefined;
