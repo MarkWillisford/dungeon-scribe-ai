@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, fireEvent, type RenderedNode } from '../../helpers/testUtils';
 import { FeatSlotList } from '@/components/character/direct-entry/FeatSlotList';
+import type { CharacterFeat } from '@/types/feats';
 
 const mockDispatch = jest.fn();
 const mockUseAppSelector = jest.fn((selector: (s: unknown) => unknown) =>
@@ -224,26 +225,28 @@ describe('FeatSlotList - Slot rendering', () => {
   const rawMythicSlot = { source: 'mythic', availableAt: 'Mythic 1', availableAtLevel: 1 };
 
   // Bonus feats come from store feats where source starts with 'bonus_'
-  const bonusFeat = {
+  const bonusFeat: CharacterFeat = {
     featId: '',
     name: '',
     source: 'bonus_1',
     grantedAtLevel: 2,
+    active: true,
     prereqOverride: false,
     choices: {},
     sourceLabel: 'Fighter 2',
   };
 
-  const assignedFeat = {
+  const assignedFeat: CharacterFeat = {
     featId: 'power-attack',
     name: 'Power Attack',
     source: 'racial',
     grantedAtLevel: 1,
+    active: true,
     prereqOverride: false,
     choices: {},
   };
 
-  function stateWith(feats: any[]) {
+  function stateWith(feats: CharacterFeat[]) {
     return (selector: (s: unknown) => unknown) =>
       selector({
         characterEntry: {
