@@ -110,7 +110,8 @@ export const RISSI_FIXTURE: Character = {
     background:
       'A cleric of Milani who fights for the freedom of the oppressed. Trained in the Hathran tradition of the Rashemi witches, she has devoted her considerable magical gifts to liberating those who suffer under tyranny.',
     notes: '',
-    racialFlexAbility: 'wis',
+    racialFlexBonuses: [{ group: 'any', count: 1, modifier: 2 }],
+    racialFlexChoices: ['wis'],
   },
 
   // ---- Abilities ----

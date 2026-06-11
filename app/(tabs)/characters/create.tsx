@@ -123,7 +123,10 @@ function getClassSkillKeys(classSkills: string[]): Set<string> {
   return keys;
 }
 
-function raceDataToRace(data: ExpandedRaceData, flexibleAbility?: string): Race {
+const MENTAL_LONG = ['intelligence', 'wisdom', 'charisma'];
+const PHYSICAL_LONG = ['strength', 'dexterity', 'constitution'];
+
+function raceDataToRace(data: ExpandedRaceData, flexibleAbilityChoices?: string[]): Race {
   const abilityModifiers: Race['abilityModifiers'] = {};
   const keyMap: Record<string, keyof Race['abilityModifiers']> = {
     strength: 'str',
@@ -141,11 +144,21 @@ function raceDataToRace(data: ExpandedRaceData, flexibleAbility?: string): Race 
     }
   }
 
-  if (data.flexibleAbilityBonus && flexibleAbility) {
-    const short = keyMap[flexibleAbility];
-    if (short) {
-      abilityModifiers[short] = (abilityModifiers[short] ?? 0) + 2;
-    }
+  if (data.flexibleAbilityBonuses && flexibleAbilityChoices) {
+    data.flexibleAbilityBonuses.forEach((bonus, i) => {
+      const choice = flexibleAbilityChoices[i];
+      if (!choice) return;
+      if (bonus.count === 'all' && bonus.group === 'any') {
+        const pool = choice === 'mental' ? MENTAL_LONG : PHYSICAL_LONG;
+        pool.forEach((long) => {
+          const short = keyMap[long];
+          if (short) abilityModifiers[short] = (abilityModifiers[short] ?? 0) + bonus.modifier;
+        });
+      } else if (bonus.count === 1) {
+        const short = keyMap[choice] ?? (choice as keyof Race['abilityModifiers']);
+        if (short) abilityModifiers[short] = (abilityModifiers[short] ?? 0) + bonus.modifier;
+      }
+    });
   }
 
   return {
@@ -178,7 +191,7 @@ export default function CreateCharacterScreen() {
   const [name, setName] = useState('');
   const [alignment, setAlignment] = useState<Alignment>(Alignment.TrueNeutral);
   const [selectedRaceData, setSelectedRaceData] = useState<ExpandedRaceData | null>(null);
-  const [flexibleAbility, setFlexibleAbility] = useState<string>('');
+  const [flexibleAbilityChoices, setFlexibleAbilityChoices] = useState<string[]>([]);
   const [selectedClass, setSelectedClass] = useState<string | null>(null);
   const [abilityMethod, setAbilityMethod] = useState(AbilityScoreMethod.PointBuy);
   const [scores, setScores] = useState({ str: 10, dex: 10, con: 10, int: 10, wis: 10, cha: 10 });
@@ -213,7 +226,7 @@ export default function CreateCharacterScreen() {
   const intScore =
     scores.int +
     (selectedRaceData
-      ? (raceDataToRace(selectedRaceData, flexibleAbility).abilityModifiers.int ?? 0)
+      ? (raceDataToRace(selectedRaceData, flexibleAbilityChoices).abilityModifiers.int ?? 0)
       : 0);
   const intMod = Math.floor((intScore - 10) / 2);
   const classData = selectedClass ? getClassByName(selectedClass) : null;
@@ -227,7 +240,10 @@ export default function CreateCharacterScreen() {
         return name.trim().length > 0;
       case 'Race':
         if (!selectedRaceData) return false;
-        if (selectedRaceData.flexibleAbilityBonus && !flexibleAbility) return false;
+        if (
+          selectedRaceData.flexibleAbilityBonuses?.length &&
+          flexibleAbilityChoices.length < selectedRaceData.flexibleAbilityBonuses.length
+        ) return false;
         return true;
       case 'Class':
         return selectedClass !== null;
@@ -263,7 +279,7 @@ export default function CreateCharacterScreen() {
     if (!userId || !selectedRaceData || !selectedClass) return;
     setError('');
 
-    const race = raceDataToRace(selectedRaceData, flexibleAbility);
+    const race = raceDataToRace(selectedRaceData, flexibleAbilityChoices);
 
     // Filter out zero-rank skills
     const allocatedSkills: Record<string, number> = {};
@@ -349,8 +365,12 @@ export default function CreateCharacterScreen() {
     <RaceSelector
       selectedRace={selectedRaceData}
       onSelectRace={setSelectedRaceData}
-      flexibleAbilityChoice={flexibleAbility}
-      onFlexibleAbilityChoice={setFlexibleAbility}
+      flexibleAbilityChoices={flexibleAbilityChoices}
+      onFlexibleAbilityChoice={(index, value) => {
+        const updated = [...flexibleAbilityChoices];
+        updated[index] = value;
+        setFlexibleAbilityChoices(updated);
+      }}
       testID="race-selector"
     />
   );
@@ -412,7 +432,7 @@ export default function CreateCharacterScreen() {
           const abilityMod = Math.floor(
             (scores[info.ability] +
               (selectedRaceData
-                ? (raceDataToRace(selectedRaceData, flexibleAbility).abilityModifiers[
+                ? (raceDataToRace(selectedRaceData, flexibleAbilityChoices).abilityModifiers[
                     info.ability
                   ] ?? 0)
                 : 0) -

@@ -19,6 +19,7 @@ import type { SearchItem } from '@/components/ui/SearchPickerSheet';
 import type { FeatDefinition, FeatType } from '@/types/feats';
 import type { TraitDefinition } from '@/types/traits';
 import type { ClassChoiceDefinition } from '@/types/classChoices';
+import type { RacialChoiceDefinition } from '@/types/racialChoices';
 import type { ExpandedClassData, SpellProgressionTable, ArchetypeData } from '@/data/classes/types';
 import type { FavoredClassBonusEntry } from '@/types/favoredClassBonuses';
 import type { ClassData } from '@/data/classes';
@@ -659,6 +660,10 @@ export class GameDataService {
 
   static async getClassChoiceDefinitions(classId: string): Promise<ClassChoiceDefinition[]> {
     return GameDataService.connector.getClassChoiceDefinitions(classId);
+  }
+
+  static async getRacialChoiceDefinitions(raceName: string): Promise<RacialChoiceDefinition[]> {
+    return GameDataService.connector.getRacialChoiceDefinitions(raceName);
   }
 
   static async getSpellTables(): Promise<Record<string, SpellProgressionTable>> {
