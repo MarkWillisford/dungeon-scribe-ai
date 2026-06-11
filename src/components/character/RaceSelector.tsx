@@ -66,7 +66,9 @@ export function RaceSelector({
   );
 
   const isFlexibleRace =
-    selectedRace && raceGroups.flexibleAbility.some((r) => r.name === selectedRace.name);
+    selectedRace &&
+    selectedRace.flexibleAbilityBonuses &&
+    selectedRace.flexibleAbilityBonuses.length > 0;
 
   const handleRacePress = (race: ExpandedRaceData) => {
     setExpandedRace(race.name === expandedRace ? null : race.name);
@@ -204,7 +206,7 @@ export function RaceSelector({
               return (
                 <View key={idx}>
                   <Text style={[styles.flexibleLabel, { color: colors.text.secondary }]}>
-                    Choose a group to receive {bonus.modifier > 0 ? '+' : ''}{bonus.modifier} to all three abilities:
+                    {`Choose a group to receive ${bonus.modifier > 0 ? '+' : ''}${bonus.modifier} to all three abilities:`}
                   </Text>
                   <View style={styles.abilityGrid}>
                     {(['mental', 'physical'] as const).map((grp) => (
@@ -274,7 +276,7 @@ export function RaceSelector({
               return (
                 <View key={idx} style={{ marginTop: idx > 0 ? 12 : 0 }}>
                   <Text style={[styles.flexibleLabel, { color: colors.text.secondary }]}>
-                    Choose one ability score to receive {bonus.modifier > 0 ? '+' : ''}{bonus.modifier}:
+                    {`Choose one ability score to receive ${bonus.modifier > 0 ? '+' : ''}${bonus.modifier}:`}
                   </Text>
                   <View style={styles.abilityGrid}>
                     {ABILITY_NAMES.map((ability) => (

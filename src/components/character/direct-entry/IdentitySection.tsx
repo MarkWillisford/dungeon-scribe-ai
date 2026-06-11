@@ -24,7 +24,6 @@ import {
   setBackground,
 } from '@/store/slices/characterEntrySlice';
 import { Alignment } from '@/types/base';
-import type { AbilityKey } from '@/types/abilities';
 import { RulesetSettingsSheet } from './RulesetSettingsSheet';
 import { RacePickerSheet } from './RacePickerSheet';
 import { RacialChoicesSection } from './RacialChoicesSection';

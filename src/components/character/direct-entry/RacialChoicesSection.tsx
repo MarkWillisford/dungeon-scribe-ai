@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { View, Text, Pressable, StyleSheet } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import { SearchPickerSheet, type SearchItem } from '@/components/ui/SearchPickerSheet';
@@ -28,17 +28,22 @@ function RacialChoiceRow({ definition, currentSelection }: RacialChoiceRowProps)
   const { colors, fantasy, isDark } = useTheme();
   const dispatch = useAppDispatch();
   const [pickerOpen, setPickerOpen] = useState(false);
-  const [pickerItems, setPickerItems] = useState<SearchItem[]>([]);
+  const [collectionItems, setCollectionItems] = useState<SearchItem[]>([]);
+
+  const inlineItems = useMemo(
+    () => (definition.optionSource === 'inline' ? buildInlineItems(definition) : []),
+    [definition],
+  );
 
   useEffect(() => {
-    if (definition.optionSource === 'inline') {
-      setPickerItems(buildInlineItems(definition));
-    } else if (definition.optionSource === 'collection' && definition.collectionName) {
+    if (definition.optionSource === 'collection' && definition.collectionName) {
       GameDataService.getClassChoiceItems(definition.collectionName, definition.collectionFilter ?? {})
-        .then((items) => setPickerItems(items))
+        .then((items) => setCollectionItems(items))
         .catch((e) => console.error('RacialChoiceRow: failed to load collection items', e));
     }
   }, [definition]);
+
+  const pickerItems = definition.optionSource === 'inline' ? inlineItems : collectionItems;
 
   const selectedLabel =
     pickerItems.find((i) => i.key === currentSelection)?.label ?? currentSelection ?? '';
