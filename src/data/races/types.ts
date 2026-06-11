@@ -18,6 +18,13 @@ export interface RacialTraitData {
   description: string;
 }
 
+export interface AlternativeRacialTraitData {
+  name: string;
+  description: string;
+  replaces: string[]; // names of the standard racial trait(s) this gives up; [] if bonus-only
+  source: string; // sourcebook, e.g. 'Advanced Race Guide'
+}
+
 export interface ExpandedRaceData {
   name: string;
   category: RaceCategory;
@@ -44,6 +51,7 @@ export interface ExpandedRaceData {
     burrow?: number;
   };
   racialTraits: RacialTraitData[];
+  alternativeRacialTraits?: AlternativeRacialTraitData[]; // omitted if race has no published ARTs
   languages: string[];
   bonusLanguages: string[];
   source: string;

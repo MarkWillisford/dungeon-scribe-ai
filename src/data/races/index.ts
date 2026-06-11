@@ -3,7 +3,13 @@
 
 // Barrel export for race data — single source of truth for all race information
 
-export type { RaceCategory, RacePowerTier, RacialTraitData, ExpandedRaceData } from './types';
+export type {
+  RaceCategory,
+  RacePowerTier,
+  RacialTraitData,
+  AlternativeRacialTraitData,
+  ExpandedRaceData,
+} from './types';
 export { CORE_RACES_EXPANDED } from './coreRaces';
 export { FEATURED_RACES } from './featuredRaces';
 export { UNCOMMON_RACES } from './uncommonRaces';
@@ -24,9 +30,17 @@ import {
   MONSTROUS_AND_POWERFUL_RACES,
   RP_UNKNOWN_RACES,
 } from './extendedRaces';
+import { ALL_ALT_RACIAL_TRAITS } from './altRacialTraits';
 
 // Alias for backward compatibility — consumers that used CORE_RACES from the old file
 export const CORE_RACES = CORE_RACES_EXPANDED;
+
+// Attach scraped alternative racial traits onto each race by exact name.
+// Races with no published ARTs keep the field omitted.
+function withAltTraits(race: ExpandedRaceData): ExpandedRaceData {
+  const arts = ALL_ALT_RACIAL_TRAITS[race.name];
+  return arts && arts.length ? { ...race, alternativeRacialTraits: arts } : race;
+}
 
 export const ALL_EXPANDED_RACES: ExpandedRaceData[] = [
   ...CORE_RACES_EXPANDED,
@@ -36,7 +50,7 @@ export const ALL_EXPANDED_RACES: ExpandedRaceData[] = [
   ...ADVANCED_RP_EXTRA_RACES,
   ...MONSTROUS_AND_POWERFUL_RACES,
   ...RP_UNKNOWN_RACES,
-];
+].map(withAltTraits);
 
 // Races that get +2 to any one ability score (determined by flexibleAbilityBonus flag)
 export const FLEXIBLE_ABILITY_RACES: string[] = ALL_EXPANDED_RACES.filter(
