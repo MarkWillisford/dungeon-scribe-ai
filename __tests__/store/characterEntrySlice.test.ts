@@ -53,7 +53,7 @@ import reducer, {
   unequipCompanionMagicItem,
   toggleFavoredClass,
   setFavoredClassBonuses,
-  setRacialFlexAbility,
+  setRacialFlexChoice,
   syncFeatSlots,
   reorderClasses,
   addTemplate,
@@ -528,26 +528,40 @@ describe('characterEntrySlice — identity', () => {
     });
   });
 
-  describe('setRacialFlexAbility', () => {
+  describe('setRacialFlexChoice', () => {
+    const humanBonuses = [{ group: 'any' as const, count: 1 as const, modifier: 2 }];
+
     it('sets a new flex ability when none was previously set', () => {
-      const state = reducer(makeInitialState(), setRacialFlexAbility('str'));
-      expect(state.character.info.racialFlexAbility).toBe('str');
+      let state = reducer(
+        makeInitialState(),
+        setRace({ raceId: 'human', raceName: 'Human', racialBonuses: {}, flexibleAbilityBonuses: humanBonuses }),
+      );
+      state = reducer(state, setRacialFlexChoice({ index: 0, value: 'str' }));
+      expect(state.character.info.racialFlexChoices?.[0]).toBe('str');
       expect(state.character.abilityScores.str.racial).toBe(2);
       expect(state.isDirty).toBe(true);
     });
 
     it('clears the old flex racial bonus and applies it to the new ability', () => {
-      let state = reducer(makeInitialState(), setRacialFlexAbility('str'));
+      let state = reducer(
+        makeInitialState(),
+        setRace({ raceId: 'human', raceName: 'Human', racialBonuses: {}, flexibleAbilityBonuses: humanBonuses }),
+      );
+      state = reducer(state, setRacialFlexChoice({ index: 0, value: 'str' }));
       expect(state.character.abilityScores.str.racial).toBe(2);
-      state = reducer(state, setRacialFlexAbility('dex'));
+      state = reducer(state, setRacialFlexChoice({ index: 0, value: 'dex' }));
       expect(state.character.abilityScores.str.racial).toBe(0);
       expect(state.character.abilityScores.dex.racial).toBe(2);
-      expect(state.character.info.racialFlexAbility).toBe('dex');
+      expect(state.character.info.racialFlexChoices?.[0]).toBe('dex');
     });
 
     it('is a no-op on racial bonus when the same ability is selected again', () => {
-      let state = reducer(makeInitialState(), setRacialFlexAbility('con'));
-      state = reducer(state, setRacialFlexAbility('con'));
+      let state = reducer(
+        makeInitialState(),
+        setRace({ raceId: 'human', raceName: 'Human', racialBonuses: {}, flexibleAbilityBonuses: humanBonuses }),
+      );
+      state = reducer(state, setRacialFlexChoice({ index: 0, value: 'con' }));
+      state = reducer(state, setRacialFlexChoice({ index: 0, value: 'con' }));
       expect(state.character.abilityScores.con.racial).toBe(2);
     });
   });

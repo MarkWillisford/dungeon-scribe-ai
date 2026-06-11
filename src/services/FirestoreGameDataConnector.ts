@@ -24,6 +24,7 @@ import { ALL_FEATS } from '@/data/feats/index';
 import type { FeatDefinition } from '@/types/feats';
 import type { TraitDefinition } from '@/types/traits';
 import type { ClassChoiceDefinition } from '@/types/classChoices';
+import type { RacialChoiceDefinition } from '@/types/racialChoices';
 import type { ExpandedClassData, ArchetypeData } from '@/data/classes/types';
 import type { ClassData } from '@/data/classes';
 import type { ClassOptionBase, EidolonEvolutionEntry } from '@/types/classOptions';
@@ -483,6 +484,29 @@ export class FirestoreGameDataConnector implements GameDataConnector {
     }
   }
 
+  async getRacialChoiceDefinitions(raceName: string): Promise<RacialChoiceDefinition[]> {
+    const cacheKey = `racialChoiceDefinitions/${raceName.toLowerCase()}`;
+    const cached = GameDataCache.get<RacialChoiceDefinition[]>(cacheKey);
+    if (cached) return cached;
+
+    try {
+      const q = query(
+        collection(db, 'racialChoiceDefinitions'),
+        where('raceName', '==', raceName.toLowerCase()),
+      );
+      const snap = await getDocs(q);
+      const results = snap.docs.map((d) => d.data() as RacialChoiceDefinition);
+      GameDataCache.set(cacheKey, results);
+      return results;
+    } catch (e) {
+      console.error(
+        `FirestoreGameDataConnector: failed to fetch racial choice definitions for "${raceName}":`,
+        e,
+      );
+      return [];
+    }
+  }
+
   async getClassChoiceDefinitions(classId: string): Promise<ClassChoiceDefinition[]> {
     const cacheKey = `classChoiceDefinitions/${classId}`;
     const cached = GameDataCache.get<ClassChoiceDefinition[]>(cacheKey);
@@ -533,7 +557,7 @@ export class FirestoreGameDataConnector implements GameDataConnector {
         core: all.filter((r) => r.category === 'Core'),
         featured: all.filter((r) => r.category === 'Featured'),
         uncommon: all.filter((r) => r.category === 'Uncommon'),
-        flexibleAbility: all.filter((r) => r.flexibleAbilityBonus === true),
+        flexibleAbility: all.filter((r) => r.flexibleAbilityBonuses && r.flexibleAbilityBonuses.length > 0),
       };
 
       GameDataCache.set(cacheKey, result);

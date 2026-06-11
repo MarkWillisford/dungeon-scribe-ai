@@ -12,6 +12,7 @@
 import type { FeatDefinition } from '@/types/feats';
 import type { TraitDefinition } from '@/types/traits';
 import type { ClassChoiceDefinition } from '@/types/classChoices';
+import type { RacialChoiceDefinition } from '@/types/racialChoices';
 import type { ExpandedClassData, SpellProgressionTable } from '@/data/classes/types';
 import type { ClassData } from '@/data/classes';
 import type { ClassOptionBase, BloodlineClassId } from '@/types/classOptions';
@@ -137,6 +138,7 @@ export interface GameDataConnector {
   getCoreClasses(context?: QueryContext): Promise<ClassData[]>;
   getClassByName(name: string, context?: QueryContext): Promise<ExpandedClassData | null>;
   getClassChoiceDefinitions(classId: string): Promise<ClassChoiceDefinition[]>;
+  getRacialChoiceDefinitions(raceName: string): Promise<RacialChoiceDefinition[]>;
   getSpellTables(): Promise<SpellTables>;
 
   // ---- Races ----
