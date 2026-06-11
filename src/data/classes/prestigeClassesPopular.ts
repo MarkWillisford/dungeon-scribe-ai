@@ -1542,4 +1542,107 @@ export const PRESTIGE_CLASSES_POPULAR: ExpandedClassData[] = [
     },
     source: 'Inner Sea Magic',
   },
+
+  // ─── 13. Sentinel ────────────────────────────────────────────────────────────
+  {
+    name: 'Sentinel',
+    category: 'Prestige',
+    maxLevel: 10,
+    hitDie: 10,
+    skillRanksPerLevel: 2,
+    classSkills: [
+      'Climb',
+      'Craft',
+      'Handle Animal',
+      'Intimidate',
+      'Knowledge (religion)',
+      'Perception',
+      'Profession',
+      'Ride',
+      'Survival',
+      'Swim',
+    ],
+    babProgression: BABProgression.Full,
+    saves: {
+      fortitude: SaveProgression.Good,
+      reflex: SaveProgression.Poor,
+      will: SaveProgression.Poor,
+    },
+    weaponProficiencies: ['Simple', 'Martial'],
+    armorProficiencies: ['Light', 'Medium', 'Heavy', 'Shields (except tower shields)'],
+    alignment: "Within one step of the chosen deity's alignment",
+    prerequisites: {
+      bab: 5,
+      feats: ['Deific Obedience', "Weapon Focus (deity's favored weapon)"],
+      alignment: "Within one step of the chosen deity's alignment",
+      special: [
+        'Must worship a single, specific deity',
+        'Alternate entry: Fiendish Obedience and Weapon Focus (favored weapon) with base attack bonus +7 or higher',
+      ],
+    },
+    classFeatures: [
+      {
+        name: 'Obedience',
+        level: 1,
+        description:
+          'In order to maintain the abilities granted by this prestige class, a sentinel must perform a daily obedience to his chosen deity.',
+      },
+      {
+        name: 'Symbolic Weapon',
+        level: 1,
+        description:
+          "While wielding his deity's favored weapon, the sentinel gains a +1 sacred bonus (or profane bonus, if his deity is evil) on attack and damage rolls. This bonus increases by 1 for every 3 sentinel levels he possesses (to +2 at 3rd level, +3 at 6th level, and +4 at 9th level). His deity's favored weapon also functions as a holy (or unholy) symbol while wielded by the sentinel.",
+      },
+      {
+        name: 'Bonus Feat',
+        level: 2,
+        description:
+          "At 2nd level, and again at 7th level, the sentinel gains a bonus feat in addition to those gained from normal advancement. These bonus feats must be selected from those listed as combat feats. The sentinel uses his sentinel level plus his fighter level (if any) to determine whether he qualifies for a feat. If a bonus feat requires selecting a specific weapon, it must be the deity's favored weapon.",
+      },
+      {
+        name: 'Divine Boon',
+        level: 3,
+        description:
+          "At 3rd level, the sentinel gains the first boon granted by his chosen deity (as detailed in that deity's Deific Obedience entry). He gains the second boon at 6th level and the third boon at 9th level. When a divine boon grants a spell-like ability, the sentinel's caster level for that ability equals his total character level.",
+      },
+      {
+        name: 'Divine Quickness',
+        level: 4,
+        description:
+          "At 4th level, while carrying his deity's favored weapon, the sentinel gains a +2 sacred bonus (or profane bonus, if his deity is evil) on initiative checks. This bonus increases to +4 at 8th level. The weapon doesn't need to be carried in hand, but it must at least be on the sentinel's person and accessible enough that he could wield it with no greater than a move action.",
+      },
+      {
+        name: 'Aligned Strike',
+        level: 5,
+        description:
+          "At 5th level, the sentinel's righteous fervor allows him to cut through certain types of damage reduction. He chooses one aligned weapon type based on his deity's alignment (axiomatic for lawful, anarchic for chaotic, holy for good, or unholy for evil); his attacks with his deity's favored weapon are treated as that alignment for the purpose of overcoming damage reduction.",
+      },
+      {
+        name: 'Stalwart',
+        level: 5,
+        description:
+          'At 5th level, the sentinel gains a +2 sacred bonus (or profane bonus, if his deity is evil) on saving throws to resist divine spells.',
+      },
+      {
+        name: 'Practiced Combatant',
+        level: 7,
+        description:
+          "At 7th level, the sentinel gains a +2 sacred bonus (or profane bonus, if his deity is evil) on combat maneuver checks he performs with his deity's favored weapon.",
+      },
+      {
+        name: 'Righteous Leader',
+        level: 8,
+        description:
+          'At 8th level, the sentinel gains Leadership as a bonus feat and is considered to qualify for that feat. He takes no penalty to his Leadership score for moving around frequently, but takes a –2 penalty (instead of the normal –1) on his Leadership score when recruiting a cohort of a different alignment.',
+      },
+      {
+        name: 'Unstoppable Warrior',
+        level: 10,
+        description:
+          "At 10th level, the sentinel gains damage reduction whose value and bypass type are based on his deity's alignment (ranging from 3/— to 10/evil or good). He no longer falls unconscious when reduced to a negative hit point total, though he can take only a single standard or move action each round while at negative hit points. Once per day as a swift action, the sentinel can use cure critical wounds on himself with a caster level equal to his total character level.",
+      },
+    ],
+    spellcasting: { type: 'None', casting: 'None' },
+    source: 'Inner Sea Gods',
+  },
 ];

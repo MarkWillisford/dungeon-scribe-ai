@@ -22,7 +22,7 @@ export const MAGE_HUNTER_PROGRESSION: InitiatingProgressionTable = [
 
 export const MAGE_HUNTER_CLASS: ExpandedClassData = {
   name: 'Mage Hunter',
-  category: 'Prestige',
+  category: 'Path of War Prestige',
   maxLevel: 10,
   hitDie: 8,
   skillRanksPerLevel: 4,

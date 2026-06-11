@@ -22,7 +22,7 @@ export const UMBRAL_BLADE_PROGRESSION: InitiatingProgressionTable = [
 
 export const UMBRAL_BLADE_CLASS: ExpandedClassData = {
   name: 'Umbral Blade',
-  category: 'Prestige',
+  category: 'Path of War Prestige',
   maxLevel: 10,
   hitDie: 10,
   skillRanksPerLevel: 4,

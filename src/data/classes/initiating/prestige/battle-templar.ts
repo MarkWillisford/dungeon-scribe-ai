@@ -22,7 +22,7 @@ export const BATTLE_TEMPLAR_PROGRESSION: InitiatingProgressionTable = [
 
 export const BATTLE_TEMPLAR_CLASS: ExpandedClassData = {
   name: 'Battle Templar',
-  category: 'Prestige',
+  category: 'Path of War Prestige',
   maxLevel: 10,
   hitDie: 8,
   skillRanksPerLevel: 4,
