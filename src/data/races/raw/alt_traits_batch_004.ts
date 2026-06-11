@@ -13,7 +13,7 @@ export const changelingAltTraits: AlternativeRacialTraitData[] = [
     description:
       "Some changelings develop a gift for spellcasting instead of their mothers' overtly fearsome traits. A changeling with this trait displays one or more stark white streaks in her hair as a child. The DCs of any saving throws against enchantment spells she casts increase by 1, and if her Charisma score is 11 or higher, she also gains the following spell-like abilities, usable once per day each: dancing lights, detect magic, disguise self, and pass without trace.",
     replaces: ['claws', 'natural armor'],
-    source: 'Pathfinder Player Companion: Agents of Evil',
+    source: 'Agents of Evil',
   },
   {
     name: 'Hag Magic (Second Version)',
@@ -117,14 +117,14 @@ export const gillmanAltTraits: AlternativeRacialTraitData[] = [
     description:
       'Gillmen who live in deep water are accustomed to the gloom of the depths. Though these gillmen can venture onto land, they are uncomfortable doing so and must return to the ocean sooner than other gillmen. Gillmen with this racial trait gain low-light vision but must submerge themselves in water every 12 hours or die within 2d4 hours.',
     replaces: ['water dependent'],
-    source: 'Pathfinder Player Companion: Blood of the Sea',
+    source: 'Blood of the Sea',
   },
   {
     name: 'Taskmaster',
     description:
       'The aboleth fleshcrafters created some gillmen as overseers among their kin, allowing them to exude pheromones into the air or water. Generations later, the descendants of these taskmaster gillmen retain the ability to influence others. Gillmen with this trait gain a +2 racial bonus on Diplomacy checks.',
     replaces: ['enchantment resistance'],
-    source: 'Pathfinder Player Companion: Blood of the Sea',
+    source: 'Blood of the Sea',
   },
   {
     name: 'Throwback',
@@ -138,14 +138,14 @@ export const gillmanAltTraits: AlternativeRacialTraitData[] = [
     description:
       'Gillmen with this racial trait gain a +2 racial bonus on saving throws against non-aboleth illusion spells or effects, but they take a -2 penalty on such saving throws against aboleth sources.',
     replaces: ['enchantment resistance'],
-    source: 'Pathfinder Player Companion: Blood of the Sea',
+    source: 'Blood of the Sea',
   },
   {
     name: 'Venomkissed',
     description:
       'Some gillmen display an innate resistance to the toxic creatures of the deep. In gillman communities, venomkissed gillmen take on the dangerous task of domesticating jellyfish, octopuses, sea snakes, and other venomous creatures. Solitary venomkissed gillmen make their homes near beds of poisonous coral and anemones, using the creatures as natural defense. Gillmen with this racial trait gain a +2 racial saving throw bonus against poison.',
     replaces: ['enchantment resistance'],
-    source: 'Pathfinder Player Companion: Blood of the Sea',
+    source: 'Blood of the Sea',
   },
 ];
 
@@ -214,27 +214,27 @@ export const kitsuneAltTraits: AlternativeRacialTraitData[] = [
     description:
       'Such characters gain a +2 bonus to Dexterity and Intelligence instead of Dexterity and Charisma.',
     replaces: ['ability score modifiers'],
-    source: 'Pathfinder Player Companion: Blood of the Beast',
+    source: 'Blood of the Beast',
   },
   {
     name: 'Multilingual',
     description:
       "They speak Common, Sylvan, and the racial language of their human form's ethnicity, and they can learn any language they want (except Druidic and other secret languages) if they have high Intelligence scores.",
     replaces: ['agile', 'languages'],
-    source: 'Pathfinder Player Companion: Blood of the Beast',
+    source: 'Blood of the Beast',
   },
   {
     name: 'Skilled',
     description:
       'They gain an additional skill rank at 1st level and one additional skill rank whenever they gain a level.',
     replaces: ['agile', 'kitsune magic'],
-    source: 'Pathfinder Player Companion: Blood of the Beast',
+    source: 'Blood of the Beast',
   },
   {
     name: 'Superior Shapeshifter',
     description: 'They gain Fox Shape as a bonus feat at 1st level, ignoring its prerequisites.',
     replaces: ['kitsune magic'],
-    source: 'Pathfinder Player Companion: Blood of the Beast',
+    source: 'Blood of the Beast',
   },
 ];
 
@@ -272,7 +272,7 @@ export const merfolkAltTraits: AlternativeRacialTraitData[] = [
     description:
       "Merfolk with this racial trait gain a +2 bonus on Diplomacy checks to influence a creature's attitude. In addition, merfolk with this racial trait gain a +1 racial bonus on checks to perform the aid another action.",
     replaces: ['low-light vision'],
-    source: 'Pathfinder Player Companion: Heroes from the Fringe',
+    source: 'Heroes from the Fringe',
   },
 ];
 

@@ -345,7 +345,13 @@ This plan delivers the **data**. Wiring ARTs into the app is a separate task:
 - Add `alternativeRacialTraits?` to the runtime `Race` type (`src/types/race.ts`) and a
   character-level field to record chosen ARTs (e.g. `selectedAlternativeTraits?: string[]`).
 - `RaceSelector` / `RacePickerSheet` UI to pick ARTs and gray out the standard traits they
-  replace.
+  replace. **Note:** an ART's `replaces[]` entries do not always name a `racialTraits[].name` —
+  ~14% point at things stored in OTHER race fields: `senses` (Darkvision, Low-Light Vision),
+  `languages`, `speed` / `alternativeMovements` (Normal/Slow/Fly Speed), `type` / `subtypes`
+  (e.g. "Mostly Human"), and `abilityModifiers` (ability-score traits). The selection UI's
+  "what does this replace" join must consider all of these fields, not just `racialTraits`.
+  A handful of values are genuinely loose (`'drow immunities'`, `'invisibility'`,
+  `'Nature Magic'`) and will need fuzzy/text matching or a manual mapping table.
 - Mechanical effect resolution (the `Effect[]` system) — out of scope here; ARTs are stored as
   text exactly like standard `racialTraits`.
 
