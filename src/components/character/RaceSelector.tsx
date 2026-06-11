@@ -79,7 +79,14 @@ export function RaceSelector({
     if (race.flexibleAbilityBonuses && race.flexibleAbilityBonuses.length > 0) {
       return race.flexibleAbilityBonuses
         .map((b) => {
-          const groupLabel = b.group === 'any' ? 'Any Group' : b.group === 'other' ? 'Other Group' : b.group === 'mental' ? 'Mental' : 'Physical';
+          const groupLabel =
+            b.group === 'any'
+              ? 'Any Group'
+              : b.group === 'other'
+                ? 'Other Group'
+                : b.group === 'mental'
+                  ? 'Mental'
+                  : 'Physical';
           const countLabel = b.count === 'all' ? 'all' : `${b.count}`;
           return `${b.modifier > 0 ? '+' : ''}${b.modifier} to ${countLabel} ${groupLabel}`;
         })
@@ -214,17 +221,40 @@ export function RaceSelector({
                         key={grp}
                         onPress={() => onFlexibleAbilityChoice(idx, grp)}
                         accessibilityRole="radio"
-                        accessibilityLabel={grp === 'mental' ? 'Mental (INT/WIS/CHA)' : 'Physical (STR/DEX/CON)'}
+                        accessibilityLabel={
+                          grp === 'mental' ? 'Mental (INT/WIS/CHA)' : 'Physical (STR/DEX/CON)'
+                        }
                         accessibilityState={{ selected: chosen === grp }}
                       >
-                        <View style={[styles.abilityChip, styles.groupChip, {
-                          backgroundColor: chosen === grp ? fantasy.gold : isDark ? colors.bg.tertiary : colors.bg.secondary,
-                          borderColor: chosen === grp ? fantasy.gold : colors.border.DEFAULT,
-                        }]}>
-                          <Text style={[styles.abilityChipText, { color: chosen === grp ? '#FFFFFF' : colors.text.primary }]}>
+                        <View
+                          style={[
+                            styles.abilityChip,
+                            styles.groupChip,
+                            {
+                              backgroundColor:
+                                chosen === grp
+                                  ? fantasy.gold
+                                  : isDark
+                                    ? colors.bg.tertiary
+                                    : colors.bg.secondary,
+                              borderColor: chosen === grp ? fantasy.gold : colors.border.DEFAULT,
+                            },
+                          ]}
+                        >
+                          <Text
+                            style={[
+                              styles.abilityChipText,
+                              { color: chosen === grp ? '#FFFFFF' : colors.text.primary },
+                            ]}
+                          >
                             {grp === 'mental' ? 'Mental' : 'Physical'}
                           </Text>
-                          <Text style={[styles.groupSubLabel, { color: chosen === grp ? '#FFFFFF' : colors.text.secondary }]}>
+                          <Text
+                            style={[
+                              styles.groupSubLabel,
+                              { color: chosen === grp ? '#FFFFFF' : colors.text.secondary },
+                            ]}
+                          >
                             {grp === 'mental' ? 'INT / WIS / CHA' : 'STR / DEX / CON'}
                           </Text>
                         </View>
@@ -237,16 +267,30 @@ export function RaceSelector({
 
             // Per-ability picker for 'other' group (abilities from the group NOT chosen above)
             if (bonus.count === 1 && bonus.group === 'other') {
-              const otherAbilities = groupChoice === 'mental' ? PHYSICAL_ABILITIES : groupChoice === 'physical' ? MENTAL_ABILITIES : ABILITY_NAMES;
+              const otherAbilities =
+                groupChoice === 'mental'
+                  ? PHYSICAL_ABILITIES
+                  : groupChoice === 'physical'
+                    ? MENTAL_ABILITIES
+                    : ABILITY_NAMES;
               // Exclude abilities already chosen for other 'other' slots
               const siblingChosen = (selectedRace.flexibleAbilityBonuses ?? [])
-                .map((b, i) => (i !== idx && b.group === 'other' && b.count === 1 ? flexibleAbilityChoices?.[i] : undefined))
+                .map((b, i) =>
+                  i !== idx && b.group === 'other' && b.count === 1
+                    ? flexibleAbilityChoices?.[i]
+                    : undefined,
+                )
                 .filter(Boolean) as string[];
               const available = otherAbilities.filter((a) => !siblingChosen.includes(a));
-              const label = bonus.modifier > 0 ? `Choose one ability to receive +${bonus.modifier}:` : `Choose one ability to receive ${bonus.modifier}:`;
+              const label =
+                bonus.modifier > 0
+                  ? `Choose one ability to receive +${bonus.modifier}:`
+                  : `Choose one ability to receive ${bonus.modifier}:`;
               return (
                 <View key={idx} style={{ marginTop: 12 }}>
-                  <Text style={[styles.flexibleLabel, { color: colors.text.secondary }]}>{label}</Text>
+                  <Text style={[styles.flexibleLabel, { color: colors.text.secondary }]}>
+                    {label}
+                  </Text>
                   <View style={styles.abilityGrid}>
                     {available.map((ability) => (
                       <Pressable
@@ -256,11 +300,27 @@ export function RaceSelector({
                         accessibilityLabel={`${ABILITY_LABELS[ability]} ${bonus.modifier > 0 ? '+' : ''}${bonus.modifier}`}
                         accessibilityState={{ selected: chosen === ability }}
                       >
-                        <View style={[styles.abilityChip, {
-                          backgroundColor: chosen === ability ? fantasy.gold : isDark ? colors.bg.tertiary : colors.bg.secondary,
-                          borderColor: chosen === ability ? fantasy.gold : colors.border.DEFAULT,
-                        }]}>
-                          <Text style={[styles.abilityChipText, { color: chosen === ability ? '#FFFFFF' : colors.text.primary }]}>
+                        <View
+                          style={[
+                            styles.abilityChip,
+                            {
+                              backgroundColor:
+                                chosen === ability
+                                  ? fantasy.gold
+                                  : isDark
+                                    ? colors.bg.tertiary
+                                    : colors.bg.secondary,
+                              borderColor:
+                                chosen === ability ? fantasy.gold : colors.border.DEFAULT,
+                            },
+                          ]}
+                        >
+                          <Text
+                            style={[
+                              styles.abilityChipText,
+                              { color: chosen === ability ? '#FFFFFF' : colors.text.primary },
+                            ]}
+                          >
                             {ABILITY_LABELS[ability]}
                           </Text>
                         </View>
@@ -287,11 +347,27 @@ export function RaceSelector({
                         accessibilityLabel={`${ABILITY_LABELS[ability]} ${bonus.modifier > 0 ? '+' : ''}${bonus.modifier}`}
                         accessibilityState={{ selected: chosen === ability }}
                       >
-                        <View style={[styles.abilityChip, {
-                          backgroundColor: chosen === ability ? fantasy.gold : isDark ? colors.bg.tertiary : colors.bg.secondary,
-                          borderColor: chosen === ability ? fantasy.gold : colors.border.DEFAULT,
-                        }]}>
-                          <Text style={[styles.abilityChipText, { color: chosen === ability ? '#FFFFFF' : colors.text.primary }]}>
+                        <View
+                          style={[
+                            styles.abilityChip,
+                            {
+                              backgroundColor:
+                                chosen === ability
+                                  ? fantasy.gold
+                                  : isDark
+                                    ? colors.bg.tertiary
+                                    : colors.bg.secondary,
+                              borderColor:
+                                chosen === ability ? fantasy.gold : colors.border.DEFAULT,
+                            },
+                          ]}
+                        >
+                          <Text
+                            style={[
+                              styles.abilityChipText,
+                              { color: chosen === ability ? '#FFFFFF' : colors.text.primary },
+                            ]}
+                          >
                             {ABILITY_LABELS[ability]}
                           </Text>
                         </View>

@@ -70,7 +70,8 @@ function formatMods(race: ExpandedRaceData): string {
           const grp = b.group === 'any' ? 'chosen group' : b.group;
           return `${sign}${b.modifier} to all (${grp})`;
         }
-        const grp = b.group === 'other' ? 'other group' : b.group === 'any' ? 'any ability' : b.group;
+        const grp =
+          b.group === 'other' ? 'other group' : b.group === 'any' ? 'any ability' : b.group;
         return `${sign}${b.modifier} to 1 (${grp})`;
       })
       .join(' / ');

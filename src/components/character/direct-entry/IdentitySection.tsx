@@ -33,8 +33,12 @@ const ALIGNMENT_OPTIONS = Object.values(Alignment).map((a) => ({ label: a, value
 const FLEX_MENTAL = ['intelligence', 'wisdom', 'charisma'];
 const FLEX_PHYSICAL = ['strength', 'dexterity', 'constitution'];
 const FLEX_LABELS: Record<string, string> = {
-  strength: 'STR', dexterity: 'DEX', constitution: 'CON',
-  intelligence: 'INT', wisdom: 'WIS', charisma: 'CHA',
+  strength: 'STR',
+  dexterity: 'DEX',
+  constitution: 'CON',
+  intelligence: 'INT',
+  wisdom: 'WIS',
+  charisma: 'CHA',
 };
 
 interface FlexGroupUIProps {
@@ -56,7 +60,8 @@ function FlexGroupUI({ bonuses, choices, onChoiceChange }: FlexGroupUIProps) {
           return (
             <View key={idx}>
               <Text style={[flexStyles.label, { color: colors.text.secondary }]}>
-                Choose a group to receive {bonus.modifier > 0 ? '+' : ''}{bonus.modifier} to all three:
+                Choose a group to receive {bonus.modifier > 0 ? '+' : ''}
+                {bonus.modifier} to all three:
               </Text>
               <View style={flexStyles.chipRow}>
                 {(['mental', 'physical'] as const).map((grp) => (
@@ -64,17 +69,39 @@ function FlexGroupUI({ bonuses, choices, onChoiceChange }: FlexGroupUIProps) {
                     key={grp}
                     onPress={() => onChoiceChange(idx, grp)}
                     accessibilityRole="radio"
-                    accessibilityLabel={grp === 'mental' ? 'Mental (INT/WIS/CHA)' : 'Physical (STR/DEX/CON)'}
+                    accessibilityLabel={
+                      grp === 'mental' ? 'Mental (INT/WIS/CHA)' : 'Physical (STR/DEX/CON)'
+                    }
                     accessibilityState={{ selected: chosen === grp }}
                   >
-                    <View style={[flexStyles.groupChip, {
-                      backgroundColor: chosen === grp ? fantasy.gold : isDark ? colors.bg.tertiary : colors.bg.secondary,
-                      borderColor: chosen === grp ? fantasy.gold : colors.border.DEFAULT,
-                    }]}>
-                      <Text style={[flexStyles.chipText, { color: chosen === grp ? '#FFFFFF' : colors.text.primary }]}>
+                    <View
+                      style={[
+                        flexStyles.groupChip,
+                        {
+                          backgroundColor:
+                            chosen === grp
+                              ? fantasy.gold
+                              : isDark
+                                ? colors.bg.tertiary
+                                : colors.bg.secondary,
+                          borderColor: chosen === grp ? fantasy.gold : colors.border.DEFAULT,
+                        },
+                      ]}
+                    >
+                      <Text
+                        style={[
+                          flexStyles.chipText,
+                          { color: chosen === grp ? '#FFFFFF' : colors.text.primary },
+                        ]}
+                      >
                         {grp === 'mental' ? 'Mental' : 'Physical'}
                       </Text>
-                      <Text style={[flexStyles.chipSub, { color: chosen === grp ? '#FFFFFF' : colors.text.secondary }]}>
+                      <Text
+                        style={[
+                          flexStyles.chipSub,
+                          { color: chosen === grp ? '#FFFFFF' : colors.text.secondary },
+                        ]}
+                      >
                         {grp === 'mental' ? 'INT / WIS / CHA' : 'STR / DEX / CON'}
                       </Text>
                     </View>
@@ -86,14 +113,22 @@ function FlexGroupUI({ bonuses, choices, onChoiceChange }: FlexGroupUIProps) {
         }
 
         if (bonus.count === 1 && bonus.group === 'other') {
-          const pool = groupChoice === 'mental' ? FLEX_PHYSICAL : groupChoice === 'physical' ? FLEX_MENTAL : [...FLEX_MENTAL, ...FLEX_PHYSICAL];
+          const pool =
+            groupChoice === 'mental'
+              ? FLEX_PHYSICAL
+              : groupChoice === 'physical'
+                ? FLEX_MENTAL
+                : [...FLEX_MENTAL, ...FLEX_PHYSICAL];
           const siblingChosen = bonuses
-            .map((b, i) => (i !== idx && b.group === 'other' && b.count === 1 ? choices[i] : undefined))
+            .map((b, i) =>
+              i !== idx && b.group === 'other' && b.count === 1 ? choices[i] : undefined,
+            )
             .filter(Boolean) as string[];
           const available = pool.filter((a) => !siblingChosen.includes(a));
-          const label = bonus.modifier > 0
-            ? `Choose one ability to receive +${bonus.modifier}:`
-            : `Choose one ability to receive ${bonus.modifier}:`;
+          const label =
+            bonus.modifier > 0
+              ? `Choose one ability to receive +${bonus.modifier}:`
+              : `Choose one ability to receive ${bonus.modifier}:`;
           return (
             <View key={idx} style={flexStyles.pickerBlock}>
               <Text style={[flexStyles.label, { color: colors.text.secondary }]}>{label}</Text>
@@ -106,11 +141,26 @@ function FlexGroupUI({ bonuses, choices, onChoiceChange }: FlexGroupUIProps) {
                     accessibilityLabel={`${FLEX_LABELS[ability]} ${bonus.modifier > 0 ? '+' : ''}${bonus.modifier}`}
                     accessibilityState={{ selected: chosen === ability }}
                   >
-                    <View style={[flexStyles.abilityChip, {
-                      backgroundColor: chosen === ability ? fantasy.gold : isDark ? colors.bg.tertiary : colors.bg.secondary,
-                      borderColor: chosen === ability ? fantasy.gold : colors.border.DEFAULT,
-                    }]}>
-                      <Text style={[flexStyles.chipText, { color: chosen === ability ? '#FFFFFF' : colors.text.primary }]}>
+                    <View
+                      style={[
+                        flexStyles.abilityChip,
+                        {
+                          backgroundColor:
+                            chosen === ability
+                              ? fantasy.gold
+                              : isDark
+                                ? colors.bg.tertiary
+                                : colors.bg.secondary,
+                          borderColor: chosen === ability ? fantasy.gold : colors.border.DEFAULT,
+                        },
+                      ]}
+                    >
+                      <Text
+                        style={[
+                          flexStyles.chipText,
+                          { color: chosen === ability ? '#FFFFFF' : colors.text.primary },
+                        ]}
+                      >
                         {FLEX_LABELS[ability]}
                       </Text>
                     </View>
@@ -219,9 +269,7 @@ export function IdentitySection() {
           onClose={() => setRacePickerOpen(false)}
         />
 
-        {character.info.race?.name && (
-          <RacialChoicesSection raceName={character.info.race.name} />
-        )}
+        {character.info.race?.name && <RacialChoicesSection raceName={character.info.race.name} />}
 
         <InlinePicker
           label="Alignment"

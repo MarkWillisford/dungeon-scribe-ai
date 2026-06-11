@@ -419,9 +419,7 @@ export class FirestoreGameDataConnector implements GameDataConnector {
   async searchFeats(query: string): Promise<FeatDefinition[]> {
     if (!query) return [];
     const q = query.toLowerCase();
-    return Promise.resolve(
-      ALL_FEATS.filter((f) => f.name.toLowerCase().includes(q)).slice(0, 50),
-    );
+    return Promise.resolve(ALL_FEATS.filter((f) => f.name.toLowerCase().includes(q)).slice(0, 50));
   }
 
   // ---- Traits ----------------------------------------------------------------
@@ -557,7 +555,9 @@ export class FirestoreGameDataConnector implements GameDataConnector {
         core: all.filter((r) => r.category === 'Core'),
         featured: all.filter((r) => r.category === 'Featured'),
         uncommon: all.filter((r) => r.category === 'Uncommon'),
-        flexibleAbility: all.filter((r) => r.flexibleAbilityBonuses && r.flexibleAbilityBonuses.length > 0),
+        flexibleAbility: all.filter(
+          (r) => r.flexibleAbilityBonuses && r.flexibleAbilityBonuses.length > 0,
+        ),
       };
 
       GameDataCache.set(cacheKey, result);
