@@ -32,9 +32,13 @@ export interface CharacterInfo {
   portrait: string;
   background: string;
   notes: string;
-  // Editor metadata for race with flexible ability bonus
-  racialFlexBonus?: boolean;
-  racialFlexAbility?: AbilityKey;
+  // The flexibleAbilityBonuses from the selected race, stored so picker UI can render without
+  // re-fetching the full race object.
+  racialFlexBonuses?: import('../data/races/types').FlexibleAbilityBonus[];
+  // Player's choices, indexed to match racialFlexBonuses. Group-toggle entries store 'mental'|'physical'.
+  racialFlexChoices?: string[];
+  // Player's racial trait/feat selections (e.g. Elven Noble's Agile Fighters feat choice)
+  racialChoices?: import('./racialChoices').RacialChoice[];
 }
 
 // Character-layer equipped slot — ring splits into ring_left / ring_right

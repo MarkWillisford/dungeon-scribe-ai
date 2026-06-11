@@ -34,10 +34,93 @@
 //   npx tsx .sandcastle/main.mts
 
 import { createSandbox, claudeCode } from '@ai-hero/sandcastle';
+import type { IterationResult } from '@ai-hero/sandcastle';
 import { docker } from '@ai-hero/sandcastle/sandboxes/docker';
 import { execSync, execFileSync, spawn } from 'node:child_process';
 import { homedir } from 'node:os';
-import { readFileSync } from 'node:fs';
+import { readFileSync, appendFileSync, mkdirSync } from 'node:fs';
+import { join } from 'node:path';
+
+// ---------------------------------------------------------------------------
+// Token usage logging
+// ---------------------------------------------------------------------------
+
+const SANDCASTLE_MODEL = 'claude-sonnet-4-6';
+
+const TOKEN_RATES = {
+  input: 3.00 / 1_000_000,
+  output: 15.00 / 1_000_000,
+  cacheRead: 0.30 / 1_000_000,
+  cacheCreation: 3.75 / 1_000_000,
+} as const;
+
+const USAGE_LOG_PATH = join(
+  new URL(import.meta.url).pathname,
+  '../../.sandcastle/logs/usage.jsonl',
+);
+
+function ensureUsageLogDir(): void {
+  mkdirSync(join(USAGE_LOG_PATH, '..'), { recursive: true });
+}
+
+type UsageOutcome = 'complete' | 'needs_review' | 'error' | 'rate_limited';
+
+interface UsageRecord {
+  type: 'sandcastle_run';
+  ts: string;
+  issue_number: number;
+  model: string;
+  outcome: UsageOutcome;
+  duration_ms: number;
+  iteration_count: number;
+  tokens: {
+    input: number;
+    output: number;
+    cache_read: number;
+    cache_creation: number;
+  } | null;
+  estimated_cost_usd: number | null;
+  session_ids: string[];
+  completion_signal: string | undefined;
+  error: string | null;
+}
+
+function aggregateUsage(
+  iterations: IterationResult[],
+): { tokens: UsageRecord['tokens']; estimated_cost_usd: number } | null {
+  const withUsage = iterations.filter((it) => it.usage != null);
+  if (withUsage.length === 0) return null;
+
+  let input = 0;
+  let output = 0;
+  let cache_read = 0;
+  let cache_creation = 0;
+
+  for (const it of withUsage) {
+    const u = it.usage!;
+    input += u.inputTokens;
+    output += u.outputTokens;
+    cache_read += u.cacheReadInputTokens;
+    cache_creation += u.cacheCreationInputTokens;
+  }
+
+  const estimated_cost_usd =
+    input * TOKEN_RATES.input +
+    output * TOKEN_RATES.output +
+    cache_read * TOKEN_RATES.cacheRead +
+    cache_creation * TOKEN_RATES.cacheCreation;
+
+  return { tokens: { input, output, cache_read, cache_creation }, estimated_cost_usd };
+}
+
+function writeUsageRecord(record: UsageRecord): void {
+  try {
+    ensureUsageLogDir();
+    appendFileSync(USAGE_LOG_PATH, JSON.stringify(record) + '\n', 'utf8');
+  } catch (err) {
+    console.error('Failed to write usage log:', err);
+  }
+}
 
 const POLL_INTERVAL_MS = 300_000; // 5 minutes
 const DOCKER_IMAGE = 'sandcastle:dungeon-scribe-ai';
@@ -396,6 +479,7 @@ async function processIssue(issue: GitHubIssue, baseBranch = 'main'): Promise<vo
     hooks,
   });
 
+  const startTs = Date.now();
   try {
     const result = await box.run({
       name: `issue-${issueNumber}`,
@@ -406,7 +490,29 @@ async function processIssue(issue: GitHubIssue, baseBranch = 'main'): Promise<vo
       completionSignal: COMPLETION_SIGNALS,
     });
 
-    if (result.completionSignal === '<promise>NEEDS_REVIEW</promise>') {
+    const durationMs = Date.now() - startTs;
+    const usageData = aggregateUsage(result.iterations);
+    const outcome: UsageOutcome =
+      result.completionSignal === '<promise>NEEDS_REVIEW</promise>' ? 'needs_review' : 'complete';
+
+    writeUsageRecord({
+      type: 'sandcastle_run',
+      ts: new Date().toISOString(),
+      issue_number: issueNumber,
+      model: SANDCASTLE_MODEL,
+      outcome,
+      duration_ms: durationMs,
+      iteration_count: result.iterations.length,
+      tokens: usageData?.tokens ?? null,
+      estimated_cost_usd: usageData?.estimated_cost_usd ?? null,
+      session_ids: result.iterations
+        .map((it) => it.sessionId)
+        .filter((id): id is string => id !== undefined),
+      completion_signal: result.completionSignal,
+      error: null,
+    });
+
+    if (outcome === 'needs_review') {
       console.log(`Issue #${issueNumber} paused for review.`);
       removeLabel(issueNumber, LABEL_IN_PROGRESS);
       addLabel(issueNumber, LABEL_ARCH_REVIEW);
@@ -416,8 +522,26 @@ async function processIssue(issue: GitHubIssue, baseBranch = 'main'): Promise<vo
       addLabel(issueNumber, LABEL_DONE);
     }
   } catch (err) {
+    const durationMs = Date.now() - startTs;
     const msg = String((err as any)?.message ?? err ?? '');
-    if (msg.toLowerCase().includes('hit your limit')) {
+    const isRateLimited = msg.toLowerCase().includes('hit your limit');
+
+    writeUsageRecord({
+      type: 'sandcastle_run',
+      ts: new Date().toISOString(),
+      issue_number: issueNumber,
+      model: SANDCASTLE_MODEL,
+      outcome: isRateLimited ? 'rate_limited' : 'error',
+      duration_ms: durationMs,
+      iteration_count: 0,
+      tokens: null,
+      estimated_cost_usd: null,
+      session_ids: [],
+      completion_signal: undefined,
+      error: msg,
+    });
+
+    if (isRateLimited) {
       const resetEpoch = parseResetEpoch(msg);
       const waitMs = resetEpoch
         ? Math.max(resetEpoch - Date.now() + 120_000, 0)

@@ -274,6 +274,11 @@ export class StaticGameDataConnector implements GameDataConnector {
     return getDefinitionsForClass(classId);
   }
 
+  async getRacialChoiceDefinitions(_raceName: string) {
+    // Racial choice definitions live in Firestore only — not bundled in static data.
+    return [];
+  }
+
   async getSpellTables() {
     return SPELL_TABLES;
   }

@@ -6,11 +6,15 @@ import { FantasyDivider } from '@/components/ui/FantasyDivider';
 import { GameDataService, type RaceGroups } from '@/services/GameDataService';
 import type { ExpandedRaceData } from '@/data/races';
 
+const MENTAL_ABILITIES = ['intelligence', 'wisdom', 'charisma'];
+const PHYSICAL_ABILITIES = ['strength', 'dexterity', 'constitution'];
+
 interface RaceSelectorProps {
   selectedRace: ExpandedRaceData | null;
   onSelectRace: (race: ExpandedRaceData) => void;
-  flexibleAbilityChoice?: string;
-  onFlexibleAbilityChoice?: (ability: string) => void;
+  // Indexed to match flexibleAbilityBonuses entries. Index 0 of a group-toggle race holds 'mental' | 'physical'.
+  flexibleAbilityChoices?: string[];
+  onFlexibleAbilityChoice?: (index: number, value: string) => void;
   testID?: string;
 }
 
@@ -34,7 +38,7 @@ const ABILITY_LABELS: Record<string, string> = {
 export function RaceSelector({
   selectedRace,
   onSelectRace,
-  flexibleAbilityChoice,
+  flexibleAbilityChoices,
   onFlexibleAbilityChoice,
   testID,
 }: RaceSelectorProps) {
@@ -62,7 +66,9 @@ export function RaceSelector({
   );
 
   const isFlexibleRace =
-    selectedRace && raceGroups.flexibleAbility.some((r) => r.name === selectedRace.name);
+    selectedRace &&
+    selectedRace.flexibleAbilityBonuses &&
+    selectedRace.flexibleAbilityBonuses.length > 0;
 
   const handleRacePress = (race: ExpandedRaceData) => {
     setExpandedRace(race.name === expandedRace ? null : race.name);
@@ -70,7 +76,15 @@ export function RaceSelector({
   };
 
   const formatModifiers = (race: ExpandedRaceData) => {
-    if (race.flexibleAbilityBonus) return '+2 to one ability of choice';
+    if (race.flexibleAbilityBonuses && race.flexibleAbilityBonuses.length > 0) {
+      return race.flexibleAbilityBonuses
+        .map((b) => {
+          const groupLabel = b.group === 'any' ? 'Any Group' : b.group === 'other' ? 'Other Group' : b.group === 'mental' ? 'Mental' : 'Physical';
+          const countLabel = b.count === 'all' ? 'all' : `${b.count}`;
+          return `${b.modifier > 0 ? '+' : ''}${b.modifier} to ${countLabel} ${groupLabel}`;
+        })
+        .join(', ');
+    }
     const entries = Object.entries(race.abilityModifiers).filter(([, v]) => v !== undefined);
     if (entries.length === 0) return 'No modifiers';
     return entries
@@ -181,49 +195,115 @@ export function RaceSelector({
         ))}
       </ScrollView>
 
-      {isFlexibleRace && onFlexibleAbilityChoice && (
-        <OrnatePanel title={`${selectedRace.name} Ability Bonus`}>
-          <Text style={[styles.flexibleLabel, { color: colors.text.secondary }]}>
-            Choose one ability score to receive +2:
-          </Text>
-          <View style={styles.abilityGrid}>
-            {ABILITY_NAMES.map((ability) => (
-              <Pressable
-                key={ability}
-                onPress={() => onFlexibleAbilityChoice(ability)}
-                accessibilityRole="radio"
-                accessibilityLabel={`${ABILITY_LABELS[ability]} +2`}
-                accessibilityState={{ selected: flexibleAbilityChoice === ability }}
-              >
-                <View
-                  style={[
-                    styles.abilityChip,
-                    {
-                      backgroundColor:
-                        flexibleAbilityChoice === ability
-                          ? fantasy.gold
-                          : isDark
-                            ? colors.bg.tertiary
-                            : colors.bg.secondary,
-                      borderColor:
-                        flexibleAbilityChoice === ability ? fantasy.gold : colors.border.DEFAULT,
-                    },
-                  ]}
-                >
-                  <Text
-                    style={[
-                      styles.abilityChipText,
-                      {
-                        color: flexibleAbilityChoice === ability ? '#FFFFFF' : colors.text.primary,
-                      },
-                    ]}
-                  >
-                    {ABILITY_LABELS[ability]}
+      {isFlexibleRace && onFlexibleAbilityChoice && selectedRace.flexibleAbilityBonuses && (
+        <OrnatePanel title={`${selectedRace.name} Ability Bonuses`}>
+          {selectedRace.flexibleAbilityBonuses.map((bonus, idx) => {
+            const chosen = flexibleAbilityChoices?.[idx];
+            const groupChoice = flexibleAbilityChoices?.[0]; // always the group toggle if present
+
+            // Group toggle: pick Mental or Physical group; all three get the modifier
+            if (bonus.count === 'all' && bonus.group === 'any') {
+              return (
+                <View key={idx}>
+                  <Text style={[styles.flexibleLabel, { color: colors.text.secondary }]}>
+                    {`Choose a group to receive ${bonus.modifier > 0 ? '+' : ''}${bonus.modifier} to all three abilities:`}
                   </Text>
+                  <View style={styles.abilityGrid}>
+                    {(['mental', 'physical'] as const).map((grp) => (
+                      <Pressable
+                        key={grp}
+                        onPress={() => onFlexibleAbilityChoice(idx, grp)}
+                        accessibilityRole="radio"
+                        accessibilityLabel={grp === 'mental' ? 'Mental (INT/WIS/CHA)' : 'Physical (STR/DEX/CON)'}
+                        accessibilityState={{ selected: chosen === grp }}
+                      >
+                        <View style={[styles.abilityChip, styles.groupChip, {
+                          backgroundColor: chosen === grp ? fantasy.gold : isDark ? colors.bg.tertiary : colors.bg.secondary,
+                          borderColor: chosen === grp ? fantasy.gold : colors.border.DEFAULT,
+                        }]}>
+                          <Text style={[styles.abilityChipText, { color: chosen === grp ? '#FFFFFF' : colors.text.primary }]}>
+                            {grp === 'mental' ? 'Mental' : 'Physical'}
+                          </Text>
+                          <Text style={[styles.groupSubLabel, { color: chosen === grp ? '#FFFFFF' : colors.text.secondary }]}>
+                            {grp === 'mental' ? 'INT / WIS / CHA' : 'STR / DEX / CON'}
+                          </Text>
+                        </View>
+                      </Pressable>
+                    ))}
+                  </View>
                 </View>
-              </Pressable>
-            ))}
-          </View>
+              );
+            }
+
+            // Per-ability picker for 'other' group (abilities from the group NOT chosen above)
+            if (bonus.count === 1 && bonus.group === 'other') {
+              const otherAbilities = groupChoice === 'mental' ? PHYSICAL_ABILITIES : groupChoice === 'physical' ? MENTAL_ABILITIES : ABILITY_NAMES;
+              // Exclude abilities already chosen for other 'other' slots
+              const siblingChosen = (selectedRace.flexibleAbilityBonuses ?? [])
+                .map((b, i) => (i !== idx && b.group === 'other' && b.count === 1 ? flexibleAbilityChoices?.[i] : undefined))
+                .filter(Boolean) as string[];
+              const available = otherAbilities.filter((a) => !siblingChosen.includes(a));
+              const label = bonus.modifier > 0 ? `Choose one ability to receive +${bonus.modifier}:` : `Choose one ability to receive ${bonus.modifier}:`;
+              return (
+                <View key={idx} style={{ marginTop: 12 }}>
+                  <Text style={[styles.flexibleLabel, { color: colors.text.secondary }]}>{label}</Text>
+                  <View style={styles.abilityGrid}>
+                    {available.map((ability) => (
+                      <Pressable
+                        key={ability}
+                        onPress={() => onFlexibleAbilityChoice(idx, ability)}
+                        accessibilityRole="radio"
+                        accessibilityLabel={`${ABILITY_LABELS[ability]} ${bonus.modifier > 0 ? '+' : ''}${bonus.modifier}`}
+                        accessibilityState={{ selected: chosen === ability }}
+                      >
+                        <View style={[styles.abilityChip, {
+                          backgroundColor: chosen === ability ? fantasy.gold : isDark ? colors.bg.tertiary : colors.bg.secondary,
+                          borderColor: chosen === ability ? fantasy.gold : colors.border.DEFAULT,
+                        }]}>
+                          <Text style={[styles.abilityChipText, { color: chosen === ability ? '#FFFFFF' : colors.text.primary }]}>
+                            {ABILITY_LABELS[ability]}
+                          </Text>
+                        </View>
+                      </Pressable>
+                    ))}
+                  </View>
+                </View>
+              );
+            }
+
+            // Simple single-ability picker (Human / any-group / count:1)
+            if (bonus.count === 1) {
+              return (
+                <View key={idx} style={{ marginTop: idx > 0 ? 12 : 0 }}>
+                  <Text style={[styles.flexibleLabel, { color: colors.text.secondary }]}>
+                    {`Choose one ability score to receive ${bonus.modifier > 0 ? '+' : ''}${bonus.modifier}:`}
+                  </Text>
+                  <View style={styles.abilityGrid}>
+                    {ABILITY_NAMES.map((ability) => (
+                      <Pressable
+                        key={ability}
+                        onPress={() => onFlexibleAbilityChoice(idx, ability)}
+                        accessibilityRole="radio"
+                        accessibilityLabel={`${ABILITY_LABELS[ability]} ${bonus.modifier > 0 ? '+' : ''}${bonus.modifier}`}
+                        accessibilityState={{ selected: chosen === ability }}
+                      >
+                        <View style={[styles.abilityChip, {
+                          backgroundColor: chosen === ability ? fantasy.gold : isDark ? colors.bg.tertiary : colors.bg.secondary,
+                          borderColor: chosen === ability ? fantasy.gold : colors.border.DEFAULT,
+                        }]}>
+                          <Text style={[styles.abilityChipText, { color: chosen === ability ? '#FFFFFF' : colors.text.primary }]}>
+                            {ABILITY_LABELS[ability]}
+                          </Text>
+                        </View>
+                      </Pressable>
+                    ))}
+                  </View>
+                </View>
+              );
+            }
+
+            return null;
+          })}
         </OrnatePanel>
       )}
     </View>
@@ -312,5 +392,14 @@ const styles = StyleSheet.create({
     fontFamily: 'Cinzel',
     fontSize: 13,
     fontWeight: '700',
+  },
+  groupChip: {
+    minWidth: 120,
+    paddingVertical: 10,
+  },
+  groupSubLabel: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 10,
+    marginTop: 2,
   },
 });

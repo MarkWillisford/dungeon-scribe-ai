@@ -81,4 +81,11 @@ describe('RollLog', () => {
     );
     expect(getByTestId('roll-log')).toBeTruthy();
   });
+
+  it('shows manual roll indicator for isManual rolls', () => {
+    const rolls = [makeRoll({ isManual: true })];
+    const { getAllText } = render(<RollLog rolls={rolls} onClear={jest.fn()} />);
+    const allText = getAllText();
+    expect(allText.some((t) => t.includes('⚄'))).toBe(true);
+  });
 });

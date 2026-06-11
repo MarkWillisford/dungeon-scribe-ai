@@ -164,7 +164,7 @@ export const CORE_RACES_EXPANDED: ExpandedRaceData[] = [
     type: 'Humanoid',
     subtypes: ['Elf', 'Human'],
     abilityModifiers: {},
-    flexibleAbilityBonus: true,
+    flexibleAbilityBonuses: [{ group: 'any', count: 1, modifier: 2 }],
     senses: ['Low-light vision'],
     racialTraits: [
       {
@@ -247,7 +247,7 @@ export const CORE_RACES_EXPANDED: ExpandedRaceData[] = [
     type: 'Humanoid',
     subtypes: ['Human', 'Orc'],
     abilityModifiers: {},
-    flexibleAbilityBonus: true,
+    flexibleAbilityBonuses: [{ group: 'any', count: 1, modifier: 2 }],
     senses: ['Darkvision 60 ft.'],
     racialTraits: [
       {
@@ -284,7 +284,7 @@ export const CORE_RACES_EXPANDED: ExpandedRaceData[] = [
     type: 'Humanoid',
     subtypes: ['Human'],
     abilityModifiers: {},
-    flexibleAbilityBonus: true,
+    flexibleAbilityBonuses: [{ group: 'any', count: 1, modifier: 2 }],
     senses: [],
     racialTraits: [
       {

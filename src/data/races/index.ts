@@ -3,7 +3,7 @@
 
 // Barrel export for race data — single source of truth for all race information
 
-export type { RaceCategory, RacePowerTier, RacialTraitData, ExpandedRaceData } from './types';
+export type { RaceCategory, RacePowerTier, RacialTraitData, ExpandedRaceData, FlexibleAbilityBonus, FlexibleAbilityGroup, AbilityKey as RaceAbilityKey } from './types';
 export { CORE_RACES_EXPANDED } from './coreRaces';
 export { FEATURED_RACES } from './featuredRaces';
 export { UNCOMMON_RACES } from './uncommonRaces';
@@ -38,9 +38,9 @@ export const ALL_EXPANDED_RACES: ExpandedRaceData[] = [
   ...RP_UNKNOWN_RACES,
 ];
 
-// Races that get +2 to any one ability score (determined by flexibleAbilityBonus flag)
+// Races with player-chosen ability bonuses (determined by flexibleAbilityBonuses field)
 export const FLEXIBLE_ABILITY_RACES: string[] = ALL_EXPANDED_RACES.filter(
-  (r) => r.flexibleAbilityBonus,
+  (r) => r.flexibleAbilityBonuses && r.flexibleAbilityBonuses.length > 0,
 ).map((r) => r.name);
 
 export function getRaceByName(name: string): ExpandedRaceData | undefined {
