@@ -1639,7 +1639,7 @@ export const PRESTIGE_CLASSES_POPULAR: ExpandedClassData[] = [
         name: 'Unstoppable Warrior',
         level: 10,
         description:
-          "At 10th level, the sentinel gains damage reduction whose value and bypass type are based on his deity's alignment (ranging from 3/— to 10/evil or good). He no longer falls unconscious when reduced to a negative hit point total, though he can take only a single standard or move action each round while at negative hit points. Once per day as a swift action, the sentinel can use cure critical wounds on himself with a caster level equal to his total character level.",
+          "At 10th level, the sentinel gains damage reduction whose value and bypass type are based on his deity's alignment; the exact DR value and bypass type for each alignment are given in the Unstoppable Warrior table in Inner Sea Gods (values range from DR 3/— to DR 10/evil or good). He no longer falls unconscious when reduced to a negative hit point total, though he can take only a single standard or move action each round while at negative hit points. Once per day as a swift action, the sentinel can use cure critical wounds on himself with a caster level equal to his total character level.",
       },
     ],
     spellcasting: { type: 'None', casting: 'None' },
