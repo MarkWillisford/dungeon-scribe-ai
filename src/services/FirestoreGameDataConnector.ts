@@ -857,7 +857,8 @@ export class FirestoreGameDataConnector implements GameDataConnector {
   }
 
   async getArchetypesByClass(className: string, _context?: QueryContext): Promise<ArchetypeData[]> {
-    const cacheKey = `archetypes/${className}`;
+    const baseClassName = className.replace(/ \(Unchained\)$/, '');
+    const cacheKey = `archetypes/${baseClassName}`;
     const cached = GameDataCache.get<ArchetypeData[]>(cacheKey);
     if (cached) return cached;
 
@@ -866,7 +867,7 @@ export class FirestoreGameDataConnector implements GameDataConnector {
         const q = query(
           collection(db, 'archetypes'),
           where('visibility', '==', 'global'),
-          where('className', '==', className),
+          where('className', '==', baseClassName),
         );
         const snap = await getDocs(q);
         const results = snap.docs.map((d) => d.data() as ArchetypeData);
@@ -884,7 +885,8 @@ export class FirestoreGameDataConnector implements GameDataConnector {
     className: string,
     _context?: QueryContext,
   ): Promise<FavoredClassBonusEntry[]> {
-    const cacheKey = `fcb/${raceName}/${className}`;
+    const baseClassName = className.replace(/ \(Unchained\)$/, '');
+    const cacheKey = `fcb/${raceName}/${baseClassName}`;
     const cached = GameDataCache.get<FavoredClassBonusEntry[]>(cacheKey);
     if (cached) return cached;
 
@@ -894,7 +896,7 @@ export class FirestoreGameDataConnector implements GameDataConnector {
           collection(db, 'favoredClassBonuses'),
           where('visibility', '==', 'global'),
           where('raceName', '==', raceName),
-          where('className', '==', className),
+          where('className', '==', baseClassName),
         );
         const snap = await getDocs(q);
         const results = snap.docs.map((d) => d.data() as FavoredClassBonusEntry);
