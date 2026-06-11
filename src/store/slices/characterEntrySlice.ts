@@ -12,6 +12,8 @@ import type { AppliedTemplate } from '@/types/templates';
 import type { CharacterMagicItem, ItemSlot } from '@/types/magicItems';
 import { computeFeatSlots } from '@/utils/characterComputations';
 import type { AbilityKey } from '@/types/abilities';
+import type { FlexibleAbilityBonus } from '@/data/races/types';
+import type { RacialChoice } from '@/types/racialChoices';
 import type { Character, ManualAbilityBonus } from '@/types';
 import type { LevelIncrementSlot } from '@/types/character';
 import type { CharacterFeat, Feats } from '@/types/feats';
@@ -109,6 +111,37 @@ function syncLevelIncrementSlots(character: Character): void {
 }
 
 const ABILITY_KEYS: AbilityKey[] = ['str', 'dex', 'con', 'int', 'wis', 'cha'];
+const MENTAL_KEYS: AbilityKey[] = ['int', 'wis', 'cha'];
+const PHYSICAL_KEYS: AbilityKey[] = ['str', 'dex', 'con'];
+
+function applyFlexChoices(
+  abilityScores: Record<AbilityKey, { racial: number }>,
+  bonuses: FlexibleAbilityBonus[],
+  choices: string[],
+) {
+  ABILITY_KEYS.forEach((k) => {
+    abilityScores[k].racial = 0;
+  });
+  bonuses.forEach((bonus, i) => {
+    const choice = choices[i];
+    if (!choice) return;
+    if (bonus.count === 'all' && bonus.group === 'any') {
+      const pool = choice === 'mental' ? MENTAL_KEYS : PHYSICAL_KEYS;
+      pool.forEach((k) => {
+        abilityScores[k].racial += bonus.modifier;
+      });
+    } else if (bonus.count === 1) {
+      const pool =
+        bonus.group === 'other'
+          ? choices[0] === 'mental'
+            ? PHYSICAL_KEYS
+            : MENTAL_KEYS
+          : ABILITY_KEYS;
+      const k = choice as AbilityKey;
+      if (pool.includes(k)) abilityScores[k].racial += bonus.modifier;
+    }
+  });
+}
 
 function syncEnhancementBonuses(character: Character): void {
   for (const key of ABILITY_KEYS) character.abilityScores[key].bonuses.enhancement = [];
@@ -248,35 +281,52 @@ const characterEntrySlice = createSlice({
         raceName: string;
         racialBonuses: Partial<Record<AbilityKey, number>>;
         hasFlexBonus?: boolean;
+        flexibleAbilityBonuses?: FlexibleAbilityBonus[];
       }>,
     ) {
-      // Update race info on CharacterInfo
       state.character.info.race = {
         ...state.character.info.race,
         name: action.payload.raceName,
         abilityModifiers: action.payload.racialBonuses as Record<string, number>,
       };
-      state.character.info.racialFlexBonus = action.payload.hasFlexBonus ?? false;
-      if (!action.payload.hasFlexBonus) {
-        state.character.info.racialFlexAbility = undefined;
-      }
-      // Apply racial bonuses to ability scores (clear old ones first)
-      const keys: AbilityKey[] = ['str', 'dex', 'con', 'int', 'wis', 'cha'];
-      keys.forEach((k) => {
+      const bonuses = action.payload.flexibleAbilityBonuses ?? [];
+      state.character.info.racialFlexBonuses = bonuses.length > 0 ? bonuses : undefined;
+      state.character.info.racialFlexChoices = bonuses.length > 0 ? [] : undefined;
+      state.character.info.racialChoices = undefined;
+      // Apply fixed racial bonuses (zero out flex contributions first)
+      ABILITY_KEYS.forEach((k) => {
         state.character.abilityScores[k].racial = action.payload.racialBonuses[k] ?? 0;
       });
       syncFeatSlotsFromClasses(state.character);
       state.isDirty = true;
     },
 
-    setRacialFlexAbility(state, action: PayloadAction<AbilityKey>) {
-      const prev = state.character.info.racialFlexAbility;
-      const next = action.payload;
-      if (prev && prev !== next) {
-        state.character.abilityScores[prev].racial = 0;
+    setRacialFlexChoice(state, action: PayloadAction<{ index: number; value: string }>) {
+      const bonuses = state.character.info.racialFlexBonuses ?? [];
+      if (!state.character.info.racialFlexChoices) {
+        state.character.info.racialFlexChoices = [];
       }
-      state.character.abilityScores[next].racial = 2;
-      state.character.info.racialFlexAbility = next;
+      state.character.info.racialFlexChoices[action.payload.index] = action.payload.value;
+      applyFlexChoices(
+        state.character.abilityScores as Record<AbilityKey, { racial: number }>,
+        bonuses,
+        state.character.info.racialFlexChoices,
+      );
+      state.isDirty = true;
+    },
+
+    upsertRacialChoice(state, action: PayloadAction<RacialChoice>) {
+      if (!state.character.info.racialChoices) {
+        state.character.info.racialChoices = [];
+      }
+      const idx = state.character.info.racialChoices.findIndex(
+        (c) => c.featureName === action.payload.featureName,
+      );
+      if (idx >= 0) {
+        state.character.info.racialChoices[idx] = action.payload;
+      } else {
+        state.character.info.racialChoices.push(action.payload);
+      }
       state.isDirty = true;
     },
 
@@ -1956,7 +2006,8 @@ export const {
   setName,
   setPlayer,
   setRace,
-  setRacialFlexAbility,
+  setRacialFlexChoice,
+  upsertRacialChoice,
   setAlignment,
   setDeity,
   setGender,

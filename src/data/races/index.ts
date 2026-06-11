@@ -9,6 +9,9 @@ export type {
   RacialTraitData,
   AlternativeRacialTraitData,
   ExpandedRaceData,
+  FlexibleAbilityBonus,
+  FlexibleAbilityGroup,
+  AbilityKey as RaceAbilityKey,
 } from './types';
 export { CORE_RACES_EXPANDED } from './coreRaces';
 export { FEATURED_RACES } from './featuredRaces';
@@ -52,9 +55,9 @@ export const ALL_EXPANDED_RACES: ExpandedRaceData[] = [
   ...RP_UNKNOWN_RACES,
 ].map(withAltTraits);
 
-// Races that get +2 to any one ability score (determined by flexibleAbilityBonus flag)
+// Races with player-chosen ability bonuses (determined by flexibleAbilityBonuses field)
 export const FLEXIBLE_ABILITY_RACES: string[] = ALL_EXPANDED_RACES.filter(
-  (r) => r.flexibleAbilityBonus,
+  (r) => r.flexibleAbilityBonuses && r.flexibleAbilityBonuses.length > 0,
 ).map((r) => r.name);
 
 export function getRaceByName(name: string): ExpandedRaceData | undefined {

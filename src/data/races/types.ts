@@ -25,6 +25,27 @@ export interface AlternativeRacialTraitData {
   source: string; // sourcebook, e.g. 'Advanced Race Guide'
 }
 
+export type AbilityKey =
+  | 'strength'
+  | 'dexterity'
+  | 'constitution'
+  | 'intelligence'
+  | 'wisdom'
+  | 'charisma';
+
+// 'mental' = Int/Wis/Cha, 'physical' = Str/Dex/Con, 'any' = any single ability,
+// 'other' = abilities from whichever group was NOT selected by an earlier 'any'+'all' entry
+export type FlexibleAbilityGroup = 'mental' | 'physical' | 'any' | 'other';
+
+export interface FlexibleAbilityBonus {
+  // Which abilities the player may choose from
+  group: FlexibleAbilityGroup;
+  // How many abilities from that group receive the bonus/penalty
+  count: number | 'all';
+  // The modifier applied to each chosen ability
+  modifier: number;
+}
+
 export interface ExpandedRaceData {
   name: string;
   category: RaceCategory;
@@ -42,7 +63,10 @@ export interface ExpandedRaceData {
     wisdom?: number;
     charisma?: number;
   };
-  flexibleAbilityBonus?: boolean; // true for races that get +2 to any one ability
+  // For races with player-chosen ability bonuses.
+  // Human: [{ group: 'any', count: 1, modifier: 2 }]
+  // Elven Noble: [{ group: 'any', count: 'all', modifier: 2 }, { group: 'other', count: 1, modifier: 4 }, { group: 'other', count: 1, modifier: -2 }]
+  flexibleAbilityBonuses?: FlexibleAbilityBonus[];
   senses: string[];
   alternativeMovements?: {
     fly?: number;

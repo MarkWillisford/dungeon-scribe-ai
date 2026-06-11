@@ -253,7 +253,7 @@ describe('FirestoreGameDataConnector', () => {
           { name: 'Human', category: 'Core' },
           { name: 'Aasimar', category: 'Featured' },
           { name: 'Tiefling', category: 'Uncommon' },
-          { name: 'Ganzi', flexibleAbilityBonus: true },
+          { name: 'Ganzi', flexibleAbilityBonuses: [{ group: 'any', count: 1, modifier: 2 }] },
         ]) as never,
       );
 

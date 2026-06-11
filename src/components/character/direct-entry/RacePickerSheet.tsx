@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import { GameDataService } from '@/services/GameDataService';
-import type { ExpandedRaceData } from '@/data/races';
+import type { ExpandedRaceData, FlexibleAbilityBonus } from '@/data/races';
 import type { AbilityKey } from '@/types/abilities';
 
 // ---- Types ----
@@ -21,6 +21,7 @@ export interface RacePickerResult {
   raceName: string;
   racialBonuses: Partial<Record<AbilityKey, number>>;
   hasFlexBonus: boolean;
+  flexibleAbilityBonuses?: FlexibleAbilityBonus[];
 }
 
 interface RacePickerSheetProps {
@@ -61,7 +62,21 @@ function toRacialBonuses(
 }
 
 function formatMods(race: ExpandedRaceData): string {
-  if (race.flexibleAbilityBonus) return '+2 Any';
+  if (race.flexibleAbilityBonuses && race.flexibleAbilityBonuses.length > 0) {
+    const summary = race.flexibleAbilityBonuses
+      .map((b) => {
+        const sign = b.modifier > 0 ? '+' : '';
+        if (b.count === 'all') {
+          const grp = b.group === 'any' ? 'chosen group' : b.group;
+          return `${sign}${b.modifier} to all (${grp})`;
+        }
+        const grp =
+          b.group === 'other' ? 'other group' : b.group === 'any' ? 'any ability' : b.group;
+        return `${sign}${b.modifier} to 1 (${grp})`;
+      })
+      .join(' / ');
+    return summary;
+  }
   const parts: string[] = [];
   for (const [long, val] of Object.entries(race.abilityModifiers)) {
     const key = ABILITY_KEY_MAP[long];
@@ -132,7 +147,8 @@ export function RacePickerSheet({ visible, onSelect, onClose }: RacePickerSheetP
       raceId: race.name.toLowerCase().replace(/\s+/g, '_'),
       raceName: race.name,
       racialBonuses: toRacialBonuses(race.abilityModifiers),
-      hasFlexBonus: race.flexibleAbilityBonus ?? false,
+      hasFlexBonus: (race.flexibleAbilityBonuses?.length ?? 0) > 0,
+      flexibleAbilityBonuses: race.flexibleAbilityBonuses,
     });
   };
 
