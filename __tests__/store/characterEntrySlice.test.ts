@@ -107,9 +107,11 @@ import reducer, {
   initLevelOrder,
   swapLevelSlot,
   splitClass,
+  upsertRacialChoice,
   type EntryValidationWarning,
 } from '@store/slices/characterEntrySlice';
 import { Alignment } from '@/types/base';
+import type { RacialChoice } from '@/types/racialChoices';
 import { BABProgression, SaveProgression } from '@/types/base';
 import type { ClassEntry } from '@/types/classes';
 import type { AppliedTemplate } from '@/types/templates';
@@ -563,6 +565,126 @@ describe('characterEntrySlice — identity', () => {
       state = reducer(state, setRacialFlexChoice({ index: 0, value: 'con' }));
       state = reducer(state, setRacialFlexChoice({ index: 0, value: 'con' }));
       expect(state.character.abilityScores.con.racial).toBe(2);
+    });
+
+    describe('Elven Noble-style bonuses (count: all, group: other)', () => {
+      // Mirrors extendedRaces.ts Elven Noble:
+      // +2 to all abilities in chosen group, +4 and -2 from the other group
+      const elvenNobleBonuses = [
+        { group: 'any' as const, count: 'all' as const, modifier: 2 },
+        { group: 'other' as const, count: 1 as const, modifier: 4 },
+        { group: 'other' as const, count: 1 as const, modifier: -2 },
+      ];
+
+      function makeElvenState() {
+        return reducer(
+          makeInitialState(),
+          setRace({ raceId: 'elven-noble', raceName: 'Elven Noble', racialBonuses: {}, flexibleAbilityBonuses: elvenNobleBonuses }),
+        );
+      }
+
+      it('applies +2 to all mental abilities when mental group is chosen', () => {
+        const state = reducer(makeElvenState(), setRacialFlexChoice({ index: 0, value: 'mental' }));
+        expect(state.character.abilityScores.int.racial).toBe(2);
+        expect(state.character.abilityScores.wis.racial).toBe(2);
+        expect(state.character.abilityScores.cha.racial).toBe(2);
+        expect(state.character.abilityScores.str.racial).toBe(0);
+        expect(state.character.abilityScores.dex.racial).toBe(0);
+        expect(state.character.abilityScores.con.racial).toBe(0);
+      });
+
+      it('applies +2 to all physical abilities when physical group is chosen', () => {
+        const state = reducer(makeElvenState(), setRacialFlexChoice({ index: 0, value: 'physical' }));
+        expect(state.character.abilityScores.str.racial).toBe(2);
+        expect(state.character.abilityScores.dex.racial).toBe(2);
+        expect(state.character.abilityScores.con.racial).toBe(2);
+        expect(state.character.abilityScores.int.racial).toBe(0);
+        expect(state.character.abilityScores.wis.racial).toBe(0);
+        expect(state.character.abilityScores.cha.racial).toBe(0);
+      });
+
+      it('applies +4 to a physical ability when choices[0] is mental (other = physical pool)', () => {
+        let state = reducer(makeElvenState(), setRacialFlexChoice({ index: 0, value: 'mental' }));
+        state = reducer(state, setRacialFlexChoice({ index: 1, value: 'str' }));
+        // mental group: int+2, wis+2, cha+2; other[physical] str+4
+        expect(state.character.abilityScores.int.racial).toBe(2);
+        expect(state.character.abilityScores.wis.racial).toBe(2);
+        expect(state.character.abilityScores.cha.racial).toBe(2);
+        expect(state.character.abilityScores.str.racial).toBe(4);
+      });
+
+      it('applies +4 to a mental ability when choices[0] is physical (other = mental pool)', () => {
+        let state = reducer(makeElvenState(), setRacialFlexChoice({ index: 0, value: 'physical' }));
+        state = reducer(state, setRacialFlexChoice({ index: 1, value: 'int' }));
+        // physical group: str+2, dex+2, con+2; other[mental] int+4
+        expect(state.character.abilityScores.str.racial).toBe(2);
+        expect(state.character.abilityScores.dex.racial).toBe(2);
+        expect(state.character.abilityScores.con.racial).toBe(2);
+        expect(state.character.abilityScores.int.racial).toBe(4);
+      });
+
+      it('is a no-op for other-pool choices when the ability is not in the pool', () => {
+        // choices[0] = 'mental' → other pool is PHYSICAL. Choosing 'int' (mental) is not in pool.
+        let state = reducer(makeElvenState(), setRacialFlexChoice({ index: 0, value: 'mental' }));
+        state = reducer(state, setRacialFlexChoice({ index: 1, value: 'int' }));
+        expect(state.character.abilityScores.int.racial).toBe(2); // only from mental group, not +4
+      });
+
+      it('skips bonuses where no choice has been made yet (early return on undefined choice)', () => {
+        // Only index 0 set; indices 1 and 2 are undefined → no +4 or -2 applied
+        const state = reducer(makeElvenState(), setRacialFlexChoice({ index: 0, value: 'mental' }));
+        // Only the 'all mental' +2 applies; +4 and -2 for 'other' are skipped
+        expect(state.character.abilityScores.str.racial).toBe(0);
+        expect(state.character.abilityScores.dex.racial).toBe(0);
+        expect(state.character.abilityScores.con.racial).toBe(0);
+      });
+    });
+  });
+
+  describe('upsertRacialChoice', () => {
+    it('initializes racialChoices array and adds the choice when previously undefined', () => {
+      const choice: RacialChoice = { featureName: 'Agile Fighters', selection: 'Weapon Finesse' };
+      const state = reducer(makeInitialState(), upsertRacialChoice(choice));
+      expect(state.character.info.racialChoices).toHaveLength(1);
+      expect(state.character.info.racialChoices?.[0]).toEqual(choice);
+      expect(state.isDirty).toBe(true);
+    });
+
+    it('pushes a new choice when the featureName does not already exist', () => {
+      const first: RacialChoice = { featureName: 'Agile Fighters', selection: 'Weapon Finesse' };
+      const second: RacialChoice = { featureName: 'SLA', selection: 'Detect Magic' };
+      let state = reducer(makeInitialState(), upsertRacialChoice(first));
+      state = reducer(state, upsertRacialChoice(second));
+      expect(state.character.info.racialChoices).toHaveLength(2);
+      expect(state.character.info.racialChoices?.[1]).toEqual(second);
+    });
+
+    it('replaces an existing choice when featureName matches', () => {
+      const original: RacialChoice = { featureName: 'Agile Fighters', selection: 'Weapon Finesse' };
+      const updated: RacialChoice = { featureName: 'Agile Fighters', selection: 'Dodge' };
+      let state = reducer(makeInitialState(), upsertRacialChoice(original));
+      state = reducer(state, upsertRacialChoice(updated));
+      expect(state.character.info.racialChoices).toHaveLength(1);
+      expect(state.character.info.racialChoices?.[0].selection).toBe('Dodge');
+    });
+
+    it('preserves other choices when updating one by featureName', () => {
+      const first: RacialChoice = { featureName: 'Agile Fighters', selection: 'Weapon Finesse' };
+      const second: RacialChoice = { featureName: 'SLA', selection: 'Detect Magic' };
+      const updatedFirst: RacialChoice = { featureName: 'Agile Fighters', selection: 'Dodge' };
+      let state = reducer(makeInitialState(), upsertRacialChoice(first));
+      state = reducer(state, upsertRacialChoice(second));
+      state = reducer(state, upsertRacialChoice(updatedFirst));
+      expect(state.character.info.racialChoices).toHaveLength(2);
+      expect(state.character.info.racialChoices?.[0].selection).toBe('Dodge');
+      expect(state.character.info.racialChoices?.[1].selection).toBe('Detect Magic');
+    });
+
+    it('clears racialChoices when race is changed', () => {
+      const choice: RacialChoice = { featureName: 'Agile Fighters', selection: 'Weapon Finesse' };
+      let state = reducer(makeInitialState(), upsertRacialChoice(choice));
+      state = reducer(state, setRace({ raceId: 'elf', raceName: 'Elf', racialBonuses: { dex: 2 } }));
+      expect(state.character.info.racialChoices).toBeUndefined();
     });
   });
 });

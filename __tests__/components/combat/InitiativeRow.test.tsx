@@ -141,4 +141,15 @@ describe('InitiativeRow', () => {
     expect(record.total).toBe(7);
     expect(record.isManual).toBe(false);
   });
+
+  it('roll with negative modifier records negative breakdown string', () => {
+    mockRollD20.mockReturnValue(10);
+    const onRollRecorded = jest.fn();
+    const { tree } = render(<InitiativeRow {...makeProps({ initiative: -2, onRollRecorded })} />);
+    const btn = findByLabel(tree, 'Roll initiative');
+    if (btn?.props?.onPress) btn.props.onPress();
+    const record = onRollRecorded.mock.calls[0][0];
+    expect(record.breakdown).toContain('Initiative: -2');
+    expect(record.total).toBe(8);
+  });
 });
