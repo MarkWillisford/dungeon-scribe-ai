@@ -37,7 +37,10 @@ function RacialChoiceRow({ definition, currentSelection }: RacialChoiceRowProps)
 
   useEffect(() => {
     if (definition.optionSource === 'collection' && definition.collectionName) {
-      GameDataService.getClassChoiceItems(definition.collectionName, definition.collectionFilter ?? {})
+      GameDataService.getClassChoiceItems(
+        definition.collectionName,
+        definition.collectionFilter ?? {},
+      )
         .then((items) => setCollectionItems(items))
         .catch((e) => console.error('RacialChoiceRow: failed to load collection items', e));
     }
@@ -122,23 +125,15 @@ export function RacialChoicesSection({ raceName }: RacialChoicesSectionProps) {
 
   return (
     <View style={styles.container}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          { color: isDark ? fantasy.gold : fantasy.darkWood },
-        ]}
-      >
+      <Text style={[styles.sectionTitle, { color: isDark ? fantasy.gold : fantasy.darkWood }]}>
         Racial Choices
       </Text>
       {definitions.map((def) => {
         const current = racialChoices.find((c) => c.featureName === def.featureName);
-        const currentSelection = typeof current?.selection === 'string' ? current.selection : undefined;
+        const currentSelection =
+          typeof current?.selection === 'string' ? current.selection : undefined;
         return (
-          <RacialChoiceRow
-            key={def.id}
-            definition={def}
-            currentSelection={currentSelection}
-          />
+          <RacialChoiceRow key={def.id} definition={def} currentSelection={currentSelection} />
         );
       })}
     </View>

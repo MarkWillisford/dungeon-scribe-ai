@@ -536,7 +536,12 @@ describe('characterEntrySlice — identity', () => {
     it('sets a new flex ability when none was previously set', () => {
       let state = reducer(
         makeInitialState(),
-        setRace({ raceId: 'human', raceName: 'Human', racialBonuses: {}, flexibleAbilityBonuses: humanBonuses }),
+        setRace({
+          raceId: 'human',
+          raceName: 'Human',
+          racialBonuses: {},
+          flexibleAbilityBonuses: humanBonuses,
+        }),
       );
       state = reducer(state, setRacialFlexChoice({ index: 0, value: 'str' }));
       expect(state.character.info.racialFlexChoices?.[0]).toBe('str');
@@ -547,7 +552,12 @@ describe('characterEntrySlice — identity', () => {
     it('clears the old flex racial bonus and applies it to the new ability', () => {
       let state = reducer(
         makeInitialState(),
-        setRace({ raceId: 'human', raceName: 'Human', racialBonuses: {}, flexibleAbilityBonuses: humanBonuses }),
+        setRace({
+          raceId: 'human',
+          raceName: 'Human',
+          racialBonuses: {},
+          flexibleAbilityBonuses: humanBonuses,
+        }),
       );
       state = reducer(state, setRacialFlexChoice({ index: 0, value: 'str' }));
       expect(state.character.abilityScores.str.racial).toBe(2);
@@ -560,7 +570,12 @@ describe('characterEntrySlice — identity', () => {
     it('is a no-op on racial bonus when the same ability is selected again', () => {
       let state = reducer(
         makeInitialState(),
-        setRace({ raceId: 'human', raceName: 'Human', racialBonuses: {}, flexibleAbilityBonuses: humanBonuses }),
+        setRace({
+          raceId: 'human',
+          raceName: 'Human',
+          racialBonuses: {},
+          flexibleAbilityBonuses: humanBonuses,
+        }),
       );
       state = reducer(state, setRacialFlexChoice({ index: 0, value: 'con' }));
       state = reducer(state, setRacialFlexChoice({ index: 0, value: 'con' }));
@@ -579,7 +594,12 @@ describe('characterEntrySlice — identity', () => {
       function makeElvenState() {
         return reducer(
           makeInitialState(),
-          setRace({ raceId: 'elven-noble', raceName: 'Elven Noble', racialBonuses: {}, flexibleAbilityBonuses: elvenNobleBonuses }),
+          setRace({
+            raceId: 'elven-noble',
+            raceName: 'Elven Noble',
+            racialBonuses: {},
+            flexibleAbilityBonuses: elvenNobleBonuses,
+          }),
         );
       }
 
@@ -594,7 +614,10 @@ describe('characterEntrySlice — identity', () => {
       });
 
       it('applies +2 to all physical abilities when physical group is chosen', () => {
-        const state = reducer(makeElvenState(), setRacialFlexChoice({ index: 0, value: 'physical' }));
+        const state = reducer(
+          makeElvenState(),
+          setRacialFlexChoice({ index: 0, value: 'physical' }),
+        );
         expect(state.character.abilityScores.str.racial).toBe(2);
         expect(state.character.abilityScores.dex.racial).toBe(2);
         expect(state.character.abilityScores.con.racial).toBe(2);
@@ -683,7 +706,10 @@ describe('characterEntrySlice — identity', () => {
     it('clears racialChoices when race is changed', () => {
       const choice: RacialChoice = { featureName: 'Agile Fighters', selection: 'Weapon Finesse' };
       let state = reducer(makeInitialState(), upsertRacialChoice(choice));
-      state = reducer(state, setRace({ raceId: 'elf', raceName: 'Elf', racialBonuses: { dex: 2 } }));
+      state = reducer(
+        state,
+        setRace({ raceId: 'elf', raceName: 'Elf', racialBonuses: { dex: 2 } }),
+      );
       expect(state.character.info.racialChoices).toBeUndefined();
     });
   });

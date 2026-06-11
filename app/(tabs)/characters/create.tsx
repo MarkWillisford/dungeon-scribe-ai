@@ -243,7 +243,8 @@ export default function CreateCharacterScreen() {
         if (
           selectedRaceData.flexibleAbilityBonuses?.length &&
           flexibleAbilityChoices.length < selectedRaceData.flexibleAbilityBonuses.length
-        ) return false;
+        )
+          return false;
         return true;
       case 'Class':
         return selectedClass !== null;

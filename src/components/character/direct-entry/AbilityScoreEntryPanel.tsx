@@ -646,7 +646,9 @@ function BreakdownPanel({ abilityKey, score, onCollapse }: BreakdownPanelProps) 
 function RacialFlexPicker() {
   const { colors, fantasy, isDark } = useTheme();
   const dispatch = useAppDispatch();
-  const current = useAppSelector((state) => state.characterEntry.character.info.racialFlexChoices?.[0]);
+  const current = useAppSelector(
+    (state) => state.characterEntry.character.info.racialFlexChoices?.[0],
+  );
 
   return (
     <View

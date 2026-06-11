@@ -18,7 +18,20 @@ export interface RacialTraitData {
   description: string;
 }
 
-export type AbilityKey = 'strength' | 'dexterity' | 'constitution' | 'intelligence' | 'wisdom' | 'charisma';
+export interface AlternativeRacialTraitData {
+  name: string;
+  description: string;
+  replaces: string[]; // names of the standard racial trait(s) this gives up; [] if bonus-only
+  source: string; // sourcebook, e.g. 'Advanced Race Guide'
+}
+
+export type AbilityKey =
+  | 'strength'
+  | 'dexterity'
+  | 'constitution'
+  | 'intelligence'
+  | 'wisdom'
+  | 'charisma';
 
 // 'mental' = Int/Wis/Cha, 'physical' = Str/Dex/Con, 'any' = any single ability,
 // 'other' = abilities from whichever group was NOT selected by an earlier 'any'+'all' entry
@@ -62,6 +75,7 @@ export interface ExpandedRaceData {
     burrow?: number;
   };
   racialTraits: RacialTraitData[];
+  alternativeRacialTraits?: AlternativeRacialTraitData[]; // omitted if race has no published ARTs
   languages: string[];
   bonusLanguages: string[];
   source: string;

@@ -350,18 +350,14 @@ export class StaticGameDataConnector implements GameDataConnector {
   async searchMagicItems(query: string): Promise<MagicItemDefinition[]> {
     if (!query) return [];
     const q = query.toLowerCase();
-    const results = this._allMagicItems.filter((item) =>
-      item.name.toLowerCase().includes(q),
-    );
+    const results = this._allMagicItems.filter((item) => item.name.toLowerCase().includes(q));
     return Promise.resolve(results.slice(0, 50));
   }
 
   async searchFeats(query: string): Promise<FeatDefinition[]> {
     if (!query) return [];
     const q = query.toLowerCase();
-    return Promise.resolve(
-      ALL_FEATS.filter((f) => f.name.toLowerCase().includes(q)).slice(0, 50),
-    );
+    return Promise.resolve(ALL_FEATS.filter((f) => f.name.toLowerCase().includes(q)).slice(0, 50));
   }
 
   // ---- Initiating system (no static data yet — Phase 9 seeds Firestore) ------

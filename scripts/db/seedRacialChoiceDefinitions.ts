@@ -23,12 +23,12 @@ if (!admin.apps.length) {
 
 const db = admin.firestore();
 
-const ALL_RACIAL_CHOICE_DEFINITIONS: RacialChoiceDefinition[] = [
-  ...ELVEN_NOBLE_RACIAL_CHOICES,
-];
+const ALL_RACIAL_CHOICE_DEFINITIONS: RacialChoiceDefinition[] = [...ELVEN_NOBLE_RACIAL_CHOICES];
 
 async function seed() {
-  console.log(`Seeding ${ALL_RACIAL_CHOICE_DEFINITIONS.length} racial choice definitions to project: ${PROJECT_ID}`);
+  console.log(
+    `Seeding ${ALL_RACIAL_CHOICE_DEFINITIONS.length} racial choice definitions to project: ${PROJECT_ID}`,
+  );
   if (DRY_RUN) console.log('DRY RUN — no writes');
 
   const chunks = chunkArray(ALL_RACIAL_CHOICE_DEFINITIONS, BATCH_SIZE);

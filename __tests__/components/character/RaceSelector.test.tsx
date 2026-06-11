@@ -130,8 +130,9 @@ describe('RaceSelector', () => {
     );
     const radios = getAllByRole('radio');
     const groupChips = radios.filter(
-      (r) => r.props.accessibilityLabel === 'Mental (INT/WIS/CHA)' ||
-             r.props.accessibilityLabel === 'Physical (STR/DEX/CON)',
+      (r) =>
+        r.props.accessibilityLabel === 'Mental (INT/WIS/CHA)' ||
+        r.props.accessibilityLabel === 'Physical (STR/DEX/CON)',
     );
     expect(groupChips.length).toBeGreaterThan(0);
     fireEvent.press(groupChips[0]);
@@ -171,4 +172,3 @@ describe('RaceSelector', () => {
     expect(strChip!.props.accessibilityState?.selected).toBe(true);
   });
 });
-

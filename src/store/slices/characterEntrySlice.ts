@@ -119,17 +119,24 @@ function applyFlexChoices(
   bonuses: FlexibleAbilityBonus[],
   choices: string[],
 ) {
-  ABILITY_KEYS.forEach((k) => { abilityScores[k].racial = 0; });
+  ABILITY_KEYS.forEach((k) => {
+    abilityScores[k].racial = 0;
+  });
   bonuses.forEach((bonus, i) => {
     const choice = choices[i];
     if (!choice) return;
     if (bonus.count === 'all' && bonus.group === 'any') {
       const pool = choice === 'mental' ? MENTAL_KEYS : PHYSICAL_KEYS;
-      pool.forEach((k) => { abilityScores[k].racial += bonus.modifier; });
+      pool.forEach((k) => {
+        abilityScores[k].racial += bonus.modifier;
+      });
     } else if (bonus.count === 1) {
-      const pool = bonus.group === 'other'
-        ? (choices[0] === 'mental' ? PHYSICAL_KEYS : MENTAL_KEYS)
-        : ABILITY_KEYS;
+      const pool =
+        bonus.group === 'other'
+          ? choices[0] === 'mental'
+            ? PHYSICAL_KEYS
+            : MENTAL_KEYS
+          : ABILITY_KEYS;
       const k = choice as AbilityKey;
       if (pool.includes(k)) abilityScores[k].racial += bonus.modifier;
     }
@@ -294,10 +301,7 @@ const characterEntrySlice = createSlice({
       state.isDirty = true;
     },
 
-    setRacialFlexChoice(
-      state,
-      action: PayloadAction<{ index: number; value: string }>,
-    ) {
+    setRacialFlexChoice(state, action: PayloadAction<{ index: number; value: string }>) {
       const bonuses = state.character.info.racialFlexBonuses ?? [];
       if (!state.character.info.racialFlexChoices) {
         state.character.info.racialFlexChoices = [];
@@ -311,10 +315,7 @@ const characterEntrySlice = createSlice({
       state.isDirty = true;
     },
 
-    upsertRacialChoice(
-      state,
-      action: PayloadAction<RacialChoice>,
-    ) {
+    upsertRacialChoice(state, action: PayloadAction<RacialChoice>) {
       if (!state.character.info.racialChoices) {
         state.character.info.racialChoices = [];
       }
