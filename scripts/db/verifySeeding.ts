@@ -58,24 +58,6 @@ import { ALL_STAVES } from '../../src/data/magicItems/staves/index';
 import { ALL_RODS } from '../../src/data/magicItems/rods/index';
 import { ALL_FAVORED_CLASS_BONUSES } from '../../src/data/favoredClassBonuses/index';
 
-const PROJECT_ID = process.env.FIREBASE_PROJECT_ID ?? 'dungeon-scribe-ai-stagin-b4fb5';
-
-if (!admin.apps.length) {
-  const credential = process.env.GOOGLE_APPLICATION_CREDENTIALS
-    ? admin.credential.applicationDefault()
-    : (() => {
-        console.error(
-          'ERROR: GOOGLE_APPLICATION_CREDENTIALS env var not set.\n' +
-            'Download a service account key and set:\n' +
-            '  export GOOGLE_APPLICATION_CREDENTIALS=/path/to/key.json',
-        );
-        process.exit(1);
-      })();
-  admin.initializeApp({ credential, projectId: PROJECT_ID });
-}
-
-const db = admin.firestore();
-db.settings({ ignoreUndefinedProperties: true });
 
 // ---------------------------------------------------------------------------
 // Collection registry
@@ -196,7 +178,7 @@ interface CollectionResult {
   error?: string;
 }
 
-async function verifyCollection(spec: CollectionSpec): Promise<CollectionResult> {
+async function verifyCollection(spec: CollectionSpec, db: admin.firestore.Firestore): Promise<CollectionResult> {
   const result: CollectionResult = {
     label: spec.label,
     collection: spec.collection,
@@ -245,6 +227,25 @@ async function verifyCollection(spec: CollectionSpec): Promise<CollectionResult>
 // ---------------------------------------------------------------------------
 
 async function verify(): Promise<void> {
+  const PROJECT_ID = process.env.FIREBASE_PROJECT_ID ?? 'dungeon-scribe-ai-stagin-b4fb5';
+
+  if (!admin.apps.length) {
+    const credential = process.env.GOOGLE_APPLICATION_CREDENTIALS
+      ? admin.credential.applicationDefault()
+      : (() => {
+          console.error(
+            'ERROR: GOOGLE_APPLICATION_CREDENTIALS env var not set.\n' +
+              'Download a service account key and set:\n' +
+              '  export GOOGLE_APPLICATION_CREDENTIALS=/path/to/key.json',
+          );
+          process.exit(1);
+        })();
+    admin.initializeApp({ credential, projectId: PROJECT_ID });
+  }
+
+  const db = admin.firestore();
+  db.settings({ ignoreUndefinedProperties: true });
+
   console.log(`\n${'='.repeat(70)}`);
   console.log('verifySeeding — Checking all Firestore collections');
   console.log(`Project: ${PROJECT_ID}`);
@@ -254,7 +255,7 @@ async function verify(): Promise<void> {
 
   for (const spec of COLLECTIONS) {
     process.stdout.write(`  Checking ${spec.label}...`);
-    const result = await verifyCollection(spec);
+    const result = await verifyCollection(spec, db);
     results.push(result);
 
     const countStr =
