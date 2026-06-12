@@ -1712,6 +1712,7 @@ const characterEntrySlice = createSlice({
       if (item) {
         item.containerId = action.payload.containerId;
         item.slot = undefined;
+        item.isOrbiting = false;
         state.character = ModifierPipelineService.recalculate(state.character);
         state.isDirty = true;
       }

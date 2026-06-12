@@ -2262,6 +2262,25 @@ describe('characterEntrySlice — equipment effects via recalculate()', () => {
     state = reducer(state, assignEquipmentContainer({ id: 'head-1', containerId: 'bag-1' }));
     expect(state.character.abilityScores.wis.bonuses.enhancement[0]?.value ?? 0).toBe(0);
   });
+
+  it('assignEquipmentContainer clears bonuses from orbiting items immediately', () => {
+    const item = makeEquipmentItem('ioun-1', {
+      isOrbiting: true,
+      effects: [
+        {
+          type: 'bonus',
+          bonusType: BonusType.ENHANCEMENT,
+          target: 'ability.int',
+          value: 2,
+          source: 'Pale Blue Rhomboid Ioun Stone',
+        } as Effect,
+      ],
+    });
+    let state = reducer(makeInitialState(), addEquipment(item));
+    expect(state.character.abilityScores.int.bonuses.enhancement[0]?.value ?? 0).toBe(2);
+    state = reducer(state, assignEquipmentContainer({ id: 'ioun-1', containerId: 'bag-1' }));
+    expect(state.character.abilityScores.int.bonuses.enhancement[0]?.value ?? 0).toBe(0);
+  });
 });
 
 // ---------------------------------------------------------------------------
