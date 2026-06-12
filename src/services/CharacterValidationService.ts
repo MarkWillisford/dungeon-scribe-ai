@@ -17,6 +17,7 @@ import { PrerequisiteService } from './PrerequisiteService';
 import { GameDataService } from '@/services/GameDataService';
 import { EidolonPoolService, type EidolonDataIndex } from './EidolonPoolService';
 import { lookupClassData, type ClassDataMap } from '@/utils/characterComputations';
+import { isPrestigeCategory } from '@/data/classes/types';
 
 // ---- Helpers ----
 
@@ -458,7 +459,7 @@ export class CharacterValidationService {
       const classData = lookupClassData(entry.name, classDataMap);
       if (!classData) continue;
       if (classData.spellcasting.type === 'None') continue;
-      if (classData.category !== 'Prestige') continue;
+      if (!isPrestigeCategory(classData.category)) continue;
 
       // Prestige caster without advancement configured
       if (!entry.spellcastingAdvancement) {
@@ -629,7 +630,9 @@ export class CharacterValidationService {
     }
 
     for (const eidolon of character.eidolons) {
-      const classEntry = character.classes.classes.find((c) => c.id === eidolon.summonerClassEntryId);
+      const classEntry = character.classes.classes.find(
+        (c) => c.id === eidolon.summonerClassEntryId,
+      );
       if (!classEntry) {
         w.push(
           warn(

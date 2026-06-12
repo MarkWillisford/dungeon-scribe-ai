@@ -22,7 +22,7 @@ export const DRAGON_FURY_PROGRESSION: InitiatingProgressionTable = [
 
 export const DRAGON_FURY_CLASS: ExpandedClassData = {
   name: 'Dragon Fury',
-  category: 'Prestige',
+  category: 'Path of War Prestige',
   maxLevel: 10,
   hitDie: 12,
   skillRanksPerLevel: 4,

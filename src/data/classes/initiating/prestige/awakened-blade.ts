@@ -23,7 +23,7 @@ export const AWAKENED_BLADE_PROGRESSION: InitiatingProgressionTable = [
 
 export const AWAKENED_BLADE_CLASS: ExpandedClassData = {
   name: 'Awakened Blade',
-  category: 'Prestige',
+  category: 'Path of War Prestige',
   maxLevel: 10,
   hitDie: 10,
   skillRanksPerLevel: 4,

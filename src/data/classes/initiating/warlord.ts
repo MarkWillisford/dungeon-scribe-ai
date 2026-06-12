@@ -31,7 +31,7 @@ export const WARLORD_PROGRESSION: InitiatingProgressionTable = [
 
 export const WARLORD_CLASS: ExpandedClassData = {
   name: 'Warlord',
-  category: 'Base',
+  category: 'Path of War',
   maxLevel: 20,
   hitDie: 10,
   skillRanksPerLevel: 4,

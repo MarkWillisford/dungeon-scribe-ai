@@ -32,7 +32,7 @@ export const WARDER_PROGRESSION: InitiatingProgressionTable = [
 
 export const WARDER_CLASS: ExpandedClassData = {
   name: 'Warder',
-  category: 'Base',
+  category: 'Path of War',
   maxLevel: 20,
   hitDie: 12,
   skillRanksPerLevel: 4,
