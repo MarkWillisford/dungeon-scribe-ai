@@ -656,6 +656,161 @@ describe('ModifierPipelineService', () => {
     });
   });
 
+  describe('collectEquipmentEffects — item-granted feats', () => {
+    test('passive granted feat effects appear in computed stats', () => {
+      const char = createTestCharacter();
+      char.editorEquipment = [
+        {
+          id: 'item-feat-1',
+          collection: 'magicItems',
+          name: 'Ring of Reflexes',
+          slot: 'ring_left',
+          grantedFeats: [{ featId: 'lightning_reflexes', choices: {}, active: true }],
+        },
+      ];
+      const baseline = ModifierPipelineService.recalculate(createTestCharacter());
+      const result = ModifierPipelineService.recalculate(char);
+      expect(result.combatStats.savingThrows.reflex.total).toBe(
+        baseline.combatStats.savingThrows.reflex.total + 2,
+      );
+    });
+
+    test('toggle granted feat does not apply effects when active is false', () => {
+      const char = createTestCharacter();
+      char.editorEquipment = [
+        {
+          id: 'item-feat-2',
+          collection: 'magicItems',
+          name: 'Belt of Power Attack',
+          slot: 'belt',
+          grantedFeats: [{ featId: 'power_attack', choices: {}, active: false }],
+        },
+      ];
+      const baseline = ModifierPipelineService.recalculate(createTestCharacter());
+      const result = ModifierPipelineService.recalculate(char);
+      expect(result.combatStats.attackBonuses.meleeTotal).toBe(
+        baseline.combatStats.attackBonuses.meleeTotal,
+      );
+    });
+
+    test('toggle granted feat applies effects when active is true', () => {
+      const char = createTestCharacter();
+      char.editorEquipment = [
+        {
+          id: 'item-feat-3',
+          collection: 'magicItems',
+          name: 'Belt of Power Attack',
+          slot: 'belt',
+          grantedFeats: [{ featId: 'power_attack', choices: {}, active: true }],
+        },
+      ];
+      const baseline = ModifierPipelineService.recalculate(createTestCharacter());
+      const result = ModifierPipelineService.recalculate(char);
+      // Power Attack at BAB 1: -(floor(1/4)+1) = -1 attack penalty
+      expect(result.combatStats.attackBonuses.meleeTotal).toBeLessThan(
+        baseline.combatStats.attackBonuses.meleeTotal,
+      );
+    });
+
+    test('granted feat source is set to item.name in ability score breakdowns', () => {
+      const abilityFeat: FeatDefinition = {
+        id: 'str_bonus_test',
+        name: 'Strength Bonus',
+        description: '+2 STR (test)',
+        source: 'Test',
+        verificationStatus: 'needs_review' as const,
+        types: ['general'],
+        prerequisites: [],
+        effects: [
+          {
+            type: 'bonus',
+            target: 'ability.str',
+            value: 2,
+            bonusType: BonusType.MORALE,
+            source: 'Strength Bonus',
+          },
+        ],
+        activationMode: 'passive',
+      };
+      FeatRegistryService.register(abilityFeat);
+
+      const itemName = 'Belt of Strength Bonus';
+      const char = createTestCharacter();
+      char.editorEquipment = [
+        {
+          id: 'item-feat-source',
+          collection: 'magicItems',
+          name: itemName,
+          slot: 'belt',
+          grantedFeats: [{ featId: 'str_bonus_test', choices: {}, active: true }],
+        },
+      ];
+      const result = ModifierPipelineService.recalculate(char);
+      const moraleBonuses = result.abilityScores.str.bonuses.morale ?? [];
+      expect(moraleBonuses.length).toBeGreaterThan(0);
+      expect(moraleBonuses[0].source).toBe(itemName);
+    });
+
+    test('unequipped item (no slot, not orbiting) granted feats do not apply', () => {
+      const char = createTestCharacter();
+      char.editorEquipment = [
+        {
+          id: 'item-feat-5',
+          collection: 'magicItems',
+          name: 'Ring (carried)',
+          grantedFeats: [{ featId: 'lightning_reflexes', choices: {}, active: true }],
+        },
+      ];
+      const baseline = ModifierPipelineService.recalculate(createTestCharacter());
+      const result = ModifierPipelineService.recalculate(char);
+      expect(result.combatStats.savingThrows.reflex.total).toBe(
+        baseline.combatStats.savingThrows.reflex.total,
+      );
+    });
+
+    test('choice placeholder in source is substituted from grant.choices', () => {
+      const choiceFeat: FeatDefinition = {
+        id: 'weapon_focus_test',
+        name: 'Weapon Focus',
+        description: '+1 attack',
+        source: 'CRB',
+        verificationStatus: 'needs_review' as const,
+        types: ['combat'],
+        prerequisites: [],
+        effects: [
+          {
+            type: 'bonus',
+            target: 'attack.melee',
+            value: 1,
+            bonusType: BonusType.UNTYPED,
+            source: 'Weapon Focus ({weapon})',
+          },
+        ],
+        activationMode: 'passive',
+        choices: [{ type: 'weapon', label: 'Weapon', affectsEffects: true }],
+      };
+      FeatRegistryService.register(choiceFeat);
+
+      const char = createTestCharacter();
+      char.editorEquipment = [
+        {
+          id: 'item-feat-6',
+          collection: 'magicItems',
+          name: 'Longsword of Focus',
+          slot: 'main_hand',
+          grantedFeats: [
+            { featId: 'weapon_focus_test', choices: { weapon: 'longsword' }, active: true },
+          ],
+        },
+      ];
+      const baseline = ModifierPipelineService.recalculate(createTestCharacter());
+      const result = ModifierPipelineService.recalculate(char);
+      expect(result.combatStats.attackBonuses.meleeTotal).toBe(
+        baseline.combatStats.attackBonuses.meleeTotal + 1,
+      );
+    });
+  });
+
   describe('resource pools', () => {
     test('recalculate computes resource pools from class features', () => {
       const char = createTestCharacter();

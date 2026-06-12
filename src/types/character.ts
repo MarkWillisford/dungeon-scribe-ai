@@ -58,7 +58,7 @@ export interface EditorEquipmentItem {
   allowsHandUse?: boolean;
   notes?: string;
   effects?: Effect[]; // snapshot from MagicItemDefinition.effects at pick time
-  grantedFeatIds?: string[]; // feat IDs granted while this item is equipped
+  grantedFeats?: import('./feats').GrantedFeat[]; // feats granted while this item is equipped
   unequippedFromSlot?: EditorEquippedSlot; // set when slot-cleared to a container; used for re-equip
 }
 

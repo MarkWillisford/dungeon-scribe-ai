@@ -317,6 +317,33 @@ export class ModifierPipelineService {
           effects.push({ ...effect, source: effect.source || item.name });
         }
       }
+
+      // Feats granted by this equipped item
+      for (const grant of item.grantedFeats ?? []) {
+        const featDef = FeatRegistryService.getFeat(grant.featId);
+        if (!featDef) continue;
+
+        if (featDef.activationMode === 'toggle' && !grant.active) continue;
+
+        const choices = grant.choices ?? {};
+
+        for (const effect of featDef.effects) {
+          let target = effect.target;
+          let source = effect.source;
+          for (const [key, val] of Object.entries(choices)) {
+            target = target.replace(`{${key}}`, val) as typeof effect.target;
+            source = source.replace(`{${key}}`, val);
+          }
+
+          if (effect.activation?.type === 'toggle' && !grant.active) continue;
+
+          const activation = effect.activation
+            ? { ...effect.activation, active: !!grant.active }
+            : undefined;
+
+          effects.push({ ...effect, target, source: item.name, activation });
+        }
+      }
     }
 
     return effects;
