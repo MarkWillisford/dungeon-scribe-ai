@@ -87,7 +87,7 @@ interface CollectionSpec {
   expected: number;
 }
 
-const COLLECTIONS: CollectionSpec[] = [
+export const COLLECTIONS: CollectionSpec[] = [
   { label: 'Races', collection: 'races', expected: ALL_EXPANDED_RACES.length },
   { label: 'Classes', collection: 'classes', expected: ALL_EXPANDED_CLASSES.length },
   { label: 'Archetypes', collection: 'archetypes', expected: ALL_ARCHETYPES.length },
@@ -108,7 +108,7 @@ const COLLECTIONS: CollectionSpec[] = [
   { label: 'Domains', collection: 'domains', expected: ALL_DOMAINS.length },
   {
     label: 'Animal Companions',
-    collection: 'animalcompanions',
+    collection: 'animalCompanions',
     expected: ALL_ANIMAL_COMPANIONS.length,
   },
   { label: 'Bloodlines', collection: 'bloodlines', expected: ALL_BLOODLINES.length },
@@ -323,7 +323,9 @@ async function verify(): Promise<void> {
   }
 }
 
-verify().catch((err) => {
-  console.error('Verify failed:', err);
-  process.exit(1);
-});
+if (require.main === module) {
+  verify().catch((err) => {
+    console.error('Verify failed:', err);
+    process.exit(1);
+  });
+}
