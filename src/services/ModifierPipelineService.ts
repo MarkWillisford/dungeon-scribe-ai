@@ -329,10 +329,8 @@ export class ModifierPipelineService {
 
         for (const effect of featDef.effects) {
           let target = effect.target;
-          let source = effect.source;
           for (const [key, val] of Object.entries(choices)) {
             target = target.replace(`{${key}}`, val) as typeof effect.target;
-            source = source.replace(`{${key}}`, val);
           }
 
           const activation = effect.activation
