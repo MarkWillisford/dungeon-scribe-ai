@@ -2254,6 +2254,14 @@ describe('characterEntrySlice — equipment effects via recalculate()', () => {
     const state = reducer(makeInitialState(), addEquipment(item));
     expect(state.character.abilityScores.int.bonuses.enhancement[0]?.value ?? 0).toBe(0);
   });
+
+  it('assignEquipmentContainer clears slot bonus immediately via recalculate()', () => {
+    const item = makeEquipmentItem('head-1', { slot: 'head', effects: [wisEffect] });
+    let state = reducer(makeInitialState(), addEquipment(item));
+    expect(state.character.abilityScores.wis.bonuses.enhancement[0]?.value ?? 0).toBe(4);
+    state = reducer(state, assignEquipmentContainer({ id: 'head-1', containerId: 'bag-1' }));
+    expect(state.character.abilityScores.wis.bonuses.enhancement[0]?.value ?? 0).toBe(0);
+  });
 });
 
 // ---------------------------------------------------------------------------
