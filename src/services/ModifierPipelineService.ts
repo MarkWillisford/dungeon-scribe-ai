@@ -335,8 +335,6 @@ export class ModifierPipelineService {
             source = source.replace(`{${key}}`, val);
           }
 
-          if (effect.activation?.type === 'toggle' && !grant.active) continue;
-
           const activation = effect.activation
             ? { ...effect.activation, active: !!grant.active }
             : undefined;
