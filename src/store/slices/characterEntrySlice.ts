@@ -30,6 +30,7 @@ import type {
 } from '@/types/eidolon';
 import { CharacterService } from '@/services/CharacterService';
 import { computeCompanionEffectiveLevel } from '@/services/CompanionService';
+import { ModifierPipelineService } from '@/services/ModifierPipelineService';
 
 // ---- Supporting types ----
 
@@ -141,24 +142,6 @@ function applyFlexChoices(
       if (pool.includes(k)) abilityScores[k].racial += bonus.modifier;
     }
   });
-}
-
-function syncEnhancementBonuses(character: Character): void {
-  for (const key of ABILITY_KEYS) character.abilityScores[key].bonuses.enhancement = [];
-  const accumulated: Partial<Record<AbilityKey, number[]>> = {};
-  for (const item of character.editorEquipment ?? []) {
-    if (item.slot && item.abilityScoreBonuses) {
-      for (const [ab, val] of Object.entries(item.abilityScoreBonuses)) {
-        (accumulated[ab as AbilityKey] ??= []).push(val as number);
-      }
-    }
-  }
-  for (const [ab, vals] of Object.entries(accumulated)) {
-    const maxVal = Math.max(...(vals as number[]));
-    character.abilityScores[ab as AbilityKey].bonuses.enhancement = [
-      { value: maxVal, source: 'equipment', type: BonusType.ENHANCEMENT },
-    ];
-  }
 }
 
 // ---- Slice state ----
@@ -1648,7 +1631,7 @@ const characterEntrySlice = createSlice({
     addEquipment(state, action: PayloadAction<EditorEquipmentItem>) {
       if (!state.character.editorEquipment) state.character.editorEquipment = [];
       state.character.editorEquipment.push(action.payload);
-      syncEnhancementBonuses(state.character);
+      state.character = ModifierPipelineService.recalculate(state.character);
       state.isDirty = true;
     },
 
@@ -1657,7 +1640,7 @@ const characterEntrySlice = createSlice({
         state.character.editorEquipment = state.character.editorEquipment.filter(
           (e) => e.id !== action.payload,
         );
-        syncEnhancementBonuses(state.character);
+        state.character = ModifierPipelineService.recalculate(state.character);
         state.isDirty = true;
       }
     },
@@ -1667,7 +1650,7 @@ const characterEntrySlice = createSlice({
         const idx = state.character.editorEquipment.findIndex((e) => e.id === action.payload.id);
         if (idx >= 0) {
           state.character.editorEquipment[idx] = action.payload;
-          syncEnhancementBonuses(state.character);
+          state.character = ModifierPipelineService.recalculate(state.character);
           state.isDirty = true;
         }
       }
@@ -1679,7 +1662,7 @@ const characterEntrySlice = createSlice({
         item.slot = action.payload.slot;
         item.containerId = undefined;
         item.unequippedFromSlot = undefined;
-        syncEnhancementBonuses(state.character);
+        state.character = ModifierPipelineService.recalculate(state.character);
         state.isDirty = true;
       }
     },
@@ -1695,7 +1678,7 @@ const characterEntrySlice = createSlice({
           item.containerId = firstContainer.id;
         }
         item.slot = undefined;
-        syncEnhancementBonuses(state.character);
+        state.character = ModifierPipelineService.recalculate(state.character);
         state.isDirty = true;
       }
     },
@@ -1720,7 +1703,7 @@ const characterEntrySlice = createSlice({
       item.slot = targetSlot;
       item.unequippedFromSlot = undefined;
       item.containerId = undefined;
-      syncEnhancementBonuses(state.character);
+      state.character = ModifierPipelineService.recalculate(state.character);
       state.isDirty = true;
     },
 
