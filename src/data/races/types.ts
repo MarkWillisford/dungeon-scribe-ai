@@ -46,6 +46,34 @@ export interface FlexibleAbilityBonus {
   modifier: number;
 }
 
+export type SLAFrequency =
+  | 'Constant'
+  | 'AtWill'
+  | 'ThreePlusMod'
+  | 'ThreePerDay'
+  | 'TwoPerDay'
+  | 'OnePerDay';
+
+export interface SLAComponent {
+  name: string;
+  level: number;
+  frequency: SLAFrequency;
+  options?: string[];
+}
+
+export interface TraitDowngradeEntry {
+  from: string;
+  to: string | null;
+  asCurrency: string;
+}
+
+export interface VariantAbilityEntry {
+  d100: number;
+  name: string;
+  description: string;
+  source: string;
+}
+
 export interface ExpandedRaceData {
   name: string;
   category: RaceCategory;
@@ -76,6 +104,10 @@ export interface ExpandedRaceData {
   };
   racialTraits: RacialTraitData[];
   alternativeRacialTraits?: AlternativeRacialTraitData[]; // omitted if race has no published ARTs
+  inheritsAltTraitsFrom?: string[];
+  traitDowngrades?: TraitDowngradeEntry[];
+  slaComponents?: SLAComponent[];
+  variantAbilityTable?: VariantAbilityEntry[];
   languages: string[];
   bonusLanguages: string[];
   source: string;
