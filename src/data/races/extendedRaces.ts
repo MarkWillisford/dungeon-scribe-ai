@@ -823,7 +823,7 @@ export const MONSTROUS_AND_POWERFUL_RACES: ExpandedRaceData[] = [
       {
         name: 'Spell-Like Abilities',
         description:
-          'Elven Nobles can cast eagle eye (2nd level), daylight (1st level), and feather step (1st level) each at will, and have detect magic as a constant spell-like ability. At 1st level they select one 1/day ability: arcane sight, deadly juggernaut, or ranged deadly juggernaut. Caster level equals effective character level.',
+          'Elven Nobles can cast eagle eye (2nd level), daylight (3rd level), and feather step (1st level) each at will, and have detect magic as a constant spell-like ability. At 1st level they select one 1/day ability: arcane sight, deadly juggernaut, or ranged deadly juggernaut. Caster level equals effective character level.',
       },
       {
         name: 'Weapon Familiarity',
