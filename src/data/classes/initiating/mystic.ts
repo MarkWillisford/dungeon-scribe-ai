@@ -31,7 +31,7 @@ export const MYSTIC_PROGRESSION: InitiatingProgressionTable = [
 
 export const MYSTIC_CLASS: ExpandedClassData = {
   name: 'Mystic',
-  category: 'Base',
+  category: 'Path of War: Expanded',
   maxLevel: 20,
   hitDie: 8,
   skillRanksPerLevel: 4,

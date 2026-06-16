@@ -35,7 +35,7 @@ export const CRUSADER_PROGRESSION: InitiatingProgressionTable = [
 
 export const CRUSADER_CLASS: ExpandedClassData = {
   name: 'Crusader',
-  category: 'Base',
+  category: 'Tome of Battle',
   maxLevel: 20,
   hitDie: 10,
   skillRanksPerLevel: 2,
@@ -154,7 +154,7 @@ export const SWORDSAGE_PROGRESSION: InitiatingProgressionTable = [
 
 export const SWORDSAGE_CLASS: ExpandedClassData = {
   name: 'Swordsage',
-  category: 'Base',
+  category: 'Tome of Battle',
   maxLevel: 20,
   hitDie: 8,
   skillRanksPerLevel: 6,
@@ -285,7 +285,7 @@ export const WARBLADE_PROGRESSION: InitiatingProgressionTable = [
 
 export const WARBLADE_CLASS: ExpandedClassData = {
   name: 'Warblade',
-  category: 'Base',
+  category: 'Tome of Battle',
   maxLevel: 20,
   hitDie: 12,
   skillRanksPerLevel: 4,

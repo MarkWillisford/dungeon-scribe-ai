@@ -14,7 +14,23 @@ export type ClassCategory =
   | 'Unchained'
   | 'Occult'
   | 'Alternate'
-  | 'Prestige';
+  | 'Prestige'
+  // Initiating (martial maneuver) classes, grouped by source book so they
+  // form their own sections in the class picker rather than mixing into the
+  // generic Base/Prestige lists.
+  | 'Tome of Battle'
+  | 'Path of War'
+  | 'Path of War: Expanded'
+  | 'Path of War Prestige';
+
+// Categories that represent prestige classes for the purposes of prestige-only
+// logic (entry-requirement validation, spellcasting-advancement checks, the
+// getPrestigeClasses() filter). Keep this in sync with ClassCategory.
+export const PRESTIGE_CATEGORIES: readonly ClassCategory[] = ['Prestige', 'Path of War Prestige'];
+
+export function isPrestigeCategory(category: ClassCategory): boolean {
+  return PRESTIGE_CATEGORIES.includes(category);
+}
 
 export interface ClassFeatureData {
   name: string;
