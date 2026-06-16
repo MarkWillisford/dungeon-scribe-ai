@@ -22,7 +22,7 @@ export const BLADECASTER_PROGRESSION: InitiatingProgressionTable = [
 
 export const BLADECASTER_CLASS: ExpandedClassData = {
   name: 'Bladecaster',
-  category: 'Prestige',
+  category: 'Path of War Prestige',
   maxLevel: 10,
   hitDie: 10,
   skillRanksPerLevel: 4,

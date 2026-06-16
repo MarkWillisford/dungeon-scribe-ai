@@ -22,7 +22,7 @@ export const PHOENIX_CHAMPION_PROGRESSION: InitiatingProgressionTable = [
 
 export const PHOENIX_CHAMPION_CLASS: ExpandedClassData = {
   name: 'Phoenix Champion',
-  category: 'Prestige',
+  category: 'Path of War Prestige',
   maxLevel: 10,
   hitDie: 10,
   skillRanksPerLevel: 4,
