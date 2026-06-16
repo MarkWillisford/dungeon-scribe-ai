@@ -2,7 +2,7 @@
 // Sources: https://www.d20pfsrd.com/races/other-races/more-races/
 
 import { Size } from '@/types/base';
-import { ExpandedRaceData } from './types';
+import { ExpandedRaceData, SLAComponent, TraitDowngradeEntry } from './types';
 
 // ============================================================
 // Standard RP (1-10) — races not in Core/Featured/Uncommon
@@ -823,7 +823,7 @@ export const MONSTROUS_AND_POWERFUL_RACES: ExpandedRaceData[] = [
       {
         name: 'Spell-Like Abilities',
         description:
-          'Elven Nobles can cast eagle eye (2nd level), daylight (1st level), and feather step (1st level) each at will, and have detect magic as a constant spell-like ability. At 1st level they select one 1/day ability: arcane sight, deadly juggernaut, or ranged deadly juggernaut. Caster level equals effective character level.',
+          'Elven Nobles can cast eagle eye (2nd level), daylight (3rd level), and feather step (1st level) each at will, and have detect magic as a constant spell-like ability. At 1st level they select one 1/day ability: arcane sight, deadly juggernaut, or ranged deadly juggernaut. Caster level equals effective character level.',
       },
       {
         name: 'Weapon Familiarity',
@@ -836,6 +836,23 @@ export const MONSTROUS_AND_POWERFUL_RACES: ExpandedRaceData[] = [
           'Elven Nobles qualify for any alternate racial trait available to Elves or Aasimars, and for any feat or ability that lists Elf or Aasimar as a prerequisite.',
       },
     ],
+    inheritsAltTraitsFrom: ['Elf', 'Aasimar'],
+    traitDowngrades: [
+      { from: 'Elevated Elven Magic', to: 'Elven Magic', asCurrency: 'Elven Magic' },
+      { from: 'Elven Magic', to: null, asCurrency: 'Elven Magic' },
+    ] satisfies TraitDowngradeEntry[],
+    slaComponents: [
+      { name: 'Detect Magic', level: 0, frequency: 'Constant' },
+      { name: 'Eagle Eye', level: 2, frequency: 'AtWill' },
+      { name: 'Daylight', level: 3, frequency: 'AtWill' },
+      { name: 'Feather Step', level: 1, frequency: 'AtWill' },
+      {
+        name: 'Arcane Sight',
+        level: 3,
+        frequency: 'OnePerDay',
+        options: ['Arcane Sight', 'Deadly Juggernaut', 'Ranged Deadly Juggernaut'],
+      },
+    ] satisfies SLAComponent[],
     languages: ['Common', 'Elven', 'Celestial'],
     bonusLanguages: [],
     source: 'homebrew',
