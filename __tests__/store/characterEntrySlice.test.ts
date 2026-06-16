@@ -119,6 +119,7 @@ import type { CharacterTrait } from '@/types/traits';
 import type { SpellcastingPool } from '@/types/spells';
 import type { EditorEquipmentItem } from '@/types/character';
 import type { LevelIncrementSlot } from '@/types/character';
+import type { Effect } from '@/types/base';
 import type { Character } from '@/types';
 
 // ---------------------------------------------------------------------------
@@ -2118,56 +2119,167 @@ describe('characterEntrySlice — notes', () => {
 });
 
 // ---------------------------------------------------------------------------
-// Enhancement sync
+// Equipment effects via recalculate()
 // ---------------------------------------------------------------------------
 
-describe('characterEntrySlice — enhancement sync', () => {
-  it('addEquipment with a slotted item syncs enhancement', () => {
-    const item = makeEquipmentItem('head-1', {
-      slot: 'head',
-      abilityScoreBonuses: { wis: 4 },
-    });
+describe('characterEntrySlice — equipment effects via recalculate()', () => {
+  const wisEffect: Effect = {
+    type: 'bonus',
+    bonusType: BonusType.ENHANCEMENT,
+    target: 'ability.wis',
+    value: 4,
+    source: 'Headband of Inspired Wisdom +4',
+  };
+
+  it('addEquipment with a slotted item applies effects via recalculate()', () => {
+    const item = makeEquipmentItem('head-1', { slot: 'head', effects: [wisEffect] });
     const state = reducer(makeInitialState(), addEquipment(item));
     expect(state.character.abilityScores.wis.bonuses.enhancement[0]?.value ?? 0).toBe(4);
   });
 
-  it('addEquipment with no slot does not apply enhancement', () => {
-    const item = makeEquipmentItem('head-1', { abilityScoreBonuses: { wis: 4 } });
+  it('addEquipment with no slot does not apply effects', () => {
+    const item = makeEquipmentItem('head-1', { effects: [wisEffect] });
     const state = reducer(makeInitialState(), addEquipment(item));
     expect(state.character.abilityScores.wis.bonuses.enhancement[0]?.value ?? 0).toBe(0);
   });
 
-  it('removeEquipment clears the enhancement', () => {
-    const item = makeEquipmentItem('head-1', { slot: 'head', abilityScoreBonuses: { wis: 4 } });
+  it('removeEquipment reverts effects immediately', () => {
+    const item = makeEquipmentItem('head-1', { slot: 'head', effects: [wisEffect] });
     let state = reducer(makeInitialState(), addEquipment(item));
     state = reducer(state, removeEquipment('head-1'));
     expect(state.character.abilityScores.wis.bonuses.enhancement[0]?.value ?? 0).toBe(0);
   });
 
-  it('two overlapping items — takes the highest per ability', () => {
+  it('two enhancement items to same ability — pipeline takes the higher value', () => {
     const item1 = makeEquipmentItem('belt-1', {
       slot: 'belt',
-      abilityScoreBonuses: { str: 2, con: 2 },
+      effects: [
+        {
+          type: 'bonus',
+          bonusType: BonusType.ENHANCEMENT,
+          target: 'ability.str',
+          value: 2,
+          source: 'Belt +2',
+        } as Effect,
+        {
+          type: 'bonus',
+          bonusType: BonusType.ENHANCEMENT,
+          target: 'ability.con',
+          value: 2,
+          source: 'Belt +2',
+        } as Effect,
+      ],
     });
-    const item2 = makeEquipmentItem('belt-2', { slot: 'belt', abilityScoreBonuses: { str: 4 } });
+    const item2 = makeEquipmentItem('belt-2', {
+      slot: 'belt',
+      effects: [
+        {
+          type: 'bonus',
+          bonusType: BonusType.ENHANCEMENT,
+          target: 'ability.str',
+          value: 4,
+          source: 'Belt +4',
+        } as Effect,
+      ],
+    });
     let state = reducer(makeInitialState(), addEquipment(item1));
     state = reducer(state, addEquipment(item2));
     expect(state.character.abilityScores.str.bonuses.enhancement[0]?.value ?? 0).toBe(4);
     expect(state.character.abilityScores.con.bonuses.enhancement[0]?.value ?? 0).toBe(2);
   });
 
-  it('assignEquipmentSlot applies enhancement when item is slotted', () => {
-    const item = makeEquipmentItem('head-1', { abilityScoreBonuses: { wis: 4 } });
+  it('updateEquipment triggers recalculate() and applies updated effects', () => {
+    const item = makeEquipmentItem('head-1', { slot: 'head', effects: [wisEffect] });
+    let state = reducer(makeInitialState(), addEquipment(item));
+    const updatedItem = {
+      ...item,
+      effects: [{ ...wisEffect, value: 6, source: 'Headband of Inspired Wisdom +6' }],
+    };
+    state = reducer(state, updateEquipment(updatedItem));
+    expect(state.character.abilityScores.wis.bonuses.enhancement[0]?.value ?? 0).toBe(6);
+  });
+
+  it('assignEquipmentSlot triggers recalculate() and applies item effects', () => {
+    const item = makeEquipmentItem('head-1', { effects: [wisEffect] });
     let state = reducer(makeInitialState(), addEquipment(item));
     state = reducer(state, assignEquipmentSlot({ id: 'head-1', slot: 'head' }));
     expect(state.character.abilityScores.wis.bonuses.enhancement[0]?.value ?? 0).toBe(4);
   });
 
-  it('unassignEquipmentSlot removes enhancement', () => {
-    const item = makeEquipmentItem('head-1', { slot: 'head', abilityScoreBonuses: { wis: 4 } });
+  it('unassignEquipmentSlot triggers recalculate() and reverts item effects', () => {
+    const item = makeEquipmentItem('head-1', { slot: 'head', effects: [wisEffect] });
     let state = reducer(makeInitialState(), addEquipment(item));
     state = reducer(state, unassignEquipmentSlot('head-1'));
     expect(state.character.abilityScores.wis.bonuses.enhancement[0]?.value ?? 0).toBe(0);
+  });
+
+  it('reequipFromContainer triggers recalculate() and reapplies item effects', () => {
+    const item = makeEquipmentItem('head-1', { slot: 'head', effects: [wisEffect] });
+    let state = reducer(makeInitialState(), addEquipment(item));
+    state = reducer(state, unassignEquipmentSlot('head-1'));
+    expect(state.character.abilityScores.wis.bonuses.enhancement[0]?.value ?? 0).toBe(0);
+    state = reducer(state, reequipFromContainer('head-1'));
+    expect(state.character.abilityScores.wis.bonuses.enhancement[0]?.value ?? 0).toBe(4);
+  });
+
+  it('orbiting ioun stone (isOrbiting:true, no slot) applies effects via recalculate()', () => {
+    const item = makeEquipmentItem('ioun-1', {
+      isOrbiting: true,
+      effects: [
+        {
+          type: 'bonus',
+          bonusType: BonusType.ENHANCEMENT,
+          target: 'ability.int',
+          value: 2,
+          source: 'Pale Blue Rhomboid Ioun Stone',
+        } as Effect,
+      ],
+    });
+    const state = reducer(makeInitialState(), addEquipment(item));
+    expect(state.character.abilityScores.int.bonuses.enhancement[0]?.value ?? 0).toBe(2);
+  });
+
+  it('inventory item (no slot, not orbiting) is excluded by recalculate()', () => {
+    const item = makeEquipmentItem('wand-1', {
+      effects: [
+        {
+          type: 'bonus',
+          bonusType: BonusType.ENHANCEMENT,
+          target: 'ability.int',
+          value: 2,
+          source: 'carried item',
+        } as Effect,
+      ],
+    });
+    const state = reducer(makeInitialState(), addEquipment(item));
+    expect(state.character.abilityScores.int.bonuses.enhancement[0]?.value ?? 0).toBe(0);
+  });
+
+  it('assignEquipmentContainer clears slot bonus immediately via recalculate()', () => {
+    const item = makeEquipmentItem('head-1', { slot: 'head', effects: [wisEffect] });
+    let state = reducer(makeInitialState(), addEquipment(item));
+    expect(state.character.abilityScores.wis.bonuses.enhancement[0]?.value ?? 0).toBe(4);
+    state = reducer(state, assignEquipmentContainer({ id: 'head-1', containerId: 'bag-1' }));
+    expect(state.character.abilityScores.wis.bonuses.enhancement[0]?.value ?? 0).toBe(0);
+  });
+
+  it('assignEquipmentContainer clears bonuses from orbiting items immediately', () => {
+    const item = makeEquipmentItem('ioun-1', {
+      isOrbiting: true,
+      effects: [
+        {
+          type: 'bonus',
+          bonusType: BonusType.ENHANCEMENT,
+          target: 'ability.int',
+          value: 2,
+          source: 'Pale Blue Rhomboid Ioun Stone',
+        } as Effect,
+      ],
+    });
+    let state = reducer(makeInitialState(), addEquipment(item));
+    expect(state.character.abilityScores.int.bonuses.enhancement[0]?.value ?? 0).toBe(2);
+    state = reducer(state, assignEquipmentContainer({ id: 'ioun-1', containerId: 'bag-1' }));
+    expect(state.character.abilityScores.int.bonuses.enhancement[0]?.value ?? 0).toBe(0);
   });
 });
 
