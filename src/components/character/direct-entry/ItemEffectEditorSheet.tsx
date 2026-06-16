@@ -167,15 +167,24 @@ export function ItemEffectEditorSheet({
     if (workingGrantedFeats.length === 0) return;
     const missing = workingGrantedFeats.filter((g) => !featNameMap.has(g.featId));
     if (missing.length === 0) return;
-    Promise.all(missing.map((g) => GameDataService.getFeatById(g.featId))).then((feats) => {
-      setFeatNameMap((prev) => {
-        const next = new Map(prev);
-        feats.forEach((f, i) => {
-          if (f) next.set(missing[i].featId, f.name);
+    let cancelled = false;
+    Promise.all(missing.map((g) => GameDataService.getFeatById(g.featId)))
+      .then((feats) => {
+        if (cancelled) return;
+        setFeatNameMap((prev) => {
+          const next = new Map(prev);
+          feats.forEach((f, i) => {
+            if (f) next.set(missing[i].featId, f.name);
+          });
+          return next;
         });
-        return next;
+      })
+      .catch(() => {
+        // Keep existing names; ignore transient lookup failures.
       });
-    });
+    return () => {
+      cancelled = true;
+    };
   }, [workingGrantedFeats]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /* istanbul ignore next */
