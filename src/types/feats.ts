@@ -36,7 +36,14 @@ export type FeatType =
 
 // ---- Feat Choice Key (shared between FeatChoice.type and choiceRequirement.key) ----
 
-export type FeatChoiceKey = 'weapon' | 'skill' | 'school' | 'ability' | 'custom' | 'spell' | 'owned_feat';
+export type FeatChoiceKey =
+  | 'weapon'
+  | 'skill'
+  | 'school'
+  | 'ability'
+  | 'custom'
+  | 'spell'
+  | 'owned_feat';
 
 // ---- Prerequisites (structured, machine-checkable) ----
 
@@ -131,6 +138,14 @@ export interface FeatDefinition extends DataQualityFields {
   // mythic tier). Validation service must check CharacterFeat[] count against maxTaken before
   // allowing a second selection. When repeatable is true and the feat has a `choices` field,
   // each instance must have a different choice (e.g. Spell Focus: Evocation ≠ Spell Focus: Illusion).
+}
+
+// ---- Feat granted by an equipped item ----
+
+export interface GrantedFeat {
+  featId: string;
+  choices?: Record<string, string>;
+  active?: boolean; // toggle state; ignored for passive feats
 }
 
 // ---- Character's Feat Instance (runtime state, stored on Character) ----

@@ -3,6 +3,48 @@ import {
   type CharacterResistances,
   type IncomingDamageDescriptor,
 } from '@services/DamageResolutionService';
+import { ModifierPipelineService } from '@services/ModifierPipelineService';
+import type { Character } from '@/types';
+import type { Buff } from '@/types/buff';
+import { BonusType } from '@/types/base';
+import type { Effect } from '@/types/base';
+
+jest.mock('@services/ModifierPipelineService', () => ({
+  ModifierPipelineService: {
+    collectAllEffects: jest.fn(() => []),
+  },
+}));
+
+const mockCollectAllEffects = ModifierPipelineService.collectAllEffects as jest.Mock;
+
+function makeCharacterStub(buffs?: Buff[]): Character {
+  return { buffs } as unknown as Character;
+}
+
+function makeDREffect(value: number, opts?: { description?: string; descriptor?: string }): Effect {
+  return {
+    type: 'resistance',
+    target: 'dr',
+    value,
+    source: 'test',
+    condition: opts
+      ? {
+          type: 'always',
+          params: opts.descriptor ? { descriptor: opts.descriptor } : {},
+          description: opts.description ?? '',
+        }
+      : undefined,
+  } as Effect;
+}
+
+function makeEREffect(damageType: string, value: number): Effect {
+  return {
+    type: 'resistance',
+    target: `energy_resistance.${damageType}` as Effect['target'],
+    value,
+    source: 'test',
+  };
+}
 
 const noResistances: CharacterResistances = { dr: [], energyResistance: {} };
 
@@ -143,5 +185,133 @@ describe('DamageResolutionService.buildSelectorOptions', () => {
     };
     const options = DamageResolutionService.buildSelectorOptions(r);
     expect(options.filter((o) => o === 'magic')).toHaveLength(1);
+  });
+});
+
+describe('DamageResolutionService.extractResistances', () => {
+  beforeEach(() => mockCollectAllEffects.mockReturnValue([]));
+
+  it('returns empty resistances when character has no effects', () => {
+    const result = DamageResolutionService.extractResistances(makeCharacterStub(), []);
+    expect(result).toEqual({ dr: [], energyResistance: {} });
+  });
+
+  it('extracts DR with bypass parsed from condition description', () => {
+    mockCollectAllEffects.mockReturnValue([makeDREffect(5, { description: 'DR 5/magic' })]);
+    const { dr } = DamageResolutionService.extractResistances(makeCharacterStub(), []);
+    expect(dr).toEqual([{ amount: 5, bypass: 'magic' }]);
+  });
+
+  it('extracts DR with bypass from condition params.descriptor when no description match', () => {
+    mockCollectAllEffects.mockReturnValue([makeDREffect(10, { descriptor: 'cold iron' })]);
+    const { dr } = DamageResolutionService.extractResistances(makeCharacterStub(), []);
+    expect(dr).toEqual([{ amount: 10, bypass: 'cold iron' }]);
+  });
+
+  it('uses "-" as bypass when DR effect has no condition', () => {
+    mockCollectAllEffects.mockReturnValue([makeDREffect(3)]);
+    const { dr } = DamageResolutionService.extractResistances(makeCharacterStub(), []);
+    expect(dr).toEqual([{ amount: 3, bypass: '-' }]);
+  });
+
+  it('uses "-" when condition description does not match DR pattern and no descriptor', () => {
+    mockCollectAllEffects.mockReturnValue([makeDREffect(3, { description: 'no match here' })]);
+    const { dr } = DamageResolutionService.extractResistances(makeCharacterStub(), []);
+    expect(dr).toEqual([{ amount: 3, bypass: '-' }]);
+  });
+
+  it('extracts energy resistance', () => {
+    mockCollectAllEffects.mockReturnValue([makeEREffect('fire', 10)]);
+    const { energyResistance } = DamageResolutionService.extractResistances(
+      makeCharacterStub(),
+      [],
+    );
+    expect(energyResistance).toEqual({ fire: 10 });
+  });
+
+  it('keeps the highest energy resistance when multiple effects target the same type', () => {
+    mockCollectAllEffects.mockReturnValue([makeEREffect('cold', 5), makeEREffect('cold', 15)]);
+    const { energyResistance } = DamageResolutionService.extractResistances(
+      makeCharacterStub(),
+      [],
+    );
+    expect(energyResistance.cold).toBe(15);
+  });
+
+  it('ignores effects with non-numeric values for DR', () => {
+    const badEffect: Effect = {
+      type: 'resistance',
+      target: 'dr',
+      value: 'formula',
+      source: 'test',
+    };
+    mockCollectAllEffects.mockReturnValue([badEffect]);
+    const { dr } = DamageResolutionService.extractResistances(makeCharacterStub(), []);
+    expect(dr).toHaveLength(0);
+  });
+
+  it('merges active buff effects not already on the character', () => {
+    const buff: Buff = {
+      id: 'b1',
+      name: 'Stoneskin',
+      source: 'spell',
+      bonusType: BonusType.ENHANCEMENT,
+      duration: null,
+      durationType: 'permanent',
+      isActive: true,
+      effects: [makeDREffect(10, { description: 'DR 10/adamantine' })],
+    };
+    const { dr } = DamageResolutionService.extractResistances(makeCharacterStub(), [buff]);
+    expect(dr).toEqual([{ amount: 10, bypass: 'adamantine' }]);
+  });
+
+  it('does not double-add buff effects already present on the character', () => {
+    const buff: Buff = {
+      id: 'b1',
+      name: 'Stoneskin',
+      source: 'spell',
+      bonusType: BonusType.ENHANCEMENT,
+      duration: null,
+      durationType: 'permanent',
+      isActive: true,
+      effects: [makeDREffect(10, { description: 'DR 10/adamantine' })],
+    };
+    const character = makeCharacterStub([buff]);
+    mockCollectAllEffects.mockReturnValue([makeDREffect(10, { description: 'DR 10/adamantine' })]);
+    const { dr } = DamageResolutionService.extractResistances(character, [buff]);
+    expect(dr).toHaveLength(1);
+  });
+
+  it('skips inactive buffs', () => {
+    const inactiveBuff: Buff = {
+      id: 'b2',
+      name: 'Inactive',
+      source: 'spell',
+      bonusType: BonusType.ENHANCEMENT,
+      duration: null,
+      durationType: 'permanent',
+      isActive: false,
+      effects: [makeDREffect(5)],
+    };
+    const { dr } = DamageResolutionService.extractResistances(makeCharacterStub(), [inactiveBuff]);
+    expect(dr).toHaveLength(0);
+  });
+
+  it('covers the buffs.map() path when character has existing buffs', () => {
+    const existingBuff: Buff = {
+      id: 'existing',
+      name: 'Existing',
+      source: 'item',
+      bonusType: BonusType.ENHANCEMENT,
+      duration: null,
+      durationType: 'permanent',
+      isActive: true,
+      effects: [],
+    };
+    const result = DamageResolutionService.extractResistances(
+      makeCharacterStub([existingBuff]),
+      [],
+    );
+    expect(result).toEqual({ dr: [], energyResistance: {} });
   });
 });

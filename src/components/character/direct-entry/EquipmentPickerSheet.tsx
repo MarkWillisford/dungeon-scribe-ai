@@ -11,10 +11,14 @@ import {
 } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import { GameDataService } from '@/services/GameDataService';
+import { FeatRegistryService } from '@/services/FeatRegistryService';
+import { SearchPickerSheet } from '@/components/ui/SearchPickerSheet';
+import type { SearchItem } from '@/components/ui/SearchPickerSheet';
 import type { WeaponDefinition, ArmorDefinition, ShieldDefinition } from '@/types/equipment';
 import type { MagicItemDefinition, ItemSlot } from '@/types/magicItems';
 import type { EditorEquippedSlot } from '@/types/character';
 import type { Effect } from '@/types/base';
+import type { GrantedFeat, FeatChoice } from '@/types/feats';
 
 // ---- Types ----
 
@@ -27,12 +31,20 @@ export interface EquipmentPickerResult {
   allowsHandUse?: boolean;
   isContainer?: boolean;
   effects?: Effect[];
+  grantedFeats?: GrantedFeat[];
+}
+
+interface PendingFeatChoice {
+  choice: FeatChoice;
+  featName: string;
+  grantIdx: number;
 }
 
 interface PickerItem extends EquipmentPickerResult {
   description?: string;
   price?: number;
   source?: string;
+  rawGrantedFeatIds?: string[]; // from MagicItemDefinition.grantedFeats before conversion
 }
 
 interface EquipmentPickerSheetProps {
@@ -136,7 +148,33 @@ export function mapMagicItem(m: MagicItemDefinition, isContainer = false): Picke
     isContainer: isContainer || undefined,
     source: sourceLabel(m.source),
     effects: m.effects,
+    rawGrantedFeatIds: m.grantedFeats?.length ? m.grantedFeats : undefined,
   };
+}
+
+export function buildGrantedFeats(featIds: string[]): GrantedFeat[] {
+  return featIds.map((featId) => {
+    const featDef = FeatRegistryService.getFeat(featId);
+    return {
+      featId,
+      choices: {},
+      active: featDef?.activationMode !== 'toggle',
+    };
+  });
+}
+
+function findNextUnfilledChoice(grants: GrantedFeat[]): PendingFeatChoice | null {
+  for (let grantIdx = 0; grantIdx < grants.length; grantIdx++) {
+    const grant = grants[grantIdx];
+    const featDef = FeatRegistryService.getFeat(grant.featId);
+    if (!featDef?.choices?.length) continue;
+    const choices = grant.choices ?? {};
+    const next = featDef.choices.find((c) => !choices[c.type]);
+    if (next) {
+      return { choice: next, featName: featDef.name, grantIdx };
+    }
+  }
+  return null;
 }
 
 export async function loadItemsForSlot(slot: PickerSlot): Promise<PickerItem[]> {
@@ -227,6 +265,12 @@ export function EquipmentPickerSheet({
   // effect doesn't need to setState synchronously on open.
   const [loadedSlot, setLoadedSlot] = useState<PickerSlot | null>(null);
 
+  // Choice prompt state for items with feat grants that require choices
+  const [pendingItem, setPendingItem] = useState<PickerItem | null>(null);
+  const [pendingGrants, setPendingGrants] = useState<GrantedFeat[]>([]);
+  const [activeChoice, setActiveChoice] = useState<PendingFeatChoice | null>(null);
+  const [choiceWeaponItems, setChoiceWeaponItems] = useState<SearchItem[]>([]);
+
   useEffect(() => {
     if (!visible) return;
     let cancelled = false;
@@ -243,6 +287,23 @@ export function EquipmentPickerSheet({
       cancelled = true;
     };
   }, [visible, slot]);
+
+  // Load weapon list when a weapon choice picker opens
+  useEffect(() => {
+    if (activeChoice?.choice.type !== 'weapon') return;
+    let cancelled = false;
+    GameDataService.getWeapons().then((weapons) => {
+      if (cancelled) return;
+      setChoiceWeaponItems(
+        weapons
+          .map((w) => ({ key: w.name, label: w.name }))
+          .sort((a, b) => a.label.localeCompare(b.label)),
+      );
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [activeChoice?.choice.type]);
 
   const loading = visible && loadedSlot !== slot;
 
@@ -267,11 +328,13 @@ export function EquipmentPickerSheet({
 
   const handleClose = () => {
     setQuery('');
+    setPendingItem(null);
+    setPendingGrants([]);
+    setActiveChoice(null);
     onClose();
   };
 
-  const handleSelect = (item: PickerItem) => {
-    setQuery('');
+  const commitSelect = (item: PickerItem, grants: GrantedFeat[]) => {
     onSelect({
       definitionId: item.definitionId,
       name: item.name,
@@ -279,7 +342,46 @@ export function EquipmentPickerSheet({
       allowsHandUse: item.allowsHandUse,
       isContainer: item.isContainer,
       effects: item.effects,
+      grantedFeats: grants.length > 0 ? grants : undefined,
     });
+  };
+
+  const handleSelect = (item: PickerItem) => {
+    setQuery('');
+    const grants = item.rawGrantedFeatIds ? buildGrantedFeats(item.rawGrantedFeatIds) : [];
+    const next = findNextUnfilledChoice(grants);
+    if (!next) {
+      commitSelect(item, grants);
+      return;
+    }
+    setPendingItem(item);
+    setPendingGrants(grants);
+    setActiveChoice(next);
+  };
+
+  const handleChoiceSelect = (value: string) => {
+    if (!pendingItem || !activeChoice) return;
+    const updatedGrants = pendingGrants.map((g, idx) =>
+      idx === activeChoice.grantIdx
+        ? { ...g, choices: { ...(g.choices ?? {}), [activeChoice.choice.type]: value } }
+        : g,
+    );
+    const next = findNextUnfilledChoice(updatedGrants);
+    if (next) {
+      setPendingGrants(updatedGrants);
+      setActiveChoice(next);
+    } else {
+      setPendingItem(null);
+      setPendingGrants([]);
+      setActiveChoice(null);
+      commitSelect(pendingItem, updatedGrants);
+    }
+  };
+
+  const handleChoiceCancel = () => {
+    setPendingItem(null);
+    setPendingGrants([]);
+    setActiveChoice(null);
   };
 
   const handleAddCustom = () => {
@@ -449,6 +551,29 @@ export function EquipmentPickerSheet({
           </View>
         )}
       </View>
+
+      {/* Feat choice prompt — shown when a picked item's granted feat needs a selection */}
+      {activeChoice && (
+        <SearchPickerSheet
+          visible
+          testID="feat-choice-picker"
+          title={`${activeChoice.featName} — ${activeChoice.choice.label}`}
+          items={
+            activeChoice.choice.type === 'weapon'
+              ? choiceWeaponItems
+              : (activeChoice.choice.options ?? []).map((o) => ({ key: o, label: o }))
+          }
+          allowCustom={activeChoice.choice.freeText}
+          onAddCustom={activeChoice.choice.freeText ? handleChoiceSelect : undefined}
+          onSelect={(item) => handleChoiceSelect(item.key)}
+          onClose={handleChoiceCancel}
+          placeholder={
+            activeChoice.choice.freeText
+              ? `Type ${activeChoice.choice.label.toLowerCase()}...`
+              : `Search ${activeChoice.choice.label.toLowerCase()}...`
+          }
+        />
+      )}
     </Modal>
   );
 }

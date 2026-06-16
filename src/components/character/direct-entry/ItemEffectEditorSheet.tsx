@@ -18,7 +18,7 @@ import { EffectTargetPickerSheet, buildTargetLabelMap } from './EffectTargetPick
 import { MagicItemEffectImportSheet } from './MagicItemEffectImportSheet';
 import { GameDataService } from '@/services/GameDataService';
 import type { EffectTargetOption } from './EffectTargetPickerSheet';
-import type { FeatDefinition } from '@/types/feats';
+import type { FeatDefinition, GrantedFeat } from '@/types/feats';
 
 // ---- Helpers ----
 
@@ -149,7 +149,9 @@ export function ItemEffectEditorSheet({
   const [sheetView, setSheetView] = useState<SheetView>('main');
   const [editedName, setEditedName] = useState(item?.name ?? '');
   const [workingEffects, setWorkingEffects] = useState<Effect[]>(item?.effects ?? []);
-  const [workingFeatIds, setWorkingFeatIds] = useState<string[]>(item?.grantedFeatIds ?? []);
+  const [workingGrantedFeats, setWorkingGrantedFeats] = useState<GrantedFeat[]>(
+    item?.grantedFeats ?? [],
+  );
   const [addingEffect, setAddingEffect] = useState(false);
   const [pendingTarget, setPendingTarget] = useState<EffectTargetOption | null>(null);
   const [pendingBonusType, setPendingBonusType] = useState<BonusType>(BonusType.UNTYPED);
@@ -162,19 +164,28 @@ export function ItemEffectEditorSheet({
 
   /* istanbul ignore next */
   useEffect(() => {
-    if (workingFeatIds.length === 0) return;
-    const missing = workingFeatIds.filter((id) => !featNameMap.has(id));
+    if (workingGrantedFeats.length === 0) return;
+    const missing = workingGrantedFeats.filter((g) => !featNameMap.has(g.featId));
     if (missing.length === 0) return;
-    Promise.all(missing.map((id) => GameDataService.getFeatById(id))).then((feats) => {
-      setFeatNameMap((prev) => {
-        const next = new Map(prev);
-        feats.forEach((f, i) => {
-          if (f) next.set(missing[i], f.name);
+    let cancelled = false;
+    Promise.all(missing.map((g) => GameDataService.getFeatById(g.featId)))
+      .then((feats) => {
+        if (cancelled) return;
+        setFeatNameMap((prev) => {
+          const next = new Map(prev);
+          feats.forEach((f, i) => {
+            if (f) next.set(missing[i].featId, f.name);
+          });
+          return next;
         });
-        return next;
+      })
+      .catch(() => {
+        // Keep existing names; ignore transient lookup failures.
       });
-    });
-  }, [workingFeatIds]); // eslint-disable-line react-hooks/exhaustive-deps
+    return () => {
+      cancelled = true;
+    };
+  }, [workingGrantedFeats]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /* istanbul ignore next */
   useEffect(() => {
@@ -244,18 +255,23 @@ export function ItemEffectEditorSheet({
 
   const handleAddFeat = useCallback(
     (feat: FeatDefinition) => {
-      if (workingFeatIds.includes(feat.id)) return;
-      setWorkingFeatIds((prev) => [...prev, feat.id]);
+      if (workingGrantedFeats.some((g) => g.featId === feat.id)) return;
+      const grant: GrantedFeat = {
+        featId: feat.id,
+        choices: {},
+        active: feat.activationMode !== 'toggle',
+      };
+      setWorkingGrantedFeats((prev) => [...prev, grant]);
       setFeatNameMap((prev) => new Map(prev).set(feat.id, feat.name));
       setFeatQuery('');
       setFeatResults([]);
       setSheetView('main');
     },
-    [workingFeatIds],
+    [workingGrantedFeats],
   );
 
-  const handleRemoveFeat = useCallback((id: string) => {
-    setWorkingFeatIds((prev) => prev.filter((fid) => fid !== id));
+  const handleRemoveFeat = useCallback((featId: string) => {
+    setWorkingGrantedFeats((prev) => prev.filter((g) => g.featId !== featId));
   }, []);
 
   const handleSave = useCallback(() => {
@@ -264,9 +280,9 @@ export function ItemEffectEditorSheet({
       ...item,
       name: editedName || item.name,
       effects: workingEffects,
-      grantedFeatIds: workingFeatIds.length > 0 ? workingFeatIds : undefined,
+      grantedFeats: workingGrantedFeats.length > 0 ? workingGrantedFeats : undefined,
     });
-  }, [item, editedName, workingEffects, workingFeatIds, onSave]);
+  }, [item, editedName, workingEffects, workingGrantedFeats, onSave]);
 
   const handleRemoveItem = useCallback(() => {
     if (!item) return;
@@ -672,11 +688,7 @@ export function ItemEffectEditorSheet({
           </Pressable>
         </View>
 
-        <Text style={[styles.featDisclaimerText, { color: colors.text.tertiary }]}>
-          Feat grants are stored but not yet applied to computed stats.
-        </Text>
-
-        {workingFeatIds.length === 0 && (
+        {workingGrantedFeats.length === 0 && (
           <Text
             style={[
               styles.emptyText,
@@ -687,18 +699,21 @@ export function ItemEffectEditorSheet({
           </Text>
         )}
 
-        {workingFeatIds.map((id) => (
-          <View key={id} style={[styles.effectRow, { borderBottomColor: colors.border.DEFAULT }]}>
+        {workingGrantedFeats.map((grant) => (
+          <View
+            key={grant.featId}
+            style={[styles.effectRow, { borderBottomColor: colors.border.DEFAULT }]}
+          >
             <Text
               style={[styles.effectLabel, { color: colors.text.primary, flex: 1 }]}
               numberOfLines={1}
             >
-              {featNameMap.get(id) ?? id}
+              {featNameMap.get(grant.featId) ?? grant.featId}
             </Text>
             <Pressable
-              onPress={() => handleRemoveFeat(id)}
+              onPress={() => handleRemoveFeat(grant.featId)}
               hitSlop={10}
-              testID={`remove-feat-${id}`}
+              testID={`remove-feat-${grant.featId}`}
               style={styles.removeBtn}
             >
               <Text style={[styles.removeBtnText, { color: colors.text.tertiary }]}>✕</Text>

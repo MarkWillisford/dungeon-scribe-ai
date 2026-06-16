@@ -125,7 +125,10 @@ describe('InitiatingService.computeInitiatorLevel', () => {
 
   it('full initiator + non-initiating class', () => {
     // Warder 4 / Fighter 10 → 4 + floor(10/2) = 9
-    const contributors = [makeContributor('Warder', 4, 'full'), makeContributor('Fighter', 10, 'half')];
+    const contributors = [
+      makeContributor('Warder', 4, 'full'),
+      makeContributor('Fighter', 10, 'half'),
+    ];
     expect(InitiatingService.computeInitiatorLevel(contributors)).toBe(9);
   });
 
@@ -156,9 +159,9 @@ describe('InitiatingService.computeInitiatorLevel', () => {
   });
 
   it('20th level single initiator', () => {
-    expect(
-      InitiatingService.computeInitiatorLevel([makeContributor('Warblade', 20, 'full')]),
-    ).toBe(20);
+    expect(InitiatingService.computeInitiatorLevel([makeContributor('Warblade', 20, 'full')])).toBe(
+      20,
+    );
   });
 
   it('respects advancesInitiatorLevel = false', () => {
@@ -207,7 +210,9 @@ describe('InitiatingService.getProgressionAtLevel', () => {
   });
 
   it('returns correct progression at level 10', () => {
-    expect(InitiatingService.getProgressionAtLevel(MOCK_TABLES, 'warblade', 10)).toEqual([14, 7, 3]);
+    expect(InitiatingService.getProgressionAtLevel(MOCK_TABLES, 'warblade', 10)).toEqual([
+      14, 7, 3,
+    ]);
   });
 
   it('returns null for unknown table key', () => {
@@ -541,5 +546,77 @@ describe('InitiatingService.rollCrusaderGrants', () => {
     InitiatingService.rollCrusaderGrants(readied, 1);
     expect(readied[0]).toBe(origA);
     expect(origA.isGranted).toBe(false);
+  });
+});
+
+describe('InitiatingService.applyTradition', () => {
+  const tradition: MartialTradition = {
+    id: 'trad-1',
+    name: 'Unbroken Gate',
+    description: 'A tradition of open hand combat.',
+    favoredDisciplineId: 'unbroken-gate',
+    source: POW_SOURCE,
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+    verificationStatus: 'needs_review',
+  };
+
+  it('sets martialTraditionId on the pool', () => {
+    const pool = makePool({ bonusDisciplines: [], removedDisciplines: [] });
+    const result = InitiatingService.applyTradition(pool, tradition, 'iron-heart');
+    expect(result.martialTraditionId).toBe('trad-1');
+  });
+
+  it('adds the removed discipline entry', () => {
+    const pool = makePool({ bonusDisciplines: [], removedDisciplines: [] });
+    const result = InitiatingService.applyTradition(pool, tradition, 'iron-heart');
+    expect(result.removedDisciplines).toContainEqual({
+      disciplineId: 'iron-heart',
+      reason: 'Martial Tradition: Unbroken Gate',
+    });
+  });
+
+  it('adds the tradition favored discipline as a bonus', () => {
+    const pool = makePool({ bonusDisciplines: [], removedDisciplines: [] });
+    const result = InitiatingService.applyTradition(pool, tradition, 'iron-heart');
+    expect(result.bonusDisciplines).toContainEqual({
+      disciplineId: 'unbroken-gate',
+      source: 'Martial Tradition: Unbroken Gate',
+    });
+  });
+
+  it('replaces a previously applied tradition in removedDisciplines', () => {
+    const pool = makePool({
+      removedDisciplines: [
+        { disciplineId: 'tiger-claw', reason: 'Martial Tradition: Old Way' },
+        { disciplineId: 'diamond-mind', reason: 'Manual removal' },
+      ],
+      bonusDisciplines: [],
+    });
+    const result = InitiatingService.applyTradition(pool, tradition, 'iron-heart');
+    const traditionEntries = result.removedDisciplines.filter((r) =>
+      r.reason.startsWith('Martial Tradition:'),
+    );
+    expect(traditionEntries).toHaveLength(1);
+    expect(traditionEntries[0].disciplineId).toBe('iron-heart');
+    expect(result.removedDisciplines.find((r) => r.reason === 'Manual removal')).toBeDefined();
+  });
+
+  it('replaces a previously applied tradition in bonusDisciplines', () => {
+    const pool = makePool({
+      bonusDisciplines: [
+        { disciplineId: 'old-bonus', source: 'Martial Tradition: Old Way' },
+        { disciplineId: 'manual-bonus', source: 'Class Feature' },
+      ],
+      removedDisciplines: [],
+    });
+    const result = InitiatingService.applyTradition(pool, tradition, 'iron-heart');
+    const traditionBonuses = result.bonusDisciplines.filter((b) =>
+      b.source.startsWith('Martial Tradition:'),
+    );
+    expect(traditionBonuses).toHaveLength(1);
+    expect(traditionBonuses[0].disciplineId).toBe('unbroken-gate');
+    expect(result.bonusDisciplines.find((b) => b.source === 'Class Feature')).toBeDefined();
   });
 });

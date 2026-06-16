@@ -63,7 +63,13 @@ jest.mock('@/components/character/direct-entry/MagicItemEffectImportSheet', () =
           testID: 'mock-import-effects-btn',
           onPress: () => {
             onImport([
-              { type: 'bonus', target: 'save.all', value: 2, bonusType: 'resistance', source: currentItemName },
+              {
+                type: 'bonus',
+                target: 'save.all',
+                value: 2,
+                bonusType: 'resistance',
+                source: currentItemName,
+              },
             ]);
             onBack();
           },
@@ -1047,7 +1053,7 @@ describe('ItemEffectEditorSheet', () => {
     expect(findTestId(updated, 'add-feat-btn')).toBeTruthy();
   });
 
-  it('saves grantedFeatIds on the item when feats added', () => {
+  it('saves grantedFeats as undefined on the item when no feats added', () => {
     const item = makeItem();
     const rendered = render(
       <ItemEffectEditorSheet
@@ -1065,19 +1071,19 @@ describe('ItemEffectEditorSheet', () => {
     fireEvent.press(backBtn!);
     rendered.rerender();
     fireEvent.press(rendered.getByTestId('save-btn'));
-    // With no feats added, grantedFeatIds should be undefined
-    expect(onSave).toHaveBeenCalledWith(
-      expect.objectContaining({ id: 'item-1' }),
-    );
+    // With no feats added, grantedFeats should be undefined
+    expect(onSave).toHaveBeenCalledWith(expect.objectContaining({ id: 'item-1' }));
     const saved = onSave.mock.calls[0][0];
-    expect(saved.grantedFeatIds).toBeUndefined();
+    expect(saved.grantedFeats).toBeUndefined();
   });
 
-  it('initializes workingFeatIds from item.grantedFeatIds', () => {
+  it('initializes workingGrantedFeats from item.grantedFeats', () => {
     const { GameDataService: mockGDS } = require('@/services/GameDataService');
     mockGDS.getFeatById.mockResolvedValue({ id: 'power-attack', name: 'Power Attack' });
 
-    const item = makeItem({ grantedFeatIds: ['power-attack'] });
+    const item = makeItem({
+      grantedFeats: [{ featId: 'power-attack', choices: {}, active: true }],
+    });
     const rendered = render(
       <ItemEffectEditorSheet
         item={item}
@@ -1089,7 +1095,7 @@ describe('ItemEffectEditorSheet', () => {
     );
     fireEvent.press(rendered.getByTestId('save-btn'));
     const saved = onSave.mock.calls[0][0];
-    expect(saved.grantedFeatIds).toEqual(['power-attack']);
+    expect(saved.grantedFeats).toEqual([{ featId: 'power-attack', choices: {}, active: true }]);
   });
 
   it('merges imported effects into the working list (handleImportEffects)', () => {
@@ -1130,7 +1136,18 @@ describe('ItemEffectEditorSheet', () => {
     );
     // Switch to featSearch view (slot 0) and inject feat results (slot 9)
     setHookStateAt(0, 'featSearch');
-    setHookStateAt(9, [{ id: 'power-attack', name: 'Power Attack' }]);
+    setHookStateAt(9, [
+      {
+        id: 'power-attack',
+        name: 'Power Attack',
+        activationMode: 'toggle',
+        effects: [],
+        types: [],
+        prerequisites: [],
+        description: '',
+        source: '',
+      },
+    ]);
     const withResults = rendered.rerender();
     const featBtn = findTestId(withResults, 'feat-result-power-attack');
     expect(featBtn).toBeTruthy();
@@ -1139,12 +1156,16 @@ describe('ItemEffectEditorSheet', () => {
     const updated = rendered.rerender();
     fireEvent.press(findTestId(updated, 'save-btn')!);
     const saved = onSave.mock.calls[0][0];
-    expect(saved.grantedFeatIds).toContain('power-attack');
+    expect(saved.grantedFeats).toEqual(
+      expect.arrayContaining([expect.objectContaining({ featId: 'power-attack' })]),
+    );
   });
 
   it('removes a granted feat (handleRemoveFeat)', () => {
     const { setHookStateAt } = require('../../helpers/testUtils');
-    const item = makeItem({ grantedFeatIds: ['power-attack'] });
+    const item = makeItem({
+      grantedFeats: [{ featId: 'power-attack', choices: {}, active: false }],
+    });
     const rendered = render(
       <ItemEffectEditorSheet
         item={item}
@@ -1163,8 +1184,8 @@ describe('ItemEffectEditorSheet', () => {
     const updated = rendered.rerender();
     fireEvent.press(findTestId(updated, 'save-btn')!);
     const saved = onSave.mock.calls[0][0];
-    // handleSave sets grantedFeatIds to undefined when the array is empty
-    expect(saved.grantedFeatIds).toBeUndefined();
+    // handleSave sets grantedFeats to undefined when the array is empty
+    expect(saved.grantedFeats).toBeUndefined();
   });
 });
 
