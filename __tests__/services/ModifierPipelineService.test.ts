@@ -768,7 +768,7 @@ describe('ModifierPipelineService', () => {
       );
     });
 
-    test('choice placeholder in source is substituted from grant.choices', () => {
+    test('choice placeholder in target is substituted from grant.choices', () => {
       const choiceFeat: FeatDefinition = {
         id: 'weapon_focus_test',
         name: 'Weapon Focus',
@@ -895,9 +895,30 @@ describe('ModifierPipelineService', () => {
         choices: {},
       });
 
+      // Add a lower MORALE bonus; stacking rules should keep only the higher (+2)
+      char.buffs.push({
+        id: 'heroism',
+        name: 'Heroism',
+        source: 'Wizard',
+        bonusType: BonusType.MORALE,
+        duration: 10,
+        durationType: 'rounds',
+        isActive: true,
+        effects: [
+          {
+            type: 'bonus',
+            bonusType: BonusType.MORALE,
+            target: 'save.will',
+            value: 1,
+            source: 'Heroism',
+          },
+        ],
+      });
+
       const breakdown = ModifierPipelineService.getBreakdown(char, 'save.will');
       expect(breakdown.bonuses.some((b) => b.source === 'Indomitable Will')).toBe(true);
       expect(breakdown.bonuses.find((b) => b.source === 'Indomitable Will')?.stacked).toBe(true);
+      expect(breakdown.bonuses.find((b) => b.source === 'Heroism')?.stacked).toBe(false);
     });
   });
 
