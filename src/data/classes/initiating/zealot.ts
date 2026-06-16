@@ -31,7 +31,7 @@ export const ZEALOT_PROGRESSION: InitiatingProgressionTable = [
 
 export const ZEALOT_CLASS: ExpandedClassData = {
   name: 'Zealot',
-  category: 'Base',
+  category: 'Path of War: Expanded',
   maxLevel: 20,
   hitDie: 10,
   skillRanksPerLevel: 4,

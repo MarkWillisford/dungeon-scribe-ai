@@ -22,7 +22,7 @@ export const LANDSKNECHT_PROGRESSION: InitiatingProgressionTable = [
 
 export const LANDSKNECHT_CLASS: ExpandedClassData = {
   name: 'Landsknecht',
-  category: 'Prestige',
+  category: 'Path of War Prestige',
   maxLevel: 10,
   hitDie: 10,
   skillRanksPerLevel: 4,

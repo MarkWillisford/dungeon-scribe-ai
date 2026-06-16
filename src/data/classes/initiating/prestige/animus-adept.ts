@@ -18,7 +18,7 @@ export const ANIMUS_ADEPT_PROGRESSION: InitiatingProgressionTable = [
 
 export const ANIMUS_ADEPT_CLASS: ExpandedClassData = {
   name: 'Animus Adept',
-  category: 'Prestige',
+  category: 'Path of War Prestige',
   maxLevel: 5,
   hitDie: 8,
   skillRanksPerLevel: 2,

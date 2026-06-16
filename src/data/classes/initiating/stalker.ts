@@ -31,7 +31,7 @@ export const STALKER_PROGRESSION: InitiatingProgressionTable = [
 
 export const STALKER_CLASS: ExpandedClassData = {
   name: 'Stalker',
-  category: 'Base',
+  category: 'Path of War',
   maxLevel: 20,
   hitDie: 8,
   skillRanksPerLevel: 6,

@@ -31,7 +31,7 @@ export const HARBINGER_PROGRESSION: InitiatingProgressionTable = [
 
 export const HARBINGER_CLASS: ExpandedClassData = {
   name: 'Harbinger',
-  category: 'Base',
+  category: 'Path of War: Expanded',
   maxLevel: 20,
   hitDie: 8,
   skillRanksPerLevel: 4,
