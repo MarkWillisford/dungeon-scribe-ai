@@ -860,4 +860,62 @@ describe('ModifierPipelineService', () => {
       );
     });
   });
+
+  describe('getBreakdown — typed bonus stacking', () => {
+    test('applies best-of stacking for typed (non-DODGE, non-UNTYPED) bonuses', () => {
+      // Register a feat with a MORALE bonus so the reduce path in getBreakdown is exercised
+      const moraleWillFeat: FeatDefinition = {
+        id: 'indomitable_will',
+        name: 'Indomitable Will',
+        description: '+2 morale to Will',
+        source: 'CRB',
+        verificationStatus: 'needs_review' as const,
+        types: ['general'],
+        prerequisites: [],
+        effects: [
+          {
+            type: 'bonus',
+            target: 'save.will',
+            value: 2,
+            bonusType: BonusType.MORALE,
+            source: 'Indomitable Will',
+          },
+        ],
+        activationMode: 'passive',
+      };
+      FeatRegistryService.registerBatch([...testFeats, moraleWillFeat]);
+
+      const char = createTestCharacter();
+      char.feats.feats.push({
+        featId: 'indomitable_will',
+        name: 'Indomitable Will',
+        source: 'level_1',
+        grantedAtLevel: 1,
+        active: true,
+        choices: {},
+      });
+
+      const breakdown = ModifierPipelineService.getBreakdown(char, 'save.will');
+      expect(breakdown.bonuses.some((b) => b.source === 'Indomitable Will')).toBe(true);
+      expect(breakdown.bonuses.find((b) => b.source === 'Indomitable Will')?.stacked).toBe(true);
+    });
+  });
+
+  describe('recalculate — favored class HP bonus', () => {
+    test('includes HP favored class bonus in hitPoints.favoredClass', () => {
+      const char = createTestCharacter();
+      char.classes.favoredClassBonuses = [{ className: 'Fighter', bonusType: 'HP', value: 3 }];
+      const result = ModifierPipelineService.recalculate(char);
+      expect(result.combatStats.hitPoints.favoredClass).toBe(3);
+    });
+
+    test('ignores non-HP favored class bonuses', () => {
+      const char = createTestCharacter();
+      char.classes.favoredClassBonuses = [
+        { className: 'Fighter', bonusType: 'skill_rank', value: 1 },
+      ];
+      const result = ModifierPipelineService.recalculate(char);
+      expect(result.combatStats.hitPoints.favoredClass).toBe(0);
+    });
+  });
 });
