@@ -33,6 +33,14 @@ function genId(): string {
   return Math.random().toString(36).slice(2) + Date.now().toString(36);
 }
 
+// Temporarily disabled while the class-choice system is still being built out.
+// The entire class card acts as the drag handle, so ordinary taps and
+// long-presses were triggering reorder drags and interfering with selection.
+// Flip back to `true` to restore drag-to-reorder. See issue #248.
+// (Level/class ordering can still be edited via the "Edit Level Progression"
+// editor below, which is unaffected.)
+const CLASS_DRAG_REORDER_ENABLED = false;
+
 // ---- Worklet: hover index from current drag state ----
 
 function computeHoverIndex(heights: number[], fromIndex: number, dy: number): number {
@@ -166,7 +174,7 @@ function DraggableRow({
       onLayout={(e) => onHeightChange(index, e.nativeEvent.layout.height)}
       style={[rowStyle, styles.draggableRow]}
     >
-      {count > 1 ? (
+      {count > 1 && CLASS_DRAG_REORDER_ENABLED ? (
         <GestureDetector gesture={gesture}>
           <View style={styles.classCardWrapper}>{card}</View>
         </GestureDetector>
@@ -595,7 +603,8 @@ export function ClassesSection() {
         <AutoComputedValue value={formatSave(will)} label="Will" />
       </View>
 
-      {/* Class cards — long-press ☰ handle to drag and reorder (multiclass only) */}
+      {/* Class cards. Drag-to-reorder is temporarily disabled (see #248);
+          use "Edit Level Progression" below to change ordering. */}
       <DraggableClassList />
 
       {/* Level progression editor — only relevant with multiple classes */}
