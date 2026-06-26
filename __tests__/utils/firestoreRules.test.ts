@@ -27,13 +27,13 @@ jest.mock('firebase-admin', () => ({
 
 import { COLLECTIONS } from '../../scripts/db/verifySeeding';
 
-/** Top-level collection names that have an explicit `match /<name>/{...}` rule. */
+/** Collections whose `match /<name>/{...}` block grants a read rule. */
 function ruleCollectionNames(rules: string): Set<string> {
   const names = new Set<string>();
-  const re = /match\s+\/([A-Za-z0-9_]+)\/\{/g;
+  const re = /match\s+\/([A-Za-z0-9_]+)\/\{[^}]*\}\s*\{([^}]*)\}/g;
   let m: RegExpExecArray | null;
   while ((m = re.exec(rules)) !== null) {
-    names.add(m[1]);
+    if (/allow[^;]*\bread\b/.test(m[2])) names.add(m[1]);
   }
   return names;
 }
@@ -53,5 +53,11 @@ describe('firestore.rules — seeded collections have matching read rules (#244)
   // scripts/db/seedRacialChoiceDefinitions.ts and read by the connector.
   it('grants read access to racialChoiceDefinitions', () => {
     expect(ruleNames).toContain('racialChoiceDefinitions');
+  });
+
+  // In COLLECTIONS, but explicit guard mirrors the racialChoiceDefinitions pattern
+  // so both extra-registry checks are visible at a glance.
+  it('grants read access to classChoiceDefinitions', () => {
+    expect(ruleNames).toContain('classChoiceDefinitions');
   });
 });
