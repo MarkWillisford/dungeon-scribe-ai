@@ -17,6 +17,7 @@ import { PrerequisiteService } from './PrerequisiteService';
 import { GameDataService } from '@/services/GameDataService';
 import { EidolonPoolService, type EidolonDataIndex } from './EidolonPoolService';
 import { lookupClassData, type ClassDataMap } from '@/utils/characterComputations';
+import { exceedsPerSkillMax } from '@/utils/skillRanks';
 import { isPrestigeCategory } from '@/data/classes/types';
 
 // ---- Helpers ----
@@ -431,7 +432,7 @@ export class CharacterValidationService {
     // Per-skill max = totalHD
     if (totalHD > 0) {
       for (const [skillKey, entry] of skillEntries) {
-        if (entry.ranks > totalHD) {
+        if (exceedsPerSkillMax(entry.ranks, totalHD)) {
           w.push(
             warn(
               warnId(`skill-max-${skillKey}`),
