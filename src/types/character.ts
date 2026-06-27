@@ -39,6 +39,8 @@ export interface CharacterInfo {
   racialFlexChoices?: string[];
   // Player's racial trait/feat selections (e.g. Elven Noble's Agile Fighters feat choice)
   racialChoices?: import('./racialChoices').RacialChoice[];
+  // Names of selected alternate racial traits; default traits are active when absent from this list
+  selectedAlternateRacialTraits?: string[];
 }
 
 // Character-layer equipped slot — ring splits into ring_left / ring_right
