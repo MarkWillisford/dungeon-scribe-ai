@@ -21,8 +21,8 @@ describe('RANGER_ARCHETYPES', () => {
       expect(divineMarksman?.replacedFeatures).toContain('Spellcasting');
     });
 
-    test('replaces Swift Tracking at level 8', () => {
-      expect(divineMarksman?.replacedFeatures).toContain('Swift Tracking');
+    test('replaces Swift Tracker at level 8', () => {
+      expect(divineMarksman?.replacedFeatures).toContain('Swift Tracker');
     });
 
     test('replaces Quarry at level 11', () => {

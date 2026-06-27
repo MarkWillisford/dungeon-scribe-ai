@@ -3209,7 +3209,7 @@ export const RANGER_ARCHETYPES: ArchetypeData[] = [
       'Track',
       'Wild Empathy',
       'Spellcasting',
-      'Swift Tracking',
+      'Swift Tracker',
       'Quarry',
       'Improved Quarry',
     ],
