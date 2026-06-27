@@ -54,6 +54,7 @@ const OPTIONAL_RULE_LABELS: Record<BoolOptionalRuleKey, string> = {
   crRefunds: 'CR Refunds',
   laBuyback: 'LA Buyback',
   crLaAbilityScoreReductions: 'CR/LA Ability Score Reductions',
+  flaws: 'Flaws (3.5e)',
 };
 
 const OPTIONAL_RULE_ORDER: BoolOptionalRuleKey[] = [
