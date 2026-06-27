@@ -315,6 +315,7 @@ export function ItemEffectEditorSheet({
   const handleChoiceSelect = useCallback(
     (value: string) => {
       if (!pendingFeat || !pendingGrant || !activeChoice) return;
+      if (!value.trim()) return;
       const updatedChoices = { ...(pendingGrant.choices ?? {}), [activeChoice.type]: value };
       const next = findNextUnfilledChoice(pendingFeat.choices ?? [], updatedChoices);
       if (next) {
