@@ -64,6 +64,7 @@ export default function CharacterDetailScreen() {
   );
 
   const closeConfirm = () => {
+    if (deleting) return;
     setConfirmVisible(false);
     setConfirmInput('');
   };
@@ -186,7 +187,7 @@ export default function CharacterDetailScreen() {
         animationType="fade"
         onRequestClose={closeConfirm}
       >
-        <Pressable style={styles.modalOverlay} onPress={closeConfirm}>
+        <Pressable style={styles.modalOverlay} onPress={closeConfirm} disabled={deleting}>
           <Pressable
             style={[styles.modalCard, modalThemeStyles.card]}
             onPress={(e) => e.stopPropagation()}
@@ -218,6 +219,7 @@ export default function CharacterDetailScreen() {
                 title="Cancel"
                 onPress={closeConfirm}
                 variant="ghost"
+                disabled={deleting}
                 style={styles.modalActionButton}
                 testID="delete-confirm-cancel"
               />

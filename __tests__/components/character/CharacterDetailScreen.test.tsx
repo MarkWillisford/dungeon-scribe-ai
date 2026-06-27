@@ -1,6 +1,6 @@
 import React from 'react';
 import { Alert } from 'react-native';
-import { render, fireEvent, type RenderedNode } from '../../helpers/testUtils';
+import { render, fireEvent, setHookStateAt, type RenderedNode } from '../../helpers/testUtils';
 
 const flushPromises = () => new Promise((resolve) => setImmediate(resolve));
 
@@ -368,6 +368,21 @@ describe('CharacterDetailScreen — confirming delete', () => {
 describe('CharacterDetailScreen — cancelling delete', () => {
   beforeEach(() => {
     mockActiveCharacter = makeCharacter();
+  });
+
+  it('disables the Cancel button while deletion is in progress', () => {
+    const { view } = openDeleteModal();
+    setHookStateAt(3, true); // deleting=true (hook slot 3)
+    const inFlightTree = view.rerender();
+    expect(nodeById(inFlightTree, 'delete-confirm-cancel')!.props.disabled).toBe(true);
+  });
+
+  it('does not close the modal when Cancel is pressed while deletion is in progress', () => {
+    const { view } = openDeleteModal();
+    setHookStateAt(3, true); // deleting=true (hook slot 3)
+    const inFlightTree = view.rerender();
+    fireEvent.press(nodeById(inFlightTree, 'delete-confirm-cancel')!); // no-op: disabled
+    expect(nodeById(view.rerender(), 'delete-confirm-input')).toBeDefined();
   });
 
   it('closes the modal and does not dispatch deleteCharacter when Cancel is pressed', () => {
