@@ -76,6 +76,8 @@ describe('rulesetSlice', () => {
       const stateWithRuleset = { activeRuleset: mockRuleset, isModifiedFromPreset: true };
       const state = rulesetReducer(stateWithRuleset, clearRuleset());
       expect(state.activeRuleset).toEqual(PRESET_PF1E_STANDARD);
+      expect(state.activeRuleset?.validationSettings.maxFlaws).toBe(2);
+      expect(state.activeRuleset?.optionalRules.flaws).toBe(false);
     });
 
     it('resets isModifiedFromPreset to false', () => {
@@ -92,6 +94,8 @@ describe('rulesetSlice', () => {
       expect(state.activeRuleset?.name).toBe('Custom');
       expect(state.activeRuleset?.allowedSources).toEqual(['pf1e-official']);
       expect(state.activeRuleset?.optionalRules.heroPoints).toBe(false);
+      expect(state.activeRuleset?.optionalRules.flaws).toBe(false);
+      expect(state.activeRuleset?.validationSettings.maxFlaws).toBe(2);
     });
 
     it('patches nested optionalRules via caller spread', () => {
