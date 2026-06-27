@@ -88,7 +88,6 @@ export interface Character {
   // until item picker provides full definition data)
   editorEquipment?: EditorEquipmentItem[];
 
-  // 3.5e flaws
   flaws: CharacterFlaws;
 
   // Editor metadata — user-entered typed bonuses for ability scores (morale, sacred, etc.)
