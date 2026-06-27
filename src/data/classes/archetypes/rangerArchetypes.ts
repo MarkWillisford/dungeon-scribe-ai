@@ -3213,7 +3213,7 @@ export const RANGER_ARCHETYPES: ArchetypeData[] = [
       'Quarry',
       'Improved Quarry',
     ],
-    modifiedFeatures: ['Combat Style Feat (must select archery)'],
+    modifiedFeatures: ['Combat Style Feats (must choose archery)'],
     newFeatures: [
       {
         name: 'Bullseye Shot',

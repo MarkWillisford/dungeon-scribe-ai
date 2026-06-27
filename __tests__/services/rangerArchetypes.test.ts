@@ -34,7 +34,7 @@ describe('RANGER_ARCHETYPES', () => {
     });
 
     test('modifies the combat style feat to require archery', () => {
-      expect(divineMarksman?.modifiedFeatures).toContain('Combat Style Feat (must select archery)');
+      expect(divineMarksman?.modifiedFeatures).toContain('Combat Style Feats (must choose archery)');
     });
 
     test('includes Bullseye Shot feature at level 1', () => {
