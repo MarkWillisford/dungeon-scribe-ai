@@ -5,7 +5,12 @@ import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { setSkillEntry, removeSkillEntry } from '@/store/slices/characterEntrySlice';
 import type { AbilityKey } from '@/types/abilities';
 import { PRESET_PF1E_STANDARD } from '@/config/rulesetPresets';
-import { getPerSkillMaxRanks, exceedsPerSkillMax, clampSkillRanks } from '@/utils/skillRanks';
+import {
+  getPerSkillMaxRanks,
+  exceedsPerSkillMax,
+  clampSkillRanks,
+  getTotalAvailableSkillRanks,
+} from '@/utils/skillRanks';
 
 type SkillEntry = { ranks: number; misc: number };
 
@@ -394,6 +399,16 @@ export function SkillsSection() {
   // Max ranks allowed in any single skill = character total level (Hit Dice).
   const maxRanks = getPerSkillMaxRanks(character.classes.totalLevel);
 
+  // Total ranks available to spend across all class levels, and how many remain.
+  const totalAvailable = getTotalAvailableSkillRanks(
+    character.classes.classes.map((c) => ({
+      skillRanksPerLevel: c.skillRanks ?? 2,
+      level: c.level,
+    })),
+    character.abilityScores.int.modifier,
+  );
+  const remaining = totalAvailable - totalRanks;
+
   const filteredDefs = useMemo(() => {
     const q = query.toLowerCase().trim();
     return SKILL_DEFS.filter((def) => {
@@ -438,9 +453,28 @@ export function SkillsSection() {
           <Text style={{ color: isDark ? fantasy.gold : fantasy.bronze, fontWeight: '700' }}>
             {totalRanks}
           </Text>
+          {totalAvailable > 0 ? (
+            <Text style={{ color: colors.text.secondary }}>
+              {' of '}
+              <Text style={{ color: isDark ? fantasy.gold : fantasy.bronze, fontWeight: '700' }}>
+                {totalAvailable}
+              </Text>
+              {'   Remaining: '}
+              <Text
+                testID="skill-ranks-remaining"
+                style={{
+                  color:
+                    remaining < 0 ? colors.error.DEFAULT : isDark ? fantasy.gold : fantasy.bronze,
+                  fontWeight: '700',
+                }}
+              >
+                {remaining}
+              </Text>
+            </Text>
+          ) : null}
           {maxRanks > 0 ? (
             <Text style={{ color: colors.text.tertiary }}>
-              {'   '}Max per skill:{' '}
+              {'   Max per skill: '}
               <Text style={{ color: isDark ? fantasy.gold : fantasy.bronze, fontWeight: '700' }}>
                 {maxRanks}
               </Text>

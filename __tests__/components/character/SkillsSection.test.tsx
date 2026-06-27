@@ -21,6 +21,8 @@ const mockAbilityScores = {
 let mockSkills: Record<string, { ranks: number; misc: number }> = {};
 let mockRuleset: Ruleset = PRESET_PF1E_STANDARD;
 let mockTotalLevel = 20;
+let mockClassEntries: { name: string; skillRanks: number; level: number }[] = [];
+let mockIntMod = 0;
 
 jest.mock('@/store/hooks', () => ({
   useAppDispatch: () => mockDispatch,
@@ -29,8 +31,11 @@ jest.mock('@/store/hooks', () => ({
       characterEntry: {
         character: {
           skills: mockSkills,
-          abilityScores: mockAbilityScores,
-          classes: { totalLevel: mockTotalLevel },
+          abilityScores: {
+            ...mockAbilityScores,
+            int: { modifier: mockIntMod },
+          },
+          classes: { totalLevel: mockTotalLevel, classes: mockClassEntries },
         },
       },
       ruleset: { activeRuleset: mockRuleset },
@@ -63,6 +68,8 @@ beforeEach(() => {
   mockSkills = {};
   mockRuleset = PRESET_PF1E_STANDARD;
   mockTotalLevel = 20;
+  mockClassEntries = [];
+  mockIntMod = 0;
   mockDispatch.mockClear();
 });
 
@@ -275,5 +282,60 @@ describe('SkillsSection — per-skill max-rank cap', () => {
     if (!ranksInput) throw new Error('Could not find Acrobatics ranks input');
     const style = StyleSheet.flatten(ranksInput.props.style);
     expect(style.borderColor).toBe('#B00020');
+  });
+});
+
+describe('SkillsSection — total available ranks', () => {
+  it('shows total available ranks from class skill ranks and INT', () => {
+    // Rogue 8/level, level 3, INT +0 => 24 available
+    mockTotalLevel = 3;
+    mockClassEntries = [{ name: 'Rogue', skillRanks: 8, level: 3 }];
+    const { getAllText } = render(<SkillsSection />);
+    const text = getAllText();
+    expect(text.some((t) => t.includes('Remaining'))).toBe(true);
+    expect(text.some((t) => t === '24')).toBe(true);
+  });
+
+  it('adds the INT modifier to per-level ranks', () => {
+    // 8/level + 2 INT, level 1 => 10 available
+    mockTotalLevel = 1;
+    mockIntMod = 2;
+    mockClassEntries = [{ name: 'Rogue', skillRanks: 8, level: 1 }];
+    const { getAllText } = render(<SkillsSection />);
+    expect(getAllText().some((t) => t === '10')).toBe(true);
+  });
+
+  it('computes remaining as available minus used', () => {
+    // available 24, used 3 => remaining 21
+    mockTotalLevel = 3;
+    mockClassEntries = [{ name: 'Rogue', skillRanks: 8, level: 3 }];
+    mockSkills = { acrobatics: { ranks: 3, misc: 0 } };
+    const { getByTestId } = render(<SkillsSection />);
+    const remaining = getByTestId('skill-ranks-remaining');
+    expect(remaining.children).toContain('21');
+  });
+
+  it('colors remaining with the error color when over-spent', () => {
+    // available 2, used 3 across capped skills => remaining -1
+    mockTotalLevel = 3;
+    mockClassEntries = [{ name: 'Wizard', skillRanks: 2, level: 1 }];
+    mockSkills = {
+      acrobatics: { ranks: 1, misc: 0 },
+      appraise: { ranks: 1, misc: 0 },
+      bluff: { ranks: 1, misc: 0 },
+    };
+    const { getByTestId } = render(<SkillsSection />);
+    const remaining = getByTestId('skill-ranks-remaining');
+    expect(remaining.children).toContain('-1');
+    const style = Array.isArray(remaining.props.style)
+      ? Object.assign({}, ...remaining.props.style)
+      : remaining.props.style;
+    expect(style.color).toBe('#B00020');
+  });
+
+  it('does not show available/remaining when the character has no classes', () => {
+    mockClassEntries = [];
+    const { getAllText } = render(<SkillsSection />);
+    expect(getAllText().some((t) => t.includes('Remaining'))).toBe(false);
   });
 });
