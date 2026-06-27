@@ -60,6 +60,7 @@ const OPTIONAL_RULE_LABELS: Record<BoolOptionalRuleKey, string> = {
 const OPTIONAL_RULE_ORDER: BoolOptionalRuleKey[] = [
   'pathOfWarMechanics',
   'tomeOfBattleMechanics',
+  'flaws',
   'heroPoints',
   'gestalt',
   'fractionalBABSaves',
