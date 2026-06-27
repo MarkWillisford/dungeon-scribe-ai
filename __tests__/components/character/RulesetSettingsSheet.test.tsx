@@ -84,15 +84,6 @@ function findAllNodes(node: RenderedNode, pred: (n: RenderedNode) => boolean): R
   return results;
 }
 
-function getAllText(node: RenderedNode): string[] {
-  const texts: string[] = [];
-  for (const child of node.children) {
-    if (typeof child === 'string') texts.push(child);
-    else texts.push(...getAllText(child));
-  }
-  return texts;
-}
-
 const onClose = jest.fn();
 
 function renderSheet() {
