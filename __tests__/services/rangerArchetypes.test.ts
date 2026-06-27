@@ -1,9 +1,17 @@
-import { RANGER_ARCHETYPES } from '../../src/data/classes/archetypes/rangerArchetypes';
+import { GameDataService } from '@/services/GameDataService';
+import { StaticGameDataConnector } from '@/services/StaticGameDataConnector';
+import type { ArchetypeData } from '@/data/classes/types';
 
 describe('RANGER_ARCHETYPES', () => {
-  describe('Divine Marksman', () => {
-    const divineMarksman = RANGER_ARCHETYPES.find((a) => a.name === 'Divine Marksman');
+  let divineMarksman: ArchetypeData | undefined;
 
+  beforeAll(async () => {
+    GameDataService.setConnector(new StaticGameDataConnector());
+    const archetypes = await GameDataService.getArchetypesByClass('Ranger');
+    divineMarksman = archetypes.find((a) => a.name === 'Divine Marksman');
+  });
+
+  describe('Divine Marksman', () => {
     test('exists in the ranger archetypes list', () => {
       expect(divineMarksman).toBeDefined();
     });
