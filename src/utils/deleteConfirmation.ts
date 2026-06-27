@@ -15,9 +15,9 @@
  * whitespace-only target name can never be confirmed.
  */
 export function isDeleteConfirmationValid(typed: string, characterName: string): boolean {
-  const target = characterName.trim().toLocaleLowerCase();
+  const target = characterName.trim().toLowerCase();
   if (target.length === 0) {
     return false;
   }
-  return typed.trim().toLocaleLowerCase() === target;
+  return typed.trim().toLowerCase() === target;
 }

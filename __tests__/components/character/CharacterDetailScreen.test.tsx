@@ -347,7 +347,7 @@ describe('CharacterDetailScreen — confirming delete', () => {
   });
 
   it('does not navigate when the deleteCharacter thunk throws', async () => {
-    mockUnwrap.mockRejectedValueOnce(new Error('Delete failed'));
+    mockUnwrap.mockRejectedValueOnce('Delete failed');
     const alertSpy = jest.spyOn(Alert, 'alert').mockImplementation(() => undefined);
     await confirmDeletion('Rissi');
     expect(mockReplace).not.toHaveBeenCalled();
@@ -355,7 +355,7 @@ describe('CharacterDetailScreen — confirming delete', () => {
   });
 
   it('shows a Delete Failed alert when the deleteCharacter thunk throws', async () => {
-    mockUnwrap.mockRejectedValueOnce(new Error('Network error'));
+    mockUnwrap.mockRejectedValueOnce('Network error');
     const alertSpy = jest.spyOn(Alert, 'alert').mockImplementation(() => undefined);
     await confirmDeletion('Rissi');
     expect(alertSpy).toHaveBeenCalledWith('Delete Failed', 'Network error');

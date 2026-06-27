@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import {
   View,
   Text,
@@ -48,6 +48,21 @@ export default function CharacterDetailScreen() {
   const characterName = activeCharacter?.info.name ?? '';
   const canDelete = isDeleteConfirmationValid(confirmInput, characterName);
 
+  const modalThemeStyles = useMemo(
+    () => ({
+      card: { backgroundColor: colors.bg.primary, borderColor: colors.accent.DEFAULT },
+      title: { color: colors.accent.DEFAULT },
+      body: { color: colors.text.secondary },
+      nameHighlight: { color: colors.text.primary, fontWeight: '700' as const },
+      input: {
+        borderColor: colors.border.DEFAULT,
+        backgroundColor: colors.bg.secondary,
+        color: colors.text.primary,
+      },
+    }),
+    [colors],
+  );
+
   const closeConfirm = () => {
     setConfirmVisible(false);
     setConfirmInput('');
@@ -65,7 +80,11 @@ export default function CharacterDetailScreen() {
     } catch (err: unknown) {
       Alert.alert(
         'Delete Failed',
-        err instanceof Error ? err.message : 'An error occurred while deleting the character.',
+        typeof err === 'string'
+          ? err
+          : err instanceof Error
+            ? err.message
+            : 'An error occurred while deleting the character.',
       );
     } finally {
       setDeleting(false);
@@ -169,32 +188,22 @@ export default function CharacterDetailScreen() {
       >
         <Pressable style={styles.modalOverlay} onPress={closeConfirm}>
           <Pressable
-            style={[
-              styles.modalCard,
-              { backgroundColor: colors.bg.primary, borderColor: colors.accent.DEFAULT },
-            ]}
+            style={[styles.modalCard, modalThemeStyles.card]}
             onPress={(e) => e.stopPropagation()}
             testID="delete-confirm-modal"
           >
-            <Text style={[styles.modalTitle, { color: colors.accent.DEFAULT }]}>
+            <Text style={[styles.modalTitle, modalThemeStyles.title]}>
               Delete Character
             </Text>
-            <Text style={[styles.modalBody, { color: colors.text.secondary }]}>
+            <Text style={[styles.modalBody, modalThemeStyles.body]}>
               This permanently deletes{' '}
-              <Text style={{ color: colors.text.primary, fontWeight: '700' }}>
+              <Text style={modalThemeStyles.nameHighlight}>
                 {activeCharacter.info.name}
               </Text>{' '}
               and cannot be undone. Type the character&apos;s name to confirm.
             </Text>
             <TextInput
-              style={[
-                styles.modalInput,
-                {
-                  borderColor: colors.border.DEFAULT,
-                  backgroundColor: colors.bg.secondary,
-                  color: colors.text.primary,
-                },
-              ]}
+              style={[styles.modalInput, modalThemeStyles.input]}
               value={confirmInput}
               onChangeText={setConfirmInput}
               placeholder={activeCharacter.info.name}
