@@ -3246,10 +3246,10 @@ export const RANGER_ARCHETYPES: ArchetypeData[] = [
           'At 11th level, a divine marksman gains Pinpoint Targeting as a bonus feat, even if he does not meet the prerequisites. This ability replaces quarry.',
       },
       {
-        name: 'Quarry',
+        name: 'Quarry (Delayed)',
         level: 19,
         description:
-          'At 19th level, a divine marksman gains the quarry class feature as normal for a ranger. This ability replaces improved quarry.',
+          'At 19th level, a divine marksman gains the quarry class feature, receiving it at 19th level instead of the normal 11th level. This ability replaces improved quarry.',
       },
     ],
     source: "Pathfinder Player Companion: Weapon Master's Handbook",

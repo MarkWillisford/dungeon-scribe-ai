@@ -75,8 +75,8 @@ describe('RANGER_ARCHETYPES', () => {
       expect(feature?.level).toBe(11);
     });
 
-    test('includes Quarry feature at level 19', () => {
-      const feature = divineMarksman?.newFeatures.find((f) => f.name === 'Quarry');
+    test('includes Quarry (Delayed) feature at level 19', () => {
+      const feature = divineMarksman?.newFeatures.find((f) => f.name === 'Quarry (Delayed)');
       expect(feature).toBeDefined();
       expect(feature?.level).toBe(19);
     });
