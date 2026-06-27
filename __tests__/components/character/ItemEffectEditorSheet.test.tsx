@@ -1269,7 +1269,6 @@ describe('ItemEffectEditorSheet', () => {
     expect(featBtn).toBeTruthy();
     fireEvent.press(featBtn!);
     const withChoice = rendered.rerender();
-    // Choice picker should be visible (activeChoice is now set)
     expect(findTestId(withChoice, 'feat-choice-picker')).toBeTruthy();
   });
 
@@ -1306,7 +1305,6 @@ describe('ItemEffectEditorSheet', () => {
       options: ['Evocation'],
     });
     const withChoice = rendered.rerender();
-    // Choice picker is visible; mock renders items from activeChoice.options
     expect(findTestId(withChoice, 'feat-choice-picker')).toBeTruthy();
     const pickBtn = findTestId(withChoice, 'search-item-Evocation');
     expect(pickBtn).toBeTruthy();
@@ -1473,7 +1471,6 @@ describe('ItemEffectEditorSheet', () => {
     setHookStateAt(10, new Map([['power-attack', 'Power Attack']]));
     const withFeat = rendered.rerender();
     expect(findTestId(withFeat, 'toggle-feat-power-attack')).toBeTruthy();
-    // Chip should show "Off" since active: false
     const chip = findTestId(withFeat, 'toggle-feat-power-attack');
     const texts: string[] = [];
     function collectText(node: RenderedNode | string): void {
