@@ -392,6 +392,37 @@ export function RulesetSettingsSheet({ visible, onClose }: RulesetSettingsSheetP
               fantasy={fantasy}
             />
           ))}
+          {activeRuleset.optionalRules.flaws && (
+            <View style={styles.numberRow}>
+              <Text style={[styles.numberLabel, { color: colors.text.secondary }]}>
+                Flaws allowed
+              </Text>
+              <TextInput
+                value={String(activeRuleset.validationSettings.maxFlaws)}
+                onChangeText={(t) => {
+                  const n = parseInt(t, 10);
+                  if (!isNaN(n) && n >= 0)
+                    patch({
+                      validationSettings: {
+                        ...activeRuleset.validationSettings,
+                        maxFlaws: n,
+                      },
+                    });
+                }}
+                keyboardType="number-pad"
+                selectTextOnFocus
+                style={[
+                  styles.numberInput,
+                  {
+                    color: colors.text.primary,
+                    borderColor: colors.border.DEFAULT,
+                    backgroundColor: isDark ? colors.bg.tertiary : colors.bg.secondary,
+                  },
+                ]}
+                accessibilityLabel="Flaws allowed"
+              />
+            </View>
+          )}
 
           <View style={styles.bottomPad} />
         </ScrollView>

@@ -1,10 +1,24 @@
 import type { FlawDefinition } from '@/types/flaws';
+import type { TraitEffect } from '@/types/traits';
 
 export class FlawRegistryService {
   private static flaws = new Map<string, FlawDefinition>();
 
+  private static cloneEffect(effect: TraitEffect): TraitEffect {
+    return {
+      ...effect,
+      condition: effect.condition
+        ? { ...effect.condition, params: { ...effect.condition.params } }
+        : undefined,
+    };
+  }
+
+  private static cloneFlaw(flaw: FlawDefinition): FlawDefinition {
+    return { ...flaw, effects: flaw.effects.map((e) => this.cloneEffect(e)) };
+  }
+
   static register(flaw: FlawDefinition): void {
-    this.flaws.set(flaw.id, flaw);
+    this.flaws.set(flaw.id, this.cloneFlaw(flaw));
   }
 
   static registerBatch(flaws: FlawDefinition[]): void {
@@ -14,11 +28,12 @@ export class FlawRegistryService {
   }
 
   static getFlaw(id: string): FlawDefinition | undefined {
-    return this.flaws.get(id);
+    const flaw = this.flaws.get(id);
+    return flaw ? this.cloneFlaw(flaw) : undefined;
   }
 
   static getAllFlaws(): FlawDefinition[] {
-    return Array.from(this.flaws.values());
+    return Array.from(this.flaws.values(), (flaw) => this.cloneFlaw(flaw));
   }
 
   static getFlawsBySource(source: string): FlawDefinition[] {

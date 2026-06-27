@@ -37,6 +37,7 @@ describe('flaw seed data integrity', () => {
     const flaw = FlawRegistryService.getFlaw('noncombatant');
     expect(flaw).toBeDefined();
     expect(flaw?.effects[0].type).toBe('penalty');
+    expect(flaw?.effects[0].target).toBe('attack.melee');
   });
 
   test("Taboo Proficiency and Deity's Wrath are absent", () => {
