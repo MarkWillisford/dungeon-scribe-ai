@@ -1360,6 +1360,85 @@ describe('ItemEffectEditorSheet', () => {
     expect(saved.grantedFeats).toBeUndefined();
   });
 
+  it('advances to second choice picker when feat has two choices (multi-step branch)', () => {
+    const { setHookStateAt } = require('../../helpers/testUtils');
+    const item = makeItem();
+    const rendered = render(
+      <ItemEffectEditorSheet
+        item={item}
+        character={character}
+        onSave={onSave}
+        onRemoveItem={onRemoveItem}
+        onClose={onClose}
+      />,
+    );
+
+    // A feat with two choices: 'school' then 'ability'
+    const twoChoiceFeat = {
+      id: 'dual-choice-feat',
+      name: 'Dual Choice Feat',
+      activationMode: 'passive' as const,
+      effects: [],
+      types: [],
+      prerequisites: [],
+      description: '',
+      source: '',
+      choices: [
+        { type: 'school', label: 'School', affectsEffects: true, options: ['Evocation', 'Abjuration'] },
+        { type: 'ability', label: 'Ability', affectsEffects: false, options: ['Strength', 'Dexterity'] },
+      ],
+    };
+
+    // Inject state for the first choice prompt
+    setHookStateAt(11, twoChoiceFeat);
+    setHookStateAt(12, { featId: 'dual-choice-feat', choices: {}, active: true });
+    setHookStateAt(13, {
+      type: 'school',
+      label: 'School',
+      affectsEffects: true,
+      options: ['Evocation', 'Abjuration'],
+    });
+
+    const withFirstChoice = rendered.rerender();
+    // Picker is visible for the first choice
+    expect(findTestId(withFirstChoice, 'feat-choice-picker')).toBeTruthy();
+
+    // Press the first choice item — this should trigger the multi-step branch
+    const firstPickBtn = findTestId(withFirstChoice, 'search-item-Evocation');
+    expect(firstPickBtn).toBeTruthy();
+    fireEvent.press(firstPickBtn!);
+
+    // After the first selection, the component calls setPendingGrant + setActiveChoice (not commit)
+    // Inject the second choice options via slot 13 to simulate state update
+    setHookStateAt(13, {
+      type: 'ability',
+      label: 'Ability',
+      affectsEffects: false,
+      options: ['Strength', 'Dexterity'],
+    });
+
+    const withSecondChoice = rendered.rerender();
+    // Picker should still be visible for the second choice
+    expect(findTestId(withSecondChoice, 'feat-choice-picker')).toBeTruthy();
+
+    // Press the second choice item — this should commit the feat
+    const secondPickBtn = findTestId(withSecondChoice, 'search-item-Strength');
+    expect(secondPickBtn).toBeTruthy();
+    fireEvent.press(secondPickBtn!);
+
+    const updated = rendered.rerender();
+    fireEvent.press(findTestId(updated, 'save-btn')!);
+    const saved = onSave.mock.calls[0][0];
+    expect(saved.grantedFeats).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          featId: 'dual-choice-feat',
+          choices: expect.objectContaining({ school: 'Evocation', ability: 'Strength' }),
+        }),
+      ]),
+    );
+  });
+
   it('displays toggle chip for toggle feats', () => {
     const { FeatRegistryService: mockFRS } = require('@/services/FeatRegistryService');
     mockFRS.getFeat.mockImplementation((id: string) => {
