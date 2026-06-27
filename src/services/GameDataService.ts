@@ -700,6 +700,10 @@ export class GameDataService {
     return GameDataService.connector.getRaceGroups(ctx);
   }
 
+  static getRaceByNameSync(name: string): ExpandedRaceData | undefined {
+    return ALL_EXPANDED_RACES.find((r) => r.name === name);
+  }
+
   // ---- Equipment -------------------------------------------------------------
 
   static async getWeapons(): Promise<WeaponDefinition[]> {
