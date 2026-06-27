@@ -110,14 +110,14 @@ export const PRESET_GO_NUTS: Ruleset = {
     crRefunds: true,
     laBuyback: true,
     crLaAbilityScoreReductions: false,
-    flaws: false,
+    flaws: true,
   },
   itemOverrides: { banned: [], allowed: [] },
   campaignRequirements: {},
   validationSettings: {
     abilityScoreMethod: 'freeform',
     maxTraits: 99, // unlimited
-    maxFlaws: 2,
+    maxFlaws: 99, // unlimited
   },
   version: 1,
   createdAt: '2026-04-09T00:00:00.000Z',
