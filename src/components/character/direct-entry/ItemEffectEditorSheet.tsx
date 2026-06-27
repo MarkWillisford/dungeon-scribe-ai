@@ -296,7 +296,6 @@ export function ItemEffectEditorSheet({
         choices: {},
         active: feat.activationMode !== 'toggle',
       };
-      setFeatNameMap((prev) => new Map(prev).set(feat.id, feat.name));
       setFeatQuery('');
       setFeatResults([]);
       setSheetView('main');
@@ -307,6 +306,7 @@ export function ItemEffectEditorSheet({
         setActiveChoice(firstChoice);
         return;
       }
+      setFeatNameMap((prev) => new Map(prev).set(feat.id, feat.name));
       setWorkingGrantedFeats((prev) => [...prev, grant]);
     },
     [workingGrantedFeats],
@@ -321,6 +321,7 @@ export function ItemEffectEditorSheet({
         setPendingGrant({ ...pendingGrant, choices: updatedChoices });
         setActiveChoice(next);
       } else {
+        setFeatNameMap((prev) => new Map(prev).set(pendingGrant.featId, pendingFeat.name));
         setWorkingGrantedFeats((prev) => [...prev, { ...pendingGrant, choices: updatedChoices }]);
         setPendingFeat(null);
         setPendingGrant(null);
