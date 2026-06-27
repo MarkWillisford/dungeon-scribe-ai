@@ -190,7 +190,7 @@ const charactersSlice = createSlice({
         level: character.classes.totalLevel,
         race: character.info.race.name,
         classes: character.classes.classes.map((c) => `${c.name} ${c.level}`).join('/'),
-        lastUpdated: new Date(),
+        lastUpdated: character.lastUpdated,
         ...(character.info.portrait ? { portrait: character.info.portrait } : {}),
       };
       const existingIndex = state.characters.findIndex((c) => c.id === summary.id);
