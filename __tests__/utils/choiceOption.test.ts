@@ -34,6 +34,15 @@ describe('ChoiceOption shared primitives', () => {
     expect(group.id).toBe('group-1');
   });
 
+  it('ChoiceOptionGroup allows the ungrouped sentinel name', () => {
+    const group: ChoiceOptionGroup<ChoiceOption> = {
+      id: 'ungrouped',
+      name: '',
+      options: [],
+    };
+    expect(group.name).toBe('');
+  });
+
   it('ClassChoiceOption is assignable to ChoiceOption', () => {
     const classOpt: ClassChoiceOption = {
       id: 'familiar',
