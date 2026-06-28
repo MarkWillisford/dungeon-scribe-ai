@@ -16,6 +16,6 @@ export interface ChoiceOption {
 
 export interface ChoiceOptionGroup<T extends ChoiceOption> {
   id: string;
-  name: string;
+  name: string; // '' for ungrouped options
   options: T[];
 }

@@ -66,8 +66,6 @@ export interface ClassChoiceOption extends ChoiceOption {
 }
 
 export interface ClassChoiceOptionGroup extends ChoiceOptionGroup<ClassChoiceOption> {
-  // '' for ungrouped options
-  name: string;
   minClassLevel?: number; // group is only available at/above this class level
 }
 
