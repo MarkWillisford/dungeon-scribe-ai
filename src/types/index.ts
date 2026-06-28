@@ -124,6 +124,7 @@ export * from './dice';
 export * from './templates';
 export * from './mythic';
 export * from './resources';
+export * from './choiceOption';
 export * from './classChoices';
 export * from './classOptions';
 export * from './deities';
