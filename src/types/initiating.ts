@@ -100,6 +100,8 @@ export interface MartialTradition extends DataQualityFields {
 export type RecoveryMethod =
   | { type: 'full_round_one' }
   | { type: 'full_round_all' }
+  | { type: 'full_round_modifier_min_2' }
+  | { type: 'standard_one' }
   | { type: 'strike_recovers_all' }
   | { type: 'random_grant'; grantCount: number }
   | { type: 'swift_one'; resourceId?: string }

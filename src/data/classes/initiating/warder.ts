@@ -216,16 +216,8 @@ export const WARDER_CLASS: ExpandedClassData = {
     // Recovery: full-round recovers initiation modifier (min 2) maneuvers,
     // standard action recovers 1 maneuver. Not a "recover all" mechanic.
     recoveryMechanics: {
-      primary: {
-        type: 'custom',
-        description:
-          'By taking a full-round action (activating defensive focus), the warder recovers a number of expended maneuvers equal to her warder initiation modifier (minimum of 2).',
-      },
-      secondary: {
-        type: 'custom',
-        description:
-          'As a standard action, the warder may recover a single expended maneuver of her choosing.',
-      },
+      primary: { type: 'full_round_modifier_min_2' },
+      secondary: { type: 'standard_one' },
     },
   },
   source: 'Path of War',

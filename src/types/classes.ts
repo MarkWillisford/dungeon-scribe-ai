@@ -85,7 +85,7 @@ export interface ClassFeature {
   name: string;
   description: string;
   shortDescription?: string;
-  activationMode?: 'passive' | 'toggle' | 'conditional';
+  activationMode?: 'passive' | 'toggle' | 'conditional' | 'action';
   level: number;
   uses?: {
     perDay?: number;

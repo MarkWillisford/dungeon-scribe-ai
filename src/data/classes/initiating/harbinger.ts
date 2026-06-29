@@ -256,11 +256,7 @@ export const HARBINGER_CLASS: ExpandedClassData = {
         description:
           'The harbinger recovers a single expended maneuver whenever she Claims a creature using her dark claim class feature, and she recovers a number of expended maneuvers equal to her harbinger initiation modifier (minimum 2) whenever a creature she has Claimed is reduced to 0 or fewer hit points.',
       },
-      secondary: {
-        type: 'custom',
-        description:
-          'The harbinger may concentrate on her inner negativity and recover a single maneuver as a standard action.',
-      },
+      secondary: { type: 'standard_one' },
     },
   },
   source: 'Path of War: Expanded',
