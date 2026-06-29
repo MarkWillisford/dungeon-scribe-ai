@@ -95,6 +95,8 @@ export interface ClassFeature {
   };
   effects: Effect[];
   resourcePool?: ResourcePoolDefinition;
+  activationCost?: { resourceId: string; amount: number };
+  maintenanceCost?: { resourceId: string; amount: number; per: 'round' };
 }
 
 export interface FavoredClassBonus {

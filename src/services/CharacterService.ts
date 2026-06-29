@@ -749,6 +749,8 @@ export class CharacterService {
             activationMode: feature.activationMode,
             resourcePool: feature.resourcePool,
             effects: feature.effects ?? [],
+            activationCost: feature.activationCost,
+            maintenanceCost: feature.maintenanceCost,
           }),
         );
     }
