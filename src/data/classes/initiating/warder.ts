@@ -2,7 +2,7 @@
 // Source: https://www.d20pfsrd.com/alternative-rule-systems/3rd-party-rules-systems/path-of-war/classes/warder/
 // Scraped: 2026-04-15
 
-import { BABProgression, SaveProgression } from '@/types/base';
+import { BABProgression, BonusType, SaveProgression } from '@/types/base';
 import type { ExpandedClassData } from '../types';
 import type { InitiatingProgressionTable } from '../initiatingProgressionTables';
 
@@ -94,7 +94,7 @@ export const WARDER_CLASS: ExpandedClassData = {
         },
         {
           type: 'bonus',
-          bonusType: 'untyped',
+          bonusType: BonusType.UNTYPED,
           target: 'cmd',
           value: 'intMod + warderLevel',
           source: 'Defensive Focus',
