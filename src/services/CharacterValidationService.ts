@@ -17,6 +17,7 @@ import { PrerequisiteService } from './PrerequisiteService';
 import { GameDataService } from '@/services/GameDataService';
 import { EidolonPoolService, type EidolonDataIndex } from './EidolonPoolService';
 import { lookupClassData, type ClassDataMap } from '@/utils/characterComputations';
+import { exceedsPerSkillMax, getPerSkillMaxRanks, getTotalAvailableSkillRanks } from '@/utils/skillRanks';
 import { isPrestigeCategory } from '@/data/classes/types';
 
 // ---- Helpers ----
@@ -403,13 +404,14 @@ export class CharacterValidationService {
   ): EntryValidationWarning[] {
     const w: EntryValidationWarning[] = [];
 
-    // Total available ranks across all classes
-    let totalAvailable = 0;
-    for (const entry of character.classes.classes) {
-      const classData = lookupClassData(entry.name, classDataMap);
-      const basePerLevel = classData?.skillRanksPerLevel ?? 2; // default 2 if unknown
-      totalAvailable += Math.max(basePerLevel + intMod, 1) * entry.level;
-    }
+    // Total available ranks across all classes (default 2/level if class unknown)
+    const totalAvailable = getTotalAvailableSkillRanks(
+      character.classes.classes.map((entry) => ({
+        skillRanksPerLevel: lookupClassData(entry.name, classDataMap)?.skillRanksPerLevel ?? 2,
+        level: entry.level,
+      })),
+      intMod,
+    );
 
     // Sum assigned ranks — only from scalar Skill entries (not arrays or the totalRanks counter)
     const skillEntries = Object.entries(character.skills).filter(
@@ -429,14 +431,15 @@ export class CharacterValidationService {
     }
 
     // Per-skill max = totalHD
-    if (totalHD > 0) {
+    const perSkillMax = getPerSkillMaxRanks(totalHD);
+    if (perSkillMax > 0) {
       for (const [skillKey, entry] of skillEntries) {
-        if (entry.ranks > totalHD) {
+        if (exceedsPerSkillMax(entry.ranks, perSkillMax)) {
           w.push(
             warn(
               warnId(`skill-max-${skillKey}`),
               'skills',
-              `${skillKey}: ${entry.ranks} ranks exceeds the per-skill maximum of ${totalHD} (total HD).`,
+              `${skillKey}: ${entry.ranks} ranks exceeds the per-skill maximum of ${perSkillMax} (total HD).`,
             ),
           );
         }

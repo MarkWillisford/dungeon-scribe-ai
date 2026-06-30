@@ -4,9 +4,9 @@
 // Defines what a class feature choice IS, when it occurs, and where options come from.
 // The player's actual selections are stored as ClassChoice[] on ClassEntry (see classes.ts).
 
-import { FeatPrerequisite } from './feats';
 import type { GameDataSource } from './gameData';
 import type { DataQualityFields } from './base';
+import type { ChoiceOption, ChoiceOptionGroup } from './choiceOption';
 
 // ---- Selection Mode ----
 // Describes when and how many times a choice is made.
@@ -51,27 +51,11 @@ export type ClassChoiceSelectionMode =
 // ---- Option Group ----
 // Options can be grouped — e.g. Rogue Talents vs. Advanced Talents (level 10+).
 
-export interface ClassChoiceOptionGroup {
-  id: string;
-  name: string; // '' for ungrouped options
-  minClassLevel?: number; // group is only available at/above this class level
-  options: ClassChoiceOption[];
-}
-
 // Inline options only — 2–4 fixed choices with no prereqs or sub-structure.
 // e.g. Wizard arcane bond (familiar vs bonded object), Ranger combat style label.
 // For large choice pools (domains, bloodlines, rage powers, etc.) use optionSource: 'collection'
 // and see src/types/classOptions.ts for the document shapes.
-export interface ClassChoiceOption {
-  id: string;
-  name: string;
-  description: string;
-  prerequisites?: FeatPrerequisite[];
-  // For choices that require a subtype (e.g. Humanoid → 'human', 'elf'; Outsider → 'devil', 'demon')
-  subtypePrompt?: {
-    label: string; // 'Choose a subtype'
-    options: string[]; // allowed subtype values
-  };
+export interface ClassChoiceOption extends ChoiceOption {
   // If set, selecting this option injects a classFeature with this name/description/level
   // onto the class entry. Deselecting it (by switching to another option) removes it.
   grantsFeature?: {
@@ -79,6 +63,10 @@ export interface ClassChoiceOption {
     description: string;
     level: number;
   };
+}
+
+export interface ClassChoiceOptionGroup extends ChoiceOptionGroup<ClassChoiceOption> {
+  minClassLevel?: number; // group is only available at/above this class level
 }
 
 // ---- Class Choice Definition ----

@@ -101,8 +101,8 @@ describe('Ruleset presets include flaw defaults', () => {
     expect(PRESET_PF1E_SOCIETY.validationSettings.maxFlaws).toBe(2);
   });
 
-  it('PRESET_GO_NUTS has flaws: false and maxFlaws: 2', () => {
-    expect(PRESET_GO_NUTS.optionalRules.flaws).toBe(false);
-    expect(PRESET_GO_NUTS.validationSettings.maxFlaws).toBe(2);
+  it('PRESET_GO_NUTS has flaws: true and maxFlaws: 99', () => {
+    expect(PRESET_GO_NUTS.optionalRules.flaws).toBe(true);
+    expect(PRESET_GO_NUTS.validationSettings.maxFlaws).toBe(99);
   });
 });

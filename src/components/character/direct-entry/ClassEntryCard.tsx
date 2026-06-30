@@ -926,9 +926,15 @@ function AdvancementControls({ entry }: { entry: ClassEntry }) {
 
 interface ClassEntryCardProps {
   entry: ClassEntry;
+  /**
+   * Optional drag affordance rendered at the start of the header. The parent
+   * list supplies this (wrapped in its own gesture detector) so that only the
+   * handle initiates a reorder — taps on the rest of the card behave normally.
+   */
+  dragHandle?: React.ReactNode;
 }
 
-export function ClassEntryCard({ entry }: ClassEntryCardProps) {
+export function ClassEntryCard({ entry, dragHandle }: ClassEntryCardProps) {
   const { colors, fantasy, isDark } = useTheme();
   const dispatch = useAppDispatch();
   const [choicesExpanded, setChoicesExpanded] = useState(false);
@@ -1014,6 +1020,7 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
     >
       {/* Header row */}
       <View style={styles.header}>
+        {dragHandle}
         <Text style={[styles.className, { color: isDark ? fantasy.gold : fantasy.darkWood }]}>
           {entry.name}
         </Text>
