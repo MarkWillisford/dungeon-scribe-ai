@@ -32,6 +32,7 @@ jest.mock('@/services/FirebaseCharacterService', () => ({
 jest.mock('@/services/CharacterService', () => ({
   CharacterService: {
     createDefaultCharacter: jest.fn(),
+    createBlankCharacter: jest.fn(() => ({})),
   },
 }));
 
@@ -1258,6 +1259,68 @@ describe('charactersSlice', () => {
       (FirebaseCharacterService.delete as jest.Mock).mockRejectedValue('error');
       await store.dispatch(deleteCharacter('char-1'));
       expect(store.getState().characters.error).toBe('Failed to delete character');
+    });
+  });
+
+  describe('saveCharacter (direct-entry) reducer cases', () => {
+    it('pushes a new character summary when the list is empty', () => {
+      const state = charactersReducer(initialState, {
+        type: 'characterEntry/save/fulfilled',
+        payload: mockCharacter,
+      });
+      expect(state.characters).toHaveLength(1);
+      expect(state.characters[0].id).toBe('char-1');
+      expect(state.characters[0].name).toBe('Thorin');
+      expect(state.activeCharacter).not.toBeNull();
+    });
+
+    it('updates an existing summary in place (edit flow)', () => {
+      const stateWithCharacter = {
+        ...initialState,
+        characters: [mockCharacterSummary],
+      };
+      const updatedCharacter: Character = {
+        ...mockCharacter,
+        info: { ...mockCharacter.info, name: 'Thorin Stonehammer' },
+      };
+      const state = charactersReducer(stateWithCharacter, {
+        type: 'characterEntry/save/fulfilled',
+        payload: updatedCharacter,
+      });
+      expect(state.characters).toHaveLength(1);
+      expect(state.characters[0].name).toBe('Thorin Stonehammer');
+    });
+
+    it('does not duplicate an existing character', () => {
+      const stateWithCharacter = {
+        ...initialState,
+        characters: [mockCharacterSummary],
+      };
+      const state = charactersReducer(stateWithCharacter, {
+        type: 'characterEntry/save/fulfilled',
+        payload: mockCharacter,
+      });
+      expect(state.characters).toHaveLength(1);
+    });
+
+    it('includes portrait in the summary when the character has one', () => {
+      const characterWithPortrait: Character = {
+        ...mockCharacter,
+        info: { ...mockCharacter.info, portrait: 'https://example.com/portrait.jpg' },
+      };
+      const state = charactersReducer(initialState, {
+        type: 'characterEntry/save/fulfilled',
+        payload: characterWithPortrait,
+      });
+      expect(state.characters[0].portrait).toBe('https://example.com/portrait.jpg');
+    });
+
+    it('omits portrait from the summary when the character has none', () => {
+      const state = charactersReducer(initialState, {
+        type: 'characterEntry/save/fulfilled',
+        payload: mockCharacter,
+      });
+      expect(state.characters[0].portrait).toBeUndefined();
     });
   });
 });
