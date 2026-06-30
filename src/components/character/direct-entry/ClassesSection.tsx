@@ -78,15 +78,21 @@ function DraggableRow({
   onHeightChange,
   onDragEnd,
 }: DraggableRowProps) {
+  const { colors } = useTheme();
   // Keep index accessible in UI-thread worklets
   const indexRef = useSharedValue(index);
   useEffect(() => {
     indexRef.value = index;
   }, [index, indexRef]);
 
+  // The pan is attached ONLY to the drag handle (below), not the whole card, so
+  // taps and presses on the card's controls are never intercepted. We claim the
+  // row in onStart (gesture actually activates after a short long-press) rather
+  // than onBegin (raw touch-down), so a stray tap on the handle doesn't trigger
+  // the lifted/reorder visual state.
   const gesture = Gesture.Pan()
-    .activateAfterLongPress(300)
-    .onBegin(() => {
+    .activateAfterLongPress(200)
+    .onStart(() => {
       activeIndex.value = indexRef.value;
       dragY.value = 0;
     })
@@ -159,20 +165,28 @@ function DraggableRow({
     };
   });
 
-  const card = <ClassEntryCard entry={entry} />;
+  // Reordering only makes sense with more than one class; a lone class shows no
+  // handle and has no gesture attached at all.
+  const dragHandle =
+    count > 1 ? (
+      <GestureDetector gesture={gesture}>
+        <View
+          style={styles.dragHandle}
+          hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
+          accessibilityRole="button"
+          accessibilityLabel={`Reorder ${entry.name}. Press and hold, then drag.`}
+        >
+          <Text style={[styles.dragHandleIcon, { color: colors.text.tertiary }]}>⋮⋮</Text>
+        </View>
+      </GestureDetector>
+    ) : null;
 
   return (
     <Animated.View
       onLayout={(e) => onHeightChange(index, e.nativeEvent.layout.height)}
       style={[rowStyle, styles.draggableRow]}
     >
-      {count > 1 ? (
-        <GestureDetector gesture={gesture}>
-          <View style={styles.classCardWrapper}>{card}</View>
-        </GestureDetector>
-      ) : (
-        card
-      )}
+      <ClassEntryCard entry={entry} dragHandle={dragHandle} />
     </Animated.View>
   );
 }
@@ -743,8 +757,18 @@ const styles = StyleSheet.create({
   draggableRow: {
     paddingBottom: 8,
   },
-  classCardWrapper: {
-    flex: 1,
+  dragHandle: {
+    paddingVertical: 4,
+    paddingRight: 6,
+    minHeight: 44,
+    minWidth: 32,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  dragHandleIcon: {
+    fontSize: 16,
+    fontWeight: '700',
+    letterSpacing: -2,
   },
   subSection: {
     marginTop: 8,

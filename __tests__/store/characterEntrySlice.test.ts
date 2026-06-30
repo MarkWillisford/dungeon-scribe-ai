@@ -66,6 +66,8 @@ import reducer, {
   removeSkillEntry,
   addTrait,
   removeTrait,
+  addFlaw,
+  removeFlaw,
   addFeatSlot,
   removeFeatSlot,
   assignFeat,
@@ -117,6 +119,7 @@ import { BABProgression, SaveProgression } from '@/types/base';
 import type { ClassEntry } from '@/types/classes';
 import type { AppliedTemplate } from '@/types/templates';
 import type { CharacterTrait } from '@/types/traits';
+import type { CharacterFlaw } from '@/types/flaws';
 import type { SpellcastingPool } from '@/types/spells';
 import type { EditorEquipmentItem } from '@/types/character';
 import type { LevelIncrementSlot } from '@/types/character';
@@ -3775,5 +3778,56 @@ describe('characterEntrySlice — reequipFromContainer', () => {
     const displaced = state.character.editorEquipment!.find((e) => e.id === 'belt-old')!;
     expect(displaced.slot).toBeUndefined();
     expect(displaced.containerId).toBeUndefined();
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Flaws
+// ---------------------------------------------------------------------------
+
+function makeFlaw(flawId: string): CharacterFlaw {
+  return { flawId, name: `Flaw ${flawId}` };
+}
+
+describe('characterEntrySlice — flaws', () => {
+  it('initializes flaws with empty list and maxFlaws 2', () => {
+    const state = makeInitialState();
+    expect(state.character.flaws.flaws).toEqual([]);
+    expect(state.character.flaws.maxFlaws).toBe(2);
+  });
+
+  describe('addFlaw', () => {
+    it('appends a flaw and sets isDirty', () => {
+      const flaw = makeFlaw('flaw-1');
+      const state = reducer(makeInitialState(), addFlaw(flaw));
+      expect(state.character.flaws.flaws).toHaveLength(1);
+      expect(state.character.flaws.flaws[0].flawId).toBe('flaw-1');
+      expect(state.isDirty).toBe(true);
+    });
+
+    it('appends multiple flaws in order', () => {
+      let state = reducer(makeInitialState(), addFlaw(makeFlaw('flaw-1')));
+      state = reducer(state, addFlaw(makeFlaw('flaw-2')));
+      expect(state.character.flaws.flaws).toHaveLength(2);
+      expect(state.character.flaws.flaws[0].flawId).toBe('flaw-1');
+      expect(state.character.flaws.flaws[1].flawId).toBe('flaw-2');
+    });
+  });
+
+  describe('removeFlaw', () => {
+    it('removes the flaw with the matching flawId', () => {
+      let state = reducer(makeInitialState(), addFlaw(makeFlaw('flaw-1')));
+      state = reducer(state, addFlaw(makeFlaw('flaw-2')));
+      state = reducer(state, removeFlaw('flaw-1'));
+      expect(state.character.flaws.flaws).toHaveLength(1);
+      expect(state.character.flaws.flaws[0].flawId).toBe('flaw-2');
+      expect(state.isDirty).toBe(true);
+    });
+
+    it('is a no-op when flawId is not found', () => {
+      let state = reducer(makeInitialState(), addFlaw(makeFlaw('flaw-1')));
+      state = reducer(state, removeFlaw('does-not-exist'));
+      expect(state.character.flaws.flaws).toHaveLength(1);
+    });
   });
 });
