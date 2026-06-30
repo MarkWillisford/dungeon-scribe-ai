@@ -17,11 +17,11 @@ on:
 
 jobs:
   babysit:
-    # On pull_request_review: only fire on CodeRabbit reviews of non-draft PRs.
+    # On pull_request_review: only fire on Sourcery reviews of non-draft PRs.
     # On workflow_dispatch: always run (pr_number input required).
     if: |
       github.event_name == 'workflow_dispatch' ||
-      (github.event.review.user.login == 'sourcery-ai[bot]' &&
+      (github.event.review.user.login == 'sourcery-ai' &&
        github.event.pull_request.draft == false &&
        !contains(github.event.pull_request.labels.*.name, 'no-babysit'))
     runs-on: ubuntu-latest
