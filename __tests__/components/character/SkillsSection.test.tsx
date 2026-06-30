@@ -1,4 +1,5 @@
 import React from 'react';
+import { StyleSheet } from 'react-native';
 import { render, fireEvent, type RenderedNode } from '../../helpers/testUtils';
 import { SkillsSection } from '@/components/character/direct-entry/SkillsSection';
 import { PRESET_PF1E_STANDARD, PRESET_GO_NUTS } from '@/config/rulesetPresets';
@@ -233,7 +234,9 @@ describe('SkillsSection — per-skill max-rank cap', () => {
     mockSkills = { acrobatics: { ranks: 2, misc: 0 } };
     const result = render(<SkillsSection />);
     const inputs = findByType(result.tree, 'TextInput');
-    fireEvent.changeText(inputs[1], '9');
+    const ranksInput = inputs.find((i) => i.props.accessibilityLabel === 'Acrobatics ranks');
+    if (!ranksInput) throw new Error('Could not find Acrobatics ranks input');
+    fireEvent.changeText(ranksInput, '9');
     const call = mockDispatch.mock.calls[mockDispatch.mock.calls.length - 1][0];
     expect(call.payload.skillKey).toBe('acrobatics');
     expect(call.payload.entry.ranks).toBe(3);
@@ -244,7 +247,9 @@ describe('SkillsSection — per-skill max-rank cap', () => {
     mockSkills = { acrobatics: { ranks: 1, misc: 0 } };
     const result = render(<SkillsSection />);
     const inputs = findByType(result.tree, 'TextInput');
-    fireEvent.changeText(inputs[1], '5');
+    const ranksInput = inputs.find((i) => i.props.accessibilityLabel === 'Acrobatics ranks');
+    if (!ranksInput) throw new Error('Could not find Acrobatics ranks input');
+    fireEvent.changeText(ranksInput, '5');
     const call = mockDispatch.mock.calls[mockDispatch.mock.calls.length - 1][0];
     expect(call.payload.entry.ranks).toBe(5);
   });
@@ -254,7 +259,9 @@ describe('SkillsSection — per-skill max-rank cap', () => {
     mockSkills = { acrobatics: { ranks: 1, misc: 0 } };
     const result = render(<SkillsSection />);
     const inputs = findByType(result.tree, 'TextInput');
-    fireEvent.changeText(inputs[1], '9');
+    const ranksInput = inputs.find((i) => i.props.accessibilityLabel === 'Acrobatics ranks');
+    if (!ranksInput) throw new Error('Could not find Acrobatics ranks input');
+    fireEvent.changeText(ranksInput, '9');
     const call = mockDispatch.mock.calls[mockDispatch.mock.calls.length - 1][0];
     expect(call.payload.entry.ranks).toBe(9);
   });
@@ -264,10 +271,9 @@ describe('SkillsSection — per-skill max-rank cap', () => {
     mockSkills = { acrobatics: { ranks: 5, misc: 0 } };
     const result = render(<SkillsSection />);
     const inputs = findByType(result.tree, 'TextInput');
-    // inputs[1] is the acrobatics rank field; its border should use the error color.
-    const style = Array.isArray(inputs[1].props.style)
-      ? Object.assign({}, ...inputs[1].props.style)
-      : inputs[1].props.style;
+    const ranksInput = inputs.find((i) => i.props.accessibilityLabel === 'Acrobatics ranks');
+    if (!ranksInput) throw new Error('Could not find Acrobatics ranks input');
+    const style = StyleSheet.flatten(ranksInput.props.style);
     expect(style.borderColor).toBe('#B00020');
   });
 });
