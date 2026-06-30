@@ -82,7 +82,6 @@ export const WARDER_CLASS: ExpandedClassData = {
       id: 'defensive-focus',
       shortDescription: 'Full-round action — expand threatened area, bonus CMD, AoO while in reach',
       activationMode: 'toggle',
-      effects: [],
       description:
         'At 1st level, the defensive prowess of the warder is second to none, allowing her to focus her actions purely on defending himself and her allies in ways that cannot be replicated. The warder gains the Combat Reflexes feat as a bonus feat, using her warder initiation modifier in place of her Dexterity modifier to determine the number of additional attacks of opportunity she may make each round. When recovering warder maneuvers as a full round action, the warder sets up a defensive perimeter around herself to defend her allies, increasing her threatened area by 5 feet + 5 feet for every five initiator levels she possesses. Until the beginning of her next turn, she may make attacks of opportunity against any opponent in this threatened area that provokes attacks of opportunity. She may move as part of these attacks of opportunity, provided her total movement before her next turn does not exceed her speed (his movement provokes attacks of opportunity as normal). Additionally, while using defensive focus, the warder adds her warder initiation modifier plus her class level to her CMD for the purposes of defending against enemies trying to use the Acrobatics skill to prevent her from getting attacks of opportunity against them.',
       effects: [
