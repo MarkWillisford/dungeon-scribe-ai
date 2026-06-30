@@ -37,181 +37,257 @@ export const OCCULT_CLASSES_EXPANDED: ExpandedClassData[] = [
         level: 1,
         description:
           "A kineticist can accept burn to use certain wild talents. For each point of burn accepted, she takes 1 point of nonlethal damage per character level that cannot be healed until after a full night's rest. A kineticist can accept a maximum number of burn points per round and per day based on her level (3 + Con modifier at 1st level).",
+        effects: [],
       },
       {
         name: 'Elemental Focus',
         level: 1,
         description:
           'A kineticist chooses one primary element (aether, air, earth, fire, or water) at 1st level. This determines her simple blast, defense wild talent, and available wild talents.',
+        effects: [],
       },
       {
         name: 'Gather Power',
         level: 1,
         description:
           'A kineticist can gather ambient elemental energy as a move action (or full-round action for more reduction) to reduce the total burn cost of a blast wild talent by 1 (or 2 for full-round, 3 at higher levels).',
+        effects: [],
       },
       {
         name: 'Infusion',
         level: 1,
         description:
           'At 1st level and every 2 levels thereafter, a kineticist gains an infusion wild talent, which modifies her kinetic blasts (form infusions change delivery, substance infusions add effects).',
+        effects: [],
       },
       {
         name: 'Kinetic Blast',
         level: 1,
         description:
           'A kineticist gains a simple blast based on her element. A simple blast deals 1d6+1 + Constitution modifier damage (increasing by 1d6+1 every 2 levels). Blasts are spell-like abilities that require a ranged touch attack (energy) or attack roll (physical).',
+        effects: [],
       },
       {
         name: 'Elemental Defense',
         level: 2,
         description:
           'At 2nd level, the kineticist gains a defense wild talent tied to her primary element, providing a passive defensive ability that scales with level and burn accepted.',
+        effects: [],
       },
       {
         name: 'Utility Wild Talent',
         level: 2,
         description:
           "At 2nd level and every 2 levels thereafter, a kineticist gains a utility wild talent, a spell-like ability that isn't directly tied to dealing damage.",
+        effects: [],
       },
-      { name: 'Infusion', level: 3, description: 'Gain an additional infusion wild talent.' },
+      {
+        name: 'Infusion',
+        level: 3,
+        description: 'Gain an additional infusion wild talent.',
+        effects: [],
+      },
       {
         name: 'Utility Wild Talent',
         level: 4,
         description: 'Gain an additional utility wild talent.',
+        effects: [],
       },
       {
         name: 'Infusion Specialization',
         level: 5,
         description:
           'At 5th level, whenever the kineticist uses an infusion that changes the burn cost, the infusion costs 1 fewer point of burn (minimum 0). This reduction increases by 1 at 8th, 11th, 14th, 17th, and 20th levels.',
+        effects: [],
       },
       {
         name: 'Metakinesis (Empower)',
         level: 5,
         description:
           'At 5th level, by accepting 1 point of burn, a kineticist can empower her kinetic blast as if using Empower Spell (increase damage by 50%).',
+        effects: [],
       },
-      { name: 'Infusion', level: 5, description: 'Gain an additional infusion wild talent.' },
+      {
+        name: 'Infusion',
+        level: 5,
+        description: 'Gain an additional infusion wild talent.',
+        effects: [],
+      },
       {
         name: 'Utility Wild Talent',
         level: 6,
         description: 'Gain an additional utility wild talent.',
+        effects: [],
       },
       {
         name: 'Expanded Element',
         level: 7,
         description:
           'At 7th level, a kineticist chooses a second element, gaining its basic utility wild talent and simple blast. She can choose the same element again to gain a composite blast. She gains another expanded element at 15th level.',
+        effects: [],
       },
-      { name: 'Infusion', level: 7, description: 'Gain an additional infusion wild talent.' },
+      {
+        name: 'Infusion',
+        level: 7,
+        description: 'Gain an additional infusion wild talent.',
+        effects: [],
+      },
       {
         name: 'Infusion Specialization',
         level: 8,
         description: 'Infusion specialization reduction increases by 1.',
+        effects: [],
       },
       {
         name: 'Utility Wild Talent',
         level: 8,
         description: 'Gain an additional utility wild talent.',
+        effects: [],
       },
       {
         name: 'Metakinesis (Maximize)',
         level: 9,
         description:
           'At 9th level, by accepting 2 points of burn, a kineticist can maximize her kinetic blast as if using Maximize Spell.',
+        effects: [],
       },
-      { name: 'Infusion', level: 9, description: 'Gain an additional infusion wild talent.' },
+      {
+        name: 'Infusion',
+        level: 9,
+        description: 'Gain an additional infusion wild talent.',
+        effects: [],
+      },
       {
         name: 'Utility Wild Talent',
         level: 10,
         description: 'Gain an additional utility wild talent.',
+        effects: [],
       },
       {
         name: 'Supercharge',
         level: 11,
         description:
           'At 11th level, the kineticist can gather power to reduce burn cost by 2 as a move action (or 3 as a full-round action).',
+        effects: [],
       },
       {
         name: 'Infusion Specialization',
         level: 11,
         description: 'Infusion specialization reduction increases by 1.',
+        effects: [],
       },
-      { name: 'Infusion', level: 11, description: 'Gain an additional infusion wild talent.' },
+      {
+        name: 'Infusion',
+        level: 11,
+        description: 'Gain an additional infusion wild talent.',
+        effects: [],
+      },
       {
         name: 'Utility Wild Talent',
         level: 12,
         description: 'Gain an additional utility wild talent.',
+        effects: [],
       },
       {
         name: 'Metakinesis (Quicken)',
         level: 13,
         description:
           'At 13th level, by accepting 3 points of burn, a kineticist can quicken her kinetic blast (cast as a swift action).',
+        effects: [],
       },
-      { name: 'Infusion', level: 13, description: 'Gain an additional infusion wild talent.' },
+      {
+        name: 'Infusion',
+        level: 13,
+        description: 'Gain an additional infusion wild talent.',
+        effects: [],
+      },
       {
         name: 'Infusion Specialization',
         level: 14,
         description: 'Infusion specialization reduction increases by 1.',
+        effects: [],
       },
       {
         name: 'Utility Wild Talent',
         level: 14,
         description: 'Gain an additional utility wild talent.',
+        effects: [],
       },
       {
         name: 'Expanded Element',
         level: 15,
         description:
           'At 15th level, the kineticist selects a third element (or reinforces an existing one for additional composite blasts).',
+        effects: [],
       },
-      { name: 'Infusion', level: 15, description: 'Gain an additional infusion wild talent.' },
+      {
+        name: 'Infusion',
+        level: 15,
+        description: 'Gain an additional infusion wild talent.',
+        effects: [],
+      },
       {
         name: 'Composite Specialization',
         level: 16,
         description:
           'At 16th level, the kineticist reduces the burn cost of composite blasts by 1.',
+        effects: [],
       },
       {
         name: 'Utility Wild Talent',
         level: 16,
         description: 'Gain an additional utility wild talent.',
+        effects: [],
       },
       {
         name: 'Infusion Specialization',
         level: 17,
         description: 'Infusion specialization reduction increases by 1.',
+        effects: [],
       },
       {
         name: 'Metakinesis (Twice)',
         level: 17,
         description:
           'At 17th level, by accepting 4 points of burn, a kineticist can apply two metakinesis abilities to the same blast.',
+        effects: [],
       },
-      { name: 'Infusion', level: 17, description: 'Gain an additional infusion wild talent.' },
+      {
+        name: 'Infusion',
+        level: 17,
+        description: 'Gain an additional infusion wild talent.',
+        effects: [],
+      },
       {
         name: 'Utility Wild Talent',
         level: 18,
         description: 'Gain an additional utility wild talent.',
+        effects: [],
       },
-      { name: 'Infusion', level: 19, description: 'Gain an additional infusion wild talent.' },
+      {
+        name: 'Infusion',
+        level: 19,
+        description: 'Gain an additional infusion wild talent.',
+        effects: [],
+      },
       {
         name: 'Omnikinesis',
         level: 20,
         description:
           'At 20th level, the kineticist can use her kinetic blast with any element, treat all her blasts as composite for purposes of infusion specialization, and accept a maximum of 2 additional points of burn per round.',
+        effects: [],
       },
       {
         name: 'Infusion Specialization',
         level: 20,
         description: 'Infusion specialization reduction increases by 1.',
+        effects: [],
       },
       {
         name: 'Utility Wild Talent',
         level: 20,
         description: 'Gain an additional utility wild talent.',
+        effects: [],
       },
     ],
     spellcasting: {
@@ -261,128 +337,173 @@ export const OCCULT_CLASSES_EXPANDED: ExpandedClassData[] = [
         level: 1,
         description:
           'A medium learns a number of knacks, or 0-level psychic spells. These spells are cast like any other spell but do not consume spell slots.',
+        effects: [],
       },
       {
         name: 'Spirit',
         level: 1,
         description:
           'A medium can channel a spirit each day through a seance lasting 1 hour. She can channel one of six legendary spirits: Archmage, Champion, Guardian, Hierophant, Marshal, or Trickster. The channeled spirit grants a spirit bonus, spirit powers, and a spirit surge ability, but also imposes a taboo and the threat of influence.',
+        effects: [],
       },
       {
         name: 'Spirit Bonus',
         level: 1,
         description:
           'When channeling a spirit, the medium gains a +1 bonus that applies to different statistics depending on the spirit channeled. This bonus increases to +2 at 4th, +3 at 8th, +4 at 12th, +5 at 16th, and +6 at 20th level.',
+        effects: [],
       },
       {
         name: 'Spirit Power (Lesser)',
         level: 1,
         description:
           'At 1st level, the medium gains the lesser spirit power of her channeled spirit. Each spirit grants a different ability.',
+        effects: [],
       },
       {
         name: 'Spirit Surge',
         level: 1,
         description:
           'A medium can add a surge of spiritual power to a failed check by allowing the spirit to gain 1 point of influence over her. At 1st level, the surge is 1d6. This increases to 1d8 at 6th, 1d10 at 10th, and at 20th level she adds 1d6 to the result in addition.',
+        effects: [],
       },
       {
         name: 'Shared Seance',
         level: 2,
         description:
           'At 2nd level, the medium can share the lesser benefits of her seance with allies who participate in the ritual.',
+        effects: [],
       },
       {
         name: 'Taboo',
         level: 2,
         description:
           'At 2nd level, the medium can voluntarily accept a taboo to gain an additional use of spirit surge without allowing the spirit more influence.',
+        effects: [],
       },
       {
         name: 'Haunt Channeler',
         level: 3,
         description:
           "At 3rd level, the medium can detect haunts and can channel a haunt's energies to attempt to put it to rest. She can also communicate with the spirit behind a haunt.",
+        effects: [],
       },
-      { name: 'Spirit Bonus', level: 4, description: 'Spirit bonus increases to +2.' },
+      { name: 'Spirit Bonus', level: 4, description: 'Spirit bonus increases to +2.', effects: [] },
       {
         name: 'Location Channel',
         level: 5,
         description:
           'At 5th level, the medium can channel the legend of a specific location instead of (or in addition to) a spirit, gaining special knowledge and abilities related to that place.',
+        effects: [],
       },
       {
         name: 'Spirit Power (Intermediate)',
         level: 6,
         description:
           'At 6th level, the medium gains the intermediate spirit power of her channeled spirit.',
+        effects: [],
       },
-      { name: 'Spirit Surge', level: 6, description: 'Spirit surge increases to 1d8.' },
+      {
+        name: 'Spirit Surge',
+        level: 6,
+        description: 'Spirit surge increases to 1d8.',
+        effects: [],
+      },
       {
         name: 'Connection Channel',
         level: 7,
         description:
           'At 7th level, the medium can use an object intimately connected to a person to channel information about that person.',
+        effects: [],
       },
-      { name: 'Spirit Bonus', level: 8, description: 'Spirit bonus increases to +3.' },
+      { name: 'Spirit Bonus', level: 8, description: 'Spirit bonus increases to +3.', effects: [] },
       {
         name: 'Propitiation',
         level: 9,
         description:
           'At 9th level, the medium can make offerings to appease a spirit, reducing its influence over her by 1 point.',
+        effects: [],
       },
-      { name: 'Spirit Surge', level: 10, description: 'Spirit surge increases to 1d10.' },
+      {
+        name: 'Spirit Surge',
+        level: 10,
+        description: 'Spirit surge increases to 1d10.',
+        effects: [],
+      },
       {
         name: 'Spirit Power (Greater)',
         level: 11,
         description:
           'At 11th level, the medium gains the greater spirit power of her channeled spirit.',
+        effects: [],
       },
-      { name: 'Spirit Bonus', level: 12, description: 'Spirit bonus increases to +4.' },
+      {
+        name: 'Spirit Bonus',
+        level: 12,
+        description: 'Spirit bonus increases to +4.',
+        effects: [],
+      },
       {
         name: 'Ask the Spirits',
         level: 13,
         description:
           'At 13th level, the medium can ask the spirits a question once per day as if using the commune spell.',
+        effects: [],
       },
       {
         name: 'Astral Journey',
         level: 14,
         description:
           'At 14th level, the medium can project her consciousness to the Astral Plane once per day.',
+        effects: [],
       },
       {
         name: 'Trance of Three',
         level: 15,
         description:
           'At 15th level, the medium can channel two spirits simultaneously, gaining the lesser and intermediate powers of both.',
+        effects: [],
       },
-      { name: 'Spirit Bonus', level: 16, description: 'Spirit bonus increases to +5.' },
+      {
+        name: 'Spirit Bonus',
+        level: 16,
+        description: 'Spirit bonus increases to +5.',
+        effects: [],
+      },
       {
         name: 'Spirit Power (Supreme)',
         level: 17,
         description:
           'At 17th level, the medium gains the supreme spirit power of her channeled spirit.',
+        effects: [],
       },
       {
         name: 'Spacious Soul',
         level: 18,
         description:
           'At 18th level, the medium gains a +4 bonus on saving throws against possession and influence attempts. She also reduces spirit influence by an additional point each day.',
+        effects: [],
       },
       {
         name: 'Spirit Mastery',
         level: 19,
         description:
           "At 19th level, the medium's spirit can never gain enough influence to take control. She is immune to the negative effects of spirit influence.",
+        effects: [],
       },
       {
         name: 'Astral Beacon',
         level: 20,
         description:
           'At 20th level, the medium becomes a beacon for spirits and the spiritual world. She can channel any spirit without a seance, can channel three spirits simultaneously, and her spirit surge adds 1d6 to the result in addition to its normal die.',
+        effects: [],
       },
-      { name: 'Spirit Bonus', level: 20, description: 'Spirit bonus increases to +6.' },
+      {
+        name: 'Spirit Bonus',
+        level: 20,
+        description: 'Spirit bonus increases to +6.',
+        effects: [],
+      },
     ],
     spellcasting: {
       type: 'Psychic',
@@ -440,128 +561,218 @@ export const OCCULT_CLASSES_EXPANDED: ExpandedClassData[] = [
         level: 1,
         description:
           'A mesmerist adds half his class level (minimum 1) as a bonus on all Bluff checks.',
+        effects: [],
       },
       {
         name: 'Hypnotic Stare',
         level: 1,
         description:
           'A mesmerist can focus his stare on one creature within 30 feet as a swift action. The target takes a -2 penalty on Will saving throws. This penalty increases to -3 at 8th level. The mesmerist can maintain his stare against only one opponent at a time.',
+        effects: [],
       },
       {
         name: 'Knacks',
         level: 1,
         description:
           'Mesmerists learn a number of knacks, or 0-level psychic spells. These spells are cast like any other spell but do not consume spell slots.',
+        effects: [],
       },
       {
         name: 'Mesmerist Trick',
         level: 1,
         description:
           "A mesmerist can implant a trick in an ally's mind as a standard action, which triggers automatically when specific conditions are met (similar to a contingency). The mesmerist can maintain one implanted trick at 1st level, plus one more at 2nd, 4th, 6th, 8th, 10th, 12th, 14th, 16th, 18th, and 20th levels.",
+        effects: [],
       },
       {
         name: 'Painful Stare',
         level: 1,
         description:
           "When an attack hits the target of the mesmerist's hypnotic stare, the mesmerist can cause the target to take an additional 1 point of damage plus 1 for every 3 mesmerist levels. He can increase this to 1d6+1 per 3 levels if he makes the attack himself.",
+        effects: [],
       },
-      { name: 'Mesmerist Trick', level: 2, description: 'Gain an additional mesmerist trick.' },
+      {
+        name: 'Mesmerist Trick',
+        level: 2,
+        description: 'Gain an additional mesmerist trick.',
+        effects: [],
+      },
       {
         name: 'Towering Ego',
         level: 2,
         description: 'At 2nd level, the mesmerist adds his Charisma bonus on Will saves.',
+        effects: [],
       },
       {
         name: 'Bold Stare',
         level: 3,
         description:
           'At 3rd level and every 4 levels thereafter, a mesmerist gains a bold stare improvement that adds an additional effect to his hypnotic stare.',
+        effects: [],
       },
       {
         name: 'Touch Treatment (Minor)',
         level: 3,
         description:
           'At 3rd level, the mesmerist can remove the fascinated, shaken, or dazed condition from a willing creature with a melee touch attack as a standard action. At 6th level, he can remove moderate conditions (confused, frightened, sickened). At 10th level, greater conditions (cowering, nauseated, panicked, stunned). At 14th level, he duplicates break enchantment.',
+        effects: [],
       },
-      { name: 'Mesmerist Trick', level: 4, description: 'Gain an additional mesmerist trick.' },
+      {
+        name: 'Mesmerist Trick',
+        level: 4,
+        description: 'Gain an additional mesmerist trick.',
+        effects: [],
+      },
       {
         name: 'Manifold Tricks',
         level: 5,
         description:
           'At 5th level, the mesmerist can have two tricks implanted at the same time. This increases to 3 at 9th, 4 at 13th, and 5 at 17th level.',
+        effects: [],
       },
       {
         name: 'Mental Potency',
         level: 5,
         description:
           'At 5th level, the mesmerist can affect creatures with more HD than normal with his mind-affecting spells and abilities. He increases the maximum HD of creatures affected by 1, increasing by 1 again at 8th, 11th, 14th, 17th, and 20th level.',
+        effects: [],
       },
-      { name: 'Mesmerist Trick', level: 6, description: 'Gain an additional mesmerist trick.' },
+      {
+        name: 'Mesmerist Trick',
+        level: 6,
+        description: 'Gain an additional mesmerist trick.',
+        effects: [],
+      },
       {
         name: 'Touch Treatment (Moderate)',
         level: 6,
         description:
           'Touch treatment can now remove confused, frightened, and sickened conditions.',
+        effects: [],
       },
-      { name: 'Bold Stare', level: 7, description: 'Gain an additional bold stare improvement.' },
+      {
+        name: 'Bold Stare',
+        level: 7,
+        description: 'Gain an additional bold stare improvement.',
+        effects: [],
+      },
       {
         name: 'Hypnotic Stare',
         level: 8,
         description: 'Hypnotic stare penalty increases to -3.',
+        effects: [],
       },
-      { name: 'Mesmerist Trick', level: 8, description: 'Gain an additional mesmerist trick.' },
+      {
+        name: 'Mesmerist Trick',
+        level: 8,
+        description: 'Gain an additional mesmerist trick.',
+        effects: [],
+      },
       {
         name: 'Manifold Tricks',
         level: 9,
         description: 'Can maintain 3 implanted tricks simultaneously.',
+        effects: [],
       },
-      { name: 'Mesmerist Trick', level: 10, description: 'Gain an additional mesmerist trick.' },
+      {
+        name: 'Mesmerist Trick',
+        level: 10,
+        description: 'Gain an additional mesmerist trick.',
+        effects: [],
+      },
       {
         name: 'Touch Treatment (Greater)',
         level: 10,
         description:
           'Touch treatment can now remove cowering, nauseated, panicked, and stunned conditions.',
+        effects: [],
       },
-      { name: 'Bold Stare', level: 11, description: 'Gain an additional bold stare improvement.' },
+      {
+        name: 'Bold Stare',
+        level: 11,
+        description: 'Gain an additional bold stare improvement.',
+        effects: [],
+      },
       {
         name: 'Glib Lie',
         level: 11,
         description:
           "At 11th level, the mesmerist's lies are so convincing that they can fool even magical detection. His statements cannot be revealed as lies by spells like discern lies or zone of truth unless the caster succeeds at a caster level check.",
+        effects: [],
       },
       {
         name: 'Masterful Tricks',
         level: 12,
         description:
           'At 12th level, the mesmerist can select masterful tricks in addition to standard tricks.',
+        effects: [],
       },
-      { name: 'Mesmerist Trick', level: 12, description: 'Gain an additional mesmerist trick.' },
+      {
+        name: 'Mesmerist Trick',
+        level: 12,
+        description: 'Gain an additional mesmerist trick.',
+        effects: [],
+      },
       {
         name: 'Manifold Tricks',
         level: 13,
         description: 'Can maintain 4 implanted tricks simultaneously.',
+        effects: [],
       },
-      { name: 'Mesmerist Trick', level: 14, description: 'Gain an additional mesmerist trick.' },
+      {
+        name: 'Mesmerist Trick',
+        level: 14,
+        description: 'Gain an additional mesmerist trick.',
+        effects: [],
+      },
       {
         name: 'Touch Treatment (Break Enchantment)',
         level: 14,
         description: 'Touch treatment can now duplicate break enchantment.',
+        effects: [],
       },
-      { name: 'Bold Stare', level: 15, description: 'Gain an additional bold stare improvement.' },
-      { name: 'Mesmerist Trick', level: 16, description: 'Gain an additional mesmerist trick.' },
+      {
+        name: 'Bold Stare',
+        level: 15,
+        description: 'Gain an additional bold stare improvement.',
+        effects: [],
+      },
+      {
+        name: 'Mesmerist Trick',
+        level: 16,
+        description: 'Gain an additional mesmerist trick.',
+        effects: [],
+      },
       {
         name: 'Manifold Tricks',
         level: 17,
         description: 'Can maintain 5 implanted tricks simultaneously.',
+        effects: [],
       },
-      { name: 'Mesmerist Trick', level: 18, description: 'Gain an additional mesmerist trick.' },
-      { name: 'Bold Stare', level: 19, description: 'Gain an additional bold stare improvement.' },
-      { name: 'Mesmerist Trick', level: 20, description: 'Gain an additional mesmerist trick.' },
+      {
+        name: 'Mesmerist Trick',
+        level: 18,
+        description: 'Gain an additional mesmerist trick.',
+        effects: [],
+      },
+      {
+        name: 'Bold Stare',
+        level: 19,
+        description: 'Gain an additional bold stare improvement.',
+        effects: [],
+      },
+      {
+        name: 'Mesmerist Trick',
+        level: 20,
+        description: 'Gain an additional mesmerist trick.',
+        effects: [],
+      },
       {
         name: 'Rule Minds',
         level: 20,
         description:
           'At 20th level, the mesmerist can permanently control a creature as if using dominate monster. He can have one creature under this effect at a time. The creature does not receive periodic saving throws.',
+        effects: [],
       },
     ],
     spellcasting: {
@@ -616,127 +827,193 @@ export const OCCULT_CLASSES_EXPANDED: ExpandedClassData[] = [
         level: 1,
         description:
           'An occultist gains the base focus power from each of his chosen implement schools. At 3rd level and every 2 levels thereafter, he gains an additional focus power selected from any school for which he has an implement. Activating a focus power costs mental focus from the associated implement.',
+        effects: [],
       },
       {
         name: 'Implements',
         level: 1,
         description:
           'An occultist learns to use two implement schools at 1st level and gains an additional school at 2nd, 6th, 10th, 14th, and 18th levels. Each implement school grants a resonant power (passive), a base focus power, and access to spells of that school. The occultist must carry a physical implement for each school.',
+        effects: [],
       },
       {
         name: 'Knacks',
         level: 1,
         description:
           'An occultist learns a number of knacks, or 0-level psychic spells. These spells are cast like any other spell but do not consume spell slots.',
+        effects: [],
       },
       {
         name: 'Mental Focus',
         level: 1,
         description:
           'An occultist has a pool of mental focus equal to his occultist level + Intelligence modifier. Each day he must invest mental focus into his implements to activate their resonant powers. He can also spend focus from invested implements to use focus powers. Uninvested focus serves as a generic pool.',
+        effects: [],
       },
       {
         name: 'Implements',
         level: 2,
         description: 'The occultist gains access to a 3rd implement school.',
+        effects: [],
       },
       {
         name: 'Magic Item Skill',
         level: 2,
         description:
           'At 2nd level, the occultist gains a bonus equal to half his level on Use Magic Device checks to activate magic items.',
+        effects: [],
       },
       {
         name: 'Object Reading',
         level: 2,
         description:
           'At 2nd level, an occultist can examine an item for 1 minute to learn information about its history, previous owners, and magical properties, as if using the psychometry occult skill unlock.',
+        effects: [],
       },
-      { name: 'Focus Power', level: 3, description: 'Gain an additional focus power.' },
+      {
+        name: 'Focus Power',
+        level: 3,
+        description: 'Gain an additional focus power.',
+        effects: [],
+      },
       {
         name: 'Shift Focus',
         level: 4,
         description:
           'At 4th level, as a full-round action the occultist can shift mental focus from one implement to another, moving up to his Intelligence modifier points of focus.',
+        effects: [],
       },
       {
         name: 'Aura Sight',
         level: 5,
         description:
           'At 5th level, the occultist can read the auras of creatures and objects as a standard action, functioning as the aura sight occult skill unlock.',
+        effects: [],
       },
-      { name: 'Focus Power', level: 5, description: 'Gain an additional focus power.' },
+      {
+        name: 'Focus Power',
+        level: 5,
+        description: 'Gain an additional focus power.',
+        effects: [],
+      },
       {
         name: 'Implements',
         level: 6,
         description: 'The occultist gains access to a 4th implement school.',
+        effects: [],
       },
-      { name: 'Focus Power', level: 7, description: 'Gain an additional focus power.' },
+      {
+        name: 'Focus Power',
+        level: 7,
+        description: 'Gain an additional focus power.',
+        effects: [],
+      },
       {
         name: 'Magic Circles',
         level: 8,
         description:
           'At 8th level, the occultist can draw a magic circle in 1 minute using 1 point of generic focus. The circle functions as a permanent magic circle against an alignment of his choice.',
+        effects: [],
       },
       {
         name: 'Outside Contact',
         level: 8,
         description:
           'At 8th level, the occultist can contact an outsider for information once per week. He gains additional contacts at 12th, 16th, and 20th levels.',
+        effects: [],
       },
-      { name: 'Focus Power', level: 9, description: 'Gain an additional focus power.' },
+      {
+        name: 'Focus Power',
+        level: 9,
+        description: 'Gain an additional focus power.',
+        effects: [],
+      },
       {
         name: 'Implements',
         level: 10,
         description: 'The occultist gains access to a 5th implement school.',
+        effects: [],
       },
-      { name: 'Focus Power', level: 11, description: 'Gain an additional focus power.' },
+      {
+        name: 'Focus Power',
+        level: 11,
+        description: 'Gain an additional focus power.',
+        effects: [],
+      },
       {
         name: 'Binding Circles',
         level: 12,
         description:
           'At 12th level, the occultist can draw binding circles that function as magic circles with the inward-focused effect, trapping creatures within.',
+        effects: [],
       },
       {
         name: 'Outside Contact',
         level: 12,
         description: 'The occultist gains an additional outside contact.',
+        effects: [],
       },
-      { name: 'Focus Power', level: 13, description: 'Gain an additional focus power.' },
+      {
+        name: 'Focus Power',
+        level: 13,
+        description: 'Gain an additional focus power.',
+        effects: [],
+      },
       {
         name: 'Implements',
         level: 14,
         description: 'The occultist gains access to a 6th implement school.',
+        effects: [],
       },
-      { name: 'Focus Power', level: 15, description: 'Gain an additional focus power.' },
+      {
+        name: 'Focus Power',
+        level: 15,
+        description: 'Gain an additional focus power.',
+        effects: [],
+      },
       {
         name: 'Fast Circles',
         level: 16,
         description:
           'At 16th level, the occultist can draw magic circles and binding circles as a full-round action instead of 1 minute.',
+        effects: [],
       },
       {
         name: 'Outside Contact',
         level: 16,
         description: 'The occultist gains an additional outside contact.',
+        effects: [],
       },
-      { name: 'Focus Power', level: 17, description: 'Gain an additional focus power.' },
+      {
+        name: 'Focus Power',
+        level: 17,
+        description: 'Gain an additional focus power.',
+        effects: [],
+      },
       {
         name: 'Implements',
         level: 18,
         description: 'The occultist gains access to a 7th implement school.',
+        effects: [],
       },
-      { name: 'Focus Power', level: 19, description: 'Gain an additional focus power.' },
+      {
+        name: 'Focus Power',
+        level: 19,
+        description: 'Gain an additional focus power.',
+        effects: [],
+      },
       {
         name: 'Implement Mastery',
         level: 20,
         description:
           'At 20th level, the occultist gains the ability to use all of his focus powers without needing to have the associated implement in hand. He can also invest generic focus to amplify the resonant power of one implement beyond its normal limit.',
+        effects: [],
       },
       {
         name: 'Outside Contact',
         level: 20,
         description: 'The occultist gains an additional outside contact.',
+        effects: [],
       },
     ],
     spellcasting: {
@@ -793,102 +1070,159 @@ export const OCCULT_CLASSES_EXPANDED: ExpandedClassData[] = [
         level: 1,
         description:
           'A psychic learns a number of knacks, or 0-level psychic spells. These spells are cast like any other spell but do not consume spell slots.',
+        effects: [],
       },
       {
         name: 'Phrenic Amplification',
         level: 1,
         description:
           'A psychic develops particular talents to augment her spellcasting. At 1st level and every 2 levels thereafter (3rd, 7th, 11th, 15th, 19th), she gains a phrenic amplification that she can apply to her spells by spending points from her phrenic pool.',
+        effects: [],
       },
       {
         name: 'Phrenic Pool',
         level: 1,
         description:
           'A psychic has a pool of supernatural mental energy equal to half her psychic level + her Wisdom or Charisma modifier (depending on discipline). She can expend points from this pool to use phrenic amplifications.',
+        effects: [],
       },
       {
         name: 'Psychic Discipline',
         level: 1,
         description:
           'A psychic selects a psychic discipline that grants additional spells and powers. Available disciplines include Abomination, Dream, Faith, Lore, Pain, Psychedelia, Rapport, Self-Perfection, and Tranquility. The discipline grants powers at 1st, 5th, and 13th levels, and bonus spells at every even level from 4th to 18th.',
+        effects: [],
       },
       {
         name: 'Discipline Power',
         level: 1,
         description: 'The psychic gains the 1st-level power of her chosen discipline.',
+        effects: [],
       },
       {
         name: 'Detect Thoughts',
         level: 2,
         description:
           "At 2nd level, a psychic can use detect thoughts as a spell-like ability at will. The DC is equal to 10 + half the psychic's level + her Charisma modifier.",
+        effects: [],
       },
       {
         name: 'Phrenic Amplification',
         level: 3,
         description: 'Gain an additional phrenic amplification.',
+        effects: [],
       },
-      { name: 'Discipline Spell', level: 4, description: 'Gain a bonus discipline spell.' },
+      {
+        name: 'Discipline Spell',
+        level: 4,
+        description: 'Gain a bonus discipline spell.',
+        effects: [],
+      },
       {
         name: 'Discipline Power',
         level: 5,
         description: 'The psychic gains the 5th-level power of her chosen discipline.',
+        effects: [],
       },
-      { name: 'Discipline Spell', level: 6, description: 'Gain a bonus discipline spell.' },
+      {
+        name: 'Discipline Spell',
+        level: 6,
+        description: 'Gain a bonus discipline spell.',
+        effects: [],
+      },
       {
         name: 'Phrenic Amplification',
         level: 7,
         description: 'Gain an additional phrenic amplification.',
+        effects: [],
       },
-      { name: 'Discipline Spell', level: 8, description: 'Gain a bonus discipline spell.' },
+      {
+        name: 'Discipline Spell',
+        level: 8,
+        description: 'Gain a bonus discipline spell.',
+        effects: [],
+      },
       {
         name: 'Telepathic Bond',
         level: 9,
         description:
           'At 9th level, the psychic can create a telepathic bond (as the spell) as a standard action a number of times per day equal to her Charisma modifier.',
+        effects: [],
       },
-      { name: 'Discipline Spell', level: 10, description: 'Gain a bonus discipline spell.' },
+      {
+        name: 'Discipline Spell',
+        level: 10,
+        description: 'Gain a bonus discipline spell.',
+        effects: [],
+      },
       {
         name: 'Major Amplifications',
         level: 11,
         description:
           'At 11th level, the psychic gains access to major amplifications whenever she would gain a phrenic amplification.',
+        effects: [],
       },
       {
         name: 'Phrenic Amplification',
         level: 11,
         description: 'Gain an additional phrenic amplification (may be major).',
+        effects: [],
       },
-      { name: 'Discipline Spell', level: 12, description: 'Gain a bonus discipline spell.' },
+      {
+        name: 'Discipline Spell',
+        level: 12,
+        description: 'Gain a bonus discipline spell.',
+        effects: [],
+      },
       {
         name: 'Discipline Power',
         level: 13,
         description: 'The psychic gains the 13th-level power of her chosen discipline.',
+        effects: [],
       },
-      { name: 'Discipline Spell', level: 14, description: 'Gain a bonus discipline spell.' },
+      {
+        name: 'Discipline Spell',
+        level: 14,
+        description: 'Gain a bonus discipline spell.',
+        effects: [],
+      },
       {
         name: 'Phrenic Amplification',
         level: 15,
         description: 'Gain an additional phrenic amplification (may be major).',
+        effects: [],
       },
-      { name: 'Discipline Spell', level: 16, description: 'Gain a bonus discipline spell.' },
+      {
+        name: 'Discipline Spell',
+        level: 16,
+        description: 'Gain a bonus discipline spell.',
+        effects: [],
+      },
       {
         name: 'Telepathy',
         level: 17,
         description:
           'At 17th level, the psychic gains telepathy out to 100 feet. She can communicate telepathically with any creature that has a language.',
+        effects: [],
       },
-      { name: 'Discipline Spell', level: 18, description: 'Gain a bonus discipline spell.' },
+      {
+        name: 'Discipline Spell',
+        level: 18,
+        description: 'Gain a bonus discipline spell.',
+        effects: [],
+      },
       {
         name: 'Phrenic Amplification',
         level: 19,
         description: 'Gain an additional phrenic amplification (may be major).',
+        effects: [],
       },
       {
         name: 'Remade Self',
         level: 20,
         description:
           "At 20th level, the psychic is constantly affected as if by an ongoing spell of her discipline's choice. She is also immune to mind-affecting effects unless she chooses to allow them, and she can rewrite her own memories and personality at will.",
+        effects: [],
       },
     ],
     spellcasting: {
@@ -945,126 +1279,176 @@ export const OCCULT_CLASSES_EXPANDED: ExpandedClassData[] = [
         level: 1,
         description:
           'A spiritualist begins play with the ability to form a bond with a phantom, an emotional echo of a dead creature. The phantom is tethered to the spiritualist via an etheric tether and can manifest in ectoplasmic or incorporeal form.',
+        effects: [],
       },
       {
         name: 'Knacks',
         level: 1,
         description:
           'Spiritualists learn a number of knacks, or 0-level psychic spells. These spells are cast like any other spell but do not consume spell slots.',
+        effects: [],
       },
       {
         name: 'Phantom',
         level: 1,
         description:
           "A spiritualist begins play with a phantom, a spiritual entity bound to the spiritualist's consciousness. The phantom has an emotional focus (anger, dedication, despair, fear, hatred, jealousy, or zeal) that determines its abilities. It can manifest as either ectoplasmic (corporeal) or incorporeal form.",
+        effects: [],
       },
       {
         name: 'Shared Consciousness',
         level: 1,
         description:
           "At 1st level, while the phantom is confined within the spiritualist's consciousness, the spiritualist gains the Skill Focus feat in two skills determined by the phantom's emotional focus. She also gains a +4 bonus on saving throws against mind-affecting effects.",
+        effects: [],
       },
       {
         name: 'Bonded Senses',
         level: 2,
         description:
           "At 2nd level, as a standard action the spiritualist can share her phantom's senses, seeing, hearing, and smelling what it does for a number of rounds per day equal to her spiritualist level.",
+        effects: [],
       },
       {
         name: 'Bonded Manifestation',
         level: 3,
         description:
           'At 3rd level, the spiritualist can pull her phantom partially into her own body, gaining ectoplasmic armor (+4 armor bonus to AC) or incorporeal movement (20% concealment). Uses last for a number of rounds per day equal to 3 + her level. Additional options unlock at 8th, 13th, and 18th levels.',
+        effects: [],
       },
       {
         name: 'Spiritual Interference',
         level: 4,
         description:
           'At 4th level, while her phantom is manifested adjacent to her, the spiritualist gains a +2 shield bonus to AC and a +2 circumstance bonus on saving throws.',
+        effects: [],
       },
       {
         name: 'Detect Undead',
         level: 5,
         description:
           'At 5th level, the spiritualist can use detect undead at will as a spell-like ability.',
+        effects: [],
       },
       {
         name: 'Phantom Recall',
         level: 6,
         description:
           'At 6th level, once per day the spiritualist can teleport her phantom to her side as if using dimension door. This increases to 2/day at 10th, 3/day at 14th, and 4/day at 18th.',
+        effects: [],
       },
       {
         name: 'Calm Spirit',
         level: 7,
         description:
           'At 7th level, the spiritualist can use calm spirit as a spell-like ability once per day. This increases to 2/day at 11th, 3/day at 15th, and 4/day at 19th.',
+        effects: [],
       },
       {
         name: 'Bonded Manifestation',
         level: 8,
         description:
           'Bonded manifestation gains additional options: ectoplasmic tendrils (natural attacks) or incorporeal flight.',
+        effects: [],
       },
       {
         name: 'See Invisibility',
         level: 9,
         description:
           'At 9th level, the spiritualist can use see invisibility as a spell-like ability once per day, lasting 10 minutes.',
+        effects: [],
       },
       {
         name: 'Fused Consciousness',
         level: 10,
         description:
           "At 10th level, the spiritualist always gains the bonded senses benefit while her phantom is manifested, regardless of whether it's in her consciousness.",
+        effects: [],
       },
-      { name: 'Phantom Recall', level: 10, description: 'Phantom recall increases to 2/day.' },
-      { name: 'Calm Spirit', level: 11, description: 'Calm spirit increases to 2/day.' },
+      {
+        name: 'Phantom Recall',
+        level: 10,
+        description: 'Phantom recall increases to 2/day.',
+        effects: [],
+      },
+      {
+        name: 'Calm Spirit',
+        level: 11,
+        description: 'Calm spirit increases to 2/day.',
+        effects: [],
+      },
       {
         name: 'Greater Spiritual Interference',
         level: 12,
         description:
           'At 12th level, the bonuses from spiritual interference extend to all allies adjacent to the phantom.',
+        effects: [],
       },
       {
         name: 'Bonded Manifestation',
         level: 13,
         description:
           'Bonded manifestation improves: ectoplasmic armor bonus increases to +6, incorporeal form grants invisibility option.',
+        effects: [],
       },
       {
         name: 'Spiritual Bond',
         level: 14,
         description:
           'At 14th level, the spiritualist can redirect damage she takes to her manifested phantom as an immediate action.',
+        effects: [],
       },
-      { name: 'Phantom Recall', level: 14, description: 'Phantom recall increases to 3/day.' },
-      { name: 'Calm Spirit', level: 15, description: 'Calm spirit increases to 3/day.' },
+      {
+        name: 'Phantom Recall',
+        level: 14,
+        description: 'Phantom recall increases to 3/day.',
+        effects: [],
+      },
+      {
+        name: 'Calm Spirit',
+        level: 15,
+        description: 'Calm spirit increases to 3/day.',
+        effects: [],
+      },
       {
         name: 'Call Spirit',
         level: 16,
         description:
           'At 16th level, the spiritualist can use call spirit as a spell-like ability once per day.',
+        effects: [],
       },
       {
         name: 'Dual Bond',
         level: 17,
         description:
           'At 17th level, the spiritualist can use bonded manifestation more frequently (3 + 2 x class level rounds per day).',
+        effects: [],
       },
       {
         name: 'Bonded Manifestation',
         level: 18,
         description:
           'Bonded manifestation reaches full power: ectoplasmic tendrils gain full-round attack, incorporeal form gains flight.',
+        effects: [],
       },
-      { name: 'Phantom Recall', level: 18, description: 'Phantom recall increases to 4/day.' },
-      { name: 'Calm Spirit', level: 19, description: 'Calm spirit increases to 4/day.' },
+      {
+        name: 'Phantom Recall',
+        level: 18,
+        description: 'Phantom recall increases to 4/day.',
+        effects: [],
+      },
+      {
+        name: 'Calm Spirit',
+        level: 19,
+        description: 'Calm spirit increases to 4/day.',
+        effects: [],
+      },
       {
         name: 'Empowered Consciousness',
         level: 20,
         description:
           'At 20th level, the spiritualist gains immunity to mind-affecting effects and possession while her phantom is within her consciousness. If her phantom is manifested, she can recall it to her consciousness as an immediate action.',
+        effects: [],
       },
     ],
     spellcasting: {
