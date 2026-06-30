@@ -130,5 +130,14 @@ describe('WARDER_CLASS classFeatures — resource-cost wiring (issue #295)', () 
       expect(aegis!.activation?.type).toBe('toggle');
       expect(aegis!.activation?.active).toBe(false);
     });
+
+    it('includes focus benefit special effect with toggle activation', () => {
+      const focus = feature.effects!.find(
+        (e) => e.type === 'special' && e.target === 'special.deathless_defenses_focus',
+      );
+      expect(focus).toBeDefined();
+      expect(focus!.activation?.type).toBe('toggle');
+      expect(focus!.activation?.active).toBe(false);
+    });
   });
 });
