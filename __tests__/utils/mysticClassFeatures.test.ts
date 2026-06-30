@@ -11,6 +11,10 @@ function getFeature(name: string, level?: number): ClassFeatureData {
   return feature;
 }
 
+function getSpecialEffects(feature: ClassFeatureData) {
+  return (feature.effects ?? []).filter((e) => e.type === 'special');
+}
+
 describe('MYSTIC_CLASS classFeatures', () => {
   describe('data integrity', () => {
     it('every feature has an effects array', () => {
@@ -30,11 +34,9 @@ describe('MYSTIC_CLASS classFeatures', () => {
 
     it('all type:special effects use compound dot-separated target keys', () => {
       MYSTIC_CLASS.classFeatures.forEach((feature: ClassFeatureData) => {
-        (feature.effects ?? [])
-          .filter((e) => e.type === 'special')
-          .forEach((effect) => {
-            expect(effect.target).toContain('.');
-          });
+        getSpecialEffects(feature).forEach((effect) => {
+          expect(effect.target).toContain('.');
+        });
       });
     });
   });
@@ -76,7 +78,7 @@ describe('MYSTIC_CLASS classFeatures', () => {
 
     it('models retaliation damage as a special effect with compound target', () => {
       const feature = getFeature('Blade Meditation');
-      const specialEffects = (feature.effects ?? []).filter((e) => e.type === 'special');
+      const specialEffects = getSpecialEffects(feature);
       expect(specialEffects).toHaveLength(1);
       expect(specialEffects[0].target).toContain('.');
     });
@@ -91,8 +93,7 @@ describe('MYSTIC_CLASS classFeatures', () => {
 
     it('base glyph has a special effect for cross-character delivery', () => {
       const feature = getFeature('Elemental Glyph');
-      const specialEffects = (feature.effects ?? []).filter((e) => e.type === 'special');
-      expect(specialEffects).toHaveLength(1);
+      expect(getSpecialEffects(feature)).toHaveLength(1);
     });
 
     it.each([
@@ -105,7 +106,7 @@ describe('MYSTIC_CLASS classFeatures', () => {
       'Elemental Glyph: Water',
     ])('%s uses type:special for its cross-character effect', (name) => {
       const feature = getFeature(name);
-      const specialEffects = (feature.effects ?? []).filter((e) => e.type === 'special');
+      const specialEffects = getSpecialEffects(feature);
       expect(specialEffects).toHaveLength(1);
       expect(specialEffects[0].target).toContain('.');
     });
@@ -125,8 +126,7 @@ describe('MYSTIC_CLASS classFeatures', () => {
     it('is action-mode with a special effect', () => {
       const feature = getFeature('Quell Magic');
       expect(feature.activationMode).toBe('action');
-      const specialEffects = (feature.effects ?? []).filter((e) => e.type === 'special');
-      expect(specialEffects).toHaveLength(1);
+      expect(getSpecialEffects(feature)).toHaveLength(1);
     });
   });
 
@@ -148,8 +148,7 @@ describe('MYSTIC_CLASS classFeatures', () => {
 
     it('has a special effect for cross-character glyph application', () => {
       const feature = getFeature('Glyph Mastery');
-      const specialEffects = (feature.effects ?? []).filter((e) => e.type === 'special');
-      expect(specialEffects).toHaveLength(1);
+      expect(getSpecialEffects(feature)).toHaveLength(1);
     });
   });
 });
