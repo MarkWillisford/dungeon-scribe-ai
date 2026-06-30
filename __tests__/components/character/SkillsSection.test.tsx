@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { render, fireEvent, type RenderedNode } from '../../helpers/testUtils';
+import { render, fireEvent, getAllText, type RenderedNode } from '../../helpers/testUtils';
 import { SkillsSection } from '@/components/character/direct-entry/SkillsSection';
 import { PRESET_PF1E_STANDARD, PRESET_GO_NUTS } from '@/config/rulesetPresets';
 import type { Ruleset } from '@/types/ruleset';
@@ -312,7 +312,7 @@ describe('SkillsSection — total available ranks', () => {
     mockSkills = { acrobatics: { ranks: 3, misc: 0 } };
     const { getByTestId } = render(<SkillsSection />);
     const remaining = getByTestId('skill-ranks-remaining');
-    expect(remaining.children).toContain('21');
+    expect(getAllText(remaining)).toContain('21');
   });
 
   it('colors remaining with the error color when over-spent', () => {
@@ -326,7 +326,7 @@ describe('SkillsSection — total available ranks', () => {
     };
     const { getByTestId } = render(<SkillsSection />);
     const remaining = getByTestId('skill-ranks-remaining');
-    expect(remaining.children).toContain('-1');
+    expect(getAllText(remaining)).toContain('-1');
     const style = Array.isArray(remaining.props.style)
       ? Object.assign({}, ...remaining.props.style)
       : remaining.props.style;
