@@ -22,18 +22,21 @@ export const BLOODRAGER_ARCHETYPES: ArchetypeData[] = [
         level: 1,
         description:
           "The bloodrider gains a bloodline-bonded mount, treating his bloodrager level as his paladin level for determining the mount's abilities. While bloodraging, both the bloodrider and his mount gain the benefits of his bloodline powers.",
+        effects: [],
       },
       {
         name: 'Mounted Bloodrage',
         level: 1,
         description:
           "When bloodraging while mounted, the bloodrider can transfer the benefit of his bloodline's 1st-level power to his mount instead of himself. He can also cast spells requiring a touch attack through his mount's natural attacks.",
+        effects: [],
       },
       {
         name: 'Charging Bloodrage',
         level: 4,
         description:
           "At 4th level, while bloodraging and mounted, the bloodrider adds his bloodline's bonus damage on charge attacks. His mount also benefits from his damage reduction while he is bloodraging and mounted.",
+        effects: [],
       },
     ],
     source: 'Pathfinder RPG: Advanced Class Guide',
@@ -55,12 +58,14 @@ export const BLOODRAGER_ARCHETYPES: ArchetypeData[] = [
         level: 1,
         description:
           'The crossblooded rager selects two bloodrager bloodlines. At each level where she gains a bloodline power, she selects which of the two bloodlines provides that power. Bonus spells are drawn from whichever bloodline provides a spell at the lower level.',
+        effects: [],
       },
       {
         name: 'Conflicting Heritage',
         level: 1,
         description:
           "The crossblooded rager's will save bonus from bloodline powers is reduced by 2. Additionally, once per bloodrage, when she fails a Will save, she must act erratically for 1 round as determined by the GM, representing the mental strain of two bloodlines fighting for supremacy.",
+        effects: [],
       },
     ],
     source: 'Pathfinder RPG: Advanced Class Guide',
@@ -82,18 +87,21 @@ export const BLOODRAGER_ARCHETYPES: ArchetypeData[] = [
         level: 1,
         description:
           'The draconic bloodrager must select the draconic bloodline. Her draconic bloodline powers activate at 2 levels earlier than normal, and she grows draconic scales providing a +2 natural armor bonus that increases to +4 at 8th level and +6 at 16th level.',
+        effects: [],
       },
       {
         name: 'Breath Weapon',
         level: 4,
         description:
           "At 4th level, the draconic bloodrager can use her draconic bloodline's breath weapon while bloodraging as a swift action, spending 1 round of bloodrage. The damage dice increase by one step at 8th level and every 4 levels thereafter.",
+        effects: [],
       },
       {
         name: 'Dragon Form',
         level: 16,
         description:
           'At 16th level, while bloodraging, the draconic bloodrager can assume the form of a dragon (as per form of the dragon II) for a number of rounds per day equal to her bloodrager level.',
+        effects: [],
       },
     ],
     source: 'Pathfinder RPG: Advanced Class Guide',
@@ -115,18 +123,21 @@ export const BLOODRAGER_ARCHETYPES: ArchetypeData[] = [
         level: 1,
         description:
           'The id rager selects an emotional focus that defines his psychic power: anger, dedication, despair, fear, hatred, or jealousy. During bloodrage, he gains a +2 bonus on concentration checks and his spells ignore the verbal component requirement.',
+        effects: [],
       },
       {
         name: 'Psychic Bloodrage Spells',
         level: 4,
         description:
           'At 4th level, the id rager adds psychic spells to his bloodrager spell list based on his emotional focus. At 4th, 8th, 12th, and 16th levels he gains one additional spell known from the psychic class list of the same level as his highest available bloodrager spell slot.',
+        effects: [],
       },
       {
         name: 'Unleashed Psyche',
         level: 8,
         description:
           'At 8th level, when the id rager ends his bloodrage voluntarily, he can channel the psychic residue into a telekinetic burst, dealing 1d6 force damage per 2 bloodrager levels (Reflex half, DC 10 + half his level + his Constitution modifier) to all creatures within 30 feet.',
+        effects: [],
       },
     ],
     source: 'Pathfinder RPG: Occult Adventures',
@@ -148,12 +159,14 @@ export const BLOODRAGER_ARCHETYPES: ArchetypeData[] = [
         level: 4,
         description:
           'At 4th level, and at every 4 levels thereafter (8th, 12th, 16th, 20th), the primalist can choose to gain a rage power from the barbarian rage power list instead of her bloodline power. She uses her bloodrager level as her effective barbarian level for the purpose of prerequisites and effects.',
+        effects: [],
       },
       {
         name: 'Primal Synergy',
         level: 8,
         description:
           "At 8th level, the primalist's rage powers and bloodline powers work in concert. Once per bloodrage, she can activate a rage power as a free action without spending an action, provided she has already used that rage power normally this bloodrage.",
+        effects: [],
       },
     ],
     source: 'Pathfinder RPG: Advanced Class Guide',
@@ -175,18 +188,21 @@ export const BLOODRAGER_ARCHETYPES: ArchetypeData[] = [
         level: 1,
         description:
           'The reformed fiend must have the abyssal or infernal bloodline. While bloodraging, she gains a bonus on damage rolls against evil creatures equal to half her bloodrager level (minimum 1), and her attacks are treated as good-aligned for the purpose of overcoming damage reduction.',
+        effects: [],
       },
       {
         name: 'Resist Temptation',
         level: 2,
         description:
           'At 2nd level, the reformed fiend gains a +2 bonus on Will saves against compulsions and enchantments from evil sources. This bonus increases by 1 for every 4 levels beyond 2nd.',
+        effects: [],
       },
       {
         name: 'Purifying Bloodrage',
         level: 8,
         description:
           'At 8th level, once per bloodrage, the reformed fiend can spend 1 round of bloodrage as a swift action to add the holy weapon property to one weapon she wields for a number of rounds equal to her Constitution modifier.',
+        effects: [],
       },
     ],
     source: 'Pathfinder RPG: Advanced Class Guide',
@@ -208,18 +224,21 @@ export const BLOODRAGER_ARCHETYPES: ArchetypeData[] = [
         level: 1,
         description:
           'The steelblood is proficient with heavy armor and tower shields. He can cast bloodrager spells while wearing heavy armor without arcane spell failure.',
+        effects: [],
       },
       {
         name: 'Blood Deflection',
         level: 2,
         description:
           'At 2nd level, while bloodraging, the steelblood can add his Constitution modifier as a deflection bonus to AC. This deflection bonus replaces the bonus he would gain from Dodge or a similar feat while bloodraging.',
+        effects: [],
       },
       {
         name: 'Fortified Bloodrage',
         level: 5,
         description:
           "At 5th level, the steelblood's armor gains the fortification property (25%) while he is bloodraging. This increases to moderate fortification (50%) at 11th level and heavy fortification (75%) at 17th level.",
+        effects: [],
       },
     ],
     source: 'Pathfinder RPG: Advanced Class Guide',
@@ -241,18 +260,21 @@ export const BLOODRAGER_ARCHETYPES: ArchetypeData[] = [
         level: 1,
         description:
           'While bloodraging, the untouchable rager gains spell resistance equal to 6 + her bloodrager level. This spell resistance applies to all spells, including beneficial ones cast by allies.',
+        effects: [],
       },
       {
         name: 'Rage Against Magic',
         level: 4,
         description:
           'At 4th level, while bloodraging, the untouchable rager gains a +4 bonus on saving throws against spells and spell-like abilities in addition to her normal bloodrage bonuses. She also gains Disruptive as a bonus feat.',
+        effects: [],
       },
       {
         name: 'Antimagic Fury',
         level: 12,
         description:
           'At 12th level, while bloodraging, if the untouchable rager successfully saves against a spell or spell-like ability that targets only her, she can immediately make a free attack against the caster as an immediate action if the caster is within her reach.',
+        effects: [],
       },
     ],
     source: 'Pathfinder RPG: Advanced Class Guide',
@@ -274,18 +296,21 @@ export const BLOODRAGER_ARCHETYPES: ArchetypeData[] = [
         level: 1,
         description:
           "When the spelleater succeeds at a saving throw against a spell, he gains temporary hit points equal to the spell's level. These temporary hit points last for 1 minute and stack with other temporary hit points up to his bloodrager level.",
+        effects: [],
       },
       {
         name: 'Consume Magic',
         level: 4,
         description:
           'At 4th level, while bloodraging, the spelleater gains fast healing equal to half the spell level whenever he succeeds at a saving throw against a spell or spell-like ability. This fast healing lasts for 2 rounds.',
+        effects: [],
       },
       {
         name: 'Devour Spell',
         level: 8,
         description:
           'At 8th level, once per bloodrage as an immediate action, the spelleater can attempt to absorb a spell targeting him (spell level up to half his bloodrager level). If he succeeds on a caster level check (DC 11 + spell level), the spell is negated and he heals 1d8 hit points per spell level.',
+        effects: [],
       },
     ],
     source: 'Pathfinder RPG: Advanced Class Guide',
@@ -307,18 +332,21 @@ export const BLOODRAGER_ARCHETYPES: ArchetypeData[] = [
         level: 1,
         description:
           'When the urban bloodrager enters a bloodrage, she does not gain the +4 morale bonus to Constitution but does not take the -2 penalty to AC. She can choose to add her bloodrage bonus to Intelligence or Wisdom rather than Strength or Dexterity.',
+        effects: [],
       },
       {
         name: 'Restrained Power',
         level: 1,
         description:
           'While in a controlled bloodrage, the urban bloodrager can use Charisma-, Dexterity-, and Intelligence-based skills, and she can use any ability that requires patience or concentration that a standard bloodrager cannot.',
+        effects: [],
       },
       {
         name: 'Focused Bloodline',
         level: 4,
         description:
           "At 4th level, the urban bloodrager can activate bloodline powers even outside of bloodrage by spending 1 round of bloodrage per round she uses the power, maintaining mental control while accessing her bloodline's magic.",
+        effects: [],
       },
     ],
     source: 'Pathfinder RPG: Advanced Class Guide',
@@ -340,18 +368,21 @@ export const BLOODRAGER_ARCHETYPES: ArchetypeData[] = [
         level: 1,
         description:
           'While bloodraging, the greenrager is considered to be under the effects of a pass without trace spell. Additionally, plants do not impede her movement while she is bloodraging, and difficult terrain from natural plant growth does not slow her.',
+        effects: [],
       },
       {
         name: 'Verdant Growth',
         level: 4,
         description:
           'At 4th level, while bloodraging, the greenrager can cause plants within 30 feet to grasp and entangle foes as a free action once per rage. This functions as an entangle spell (DC 10 + half her level + her Constitution modifier) lasting for 1d4 rounds.',
+        effects: [],
       },
       {
         name: 'Thorn Body',
         level: 8,
         description:
           'At 8th level, while bloodraging, the greenrager sprouts thorns from her skin. Any creature that strikes her with an unarmed attack or natural weapon takes 1d6 piercing damage + her Constitution modifier. She also gains a thorn melee attack dealing 1d4 piercing damage.',
+        effects: [],
       },
     ],
     source: 'Pathfinder RPG: Advanced Class Guide',
@@ -373,18 +404,21 @@ export const BLOODRAGER_ARCHETYPES: ArchetypeData[] = [
         level: 1,
         description:
           'When the rageshaper enters a bloodrage, he gains one bloodline-appropriate physical transformation (claws, fangs, scales, wings, etc.) determined by his bloodline, as if he had cast beast shape I on himself. The forms available improve as he levels.',
+        effects: [],
       },
       {
         name: 'Bestial Growth',
         level: 4,
         description:
           'At 4th level, the rageshaper gains a second physical transformation during bloodrage. At 8th level he gains a third, and at 12th level he gains a fourth. These stack with his bloodline powers.',
+        effects: [],
       },
       {
         name: 'Complete Transformation',
         level: 16,
         description:
           "At 16th level, the rageshaper can choose to fully transform into a creature appropriate to his bloodline (as per greater beast shape or a form appropriate to his bloodline's creature type) when entering bloodrage. This replaces his normal bloodrage bonuses for that rage.",
+        effects: [],
       },
     ],
     source: 'Pathfinder RPG: Advanced Class Guide',
