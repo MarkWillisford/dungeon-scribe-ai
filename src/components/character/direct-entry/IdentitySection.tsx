@@ -27,6 +27,7 @@ import { Alignment } from '@/types/base';
 import { RulesetSettingsSheet } from './RulesetSettingsSheet';
 import { RacePickerSheet } from './RacePickerSheet';
 import { RacialChoicesSection } from './RacialChoicesSection';
+import { AltRacialTraitsSection } from './AltRacialTraitsSection';
 
 const ALIGNMENT_OPTIONS = Object.values(Alignment).map((a) => ({ label: a, value: a }));
 
@@ -270,6 +271,9 @@ export function IdentitySection() {
         />
 
         {character.info.race?.name && <RacialChoicesSection raceName={character.info.race.name} />}
+        {character.info.race?.name && (
+          <AltRacialTraitsSection raceName={character.info.race.name} />
+        )}
 
         <InlinePicker
           label="Alignment"

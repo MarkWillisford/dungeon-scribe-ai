@@ -108,6 +108,7 @@ import reducer, {
   swapLevelSlot,
   splitClass,
   upsertRacialChoice,
+  toggleAlternateRacialTrait,
   type EntryValidationWarning,
 } from '@store/slices/characterEntrySlice';
 import { Alignment } from '@/types/base';
@@ -712,6 +713,45 @@ describe('characterEntrySlice — identity', () => {
         setRace({ raceId: 'elf', raceName: 'Elf', racialBonuses: { dex: 2 } }),
       );
       expect(state.character.info.racialChoices).toBeUndefined();
+    });
+  });
+
+  describe('toggleAlternateRacialTrait', () => {
+    it('adds an ART when selectedAlternateRacialTraits is undefined', () => {
+      const state = reducer(makeInitialState(), toggleAlternateRacialTrait('Urbanite'));
+      expect(state.character.info.selectedAlternateRacialTraits).toEqual(['Urbanite']);
+      expect(state.isDirty).toBe(true);
+    });
+
+    it('adds a second ART without removing the first', () => {
+      let state = reducer(makeInitialState(), toggleAlternateRacialTrait('Urbanite'));
+      state = reducer(state, toggleAlternateRacialTrait('Dreamspeaker'));
+      expect(state.character.info.selectedAlternateRacialTraits).toEqual([
+        'Urbanite',
+        'Dreamspeaker',
+      ]);
+    });
+
+    it('removes an ART when it is already selected (toggle off)', () => {
+      let state = reducer(makeInitialState(), toggleAlternateRacialTrait('Urbanite'));
+      state = reducer(state, toggleAlternateRacialTrait('Urbanite'));
+      expect(state.character.info.selectedAlternateRacialTraits).toEqual([]);
+    });
+
+    it('removes only the targeted ART when multiple are selected', () => {
+      let state = reducer(makeInitialState(), toggleAlternateRacialTrait('Urbanite'));
+      state = reducer(state, toggleAlternateRacialTrait('Dreamspeaker'));
+      state = reducer(state, toggleAlternateRacialTrait('Urbanite'));
+      expect(state.character.info.selectedAlternateRacialTraits).toEqual(['Dreamspeaker']);
+    });
+
+    it('clears selectedAlternateRacialTraits when race is changed', () => {
+      let state = reducer(makeInitialState(), toggleAlternateRacialTrait('Urbanite'));
+      state = reducer(
+        state,
+        setRace({ raceId: 'elf', raceName: 'Elf', racialBonuses: { dex: 2 } }),
+      );
+      expect(state.character.info.selectedAlternateRacialTraits).toBeUndefined();
     });
   });
 });
