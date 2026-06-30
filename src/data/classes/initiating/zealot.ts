@@ -414,7 +414,6 @@ export const ZEALOT_CLASS: ExpandedClassData = {
       id: 'zealot_mission_destruction_crushing_blows',
       shortDescription: 'Expend psionic focus to grant collective members DR ignore for one round',
       activationMode: 'action',
-      activationCost: { resourceId: 'psionic_focus', amount: 1 },
       description:
         'By striking at the fundamental nature of the objects and creatures he wishes to destroy, the zealot can shatter them as easily as brittle vessels. At 4th level, as long as the zealot is psionically focused, his attacks ignore hardness and damage reduction up to double the intensity of his zeal. In addition, the zealot can expend his psionic focus as a free action to allow each member of his collective attacks to ignore hardness and automatically overcome damage reduction with their attacks for one round.',
       effects: [
@@ -452,7 +451,6 @@ export const ZEALOT_CLASS: ExpandedClassData = {
       shortDescription:
         'Expend psionic focus to halve damage taken by a collective member (free action)',
       activationMode: 'action',
-      activationCost: { resourceId: 'psionic_focus', amount: 1 },
       description:
         "When a zealot's allies are wounded from battle, they can find a refuge at his side. At 4th level, as long as the zealot is psionically focused, his reach increases by 5 feet. In addition, whenever an ally within his reach takes hit point damage, the zealot can expend his psionic focus as a free action (even if it isn't his turn) to surround the ally with a telekinetic shield which reduces the damage they take by half (after applying damage reduction and energy resistance). A creature can only benefit from this ability once per round.",
       effects: [
