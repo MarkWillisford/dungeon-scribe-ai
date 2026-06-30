@@ -172,7 +172,7 @@ function DraggableRow({
       <GestureDetector gesture={gesture}>
         <View
           style={styles.dragHandle}
-          hitSlop={8}
+          hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
           accessibilityRole="button"
           accessibilityLabel={`Reorder ${entry.name}. Press and hold, then drag.`}
         >
@@ -760,6 +760,8 @@ const styles = StyleSheet.create({
   dragHandle: {
     paddingVertical: 4,
     paddingRight: 6,
+    minHeight: 44,
+    minWidth: 32,
     alignItems: 'center',
     justifyContent: 'center',
   },
