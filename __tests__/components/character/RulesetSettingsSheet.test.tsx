@@ -149,6 +149,24 @@ describe('RulesetSettingsSheet — Flaws toggle', () => {
     expect(action.type).toBe('ruleset/patchActiveRuleset');
     expect(action.payload.optionalRules.flaws).toBe(true);
   });
+
+  it('dispatches patchActiveRuleset toggling flaws off when pressed', () => {
+    mockActiveRuleset = {
+      ...baseRuleset,
+      optionalRules: { ...baseRuleset.optionalRules, flaws: true },
+    };
+    const { tree } = renderSheet();
+    const flawsToggle = findAllNodes(
+      tree,
+      (n) =>
+        n.props.accessibilityRole === 'checkbox' && n.props.accessibilityLabel === 'Flaws (3.5e)',
+    )[0];
+    fireEvent.press(flawsToggle);
+    expect(mockDispatch).toHaveBeenCalled();
+    const action = mockDispatch.mock.calls[0][0];
+    expect(action.type).toBe('ruleset/patchActiveRuleset');
+    expect(action.payload.optionalRules.flaws).toBe(false);
+  });
 });
 
 describe('RulesetSettingsSheet — maxFlaws input', () => {
@@ -175,7 +193,10 @@ describe('RulesetSettingsSheet — maxFlaws input', () => {
       validationSettings: { ...baseRuleset.validationSettings, maxFlaws: 3 },
     };
     const { tree } = renderSheet();
-    const maxFlawsInput = findAllNodes(tree, (n) => n.props.accessibilityLabel === 'Flaws allowed')[0];
+    const maxFlawsInput = findAllNodes(
+      tree,
+      (n) => n.props.accessibilityLabel === 'Flaws allowed',
+    )[0];
     expect(maxFlawsInput.props.value).toBe('3');
   });
 
@@ -186,7 +207,10 @@ describe('RulesetSettingsSheet — maxFlaws input', () => {
       validationSettings: { ...baseRuleset.validationSettings, maxFlaws: 2 },
     };
     const { tree } = renderSheet();
-    const maxFlawsInput = findAllNodes(tree, (n) => n.props.accessibilityLabel === 'Flaws allowed')[0];
+    const maxFlawsInput = findAllNodes(
+      tree,
+      (n) => n.props.accessibilityLabel === 'Flaws allowed',
+    )[0];
     fireEvent.changeText(maxFlawsInput, '4');
     expect(mockDispatch).toHaveBeenCalled();
     const action = mockDispatch.mock.calls[0][0];
@@ -200,8 +224,25 @@ describe('RulesetSettingsSheet — maxFlaws input', () => {
       optionalRules: { ...baseRuleset.optionalRules, flaws: true },
     };
     const { tree } = renderSheet();
-    const maxFlawsInput = findAllNodes(tree, (n) => n.props.accessibilityLabel === 'Flaws allowed')[0];
+    const maxFlawsInput = findAllNodes(
+      tree,
+      (n) => n.props.accessibilityLabel === 'Flaws allowed',
+    )[0];
     fireEvent.changeText(maxFlawsInput, 'abc');
+    expect(mockDispatch).not.toHaveBeenCalled();
+  });
+
+  it('does not dispatch when maxFlaws input is cleared to an empty string', () => {
+    mockActiveRuleset = {
+      ...baseRuleset,
+      optionalRules: { ...baseRuleset.optionalRules, flaws: true },
+    };
+    const { tree } = renderSheet();
+    const maxFlawsInput = findAllNodes(
+      tree,
+      (n) => n.props.accessibilityLabel === 'Flaws allowed',
+    )[0];
+    fireEvent.changeText(maxFlawsInput, '');
     expect(mockDispatch).not.toHaveBeenCalled();
   });
 
@@ -211,7 +252,10 @@ describe('RulesetSettingsSheet — maxFlaws input', () => {
       optionalRules: { ...baseRuleset.optionalRules, flaws: true },
     };
     const { tree } = renderSheet();
-    const maxFlawsInput = findAllNodes(tree, (n) => n.props.accessibilityLabel === 'Flaws allowed')[0];
+    const maxFlawsInput = findAllNodes(
+      tree,
+      (n) => n.props.accessibilityLabel === 'Flaws allowed',
+    )[0];
     fireEvent.changeText(maxFlawsInput, '-1');
     expect(mockDispatch).not.toHaveBeenCalled();
   });
@@ -228,7 +272,10 @@ describe('RulesetSettingsSheet — maxFlaws input', () => {
       },
     };
     const { tree } = renderSheet();
-    const maxFlawsInput = findAllNodes(tree, (n) => n.props.accessibilityLabel === 'Flaws allowed')[0];
+    const maxFlawsInput = findAllNodes(
+      tree,
+      (n) => n.props.accessibilityLabel === 'Flaws allowed',
+    )[0];
     fireEvent.changeText(maxFlawsInput, '5');
     const action = mockDispatch.mock.calls[0][0];
     expect(action.payload.validationSettings.abilityScoreMethod).toBe('point-buy');
