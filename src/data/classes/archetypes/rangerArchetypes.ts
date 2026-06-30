@@ -3485,4 +3485,62 @@ export const RANGER_ARCHETYPES: ArchetypeData[] = [
     ],
     source: 'Ultimate Wilderness',
   },
+
+  // ──────────────────────────────────────────────
+  // 85. Divine Marksman
+  // ──────────────────────────────────────────────
+  {
+    name: 'Divine Marksman',
+    className: 'Ranger',
+    description:
+      'A divine marksman is a ranger who forgoes the normal connection to the natural world in favor of a divinely blessed precision with ranged weapons, channeling sacred energy into every shot.',
+    replacedFeatures: [
+      'Track',
+      'Wild Empathy',
+      'Spellcasting',
+      'Swift Tracker',
+      'Quarry',
+      'Improved Quarry',
+    ],
+    modifiedFeatures: ['Combat Style Feats (must choose archery)'],
+    newFeatures: [
+      {
+        name: 'Bullseye Shot',
+        level: 1,
+        description:
+          'At 1st level, a divine marksman gains Bullseye Shot as a bonus feat, even if he does not meet the prerequisites.',
+      },
+      {
+        name: 'Archery Style',
+        level: 2,
+        description:
+          'At 2nd level, a divine marksman must select archery as his combat style. This modifies the combat style feat class feature.',
+      },
+      {
+        name: 'Vicious Aim',
+        level: 4,
+        description:
+          'At 4th level, a divine marksman adds half the highest favored enemy bonus he has earned to all ranged attack rolls and ranged damage rolls. This bonus does not stack with his favored enemy bonus against qualifying creatures. The divine marksman is not considered to have a caster level. This ability replaces all spellcasting.',
+      },
+      {
+        name: 'Divine Influence',
+        level: 8,
+        description:
+          'At 8th level, a divine marksman gains Weapon Focus (longbow) as a bonus feat. This ability replaces swift tracker.',
+      },
+      {
+        name: 'Pinpoint Targeting',
+        level: 11,
+        description:
+          'At 11th level, a divine marksman gains Pinpoint Targeting as a bonus feat, even if he does not meet the prerequisites. This ability replaces quarry.',
+      },
+      {
+        name: 'Quarry (Delayed)',
+        level: 19,
+        description:
+          'At 19th level, a divine marksman gains the quarry class feature, receiving it at 19th level instead of the normal 11th level. This ability replaces improved quarry.',
+      },
+    ],
+    source: "Weapon Master's Handbook",
+  },
 ];
