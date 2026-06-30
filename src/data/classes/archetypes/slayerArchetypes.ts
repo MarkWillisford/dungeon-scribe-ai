@@ -17,24 +17,28 @@ export const SLAYER_ARCHETYPES: ArchetypeData[] = [
         level: 1,
         description:
           "An Ankou's shadow gains a +2 bonus on Stealth checks. This bonus increases by +1 for every 4 levels beyond 1st. She can move at full speed without penalty to Stealth.",
+        effects: [],
       },
       {
         name: 'Death Mark',
         level: 4,
         description:
           'At 4th level, when the slayer deals sneak attack damage to a creature she has studied, she can spend a move action to mark that creature for death. The marked creature provokes attacks of opportunity from the slayer even when it would not normally do so, for 1 minute.',
+        effects: [],
       },
       {
         name: 'Inevitable Strike',
         level: 8,
         description:
           'At 8th level, once per day the slayer can declare an Inevitable Strike before making an attack against her studied target. This attack automatically threatens a critical hit (she still confirms normally). At 16th level, she may use this ability twice per day.',
+        effects: [],
       },
       {
         name: 'Walk Between Worlds',
         level: 12,
         description:
           "At 12th level, the Ankou's shadow can become invisible as a swift action for 1 round per slayer level per day. These rounds need not be consecutive. She can split this duration into multiple uses.",
+        effects: [],
       },
     ],
     source: 'Pathfinder RPG: Faiths & Philosophies',
@@ -56,30 +60,35 @@ export const SLAYER_ARCHETYPES: ArchetypeData[] = [
         level: 1,
         description:
           'A bounty hunter takes no penalty on attack rolls when attempting to deal nonlethal damage with lethal weapons against a studied target. She gains a +2 bonus on combat maneuver checks to grapple, disarm, or trip studied targets.',
+        effects: [],
       },
       {
         name: 'Legal Authority',
         level: 2,
         description:
           'At 2nd level, the bounty hunter gains a writ of authority from a legal organization. She gains a +4 bonus on Diplomacy checks when dealing with local law enforcement and can detain creatures she has defeated in combat without inciting hostility from lawful factions.',
+        effects: [],
       },
       {
         name: 'Wanted, Dead or Alive',
         level: 6,
         description:
           "At 6th level, when the bounty hunter successfully captures a studied target alive (reduces to 0 hp nonlethally or grapples into submission), she gains a morale bonus on her next day's skill checks and attack rolls equal to the target's CR.",
+        effects: [],
       },
       {
         name: 'Expert Tracker',
         level: 8,
         description:
           'At 8th level, the bounty hunter can track at full speed without penalty. She also gains the ability to use Survival to follow tracks in urban environments as if using the Stealth skill.',
+        effects: [],
       },
       {
         name: 'Master Captor',
         level: 14,
         description:
           'At 14th level, once per day the bounty hunter can attempt a special capture maneuver against a studied target at the end of a full-attack action. The target must succeed at a Fortitude save (DC 10 + half slayer level + Strength modifier) or become helpless for 1 round.',
+        effects: [],
       },
     ],
     source: 'Pathfinder RPG: Advanced Class Guide',
@@ -101,24 +110,28 @@ export const SLAYER_ARCHETYPES: ArchetypeData[] = [
         level: 1,
         description:
           'A bruiser treats her unarmed strikes as one size category larger for the purpose of damage. She also gains Improved Unarmed Strike as a bonus feat.',
+        effects: [],
       },
       {
         name: 'Intimidating Study',
         level: 1,
         description:
           "When the bruiser uses studied target, she may also attempt to demoralize that target as a free action (Intimidate check). If successful, the target takes a cumulative –1 penalty on saves versus the bruiser's abilities for the duration of the studied target effect.",
+        effects: [],
       },
       {
         name: 'Powerful Blow',
         level: 4,
         description:
           'At 4th level, once per round the bruiser can declare a Powerful Blow before making a melee attack. If the attack hits, it deals additional damage equal to half her slayer level. The target must also succeed at a Fortitude save (DC 10 + damage dealt) or be staggered for 1 round.',
+        effects: [],
       },
       {
         name: 'Terror Strike',
         level: 10,
         description:
           'At 10th level, whenever the bruiser knocks a creature unconscious or kills it in melee, all enemies within 30 feet who witnessed the act must succeed at a Will save (DC 10 + half slayer level + Str modifier) or become shaken for 1d4 rounds.',
+        effects: [],
       },
     ],
     source: 'Pathfinder RPG: Advanced Class Guide',
@@ -140,24 +153,28 @@ export const SLAYER_ARCHETYPES: ArchetypeData[] = [
         level: 1,
         description:
           'A cutthroat gains a +2 bonus on Bluff, Disguise, and Sleight of Hand checks. At 5th level and every 5 levels thereafter, this bonus increases by +2. She can gather information in a settlement in half the normal time.',
+        effects: [],
       },
       {
         name: 'Quick Kill',
         level: 2,
         description:
           'At 2nd level, once per day the cutthroat can attempt to kill a studied target instantly. She must be adjacent to a flat-footed or unaware studied target and make a melee attack. If the attack deals damage, the target must succeed at a Fortitude save (DC 10 + sneak attack dice) or be slain outright.',
+        effects: [],
       },
       {
         name: 'Vanishing Act',
         level: 4,
         description:
           'At 4th level, once per day after making a melee attack as part of a full-attack action, the cutthroat can immediately take a 5-foot step and attempt a Stealth check to hide, even without cover. At 10th level, she can use this ability twice per day.',
+        effects: [],
       },
       {
         name: 'Underworld Reputation',
         level: 8,
         description:
           "At 8th level, the cutthroat's reputation in criminal circles precedes her. Creatures who recognize her (Knowledge (local) DC 15) must make a Will save (DC 10 + half slayer level + Cha modifier) or be shaken when attacking her.",
+        effects: [],
       },
     ],
     source: 'Pathfinder RPG: Advanced Class Guide',
@@ -179,24 +196,28 @@ export const SLAYER_ARCHETYPES: ArchetypeData[] = [
         level: 1,
         description:
           'A deliverer gains the smite evil ability of a paladin, usable once per day. She uses her slayer level as her paladin level for all smite evil effects. At 4th level and every 3 levels thereafter, she gains an additional daily use.',
+        effects: [],
       },
       {
         name: 'Divine Purpose',
         level: 3,
         description:
           'At 3rd level, the deliverer can designate her studied target as a divine mark once per day. Her sneak attack damage against the divine mark gains the good descriptor and overcomes damage reduction as if it were a good-aligned weapon.',
+        effects: [],
       },
       {
         name: 'Holy Strike',
         level: 7,
         description:
           "At 7th level, the deliverer's sneak attacks against studied targets deal +2d6 divine damage if the target is evil. This divine damage bypasses all damage reduction.",
+        effects: [],
       },
       {
         name: 'Celestial Execution',
         level: 14,
         description:
           'At 14th level, once per day the deliverer can make a single devastating attack against a studied evil target. If the attack hits, the target must succeed at a Fortitude save (DC 10 + half slayer level + Wisdom modifier) or be slain. On a successful save, the target takes an additional 10d6 divine damage.',
+        effects: [],
       },
     ],
     source: 'Pathfinder RPG: Advanced Class Guide',
@@ -218,30 +239,35 @@ export const SLAYER_ARCHETYPES: ArchetypeData[] = [
         level: 1,
         description:
           "A grave warden's studied target bonus is doubled when applied against undead creatures. She also gains a +2 bonus on Knowledge (religion) checks to identify undead and recall their special abilities.",
+        effects: [],
       },
       {
         name: 'Consecrated Strike',
         level: 2,
         description:
           "At 2nd level, the grave warden's weapons are treated as good-aligned for the purpose of overcoming undead damage reduction. She also adds half her slayer level to damage rolls against undead.",
+        effects: [],
       },
       {
         name: 'Detect Undead',
         level: 4,
         description:
           'At 4th level, the grave warden can detect undead at will as a spell-like ability, as the spell. She automatically knows the direction of the nearest undead creature within 60 feet as a free action.',
+        effects: [],
       },
       {
         name: 'Undead Bane',
         level: 8,
         description:
           "At 8th level, the grave warden's weapons gain the undead bane property when attacking her studied target. At 16th level, all her weapons are treated as undead bane regardless of studied target status.",
+        effects: [],
       },
       {
         name: 'Grave Mastery',
         level: 14,
         description:
           "At 14th level, the grave warden is immune to the energy drain ability of undead and gains a +4 bonus on saves versus negative energy effects. When she slays an undead studied target, she regains hit points equal to the target's CR.",
+        effects: [],
       },
     ],
     source: 'Pathfinder RPG: Advanced Class Guide',
@@ -263,24 +289,28 @@ export const SLAYER_ARCHETYPES: ArchetypeData[] = [
         level: 1,
         description:
           'A guerrilla can spend 1 minute preparing an ambush site, granting herself and allies who follow her direction a +2 bonus on attack rolls and Stealth checks in the first round of combat if they successfully surprise the enemy. This bonus increases by +1 for every 5 levels.',
+        effects: [],
       },
       {
         name: 'Terrain Mastery',
         level: 2,
         description:
           "At 2nd level, the guerrilla selects a terrain type (as the ranger's favored terrain). She gains a +2 bonus on initiative, Perception, Stealth, and Survival checks in that terrain. She selects an additional terrain at 6th level and every 4 levels thereafter.",
+        effects: [],
       },
       {
         name: 'Guerrilla Strike',
         level: 4,
         description:
           'At 4th level, whenever the guerrilla attacks a flat-footed target from a position of cover or concealment, she adds her studied target bonus to damage even if she did not spend an action to study the target that round.',
+        effects: [],
       },
       {
         name: 'Fade Away',
         level: 10,
         description:
           'At 10th level, after reducing a studied target to 0 hit points or fewer, the guerrilla can immediately attempt a Stealth check as a free action, even without cover or concealment, to hide from all other creatures. She gains a +10 bonus on this check.',
+        effects: [],
       },
     ],
     source: 'Pathfinder RPG: Advanced Class Guide',
@@ -302,24 +332,28 @@ export const SLAYER_ARCHETYPES: ArchetypeData[] = [
         level: 1,
         description:
           "A Kintargo contract killer begins play with a letter of marque from a noble house, thieves' guild, or government organization. She gains a +4 bonus on Diplomacy and Intimidate checks against members of that organization and can requisition minor resources (safe houses, basic equipment) once per month.",
+        effects: [],
       },
       {
         name: 'Contract Mark',
         level: 2,
         description:
           'At 2nd level, the contract killer can spend 1 hour researching a target and establish a formal contract mark. Against her contracted target, her studied target bonus increases by +2 and her sneak attack deals an additional die of damage.',
+        effects: [],
       },
       {
         name: 'Escape Clause',
         level: 5,
         description:
           'At 5th level, the contract killer has learned to read situations with legal precision. Once per day, when she would fail a saving throw, she can reroll it and take the higher result. This represents her ability to find the escape clause in any situation.',
+        effects: [],
       },
       {
         name: 'Perfect Kill',
         level: 11,
         description:
           'At 11th level, once per day the contract killer can make a single melee attack against a contracted target that, if it hits and deals damage, forces the target to succeed at a Fortitude save (DC 10 + sneak attack dice) or take 1d4 points of Constitution damage per slayer level.',
+        effects: [],
       },
     ],
     source: "Pathfinder RPG: Hell's Rebels AP",
@@ -341,30 +375,35 @@ export const SLAYER_ARCHETYPES: ArchetypeData[] = [
         level: 1,
         description:
           'A spy adds Bluff, Diplomacy, and Disguise to her list of class skills. She gains a +2 bonus on each of these skills, and this bonus increases by +1 for every 4 levels beyond 1st.',
+        effects: [],
       },
       {
         name: 'Hidden Agenda',
         level: 1,
         description:
           'A spy can maintain a false identity with extreme believability. She gains a +4 bonus on Disguise checks and can use Bluff to pass secret messages as a move action rather than a standard action.',
+        effects: [],
       },
       {
         name: 'Interrogation',
         level: 4,
         description:
           "At 4th level, the spy can extract information from a helpless or willing creature. Spending 10 minutes in conversation, she learns 3 pieces of useful information (GM's discretion) about the creature's knowledge. She can use this ability a number of times per day equal to her Intelligence modifier.",
+        effects: [],
       },
       {
         name: 'Sleeper Agent',
         level: 8,
         description:
           'At 8th level, the spy can embed herself so thoroughly in an organization that even magical detection may fail. She gains a +4 bonus on saves versus magical compulsion to reveal her true identity and any spell that would compel her to speak truthfully must overcome her SR of 10 + her slayer level.',
+        effects: [],
       },
       {
         name: 'Master of Disguise',
         level: 12,
         description:
           'At 12th level, the spy can change her appearance as a move action (as alter self) at will. She does not need props or equipment to use this ability, and observers must succeed at a Perception check (DC 25 + spy level) to notice the transformation.',
+        effects: [],
       },
     ],
     source: 'Pathfinder RPG: Advanced Class Guide',
@@ -386,24 +425,28 @@ export const SLAYER_ARCHETYPES: ArchetypeData[] = [
         level: 1,
         description:
           'A stygian slayer can shift through shadow as a swift action, teleporting up to 10 feet to an unoccupied space she can see that is in dim light or darkness. She can use this ability a number of times per day equal to 3 + her Wisdom modifier.',
+        effects: [],
       },
       {
         name: 'Shadow Strike',
         level: 3,
         description:
           "At 3rd level, the stygian slayer's sneak attacks deal shadow damage that bypasses concealment-based miss chances. Creatures damaged by her sneak attack must succeed at a Will save (DC 10 + half slayer level + Wis modifier) or take a –2 penalty on Perception checks for 1 minute.",
+        effects: [],
       },
       {
         name: 'Animate Shadow',
         level: 6,
         description:
           "At 6th level, when the stygian slayer slays a studied target, she can immediately animate its shadow as a shadow creature under her control. This shadow has HD equal to half the slain creature's HD and persists for 1 hour per slayer level.",
+        effects: [],
       },
       {
         name: 'Dark Consumption',
         level: 12,
         description:
           "At 12th level, once per day when the stygian slayer kills a studied target with a sneak attack, she consumes its life force, gaining temporary hit points equal to the target's maximum hit points (capped at twice her slayer level). These temporary hit points last 1 hour.",
+        effects: [],
       },
     ],
     source: 'Pathfinder RPG: Advanced Race Guide',
@@ -425,24 +468,28 @@ export const SLAYER_ARCHETYPES: ArchetypeData[] = [
         level: 1,
         description:
           'A vanguard grants all allies within 30 feet who can see and hear her a +1 bonus on initiative checks. At 5th level and every 5 levels thereafter, this bonus increases by +1.',
+        effects: [],
       },
       {
         name: 'Opening Strike',
         level: 2,
         description:
           "At 2nd level, when the vanguard successfully strikes a studied target, all allies who make an attack against that target before the start of the vanguard's next turn gain a +2 bonus on attack rolls. This bonus does not stack with itself.",
+        effects: [],
       },
       {
         name: 'Formation Fighting',
         level: 6,
         description:
           'At 6th level, the vanguard and her adjacent allies do not provide flanking bonuses to enemies. Additionally, she and her adjacent allies gain a +1 dodge bonus to AC and CMD when adjacent to at least one other ally.',
+        effects: [],
       },
       {
         name: 'Coordinated Assault',
         level: 10,
         description:
           'At 10th level, once per round as a swift action, the vanguard can mark a studied target for coordinated assault. Each ally who attacks that target this round deals an additional 1d6 damage per 5 slayer levels the vanguard possesses.',
+        effects: [],
       },
     ],
     source: 'Pathfinder RPG: Advanced Class Guide',

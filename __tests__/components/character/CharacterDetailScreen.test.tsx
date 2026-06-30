@@ -1,6 +1,8 @@
 import React from 'react';
 import { Alert } from 'react-native';
-import { render, type RenderedNode } from '../../helpers/testUtils';
+import { render, fireEvent, setHookStateAt, type RenderedNode } from '../../helpers/testUtils';
+
+const flushPromises = () => new Promise((resolve) => setImmediate(resolve));
 
 // ---- Router mock ----
 
@@ -81,7 +83,11 @@ jest.mock('@/components/ui/OrnateButton', () => {
   const React = require('react');
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const OrnateButton = (props: any) =>
-    React.createElement('Pressable', { testID: props.testID, onPress: props.onPress }, props.title);
+    React.createElement(
+      'Pressable',
+      { testID: props.testID, onPress: props.onPress, disabled: props.disabled },
+      props.title,
+    );
   return { OrnateButton };
 });
 
@@ -238,206 +244,155 @@ describe('CharacterDetailScreen — character not found', () => {
   });
 });
 
-// ---- Tests: delete button ----
+// ---- Helpers for the confirmation modal flow ----
+
+function nodeById(tree: RenderedNode, testID: string): RenderedNode | undefined {
+  return findAllNodes(tree, (n) => typeof n === 'object' && n.props?.testID === testID)[0];
+}
+
+/** Render, then open the delete-confirmation modal and return the updated tree. */
+function openDeleteModal() {
+  const view = render(React.createElement(CharacterDetailScreen));
+  const deleteButton = nodeById(view.tree, 'delete-character-button')!;
+  fireEvent.press(deleteButton);
+  return { view, tree: view.rerender() };
+}
+
+// ---- Tests: delete button placement ----
 
 describe('CharacterDetailScreen — delete button', () => {
-  let alertSpy: jest.SpyInstance;
-
   beforeEach(() => {
     mockActiveCharacter = makeCharacter();
-    alertSpy = jest.spyOn(Alert, 'alert').mockImplementation(() => undefined);
   });
 
-  afterEach(() => {
-    alertSpy.mockRestore();
-  });
-
-  it('renders the delete button when a character is loaded', () => {
+  it('renders the delete button alongside the edit button when a character is loaded', () => {
     const { queryByTestId } = render(React.createElement(CharacterDetailScreen));
     expect(queryByTestId('delete-character-button')).not.toBeNull();
+    expect(queryByTestId('character-detail-edit')).not.toBeNull();
   });
 
-  it('shows Alert with correct title when delete button is pressed', () => {
+  it('does not show the confirmation modal until the delete button is pressed', () => {
     const { tree } = render(React.createElement(CharacterDetailScreen));
-    const deleteButton = findAllNodes(
-      tree,
-      (n) => typeof n === 'object' && n.props?.testID === 'delete-character-button',
-    )[0];
-    expect(deleteButton).toBeDefined();
-    deleteButton.props.onPress();
-    expect(alertSpy).toHaveBeenCalledWith(
-      'Delete Character',
-      expect.stringContaining('Rissi'),
-      expect.any(Array),
-    );
+    // The mocked Modal renders null while hidden, so its contents are absent.
+    expect(nodeById(tree, 'delete-confirm-input')).toBeUndefined();
   });
 
-  it('Alert message includes the character name', () => {
-    mockActiveCharacter = makeCharacter({ info: { name: 'Thorn', race: { name: 'Human' } } });
-    const { tree } = render(React.createElement(CharacterDetailScreen));
-    const deleteButton = findAllNodes(
-      tree,
-      (n) => typeof n === 'object' && n.props?.testID === 'delete-character-button',
-    )[0];
-    deleteButton.props.onPress();
-    expect(alertSpy).toHaveBeenCalledWith(
-      'Delete Character',
-      expect.stringContaining('Thorn'),
-      expect.any(Array),
-    );
+  it('opens the confirmation modal when the delete button is pressed', () => {
+    const { tree } = openDeleteModal();
+    expect(nodeById(tree, 'delete-confirm-modal')).toBeDefined();
+    expect(nodeById(tree, 'delete-confirm-input')).toBeDefined();
+  });
+});
+
+// ---- Tests: confirmation gating ----
+
+describe('CharacterDetailScreen — delete confirmation gating', () => {
+  beforeEach(() => {
+    mockActiveCharacter = makeCharacter();
   });
 
-  it('Alert has Cancel and Delete buttons', () => {
-    const { tree } = render(React.createElement(CharacterDetailScreen));
-    const deleteButton = findAllNodes(
-      tree,
-      (n) => typeof n === 'object' && n.props?.testID === 'delete-character-button',
-    )[0];
-    deleteButton.props.onPress();
-    const buttons: { text: string; style?: string; onPress?: () => void }[] =
-      alertSpy.mock.calls[0][2];
-    expect(buttons.find((b) => b.text === 'Cancel')).toBeDefined();
-    expect(buttons.find((b) => b.text === 'Delete')).toBeDefined();
+  it('disables the confirm button until the typed name matches', () => {
+    const { view, tree } = openDeleteModal();
+    expect(nodeById(tree, 'delete-confirm-submit')!.props.disabled).toBe(true);
+
+    fireEvent.changeText(nodeById(tree, 'delete-confirm-input')!, 'Wrong');
+    expect(nodeById(view.rerender(), 'delete-confirm-submit')!.props.disabled).toBe(true);
+
+    fireEvent.changeText(nodeById(view.rerender(), 'delete-confirm-input')!, 'Rissi');
+    expect(nodeById(view.rerender(), 'delete-confirm-submit')!.props.disabled).toBe(false);
   });
 
-  it('Cancel button has cancel style', () => {
-    const { tree } = render(React.createElement(CharacterDetailScreen));
-    const deleteButton = findAllNodes(
-      tree,
-      (n) => typeof n === 'object' && n.props?.testID === 'delete-character-button',
-    )[0];
-    deleteButton.props.onPress();
-    const buttons: { text: string; style?: string }[] = alertSpy.mock.calls[0][2];
-    const cancelBtn = buttons.find((b) => b.text === 'Cancel');
-    expect(cancelBtn?.style).toBe('cancel');
+  it('enables the confirm button for a case-insensitive, whitespace-padded match', () => {
+    const { view, tree } = openDeleteModal();
+    fireEvent.changeText(nodeById(tree, 'delete-confirm-input')!, '  rissi ');
+    expect(nodeById(view.rerender(), 'delete-confirm-submit')!.props.disabled).toBe(false);
   });
 
-  it('Delete button has destructive style', () => {
-    const { tree } = render(React.createElement(CharacterDetailScreen));
-    const deleteButton = findAllNodes(
-      tree,
-      (n) => typeof n === 'object' && n.props?.testID === 'delete-character-button',
-    )[0];
-    deleteButton.props.onPress();
-    const buttons: { text: string; style?: string }[] = alertSpy.mock.calls[0][2];
-    const deleteBtn = buttons.find((b) => b.text === 'Delete');
-    expect(deleteBtn?.style).toBe('destructive');
+  it('does not dispatch deleteCharacter when confirm is pressed with a non-matching name', async () => {
+    const { deleteCharacter } = require('@/store/slices/charactersSlice');
+    const { view, tree } = openDeleteModal();
+    fireEvent.changeText(nodeById(tree, 'delete-confirm-input')!, 'Wrong');
+    const submit = nodeById(view.rerender(), 'delete-confirm-submit')!;
+    fireEvent.press(submit); // disabled → fireEvent is a no-op
+    await flushPromises();
+    expect(deleteCharacter).not.toHaveBeenCalled();
   });
 });
 
 // ---- Tests: confirm delete ----
 
 describe('CharacterDetailScreen — confirming delete', () => {
-  let alertSpy: jest.SpyInstance;
-
   beforeEach(() => {
     mockActiveCharacter = makeCharacter();
-    alertSpy = jest.spyOn(Alert, 'alert').mockImplementation(() => undefined);
   });
 
-  afterEach(() => {
-    alertSpy.mockRestore();
-  });
+  async function confirmDeletion(name: string) {
+    const { view, tree } = openDeleteModal();
+    fireEvent.changeText(nodeById(tree, 'delete-confirm-input')!, name);
+    const submit = nodeById(view.rerender(), 'delete-confirm-submit')!;
+    await submit.props.onPress();
+    return view;
+  }
 
-  it('dispatches deleteCharacter thunk when Delete is confirmed', async () => {
+  it('dispatches deleteCharacter thunk when the name is confirmed', async () => {
     const { deleteCharacter } = require('@/store/slices/charactersSlice');
-    const { tree } = render(React.createElement(CharacterDetailScreen));
-    const deleteButton = findAllNodes(
-      tree,
-      (n) => typeof n === 'object' && n.props?.testID === 'delete-character-button',
-    )[0];
-    deleteButton.props.onPress();
-    const buttons: { text: string; onPress?: () => Promise<void> }[] = alertSpy.mock.calls[0][2];
-    const confirmBtn = buttons.find((b) => b.text === 'Delete');
-    await confirmBtn!.onPress!();
+    await confirmDeletion('Rissi');
     expect(deleteCharacter).toHaveBeenCalledWith('char-123');
     expect(mockDispatch).toHaveBeenCalledWith('DELETE_CHARACTER_THUNK');
   });
 
-  it('navigates to characters list after successful delete', async () => {
-    const { tree } = render(React.createElement(CharacterDetailScreen));
-    const deleteButton = findAllNodes(
-      tree,
-      (n) => typeof n === 'object' && n.props?.testID === 'delete-character-button',
-    )[0];
-    deleteButton.props.onPress();
-    const buttons: { text: string; onPress?: () => Promise<void> }[] = alertSpy.mock.calls[0][2];
-    const confirmBtn = buttons.find((b) => b.text === 'Delete');
-    await confirmBtn!.onPress!();
+  it('navigates to the characters list after a successful delete', async () => {
+    await confirmDeletion('Rissi');
     expect(mockReplace).toHaveBeenCalledWith('/(tabs)/characters');
   });
 
-  it('does not navigate when deleteCharacter thunk throws', async () => {
-    mockUnwrap.mockRejectedValueOnce(new Error('Delete failed'));
-    // Suppress the second Alert (Delete Failed) as well
-    alertSpy.mockImplementation(() => undefined);
-
-    const { tree } = render(React.createElement(CharacterDetailScreen));
-    const deleteButton = findAllNodes(
-      tree,
-      (n) => typeof n === 'object' && n.props?.testID === 'delete-character-button',
-    )[0];
-    deleteButton.props.onPress();
-    const buttons: { text: string; onPress?: () => Promise<void> }[] = alertSpy.mock.calls[0][2];
-    const confirmBtn = buttons.find((b) => b.text === 'Delete');
-    await confirmBtn!.onPress!();
+  it('does not navigate when the deleteCharacter thunk throws', async () => {
+    mockUnwrap.mockRejectedValueOnce('Delete failed');
+    const alertSpy = jest.spyOn(Alert, 'alert').mockImplementation(() => undefined);
+    await confirmDeletion('Rissi');
     expect(mockReplace).not.toHaveBeenCalled();
+    alertSpy.mockRestore();
   });
 
-  it('shows Delete Failed alert when deleteCharacter thunk throws', async () => {
-    mockUnwrap.mockRejectedValueOnce(new Error('Network error'));
-    const { tree } = render(React.createElement(CharacterDetailScreen));
-    const deleteButton = findAllNodes(
-      tree,
-      (n) => typeof n === 'object' && n.props?.testID === 'delete-character-button',
-    )[0];
-    deleteButton.props.onPress();
-    const buttons: { text: string; onPress?: () => Promise<void> }[] = alertSpy.mock.calls[0][2];
-    const confirmBtn = buttons.find((b) => b.text === 'Delete');
-    await confirmBtn!.onPress!();
+  it('shows a Delete Failed alert when the deleteCharacter thunk throws', async () => {
+    mockUnwrap.mockRejectedValueOnce('Network error');
+    const alertSpy = jest.spyOn(Alert, 'alert').mockImplementation(() => undefined);
+    await confirmDeletion('Rissi');
     expect(alertSpy).toHaveBeenCalledWith('Delete Failed', 'Network error');
+    alertSpy.mockRestore();
   });
 });
 
 // ---- Tests: cancel delete ----
 
 describe('CharacterDetailScreen — cancelling delete', () => {
-  let alertSpy: jest.SpyInstance;
-
   beforeEach(() => {
     mockActiveCharacter = makeCharacter();
-    alertSpy = jest.spyOn(Alert, 'alert').mockImplementation(() => undefined);
   });
 
-  afterEach(() => {
-    alertSpy.mockRestore();
+  it('disables the Cancel button while deletion is in progress', () => {
+    const { view } = openDeleteModal();
+    setHookStateAt(3, true); // deleting=true (hook slot 3)
+    const inFlightTree = view.rerender();
+    expect(nodeById(inFlightTree, 'delete-confirm-cancel')!.props.disabled).toBe(true);
   });
 
-  it('does not dispatch deleteCharacter when Cancel is pressed', () => {
+  it('does not close the modal when Cancel is pressed while deletion is in progress', () => {
+    const { view } = openDeleteModal();
+    setHookStateAt(3, true); // deleting=true (hook slot 3)
+    const inFlightTree = view.rerender();
+    fireEvent.press(nodeById(inFlightTree, 'delete-confirm-cancel')!); // no-op: disabled
+    expect(nodeById(view.rerender(), 'delete-confirm-input')).toBeDefined();
+  });
+
+  it('closes the modal and does not dispatch deleteCharacter when Cancel is pressed', () => {
     const { deleteCharacter } = require('@/store/slices/charactersSlice');
-    const { tree } = render(React.createElement(CharacterDetailScreen));
-    const deleteButton = findAllNodes(
-      tree,
-      (n) => typeof n === 'object' && n.props?.testID === 'delete-character-button',
-    )[0];
-    deleteButton.props.onPress();
-    const buttons: { text: string; onPress?: () => void }[] = alertSpy.mock.calls[0][2];
-    const cancelBtn = buttons.find((b) => b.text === 'Cancel');
-    cancelBtn!.onPress?.();
+    const { view, tree } = openDeleteModal();
+    fireEvent.press(nodeById(tree, 'delete-confirm-cancel')!);
+    const reTree = view.rerender();
+    // Modal closed → its contents render null again.
+    expect(nodeById(reTree, 'delete-confirm-input')).toBeUndefined();
     expect(deleteCharacter).not.toHaveBeenCalled();
-    expect(mockDispatch).not.toHaveBeenCalledWith('DELETE_CHARACTER_THUNK');
-  });
-
-  it('does not navigate when Cancel is pressed', () => {
-    const { tree } = render(React.createElement(CharacterDetailScreen));
-    const deleteButton = findAllNodes(
-      tree,
-      (n) => typeof n === 'object' && n.props?.testID === 'delete-character-button',
-    )[0];
-    deleteButton.props.onPress();
-    const buttons: { text: string; onPress?: () => void }[] = alertSpy.mock.calls[0][2];
-    const cancelBtn = buttons.find((b) => b.text === 'Cancel');
-    cancelBtn!.onPress?.();
     expect(mockReplace).not.toHaveBeenCalled();
     expect(mockBack).not.toHaveBeenCalled();
   });

@@ -61,13 +61,20 @@ service cloud.firestore {
     //   or the future admin panel can modify game data from a client.
     //   The Admin SDK (seed scripts) bypasses these rules entirely.
     //
+    // NOTE: Collection names are case-sensitive and MUST match the names the
+    //   seed scripts write to (scripts/db/*) and the connector reads
+    //   (FirestoreGameDataConnector). The class-choice option collections are
+    //   seeded lowercase (e.g. 'roguetalents', 'cavalierorders'); a camelCase
+    //   match path here is a silent default-deny. See issue #244.
+    //
     // Collections: races, classes, feats, traits, spells, templates, deities,
-    //   domains, animalCompanions, bloodlines, cavalierOrders, inquisitions,
-    //   mysteries, revelations, ragePowers, rogueTalents, hexes, arcanistExploits,
-    //   investigatorTalents, kineticistWildTalents, magusArcana, mesmeristTricks,
-    //   ninjaTricks, occultistFocusPowers, phrenicAmplifications, shamanSpirits,
-    //   slayerTalents, warpriestBlessings, alchemistDiscoveries, eidolonEvolutions,
-    //   classChoiceDefinitions, rulesets, magicItems, weapons, armor, shields, gear,
+    //   domains, animalCompanions, bloodlines, cavalierorders, inquisitions,
+    //   mysteries, revelations, ragepowers, roguetalents, hexes, arcanistexploits,
+    //   investigatortalents, wildtalents, magusarcana, mesmeristtricks,
+    //   ninjatricks, occultistfocuspowers, phrenicamplifications, shamanspirits,
+    //   slayertalents, warpriestblessings, alchemistdiscoveries, eidolonevolutions,
+    //   classChoiceDefinitions, racialChoiceDefinitions, rulesets, magicItems,
+    //   weapons, armor, shields, gear,
     //   disciplines, maneuvers, stances, martialTraditions, favoredClassBonuses,
     //   eidolonbaseforms, eidolonsubtypes
     match /races/{docId}                    { allow read: if isAuthenticated(); allow write: if isAdmin(); }
@@ -80,28 +87,29 @@ service cloud.firestore {
     match /domains/{docId}                  { allow read: if isAuthenticated(); allow write: if isAdmin(); }
     match /animalCompanions/{docId}         { allow read: if isAuthenticated(); allow write: if isAdmin(); }
     match /bloodlines/{docId}              { allow read: if isAuthenticated(); allow write: if isAdmin(); }
-    match /cavalierOrders/{docId}           { allow read: if isAuthenticated(); allow write: if isAdmin(); }
+    match /cavalierorders/{docId}           { allow read: if isAuthenticated(); allow write: if isAdmin(); }
     match /inquisitions/{docId}             { allow read: if isAuthenticated(); allow write: if isAdmin(); }
     match /mysteries/{docId}               { allow read: if isAuthenticated(); allow write: if isAdmin(); }
     match /revelations/{docId}             { allow read: if isAuthenticated(); allow write: if isAdmin(); }
-    match /ragePowers/{docId}              { allow read: if isAuthenticated(); allow write: if isAdmin(); }
-    match /rogueTalents/{docId}            { allow read: if isAuthenticated(); allow write: if isAdmin(); }
+    match /ragepowers/{docId}              { allow read: if isAuthenticated(); allow write: if isAdmin(); }
+    match /roguetalents/{docId}            { allow read: if isAuthenticated(); allow write: if isAdmin(); }
     match /hexes/{docId}                   { allow read: if isAuthenticated(); allow write: if isAdmin(); }
-    match /arcanistExploits/{docId}        { allow read: if isAuthenticated(); allow write: if isAdmin(); }
-    match /investigatorTalents/{docId}     { allow read: if isAuthenticated(); allow write: if isAdmin(); }
-    match /kineticistWildTalents/{docId}   { allow read: if isAuthenticated(); allow write: if isAdmin(); }
-    match /magusArcana/{docId}             { allow read: if isAuthenticated(); allow write: if isAdmin(); }
-    match /mesmeristTricks/{docId}         { allow read: if isAuthenticated(); allow write: if isAdmin(); }
-    match /ninjaTricks/{docId}             { allow read: if isAuthenticated(); allow write: if isAdmin(); }
-    match /occultistFocusPowers/{docId}    { allow read: if isAuthenticated(); allow write: if isAdmin(); }
-    match /phrenicAmplifications/{docId}   { allow read: if isAuthenticated(); allow write: if isAdmin(); }
-    match /shamanSpirits/{docId}           { allow read: if isAuthenticated(); allow write: if isAdmin(); }
-    match /slayerTalents/{docId}           { allow read: if isAuthenticated(); allow write: if isAdmin(); }
-    match /warpriestBlessings/{docId}      { allow read: if isAuthenticated(); allow write: if isAdmin(); }
-    match /alchemistDiscoveries/{docId}    { allow read: if isAuthenticated(); allow write: if isAdmin(); }
-    match /eidolonEvolutions/{docId}       { allow read: if isAuthenticated(); allow write: if isAdmin(); }
+    match /arcanistexploits/{docId}        { allow read: if isAuthenticated(); allow write: if isAdmin(); }
+    match /investigatortalents/{docId}     { allow read: if isAuthenticated(); allow write: if isAdmin(); }
+    match /wildtalents/{docId}             { allow read: if isAuthenticated(); allow write: if isAdmin(); }
+    match /magusarcana/{docId}             { allow read: if isAuthenticated(); allow write: if isAdmin(); }
+    match /mesmeristtricks/{docId}         { allow read: if isAuthenticated(); allow write: if isAdmin(); }
+    match /ninjatricks/{docId}             { allow read: if isAuthenticated(); allow write: if isAdmin(); }
+    match /occultistfocuspowers/{docId}    { allow read: if isAuthenticated(); allow write: if isAdmin(); }
+    match /phrenicamplifications/{docId}   { allow read: if isAuthenticated(); allow write: if isAdmin(); }
+    match /shamanspirits/{docId}           { allow read: if isAuthenticated(); allow write: if isAdmin(); }
+    match /slayertalents/{docId}           { allow read: if isAuthenticated(); allow write: if isAdmin(); }
+    match /warpriestblessings/{docId}      { allow read: if isAuthenticated(); allow write: if isAdmin(); }
+    match /alchemistdiscoveries/{docId}    { allow read: if isAuthenticated(); allow write: if isAdmin(); }
+    match /eidolonevolutions/{docId}       { allow read: if isAuthenticated(); allow write: if isAdmin(); }
     match /archetypes/{docId}              { allow read: if isAuthenticated(); allow write: if isAdmin(); }
     match /classChoiceDefinitions/{docId}  { allow read: if isAuthenticated(); allow write: if isAdmin(); }
+    match /racialChoiceDefinitions/{docId} { allow read: if isAuthenticated(); allow write: if isAdmin(); }
     match /rulesets/{docId}                { allow read: if isAuthenticated(); allow write: if isAdmin(); }
     match /magicItems/{docId}              { allow read: if isAuthenticated(); allow write: if isAdmin(); }
     match /weapons/{docId}                 { allow read: if isAuthenticated(); allow write: if isAdmin(); }
