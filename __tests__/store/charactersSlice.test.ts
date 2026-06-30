@@ -759,6 +759,7 @@ const mockCharacter: Character = {
   },
   feats: { feats: [], totalFeats: 0, bonusFeats: 0 },
   traits: { traits: [], maxTraits: 2 },
+  flaws: { flaws: [], maxFlaws: 2 },
   equipment: {
     weapons: [],
     armor: [],

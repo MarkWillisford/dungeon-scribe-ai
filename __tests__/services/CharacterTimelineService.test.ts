@@ -234,6 +234,7 @@ function blankCharacter(): Character {
     } as any,
     feats: { feats: [], totalFeats: 0, bonusFeats: 0 },
     traits: { traits: [], maxTraits: 2 },
+    flaws: { flaws: [], maxFlaws: 2 },
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     equipment: {} as any,
     spellcasting: {
