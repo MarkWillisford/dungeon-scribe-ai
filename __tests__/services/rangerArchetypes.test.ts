@@ -81,8 +81,8 @@ describe('RANGER_ARCHETYPES', () => {
       expect(feature?.level).toBe(19);
     });
 
-    test("is attributed to Pathfinder Player Companion: Weapon Master's Handbook", () => {
-      expect(divineMarksman?.source).toBe("Pathfinder Player Companion: Weapon Master's Handbook");
+    test("is attributed to Weapon Master's Handbook", () => {
+      expect(divineMarksman?.source).toBe("Weapon Master's Handbook");
     });
 
     test('all new features have non-empty descriptions', () => {

@@ -3526,7 +3526,7 @@ export const RANGER_ARCHETYPES: ArchetypeData[] = [
         name: 'Divine Influence',
         level: 8,
         description:
-          'At 8th level, a divine marksman gains Weapon Focus (longsword) as a bonus feat. This ability replaces swift tracker.',
+          'At 8th level, a divine marksman gains Weapon Focus (longbow) as a bonus feat. This ability replaces swift tracker.',
       },
       {
         name: 'Pinpoint Targeting',
@@ -3541,6 +3541,6 @@ export const RANGER_ARCHETYPES: ArchetypeData[] = [
           'At 19th level, a divine marksman gains the quarry class feature, receiving it at 19th level instead of the normal 11th level. This ability replaces improved quarry.',
       },
     ],
-    source: "Pathfinder Player Companion: Weapon Master's Handbook",
+    source: "Weapon Master's Handbook",
   },
 ];
