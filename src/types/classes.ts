@@ -85,7 +85,7 @@ export interface ClassFeature {
   name: string;
   description: string;
   shortDescription?: string;
-  activationMode?: 'passive' | 'toggle' | 'conditional';
+  activationMode?: 'passive' | 'toggle' | 'conditional' | 'action';
   level: number;
   uses?: {
     perDay?: number;
@@ -95,6 +95,8 @@ export interface ClassFeature {
   };
   effects: Effect[];
   resourcePool?: ResourcePoolDefinition;
+  activationCost?: { resourceId: string; amount: number };
+  maintenanceCost?: { resourceId: string; amount: number; per: 'round' };
 }
 
 export interface FavoredClassBonus {

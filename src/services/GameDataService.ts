@@ -700,6 +700,16 @@ export class GameDataService {
     return GameDataService.connector.getRaceGroups(ctx);
   }
 
+  /**
+   * Synchronous accessor — Phase B concession.
+   * Used by AltRacialTraitsSection as a synchronous useMemo lookup.
+   * Phase B cleanup: replace with async getRaceByName through the connector once
+   * the connector exposes single-race lookup.
+   */
+  static getRaceByNameSync(name: string): ExpandedRaceData | undefined {
+    return ALL_EXPANDED_RACES.find((r) => r.name === name);
+  }
+
   // ---- Equipment -------------------------------------------------------------
 
   static async getWeapons(): Promise<WeaponDefinition[]> {

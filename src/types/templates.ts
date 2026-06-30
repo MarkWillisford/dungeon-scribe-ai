@@ -65,7 +65,7 @@ export interface FlatFeature {
   description: string;
   // Toggle/resource fields — populate for abilities that appear in the combat panel.
   id?: string;
-  activationMode?: 'passive' | 'toggle' | 'conditional';
+  activationMode?: 'passive' | 'toggle' | 'conditional' | 'action';
   shortDescription?: string;
   effects?: Effect[];
   resourcePool?: ResourcePoolDefinition;
@@ -77,7 +77,7 @@ export interface HDThresholdFeature {
   description: string;
   minimumHD: number; // Feature activates when totalHD >= minimumHD
   id?: string;
-  activationMode?: 'passive' | 'toggle' | 'conditional';
+  activationMode?: 'passive' | 'toggle' | 'conditional' | 'action';
   shortDescription?: string;
   effects?: Effect[];
   resourcePool?: ResourcePoolDefinition;
