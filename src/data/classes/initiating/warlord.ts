@@ -307,11 +307,7 @@ export const WARLORD_CLASS: ExpandedClassData = {
     progressionTableKey: 'warlord',
     recoveryMechanics: {
       primary: { type: 'gambit' },
-      secondary: {
-        type: 'custom',
-        description:
-          'The warlord may spend a standard action to recover a single readied maneuver of his choosing.',
-      },
+      secondary: { type: 'standard_one' },
     },
   },
   source: 'Path of War',

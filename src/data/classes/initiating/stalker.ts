@@ -499,11 +499,7 @@ export const STALKER_CLASS: ExpandedClassData = {
     ],
     progressionTableKey: 'stalker',
     recoveryMechanics: {
-      primary: {
-        type: 'custom',
-        description:
-          'As a full-round action that does not provoke attacks of opportunity, the stalker recovers a number of expended maneuvers equal to his stalker initiation modifier (minimum 2). When recovering in this way, he may move up to his base speed, gains a +4 insight bonus to AC, and the next attack he makes this encounter adds his deadly strike damage if it hits.',
-      },
+      primary: { type: 'full_round_modifier_min_2' },
       secondary: {
         type: 'swift_one',
         resourceId: 'stalker_ki',

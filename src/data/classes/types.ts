@@ -40,9 +40,14 @@ export interface ClassFeatureData {
   // Snapshotted onto the character at selection time (see issue #213).
   id?: string;
   shortDescription?: string;
-  activationMode?: 'passive' | 'toggle' | 'conditional';
+  // 'action' mode renders as a one-shot button in the combat panel with no persistent active state.
+  activationMode?: 'passive' | 'toggle' | 'conditional' | 'action';
   effects?: Effect[];
   resourcePool?: ResourcePoolDefinition;
+  // Uses consumed from another resource pool on activation.
+  activationCost?: { resourceId: string; amount: number };
+  // Uses consumed per round to sustain this feature.
+  maintenanceCost?: { resourceId: string; amount: number; per: 'round' };
 }
 
 export interface PrestigePrerequisites {
