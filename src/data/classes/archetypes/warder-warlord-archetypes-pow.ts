@@ -16,18 +16,21 @@ export const WARDER_WARLORD_POW_ARCHETYPES: ArchetypeData[] = [
         level: 1,
         description:
           'At 1st level, the sworn protector may select a ward, a person whom she must protect no matter what the cost. When in combat within 10 feet of the ward, the ward gains a +1 morale bonus to their AC and saving throws. This bonus increases by +1 at 5th, 9th, 13th, and 17th levels. The sworn protector adds her guardianship bonus to attack and damage rolls while within range of her ward. The range of guardianship increases by 10 feet at 6th and 12th levels. The sworn protector can have one ward at 1st level, a second at 8th level, and a third at 15th level. Establishing a ward relationship requires ten minutes of discussion and practice. This ability replaces aegis.',
+        effects: [],
       },
       {
         name: 'Defensive Intercept',
         level: 1,
         description:
           "The sworn protector can use this ability a number of times per day equal to 1 + the sworn protector's warder initiation modifier. As an immediate action, the sworn protector moves up to her base speed to a space within 10 feet of a ward being attacked, subject to attacks of opportunity.",
+        effects: [],
       },
       {
         name: 'Shared Counter',
         level: 3,
         description:
           'At 3rd level, the sworn protector can use readied counters with a range of personal to protect another as long as he is adjacent to their position. The sworn protector may use this ability with the extended defense class feature and may combine it with defensive intercept as part of the same immediate action. This ability replaces the bonus feat gained at 3rd level.',
+        effects: [],
       },
     ],
     // Sworn Protector does not swap any disciplines from the base Warder list.
@@ -49,24 +52,28 @@ export const WARDER_WARLORD_POW_ARCHETYPES: ArchetypeData[] = [
         level: 1,
         description:
           'At 1st level, when fighting with ranged weapons, one-handed or light weapons, or a banner with a buckler in medium or lighter armor, the bannerman gains a +1 dodge bonus to his Armor Class per four warlord levels. This ability replaces the 1st-level bonus feat.',
+        effects: [],
       },
       {
         name: 'Tactical Presence (Bannerman)',
         level: 2,
         description:
           "The bannerman modifies the warlord's tactical presence ability with the following options: Diplomat's Presence (2nd level) grants a +4 competence bonus to Bluff, Diplomacy, Intimidate, and Sense Motive rolls. Fearsome Presence (13th level) causes enemies within 30 feet to be filled with dread as if under a fear spell. Commander's Presence (17th level) allows the bannerman to lend a readied maneuver to an ally within 30 feet as a swift action.",
+        effects: [],
       },
       {
         name: 'Inspiring Banner',
         level: 5,
         description:
           "At 5th level, when the bannerman's banner is visible and he is using a Golden Lion stance, all allies within 60 feet receive a +2 morale bonus on saving throws against fear and fatigue and a +2 morale bonus on attack and damage rolls. These bonuses increase by +1 at 12th and 19th levels. This ability replaces battle prowess.",
+        effects: [],
       },
       {
         name: 'Share Boost',
         level: 6,
         description:
           'At 6th level, the bannerman may once per day initiate a boost as an immediate action to utilize a boost for an ally initiating a maneuver. He gains additional uses at 12th and 18th levels. This ability replaces dual boost.',
+        effects: [],
       },
     ],
     disciplineSwaps: {
@@ -98,30 +105,35 @@ export const WARDER_WARLORD_POW_ARCHETYPES: ArchetypeData[] = [
         level: 1,
         description:
           'At 1st level, the bushi gains Exotic Weapon Proficiency (katana) and Exotic Weapon Proficiency (wakizashi) as bonus feats without needing to meet their prerequisites.',
+        effects: [],
       },
       {
         name: 'Quick Draw',
         level: 1,
         description:
           'At 1st level, the bushi gains the Quick Draw feat as a bonus feat. Additionally, the bushi may sheathe his weapon without provoking attacks of opportunity.',
+        effects: [],
       },
       {
         name: 'Iaido',
         level: 1,
         description:
           'Alongside normal recovery, the bushi may sheathe a weapon as a move action to recover one expended maneuver per round. The bushi cannot use a maneuver in the same round it was recovered this way.',
+        effects: [],
       },
       {
         name: 'Mixed Combat',
         level: 6,
         description:
           'At 6th level, the bushi gains the Mixed Combat feat. The bushi is considered to be threatening all adjacent squares even if his weapon is sheathed, and can draw his weapon when making any attack.',
+        effects: [],
       },
       {
         name: 'Bushido',
         level: 1,
         description:
           'The bushi gains access to seven supernatural bushido abilities selectable at specific level intervals: Benevolence (swift action grants allies within 30 feet temporary hit points equal to initiator level for 1 minute), Courage (immunity to non-magical fear, +4 bonus on fear saves, can grant bonus to allies within 60 feet), Honesty (discern lies spell-like ability, usable rounds per day equal to initiation modifier), Honor (after hitting a creature, gain +1 bonus on attack and damage rolls against that creature, increasing by +1 per four initiator levels), Loyalty (standard action to mark an ally with deathwatch and status awareness), Respect (aid another grants bonus equal to initiation modifier instead of normal bonus), and Righteousness (at-will detect chaos, detect evil, detect good, and detect law).',
+        effects: [],
       },
     ],
     // Bushi trades one of the base class's available disciplines (player choice) for Mithral Current.
@@ -151,30 +163,35 @@ export const WARDER_WARLORD_POW_ARCHETYPES: ArchetypeData[] = [
         level: 1,
         description:
           'The steelfist commando is proficient with simple and martial weapons, monk weapons, and light armor only. She is not proficient with shields. This replaces the standard warlord weapon and armor proficiencies.',
+        effects: [],
       },
       {
         name: 'Unarmed Combat',
         level: 1,
         description:
           'At 1st level, the steelfist commando gains Improved Unarmed Strike as a bonus feat. At 3rd level, she gains Greater Unarmed Strike. Her unarmed strikes function as both manufactured and natural weapons for the purpose of enhancement. This ability replaces the 1st-level bonus feat.',
+        effects: [],
       },
       {
         name: 'Dodge Bonus',
         level: 2,
         description:
           'At 2nd level, the steelfist commando gains a +1 dodge bonus to AC. This bonus increases at 6th, 10th, 14th, and 18th levels to a maximum of +5.',
+        effects: [],
       },
       {
         name: 'Commando Prowess',
         level: 5,
         description:
           'At 5th level, while in a martial stance, the steelfist commando gains a +1 competence bonus to attack and damage rolls, a +2 bonus to CMB and CMD, and adds her initiation modifier to Stealth checks. These bonuses improve at 12th and 19th levels. This ability replaces battle prowess.',
+        effects: [],
       },
       {
         name: 'Powerful Pugilist',
         level: 8,
         description:
           "At 8th level, the steelfist commando's unarmed strikes treat her as one size larger for determining damage and for CMB and CMD. She also deals an additional 2d6 precision damage against flat-footed targets. This ability replaces the 10th-level bonus feat.",
+        effects: [],
       },
     ],
     disciplineSwaps: {
@@ -206,42 +223,49 @@ export const WARDER_WARLORD_POW_ARCHETYPES: ArchetypeData[] = [
         level: 1,
         description:
           'The vanguard commander is proficient with all simple and martial weapons, all armor, and shields (except tower shields). This replaces the standard warlord weapon and armor proficiencies.',
+        effects: [],
       },
       {
         name: 'Improved Shield Bash',
         level: 1,
         description:
           'At 1st level, the vanguard commander gains Improved Shield Bash as a bonus feat. This replaces the standard 1st-level bonus feat.',
+        effects: [],
       },
       {
         name: "Guardian's Gambit",
         level: 1,
         description:
           'The vanguard commander adds a new gambit option: Risk — a successful charging shield bash attack. Reward — the warlord and all allies within 30 feet may make a free 5-foot step, even if they have already made one this turn.',
+        effects: [],
       },
       {
         name: 'Daring Defense',
         level: 1,
         description:
           'The vanguard commander adds his warlord initiation modifier to his Reflex save bonus. This ability replaces force of personality.',
+        effects: [],
       },
       {
         name: 'Defensive Prowess',
         level: 5,
         description:
           'While in a Golden Lion or Iron Tortoise stance, the vanguard commander reduces his armor check penalty by 1, and gains a +1 competence bonus to his shield bonus and CMD. These bonuses improve at 12th and 19th levels. This ability replaces battle prowess.',
+        effects: [],
       },
       {
         name: 'Heightened Defenses',
         level: 6,
         description:
           'The vanguard commander may use this ability a number of times per day equal to 1 + his initiation modifier. He may initiate counters without using an immediate action, though he may only do so a maximum of once per round. This ability replaces dual boost.',
+        effects: [],
       },
       {
         name: "Vanguard's Shield",
         level: 10,
         description:
           'The vanguard commander may make a shield bash as a free action at his full base attack bonus when initiating melee strikes or counters against adjacent foes. This ability replaces tactical assistance.',
+        effects: [],
       },
     ],
     disciplineSwaps: {

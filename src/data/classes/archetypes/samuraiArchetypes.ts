@@ -17,18 +17,21 @@ export const SAMURAI_ARCHETYPES: ArchetypeData[] = [
         level: 1,
         description:
           'An ashigaru treats spears, naginatas, and yaris as simple weapons and gains a +1 bonus on attack rolls with these weapons. At 5th level and every 5 levels thereafter, this bonus increases by +1 to a maximum of +4 at 20th level.',
+        effects: [],
       },
       {
         name: 'Rally the Peasants',
         level: 4,
         description:
           'At 4th level, once per day, the ashigaru can use his challenge to inspire all non-samurai, non-cavalier allies within 30 feet rather than a single target, granting them a +1 morale bonus on attack rolls for the duration. At 10th level, this becomes a +2 bonus.',
+        effects: [],
       },
       {
         name: 'Siege Expertise',
         level: 8,
         description:
           'At 8th level, the ashigaru treats siege weapons as martial weapons and gains a +2 competence bonus on attack rolls with them. He can direct a siege crew as a move action rather than a full-round action.',
+        effects: [],
       },
     ],
     source: 'Ultimate Combat',
@@ -50,18 +53,21 @@ export const SAMURAI_ARCHETYPES: ArchetypeData[] = [
         level: 1,
         description:
           "A broken promise enters a state of disgraced fury as a free action, functioning as the barbarian's rage ability with a number of rounds per day equal to 4 + his Charisma modifier, increasing by 2 each level. Unlike barbarian rage, he need not be in combat to end the fury.",
+        effects: [],
       },
       {
         name: 'Reckless Challenge',
         level: 1,
         description:
           'When a broken promise uses challenge, he gains a +2 morale bonus on damage rolls against the challenged target but takes a –2 penalty to AC against all opponents (not just the challenged target) for the duration.',
+        effects: [],
       },
       {
         name: 'Shameful Resilience',
         level: 8,
         description:
           "At 8th level, the broken promise's shame has hardened him against pain. While in disgraced fury, he gains DR 2/— that increases by 1 for every 4 samurai levels beyond 8th. He also becomes immune to the shaken and frightened conditions while in fury.",
+        effects: [],
       },
     ],
     source: 'Pathfinder Player Companion: Code of the Stalwart Defender',
@@ -83,6 +89,7 @@ export const SAMURAI_ARCHETYPES: ArchetypeData[] = [
         level: 1,
         description:
           'An honored fist of the Society gains one additional use of resolve per day and adds half his samurai level as a bonus on Knowledge (history) and Knowledge (local) checks. He can use these Knowledge skills untrained.',
+        effects: [],
       },
     ],
     source: 'Pathfinder Society Primer',
@@ -104,18 +111,21 @@ export const SAMURAI_ARCHETYPES: ArchetypeData[] = [
         level: 1,
         description:
           'At 1st level, an oathbound declares a sacred oath to protect a specific individual, location, or ideal. When acting in direct service of that oath, he gains a +2 sacred bonus on attack rolls, saving throws, and skill checks. Violating the oath imposes a –2 penalty on all rolls until atoned.',
+        effects: [],
       },
       {
         name: 'Oath-Powered Strike',
         level: 5,
         description:
           'At 5th level, once per day when making an attack directly in service of his oath, the oathbound can add his Charisma modifier as a bonus on the damage roll. At 10th level, he can do this a number of times per day equal to his Charisma modifier.',
+        effects: [],
       },
       {
         name: 'Unbreakable Oath',
         level: 11,
         description:
           'At 11th level, the oathbound becomes immune to charm and compulsion effects that would cause him to act against his oath. He also gains SR equal to 11 + his samurai level against spells that would supernaturally prevent him from fulfilling his oath.',
+        effects: [],
       },
     ],
     source: 'Pathfinder Player Companion: Code of the Stalwart Defender',
@@ -137,24 +147,28 @@ export const SAMURAI_ARCHETYPES: ArchetypeData[] = [
         level: 1,
         description:
           'A sword saint selects a single one-handed slashing weapon as his chosen weapon at 1st level. He gains Weapon Focus and Weapon Specialization with this weapon as bonus feats. All challenge and order abilities apply only when using the chosen weapon.',
+        effects: [],
       },
       {
         name: 'Iaijutsu',
         level: 3,
         description:
           'At 3rd level, when the sword saint draws his chosen weapon in the same action as making an attack (from a sheathed position), he deals an additional 1d6 points of damage per 4 samurai levels. He can draw his weapon as a free action as part of any attack.',
+        effects: [],
       },
       {
         name: 'Perfect Strike',
         level: 9,
         description:
           'At 9th level, once per round when the sword saint confirms a critical hit with his chosen weapon, he can spend 1 point of resolve to double the threat multiplier (e.g., ×2 becomes ×3) for that strike. This ability cannot be used more than once per day per 4 samurai levels.',
+        effects: [],
       },
       {
         name: 'Blade Transcendence',
         level: 15,
         description:
           "At 15th level, the sword saint's mastery of his chosen weapon becomes supernatural. Attacks with his chosen weapon are treated as though they have the brilliant energy property, and he adds his Charisma modifier as an insight bonus on all attack rolls with the weapon.",
+        effects: [],
       },
     ],
     source: 'Ultimate Combat',
@@ -176,18 +190,21 @@ export const SAMURAI_ARCHETYPES: ArchetypeData[] = [
         level: 1,
         description:
           'A warrior of true grit gains the grit class feature as a gunslinger of his samurai level, with a pool equal to his Wisdom modifier (minimum 1). He gains two gunslinger deeds of his choice from those available at 1st level and can spend grit on those deeds.',
+        effects: [],
       },
       {
         name: 'Firearm Proficiency',
         level: 1,
         description:
           'The warrior of true grit gains proficiency with all firearms and the Amateur Gunslinger feat as a bonus feat. He can spend points of resolve as grit and vice versa for the purpose of qualifying for and using deeds.',
+        effects: [],
       },
       {
         name: 'Calm Under Fire',
         level: 5,
         description:
           'At 5th level, the warrior of true grit does not provoke attacks of opportunity when reloading a firearm. Additionally, when adjacent to an enemy, he does not take the normal –4 penalty on ranged attack rolls for firing at point-blank range.',
+        effects: [],
       },
     ],
     source: "Pathfinder Player Companion: Weapon Master's Handbook",
@@ -209,18 +226,21 @@ export const SAMURAI_ARCHETYPES: ArchetypeData[] = [
         level: 1,
         description:
           'A ronin gains a bonus equal to half his samurai level (minimum 1) on Survival, Sense Motive, and Profession (soldier) checks. He does not need to belong to an order and gains the challenge ability as normal but without order-related bonuses.',
+        effects: [],
       },
       {
         name: "Wanderer's Resolve",
         level: 4,
         description:
           "At 4th level, the ronin gains an additional use of resolve per day for every 4 samurai levels he possesses. His long experience fending for himself has honed his self-reliance to an extraordinary degree, granting him the equivalent of the Order of the Warrior's challenge benefit.",
+        effects: [],
       },
       {
         name: 'Masterless Mastery',
         level: 10,
         description:
           "At 10th level, the ronin's independence becomes a source of power. He gains a +2 morale bonus on saving throws against charm, compulsion, and fear effects. He also gains the benefits of the Order of the Warrior's 8th-level order ability.",
+        effects: [],
       },
     ],
     source: 'Ultimate Combat',
@@ -242,18 +262,21 @@ export const SAMURAI_ARCHETYPES: ArchetypeData[] = [
         level: 1,
         description:
           'A daimyo adds his Charisma modifier (instead of Strength) on Intimidate checks and gains a bonus equal to his samurai level on Leadership checks. He gains the Leadership feat as a bonus feat at 1st level even if he would not normally qualify.',
+        effects: [],
       },
       {
         name: 'War Council',
         level: 5,
         description:
           'At 5th level, the daimyo can spend 10 minutes advising allies to grant them a teamwork feat he possesses for 24 hours. He can do this a number of times per day equal to his Charisma modifier. Allies do not need to meet the prerequisites of the granted feat.',
+        effects: [],
       },
       {
         name: 'Strategic Mastery',
         level: 11,
         description:
           "At 11th level, when using the aid another action, the daimyo provides a +4 bonus instead of +2, and can use aid another as a swift action once per round. His banner's bonuses apply to all allies within 120 feet and the morale bonus increases by +1.",
+        effects: [],
       },
     ],
     source: 'Pathfinder Campaign Setting: Dragon Empires Gazetteer',
@@ -275,18 +298,21 @@ export const SAMURAI_ARCHETYPES: ArchetypeData[] = [
         level: 1,
         description:
           'A yojimbo selects one creature as his ward per day as a free action. He gains a +2 shield bonus to AC and a +2 bonus on Reflex saves while adjacent to his ward. If his ward would be hit by an attack, the yojimbo can use an immediate action to take the hit instead.',
+        effects: [],
       },
       {
         name: 'Intervention',
         level: 5,
         description:
           'At 5th level, once per round as an immediate action, the yojimbo can move up to his speed toward his ward when the ward is attacked. If he reaches the ward, he can interpose himself as per the bodyguard feat. He does not provoke attacks of opportunity for this movement.',
+        effects: [],
       },
       {
         name: 'Unyielding Guardian',
         level: 11,
         description:
           'At 11th level, the yojimbo is immune to fear effects while his ward is within 30 feet and conscious. While adjacent to his ward, the yojimbo gains DR 5/— against the first hit each round from attacks targeting him due to his protective interception.',
+        effects: [],
       },
     ],
     source: 'Pathfinder Campaign Setting: Dragon Empires Primer',
@@ -308,18 +334,21 @@ export const SAMURAI_ARCHETYPES: ArchetypeData[] = [
         level: 1,
         description:
           'A lotus geisha adds her samurai level as a bonus on Perform (act), Perform (dance), Perform (oratory), and Diplomacy checks. She can use her samurai level in place of ranks in these skills for the purpose of meeting feat prerequisites.',
+        effects: [],
       },
       {
         name: 'Social Challenge',
         level: 1,
         description:
           'When the lotus geisha uses challenge, she may instead issue a social challenge. The target is compelled to engage her socially and takes a –2 penalty on attack rolls against any creature other than her. The social challenge lasts until combat begins or 1 minute passes.',
+        effects: [],
       },
       {
         name: 'Deadly Refinement',
         level: 8,
         description:
           'At 8th level, after successfully engaging a target in conversation for at least 1 minute, the lotus geisha treats that target as flat-footed against her first attack in combat. Additionally, her challenge damage bonus applies to Iaijutsu draws against challenged targets.',
+        effects: [],
       },
     ],
     source: 'Pathfinder Campaign Setting: Dragon Empires Gazetteer',
