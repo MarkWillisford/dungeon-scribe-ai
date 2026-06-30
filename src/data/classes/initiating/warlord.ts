@@ -86,7 +86,7 @@ export const WARLORD_CLASS: ExpandedClassData = {
     {
       name: "Warlord's Gambit",
       level: 1,
-      id: 'warlords_gambit',
+      id: 'warlords-gambit',
       shortDescription:
         'Swift action: attempt a gambit risk to recover maneuvers + ally reward, or fail for 1 maneuver + -2 to all d20 rolls for 1 round',
       activationMode: 'action',
@@ -111,7 +111,7 @@ export const WARLORD_CLASS: ExpandedClassData = {
     {
       name: 'Tactical Presence (Indomitable)',
       level: 2,
-      id: 'tactical_presence_indomitable',
+      id: 'tactical-presence-indomitable',
       shortDescription:
         'Move action (free at 7th): allies within 30ft gain Die Hard and +[CHA mod] morale bonus to Fortitude vs death/fatigue/exhaustion/poison',
       activationMode: 'toggle',
@@ -186,7 +186,7 @@ export const WARLORD_CLASS: ExpandedClassData = {
     {
       name: 'Tactical Presence (Rallying)',
       level: 5,
-      id: 'tactical_presence_rallying',
+      id: 'tactical-presence-rallying',
       shortDescription:
         'Allies within 30ft gain +[CHA mod] morale bonus to Will saves vs fear/death/compulsion; ends if warlord is mind-affected',
       activationMode: 'toggle',
@@ -205,7 +205,7 @@ export const WARLORD_CLASS: ExpandedClassData = {
     {
       name: 'Battle Prowess +1',
       level: 5,
-      id: 'battle_prowess',
+      id: 'battle-prowess',
       shortDescription:
         '+1 competence bonus to attack rolls, damage rolls, CMB, and CMD when in a stance from chosen discipline',
       activationMode: 'toggle',
@@ -249,7 +249,7 @@ export const WARLORD_CLASS: ExpandedClassData = {
     {
       name: 'Dual Boost (1/day)',
       level: 6,
-      id: 'dual_boost',
+      id: 'dual-boost',
       shortDescription: 'Swift action: initiate two boost maneuvers simultaneously',
       activationMode: 'action',
       description:
@@ -287,7 +287,7 @@ export const WARLORD_CLASS: ExpandedClassData = {
     {
       name: 'Tactical Assistance',
       level: 8,
-      id: 'tactical_assistance',
+      id: 'tactical-assistance',
       shortDescription:
         'Move action: aid another for any ally within 30ft, affecting all allies in range',
       activationMode: 'action',
@@ -311,7 +311,7 @@ export const WARLORD_CLASS: ExpandedClassData = {
     {
       name: 'Tactical Presence (Victorious)',
       level: 9,
-      id: 'tactical_presence_victorious',
+      id: 'tactical-presence-victorious',
       shortDescription:
         'When warlord reduces a foe to 0 HP, warlord and allies within 30ft gain (warlord level + CHA mod) temporary HP',
       activationMode: 'toggle',
@@ -344,7 +344,7 @@ export const WARLORD_CLASS: ExpandedClassData = {
     {
       name: 'Battle Prowess +2',
       level: 12,
-      id: 'battle_prowess_2',
+      id: 'battle-prowess-2',
       shortDescription:
         '+2 competence bonus to attack rolls, damage rolls, CMB, and CMD when in a stance from chosen discipline',
       activationMode: 'toggle',
@@ -447,7 +447,7 @@ export const WARLORD_CLASS: ExpandedClassData = {
     {
       name: 'Battle Prowess +3',
       level: 19,
-      id: 'battle_prowess_3',
+      id: 'battle-prowess-3',
       shortDescription:
         '+3 competence bonus to attack rolls, damage rolls, CMB, and CMD when in a stance from chosen discipline',
       activationMode: 'toggle',

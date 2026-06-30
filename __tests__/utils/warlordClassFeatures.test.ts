@@ -46,7 +46,7 @@ describe('WARLORD_CLASS classFeatures — effects wiring (issue #298)', () => {
     const gambit = features.find((f) => f.name === "Warlord's Gambit" && f.level === 1);
     expect(gambit).toBeDefined();
     expect(gambit!.activationMode).toBe('action');
-    expect(gambit!.id).toBe('warlords_gambit');
+    expect(gambit!.id).toBe('warlords-gambit');
     expect(gambit!.effects!.some((e) => e.type === 'special')).toBe(true);
   });
 
