@@ -216,7 +216,7 @@ export function ItemEffectEditorSheet({
             .sort((a, b) => a.label.localeCompare(b.label)),
         );
       })
-      .catch(() => {});
+      .catch((e) => console.error('Failed to load weapons for feat choices', e));
     return () => {
       cancelled = true;
     };
