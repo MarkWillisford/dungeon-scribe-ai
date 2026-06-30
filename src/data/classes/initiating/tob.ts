@@ -63,54 +63,63 @@ export const CRUSADER_CLASS: ExpandedClassData = {
       level: 1,
       description:
         "The crusader maintains a pool of delayed damage. When the crusader takes damage, half of it (rounded down) is set aside and not immediately applied. At the start of each of the crusader's turns, half of the accumulated delayed damage (rounded down) is applied. This pool resets at the end of each encounter.",
+      effects: [],
     },
     {
       name: 'Furious Counterstrike',
       level: 1,
       description:
         "When the crusader's steely resolve delayed damage pool is greater than 0, the crusader gains a bonus on melee attack rolls and melee damage rolls equal to the number of points in the pool divided by 4 (rounded down, minimum +1).",
+      effects: [],
     },
     {
       name: 'Indomitable Soul',
       level: 2,
       description:
         'The crusader gains a +2 bonus on Will saving throws. This bonus increases by +1 for every four levels beyond 2nd.',
+      effects: [],
     },
     {
       name: 'Zealous Surge',
       level: 4,
       description:
         'Once per day, when the crusader fails a saving throw, she can immediately reroll the saving throw. The crusader must take the result of the reroll, even if it is lower.',
+      effects: [],
     },
     {
       name: 'Smite',
       level: 5,
       description:
         'Once per day, the crusader can declare a smite. She adds her Charisma modifier (if positive) to a single attack roll and adds her crusader level to the damage roll for that attack.',
+      effects: [],
     },
     {
       name: 'Aura of Chaos',
       level: 7,
       description:
         'The crusader radiates an aura of determination that bolsters nearby allies. Allies within 30 feet gain a +1 morale bonus on attack rolls and saving throws against fear. This bonus improves to +2 at 14th level.',
+      effects: [],
     },
     {
       name: 'Thicket of Blades',
       level: 9,
       description:
         "The crusader's threatened area becomes unusually difficult to navigate. Foes provoke attacks of opportunity when they move through the crusader's threatened area as normal, and 5-foot steps within that area are treated as normal movement for the purpose of provoking attacks of opportunity.",
+      effects: [],
     },
     {
       name: 'Mettle',
       level: 11,
       description:
         'The crusader can shrug off magical effects that would otherwise harm her. If the crusader succeeds on a Fortitude or Will saving throw against an effect that has a reduced effect on a successful save, she instead ignores the effect entirely.',
+      effects: [],
     },
     {
       name: 'Divine Surge',
       level: 14,
       description:
         'Once per day, as a swift action, the crusader can channel divine energy to gain a number of temporary hit points equal to twice her crusader level. These temporary hit points last for 1 minute.',
+      effects: [],
     },
   ],
   spellcasting: { type: 'None', casting: 'None' },
@@ -187,54 +196,63 @@ export const SWORDSAGE_CLASS: ExpandedClassData = {
       level: 1,
       description:
         'When wearing light or no armor and not carrying a heavy load, the swordsage adds her Wisdom modifier (if positive) as a bonus to Armor Class. This bonus applies even against touch attacks and when flat-footed, but not when the swordsage is immobilized or helpless.',
+      effects: [],
     },
     {
       name: 'Discipline Focus (Weapon Focus)',
       level: 1,
       description:
         "The swordsage gains Weapon Focus as a bonus feat for one weapon associated with one of her disciplines. She must choose a discipline and a weapon from that discipline's associated weapons.",
+      effects: [],
     },
     {
       name: 'Quick to Act',
       level: 1,
       description:
         'The swordsage gains a +1 bonus on initiative checks. This bonus increases by 1 for every five swordsage levels beyond 1st (+2 at 6th, +3 at 11th, +4 at 16th).',
+      effects: [],
     },
     {
       name: 'Discipline Focus (Insightful Strike)',
       level: 2,
       description:
         "For one of the swordsage's disciplines, she can add her Wisdom modifier (instead of Strength) to damage rolls whenever she uses a strike from that discipline.",
+      effects: [],
     },
     {
       name: 'Sense Magic',
       level: 3,
       description:
         'The swordsage can use detect magic at will as a spell-like ability. Her caster level equals her swordsage level.',
+      effects: [],
     },
     {
       name: 'Discipline Focus (Defensive Stance)',
       level: 6,
       description:
         "For one of the swordsage's disciplines, she gains a +2 bonus to Armor Class when in a stance from that discipline.",
+      effects: [],
     },
     {
       name: 'Evasion',
       level: 9,
       description:
         'If the swordsage succeeds on a Reflex saving throw against an attack that normally deals damage on a successful save, she takes no damage. Evasion can only be used if the swordsage is wearing light or no armor.',
+      effects: [],
     },
     {
       name: 'Discipline Mastery',
       level: 16,
       description:
         'The swordsage gains mastery over one of her disciplines. She treats her initiator level as 2 higher than normal for the purpose of meeting prerequisites for maneuvers from her chosen discipline and for the purpose of maneuver effects that scale with initiator level.',
+      effects: [],
     },
     {
       name: 'Dual Boost',
       level: 17,
       description:
         'The swordsage can initiate two boost maneuvers simultaneously. As a swift action, she can initiate two boosts, though she still expends both maneuvers.',
+      effects: [],
     },
   ],
   spellcasting: { type: 'None', casting: 'None' },
@@ -316,54 +334,63 @@ export const WARBLADE_CLASS: ExpandedClassData = {
       level: 1,
       description:
         'The warblade can add her Intelligence modifier (minimum +0) as a bonus on Reflex saving throws as long as she is not flat-footed.',
+      effects: [],
     },
     {
       name: 'Weapon Aptitude',
       level: 1,
       description:
         "The warblade's training allows her to realign her weapon skills. Each morning, she may spend 1 hour practicing to reassign one of her weapon-specific fighter bonus feats (such as Weapon Focus) to a different qualifying weapon.",
+      effects: [],
     },
     {
       name: 'Uncanny Dodge',
       level: 2,
       description:
         'The warblade retains her Dexterity bonus to AC even if caught flat-footed or struck by an invisible attacker. She still loses her Dexterity bonus if immobilized.',
+      effects: [],
     },
     {
       name: 'Battle Ardor (Critical Confirmation)',
       level: 3,
       description:
         'The warblade adds her Intelligence modifier (minimum +0) as a bonus on attack rolls made to confirm critical hits.',
+      effects: [],
     },
     {
       name: 'Improved Uncanny Dodge',
       level: 6,
       description:
         'The warblade can no longer be flanked. A rogue must be at least four levels higher than the warblade to use flanking to deny her Dexterity bonus.',
+      effects: [],
     },
     {
       name: 'Battle Cunning (Damage)',
       level: 7,
       description:
         'The warblade adds her Intelligence modifier (minimum +0) as a bonus on damage rolls against flat-footed or flanked opponents.',
+      effects: [],
     },
     {
       name: 'Battle Skill (Combat Maneuvers)',
       level: 11,
       description:
         'The warblade adds her Intelligence modifier (minimum +0) as a bonus on her Combat Maneuver Bonus and Combat Maneuver Defense.',
+      effects: [],
     },
     {
       name: 'Battle Mastery',
       level: 15,
       description:
         'The warblade adds her Intelligence modifier (minimum +0) as a bonus on all attack rolls and damage rolls.',
+      effects: [],
     },
     {
       name: 'Stance Mastery',
       level: 20,
       description:
         "The warblade can maintain two stances simultaneously. Both stances' effects apply at the same time.",
+      effects: [],
     },
   ],
   spellcasting: { type: 'None', casting: 'None' },

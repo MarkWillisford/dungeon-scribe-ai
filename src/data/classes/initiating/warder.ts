@@ -67,12 +67,14 @@ export const WARDER_CLASS: ExpandedClassData = {
       level: 1,
       description:
         "A warder begins her career with knowledge of five martial maneuvers. The disciplines available to her are Broken Blade, Golden Lion, Iron Tortoise, Primal Fury, and either Eternal Guardian or Piercing Thunder. If she does not have the associated skill for a chosen discipline as a class skill, she gains it as a class skill. She readies her maneuvers by going over battle tactics, through weapon drills, or spending time meditating in prayer for 10 minutes. She need not sleep or be well-rested beforehand. At 4th level and every even level thereafter, the warder may exchange one known maneuver for another of any level she qualifies for. Maneuvers are extraordinary abilities, unaffected by spell resistance, and do not provoke attacks of opportunity when initiated. A warder's initiation modifier is Intelligence.",
+      effects: [],
     },
     {
       name: 'Maneuver Recovery',
       level: 1,
       description:
         'For a warder to recover expended maneuvers, she must take stock of her situation to plan for her next movement. By focusing entirely on a defensive position to prepare her next move, she is able to regain maneuvers expended to assist her to victory. By taking a full round action to plan her next move (activating her defensive focus class feature, see below), she recovers a number of expended maneuvers equal to her warder initiation modifier (minimum of 2). Alternately, she may take a brief pause in battle and recover a single maneuver of her choosing by spending a standard action on her turn.',
+      effects: [],
     },
     {
       name: 'Defensive Focus',
@@ -88,6 +90,7 @@ export const WARDER_CLASS: ExpandedClassData = {
       level: 1,
       description:
         "At 1st level, the warder's defensive prowess extends to those who choose to stay near to him. Allies who are within 10 ft. of the warder's position gain a +1 morale bonus to Armor Class and to Will saves under the warder's defensive aegis, her presence bolstering and shepherding the defenses of her allies. This bonus improves to +2 at 5th level (+3 at 9th level, +4 at 13th level, and +5 at 17th level). The warder does not receive this bonus, but may receive the benefits of this ability from another warder. If the ally cannot see or hear the warder, then the ally does not gain the benefits of this ability (such as if the warder is concealed or invisible). At 6th level, her aegis' range increases its effective area, growing to a 20 ft. radius. At 12th level, this increases again to 30 ft.",
+      effects: [],
     },
     {
       name: "Armiger's Mark",
@@ -105,18 +108,21 @@ export const WARDER_CLASS: ExpandedClassData = {
         maxFormula: 'floor(warderLevel / 2) + intMod',
         restRecoveryMode: 'full',
       },
+      effects: [],
     },
     {
       name: 'Bonus Feat',
       level: 3,
       description:
         'At 3rd level and every 5th level thereafter (8th, 13th, 18th), a warder receives a bonus combat or teamwork feat. She must meet all prerequisites for these feats.',
+      effects: [],
     },
     {
       name: 'Tactical Acumen',
       level: 4,
       description:
         'At 4th level, the combat training that the warder has received hones her reflexes. Through her knowledge of tactics, training manuals, and lessons in the histories of war, her wits aid her when her agility may be impaired by her heavy armor. The warder may add her warder initiation modifier to her Reflex saves and to her initiative in place of her Dexterity modifier (using the higher of the two bonuses).',
+      effects: [],
     },
     {
       name: 'Extended Defense',
@@ -134,12 +140,14 @@ export const WARDER_CLASS: ExpandedClassData = {
         maxFormula: 'floor((warderLevel - 2) / 3)',
         restRecoveryMode: 'full',
       },
+      effects: [],
     },
     {
       name: 'Clad in Steel',
       level: 6,
       description:
         'Having improved her skill with her armor, the warder is a more capable combatant in it when protecting her allies or cause. The warder may subtract her aegis bonus from her total armor check penalty and increase the maximum Dexterity bonus on her armor by 1 at 6th level, and by 2 at 12th level.',
+      effects: [],
     },
     {
       name: 'Adaptive Tactics',
@@ -151,40 +159,47 @@ export const WARDER_CLASS: ExpandedClassData = {
       name: 'Bonus Feat',
       level: 8,
       description: 'The warder receives an additional bonus combat or teamwork feat.',
+      effects: [],
     },
     {
       name: 'Improved Defensive Focus',
       level: 10,
       description:
         'At 10th level, her defensive focus improves further. While her reach is increased by this ability, opponents treat her threatened area as difficult terrain. If a foe tries to move through a space within her reach, the movement through those squares costs double (x2). Additionally, while using her defensive focus to make an attack of opportunity, her movement does not provoke attacks of opportunity.',
+      effects: [],
     },
     {
       name: 'Stalwart',
       level: 12,
       description:
         'At 12th level, a warder can use mental and physical resiliency to avoid certain attacks. If she makes a successful Fortitude or Will saving throw against an attack that has a reduced effect on a successful save, she instead avoids the effect entirely. A helpless warder does not gain the benefit of the stalwart ability.',
+      effects: [],
     },
     {
       name: 'Bonus Feat',
       level: 13,
       description: 'The warder receives an additional bonus combat or teamwork feat.',
+      effects: [],
     },
     {
       name: 'Steel Defense',
       level: 15,
       description:
         "At 15th level, the warder is capable of turning an otherwise lethal blow and continue the fight. When an attack that inflicts hit point damage from a natural attack, melee weapon, or ranged weapon would reduce the warder to 0 or fewer hit points, she can make a Fortitude save (DC the attacker's attack roll) to deflect the attack to her armor or shield (light, heavy, or tower shields only), causing it to suffer the damage in her place (apply item hardness as normal). If this would break the character's armor, it gains the broken condition until it is repaired. The warder cannot use this ability with broken armor or a broken shield. The warder must be wearing armor or a shield to use this ability.",
+      effects: [],
     },
     {
       name: 'Bonus Feat',
       level: 18,
       description: 'The warder receives an additional bonus combat or teamwork feat.',
+      effects: [],
     },
     {
       name: 'Born of Steel',
       level: 19,
       description:
         'At 19th level, the warder is so at home in her armor that it is like a second skin, protecting her with its familiar embrace. When wearing medium or heavy armor, the warder is more resistant to critical hits. When a critical threat is rolled against her, the warder may add her warder initiation modifier to her AC against the critical confirmation roll.',
+      effects: [],
     },
     {
       name: 'Deathless Defenses',
