@@ -17,24 +17,28 @@ export const INVESTIGATOR_ARCHETYPES: ArchetypeData[] = [
         level: 1,
         description:
           'Instead of alchemy, the conspiracy theorist maintains a network of contacts and rumor sources. She can spend 10 minutes gathering local rumors to gain a +4 bonus on one Knowledge check related to local events, organizations, or persons.',
+        effects: [],
       },
       {
         name: 'Pattern Recognition',
         level: 3,
         description:
           'The conspiracy theorist adds half her investigator level (minimum 1) as a bonus on Sense Motive checks and gains a free Sense Motive check against any creature she observes for at least 1 round.',
+        effects: [],
       },
       {
         name: 'Uncover the Truth',
         level: 5,
         description:
           'By spending 1 inspiration point, the conspiracy theorist can attempt a special Insight check to determine whether a piece of information is true, false, or deliberately misleading, as the spell discern lies for one statement.',
+        effects: [],
       },
       {
         name: 'Web of Secrets',
         level: 11,
         description:
           'The conspiracy theorist automatically knows when a creature within 30 feet is attempting to deceive her or a nearby ally, allowing an immediate Sense Motive check as a free action even outside her turn.',
+        effects: [],
       },
     ],
     source: 'Pathfinder Player Companion: Dirty Tactics Toolbox',
@@ -56,24 +60,28 @@ export const INVESTIGATOR_ARCHETYPES: ArchetypeData[] = [
         level: 1,
         description:
           'The empiricist uses her Intelligence modifier in place of the normal ability modifier for Disable Device, Perception, Sense Motive, and Use Magic Device checks, and can use Inspiration on these checks without spending a use.',
+        effects: [],
       },
       {
         name: 'Unfailing Logic',
         level: 4,
         description:
           'The empiricist gains a +2 bonus on saving throws against illusion spells and effects. She may spend 1 inspiration point as a swift action to treat any illusion she interacts with as disbelieved for 1 round.',
+        effects: [],
       },
       {
         name: 'Inexorable Logic',
         level: 9,
         description:
           'The empiricist can spend 1 inspiration point to reroll any saving throw against a mind-affecting effect; she must take the second result even if it is lower.',
+        effects: [],
       },
       {
         name: 'Empirical Logic',
         level: 14,
         description:
           'The empiricist adds her Intelligence modifier rather than her Wisdom modifier on Will saving throws against enchantment and illusion effects.',
+        effects: [],
       },
     ],
     source: 'Ultimate Intrigue',
@@ -95,24 +103,28 @@ export const INVESTIGATOR_ARCHETYPES: ArchetypeData[] = [
         level: 1,
         description:
           'The gravedigger can examine a corpse as a 1-minute ritual to determine cause and approximate time of death, as speak with dead without a spell, though only for three questions and requiring a DC 15 Knowledge (religion) check.',
+        effects: [],
       },
       {
         name: 'Funerary Reagents',
         level: 1,
         description:
           'The gravedigger brews oils and unguents that preserve bodies and repel undead. She can prepare a number of reagents per day equal to her investigator level; each requires 1 minute to apply and lasts 1 hour.',
+        effects: [],
       },
       {
         name: 'Death Sense',
         level: 3,
         description:
           'The gravedigger can sense undead creatures within 30 feet as if she had the detect undead spell active, and gains a +2 bonus on Knowledge (religion) checks related to undead and burial rites.',
+        effects: [],
       },
       {
         name: 'Grave Strike',
         level: 4,
         description:
           "When using Studied Strike against undead, the gravedigger deals full precision damage regardless of the undead type's immunity to critical hits, and adds her Intelligence modifier as bonus damage on the attack.",
+        effects: [],
       },
     ],
     source: "Pathfinder Player Companion: Adventurer's Armory 2",
@@ -140,24 +152,28 @@ export const INVESTIGATOR_ARCHETYPES: ArchetypeData[] = [
         level: 1,
         description:
           'The jinyiwei receives a writ of authority that grants a +4 bonus on Intimidate checks against creatures who know her affiliation, and she is treated as having the Quick Draw feat for drawing her signature jian sword.',
+        effects: [],
       },
       {
         name: 'Shadow Surveillance',
         level: 1,
         description:
           'The jinyiwei can make Stealth checks to tail a target in an urban environment without penalty even while maintaining observation, and gains a +2 bonus on Perception and Stealth checks in crowds.',
+        effects: [],
       },
       {
         name: 'Swordplay Talent',
         level: 3,
         description:
           'The jinyiwei gains Weapon Focus (jian) as a bonus feat at 3rd level and adds her Intelligence modifier to damage rolls with a jian when she has used Studied Combat against the target.',
+        effects: [],
       },
       {
         name: 'Implacable Agent',
         level: 7,
         description:
           'The jinyiwei is immune to fear effects from targets she has studied and gains a +4 morale bonus on saving throws against mind-affecting effects from sources that know her as an imperial agent.',
+        effects: [],
       },
     ],
     source: 'Dragon Empires Gazetteer',
@@ -179,24 +195,28 @@ export const INVESTIGATOR_ARCHETYPES: ArchetypeData[] = [
         level: 1,
         description:
           'The lamplighter can craft alchemical illumination items at half cost and twice normal speed. She can create a special lantern that reveals invisible creatures and objects within its light radius (30 feet) as a standard action.',
+        effects: [],
       },
       {
         name: 'Expose',
         level: 2,
         description:
           'As a standard action, the lamplighter can illuminate a single creature within 30 feet with alchemical luminescent dust, negating its concealment, invisibility, or hiding bonus for 1 minute per investigator level.',
+        effects: [],
       },
       {
         name: 'City Light',
         level: 6,
         description:
           'The lamplighter never suffers penalties from darkness conditions and can see in magical darkness up to 30 feet, as if she had darkvision with the ability to pierce magical darkness.',
+        effects: [],
       },
       {
         name: 'Beacon',
         level: 11,
         description:
           'The lamplighter can designate one creature per investigator level as a "person of interest." She always knows the general direction of designated creatures within 1 mile and gains a +2 bonus on all checks against them.',
+        effects: [],
       },
     ],
     source: 'Pathfinder Player Companion: Heroes of the Streets',
@@ -218,24 +238,28 @@ export const INVESTIGATOR_ARCHETYPES: ArchetypeData[] = [
         level: 1,
         description:
           'The questioner can spend inspiration on Bluff, Diplomacy, Intimidate, and Sense Motive checks without using an investigator talent. She gains a +2 bonus on all such checks when interrogating a creature she has studied for at least 1 minute.',
+        effects: [],
       },
       {
         name: 'Read Motive',
         level: 2,
         description:
           "After 1 round of conversation, the questioner can attempt a Sense Motive check (DC 15 + target's Bluff) to learn the target's primary motivation or current emotional state.",
+        effects: [],
       },
       {
         name: 'Lie Detector',
         level: 5,
         description:
           'The questioner detects lies as a constant effect (as the spell) when in conversation with a willing or restrained subject, and can extract information from an unwilling subject with a successful opposed Sense Motive vs. Bluff check.',
+        effects: [],
       },
       {
         name: 'Breaking Point',
         level: 9,
         description:
           "By spending 1 inspiration point, the questioner can shatter a creature's resolve during interrogation, forcing a Will save (DC 10 + half investigator level + INT modifier) or compelling the creature to answer one question truthfully.",
+        effects: [],
       },
     ],
     source: "Pathfinder Player Companion: Spymaster's Handbook",
@@ -263,24 +287,28 @@ export const INVESTIGATOR_ARCHETYPES: ArchetypeData[] = [
         level: 1,
         description:
           'The psychic detective casts spells drawn from the psychic spell list as a spontaneous caster, using Intelligence as her casting stat. Her caster level equals her investigator level and she can cast a number of spells per day as per the psychic detective spell progression.',
+        effects: [],
       },
       {
         name: 'Psychic Inspiration',
         level: 2,
         description:
           'The psychic detective can spend inspiration on concentration checks and Knowledge (arcana, dungeoneering, and planes) checks. She adds her Intelligence modifier to concentration checks as a free benefit.',
+        effects: [],
       },
       {
         name: 'Telepathic Intuition',
         level: 5,
         description:
           'The psychic detective can read surface thoughts of a creature she has studied, as the detect thoughts spell, by spending 1 inspiration point. She does not need to concentrate once the connection is established for 1 round.',
+        effects: [],
       },
       {
         name: 'Psychic Strike',
         level: 4,
         description:
           "The psychic detective's studied strike deals psychic damage that bypasses all damage reduction and can affect incorporeal creatures as if the attack were a force effect.",
+        effects: [],
       },
     ],
     source: 'Occult Adventures',
@@ -309,24 +337,28 @@ export const INVESTIGATOR_ARCHETYPES: ArchetypeData[] = [
         level: 1,
         description:
           'The sleuth gains a pool of luck points equal to her Charisma modifier (minimum 1). She can spend luck points to power deeds similar to the swashbuckler, and regains luck whenever she succeeds on a Reflex save, confirms a critical hit, or reduces a foe to 0 hp.',
+        effects: [],
       },
       {
         name: 'Deeds',
         level: 1,
         description:
           'The sleuth gains a series of deeds at 1st, 3rd, 7th, and 11th level, including Dodging Panache (spend 1 luck point to add CHA to AC for 1 round), Charmed Life (spend luck point before a save for +CHA bonus), and similar luck-based abilities.',
+        effects: [],
       },
       {
         name: 'Unflinching',
         level: 11,
         description:
           'The sleuth is immune to fear effects while she has at least 1 luck point remaining, and gains a +2 morale bonus on all saves against enchantment effects.',
+        effects: [],
       },
       {
         name: 'Consummate Liar',
         level: 3,
         description:
           'The sleuth adds half her investigator level (minimum 1) on all Bluff checks and never takes the penalty for outrageous lies when talking her way out of immediate danger.',
+        effects: [],
       },
     ],
     source: 'Advanced Class Guide',
@@ -348,24 +380,28 @@ export const INVESTIGATOR_ARCHETYPES: ArchetypeData[] = [
         level: 1,
         description:
           'The tinkerer can craft mechanical gadgets using Craft (clockwork) in place of Craft (alchemy). Each day she can prepare a number of single-use gadgets equal to her investigator level + Intelligence modifier, each taking 10 minutes to assemble.',
+        effects: [],
       },
       {
         name: 'Mechanical Insight',
         level: 1,
         description:
           'The tinkerer gains a +4 bonus on Disable Device checks against mechanical traps and constructs, and can take 10 on Disable Device checks even when threatened or in combat against such targets.',
+        effects: [],
       },
       {
         name: 'Rapid Assembly',
         level: 3,
         description:
           'The tinkerer can assemble a gadget as a standard action rather than taking 10 minutes, though improvised gadgets assembled this way have a 10% chance of malfunction on each use.',
+        effects: [],
       },
       {
         name: 'Construct Companion',
         level: 7,
         description:
           "The tinkerer constructs a small mechanical companion (statistics as a familiar appropriate to her level). The companion can deliver extracts and perform simple tasks but does not share the tinkerer's skill or save bonuses.",
+        effects: [],
       },
     ],
     source: 'Pathfinder Player Companion: Alchemy Manual',
@@ -393,24 +429,28 @@ export const INVESTIGATOR_ARCHETYPES: ArchetypeData[] = [
         level: 1,
         description:
           "As a standard action, the tome eater can eat a page of written text to gain a +4 bonus on one Knowledge check related to the text's subject within 24 hours, or eat a scroll to cast it immediately as if it were a spell-trigger item she activates.",
+        effects: [],
       },
       {
         name: 'Digest Spell',
         level: 3,
         description:
           'The tome eater can devour a scroll of a spell she could cast and retain it in a mental "stomach" for a number of hours equal to her investigator level. She can cast it once during that period without the scroll, using her Intelligence modifier as the spellcasting modifier.',
+        effects: [],
       },
       {
         name: 'Eidetic Consumption',
         level: 5,
         description:
           'After consuming at least one page of text from a source, the tome eater recalls its contents perfectly and can reproduce the text verbatim. She gains the benefits of Skill Focus in any skill the text was a treatise on for 24 hours.',
+        effects: [],
       },
       {
         name: 'Voracious Mind',
         level: 11,
         description:
           "The tome eater can consume an entire book as a full-round action, gaining a +2 insight bonus on all Knowledge checks in the book's subject area permanently (maximum +10 total from this ability) and +1d4 temporary inspiration points that last 1 hour.",
+        effects: [],
       },
     ],
     source: 'Pathfinder Player Companion: Blood of Shadows',
@@ -432,24 +472,28 @@ export const INVESTIGATOR_ARCHETYPES: ArchetypeData[] = [
         level: 1,
         description:
           'The cryptid scholar adds all Knowledge skills to the list of skills she can use inspiration on without spending a talent, and can always take 10 on Knowledge checks to identify creatures even in stressful situations.',
+        effects: [],
       },
       {
         name: 'Cryptid Field Notes',
         level: 1,
         description:
           'The cryptid scholar maintains a detailed field journal. Each time she successfully identifies a new creature type, she records it. She gains a cumulative +1 bonus (maximum +5) on attack rolls and saves against creature types she has cataloged for at least 1 week.',
+        effects: [],
       },
       {
         name: 'Debunk and Exploit',
         level: 4,
         description:
           "When the cryptid scholar identifies a creature's special abilities (via a successful Knowledge check), she can spend 1 inspiration point to immediately determine one weakness or vulnerability of that creature as a free action.",
+        effects: [],
       },
       {
         name: 'Impossible Anatomy',
         level: 9,
         description:
           "The cryptid scholar's studied strike deals full precision damage against creatures normally immune to it (such as oozes, plants, and constructs) by targeting the specific physiological quirks she has cataloged.",
+        effects: [],
       },
     ],
     source: "Pathfinder Player Companion: Monster Summoner's Handbook",
@@ -471,24 +515,28 @@ export const INVESTIGATOR_ARCHETYPES: ArchetypeData[] = [
         level: 1,
         description:
           'The mastermind begins play with a network of three informants who provide information on any one topic per week at no cost. At 5th, 10th, and 15th level, she gains three additional informants who become more specialized in nature.',
+        effects: [],
       },
       {
         name: 'Direct Agent',
         level: 3,
         description:
           "As a standard action, the mastermind can grant an ally within 30 feet who can see or hear her the benefit of her Studied Combat bonus against the mastermind's current studied target for a number of rounds equal to her Intelligence modifier.",
+        effects: [],
       },
       {
         name: 'Countermeasures',
         level: 5,
         description:
           'The mastermind spends 1 inspiration point to designate a location or route as "secured." For 24 hours, she and her allies gain a +4 bonus on Perception checks and cannot be surprised in that area.',
+        effects: [],
       },
       {
         name: 'Five Moves Ahead',
         level: 9,
         description:
           "At the start of each day, the mastermind may designate one creature she knows exists. She gains a +2 competence bonus on all d20 rolls made against that creature's schemes, minions, or direct actions.",
+        effects: [],
       },
     ],
     source: 'Ultimate Intrigue',
@@ -510,24 +558,28 @@ export const INVESTIGATOR_ARCHETYPES: ArchetypeData[] = [
         level: 1,
         description:
           'By observing or studying a creature for 10 minutes and succeeding at a DC 15 Sense Motive check, the profiler builds a psychological profile. She gains a +2 bonus on Bluff, Diplomacy, Intimidate, and Sense Motive checks against the profiled creature.',
+        effects: [],
       },
       {
         name: 'Predict Behavior',
         level: 3,
         description:
           'Once per day per target the profiler has profiled, she can predict one action the target will take in the next hour with 70% accuracy (determined by the GM). On a successful prediction, she gains a +4 bonus on the next check made relevant to that action.',
+        effects: [],
       },
       {
         name: 'Signature Analysis',
         level: 5,
         description:
           'The profiler can link crimes or events to a known perpetrator by spending 1 hour examining evidence and succeeding on a DC 20 Knowledge (local) check. On success, she learns whether a specific person committed or is implicated in a given act.',
+        effects: [],
       },
       {
         name: 'Inside the Mind',
         level: 11,
         description:
           "The profiler's Studied Combat bonus applies even when she cannot directly observe a studied creature, as long as she has a complete profile on it and it is within 100 feet.",
+        effects: [],
       },
     ],
     source: 'Pathfinder Player Companion: Dirty Tactics Toolbox',
@@ -549,24 +601,28 @@ export const INVESTIGATOR_ARCHETYPES: ArchetypeData[] = [
         level: 1,
         description:
           'The relic hunter automatically detects active divine magic within 30 feet as if using detect magic, and can spend 1 inspiration point to identify the deity or faith associated with any divine magical item or effect.',
+        effects: [],
       },
       {
         name: 'Sacred Research',
         level: 1,
         description:
           'The relic hunter adds Knowledge (religion) and Knowledge (history) to the list of skills she can use inspiration on without spending a talent and gains a +2 bonus on both skills.',
+        effects: [],
       },
       {
         name: 'Attune to Relic',
         level: 4,
         description:
           'The relic hunter can attune to one divine artifact per investigator level at any given time. She treats attuned relics as if she met all alignment prerequisites and gains a +1 bonus on saves while holding or wearing an attuned item.',
+        effects: [],
       },
       {
         name: 'Relic Lore',
         level: 7,
         description:
           'By studying a divine artifact for 1 hour, the relic hunter learns all of its command words, functions, and history as if she had cast legend lore on it. She can share this knowledge with others by spending 10 minutes in explanation.',
+        effects: [],
       },
     ],
     source: 'Pathfinder Player Companion: Chronicle of Legends',

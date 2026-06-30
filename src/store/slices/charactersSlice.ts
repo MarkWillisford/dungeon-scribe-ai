@@ -4,6 +4,7 @@ import type { CharacterFeat } from '@/types/feats';
 import { FirebaseCharacterService } from '@/services/FirebaseCharacterService';
 import { CharacterService } from '@/services/CharacterService';
 import { ModifierPipelineService } from '@/services/ModifierPipelineService';
+import { saveCharacter } from '../thunks/saveCharacter';
 
 interface CharactersState {
   characters: CharacterSummary[];
@@ -178,6 +179,27 @@ const charactersSlice = createSlice({
     builder.addCase(updateCharacter.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload as string;
+    });
+
+    // Save character (direct-entry flow — upserts into the list)
+    builder.addCase(saveCharacter.fulfilled, (state, action) => {
+      const character = ModifierPipelineService.recalculate(action.payload);
+      const summary: CharacterSummary = {
+        id: character.info.id,
+        name: character.info.name,
+        level: character.classes.totalLevel,
+        race: character.info.race.name,
+        classes: character.classes.classes.map((c) => `${c.name} ${c.level}`).join('/'),
+        lastUpdated: character.lastUpdated,
+        ...(character.info.portrait ? { portrait: character.info.portrait } : {}),
+      };
+      const existingIndex = state.characters.findIndex((c) => c.id === summary.id);
+      if (existingIndex >= 0) {
+        state.characters[existingIndex] = summary;
+      } else {
+        state.characters.push(summary);
+      }
+      state.activeCharacter = character;
     });
 
     // Delete character

@@ -23,6 +23,7 @@ export interface OptionalRules {
   crRefunds: boolean;
   laBuyback: boolean;
   crLaAbilityScoreReductions: boolean;
+  flaws: boolean;
 }
 
 export type OverrideKind = 'feat' | 'class' | 'spell' | 'item';
@@ -39,6 +40,7 @@ export interface ValidationSettings {
   abilityScoreMethod: 'point-buy' | 'standard-array' | 'dice' | 'freeform';
   pointBuyBudget?: number; // Only used when method === 'point-buy'
   maxTraits: number;
+  maxFlaws: number;
 }
 
 export interface CampaignRequirements {

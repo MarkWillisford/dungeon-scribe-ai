@@ -136,3 +136,4 @@ export * from './gameData';
 export * from './companions';
 export * from './favoredClassBonuses';
 export * from './eidolon';
+export * from './flaws';
