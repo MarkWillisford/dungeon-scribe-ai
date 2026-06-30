@@ -1,6 +1,6 @@
 import { WARDER_CLASS } from '@/data/classes/initiating/warder';
 
-describe('WARDER_CLASS classFeatures — resource-cost wiring (issue #295)', () => {
+describe('WARDER_CLASS classFeatures — wiring (issues #294, #295)', () => {
   const features = WARDER_CLASS.classFeatures;
 
   it('every class feature has an effects array', () => {
@@ -26,6 +26,83 @@ describe('WARDER_CLASS classFeatures — resource-cost wiring (issue #295)', () 
         if (e.type === 'special') {
           expect(e.target).toMatch(/\./);
         }
+      });
+    });
+  });
+
+  describe('Defensive Focus — toggle bundle', () => {
+    let feature: (typeof features)[number];
+
+    beforeAll(() => {
+      feature = features.find((f) => f.name === 'Defensive Focus')!;
+    });
+
+    it('exists in classFeatures', () => {
+      expect(feature).toBeDefined();
+    });
+
+    it('has id defensive-focus', () => {
+      expect(feature.id).toBe('defensive-focus');
+    });
+
+    it('has activationMode toggle', () => {
+      expect(feature.activationMode).toBe('toggle');
+    });
+
+    it('has a shortDescription', () => {
+      expect(typeof feature.shortDescription).toBe('string');
+      expect(feature.shortDescription!.length).toBeGreaterThan(0);
+    });
+
+    it('effects array is populated (not empty)', () => {
+      expect(Array.isArray(feature.effects)).toBe(true);
+      expect(feature.effects!.length).toBeGreaterThan(0);
+    });
+
+    it('has exactly 4 effects', () => {
+      expect(feature.effects).toHaveLength(4);
+    });
+
+    it('includes passive Combat Reflexes special effect (no activation field)', () => {
+      const combatReflexes = feature.effects!.find(
+        (e) => e.type === 'special' && e.target === 'special.combat_reflexes_int_mod',
+      );
+      expect(combatReflexes).toBeDefined();
+      expect(combatReflexes!.activation).toBeUndefined();
+    });
+
+    it('includes +CMD bonus effect with toggle activation', () => {
+      const cmdBonus = feature.effects!.find((e) => e.type === 'bonus' && e.target === 'cmd');
+      expect(cmdBonus).toBeDefined();
+      expect(cmdBonus!.value).toBe('intMod + warderLevel');
+      expect(cmdBonus!.bonusType).toBe('untyped');
+      expect(cmdBonus!.activation?.type).toBe('toggle');
+      expect(cmdBonus!.activation?.active).toBe(false);
+    });
+
+    it('includes threatened-area-expansion special effect with toggle activation', () => {
+      const threatenedArea = feature.effects!.find(
+        (e) => e.type === 'special' && e.target === 'special.defensive_focus_threatened_area',
+      );
+      expect(threatenedArea).toBeDefined();
+      expect(threatenedArea!.activation?.type).toBe('toggle');
+      expect(threatenedArea!.activation?.active).toBe(false);
+    });
+
+    it('includes movement-AoO special effect with toggle activation', () => {
+      const movementAoo = feature.effects!.find(
+        (e) => e.type === 'special' && e.target === 'special.defensive_focus_movement_aoo',
+      );
+      expect(movementAoo).toBeDefined();
+      expect(movementAoo!.activation?.type).toBe('toggle');
+      expect(movementAoo!.activation?.active).toBe(false);
+    });
+
+    it('all toggle-gated effects have active: false', () => {
+      const toggleEffects = feature.effects!.filter((e) => e.activation !== undefined);
+      toggleEffects.forEach((e) => {
+        expect(e.activation?.type).toBe('toggle');
+        expect(e.activation?.active).toBe(false);
       });
     });
   });
