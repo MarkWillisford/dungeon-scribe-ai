@@ -19,6 +19,7 @@ import type { LevelIncrementSlot } from '@/types/character';
 import type { CharacterFeat, Feats } from '@/types/feats';
 import type { ClassEntry, CharacterClasses, FavoredClassBonusSelection } from '@/types/classes';
 import type { CharacterTrait } from '@/types/traits';
+import type { CharacterFlaw } from '@/types/flaws';
 import type { SpellcastingAdvancement, SpellcastingPool } from '@/types/spells';
 import type { EditorEquipmentItem, EditorEquippedSlot } from '@/types/character';
 import type {
@@ -1508,6 +1509,20 @@ const characterEntrySlice = createSlice({
       state.isDirty = true;
     },
 
+    // ---- Flaws ----
+
+    addFlaw(state, action: PayloadAction<CharacterFlaw>) {
+      state.character.flaws.flaws.push(action.payload);
+      state.isDirty = true;
+    },
+
+    removeFlaw(state, action: PayloadAction<string>) {
+      state.character.flaws.flaws = state.character.flaws.flaws.filter(
+        (f) => f.flawId !== action.payload,
+      );
+      state.isDirty = true;
+    },
+
     // ---- Feats ----
 
     syncFeatSlots(state) {
@@ -2071,6 +2086,8 @@ export const {
   removeSkillEntry,
   addTrait,
   removeTrait,
+  addFlaw,
+  removeFlaw,
   syncFeatSlots,
   addFeatSlot,
   removeFeatSlot,

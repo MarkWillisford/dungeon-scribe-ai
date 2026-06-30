@@ -451,10 +451,7 @@ export const ZEALOT_CLASS: ExpandedClassData = {
         description:
           'The zealot recovers maneuvers by using the Aid Another action as a move action, recovering a number of expended maneuvers equal to his zealot initiation modifier (minimum 2). This activates his zeal class feature.',
       },
-      secondary: {
-        type: 'custom',
-        description: 'The zealot may recover a single maneuver as a standard action.',
-      },
+      secondary: { type: 'standard_one' },
     },
   },
   source: 'Path of War: Expanded',

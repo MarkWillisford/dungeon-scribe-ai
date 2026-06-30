@@ -17,8 +17,16 @@ on:
 
 jobs:
   babysit:
-    # On pull_request_review: only fire on CodeRabbit reviews of non-draft PRs.
+    # On pull_request_review: only fire on Sourcery reviews of non-draft PRs.
     # On workflow_dispatch: always run (pr_number input required).
+    #
+    # Gotchas (see CLAUDE.md "CI Workflow Gotchas"):
+    # 1. The bot login in webhook payloads includes a `[bot]` suffix. `sourcery-ai[bot]`
+    #    is correct; `sourcery-ai` (what `gh pr view` returns) silently never matches.
+    # 2. `pull_request_review` evaluates this `if` against the PR HEAD branch's
+    #    workflow file, not main. Open PRs keep skipping until their branches sync
+    #    with main. To test a change here, merge main into a PR branch or open a
+    #    fresh PR off current main.
     if: |
       github.event_name == 'workflow_dispatch' ||
       (github.event.review.user.login == 'sourcery-ai[bot]' &&

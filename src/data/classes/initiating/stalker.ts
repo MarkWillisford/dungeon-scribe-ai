@@ -1,7 +1,7 @@
 // Stalker — Path of War base initiating class (Dreamscarred Press)
 // Source: https://www.d20pfsrd.com/alternative-rule-systems/3rd-party-rules-systems/path-of-war/classes/stalker/
 
-import { BABProgression, SaveProgression } from '@/types/base';
+import { BABProgression, BonusType, SaveProgression } from '@/types/base';
 import type { ExpandedClassData } from '../types';
 import type { InitiatingProgressionTable } from '../initiatingProgressionTables';
 
@@ -160,9 +160,43 @@ export const STALKER_CLASS: ExpandedClassData = {
     {
       name: 'Stalker Art: Concealed Recovery',
       level: 1,
+      id: 'stalker-art-concealed-recovery',
+      shortDescription:
+        'Toggle during recovery — +4 insight AC, concealment (20%/total at 11th), deadly strike charge, move up to speed',
+      activationMode: 'toggle',
       description:
         'The stalker may utilize his ki-fueled attunement to the world around him to defend himself while he centers his spirit for martial maneuver recovery. When recovering maneuvers (either as a full-round action or as a standard action), the stalker enjoys concealment (with a 20% miss chance). At 11th level, this improves to total concealment (50% miss chance). This is a supernatural ability.',
-      effects: [],
+      effects: [
+        {
+          type: 'bonus',
+          bonusType: BonusType.INSIGHT,
+          target: 'ac',
+          value: 4,
+          source: 'Stalker Art: Concealed Recovery',
+          activation: { type: 'toggle', active: false },
+        },
+        {
+          type: 'special',
+          target: 'special.stalker_recovery_concealment',
+          value: 0,
+          source: 'Stalker Art: Concealed Recovery',
+          activation: { type: 'toggle', active: false },
+        },
+        {
+          type: 'special',
+          target: 'special.stalker_recovery_deadly_strike_charge',
+          value: 0,
+          source: 'Stalker Art: Concealed Recovery',
+          activation: { type: 'toggle', active: false },
+        },
+        {
+          type: 'special',
+          target: 'special.stalker_recovery_movement',
+          value: 0,
+          source: 'Stalker Art: Concealed Recovery',
+          activation: { type: 'toggle', active: false },
+        },
+      ],
     },
     {
       name: 'Stalker Art: Critical Edge',
@@ -499,11 +533,7 @@ export const STALKER_CLASS: ExpandedClassData = {
     ],
     progressionTableKey: 'stalker',
     recoveryMechanics: {
-      primary: {
-        type: 'custom',
-        description:
-          'As a full-round action that does not provoke attacks of opportunity, the stalker recovers a number of expended maneuvers equal to his stalker initiation modifier (minimum 2). When recovering in this way, he may move up to his base speed, gains a +4 insight bonus to AC, and the next attack he makes this encounter adds his deadly strike damage if it hits.',
-      },
+      primary: { type: 'full_round_modifier_min_2' },
       secondary: {
         type: 'swift_one',
         resourceId: 'stalker_ki',

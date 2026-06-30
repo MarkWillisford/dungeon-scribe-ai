@@ -386,6 +386,8 @@ export const RISSI_FIXTURE: Character = {
     maxTraits: 2,
   },
 
+  flaws: { flaws: [], maxFlaws: 2 },
+
   // ---- Feats (assigned only) ----
   feats: {
     feats: [
