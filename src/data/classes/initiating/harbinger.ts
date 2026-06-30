@@ -1,7 +1,7 @@
 // Harbinger — Path of War: Expanded initiating class (Dreamscarred Press)
 // Source: https://www.d20pfsrd.com/alternative-rule-systems/3rd-party-rules-systems/path-of-war/classes/harbinger
 
-import { BABProgression, SaveProgression } from '@/types/base';
+import { BABProgression, BonusType, SaveProgression } from '@/types/base';
 import type { ExpandedClassData } from '../types';
 import type { InitiatingProgressionTable } from '../initiatingProgressionTables';
 
@@ -98,9 +98,19 @@ export const HARBINGER_CLASS: ExpandedClassData = {
     {
       name: 'Dark Claim',
       level: 1,
+      id: 'dark-claim',
+      shortDescription: 'Mark a creature within close range as Claimed (swift action)',
+      activationMode: 'action',
       description:
         'Starting at 1st level, a harbinger gains the ability to reach out with her sorcerous malice, marking foes as her own. As a swift action, the harbinger may Claim an opponent that she can see (including with special senses such as blindsense or tremorsense) within close range (25 feet + 5 feet per 2 harbinger levels) for a number of rounds equal to 1/2 her class level (minimum 1 round). A harbinger can have a maximum number of creatures Claimed equal to her harbinger initiation modifier (minimum 1), and may not Claim a creature she has already Claimed until or unless the Claim expires. Claimed creatures using the Withdraw action to leave a square threatened by the harbinger provoke attacks of opportunity from her. In addition, the harbinger automatically knows the position of creatures she has Claimed. Any opponent the harbinger cannot see still has total concealment (50% miss chance) against her, and the harbinger still suffers the normal miss chance when attacking creatures that have concealment. The harbinger is still denied her Dexterity bonus to her AC against attacks from Claimed creatures she cannot see.',
-      effects: [],
+      effects: [
+        {
+          type: 'special',
+          target: 'special.dark_claim',
+          value: 0,
+          source: 'Dark Claim',
+        },
+      ],
     },
     {
       name: 'Ill Tidings',
@@ -119,23 +129,80 @@ export const HARBINGER_CLASS: ExpandedClassData = {
     {
       name: 'Grim News',
       level: 3,
+      id: 'grim-news',
+      shortDescription:
+        'Move up to speed as a swift action (1/encounter, scaling at levels 9 and 15)',
+      activationMode: 'action',
       description:
         "Like a ghost or a rumor, the harbinger moves with supernatural acumen. Starting at 3rd level, a harbinger can move up to her speed as a swift action once per encounter. She can use this ability twice per encounter at 9th level, and three times per encounter at 15th level. At 9th level and again at 15th level, the harbinger selects one of the following abilities. Once made, her choice is permanent and cannot be changed. Dark Wings: The harbinger gains a fly speed equal to her base land speed, with good maneuverability. This flight is supernatural in nature. Omenwalk: The harbinger gains the ability to teleport up to her speed as a move action. The harbinger does not need line of effect or line of sight to her destination, although she still provokes attacks of opportunity for leaving a threatened square when using this ability. Spider's Boon: The harbinger gains a climb speed equal to her base land speed. In addition, she develops a sticky grip that aids her in battle, granting her a +4 racial bonus on grapple checks and to her CMD. Water Dweller: The harbinger gains a swim speed equal to her base land speed. In addition, the harbinger no longer needs to breathe and becomes immune to inhaled poisons.",
-      effects: [],
+      resourcePool: {
+        id: 'grim_news',
+        name: 'Grim News',
+        rechargeOn: 'per_encounter',
+        maxFormula: '1 + floor(harbingerLevel / 9) + floor(harbingerLevel / 15)',
+        restRecoveryMode: 'full',
+      },
+      effects: [
+        {
+          type: 'special',
+          target: 'special.grim_news',
+          value: 0,
+          source: 'Grim News',
+        },
+      ],
     },
     {
       name: 'Massacre',
       level: 4,
+      id: 'massacre',
+      shortDescription:
+        'Initiate a readied strike as immediate action when reducing foe to 0 HP (1/encounter)',
+      activationMode: 'action',
       description:
         'The scent of blood in the air and the gentle throb of fading life force impels the harbinger to further heights of violence. Starting at 4th level, a harbinger can initiate one of her readied strikes against an adjacent creature as an immediate action when she reduces an opponent to 0 or fewer hit points. She can only initiate strikes with an initiation action of one standard action with this ability. The harbinger can use this ability once per encounter at 4th level, twice per encounter at 10th level, and three times per encounter at 16th level.',
-      effects: [],
+      resourcePool: {
+        id: 'massacre',
+        name: 'Massacre',
+        rechargeOn: 'per_encounter',
+        maxFormula: '1 + floor(harbingerLevel / 10) + floor(harbingerLevel / 16)',
+        restRecoveryMode: 'full',
+      },
+      effects: [
+        {
+          type: 'special',
+          target: 'special.massacre',
+          value: 0,
+          source: 'Massacre',
+        },
+      ],
     },
     {
       name: 'Elusive Shadow',
       level: 5,
+      id: 'elusive-shadow',
+      shortDescription:
+        '+2 dodge to AC and Reflex saves (toggle on when you have moved 10+ ft this round)',
+      activationMode: 'toggle',
       description:
         "The harbinger's unnatural alacrity protects her from harm as she shies away from whirling blades and streaking spells alike. Starting at 5th level, a harbinger gains a +2 dodge bonus to her AC and Reflex saves during any round in which she has moved at least 10 feet (including by teleportation effects such as omenwalk).",
-      effects: [],
+      effects: [
+        {
+          type: 'bonus',
+          bonusType: BonusType.DODGE,
+          target: 'ac.dodge',
+          value: 2,
+          source: 'Elusive Shadow',
+          activation: { type: 'toggle', active: false },
+        },
+        {
+          type: 'bonus',
+          bonusType: BonusType.DODGE,
+          target: 'save.reflex',
+          value: 2,
+          source: 'Elusive Shadow',
+          activation: { type: 'toggle', active: false },
+        },
+      ],
     },
     {
       name: 'Dark Focus Bonus Feat',
@@ -149,14 +216,28 @@ export const HARBINGER_CLASS: ExpandedClassData = {
       level: 7,
       description:
         'Having become adept at concealing the malice within, the harbinger develops the ability to allay the suspicions of those who investigate her with magic. At 7th level, a harbinger can use magic aura as a spell-like ability at will, with a caster level equal to her harbinger level. She may only target items and objects she is attending, carrying, wearing, or wielding.',
-      effects: [],
+      effects: [
+        {
+          type: 'special',
+          target: 'special.sorcerous_deception',
+          value: 0,
+          source: 'Sorcerous Deception',
+        },
+      ],
     },
     {
       name: 'Ill Intentions',
       level: 8,
       description:
         'Those cornered by the harbinger and her allies feel the weight of her malice pressing down against them. Starting at 8th level, whenever a harbinger and one or more of her allies flank a creature, that creature suffers a -2 penalty on saving throws and skill checks.',
-      effects: [],
+      effects: [
+        {
+          type: 'special',
+          target: 'special.ill_intentions',
+          value: 0,
+          source: 'Ill Intentions',
+        },
+      ],
     },
     {
       name: 'Grim News Improvement',
@@ -195,23 +276,54 @@ export const HARBINGER_CLASS: ExpandedClassData = {
     {
       name: 'Black Omen',
       level: 11,
+      id: 'black-omen',
+      shortDescription: 'Move up to half speed as an immediate action (1/encounter)',
+      activationMode: 'action',
       description:
         'Like misfortune, the harbinger does not seem to move so much as simply arrive. Starting at 11th level, a harbinger may move up to half her speed as an immediate action once per encounter.',
-      effects: [],
+      resourcePool: {
+        id: 'black_omen',
+        name: 'Black Omen',
+        rechargeOn: 'per_encounter',
+        maxFormula: '1',
+        restRecoveryMode: 'full',
+      },
+      effects: [
+        {
+          type: 'special',
+          target: 'special.black_omen',
+          value: 0,
+          source: 'Black Omen',
+        },
+      ],
     },
     {
       name: 'Bleak Prophecy',
       level: 12,
       description:
         'Those claimed by the harbinger are filled with dreadful visions of their own demise. Starting at 12th level, creatures Claimed by a harbinger become shaken while the Claim persists.',
-      effects: [],
+      effects: [
+        {
+          type: 'special',
+          target: 'special.bleak_prophecy',
+          value: 0,
+          source: 'Bleak Prophecy',
+        },
+      ],
     },
     {
       name: 'Dark Murmur',
       level: 13,
       description:
         "Those claimed by the harbinger find her as hard to catch as rumor itself. Starting at 13th level, the harbinger's movement no longer provokes attacks of opportunity from creatures she has Claimed.",
-      effects: [],
+      effects: [
+        {
+          type: 'special',
+          target: 'special.dark_murmur',
+          value: 0,
+          source: 'Dark Murmur',
+        },
+      ],
     },
     {
       name: 'Dark Focus: Spontaneous Initiation',
@@ -236,9 +348,20 @@ export const HARBINGER_CLASS: ExpandedClassData = {
     {
       name: 'Rumors of War',
       level: 17,
+      id: 'rumors-of-war',
+      shortDescription:
+        'Move and initiate a strike at any point during the movement (full-round action)',
+      activationMode: 'action',
       description:
         'The harbinger sweeps through her enemies, spreading pain and woe wherever she steps. Starting at 17th level, a harbinger may move up to her speed and initiate a single strike at any point in the movement as a full-round action.',
-      effects: [],
+      effects: [
+        {
+          type: 'special',
+          target: 'special.rumors_of_war',
+          value: 0,
+          source: 'Rumors of War',
+        },
+      ],
     },
     {
       name: 'Voices in the Dark',
