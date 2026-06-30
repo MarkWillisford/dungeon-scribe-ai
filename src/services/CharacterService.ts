@@ -83,6 +83,7 @@ export class CharacterService {
       skills: this.createDefaultSkills(),
       feats: { feats: [], totalFeats: 0, bonusFeats: 0 },
       traits: { traits: [], maxTraits: 2 },
+      flaws: { flaws: [], maxFlaws: 2 },
       equipment: this.createDefaultEquipment(),
       spellcasting: {
         pools: [],
@@ -452,6 +453,7 @@ export class CharacterService {
       skills: this.createDefaultSkills(),
       feats: { feats: [], totalFeats: 0, bonusFeats: 0 },
       traits: { traits: [], maxTraits: 2 },
+      flaws: { flaws: [], maxFlaws: 2 },
       equipment: this.createDefaultEquipment(),
       spellcasting: { pools: [], preparedSpells: [], knownSpells: [], spellbooks: [] },
       initiating: {

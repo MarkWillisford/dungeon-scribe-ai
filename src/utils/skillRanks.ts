@@ -45,3 +45,28 @@ export function clampSkillRanks(requested: number, maxRanks: number): number {
   }
   return Math.floor(requested);
 }
+
+/** A class's contribution to the skill-rank pool: its per-level ranks and how many levels. */
+export interface SkillRankSource {
+  /** Base skill ranks the class grants per level (before INT). */
+  skillRanksPerLevel: number;
+  /** Number of levels taken in the class. */
+  level: number;
+}
+
+/**
+ * Total skill ranks available to spend, summed across all class levels.
+ *
+ * Each class grants `max(1, base + INT modifier)` ranks per level (Pathfinder's
+ * one-rank-per-level minimum), multiplied by its levels. Does not yet include
+ * favored-class bonus ranks or other situational sources — matching
+ * CharacterValidationService's total-rank check, which shares this helper.
+ */
+export function getTotalAvailableSkillRanks(sources: SkillRankSource[], intMod: number): number {
+  const mod = Number.isFinite(intMod) ? Math.floor(intMod) : 0;
+  return sources.reduce((sum, s) => {
+    const base = Number.isFinite(s.skillRanksPerLevel) ? Math.floor(s.skillRanksPerLevel) : 0;
+    const levels = Number.isFinite(s.level) ? Math.max(0, Math.floor(s.level)) : 0;
+    return sum + Math.max(1, base + mod) * levels;
+  }, 0);
+}
