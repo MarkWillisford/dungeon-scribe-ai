@@ -43,6 +43,15 @@ describe('HARBINGER_CLASS classFeatures shape', () => {
     }
   });
 
+  test('all wired features (non-empty effects) have id and shortDescription', () => {
+    const wiredFeatures = features.filter((f) => (f.effects ?? []).length > 0);
+    expect(wiredFeatures.length).toBeGreaterThan(0);
+    for (const feature of wiredFeatures) {
+      expect(typeof feature.id).toBe('string');
+      expect(typeof feature.shortDescription).toBe('string');
+    }
+  });
+
   describe('Elusive Shadow', () => {
     const feature = features.find((f) => f.name === 'Elusive Shadow')!;
 

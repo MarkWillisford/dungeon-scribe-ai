@@ -214,6 +214,8 @@ export const HARBINGER_CLASS: ExpandedClassData = {
     {
       name: 'Sorcerous Deception',
       level: 7,
+      id: 'sorcerous-deception',
+      shortDescription: 'Cast magic aura at will on attended items (CL = harbinger level)',
       description:
         'Having become adept at concealing the malice within, the harbinger develops the ability to allay the suspicions of those who investigate her with magic. At 7th level, a harbinger can use magic aura as a spell-like ability at will, with a caster level equal to her harbinger level. She may only target items and objects she is attending, carrying, wearing, or wielding.',
       effects: [
@@ -228,6 +230,8 @@ export const HARBINGER_CLASS: ExpandedClassData = {
     {
       name: 'Ill Intentions',
       level: 8,
+      id: 'ill-intentions',
+      shortDescription: 'Flanked creatures suffer -2 penalty on saves and skill checks',
       description:
         'Those cornered by the harbinger and her allies feel the weight of her malice pressing down against them. Starting at 8th level, whenever a harbinger and one or more of her allies flank a creature, that creature suffers a -2 penalty on saving throws and skill checks.',
       effects: [
@@ -300,6 +304,8 @@ export const HARBINGER_CLASS: ExpandedClassData = {
     {
       name: 'Bleak Prophecy',
       level: 12,
+      id: 'bleak-prophecy',
+      shortDescription: 'Claimed creatures become shaken while the Claim persists',
       description:
         'Those claimed by the harbinger are filled with dreadful visions of their own demise. Starting at 12th level, creatures Claimed by a harbinger become shaken while the Claim persists.',
       effects: [
@@ -314,6 +320,8 @@ export const HARBINGER_CLASS: ExpandedClassData = {
     {
       name: 'Dark Murmur',
       level: 13,
+      id: 'dark-murmur',
+      shortDescription: 'Harbinger movement no longer provokes AoO from Claimed creatures',
       description:
         "Those claimed by the harbinger find her as hard to catch as rumor itself. Starting at 13th level, the harbinger's movement no longer provokes attacks of opportunity from creatures she has Claimed.",
       effects: [
