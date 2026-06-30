@@ -159,8 +159,12 @@ export const WARLORD_CLASS: ExpandedClassData = {
       effects: [],
     },
     {
+      id: 'tactical-flanker',
       name: 'Tactical Flanker',
       level: 4,
+      shortDescription:
+        'At start of turn: choose an adjacent square; you and allies can use it as your position for flanking until your next turn',
+      activationMode: 'action',
       description:
         "At 4th level, the warlord is exceptionally gifted at working with his allies to bring down opponents and his skills assist any who ally with him. At the start of the warlord's turn, he chooses a single square adjacent to him. Until the start of his next turn, he and his allies can treat that square as if it was occupied by him for the purposes of flanking opponents.",
       effects: [
