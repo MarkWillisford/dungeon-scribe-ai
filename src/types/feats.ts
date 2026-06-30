@@ -126,7 +126,7 @@ export interface FeatDefinition extends DataQualityFields {
   prerequisites: FeatPrerequisite[];
   effects: FeatEffect[];
   spellLikeAbilities?: FeatSpellLikeAbility[];
-  activationMode: 'passive' | 'toggle' | 'conditional';
+  activationMode: 'passive' | 'toggle' | 'conditional' | 'action';
   choices?: FeatChoice[];
   tags?: string[];
 
