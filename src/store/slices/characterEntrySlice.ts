@@ -276,6 +276,7 @@ const characterEntrySlice = createSlice({
       state.character.info.racialFlexBonuses = bonuses.length > 0 ? bonuses : undefined;
       state.character.info.racialFlexChoices = bonuses.length > 0 ? [] : undefined;
       state.character.info.racialChoices = undefined;
+      state.character.info.selectedAlternateRacialTraits = undefined;
       // Apply fixed racial bonuses (zero out flex contributions first)
       ABILITY_KEYS.forEach((k) => {
         state.character.abilityScores[k].racial = action.payload.racialBonuses[k] ?? 0;
@@ -309,6 +310,20 @@ const characterEntrySlice = createSlice({
         state.character.info.racialChoices[idx] = action.payload;
       } else {
         state.character.info.racialChoices.push(action.payload);
+      }
+      state.isDirty = true;
+    },
+
+    toggleAlternateRacialTrait(state, action: PayloadAction<string>) {
+      if (!state.character.info.selectedAlternateRacialTraits) {
+        state.character.info.selectedAlternateRacialTraits = [];
+      }
+      const artName = action.payload;
+      const idx = state.character.info.selectedAlternateRacialTraits.indexOf(artName);
+      if (idx >= 0) {
+        state.character.info.selectedAlternateRacialTraits.splice(idx, 1);
+      } else {
+        state.character.info.selectedAlternateRacialTraits.push(artName);
       }
       state.isDirty = true;
     },
@@ -1993,6 +2008,7 @@ export const {
   setRace,
   setRacialFlexChoice,
   upsertRacialChoice,
+  toggleAlternateRacialTrait,
   setAlignment,
   setDeity,
   setGender,
