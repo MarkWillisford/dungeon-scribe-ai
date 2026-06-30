@@ -94,7 +94,8 @@ export const MYSTIC_CLASS: ExpandedClassData = {
         name: 'Animus',
         rechargeOn: 'special',
         maxFormula: 'max(1, 1 + wisMod)',
-        restRecoveryMode: 'full',
+        restRecoveryMode: 'formula',
+        restRecoveryFormula: '0',
         specialRechargeNote:
           'Resets at end of encounter. Generates during combat: 1+WIS mod at start of first turn, +1 per turn, +1 after initiating a maneuver.',
       },

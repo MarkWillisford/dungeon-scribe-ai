@@ -53,7 +53,8 @@ describe('MYSTIC_CLASS classFeatures', () => {
       expect(feature.resourcePool!.name).toBeTruthy();
       expect(feature.resourcePool!.maxFormula).toBeTruthy();
       expect(feature.resourcePool!.rechargeOn).toBe('special');
-      expect(feature.resourcePool!.restRecoveryMode).toBe('full');
+      expect(feature.resourcePool!.restRecoveryMode).toBe('formula');
+      expect(feature.resourcePool!.restRecoveryFormula).toBe('0');
     });
   });
 
