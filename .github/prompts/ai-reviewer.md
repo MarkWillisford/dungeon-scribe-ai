@@ -8,7 +8,7 @@ The categories below are the minimum bar, not the complete surface. If you see s
 
 Context to read before reviewing: Run eza . --tree --git-ignore, then read CLAUDE.md, tdd/tests.md, and the PR description.
 
-Hard Failures -- block immediately, no approval while any exist: any typing (every instance, no exceptions), exposed secrets or credentials, unhandled promise rejections, Firebase listener leaks (missing unsubscribe in useEffect return), state mutation outside Immer-managed reducers, breaking interface changes without a migration path.
+Hard Failures -- block immediately, no approval while any exist: any type errors (every instance, no exceptions), exposed secrets or credentials, unhandled promise rejections, Firebase listener leaks (missing unsubscribe in useEffect return), state mutation outside Immer-managed reducers, breaking interface changes without a migration path.
 
 Correctness (blocking): Logic errors (always-true/false conditions, off-by-one, operator precedence, silent undefined returns, negation errors). Edge cases (null/undefined inputs, empty arrays/strings, zero/negative values, network failures reaching UI without error state). Async and concurrency (race conditions, state updates after unmount, Firebase writes that need transactions, missing useEffect cleanup). Dependency arrays (missing deps, stale closures, object/array literals that recreate on every render).
 

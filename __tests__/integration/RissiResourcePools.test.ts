@@ -96,6 +96,12 @@ describe('Rissi resource pool validation (issue #149)', () => {
     expect(ids).toEqual(['channel_energy_uses', 'lay_on_hands_uses', 'smite_evil_uses']);
   });
 
+  test('all pools start full (current equals max)', () => {
+    for (const pool of pools) {
+      expect(pool.current).toBe(pool.max);
+    }
+  });
+
   test('no phantom pools from classes Rissi does not have', () => {
     const phantomIds = ['rage_rounds', 'ki', 'bardic_performance_rounds', 'arcane_reservoir'];
     for (const id of phantomIds) {
@@ -196,6 +202,7 @@ describe('Rissi resource pool validation (issue #149)', () => {
 
     test('rechargeOn = rest', () => {
       expect(pool.rechargeOn).toBe('rest');
+      expect(pool.restRecoveryMode).toBe('full');
     });
   });
 
