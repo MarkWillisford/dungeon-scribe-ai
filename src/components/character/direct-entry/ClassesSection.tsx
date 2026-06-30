@@ -33,14 +33,6 @@ function genId(): string {
   return Math.random().toString(36).slice(2) + Date.now().toString(36);
 }
 
-// Temporarily disabled while the class-choice system is still being built out.
-// The entire class card acts as the drag handle, so ordinary taps and
-// long-presses were triggering reorder drags and interfering with selection.
-// Flip back to `true` to restore drag-to-reorder. See issue #248.
-// (Level/class ordering can still be edited via the "Edit Level Progression"
-// editor below, which is unaffected.)
-const CLASS_DRAG_REORDER_ENABLED = false;
-
 // ---- Worklet: hover index from current drag state ----
 
 function computeHoverIndex(heights: number[], fromIndex: number, dy: number): number {
@@ -86,15 +78,21 @@ function DraggableRow({
   onHeightChange,
   onDragEnd,
 }: DraggableRowProps) {
+  const { colors } = useTheme();
   // Keep index accessible in UI-thread worklets
   const indexRef = useSharedValue(index);
   useEffect(() => {
     indexRef.value = index;
   }, [index, indexRef]);
 
+  // The pan is attached ONLY to the drag handle (below), not the whole card, so
+  // taps and presses on the card's controls are never intercepted. We claim the
+  // row in onStart (gesture actually activates after a short long-press) rather
+  // than onBegin (raw touch-down), so a stray tap on the handle doesn't trigger
+  // the lifted/reorder visual state.
   const gesture = Gesture.Pan()
-    .activateAfterLongPress(300)
-    .onBegin(() => {
+    .activateAfterLongPress(200)
+    .onStart(() => {
       activeIndex.value = indexRef.value;
       dragY.value = 0;
     })
@@ -167,20 +165,28 @@ function DraggableRow({
     };
   });
 
-  const card = <ClassEntryCard entry={entry} />;
+  // Reordering only makes sense with more than one class; a lone class shows no
+  // handle and has no gesture attached at all.
+  const dragHandle =
+    count > 1 ? (
+      <GestureDetector gesture={gesture}>
+        <View
+          style={styles.dragHandle}
+          hitSlop={8}
+          accessibilityRole="button"
+          accessibilityLabel={`Reorder ${entry.name}. Press and hold, then drag.`}
+        >
+          <Text style={[styles.dragHandleIcon, { color: colors.text.tertiary }]}>⋮⋮</Text>
+        </View>
+      </GestureDetector>
+    ) : null;
 
   return (
     <Animated.View
       onLayout={(e) => onHeightChange(index, e.nativeEvent.layout.height)}
       style={[rowStyle, styles.draggableRow]}
     >
-      {count > 1 && CLASS_DRAG_REORDER_ENABLED ? (
-        <GestureDetector gesture={gesture}>
-          <View style={styles.classCardWrapper}>{card}</View>
-        </GestureDetector>
-      ) : (
-        card
-      )}
+      <ClassEntryCard entry={entry} dragHandle={dragHandle} />
     </Animated.View>
   );
 }
@@ -603,8 +609,7 @@ export function ClassesSection() {
         <AutoComputedValue value={formatSave(will)} label="Will" />
       </View>
 
-      {/* Class cards. Drag-to-reorder is temporarily disabled (see #248);
-          use "Edit Level Progression" below to change ordering. */}
+      {/* Class cards — long-press ☰ handle to drag and reorder (multiclass only) */}
       <DraggableClassList />
 
       {/* Level progression editor — only relevant with multiple classes */}
@@ -752,8 +757,16 @@ const styles = StyleSheet.create({
   draggableRow: {
     paddingBottom: 8,
   },
-  classCardWrapper: {
-    flex: 1,
+  dragHandle: {
+    paddingVertical: 4,
+    paddingRight: 6,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  dragHandleIcon: {
+    fontSize: 16,
+    fontWeight: '700',
+    letterSpacing: -2,
   },
   subSection: {
     marginTop: 8,
