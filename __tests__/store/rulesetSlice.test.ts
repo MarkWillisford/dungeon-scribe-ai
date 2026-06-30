@@ -27,6 +27,7 @@ const mockRuleset: Ruleset = {
     crRefunds: false,
     laBuyback: false,
     crLaAbilityScoreReductions: true,
+    flaws: false,
   },
   itemOverrides: { banned: [], allowed: [] },
   campaignRequirements: {},
@@ -34,6 +35,7 @@ const mockRuleset: Ruleset = {
     abilityScoreMethod: 'point-buy',
     pointBuyBudget: 20,
     maxTraits: 2,
+    maxFlaws: 2,
   },
   version: 1,
   createdAt: '2026-04-09T00:00:00.000Z',
@@ -74,6 +76,8 @@ describe('rulesetSlice', () => {
       const stateWithRuleset = { activeRuleset: mockRuleset, isModifiedFromPreset: true };
       const state = rulesetReducer(stateWithRuleset, clearRuleset());
       expect(state.activeRuleset).toEqual(PRESET_PF1E_STANDARD);
+      expect(state.activeRuleset?.validationSettings.maxFlaws).toBe(2);
+      expect(state.activeRuleset?.optionalRules.flaws).toBe(false);
     });
 
     it('resets isModifiedFromPreset to false', () => {
@@ -90,6 +94,8 @@ describe('rulesetSlice', () => {
       expect(state.activeRuleset?.name).toBe('Custom');
       expect(state.activeRuleset?.allowedSources).toEqual(['pf1e-official']);
       expect(state.activeRuleset?.optionalRules.heroPoints).toBe(false);
+      expect(state.activeRuleset?.optionalRules.flaws).toBe(false);
+      expect(state.activeRuleset?.validationSettings.maxFlaws).toBe(2);
     });
 
     it('patches nested optionalRules via caller spread', () => {
