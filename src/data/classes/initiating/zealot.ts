@@ -159,7 +159,6 @@ export const ZEALOT_CLASS: ExpandedClassData = {
       id: 'zealot_enduring_zeal',
       shortDescription: 'Spend power points during Zeal to extend its duration',
       activationMode: 'action',
-      activationCost: { resourceId: 'power_points', amount: 1 },
       description:
         'When the zealot activates his zeal class feature, he can spend up to 1 power point per zealot level to extend the duration of his zeal by a number of rounds equal to the power points spent.',
       effects: [
@@ -352,7 +351,6 @@ export const ZEALOT_CLASS: ExpandedClassData = {
       shortDescription:
         'Spend power points to grant a collective member temporary use of a maneuver',
       activationMode: 'action',
-      activationCost: { resourceId: 'power_points', amount: 1 },
       description:
         "As a zealot continues to mold the hearts and minds of those around them, his collective begins to copy his words and his deeds, working to advance his cause. At 4th level, this manifests in the ability to temporarily psychically transfer the zealot's techniques. When the zealot initiates a maneuver at least one level below his maximum maneuver level known, he can spend 1 power point per maneuver level to grant another member of his collective the ability to initiate that maneuver one time within 1 minute or until the zealot chooses to recover the maneuver. This is not considered an augment and does not count against the maximum amount of power points the zealot can spend on the maneuver. The maneuver becomes a known and readied maneuver for that ally, using the zealot's initiator level and initiation modifier. After the zealot's ally initiates the maneuver or 1 minute passes, it is expended and the echo ends. This does not cause the creature to unlearn a maneuver it knows from other sources. If the zealot recovers the granted maneuver, this ability ends immediately and the maneuver is removed from the ally. This ability does not allow a creature to have two of the same maneuver readied. The zealot can only have one echoed maneuver at a time; using this ability ends any previous use. A creature can only have an echoed maneuver from one zealot at a time, but a creature may end any echoed maneuver on them as a free action (even if it isn't their turn). At 11th level, the zealot can grant up to two echoed maneuvers at a time. Any given creature may still only know one echoed maneuver at one time. Granting another echoed maneuver while the zealot already has two maneuvers echoed causes the oldest echoed maneuver to be expended and removed from the creature benefiting from it.",
       effects: [
@@ -377,7 +375,6 @@ export const ZEALOT_CLASS: ExpandedClassData = {
       id: 'zealot_mission_creation_eternal_rebirth',
       shortDescription: 'Expend psionic focus and spend power points to heal a collective member',
       activationMode: 'action',
-      activationCost: { resourceId: 'power_points', amount: 1 },
       description:
         "The zealot's psyche resists the death of those in his collective, giving them a chance to be reborn after a fatal blow. At 4th level, as long as the zealot maintains psionic focus, creatures in his collective that have died within 1 round can still benefit from healing and remain in the collective for 1 round (though the zealot must still make a Fortitude save as normal for a creature in his collective dying). If the dead creature is healed so that the creature's hit point total is at a negative amount less than its Constitution score, it comes back to life and stabilizes at its new hit point total without leaving the zealot's collective. Creatures brought back to life through this effect gain a temporary negative level that lasts for 1 day. Creatures slain by death effects cannot be saved by this effect. In addition, the zealot can expend his psionic focus as a free action and pay any amount of power points up to his zealot level to heal a member of his collective for 4 hit points for every power point spent; a creature cannot benefit from this ability more than once per round.",
       effects: [
@@ -396,7 +393,6 @@ export const ZEALOT_CLASS: ExpandedClassData = {
       shortDescription:
         'Augment a strike by spending power points to create ectoplasm walls or suppress conditions',
       activationMode: 'action',
-      activationCost: { resourceId: 'power_points', amount: 2 },
       description:
         "The zealot's strikes draw out the bounty of the universe, causing existence itself to bring forth matter to bind and control his foes. At 8th level, the zealot gains the ability to augment his strikes in one or more of the following ways: For every 2 power points the zealot spends, a 10-foot-square wall of ectoplasm that lasts for 1 minute appears within 30 feet of one member of the zealot's collective, using his zealot level as his manifester level. Creatures benefiting from the zealot's zeal ability can walk through the wall unimpeded, although the wall still blocks line of sight and line of effect. For every 3 power points the zealot spends, he may temporarily suppress one of the following harmful conditions affecting a member of his collective for a number of rounds equal to his initiator level. This does not end the effect causing the condition; it just suspends that condition's effect for the duration. Spells or effects with durations expire normally, even while suppressed. A spell or effect with a duration greater than that of the suppression effect resumes functioning normally when the suppression ends. The zealot can suppress any one of the following conditions: blinded, confused, dazed, dazzled, deafened, fatigued, frightened, paralyzed, shaken, or sickened.",
       effects: [
@@ -432,7 +428,6 @@ export const ZEALOT_CLASS: ExpandedClassData = {
       shortDescription:
         'Augment a strike by spending power points to add energy damage or expand its area',
       activationMode: 'action',
-      activationCost: { resourceId: 'power_points', amount: 1 },
       description:
         "The zealot's attacks strain and crack the bounds of reality, allowing him to strike once to cause a whole wave of foes to fall. At 8th level, the zealot gains the ability to augment his strikes in one or more of the following ways: For every power point the zealot spends, this strike deals an additional 1d8 points of damage of the zealot's active energy type. For every 2d8 he increases the damage by, the save DC of this strike increases by +1. If the strike deals damage multiple times (such as by multiple attacks or a longer duration than one attack), this additional damage is only added to the first instance of damage (though it is dealt to each target in the case of area of effect strikes). If the zealot spends power points equal to the maximum number of power points he can spend to augment a maneuver (3 at 8th level, 4 at 12th level, and so on), his strike affects all opponents within a 15-foot cone or 20-foot line originating from the zealot. The zealot makes a single attack roll and compares it to the AC of each creature within the area. If the strike allows a saving throw, each target may make one. Only strikes with an initiation action of 1 standard action may be augmented in this fashion, and this augment replaces the strike's normal targets and affected area.",
       effects: [
@@ -468,7 +463,6 @@ export const ZEALOT_CLASS: ExpandedClassData = {
       id: 'zealot_mission_protection_unbreakable_fortress',
       shortDescription: 'Augment a counter by spending power points to grant collective members DR',
       activationMode: 'action',
-      activationCost: { resourceId: 'power_points', amount: 1 },
       description:
         "The zealot is a bastion of defense, every blow he strikes not only harms his enemies, but it also protects his allies. At 8th level, the zealot gains the ability to augment his counters in one or more of the following ways: The zealot can spend power points to grant each member of his collective damage reduction/- equal to the level of the maneuver initiated for one round per power point spent. If the zealot spends 1 power point per level of the maneuver, he can initiate the counter as a free action instead of an immediate action, even if it isn't his turn. The zealot may use this augment only once per round, and he cannot augment a counter of higher than 6th level with this ability.",
       effects: [

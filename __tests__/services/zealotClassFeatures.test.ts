@@ -37,12 +37,11 @@ describe('Zealot class feature effects — acceptance criteria', () => {
       expect(f.shortDescription).toBeDefined();
     });
 
-    it('Echoes of Steel is action-mode with PP activationCost', () => {
+    it('Echoes of Steel is action-mode (variable PP cost, no fixed activationCost)', () => {
       const f = find('Echoes of Steel');
       expect(f.activationMode).toBe('action');
       expect(f.id).toBeDefined();
-      expect(f.activationCost).toBeDefined();
-      expect(f.activationCost?.resourceId).toBe('power_points');
+      expect(f.activationCost).toBeUndefined();
     });
 
     it('Conviction: Path of Dedication is action-mode with id', () => {
@@ -51,10 +50,10 @@ describe('Zealot class feature effects — acceptance criteria', () => {
       expect(f.id).toBeDefined();
     });
 
-    it('Conviction: Enduring Zeal is action-mode with PP activationCost', () => {
+    it('Conviction: Enduring Zeal is action-mode (variable PP cost, no fixed activationCost)', () => {
       const f = find('Conviction: Enduring Zeal');
       expect(f.activationMode).toBe('action');
-      expect(f.activationCost?.resourceId).toBe('power_points');
+      expect(f.activationCost).toBeUndefined();
     });
 
     it('Conviction: Strike of Unity is action-mode with PP activationCost', () => {
