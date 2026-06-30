@@ -154,7 +154,7 @@ describe('RulesetSettingsSheet — Flaws toggle', () => {
 describe('RulesetSettingsSheet — maxFlaws input', () => {
   it('hides the Max Flaws input when flaws is off', () => {
     const { tree } = renderSheet();
-    const maxFlawsInput = findAllNodes(tree, (n) => n.props.accessibilityLabel === 'Max flaws');
+    const maxFlawsInput = findAllNodes(tree, (n) => n.props.accessibilityLabel === 'Flaws allowed');
     expect(maxFlawsInput.length).toBe(0);
   });
 
@@ -164,7 +164,7 @@ describe('RulesetSettingsSheet — maxFlaws input', () => {
       optionalRules: { ...baseRuleset.optionalRules, flaws: true },
     };
     const { tree } = renderSheet();
-    const maxFlawsInput = findAllNodes(tree, (n) => n.props.accessibilityLabel === 'Max flaws');
+    const maxFlawsInput = findAllNodes(tree, (n) => n.props.accessibilityLabel === 'Flaws allowed');
     expect(maxFlawsInput.length).toBe(1);
   });
 
@@ -175,7 +175,7 @@ describe('RulesetSettingsSheet — maxFlaws input', () => {
       validationSettings: { ...baseRuleset.validationSettings, maxFlaws: 3 },
     };
     const { tree } = renderSheet();
-    const maxFlawsInput = findAllNodes(tree, (n) => n.props.accessibilityLabel === 'Max flaws')[0];
+    const maxFlawsInput = findAllNodes(tree, (n) => n.props.accessibilityLabel === 'Flaws allowed')[0];
     expect(maxFlawsInput.props.value).toBe('3');
   });
 
@@ -186,7 +186,7 @@ describe('RulesetSettingsSheet — maxFlaws input', () => {
       validationSettings: { ...baseRuleset.validationSettings, maxFlaws: 2 },
     };
     const { tree } = renderSheet();
-    const maxFlawsInput = findAllNodes(tree, (n) => n.props.accessibilityLabel === 'Max flaws')[0];
+    const maxFlawsInput = findAllNodes(tree, (n) => n.props.accessibilityLabel === 'Flaws allowed')[0];
     fireEvent.changeText(maxFlawsInput, '4');
     expect(mockDispatch).toHaveBeenCalled();
     const action = mockDispatch.mock.calls[0][0];
@@ -200,7 +200,7 @@ describe('RulesetSettingsSheet — maxFlaws input', () => {
       optionalRules: { ...baseRuleset.optionalRules, flaws: true },
     };
     const { tree } = renderSheet();
-    const maxFlawsInput = findAllNodes(tree, (n) => n.props.accessibilityLabel === 'Max flaws')[0];
+    const maxFlawsInput = findAllNodes(tree, (n) => n.props.accessibilityLabel === 'Flaws allowed')[0];
     fireEvent.changeText(maxFlawsInput, 'abc');
     expect(mockDispatch).not.toHaveBeenCalled();
   });
@@ -211,7 +211,7 @@ describe('RulesetSettingsSheet — maxFlaws input', () => {
       optionalRules: { ...baseRuleset.optionalRules, flaws: true },
     };
     const { tree } = renderSheet();
-    const maxFlawsInput = findAllNodes(tree, (n) => n.props.accessibilityLabel === 'Max flaws')[0];
+    const maxFlawsInput = findAllNodes(tree, (n) => n.props.accessibilityLabel === 'Flaws allowed')[0];
     fireEvent.changeText(maxFlawsInput, '-1');
     expect(mockDispatch).not.toHaveBeenCalled();
   });
@@ -228,7 +228,7 @@ describe('RulesetSettingsSheet — maxFlaws input', () => {
       },
     };
     const { tree } = renderSheet();
-    const maxFlawsInput = findAllNodes(tree, (n) => n.props.accessibilityLabel === 'Max flaws')[0];
+    const maxFlawsInput = findAllNodes(tree, (n) => n.props.accessibilityLabel === 'Flaws allowed')[0];
     fireEvent.changeText(maxFlawsInput, '5');
     const action = mockDispatch.mock.calls[0][0];
     expect(action.payload.validationSettings.abilityScoreMethod).toBe('point-buy');
