@@ -80,6 +80,15 @@ At the start of every new session, run /prime before doing anything else.
 - Pre-commit hooks enforce lint + format via Husky + lint-staged
 - Never include `Co-Authored-By: Claude` in commit messages
 - Never include `🤖 Generated with [Claude Code](https://claude.com/claude-code)` in PR descriptions or any other output
+- Workflow file changes (`.github/workflows/**`) always go through a PR. Direct pushes to main bypass branch protection but skip the validation that catches subtle bugs in `if` conditions or bot login formats.
+
+## CI Workflow Gotchas
+
+The babysit-pr workflow (`.github/workflows/babysit-pr.yml`) reacts to Sourcery review submissions. Two gotchas that are easy to miss:
+
+1. **Bot logins in webhook payloads use the `[bot]` suffix.** Sourcery's login is `sourcery-ai[bot]`, not `sourcery-ai`. The `gh` CLI and GraphQL strip the suffix, so `gh pr view --json reviews` shows `"author":"sourcery-ai"` — but the workflow event payload sent to Actions still has `sourcery-ai[bot]`. The `if` condition must match the payload form, not the CLI form. Same pattern as `coderabbitai[bot]`.
+
+2. **`pull_request_review` evaluates `if` against the PR HEAD branch's workflow file, not main.** When you fix a bug in `babysit-pr.yml` on main, open PRs still skip until their branches sync with main (e.g., via "Update branch"). To test a workflow fix, either merge main into an existing PR's branch or open a fresh test PR off current main.
 
 ## Git Standard — Orient Before Acting
 
