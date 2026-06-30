@@ -1,4 +1,5 @@
 import { WARDER_CLASS } from '@/data/classes/initiating/warder';
+import { BonusType } from '@/types/base';
 
 describe('WARDER_CLASS classFeatures — wiring (issues #294, #295)', () => {
   const features = WARDER_CLASS.classFeatures;
@@ -75,7 +76,7 @@ describe('WARDER_CLASS classFeatures — wiring (issues #294, #295)', () => {
       const cmdBonus = feature.effects!.find((e) => e.type === 'bonus' && e.target === 'cmd');
       expect(cmdBonus).toBeDefined();
       expect(cmdBonus!.value).toBe('intMod + warderLevel');
-      expect(cmdBonus!.bonusType).toBe('untyped');
+      expect(cmdBonus!.bonusType).toBe(BonusType.UNTYPED);
       expect(cmdBonus!.activation?.type).toBe('toggle');
       expect(cmdBonus!.activation?.active).toBe(false);
     });
