@@ -82,6 +82,7 @@ export const WARDER_CLASS: ExpandedClassData = {
       id: 'defensive-focus',
       shortDescription: 'Full-round action — expand threatened area, bonus CMD, AoO while in reach',
       activationMode: 'toggle',
+      effects: [],
       description:
         'At 1st level, the defensive prowess of the warder is second to none, allowing her to focus her actions purely on defending himself and her allies in ways that cannot be replicated. The warder gains the Combat Reflexes feat as a bonus feat, using her warder initiation modifier in place of her Dexterity modifier to determine the number of additional attacks of opportunity she may make each round. When recovering warder maneuvers as a full round action, the warder sets up a defensive perimeter around herself to defend her allies, increasing her threatened area by 5 feet + 5 feet for every five initiator levels she possesses. Until the beginning of her next turn, she may make attacks of opportunity against any opponent in this threatened area that provokes attacks of opportunity. She may move as part of these attacks of opportunity, provided her total movement before her next turn does not exceed her speed (his movement provokes attacks of opportunity as normal). Additionally, while using defensive focus, the warder adds her warder initiation modifier plus her class level to her CMD for the purposes of defending against enemies trying to use the Acrobatics skill to prevent her from getting attacks of opportunity against them.',
     },
@@ -152,8 +153,13 @@ export const WARDER_CLASS: ExpandedClassData = {
     {
       name: 'Adaptive Tactics',
       level: 7,
+      id: 'adaptive-tactics',
+      shortDescription: 'Full-round action — expend 1 mark to re-ready up to IL maneuvers',
+      activationMode: 'action',
+      activationCost: { resourceId: 'armigers_mark', amount: 1 },
       description:
         "A warrior can attempt to plan for everything, but no plan stands against the heat of battle if there is no room for adaptation. At 7th level, the warder can expend one use of her armiger's mark ability as a full-round action to expend up to her warder initiation modifier in readied maneuvers, then instantly ready an equal amount of maneuvers. The warder may not replace expended maneuvers using this ability; any maneuver she is re-preparing with this ability must be unexpended to be exchanged. She may choose from any of her known maneuvers.",
+      effects: [],
     },
     {
       name: 'Bonus Feat',
@@ -204,8 +210,44 @@ export const WARDER_CLASS: ExpandedClassData = {
     {
       name: 'Deathless Defenses',
       level: 20,
+      id: 'deathless-defenses',
+      shortDescription:
+        'Immediate action — expend 2 marks to activate; defensive focus + aegis + mind immunity + cannot die from HP damage',
+      activationMode: 'toggle',
+      activationCost: { resourceId: 'armigers_mark', amount: 2 },
+      maintenanceCost: { resourceId: 'armigers_mark', amount: 1, per: 'round' },
       description:
         "At 20th level, the warder can indefinitely hold a position to protect her allies, even if it may cost her her life. The warder must expend two uses of her armiger's mark ability as an immediate action to activate her deathless defenses. While this ability is active, the warder is capable of maintaining her defensive focus as a move action (but recovers no maneuvers unless she spends a full round to recover) but gains the full bonuses of her defensive focus. Additionally, she receives the benefits of her aegis ability as well. She is unable to die from hit point damage while this effect is in use. She may maintain the use of this ability each round at the cost of one use of her armiger's mark ability, or she may end it as a free action. Abilities or effects that don't inflict hit point damage, such as energy drain or ability damage, can still kill the warder. While this effect is in use, she is immune to mind-affecting abilities, as her focus prevents any from tampering with her mind. Once this ability ends, either voluntarily or if the character runs out of uses of armiger's mark (assuming she is not dead), the warder is exhausted and must rest a full 8 hours to recover.",
+      effects: [
+        {
+          type: 'special',
+          target: 'special.deathless_defenses_focus',
+          value: 0,
+          source: 'Deathless Defenses',
+          activation: { type: 'toggle', active: false },
+        },
+        {
+          type: 'immunity',
+          target: 'mind_affecting',
+          value: 0,
+          source: 'Deathless Defenses',
+          activation: { type: 'toggle', active: false },
+        },
+        {
+          type: 'special',
+          target: 'special.deathless_defenses_hp',
+          value: 0,
+          source: 'Deathless Defenses',
+          activation: { type: 'toggle', active: false },
+        },
+        {
+          type: 'special',
+          target: 'special.deathless_defenses_aegis',
+          value: 0,
+          source: 'Deathless Defenses',
+          activation: { type: 'toggle', active: false },
+        },
+      ],
     },
   ],
   spellcasting: {
