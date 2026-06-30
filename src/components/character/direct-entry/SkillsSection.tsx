@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { setSkillEntry, removeSkillEntry } from '@/store/slices/characterEntrySlice';
 import type { AbilityKey } from '@/types/abilities';
 import { PRESET_PF1E_STANDARD } from '@/config/rulesetPresets';
+import { getPerSkillMaxRanks, exceedsPerSkillMax, clampSkillRanks } from '@/utils/skillRanks';
 
 type SkillEntry = { ranks: number; misc: number };
 
@@ -100,13 +101,22 @@ interface SkillRowProps {
   label?: string;
   entry: SkillEntry;
   abilityMod: number;
+  maxRanks: number;
   onChange: (entry: SkillEntry) => void;
   onRemove?: () => void;
 }
 
-function SkillRow({ def, label, entry, abilityMod, onChange, onRemove }: SkillRowProps) {
+function SkillRow({ def, label, entry, abilityMod, maxRanks, onChange, onRemove }: SkillRowProps) {
   const { colors, fantasy, isDark } = useTheme();
   const total = entry.ranks + entry.misc + abilityMod;
+  const overMax = exceedsPerSkillMax(entry.ranks, maxRanks);
+  const rankBorderColor = overMax
+    ? colors.error.DEFAULT
+    : entry.ranks > 0
+      ? isDark
+        ? fantasy.gold
+        : fantasy.bronze
+      : colors.border.DEFAULT;
 
   return (
     <View style={[styles.skillRow, { borderBottomColor: colors.border.DEFAULT }]}>
@@ -123,18 +133,19 @@ function SkillRow({ def, label, entry, abilityMod, onChange, onRemove }: SkillRo
           value={entry.ranks > 0 ? String(entry.ranks) : ''}
           onChangeText={(t) => {
             const n = parseInt(t, 10);
-            onChange({ ...entry, ranks: isNaN(n) ? 0 : n });
+            onChange({ ...entry, ranks: clampSkillRanks(isNaN(n) ? 0 : n, maxRanks) });
           }}
           keyboardType="number-pad"
           selectTextOnFocus
           placeholder="0"
           placeholderTextColor={colors.text.tertiary}
+          accessibilityLabel={`${label ?? def.label} ranks`}
+          accessibilityHint={maxRanks > 0 ? `Maximum ${maxRanks} ranks` : undefined}
           style={[
             styles.rankInput,
             {
-              color: colors.text.primary,
-              borderColor:
-                entry.ranks > 0 ? (isDark ? fantasy.gold : fantasy.bronze) : colors.border.DEFAULT,
+              color: overMax ? colors.error.DEFAULT : colors.text.primary,
+              borderColor: rankBorderColor,
               backgroundColor: isDark ? colors.bg.tertiary : colors.bg.secondary,
             },
           ]}
@@ -203,6 +214,7 @@ interface SpecialtyGroupProps {
   skills: Record<string, SkillEntry>;
   filterQuery: string;
   abilityMod: number;
+  maxRanks: number;
   onChangeSkill: (skillKey: string, entry: SkillEntry) => void;
   onRemoveSkill: (skillKey: string) => void;
   onAddSkill: (skillKey: string) => void;
@@ -213,6 +225,7 @@ function SpecialtyGroup({
   skills,
   filterQuery,
   abilityMod,
+  maxRanks,
   onChangeSkill,
   onRemoveSkill,
   onAddSkill,
@@ -331,6 +344,7 @@ function SpecialtyGroup({
             label={`${def.label} (${capitalizeWords(rawName)})`}
             entry={skills[k] ?? emptyEntry}
             abilityMod={abilityMod}
+            maxRanks={maxRanks}
             onChange={(entry) => onChangeSkill(k, entry)}
             onRemove={() => onRemoveSkill(k)}
           />
@@ -377,6 +391,9 @@ export function SkillsSection() {
     [skills],
   );
 
+  // Max ranks allowed in any single skill = character total level (Hit Dice).
+  const maxRanks = getPerSkillMaxRanks(character.classes.totalLevel);
+
   const filteredDefs = useMemo(() => {
     const q = query.toLowerCase().trim();
     return SKILL_DEFS.filter((def) => {
@@ -421,6 +438,14 @@ export function SkillsSection() {
           <Text style={{ color: isDark ? fantasy.gold : fantasy.bronze, fontWeight: '700' }}>
             {totalRanks}
           </Text>
+          {maxRanks > 0 ? (
+            <Text style={{ color: colors.text.tertiary }}>
+              {'   '}Max per skill:{' '}
+              <Text style={{ color: isDark ? fantasy.gold : fantasy.bronze, fontWeight: '700' }}>
+                {maxRanks}
+              </Text>
+            </Text>
+          ) : null}
         </Text>
       </View>
 
@@ -478,6 +503,7 @@ export function SkillsSection() {
               skills={skills}
               filterQuery={query}
               abilityMod={abilityMods[def.ability]}
+              maxRanks={maxRanks}
               onChangeSkill={(skillKey, entry) => dispatch(setSkillEntry({ skillKey, entry }))}
               onRemoveSkill={(skillKey) => dispatch(removeSkillEntry(skillKey))}
               onAddSkill={(skillKey) => dispatch(setSkillEntry({ skillKey, entry: emptyEntry }))}
@@ -488,6 +514,7 @@ export function SkillsSection() {
               def={def}
               entry={skills[def.key] ?? emptyEntry}
               abilityMod={abilityMods[def.ability]}
+              maxRanks={maxRanks}
               onChange={(entry) => dispatch(setSkillEntry({ skillKey: def.key, entry }))}
             />
           ),
