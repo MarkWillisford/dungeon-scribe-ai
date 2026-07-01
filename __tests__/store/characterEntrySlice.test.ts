@@ -1631,6 +1631,18 @@ describe('characterEntrySlice — templates', () => {
                       },
                     },
                   },
+                  {
+                    id: 'avoral',
+                    name: 'Avoral',
+                    description: 'Wind Wall at will',
+                    grantsFeature: {
+                      id: 'wind-wall',
+                      scalingType: 'flat',
+                      name: 'Wind Wall at will',
+                      description: 'Wind Wall spell-like ability usable at will.',
+                      activationMode: 'toggle',
+                    },
+                  },
                 ],
               },
             ],
@@ -1681,40 +1693,71 @@ describe('characterEntrySlice — templates', () => {
       expect(state.character.appliedTemplates[0]).toEqual(before);
     });
 
-    it('does not mutate state on idempotent re-selection of same option', () => {
+    it('re-selection to different option replaces injected feature by derived id with no duplicate', () => {
       let state = reducer(
         makeInitialState(),
         addTemplate(makeTemplate('tpl-1', { templateId: 'celestial-blessed-creature' })),
       );
       const tplId = state.character.appliedTemplates[0].id!;
-      const choiceDef = makeChoiceDef();
-
-      // First resolution
+      const def = makeChoiceDef();
       state = reducer(
         state,
         resolveTemplateChoice({
           appliedTemplateId: tplId,
-          templateDefinition: choiceDef,
+          templateDefinition: def,
           choiceId: 'celestial-type',
           selectionId: 'astral-deva',
         }),
       );
-      const stateAfterFirst = state;
-
-      // Re-select the same option
       state = reducer(
         state,
         resolveTemplateChoice({
           appliedTemplateId: tplId,
-          templateDefinition: choiceDef,
+          templateDefinition: def,
+          choiceId: 'celestial-type',
+          selectionId: 'avoral',
+        }),
+      );
+      const tpl = state.character.appliedTemplates[0];
+      expect(tpl.templateChoices).toEqual([{ choiceId: 'celestial-type', selection: 'avoral' }]);
+      expect(tpl.features).toHaveLength(1);
+      expect(tpl.features![0]).toMatchObject({
+        name: 'Wind Wall at will',
+        id: 'celestial-blessed-creature__choice__celestial-type',
+      });
+    });
+
+    it('same-option re-selection is idempotent: no duplicate features and selection unchanged', () => {
+      let state = reducer(
+        makeInitialState(),
+        addTemplate(makeTemplate('tpl-1', { templateId: 'celestial-blessed-creature' })),
+      );
+      const tplId = state.character.appliedTemplates[0].id!;
+      const def = makeChoiceDef();
+      state = reducer(
+        state,
+        resolveTemplateChoice({
+          appliedTemplateId: tplId,
+          templateDefinition: def,
           choiceId: 'celestial-type',
           selectionId: 'astral-deva',
         }),
       );
-
-      // Immer creates a new object only on mutation; same reference proves no write happened
-      expect(state.character.appliedTemplates).toBe(stateAfterFirst.character.appliedTemplates);
-      expect(state.isDirty).toBe(stateAfterFirst.isDirty);
+      state = reducer(
+        state,
+        resolveTemplateChoice({
+          appliedTemplateId: tplId,
+          templateDefinition: def,
+          choiceId: 'celestial-type',
+          selectionId: 'astral-deva',
+        }),
+      );
+      const tpl = state.character.appliedTemplates[0];
+      expect(tpl.templateChoices).toEqual([
+        { choiceId: 'celestial-type', selection: 'astral-deva' },
+      ]);
+      expect(tpl.features).toHaveLength(1);
+      expect(tpl.features![0].name).toBe('Stunning Strike 5/day');
     });
 
     it('does not mutate state for unknown choiceId', () => {
