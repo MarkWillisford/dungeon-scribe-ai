@@ -297,7 +297,7 @@ describe('CombatAbilityToggles', () => {
   });
 
   describe('template feature scanning', () => {
-    const DERIVED_ID = 'celestial-blessed-creature__choice__celestial-type';
+    const FEATURE_ID = 'celestial-blessed-creature__choice__celestial-type';
 
     function makeCharacterWithTemplateFeature(
       features: Array<{ id: string; name: string; description: string; activationMode: string }>,
@@ -325,7 +325,7 @@ describe('CombatAbilityToggles', () => {
     it('shows a template toggle feature in the combat panel', () => {
       const character = makeCharacterWithTemplateFeature([
         {
-          id: DERIVED_ID,
+          id: FEATURE_ID,
           name: 'Wind Wall at will',
           description: 'Wind Wall SLA',
           activationMode: 'toggle',
@@ -338,7 +338,7 @@ describe('CombatAbilityToggles', () => {
     it('does not show a template feature with activationMode action', () => {
       const character = makeCharacterWithTemplateFeature([
         {
-          id: DERIVED_ID,
+          id: FEATURE_ID,
           name: 'Stunning Strike 5/day',
           description: 'Stun on hit',
           activationMode: 'action',
@@ -351,7 +351,7 @@ describe('CombatAbilityToggles', () => {
     it('switching template option removes old feature and surfaces new one', () => {
       const beforeCharacter = makeCharacterWithTemplateFeature([
         {
-          id: DERIVED_ID,
+          id: FEATURE_ID,
           name: 'Wind Wall at will',
           description: 'Wind Wall SLA',
           activationMode: 'toggle',
@@ -359,7 +359,7 @@ describe('CombatAbilityToggles', () => {
       ]);
       const afterCharacter = makeCharacterWithTemplateFeature([
         {
-          id: DERIVED_ID,
+          id: FEATURE_ID,
           name: 'Faerie Fire at will',
           description: 'Faerie Fire SLA',
           activationMode: 'toggle',
@@ -382,7 +382,7 @@ describe('CombatAbilityToggles', () => {
     it('removing the template drops its injected feature with no orphan toggles', () => {
       const withTemplate = makeCharacterWithTemplateFeature([
         {
-          id: DERIVED_ID,
+          id: FEATURE_ID,
           name: 'Wind Wall at will',
           description: 'Wind Wall SLA',
           activationMode: 'toggle',
