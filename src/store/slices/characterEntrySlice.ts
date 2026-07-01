@@ -1401,6 +1401,9 @@ const characterEntrySlice = createSlice({
         choiceId,
         selectionId,
       );
+      if (newTemplateChoices === applied.templateChoices && newFeatures === applied.features) {
+        return;
+      }
       state.character.appliedTemplates[idx] = {
         ...applied,
         templateChoices: newTemplateChoices,
