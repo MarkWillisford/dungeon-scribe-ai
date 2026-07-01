@@ -80,7 +80,7 @@ export function TemplateChoiceRow({
       {selectedDescription && (
         <Text
           style={[styles.optionDescription, { color: colors.text.secondary }]}
-          testID="choice-option-description"
+          testID={`choice-option-description-${choice.id}`}
         >
           {selectedDescription}
         </Text>

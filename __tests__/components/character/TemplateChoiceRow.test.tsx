@@ -133,7 +133,7 @@ describe('TemplateChoiceRow', () => {
     );
     const text = r.getAllText().join(' ');
     expect(text).toMatch(/Stunning Strike 5\/day/);
-    expect(r.getByTestId('choice-option-description')).toBeDefined();
+    expect(r.getByTestId('choice-option-description-celestial-type')).toBeDefined();
   });
 
   it('does not display description block when no selection exists', () => {
@@ -145,7 +145,7 @@ describe('TemplateChoiceRow', () => {
         templateDefinition={TEMPLATE_DEF}
       />,
     );
-    expect(r.queryByTestId('choice-option-description')).toBeNull();
+    expect(r.queryByTestId('choice-option-description-celestial-type')).toBeNull();
   });
 
   it('renders raw id as fallback when currentSelection does not match any option', () => {
