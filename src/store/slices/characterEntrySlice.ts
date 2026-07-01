@@ -9,6 +9,8 @@ import type {
   TrickName,
 } from '@/types/companions';
 import type { AppliedTemplate } from '@/types/templates';
+import type { TemplateDefinition } from '@/data/templates/types';
+import { resolveTemplateChoice as resolveTemplateChoicePure } from '@/services/TemplateChoiceService';
 import type { CharacterMagicItem, ItemSlot } from '@/types/magicItems';
 import { computeFeatSlots } from '@/utils/characterComputations';
 import type { AbilityKey } from '@/types/abilities';
@@ -1389,6 +1391,33 @@ const characterEntrySlice = createSlice({
       }
     },
 
+    resolveTemplateChoice(
+      state,
+      action: PayloadAction<{
+        appliedTemplateId: string;
+        templateDefinition: TemplateDefinition;
+        choiceId: string;
+        selectionId: string;
+      }>,
+    ) {
+      const { appliedTemplateId, templateDefinition, choiceId, selectionId } = action.payload;
+      const idx = state.character.appliedTemplates.findIndex((t) => t.id === appliedTemplateId);
+      if (idx < 0) return;
+      const applied = state.character.appliedTemplates[idx];
+      const { newTemplateChoices, newFeatures } = resolveTemplateChoicePure(
+        templateDefinition,
+        applied,
+        choiceId,
+        selectionId,
+      );
+      state.character.appliedTemplates[idx] = {
+        ...applied,
+        templateChoices: newTemplateChoices,
+        features: newFeatures,
+      };
+      state.isDirty = true;
+    },
+
     // ---- Combat stats ----
 
     setCombatField(
@@ -2092,6 +2121,7 @@ export const {
   updateTemplate,
   reorderTemplates,
   setTemplateAcquiredAtECL,
+  resolveTemplateChoice,
   setCombatField,
   setSkillEntry,
   removeSkillEntry,

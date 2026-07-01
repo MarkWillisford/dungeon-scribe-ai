@@ -7,6 +7,7 @@ import { removeTemplate, updateTemplate } from '@/store/slices/characterEntrySli
 import type { AppliedTemplate } from '@/types/templates';
 import { ALL_TEMPLATES } from '@/data/templates';
 import { TemplateCompanionSection } from './TemplateCompanionSection';
+import { TemplateChoiceRow } from './TemplateChoiceRow';
 
 const ACQUIRED_OPTIONS = [
   { label: 'Inherited', value: 'inherited' },
@@ -38,11 +39,13 @@ export function TemplateEntryCard({ entry }: TemplateEntryCardProps) {
   // catalog reference (`templateId`) whose definition carries
   // `grantsCompanion`. Free grants are not eligible by design — they don't
   // have a catalog identity to resolve against.
-  const companionGrant = useMemo(() => {
+  const templateDef = useMemo(() => {
     if (entry.isFreeGrant || !entry.templateId) return null;
-    const def = ALL_TEMPLATES.find((t) => t.id === entry.templateId);
-    return def?.grantsCompanion ?? null;
+    return ALL_TEMPLATES.find((t) => t.id === entry.templateId) ?? null;
   }, [entry.isFreeGrant, entry.templateId]);
+
+  const companionGrant = templateDef?.grantsCompanion ?? null;
+  const templateChoiceDefs = templateDef?.choices ?? null;
 
   return (
     <View
@@ -85,6 +88,23 @@ export function TemplateEntryCard({ entry }: TemplateEntryCardProps) {
           style={styles.medPicker}
         />
       </View>
+
+      {/* Sub-choices — one row per TemplateChoiceDefinition. */}
+      {templateChoiceDefs &&
+        templateDef &&
+        entry.id &&
+        templateChoiceDefs.map((choice) => {
+          const resolved = entry.templateChoices?.find((c) => c.choiceId === choice.id)?.selection;
+          return (
+            <TemplateChoiceRow
+              key={choice.id}
+              choice={choice}
+              currentSelection={resolved}
+              appliedTemplateId={entry.id!}
+              templateDefinition={templateDef}
+            />
+          );
+        })}
 
       {/* Companion grant — only renders when the template definition sets
           grantsCompanion and this is a catalog-backed template entry. */}

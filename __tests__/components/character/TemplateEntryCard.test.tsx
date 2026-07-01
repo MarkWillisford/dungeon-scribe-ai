@@ -1,0 +1,162 @@
+import React from 'react';
+import { render } from '../../helpers/testUtils';
+import { TemplateEntryCard } from '@/components/character/direct-entry/TemplateEntryCard';
+import type { AppliedTemplate } from '@/types/templates';
+
+// ---- Mocks ----
+
+const mockDispatch = jest.fn();
+
+jest.mock('@/store/hooks', () => ({
+  useAppDispatch: () => mockDispatch,
+  useAppSelector: () => null,
+}));
+
+jest.mock('@/hooks/useTheme', () => ({
+  useTheme: () => ({
+    colors: {
+      bg: { primary: '#fff', secondary: '#f5f5f5', tertiary: '#eee' },
+      border: { DEFAULT: '#ccc' },
+      text: { primary: '#000', secondary: '#333', tertiary: '#999' },
+    },
+    fantasy: { gold: '#FFD700', bronze: '#CD7F32', darkWood: '#4A2C2A' },
+    isDark: false,
+  }),
+}));
+
+// ALL_TEMPLATES lookup — provide a template with and without choices.
+jest.mock('@/data/templates', () => ({
+  ALL_TEMPLATES: [
+    {
+      id: 'celestial-blessed-creature',
+      name: 'Celestial-Blessed Creature',
+      description: 'Test',
+      crAdjustment: 1,
+      acquisitionType: 'acquired',
+      isSimpleTemplate: false,
+      features: [],
+      choices: [
+        {
+          id: 'celestial-type',
+          label: 'Celestial Type',
+          optionSource: 'inline',
+          optionGroups: [
+            {
+              id: 'g1',
+              name: '',
+              options: [
+                { id: 'astral-deva', name: 'Astral Deva', description: 'Stunning Strike 5/day' },
+              ],
+            },
+          ],
+        },
+      ],
+      sourceInfo: { type: 'third_party', publisher: 'Test', publication: 'Test' },
+      visibility: 'global',
+      rev: 1,
+      verificationStatus: 'needs_review',
+    },
+    {
+      id: 'half-dragon',
+      name: 'Half-Dragon',
+      description: 'Test',
+      crAdjustment: 2,
+      acquisitionType: 'inherited',
+      isSimpleTemplate: false,
+      features: [],
+      // no choices
+      sourceInfo: { type: 'official', publication: 'MM' },
+      visibility: 'global',
+      rev: 1,
+      verificationStatus: 'verified',
+    },
+  ],
+}));
+
+// TemplateChoiceRow — stub renders a text identifying the choice label so we
+// can confirm it was rendered without needing a full picker test here.
+jest.mock('@/components/character/direct-entry/TemplateChoiceRow', () => {
+  const React = require('react');
+  const { Text } = require('react-native');
+  return {
+    TemplateChoiceRow: ({
+      choice,
+      currentSelection,
+    }: {
+      choice: { id: string; label: string };
+      currentSelection: string | undefined;
+    }) =>
+      React.createElement(
+        Text,
+        { testID: `choice-row-${choice.id}` },
+        `choice-row:${choice.label}:${currentSelection ?? 'unresolved'}`,
+      ),
+  };
+});
+
+// TemplateCompanionSection — stub out since it has its own tests.
+jest.mock('@/components/character/direct-entry/TemplateCompanionSection', () => ({
+  TemplateCompanionSection: () => null,
+}));
+
+// InlinePicker — simple stub.
+jest.mock('@/components/ui/InlinePicker', () => {
+  const React = require('react');
+  const { Text } = require('react-native');
+  return {
+    InlinePicker: ({ value }: { value: string }) => React.createElement(Text, null, value),
+  };
+});
+
+// ---- Fixtures ----
+
+function makeEntry(overrides: Partial<AppliedTemplate> = {}): AppliedTemplate {
+  return {
+    id: 'entry-1',
+    templateId: 'celestial-blessed-creature',
+    name: 'Celestial-Blessed Creature',
+    appliedAs: 'cr',
+    cr: 1,
+    acquisitionType: 'acquired',
+    paidTiers: [],
+    sourceId: 'templates',
+    sourceRev: 1,
+    ...overrides,
+  };
+}
+
+// ---- Tests ----
+
+describe('TemplateEntryCard', () => {
+  beforeEach(() => {
+    mockDispatch.mockClear();
+  });
+
+  it('renders one TemplateChoiceRow per choice in the template definition', () => {
+    const r = render(<TemplateEntryCard entry={makeEntry()} />);
+    expect(r.getByTestId('choice-row-celestial-type')).toBeDefined();
+    const text = r.getAllText().join(' ');
+    expect(text).toMatch(/choice-row:Celestial Type:unresolved/);
+  });
+
+  it('passes currentSelection from templateChoices to the row', () => {
+    const entry = makeEntry({
+      templateChoices: [{ choiceId: 'celestial-type', selection: 'astral-deva' }],
+    });
+    const r = render(<TemplateEntryCard entry={entry} />);
+    const text = r.getAllText().join(' ');
+    expect(text).toMatch(/choice-row:Celestial Type:astral-deva/);
+  });
+
+  it('hides the choices section entirely when template has no choices', () => {
+    const entry = makeEntry({ templateId: 'half-dragon', name: 'Half-Dragon' });
+    const r = render(<TemplateEntryCard entry={entry} />);
+    expect(r.queryByTestId('choice-row-celestial-type')).toBeNull();
+  });
+
+  it('hides the choices section for free grant entries (no catalog identity)', () => {
+    const entry = makeEntry({ isFreeGrant: true });
+    const r = render(<TemplateEntryCard entry={entry} />);
+    expect(r.queryByTestId('choice-row-celestial-type')).toBeNull();
+  });
+});
