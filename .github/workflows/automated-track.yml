@@ -1,0 +1,172 @@
+name: Automated Track
+
+# Triggered when an issue is labeled. Filtered to the `bug` label below.
+# Reads the issue, writes a fix on a new branch, runs self-review, and opens
+# a PR — all without human involvement until the PR is open.
+#
+# Self-escalation: if the fix is too complex (more than ESCALATION_FILE_THRESHOLD
+# files) or tests cannot pass (after ESCALATION_ATTEMPT_MAX attempts), the issue
+# is relabeled `sandcastle` and the workflow exits cleanly. No PR is created.
+#
+# Required secrets:
+#   ANTHROPIC_API_KEY — Claude API key
+#
+# Required files:
+#   .claude/reviewer-rotation.json — { "next": "mark" } or { "next": "doug" }
+#                                    Values must be valid GitHub usernames.
+
+on:
+  issues:
+    types: [labeled]
+
+concurrency:
+  # One run per issue at a time. Cancel any in-progress run if the label fires again.
+  group: issue-${{ github.event.issue.number }}
+  cancel-in-progress: true
+
+env:
+  # Self-escalation thresholds. These are starting points — adjust based on
+  # observed failure patterns as the automated track accumulates real runs.
+  ESCALATION_FILE_THRESHOLD: 3
+  ESCALATION_ATTEMPT_MAX: 2
+
+jobs:
+  automated-fix:
+    if: github.event.label.name == 'bug'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Configure git and create fix branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout -b "automated/issue-${{ github.event.issue.number }}"
+
+      - name: Fix agent
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          direct_prompt: |
+            You are an autonomous bug-fix agent running in GitHub Actions.
+
+            Fix the bug described in issue #${{ github.event.issue.number }}.
+
+            Issue title: ${{ github.event.issue.title }}
+
+            Issue body:
+            ${{ github.event.issue.body }}
+
+            Escalation thresholds (hard limits):
+            - Max files to modify: ${{ env.ESCALATION_FILE_THRESHOLD }}
+            - Max test attempts: ${{ env.ESCALATION_ATTEMPT_MAX }}
+
+            Steps:
+            1. Read the issue carefully. Understand the root cause before writing any code.
+            2. Identify every file that needs to change. If the count exceeds
+               ${{ env.ESCALATION_FILE_THRESHOLD }}, write the single word ESCALATE to
+               .github/agent-result.txt and stop. Do not write any code.
+            3. Write the minimal fix.
+            4. Run: npm test
+               If tests fail, revise and retry. Count each npm test invocation as one attempt.
+               If tests still fail after ${{ env.ESCALATION_ATTEMPT_MAX }} total attempts,
+               write ESCALATE to .github/agent-result.txt and stop. Do not commit.
+            5. Run: npm run typecheck
+               Fix any type errors before continuing.
+            6. Commit the fix. Do NOT include .github/agent-result.txt in the commit:
+                 git add -A
+                 git reset .github/agent-result.txt
+                 git commit -m "fix: <one-line summary>
+
+            Closes #${{ github.event.issue.number }}"
+            7. Write DONE to .github/agent-result.txt.
+
+      - name: Read agent result
+        id: agent
+        run: |
+          RESULT=$(cat .github/agent-result.txt 2>/dev/null | tr -d '[:space:]')
+          echo "result=${RESULT:-UNKNOWN}" >> $GITHUB_OUTPUT
+
+      - name: Escalate to sandcastle
+        if: steps.agent.outputs.result != 'DONE'
+        run: |
+          gh issue edit "${{ github.event.issue.number }}" \
+            --remove-label "bug" \
+            --add-label "sandcastle"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Push fix branch
+        if: steps.agent.outputs.result == 'DONE'
+        run: git push origin "automated/issue-${{ github.event.issue.number }}"
+
+      - name: Self-review
+        if: steps.agent.outputs.result == 'DONE'
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          direct_prompt: |
+            Run the self-review skill on branch automated/issue-${{ github.event.issue.number }}.
+
+            Read the skill at .claude/skills/self-review/SKILL.md and follow it exactly.
+
+            The skill reviews git diff main...<BRANCH>, scores every issue 0-100, and
+            auto-fixes issues scoring 50 or above with one commit per fix.
+
+            After all fixes are committed, stop. The workflow will push the commits.
+
+      - name: Push self-review commits
+        if: steps.agent.outputs.result == 'DONE'
+        run: git push origin "automated/issue-${{ github.event.issue.number }}"
+
+      - name: Create PR and assign reviewer
+        if: steps.agent.outputs.result == 'DONE'
+        run: |
+          REVIEWER=$(jq -r '.next' .claude/reviewer-rotation.json)
+
+          PR_BODY=$(printf "Automated fix for issue #%s.\n\nCloses #%s" \
+            "${{ github.event.issue.number }}" "${{ github.event.issue.number }}")
+
+          PR_URL=$(gh pr create \
+            --base main \
+            --head "automated/issue-${{ github.event.issue.number }}" \
+            --title "fix: ${{ github.event.issue.title }}" \
+            --body "$PR_BODY")
+
+          PR_NUMBER=$(echo "$PR_URL" | grep -oE '[0-9]+$')
+
+          gh pr edit "$PR_NUMBER" --add-reviewer "$REVIEWER"
+
+          # Flip the rotation. Write directly to main via the GitHub API so
+          # this housekeeping commit never appears in the PR diff.
+          if [ "$REVIEWER" = "mark" ]; then NEXT="doug"; else NEXT="mark"; fi
+
+          CONTENT=$(printf '{"next":"%s"}' "$NEXT" | base64 -w0)
+          SHA=$(gh api "repos/${{ github.repository }}/contents/.claude/reviewer-rotation.json" --jq '.sha')
+          gh api "repos/${{ github.repository }}/contents/.claude/reviewer-rotation.json" \
+            -X PUT \
+            -f message="chore: flip reviewer rotation to $NEXT [skip ci]" \
+            -f content="$CONTENT" \
+            -f sha="$SHA"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
