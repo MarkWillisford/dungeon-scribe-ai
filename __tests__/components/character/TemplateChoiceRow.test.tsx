@@ -161,6 +161,26 @@ describe('TemplateChoiceRow', () => {
     expect(text).toMatch(/unknown-id/);
   });
 
+  it('renders nothing for collection-backed option sources (not yet implemented)', () => {
+    const collectionChoice: TemplateChoiceDefinition = {
+      id: 'collection-choice',
+      label: 'Some Choice',
+      optionSource: 'collection',
+      collectionName: 'some-collection',
+    };
+    const r = render(
+      <TemplateChoiceRow
+        choice={collectionChoice}
+        currentSelection={undefined}
+        appliedTemplateId="applied-1"
+        templateDefinition={TEMPLATE_DEF}
+      />,
+    );
+    // null return — no button, no text content rendered
+    expect(r.getAllByRole('button')).toHaveLength(0);
+    expect(r.getAllText()).toHaveLength(0);
+  });
+
   it('tap opens the picker', () => {
     const r = render(
       <TemplateChoiceRow

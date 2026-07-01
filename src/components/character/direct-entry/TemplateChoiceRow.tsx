@@ -23,6 +23,12 @@ export function TemplateChoiceRow({
   const dispatch = useAppDispatch();
   const [pickerOpen, setPickerOpen] = useState(false);
 
+  // collection-backed option sources are not yet implemented; skip rendering
+  // rather than showing an inert disabled row with no explanation.
+  if (choice.optionSource !== 'inline') {
+    return null;
+  }
+
   const allOptions = choice.optionGroups?.flatMap((g) => g.options) ?? [];
   const hasOptions = allOptions.length > 0;
 
