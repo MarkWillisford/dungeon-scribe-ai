@@ -213,7 +213,7 @@ export class ModifierPipelineService {
       const flawDef = FlawRegistryService.getFlaw(charFlaw.flawId);
       if (!flawDef) continue;
       for (const effect of flawDef.effects) {
-        effects.push(effect as unknown as Effect);
+        effects.push(effect);
       }
     }
 

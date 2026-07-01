@@ -1,10 +1,10 @@
 import type { FlawDefinition } from '@/types/flaws';
-import type { TraitEffect } from '@/types/traits';
+import type { Effect } from '@/types/base';
 
 export class FlawRegistryService {
   private static flaws = new Map<string, FlawDefinition>();
 
-  private static cloneEffect(effect: TraitEffect): TraitEffect {
+  private static cloneEffect(effect: Effect): Effect {
     return {
       ...effect,
       condition: effect.condition
