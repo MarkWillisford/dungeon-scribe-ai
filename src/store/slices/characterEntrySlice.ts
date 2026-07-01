@@ -1404,6 +1404,8 @@ const characterEntrySlice = createSlice({
       const idx = state.character.appliedTemplates.findIndex((t) => t.id === appliedTemplateId);
       if (idx < 0) return;
       const applied = state.character.appliedTemplates[idx];
+      const existingChoice = applied.templateChoices?.find((c) => c.choiceId === choiceId);
+      if (existingChoice?.selection === selectionId) return;
       const { newTemplateChoices, newFeatures } = resolveTemplateChoicePure(
         templateDefinition,
         applied,

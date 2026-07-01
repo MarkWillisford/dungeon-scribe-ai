@@ -1746,6 +1746,8 @@ describe('characterEntrySlice — templates', () => {
           selectionId: 'astral-deva',
         }),
       );
+      // Reset isDirty so the second (idempotent) dispatch is the only signal.
+      state = { ...state, isDirty: false };
       state = reducer(
         state,
         resolveTemplateChoice({
@@ -1761,6 +1763,7 @@ describe('characterEntrySlice — templates', () => {
       ]);
       expect(tpl.features).toHaveLength(1);
       expect(tpl.features![0].name).toBe('Stunning Strike 5/day');
+      expect(state.isDirty).toBe(false);
     });
 
     it('does not mutate state for unknown choiceId', () => {
