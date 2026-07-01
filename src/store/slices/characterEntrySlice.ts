@@ -68,7 +68,7 @@ function makeFeatSource(source: 'racial' | 'level' | 'bonus' | 'mythic', level: 
 
 function syncFeatSlotsFromClasses(character: Character): void {
   const raceName = character.info.race?.name ?? '';
-  const generated = computeFeatSlots(character.classes.classes, raceName);
+  const generated = computeFeatSlots(character.classes.classes, raceName, character.flaws.flaws);
 
   // Build set of (source, level) pairs already in character feats
   const existingKeys = new Set(character.feats.feats.map((f) => `${f.source}_${f.grantedAtLevel}`));

@@ -21,6 +21,7 @@ import type { AppliedTemplate } from '@/types/templates';
 import { BABProgression, SaveProgression, BonusType } from '@/types/base';
 import type { FavoredClassBonusEntry } from '@/types/favoredClassBonuses';
 import type { AbilityKey } from '@/types/abilities';
+import type { CharacterFlaw } from '@/types/flaws';
 import { ALL_EXPANDED_CLASSES } from '@/data/classes/index';
 
 // Reuse the full static set as the test map. These are the same classes the
@@ -174,19 +175,19 @@ describe('computeBaseWillFractional', () => {
 
 describe('computeFeatSlots', () => {
   it('generates one slot per odd HD', () => {
-    const slots = computeFeatSlots([cls('Fighter', 5)], 'Dwarf');
+    const slots = computeFeatSlots([cls('Fighter', 5)], 'Dwarf', []);
     expect(slots.map((s) => s.availableAtLevel)).toEqual([1, 3, 5]);
   });
 
   it('adds a bonus racial feat for Human', () => {
-    const slots = computeFeatSlots([cls('Fighter', 1)], 'Human');
+    const slots = computeFeatSlots([cls('Fighter', 1)], 'Human', []);
     const racial = slots.filter((s) => s.source === 'racial');
     expect(racial).toHaveLength(1);
     expect(racial[0].id).toBe('racial-feat-human-1');
   });
 
   it('does not add a racial feat for non-Human races', () => {
-    const slots = computeFeatSlots([cls('Fighter', 1)], 'Elf');
+    const slots = computeFeatSlots([cls('Fighter', 1)], 'Elf', []);
     expect(slots.filter((s) => s.source === 'racial')).toHaveLength(0);
   });
 });
@@ -398,33 +399,61 @@ describe('computeTotalBAB — Low BAB', () => {
 
 describe('computeFeatSlots', () => {
   it('returns empty array for no classes', () => {
-    expect(computeFeatSlots([], 'Dwarf')).toHaveLength(0);
+    expect(computeFeatSlots([], 'Dwarf', [])).toHaveLength(0);
   });
 
   it('grants a level feat slot at every odd HD (non-human)', () => {
     // 4 levels → slots at HD 1, 3
-    const slots = computeFeatSlots([cls('Fighter', 4)], 'Dwarf');
+    const slots = computeFeatSlots([cls('Fighter', 4)], 'Dwarf', []);
     expect(slots).toHaveLength(2);
     expect(slots.map((s) => s.availableAtLevel)).toEqual([1, 3]);
     expect(slots.every((s) => s.source === 'level')).toBe(true);
   });
 
   it('human gets an extra racial bonus feat slot', () => {
-    const slots = computeFeatSlots([cls('Fighter', 4)], 'Human');
+    const slots = computeFeatSlots([cls('Fighter', 4)], 'Human', []);
     expect(slots).toHaveLength(3);
     expect(slots.some((s) => s.source === 'racial')).toBe(true);
   });
 
   it('slots are sorted by availableAtLevel', () => {
-    const slots = computeFeatSlots([cls('Fighter', 6)], 'Human');
+    const slots = computeFeatSlots([cls('Fighter', 6)], 'Human', []);
     const levels = slots.map((s) => s.availableAtLevel);
     expect(levels).toEqual([...levels].sort((a, b) => a - b));
   });
 
   it('each level feat slot has a unique id', () => {
-    const slots = computeFeatSlots([cls('Fighter', 6)], 'Dwarf');
+    const slots = computeFeatSlots([cls('Fighter', 6)], 'Dwarf', []);
     const ids = slots.map((s) => s.id);
     expect(new Set(ids).size).toBe(ids.length);
+  });
+
+  it('grants one bonus feat slot per flaw', () => {
+    const flaws: CharacterFlaw[] = [
+      { flawId: 'flaw-1', name: 'Cowardly' },
+      { flawId: 'flaw-2', name: 'Meager Fortitude' },
+    ];
+    const slots = computeFeatSlots([cls('Fighter', 1)], 'Dwarf', flaws);
+    const bonusSlots = slots.filter((s) => s.source === 'bonus');
+    expect(bonusSlots).toHaveLength(2);
+  });
+
+  it('flaw bonus slot has correct shape', () => {
+    const flaws: CharacterFlaw[] = [{ flawId: 'flaw-1', name: 'Cowardly' }];
+    const slots = computeFeatSlots([cls('Fighter', 1)], 'Dwarf', flaws);
+    const bonusSlot = slots.find((s) => s.source === 'bonus');
+    expect(bonusSlot).toEqual({
+      id: 'flaw-feat-flaw-1',
+      source: 'bonus',
+      availableAt: 'Flaw: Cowardly',
+      availableAtLevel: 1,
+      prereqOverride: false,
+    });
+  });
+
+  it('empty flaws array produces no bonus slots', () => {
+    const slots = computeFeatSlots([cls('Fighter', 1)], 'Dwarf', []);
+    expect(slots.filter((s) => s.source === 'bonus')).toHaveLength(0);
   });
 });
 

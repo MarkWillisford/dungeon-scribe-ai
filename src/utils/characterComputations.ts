@@ -10,6 +10,7 @@ import type { ClassEntry } from '@/types/classes';
 import type { AppliedTemplate } from '@/types/templates';
 import type { ExpandedClassData } from '@/data/classes/types';
 import type { FavoredClassBonusEntry, FCBMechanicalEffect } from '@/types/favoredClassBonuses';
+import type { CharacterFlaw } from '@/types/flaws';
 
 // ---- Class data lookup ----
 
@@ -216,7 +217,11 @@ export interface FeatSlot {
   prereqOverride: boolean;
 }
 
-export function computeFeatSlots(classes: ClassEntry[], race: string): FeatSlot[] {
+export function computeFeatSlots(
+  classes: ClassEntry[],
+  race: string,
+  flaws: CharacterFlaw[],
+): FeatSlot[] {
   const totalHD = classes.reduce((sum, c) => sum + c.level, 0);
   const slots: FeatSlot[] = [];
 
@@ -235,6 +240,16 @@ export function computeFeatSlots(classes: ClassEntry[], race: string): FeatSlot[
       id: 'racial-feat-human-1',
       source: 'racial',
       availableAt: 'Human Bonus',
+      availableAtLevel: 1,
+      prereqOverride: false,
+    });
+  }
+
+  for (const flaw of flaws) {
+    slots.push({
+      id: `flaw-feat-${flaw.flawId}`,
+      source: 'bonus',
+      availableAt: `Flaw: ${flaw.name}`,
       availableAtLevel: 1,
       prereqOverride: false,
     });
