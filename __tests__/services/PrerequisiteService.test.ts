@@ -600,4 +600,119 @@ describe('PrerequisiteService', () => {
       expect(result.met).toBe(false);
     });
   });
+
+  describe('initiator_level prerequisite', () => {
+    function charWithIL(effectiveInitiatorLevel: number): Character {
+      const char = createTestCharacter();
+      (char as unknown as Record<string, unknown>).initiating = {
+        pools: [{ effectiveInitiatorLevel }],
+        knownManeuvers: [],
+      };
+      return char;
+    }
+
+    test('initiator_level met when highest pool IL >= minimum', async () => {
+      const char = charWithIL(6);
+      const feat = makeFeat([{ type: 'initiator_level', minimum: 6 }]);
+      const result = await PrerequisiteService.checkPrerequisites(char, feat);
+      expect(result.met).toBe(true);
+    });
+
+    test('initiator_level not met when highest pool IL < minimum', async () => {
+      const char = charWithIL(4);
+      const feat = makeFeat([{ type: 'initiator_level', minimum: 6 }]);
+      const result = await PrerequisiteService.checkPrerequisites(char, feat);
+      expect(result.met).toBe(false);
+    });
+
+    test('initiator_level not met when no initiating pools', async () => {
+      const char = createTestCharacter();
+      const feat = makeFeat([{ type: 'initiator_level', minimum: 1 }]);
+      const result = await PrerequisiteService.checkPrerequisites(char, feat);
+      expect(result.met).toBe(false);
+    });
+  });
+
+  describe('maneuver_known prerequisite', () => {
+    function charWithManeuver(maneuverId: string): Character {
+      const char = createTestCharacter();
+      (char as unknown as Record<string, unknown>).initiating = {
+        pools: [],
+        knownManeuvers: [{ maneuverId }],
+      };
+      return char;
+    }
+
+    test('maneuver_known met when character has the maneuver', async () => {
+      const char = charWithManeuver('steel-wind-strike');
+      const feat = makeFeat([{ type: 'maneuver_known', maneuverId: 'steel-wind-strike' }]);
+      const result = await PrerequisiteService.checkPrerequisites(char, feat);
+      expect(result.met).toBe(true);
+    });
+
+    test('maneuver_known not met when character lacks the maneuver', async () => {
+      const char = charWithManeuver('lightning-throw');
+      const feat = makeFeat([{ type: 'maneuver_known', maneuverId: 'steel-wind-strike' }]);
+      const result = await PrerequisiteService.checkPrerequisites(char, feat);
+      expect(result.met).toBe(false);
+    });
+
+    test('maneuver_known not met when no initiating data', async () => {
+      const char = createTestCharacter();
+      const feat = makeFeat([{ type: 'maneuver_known', maneuverId: 'steel-wind-strike' }]);
+      const result = await PrerequisiteService.checkPrerequisites(char, feat);
+      expect(result.met).toBe(false);
+    });
+  });
+
+  describe('discipline_access prerequisite', () => {
+    function charWithDiscipline(disciplineId: string): Character {
+      const char = createTestCharacter();
+      (char as unknown as Record<string, unknown>).initiating = {
+        pools: [
+          {
+            effectiveInitiatorLevel: 5,
+            baseClass: 'Warlord',
+            accessibleDisciplines: [disciplineId, 'golden-lion'],
+            bonusDisciplines: [],
+            removedDisciplines: [],
+          },
+        ],
+        knownManeuvers: [],
+      };
+      return char;
+    }
+
+    test('discipline_access met when character pool has the discipline', async () => {
+      const char = charWithDiscipline('scarlet-throne');
+      const feat = makeFeat([{ type: 'discipline_access', disciplineId: 'scarlet-throne' }]);
+      const result = await PrerequisiteService.checkPrerequisites(char, feat);
+      expect(result.met).toBe(true);
+    });
+
+    test('discipline_access not met when pool lacks the discipline', async () => {
+      const char = charWithDiscipline('iron-tortoise');
+      const feat = makeFeat([{ type: 'discipline_access', disciplineId: 'scarlet-throne' }]);
+      const result = await PrerequisiteService.checkPrerequisites(char, feat);
+      expect(result.met).toBe(false);
+    });
+
+    test('discipline_access skips snapshot pools without accessibleDisciplines', async () => {
+      const char = createTestCharacter();
+      (char as unknown as Record<string, unknown>).initiating = {
+        pools: [{ effectiveInitiatorLevel: 5, baseClass: 'Warlord' }],
+        knownManeuvers: [],
+      };
+      const feat = makeFeat([{ type: 'discipline_access', disciplineId: 'scarlet-throne' }]);
+      const result = await PrerequisiteService.checkPrerequisites(char, feat);
+      expect(result.met).toBe(false);
+    });
+
+    test('discipline_access not met when no initiating data', async () => {
+      const char = createTestCharacter();
+      const feat = makeFeat([{ type: 'discipline_access', disciplineId: 'scarlet-throne' }]);
+      const result = await PrerequisiteService.checkPrerequisites(char, feat);
+      expect(result.met).toBe(false);
+    });
+  });
 });

@@ -32,9 +32,15 @@ export interface CharacterInfo {
   portrait: string;
   background: string;
   notes: string;
-  // Editor metadata for race with flexible ability bonus
-  racialFlexBonus?: boolean;
-  racialFlexAbility?: AbilityKey;
+  // The flexibleAbilityBonuses from the selected race, stored so picker UI can render without
+  // re-fetching the full race object.
+  racialFlexBonuses?: import('../data/races/types').FlexibleAbilityBonus[];
+  // Player's choices, indexed to match racialFlexBonuses. Group-toggle entries store 'mental'|'physical'.
+  racialFlexChoices?: string[];
+  // Player's racial trait/feat selections (e.g. Elven Noble's Agile Fighters feat choice)
+  racialChoices?: import('./racialChoices').RacialChoice[];
+  // Names of selected alternate racial traits; default traits are active when absent from this list
+  selectedAlternateRacialTraits?: string[];
 }
 
 // Character-layer equipped slot — ring splits into ring_left / ring_right
@@ -53,10 +59,8 @@ export interface EditorEquipmentItem {
   isOrbiting?: boolean;
   allowsHandUse?: boolean;
   notes?: string;
-  // Denormalized from item definition at add time — used for pipeline enhancement bonuses
-  abilityScoreBonuses?: Partial<Record<AbilityKey, number>>;
   effects?: Effect[]; // snapshot from MagicItemDefinition.effects at pick time
-  grantedFeatIds?: string[]; // feat IDs granted while this item is equipped
+  grantedFeats?: import('./feats').GrantedFeat[]; // feats granted while this item is equipped
   unequippedFromSlot?: EditorEquippedSlot; // set when slot-cleared to a container; used for re-equip
 }
 

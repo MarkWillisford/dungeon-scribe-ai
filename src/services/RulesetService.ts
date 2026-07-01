@@ -38,31 +38,48 @@ export class RulesetService {
     return doc(db, 'rulesets', rulesetId);
   }
 
+  // ---- Hydration ----
+
+  private static hydrateRuleset(raw: Record<string, unknown>): Ruleset {
+    const r = raw as unknown as Ruleset;
+    return {
+      ...r,
+      optionalRules: {
+        ...r.optionalRules,
+        flaws: r.optionalRules?.flaws ?? false,
+      },
+      validationSettings: {
+        ...r.validationSettings,
+        maxFlaws: r.validationSettings?.maxFlaws ?? 2,
+      },
+    };
+  }
+
   // ---- Read ----
 
   static async getUserRulesets(uid: string): Promise<Ruleset[]> {
     const snapshot = await getDocs(this.userRulesetsCol(uid));
-    return snapshot.docs.map((d) => ({ id: d.id, ...d.data() }) as Ruleset);
+    return snapshot.docs.map((d) => this.hydrateRuleset({ id: d.id, ...d.data() }));
   }
 
   static async getGlobalPresets(): Promise<Ruleset[]> {
     const q = query(this.globalPresetsCol(), where('visibility', '==', 'global'));
     const snapshot = await getDocs(q);
-    return snapshot.docs.map((d) => ({ id: d.id, ...d.data() }) as Ruleset);
+    return snapshot.docs.map((d) => this.hydrateRuleset({ id: d.id, ...d.data() }));
   }
 
   /** Fetch a single global preset by ID (e.g. when resolving a CampaignRulesetLink). */
   static async getGlobalPreset(rulesetId: string): Promise<Ruleset | null> {
     const snapshot = await getDoc(this.globalPresetDoc(rulesetId));
     if (!snapshot.exists()) return null;
-    return { id: snapshot.id, ...snapshot.data() } as Ruleset;
+    return this.hydrateRuleset({ id: snapshot.id, ...snapshot.data() });
   }
 
   /** Fetch a user-owned ruleset by ID. Returns null if not found. */
   static async getRuleset(uid: string, rulesetId: string): Promise<Ruleset | null> {
     const snapshot = await getDoc(this.userRulesetDoc(uid, rulesetId));
     if (!snapshot.exists()) return null;
-    return { id: snapshot.id, ...snapshot.data() } as Ruleset;
+    return this.hydrateRuleset({ id: snapshot.id, ...snapshot.data() });
   }
 
   // ---- Write ----

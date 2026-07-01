@@ -66,13 +66,6 @@ export class ModifierPipelineService {
   static recalculate(character: Character): Character {
     const c = JSON.parse(JSON.stringify(character)) as Character;
 
-    // Reconstitute Map after deep clone
-    if (!(c.equipment.equippedSlots instanceof Map)) {
-      c.equipment.equippedSlots = new Map(
-        Object.entries(c.equipment.equippedSlots || {}),
-      ) as Character['equipment']['equippedSlots'];
-    }
-
     // Phase 1: Collect all active effects from every source
     const allEffects = this.collectAllEffects(c);
 
@@ -151,7 +144,7 @@ export class ModifierPipelineService {
   // Phase 1: Effect Collection
   // ============================================================
 
-  private static collectAllEffects(character: Character): Effect[] {
+  static collectAllEffects(character: Character): Effect[] {
     const effects: Effect[] = [];
 
     // 1. Racial traits
@@ -319,27 +312,32 @@ export class ModifierPipelineService {
       // containers, carried gear) have neither a slot nor isOrbiting and are excluded.
       if (!item.slot && !item.isOrbiting) continue;
 
-      // Structured Effect[] entries (preferred path for all item effects).
       if (item.effects?.length) {
         for (const effect of item.effects) {
           effects.push({ ...effect, source: effect.source || item.name });
         }
       }
 
-      // abilityScoreBonuses: denormalised shorthand used by some magic items (e.g.
-      // Headband of Vast Intellect). Convert to Enhancement Effect[] so the pipeline
-      // correctly restores them after every recalculate() wipes score.bonuses.
-      if (item.abilityScoreBonuses) {
-        for (const [ab, val] of Object.entries(item.abilityScoreBonuses)) {
-          if (typeof val === 'number' && val !== 0) {
-            effects.push({
-              type: 'bonus',
-              bonusType: BonusType.ENHANCEMENT,
-              target: `ability.${ab}`,
-              value: val,
-              source: item.name,
-            });
+      // Feats granted by this equipped item
+      for (const grant of item.grantedFeats ?? []) {
+        const featDef = FeatRegistryService.getFeat(grant.featId);
+        if (!featDef) continue;
+
+        if (featDef.activationMode === 'toggle' && !grant.active) continue;
+
+        const choices = grant.choices ?? {};
+
+        for (const effect of featDef.effects) {
+          let target = effect.target;
+          for (const [key, val] of Object.entries(choices)) {
+            target = target.replace(`{${key}}`, val) as typeof effect.target;
           }
+
+          const activation = effect.activation
+            ? { ...effect.activation, active: !!grant.active }
+            : undefined;
+
+          effects.push({ ...effect, target, source: item.name, activation });
         }
       }
     }

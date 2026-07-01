@@ -12,13 +12,14 @@
  * All methods are async. QueryContext is optional — defaults to Redux store.
  */
 
-import { PRESET_PF1E_STANDARD } from '@/data/rulesets/presets';
+import { PRESET_PF1E_STANDARD } from '@/config/rulesetPresets';
 import type { RootState } from '@/store/store';
 import type { Ruleset } from '@/types/ruleset';
 import type { SearchItem } from '@/components/ui/SearchPickerSheet';
 import type { FeatDefinition, FeatType } from '@/types/feats';
 import type { TraitDefinition } from '@/types/traits';
 import type { ClassChoiceDefinition } from '@/types/classChoices';
+import type { RacialChoiceDefinition } from '@/types/racialChoices';
 import type { ExpandedClassData, SpellProgressionTable, ArchetypeData } from '@/data/classes/types';
 import type { FavoredClassBonusEntry } from '@/types/favoredClassBonuses';
 import type { ClassData } from '@/data/classes';
@@ -661,6 +662,10 @@ export class GameDataService {
     return GameDataService.connector.getClassChoiceDefinitions(classId);
   }
 
+  static async getRacialChoiceDefinitions(raceName: string): Promise<RacialChoiceDefinition[]> {
+    return GameDataService.connector.getRacialChoiceDefinitions(raceName);
+  }
+
   static async getSpellTables(): Promise<Record<string, SpellProgressionTable>> {
     return GameDataService.connector.getSpellTables();
   }
@@ -693,6 +698,16 @@ export class GameDataService {
   static async getRaceGroups(context?: QueryContext): Promise<RaceGroups> {
     const ctx = context ?? GameDataService.getContextFromStore();
     return GameDataService.connector.getRaceGroups(ctx);
+  }
+
+  /**
+   * Synchronous accessor — Phase B concession.
+   * Used by AltRacialTraitsSection as a synchronous useMemo lookup.
+   * Phase B cleanup: replace with async getRaceByName through the connector once
+   * the connector exposes single-race lookup.
+   */
+  static getRaceByNameSync(name: string): ExpandedRaceData | undefined {
+    return ALL_EXPANDED_RACES.find((r) => r.name === name);
   }
 
   // ---- Equipment -------------------------------------------------------------

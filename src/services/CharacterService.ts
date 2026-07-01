@@ -7,8 +7,8 @@ import { Race } from '@/types/race';
 import { Alignment, BABProgression, SaveProgression, Size } from '@/types/base';
 import { ClassFeature } from '@/types/classes';
 import { AbilityScoreService } from '@services/AbilityScoreService';
-import { getClassByName } from '@data/classes';
-import { PRESET_PF1E_STANDARD } from '@data/rulesets/presets';
+import { getClassByName } from '@data/classes/index';
+import { PRESET_PF1E_STANDARD } from '@config/rulesetPresets';
 
 const PLACEHOLDER_RACE: Race = {
   name: '',
@@ -83,6 +83,7 @@ export class CharacterService {
       skills: this.createDefaultSkills(),
       feats: { feats: [], totalFeats: 0, bonusFeats: 0 },
       traits: { traits: [], maxTraits: 2 },
+      flaws: { flaws: [], maxFlaws: 2 },
       equipment: this.createDefaultEquipment(),
       spellcasting: {
         pools: [],
@@ -452,6 +453,7 @@ export class CharacterService {
       skills: this.createDefaultSkills(),
       feats: { feats: [], totalFeats: 0, bonusFeats: 0 },
       traits: { traits: [], maxTraits: 2 },
+      flaws: { flaws: [], maxFlaws: 2 },
       equipment: this.createDefaultEquipment(),
       spellcasting: { pools: [], preparedSpells: [], knownSpells: [], spellbooks: [] },
       initiating: {
@@ -661,7 +663,7 @@ export class CharacterService {
       shields: [],
       magicItems: [],
       gear: [],
-      equippedSlots: new Map(),
+      equippedSlots: {},
       encumbranceSettings: {
         enabled: false,
         variant: EncumbranceVariant.CORE_RULES,
@@ -739,12 +741,20 @@ export class CharacterService {
     if (classData) {
       return classData.classFeatures
         .filter((feature) => feature.level === 1)
-        .map((feature) => ({
-          name: feature.name,
-          description: feature.description ?? '',
-          level: feature.level,
-          effects: [],
-        }));
+        .map(
+          (feature): ClassFeature => ({
+            name: feature.name,
+            description: feature.description ?? '',
+            level: feature.level,
+            id: feature.id,
+            shortDescription: feature.shortDescription,
+            activationMode: feature.activationMode,
+            resourcePool: feature.resourcePool,
+            effects: feature.effects ?? [],
+            activationCost: feature.activationCost,
+            maintenanceCost: feature.maintenanceCost,
+          }),
+        );
     }
     return [];
   }

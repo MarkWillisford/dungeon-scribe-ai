@@ -17,8 +17,11 @@ import type { EditorEquipmentItem } from '@/types/character';
 import { EffectTargetPickerSheet, buildTargetLabelMap } from './EffectTargetPickerSheet';
 import { MagicItemEffectImportSheet } from './MagicItemEffectImportSheet';
 import { GameDataService } from '@/services/GameDataService';
+import { FeatRegistryService } from '@/services/FeatRegistryService';
 import type { EffectTargetOption } from './EffectTargetPickerSheet';
-import type { FeatDefinition } from '@/types/feats';
+import type { FeatDefinition, FeatChoice, GrantedFeat } from '@/types/feats';
+import { SearchPickerSheet } from '@/components/ui/SearchPickerSheet';
+import type { SearchItem } from '@/components/ui/SearchPickerSheet';
 
 // ---- Helpers ----
 
@@ -107,6 +110,13 @@ function effectTypeForTarget(target: EffectTarget): EffectType {
   return isSpecialTarget(target) ? 'special' : 'bonus';
 }
 
+function findNextUnfilledChoice(
+  choices: FeatChoice[],
+  filled: Record<string, string>,
+): FeatChoice | null {
+  return choices.find((c) => !filled[c.type]) ?? null;
+}
+
 function formatEffectRow(effect: Effect, labelMap: Map<string, string>): string {
   const targetLabel = labelMap.get(effect.target) ?? effect.target;
   const val =
@@ -149,7 +159,9 @@ export function ItemEffectEditorSheet({
   const [sheetView, setSheetView] = useState<SheetView>('main');
   const [editedName, setEditedName] = useState(item?.name ?? '');
   const [workingEffects, setWorkingEffects] = useState<Effect[]>(item?.effects ?? []);
-  const [workingFeatIds, setWorkingFeatIds] = useState<string[]>(item?.grantedFeatIds ?? []);
+  const [workingGrantedFeats, setWorkingGrantedFeats] = useState<GrantedFeat[]>(
+    item?.grantedFeats ?? [],
+  );
   const [addingEffect, setAddingEffect] = useState(false);
   const [pendingTarget, setPendingTarget] = useState<EffectTargetOption | null>(null);
   const [pendingBonusType, setPendingBonusType] = useState<BonusType>(BonusType.UNTYPED);
@@ -160,21 +172,55 @@ export function ItemEffectEditorSheet({
   const [featResults, setFeatResults] = useState<FeatDefinition[]>([]);
   const [featNameMap, setFeatNameMap] = useState<Map<string, string>>(new Map());
 
+  // Feat choice prompt state (for feats that require a selection before being added)
+  const [pendingFeat, setPendingFeat] = useState<FeatDefinition | null>(null);
+  const [pendingGrant, setPendingGrant] = useState<GrantedFeat | null>(null);
+  const [activeChoice, setActiveChoice] = useState<FeatChoice | null>(null);
+  const [choiceWeaponItems, setChoiceWeaponItems] = useState<SearchItem[]>([]);
+
   /* istanbul ignore next */
   useEffect(() => {
-    if (workingFeatIds.length === 0) return;
-    const missing = workingFeatIds.filter((id) => !featNameMap.has(id));
+    if (workingGrantedFeats.length === 0) return;
+    const missing = workingGrantedFeats.filter((g) => !featNameMap.has(g.featId));
     if (missing.length === 0) return;
-    Promise.all(missing.map((id) => GameDataService.getFeatById(id))).then((feats) => {
-      setFeatNameMap((prev) => {
-        const next = new Map(prev);
-        feats.forEach((f, i) => {
-          if (f) next.set(missing[i], f.name);
+    let cancelled = false;
+    Promise.all(missing.map((g) => GameDataService.getFeatById(g.featId)))
+      .then((feats) => {
+        if (cancelled) return;
+        setFeatNameMap((prev) => {
+          const next = new Map(prev);
+          feats.forEach((f, i) => {
+            if (f) next.set(missing[i].featId, f.name);
+          });
+          return next;
         });
-        return next;
+      })
+      .catch(() => {
+        // Keep existing names; ignore transient lookup failures.
       });
-    });
-  }, [workingFeatIds]); // eslint-disable-line react-hooks/exhaustive-deps
+    return () => {
+      cancelled = true;
+    };
+  }, [workingGrantedFeats]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  /* istanbul ignore next */
+  useEffect(() => {
+    if (activeChoice?.type !== 'weapon') return;
+    let cancelled = false;
+    GameDataService.getWeapons()
+      .then((weapons) => {
+        if (cancelled) return;
+        setChoiceWeaponItems(
+          weapons
+            .map((w) => ({ key: w.name, label: w.name }))
+            .sort((a, b) => a.label.localeCompare(b.label)),
+        );
+      })
+      .catch((e) => console.error('Failed to load weapons for feat choices', e));
+    return () => {
+      cancelled = true;
+    };
+  }, [activeChoice?.type]);
 
   /* istanbul ignore next */
   useEffect(() => {
@@ -244,18 +290,62 @@ export function ItemEffectEditorSheet({
 
   const handleAddFeat = useCallback(
     (feat: FeatDefinition) => {
-      if (workingFeatIds.includes(feat.id)) return;
-      setWorkingFeatIds((prev) => [...prev, feat.id]);
-      setFeatNameMap((prev) => new Map(prev).set(feat.id, feat.name));
+      if (workingGrantedFeats.some((g) => g.featId === feat.id)) return;
+      const grant: GrantedFeat = {
+        featId: feat.id,
+        choices: {},
+        active: feat.activationMode !== 'toggle',
+      };
       setFeatQuery('');
       setFeatResults([]);
       setSheetView('main');
+      const firstChoice = findNextUnfilledChoice(feat.choices ?? [], {});
+      if (firstChoice) {
+        setPendingFeat(feat);
+        setPendingGrant(grant);
+        setActiveChoice(firstChoice);
+        return;
+      }
+      setFeatNameMap((prev) => new Map(prev).set(feat.id, feat.name));
+      setWorkingGrantedFeats((prev) => [...prev, grant]);
     },
-    [workingFeatIds],
+    [workingGrantedFeats],
   );
 
-  const handleRemoveFeat = useCallback((id: string) => {
-    setWorkingFeatIds((prev) => prev.filter((fid) => fid !== id));
+  const handleChoiceSelect = useCallback(
+    (value: string) => {
+      if (!pendingFeat || !pendingGrant || !activeChoice) return;
+      if (!value.trim()) return;
+      const updatedChoices = { ...(pendingGrant.choices ?? {}), [activeChoice.type]: value };
+      const next = findNextUnfilledChoice(pendingFeat.choices ?? [], updatedChoices);
+      if (next) {
+        setPendingGrant({ ...pendingGrant, choices: updatedChoices });
+        setActiveChoice(next);
+      } else {
+        setFeatNameMap((prev) => new Map(prev).set(pendingGrant.featId, pendingFeat.name));
+        setWorkingGrantedFeats((prev) => [...prev, { ...pendingGrant, choices: updatedChoices }]);
+        setPendingFeat(null);
+        setPendingGrant(null);
+        setActiveChoice(null);
+      }
+    },
+    [pendingFeat, pendingGrant, activeChoice],
+  );
+
+  const handleChoiceCancel = useCallback(() => {
+    setPendingFeat(null);
+    setPendingGrant(null);
+    setActiveChoice(null);
+  }, []);
+
+  const handleToggleFeat = useCallback((featId: string) => {
+    setWorkingGrantedFeats((prev) =>
+      prev.map((g) => (g.featId === featId ? { ...g, active: !g.active } : g)),
+    );
+  }, []);
+
+  const handleRemoveFeat = useCallback((featId: string) => {
+    setWorkingGrantedFeats((prev) => prev.filter((g) => g.featId !== featId));
   }, []);
 
   const handleSave = useCallback(() => {
@@ -264,9 +354,9 @@ export function ItemEffectEditorSheet({
       ...item,
       name: editedName || item.name,
       effects: workingEffects,
-      grantedFeatIds: workingFeatIds.length > 0 ? workingFeatIds : undefined,
+      grantedFeats: workingGrantedFeats.length > 0 ? workingGrantedFeats : undefined,
     });
-  }, [item, editedName, workingEffects, workingFeatIds, onSave]);
+  }, [item, editedName, workingEffects, workingGrantedFeats, onSave]);
 
   const handleRemoveItem = useCallback(() => {
     if (!item) return;
@@ -672,11 +762,7 @@ export function ItemEffectEditorSheet({
           </Pressable>
         </View>
 
-        <Text style={[styles.featDisclaimerText, { color: colors.text.tertiary }]}>
-          Feat grants are stored but not yet applied to computed stats.
-        </Text>
-
-        {workingFeatIds.length === 0 && (
+        {workingGrantedFeats.length === 0 && (
           <Text
             style={[
               styles.emptyText,
@@ -687,24 +773,58 @@ export function ItemEffectEditorSheet({
           </Text>
         )}
 
-        {workingFeatIds.map((id) => (
-          <View key={id} style={[styles.effectRow, { borderBottomColor: colors.border.DEFAULT }]}>
-            <Text
-              style={[styles.effectLabel, { color: colors.text.primary, flex: 1 }]}
-              numberOfLines={1}
+        {workingGrantedFeats.map((grant) => {
+          const featDef = FeatRegistryService.getFeat(grant.featId);
+          const isToggle = featDef?.activationMode === 'toggle';
+          return (
+            <View
+              key={grant.featId}
+              style={[styles.effectRow, { borderBottomColor: colors.border.DEFAULT }]}
             >
-              {featNameMap.get(id) ?? id}
-            </Text>
-            <Pressable
-              onPress={() => handleRemoveFeat(id)}
-              hitSlop={10}
-              testID={`remove-feat-${id}`}
-              style={styles.removeBtn}
-            >
-              <Text style={[styles.removeBtnText, { color: colors.text.tertiary }]}>✕</Text>
-            </Pressable>
-          </View>
-        ))}
+              <Text
+                style={[styles.effectLabel, { color: colors.text.primary, flex: 1 }]}
+                numberOfLines={1}
+              >
+                {featNameMap.get(grant.featId) ?? grant.featId}
+              </Text>
+              {isToggle && (
+                <Pressable
+                  testID={`toggle-feat-${grant.featId}`}
+                  onPress={() => handleToggleFeat(grant.featId)}
+                  hitSlop={10}
+                  style={[
+                    styles.toggleChip,
+                    {
+                      borderColor: grant.active ? gold : colors.border.DEFAULT,
+                      backgroundColor: grant.active
+                        ? isDark
+                          ? 'rgba(212,175,55,0.15)'
+                          : 'rgba(140,90,40,0.08)'
+                        : 'transparent',
+                    },
+                  ]}
+                >
+                  <Text
+                    style={[
+                      styles.toggleChipText,
+                      { color: grant.active ? gold : colors.text.tertiary },
+                    ]}
+                  >
+                    {grant.active ? 'On' : 'Off'}
+                  </Text>
+                </Pressable>
+              )}
+              <Pressable
+                onPress={() => handleRemoveFeat(grant.featId)}
+                hitSlop={10}
+                testID={`remove-feat-${grant.featId}`}
+                style={styles.removeBtn}
+              >
+                <Text style={[styles.removeBtnText, { color: colors.text.tertiary }]}>✕</Text>
+              </Pressable>
+            </View>
+          );
+        })}
       </ScrollView>
 
       {/* Footer */}
@@ -731,6 +851,28 @@ export function ItemEffectEditorSheet({
           <Text style={[styles.saveText, { color: gold }]}>Save</Text>
         </Pressable>
       </View>
+
+      {activeChoice && pendingFeat && (
+        <SearchPickerSheet
+          visible
+          testID="feat-choice-picker"
+          title={`${pendingFeat.name} — ${activeChoice.label}`}
+          items={
+            activeChoice.type === 'weapon'
+              ? choiceWeaponItems
+              : (activeChoice.options ?? []).map((o) => ({ key: o, label: o }))
+          }
+          allowCustom={activeChoice.freeText}
+          onAddCustom={activeChoice.freeText ? handleChoiceSelect : undefined}
+          onSelect={(item) => handleChoiceSelect(item.key)}
+          onClose={handleChoiceCancel}
+          placeholder={
+            activeChoice.freeText
+              ? `Type ${activeChoice.label.toLowerCase()}...`
+              : `Search ${activeChoice.label.toLowerCase()}...`
+          }
+        />
+      )}
     </KeyboardAvoidingView>
   );
 }
@@ -1000,5 +1142,17 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     textTransform: 'uppercase',
     letterSpacing: 0.5,
+  },
+  toggleChip: {
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    borderWidth: 1,
+    borderRadius: 12,
+    marginRight: 8,
+  },
+  toggleChipText: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 12,
+    fontWeight: '600',
   },
 });

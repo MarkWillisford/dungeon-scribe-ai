@@ -53,7 +53,7 @@ import reducer, {
   unequipCompanionMagicItem,
   toggleFavoredClass,
   setFavoredClassBonuses,
-  setRacialFlexAbility,
+  setRacialFlexChoice,
   syncFeatSlots,
   reorderClasses,
   addTemplate,
@@ -66,6 +66,8 @@ import reducer, {
   removeSkillEntry,
   addTrait,
   removeTrait,
+  addFlaw,
+  removeFlaw,
   addFeatSlot,
   removeFeatSlot,
   assignFeat,
@@ -107,16 +109,21 @@ import reducer, {
   initLevelOrder,
   swapLevelSlot,
   splitClass,
+  upsertRacialChoice,
+  toggleAlternateRacialTrait,
   type EntryValidationWarning,
 } from '@store/slices/characterEntrySlice';
 import { Alignment } from '@/types/base';
+import type { RacialChoice } from '@/types/racialChoices';
 import { BABProgression, SaveProgression } from '@/types/base';
 import type { ClassEntry } from '@/types/classes';
 import type { AppliedTemplate } from '@/types/templates';
 import type { CharacterTrait } from '@/types/traits';
+import type { CharacterFlaw } from '@/types/flaws';
 import type { SpellcastingPool } from '@/types/spells';
 import type { EditorEquipmentItem } from '@/types/character';
 import type { LevelIncrementSlot } from '@/types/character';
+import type { Effect } from '@/types/base';
 import type { Character } from '@/types';
 
 // ---------------------------------------------------------------------------
@@ -528,27 +535,226 @@ describe('characterEntrySlice — identity', () => {
     });
   });
 
-  describe('setRacialFlexAbility', () => {
+  describe('setRacialFlexChoice', () => {
+    const humanBonuses = [{ group: 'any' as const, count: 1 as const, modifier: 2 }];
+
     it('sets a new flex ability when none was previously set', () => {
-      const state = reducer(makeInitialState(), setRacialFlexAbility('str'));
-      expect(state.character.info.racialFlexAbility).toBe('str');
+      let state = reducer(
+        makeInitialState(),
+        setRace({
+          raceId: 'human',
+          raceName: 'Human',
+          racialBonuses: {},
+          flexibleAbilityBonuses: humanBonuses,
+        }),
+      );
+      state = reducer(state, setRacialFlexChoice({ index: 0, value: 'str' }));
+      expect(state.character.info.racialFlexChoices?.[0]).toBe('str');
       expect(state.character.abilityScores.str.racial).toBe(2);
       expect(state.isDirty).toBe(true);
     });
 
     it('clears the old flex racial bonus and applies it to the new ability', () => {
-      let state = reducer(makeInitialState(), setRacialFlexAbility('str'));
+      let state = reducer(
+        makeInitialState(),
+        setRace({
+          raceId: 'human',
+          raceName: 'Human',
+          racialBonuses: {},
+          flexibleAbilityBonuses: humanBonuses,
+        }),
+      );
+      state = reducer(state, setRacialFlexChoice({ index: 0, value: 'str' }));
       expect(state.character.abilityScores.str.racial).toBe(2);
-      state = reducer(state, setRacialFlexAbility('dex'));
+      state = reducer(state, setRacialFlexChoice({ index: 0, value: 'dex' }));
       expect(state.character.abilityScores.str.racial).toBe(0);
       expect(state.character.abilityScores.dex.racial).toBe(2);
-      expect(state.character.info.racialFlexAbility).toBe('dex');
+      expect(state.character.info.racialFlexChoices?.[0]).toBe('dex');
     });
 
     it('is a no-op on racial bonus when the same ability is selected again', () => {
-      let state = reducer(makeInitialState(), setRacialFlexAbility('con'));
-      state = reducer(state, setRacialFlexAbility('con'));
+      let state = reducer(
+        makeInitialState(),
+        setRace({
+          raceId: 'human',
+          raceName: 'Human',
+          racialBonuses: {},
+          flexibleAbilityBonuses: humanBonuses,
+        }),
+      );
+      state = reducer(state, setRacialFlexChoice({ index: 0, value: 'con' }));
+      state = reducer(state, setRacialFlexChoice({ index: 0, value: 'con' }));
       expect(state.character.abilityScores.con.racial).toBe(2);
+    });
+
+    describe('Elven Noble-style bonuses (count: all, group: other)', () => {
+      // Mirrors extendedRaces.ts Elven Noble:
+      // +2 to all abilities in chosen group, +4 and -2 from the other group
+      const elvenNobleBonuses = [
+        { group: 'any' as const, count: 'all' as const, modifier: 2 },
+        { group: 'other' as const, count: 1 as const, modifier: 4 },
+        { group: 'other' as const, count: 1 as const, modifier: -2 },
+      ];
+
+      function makeElvenState() {
+        return reducer(
+          makeInitialState(),
+          setRace({
+            raceId: 'elven-noble',
+            raceName: 'Elven Noble',
+            racialBonuses: {},
+            flexibleAbilityBonuses: elvenNobleBonuses,
+          }),
+        );
+      }
+
+      it('applies +2 to all mental abilities when mental group is chosen', () => {
+        const state = reducer(makeElvenState(), setRacialFlexChoice({ index: 0, value: 'mental' }));
+        expect(state.character.abilityScores.int.racial).toBe(2);
+        expect(state.character.abilityScores.wis.racial).toBe(2);
+        expect(state.character.abilityScores.cha.racial).toBe(2);
+        expect(state.character.abilityScores.str.racial).toBe(0);
+        expect(state.character.abilityScores.dex.racial).toBe(0);
+        expect(state.character.abilityScores.con.racial).toBe(0);
+      });
+
+      it('applies +2 to all physical abilities when physical group is chosen', () => {
+        const state = reducer(
+          makeElvenState(),
+          setRacialFlexChoice({ index: 0, value: 'physical' }),
+        );
+        expect(state.character.abilityScores.str.racial).toBe(2);
+        expect(state.character.abilityScores.dex.racial).toBe(2);
+        expect(state.character.abilityScores.con.racial).toBe(2);
+        expect(state.character.abilityScores.int.racial).toBe(0);
+        expect(state.character.abilityScores.wis.racial).toBe(0);
+        expect(state.character.abilityScores.cha.racial).toBe(0);
+      });
+
+      it('applies +4 to a physical ability when choices[0] is mental (other = physical pool)', () => {
+        let state = reducer(makeElvenState(), setRacialFlexChoice({ index: 0, value: 'mental' }));
+        state = reducer(state, setRacialFlexChoice({ index: 1, value: 'str' }));
+        // mental group: int+2, wis+2, cha+2; other[physical] str+4
+        expect(state.character.abilityScores.int.racial).toBe(2);
+        expect(state.character.abilityScores.wis.racial).toBe(2);
+        expect(state.character.abilityScores.cha.racial).toBe(2);
+        expect(state.character.abilityScores.str.racial).toBe(4);
+      });
+
+      it('applies +4 to a mental ability when choices[0] is physical (other = mental pool)', () => {
+        let state = reducer(makeElvenState(), setRacialFlexChoice({ index: 0, value: 'physical' }));
+        state = reducer(state, setRacialFlexChoice({ index: 1, value: 'int' }));
+        // physical group: str+2, dex+2, con+2; other[mental] int+4
+        expect(state.character.abilityScores.str.racial).toBe(2);
+        expect(state.character.abilityScores.dex.racial).toBe(2);
+        expect(state.character.abilityScores.con.racial).toBe(2);
+        expect(state.character.abilityScores.int.racial).toBe(4);
+      });
+
+      it('is a no-op for other-pool choices when the ability is not in the pool', () => {
+        // choices[0] = 'mental' → other pool is PHYSICAL. Choosing 'int' (mental) is not in pool.
+        let state = reducer(makeElvenState(), setRacialFlexChoice({ index: 0, value: 'mental' }));
+        state = reducer(state, setRacialFlexChoice({ index: 1, value: 'int' }));
+        expect(state.character.abilityScores.int.racial).toBe(2); // only from mental group, not +4
+      });
+
+      it('skips bonuses where no choice has been made yet (early return on undefined choice)', () => {
+        // Only index 0 set; indices 1 and 2 are undefined → no +4 or -2 applied
+        const state = reducer(makeElvenState(), setRacialFlexChoice({ index: 0, value: 'mental' }));
+        // Only the 'all mental' +2 applies; +4 and -2 for 'other' are skipped
+        expect(state.character.abilityScores.str.racial).toBe(0);
+        expect(state.character.abilityScores.dex.racial).toBe(0);
+        expect(state.character.abilityScores.con.racial).toBe(0);
+      });
+    });
+  });
+
+  describe('upsertRacialChoice', () => {
+    it('initializes racialChoices array and adds the choice when previously undefined', () => {
+      const choice: RacialChoice = { featureName: 'Agile Fighters', selection: 'Weapon Finesse' };
+      const state = reducer(makeInitialState(), upsertRacialChoice(choice));
+      expect(state.character.info.racialChoices).toHaveLength(1);
+      expect(state.character.info.racialChoices?.[0]).toEqual(choice);
+      expect(state.isDirty).toBe(true);
+    });
+
+    it('pushes a new choice when the featureName does not already exist', () => {
+      const first: RacialChoice = { featureName: 'Agile Fighters', selection: 'Weapon Finesse' };
+      const second: RacialChoice = { featureName: 'SLA', selection: 'Detect Magic' };
+      let state = reducer(makeInitialState(), upsertRacialChoice(first));
+      state = reducer(state, upsertRacialChoice(second));
+      expect(state.character.info.racialChoices).toHaveLength(2);
+      expect(state.character.info.racialChoices?.[1]).toEqual(second);
+    });
+
+    it('replaces an existing choice when featureName matches', () => {
+      const original: RacialChoice = { featureName: 'Agile Fighters', selection: 'Weapon Finesse' };
+      const updated: RacialChoice = { featureName: 'Agile Fighters', selection: 'Dodge' };
+      let state = reducer(makeInitialState(), upsertRacialChoice(original));
+      state = reducer(state, upsertRacialChoice(updated));
+      expect(state.character.info.racialChoices).toHaveLength(1);
+      expect(state.character.info.racialChoices?.[0].selection).toBe('Dodge');
+    });
+
+    it('preserves other choices when updating one by featureName', () => {
+      const first: RacialChoice = { featureName: 'Agile Fighters', selection: 'Weapon Finesse' };
+      const second: RacialChoice = { featureName: 'SLA', selection: 'Detect Magic' };
+      const updatedFirst: RacialChoice = { featureName: 'Agile Fighters', selection: 'Dodge' };
+      let state = reducer(makeInitialState(), upsertRacialChoice(first));
+      state = reducer(state, upsertRacialChoice(second));
+      state = reducer(state, upsertRacialChoice(updatedFirst));
+      expect(state.character.info.racialChoices).toHaveLength(2);
+      expect(state.character.info.racialChoices?.[0].selection).toBe('Dodge');
+      expect(state.character.info.racialChoices?.[1].selection).toBe('Detect Magic');
+    });
+
+    it('clears racialChoices when race is changed', () => {
+      const choice: RacialChoice = { featureName: 'Agile Fighters', selection: 'Weapon Finesse' };
+      let state = reducer(makeInitialState(), upsertRacialChoice(choice));
+      state = reducer(
+        state,
+        setRace({ raceId: 'elf', raceName: 'Elf', racialBonuses: { dex: 2 } }),
+      );
+      expect(state.character.info.racialChoices).toBeUndefined();
+    });
+  });
+
+  describe('toggleAlternateRacialTrait', () => {
+    it('adds an ART when selectedAlternateRacialTraits is undefined', () => {
+      const state = reducer(makeInitialState(), toggleAlternateRacialTrait('Urbanite'));
+      expect(state.character.info.selectedAlternateRacialTraits).toEqual(['Urbanite']);
+      expect(state.isDirty).toBe(true);
+    });
+
+    it('adds a second ART without removing the first', () => {
+      let state = reducer(makeInitialState(), toggleAlternateRacialTrait('Urbanite'));
+      state = reducer(state, toggleAlternateRacialTrait('Dreamspeaker'));
+      expect(state.character.info.selectedAlternateRacialTraits).toEqual([
+        'Urbanite',
+        'Dreamspeaker',
+      ]);
+    });
+
+    it('removes an ART when it is already selected (toggle off)', () => {
+      let state = reducer(makeInitialState(), toggleAlternateRacialTrait('Urbanite'));
+      state = reducer(state, toggleAlternateRacialTrait('Urbanite'));
+      expect(state.character.info.selectedAlternateRacialTraits).toEqual([]);
+    });
+
+    it('removes only the targeted ART when multiple are selected', () => {
+      let state = reducer(makeInitialState(), toggleAlternateRacialTrait('Urbanite'));
+      state = reducer(state, toggleAlternateRacialTrait('Dreamspeaker'));
+      state = reducer(state, toggleAlternateRacialTrait('Urbanite'));
+      expect(state.character.info.selectedAlternateRacialTraits).toEqual(['Dreamspeaker']);
+    });
+
+    it('clears selectedAlternateRacialTraits when race is changed', () => {
+      let state = reducer(makeInitialState(), toggleAlternateRacialTrait('Urbanite'));
+      state = reducer(
+        state,
+        setRace({ raceId: 'elf', raceName: 'Elf', racialBonuses: { dex: 2 } }),
+      );
+      expect(state.character.info.selectedAlternateRacialTraits).toBeUndefined();
     });
   });
 });
@@ -1956,56 +2162,167 @@ describe('characterEntrySlice — notes', () => {
 });
 
 // ---------------------------------------------------------------------------
-// Enhancement sync
+// Equipment effects via recalculate()
 // ---------------------------------------------------------------------------
 
-describe('characterEntrySlice — enhancement sync', () => {
-  it('addEquipment with a slotted item syncs enhancement', () => {
-    const item = makeEquipmentItem('head-1', {
-      slot: 'head',
-      abilityScoreBonuses: { wis: 4 },
-    });
+describe('characterEntrySlice — equipment effects via recalculate()', () => {
+  const wisEffect: Effect = {
+    type: 'bonus',
+    bonusType: BonusType.ENHANCEMENT,
+    target: 'ability.wis',
+    value: 4,
+    source: 'Headband of Inspired Wisdom +4',
+  };
+
+  it('addEquipment with a slotted item applies effects via recalculate()', () => {
+    const item = makeEquipmentItem('head-1', { slot: 'head', effects: [wisEffect] });
     const state = reducer(makeInitialState(), addEquipment(item));
     expect(state.character.abilityScores.wis.bonuses.enhancement[0]?.value ?? 0).toBe(4);
   });
 
-  it('addEquipment with no slot does not apply enhancement', () => {
-    const item = makeEquipmentItem('head-1', { abilityScoreBonuses: { wis: 4 } });
+  it('addEquipment with no slot does not apply effects', () => {
+    const item = makeEquipmentItem('head-1', { effects: [wisEffect] });
     const state = reducer(makeInitialState(), addEquipment(item));
     expect(state.character.abilityScores.wis.bonuses.enhancement[0]?.value ?? 0).toBe(0);
   });
 
-  it('removeEquipment clears the enhancement', () => {
-    const item = makeEquipmentItem('head-1', { slot: 'head', abilityScoreBonuses: { wis: 4 } });
+  it('removeEquipment reverts effects immediately', () => {
+    const item = makeEquipmentItem('head-1', { slot: 'head', effects: [wisEffect] });
     let state = reducer(makeInitialState(), addEquipment(item));
     state = reducer(state, removeEquipment('head-1'));
     expect(state.character.abilityScores.wis.bonuses.enhancement[0]?.value ?? 0).toBe(0);
   });
 
-  it('two overlapping items — takes the highest per ability', () => {
+  it('two enhancement items to same ability — pipeline takes the higher value', () => {
     const item1 = makeEquipmentItem('belt-1', {
       slot: 'belt',
-      abilityScoreBonuses: { str: 2, con: 2 },
+      effects: [
+        {
+          type: 'bonus',
+          bonusType: BonusType.ENHANCEMENT,
+          target: 'ability.str',
+          value: 2,
+          source: 'Belt +2',
+        } as Effect,
+        {
+          type: 'bonus',
+          bonusType: BonusType.ENHANCEMENT,
+          target: 'ability.con',
+          value: 2,
+          source: 'Belt +2',
+        } as Effect,
+      ],
     });
-    const item2 = makeEquipmentItem('belt-2', { slot: 'belt', abilityScoreBonuses: { str: 4 } });
+    const item2 = makeEquipmentItem('belt-2', {
+      slot: 'belt',
+      effects: [
+        {
+          type: 'bonus',
+          bonusType: BonusType.ENHANCEMENT,
+          target: 'ability.str',
+          value: 4,
+          source: 'Belt +4',
+        } as Effect,
+      ],
+    });
     let state = reducer(makeInitialState(), addEquipment(item1));
     state = reducer(state, addEquipment(item2));
     expect(state.character.abilityScores.str.bonuses.enhancement[0]?.value ?? 0).toBe(4);
     expect(state.character.abilityScores.con.bonuses.enhancement[0]?.value ?? 0).toBe(2);
   });
 
-  it('assignEquipmentSlot applies enhancement when item is slotted', () => {
-    const item = makeEquipmentItem('head-1', { abilityScoreBonuses: { wis: 4 } });
+  it('updateEquipment triggers recalculate() and applies updated effects', () => {
+    const item = makeEquipmentItem('head-1', { slot: 'head', effects: [wisEffect] });
+    let state = reducer(makeInitialState(), addEquipment(item));
+    const updatedItem = {
+      ...item,
+      effects: [{ ...wisEffect, value: 6, source: 'Headband of Inspired Wisdom +6' }],
+    };
+    state = reducer(state, updateEquipment(updatedItem));
+    expect(state.character.abilityScores.wis.bonuses.enhancement[0]?.value ?? 0).toBe(6);
+  });
+
+  it('assignEquipmentSlot triggers recalculate() and applies item effects', () => {
+    const item = makeEquipmentItem('head-1', { effects: [wisEffect] });
     let state = reducer(makeInitialState(), addEquipment(item));
     state = reducer(state, assignEquipmentSlot({ id: 'head-1', slot: 'head' }));
     expect(state.character.abilityScores.wis.bonuses.enhancement[0]?.value ?? 0).toBe(4);
   });
 
-  it('unassignEquipmentSlot removes enhancement', () => {
-    const item = makeEquipmentItem('head-1', { slot: 'head', abilityScoreBonuses: { wis: 4 } });
+  it('unassignEquipmentSlot triggers recalculate() and reverts item effects', () => {
+    const item = makeEquipmentItem('head-1', { slot: 'head', effects: [wisEffect] });
     let state = reducer(makeInitialState(), addEquipment(item));
     state = reducer(state, unassignEquipmentSlot('head-1'));
     expect(state.character.abilityScores.wis.bonuses.enhancement[0]?.value ?? 0).toBe(0);
+  });
+
+  it('reequipFromContainer triggers recalculate() and reapplies item effects', () => {
+    const item = makeEquipmentItem('head-1', { slot: 'head', effects: [wisEffect] });
+    let state = reducer(makeInitialState(), addEquipment(item));
+    state = reducer(state, unassignEquipmentSlot('head-1'));
+    expect(state.character.abilityScores.wis.bonuses.enhancement[0]?.value ?? 0).toBe(0);
+    state = reducer(state, reequipFromContainer('head-1'));
+    expect(state.character.abilityScores.wis.bonuses.enhancement[0]?.value ?? 0).toBe(4);
+  });
+
+  it('orbiting ioun stone (isOrbiting:true, no slot) applies effects via recalculate()', () => {
+    const item = makeEquipmentItem('ioun-1', {
+      isOrbiting: true,
+      effects: [
+        {
+          type: 'bonus',
+          bonusType: BonusType.ENHANCEMENT,
+          target: 'ability.int',
+          value: 2,
+          source: 'Pale Blue Rhomboid Ioun Stone',
+        } as Effect,
+      ],
+    });
+    const state = reducer(makeInitialState(), addEquipment(item));
+    expect(state.character.abilityScores.int.bonuses.enhancement[0]?.value ?? 0).toBe(2);
+  });
+
+  it('inventory item (no slot, not orbiting) is excluded by recalculate()', () => {
+    const item = makeEquipmentItem('wand-1', {
+      effects: [
+        {
+          type: 'bonus',
+          bonusType: BonusType.ENHANCEMENT,
+          target: 'ability.int',
+          value: 2,
+          source: 'carried item',
+        } as Effect,
+      ],
+    });
+    const state = reducer(makeInitialState(), addEquipment(item));
+    expect(state.character.abilityScores.int.bonuses.enhancement[0]?.value ?? 0).toBe(0);
+  });
+
+  it('assignEquipmentContainer clears slot bonus immediately via recalculate()', () => {
+    const item = makeEquipmentItem('head-1', { slot: 'head', effects: [wisEffect] });
+    let state = reducer(makeInitialState(), addEquipment(item));
+    expect(state.character.abilityScores.wis.bonuses.enhancement[0]?.value ?? 0).toBe(4);
+    state = reducer(state, assignEquipmentContainer({ id: 'head-1', containerId: 'bag-1' }));
+    expect(state.character.abilityScores.wis.bonuses.enhancement[0]?.value ?? 0).toBe(0);
+  });
+
+  it('assignEquipmentContainer clears bonuses from orbiting items immediately', () => {
+    const item = makeEquipmentItem('ioun-1', {
+      isOrbiting: true,
+      effects: [
+        {
+          type: 'bonus',
+          bonusType: BonusType.ENHANCEMENT,
+          target: 'ability.int',
+          value: 2,
+          source: 'Pale Blue Rhomboid Ioun Stone',
+        } as Effect,
+      ],
+    });
+    let state = reducer(makeInitialState(), addEquipment(item));
+    expect(state.character.abilityScores.int.bonuses.enhancement[0]?.value ?? 0).toBe(2);
+    state = reducer(state, assignEquipmentContainer({ id: 'ioun-1', containerId: 'bag-1' }));
+    expect(state.character.abilityScores.int.bonuses.enhancement[0]?.value ?? 0).toBe(0);
   });
 });
 
@@ -3461,5 +3778,56 @@ describe('characterEntrySlice — reequipFromContainer', () => {
     const displaced = state.character.editorEquipment!.find((e) => e.id === 'belt-old')!;
     expect(displaced.slot).toBeUndefined();
     expect(displaced.containerId).toBeUndefined();
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Flaws
+// ---------------------------------------------------------------------------
+
+function makeFlaw(flawId: string): CharacterFlaw {
+  return { flawId, name: `Flaw ${flawId}` };
+}
+
+describe('characterEntrySlice — flaws', () => {
+  it('initializes flaws with empty list and maxFlaws 2', () => {
+    const state = makeInitialState();
+    expect(state.character.flaws.flaws).toEqual([]);
+    expect(state.character.flaws.maxFlaws).toBe(2);
+  });
+
+  describe('addFlaw', () => {
+    it('appends a flaw and sets isDirty', () => {
+      const flaw = makeFlaw('flaw-1');
+      const state = reducer(makeInitialState(), addFlaw(flaw));
+      expect(state.character.flaws.flaws).toHaveLength(1);
+      expect(state.character.flaws.flaws[0].flawId).toBe('flaw-1');
+      expect(state.isDirty).toBe(true);
+    });
+
+    it('appends multiple flaws in order', () => {
+      let state = reducer(makeInitialState(), addFlaw(makeFlaw('flaw-1')));
+      state = reducer(state, addFlaw(makeFlaw('flaw-2')));
+      expect(state.character.flaws.flaws).toHaveLength(2);
+      expect(state.character.flaws.flaws[0].flawId).toBe('flaw-1');
+      expect(state.character.flaws.flaws[1].flawId).toBe('flaw-2');
+    });
+  });
+
+  describe('removeFlaw', () => {
+    it('removes the flaw with the matching flawId', () => {
+      let state = reducer(makeInitialState(), addFlaw(makeFlaw('flaw-1')));
+      state = reducer(state, addFlaw(makeFlaw('flaw-2')));
+      state = reducer(state, removeFlaw('flaw-1'));
+      expect(state.character.flaws.flaws).toHaveLength(1);
+      expect(state.character.flaws.flaws[0].flawId).toBe('flaw-2');
+      expect(state.isDirty).toBe(true);
+    });
+
+    it('is a no-op when flawId is not found', () => {
+      let state = reducer(makeInitialState(), addFlaw(makeFlaw('flaw-1')));
+      state = reducer(state, removeFlaw('does-not-exist'));
+      expect(state.character.flaws.flaws).toHaveLength(1);
+    });
   });
 });

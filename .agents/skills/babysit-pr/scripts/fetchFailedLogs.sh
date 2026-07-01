@@ -33,7 +33,7 @@ if ! command -v jq >/dev/null 2>&1; then
   printf '{"error":"jq not found"}\n' >&2
   exit 1
 fi
-if ! gh api user --jq '.login' >/dev/null 2>&1; then
+if ! gh api graphql -f query='query{viewer{login}}' --jq '.data.viewer.login' >/dev/null 2>&1; then
   printf '{"error":"not authenticated with GitHub — run: gh auth login"}\n' >&2
   exit 1
 fi

@@ -1,7 +1,8 @@
 import React from 'react';
-import { render, fireEvent, type RenderedNode } from '../../helpers/testUtils';
+import { StyleSheet } from 'react-native';
+import { render, fireEvent, getAllText, type RenderedNode } from '../../helpers/testUtils';
 import { SkillsSection } from '@/components/character/direct-entry/SkillsSection';
-import { PRESET_PF1E_STANDARD, PRESET_GO_NUTS } from '@/data/rulesets/presets';
+import { PRESET_PF1E_STANDARD, PRESET_GO_NUTS } from '@/config/rulesetPresets';
 import type { Ruleset } from '@/types/ruleset';
 
 const mockDispatch = jest.fn();
@@ -19,13 +20,23 @@ const mockAbilityScores = {
 
 let mockSkills: Record<string, { ranks: number; misc: number }> = {};
 let mockRuleset: Ruleset = PRESET_PF1E_STANDARD;
+let mockTotalLevel = 20;
+let mockClassEntries: { name: string; skillRanks: number; level: number }[] = [];
+let mockIntMod = 0;
 
 jest.mock('@/store/hooks', () => ({
   useAppDispatch: () => mockDispatch,
   useAppSelector: (selector: (s: unknown) => unknown) =>
     selector({
       characterEntry: {
-        character: { skills: mockSkills, abilityScores: mockAbilityScores },
+        character: {
+          skills: mockSkills,
+          abilityScores: {
+            ...mockAbilityScores,
+            int: { modifier: mockIntMod },
+          },
+          classes: { totalLevel: mockTotalLevel, classes: mockClassEntries },
+        },
       },
       ruleset: { activeRuleset: mockRuleset },
     }),
@@ -37,6 +48,7 @@ jest.mock('@/hooks/useTheme', () => ({
       bg: { primary: '#fff', secondary: '#f5f5f5', tertiary: '#eee' },
       border: { DEFAULT: '#ccc' },
       text: { primary: '#000', secondary: '#333', tertiary: '#999' },
+      error: { DEFAULT: '#B00020' },
     },
     fantasy: { gold: '#FFD700', bronze: '#CD7F32' },
     isDark: false,
@@ -55,6 +67,9 @@ function findByType(node: RenderedNode, typeName: string): RenderedNode[] {
 beforeEach(() => {
   mockSkills = {};
   mockRuleset = PRESET_PF1E_STANDARD;
+  mockTotalLevel = 20;
+  mockClassEntries = [];
+  mockIntMod = 0;
   mockDispatch.mockClear();
 });
 
@@ -203,5 +218,124 @@ describe('SkillsSection — event handlers', () => {
     // First input is always the search bar
     fireEvent.changeText(inputs[0], 'acro');
     expect(mockDispatch).not.toHaveBeenCalled();
+  });
+});
+
+describe('SkillsSection — per-skill max-rank cap', () => {
+  it('shows the per-skill max in the summary when the character has levels', () => {
+    mockTotalLevel = 3;
+    const { getAllText } = render(<SkillsSection />);
+    const text = getAllText();
+    expect(text.some((t) => t.includes('Max per skill'))).toBe(true);
+    expect(text.some((t) => t === '3')).toBe(true);
+  });
+
+  it('does not show a max-per-skill summary when the character has no levels', () => {
+    mockTotalLevel = 0;
+    const { getAllText } = render(<SkillsSection />);
+    expect(getAllText().some((t) => t.includes('Max per skill'))).toBe(false);
+  });
+
+  it('clamps a rank entry above the cap down to the character level', () => {
+    mockTotalLevel = 3;
+    mockSkills = { acrobatics: { ranks: 2, misc: 0 } };
+    const result = render(<SkillsSection />);
+    const inputs = findByType(result.tree, 'TextInput');
+    const ranksInput = inputs.find((i) => i.props.accessibilityLabel === 'Acrobatics ranks');
+    if (!ranksInput) throw new Error('Could not find Acrobatics ranks input');
+    fireEvent.changeText(ranksInput, '9');
+    const call = mockDispatch.mock.calls[mockDispatch.mock.calls.length - 1][0];
+    expect(call.payload.skillKey).toBe('acrobatics');
+    expect(call.payload.entry.ranks).toBe(3);
+  });
+
+  it('allows a rank entry at or below the cap', () => {
+    mockTotalLevel = 5;
+    mockSkills = { acrobatics: { ranks: 1, misc: 0 } };
+    const result = render(<SkillsSection />);
+    const inputs = findByType(result.tree, 'TextInput');
+    const ranksInput = inputs.find((i) => i.props.accessibilityLabel === 'Acrobatics ranks');
+    if (!ranksInput) throw new Error('Could not find Acrobatics ranks input');
+    fireEvent.changeText(ranksInput, '5');
+    const call = mockDispatch.mock.calls[mockDispatch.mock.calls.length - 1][0];
+    expect(call.payload.entry.ranks).toBe(5);
+  });
+
+  it('does not clamp when the character has no levels (cap not yet known)', () => {
+    mockTotalLevel = 0;
+    mockSkills = { acrobatics: { ranks: 1, misc: 0 } };
+    const result = render(<SkillsSection />);
+    const inputs = findByType(result.tree, 'TextInput');
+    const ranksInput = inputs.find((i) => i.props.accessibilityLabel === 'Acrobatics ranks');
+    if (!ranksInput) throw new Error('Could not find Acrobatics ranks input');
+    fireEvent.changeText(ranksInput, '9');
+    const call = mockDispatch.mock.calls[mockDispatch.mock.calls.length - 1][0];
+    expect(call.payload.entry.ranks).toBe(9);
+  });
+
+  it('flags an existing over-cap entry with the error color', () => {
+    mockTotalLevel = 2;
+    mockSkills = { acrobatics: { ranks: 5, misc: 0 } };
+    const result = render(<SkillsSection />);
+    const inputs = findByType(result.tree, 'TextInput');
+    const ranksInput = inputs.find((i) => i.props.accessibilityLabel === 'Acrobatics ranks');
+    if (!ranksInput) throw new Error('Could not find Acrobatics ranks input');
+    const style = StyleSheet.flatten(ranksInput.props.style);
+    expect(style.borderColor).toBe('#B00020');
+  });
+});
+
+describe('SkillsSection — total available ranks', () => {
+  it('shows total available ranks from class skill ranks and INT', () => {
+    // Rogue 8/level, level 3, INT +0 => 24 available
+    mockTotalLevel = 3;
+    mockClassEntries = [{ name: 'Rogue', skillRanks: 8, level: 3 }];
+    const { getAllText } = render(<SkillsSection />);
+    const text = getAllText();
+    expect(text.some((t) => t.includes('Remaining'))).toBe(true);
+    expect(text.some((t) => t === '24')).toBe(true);
+  });
+
+  it('adds the INT modifier to per-level ranks', () => {
+    // 8/level + 2 INT, level 1 => 10 available
+    mockTotalLevel = 1;
+    mockIntMod = 2;
+    mockClassEntries = [{ name: 'Rogue', skillRanks: 8, level: 1 }];
+    const { getAllText } = render(<SkillsSection />);
+    expect(getAllText().some((t) => t === '10')).toBe(true);
+  });
+
+  it('computes remaining as available minus used', () => {
+    // available 24, used 3 => remaining 21
+    mockTotalLevel = 3;
+    mockClassEntries = [{ name: 'Rogue', skillRanks: 8, level: 3 }];
+    mockSkills = { acrobatics: { ranks: 3, misc: 0 } };
+    const { getByTestId } = render(<SkillsSection />);
+    const remaining = getByTestId('skill-ranks-remaining');
+    expect(getAllText(remaining)).toContain('21');
+  });
+
+  it('colors remaining with the error color when over-spent', () => {
+    // available 2, used 3 across capped skills => remaining -1
+    mockTotalLevel = 3;
+    mockClassEntries = [{ name: 'Wizard', skillRanks: 2, level: 1 }];
+    mockSkills = {
+      acrobatics: { ranks: 1, misc: 0 },
+      appraise: { ranks: 1, misc: 0 },
+      bluff: { ranks: 1, misc: 0 },
+    };
+    const { getByTestId } = render(<SkillsSection />);
+    const remaining = getByTestId('skill-ranks-remaining');
+    expect(getAllText(remaining)).toContain('-1');
+    const style = Array.isArray(remaining.props.style)
+      ? Object.assign({}, ...remaining.props.style)
+      : remaining.props.style;
+    expect(style.color).toBe('#B00020');
+  });
+
+  it('does not show available/remaining when the character has no classes', () => {
+    mockClassEntries = [];
+    const { getAllText } = render(<SkillsSection />);
+    expect(getAllText().some((t) => t.includes('Remaining'))).toBe(false);
   });
 });

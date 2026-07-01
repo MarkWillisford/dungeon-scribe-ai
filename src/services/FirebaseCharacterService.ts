@@ -13,9 +13,12 @@ import {
 import { db } from '@config/firebase';
 import type { Character } from '@/types';
 import type { CharacterSummary } from '@/types/character';
-import type { EquipmentSlot } from '@/types/equipment';
-import type { ItemSlot } from '@/types/magicItems';
-import { PRESET_PF1E_STANDARD } from '@data/rulesets/presets';
+import type { ClassFeature } from '@/types/classes';
+import type { ResourcePoolDefinition } from '@/types/resources';
+import type { TemplateFeature } from '@/types/templates';
+import { PRESET_PF1E_STANDARD } from '@config/rulesetPresets';
+import { ALL_CLASS_CHOICE_DEFINITIONS } from '@data/classChoiceDefinitions';
+import { CharacterService } from '@/services/CharacterService';
 
 export class FirebaseCharacterService {
   private static readonly COLLECTION = 'characters';
@@ -75,7 +78,17 @@ export class FirebaseCharacterService {
   }
 
   /**
-   * Get a single character by ID
+   * Get a single character by ID.
+   *
+   * After deserializing the character document, we attempt to merge
+   * classFeatureResourcePools from Firestore class documents onto the
+   * character's stored class features. For modern characters whose class
+   * features are already fully snapshotted, this fetch is skipped by the
+   * guard inside mergeClassFeatureResourcePools. The fetch only runs for
+   * legacy characters that lack complete feature snapshots. This allows
+   * ResourcePoolService.computePools() (called inside
+   * ModifierPipelineService.recalculate()) to find pool definitions without
+   * needing async Firestore access of its own.
    */
   static async getCharacter(characterId: string): Promise<Character> {
     const docRef = doc(db, this.COLLECTION, characterId);
@@ -87,14 +100,213 @@ export class FirebaseCharacterService {
 
     const data = docSnap.data();
     const character = this.deserializeFromFirestore(data);
+    let enriched = character;
+    try {
+      enriched = await this.mergeClassFeatureResourcePools(character);
+    } catch (err) {
+      console.warn(
+        '[FirebaseCharacterService] mergeClassFeatureResourcePools failed, returning base character',
+        err,
+      );
+    }
+    try {
+      enriched = await this.mergeTemplateFeatures(enriched);
+    } catch (err) {
+      console.warn(
+        '[FirebaseCharacterService] mergeTemplateFeatures failed, returning base character',
+        err,
+      );
+    }
 
     return {
-      ...character,
+      ...enriched,
       info: {
-        ...character.info,
+        ...enriched.info,
         firebaseId: docSnap.id,
       },
     };
+  }
+
+  /**
+   * Load class documents from Firestore and merge two things onto the character:
+   *
+   * 1. classFeatures: if a class entry has an empty array (characters created
+   *    before features were persisted on the entry), inject features from the
+   *    class doc filtered to levels the character has actually reached.
+   *
+   * 2. classFeatureResourcePools: attach the ResourcePoolDefinition onto each
+   *    matching feature by name so ResourcePoolService.computePools() can work
+   *    without its own async Firestore access.
+   *
+   * Uses the class doc snaps already fetched — no extra DB calls.
+   */
+  private static async mergeClassFeatureResourcePools(character: Character): Promise<Character> {
+    // Skip the Firestore fetch when every class entry already has features stored.
+    // Characters created (or last saved) with the snapshot-on-selection system carry
+    // full ClassFeature data on the character document, so the catalog is never
+    // consulted at load time. The fetch only runs for legacy characters whose
+    // classFeatures array is empty (i.e., created before feature snapshotting existed).
+    const needsMerge = character.classes.classes.some(
+      (cls) =>
+        cls.classFeatures.length === 0 ||
+        cls.classFeatures.some((f) => f.id !== undefined && f.resourcePool === undefined),
+    );
+    if (!needsMerge) return character;
+
+    const classIds = character.classes.classes.map((cls) => this.classDocId(cls.name));
+    const uniqueIds = [...new Set(classIds)];
+    if (uniqueIds.length === 0) return character;
+
+    const classDocSnaps = await Promise.all(uniqueIds.map((id) => getDoc(doc(db, 'classes', id))));
+
+    const poolsByClassId = new Map<string, Record<string, ResourcePoolDefinition>>();
+    const featuresByClassId = new Map<string, ClassFeature[]>();
+
+    for (const snap of classDocSnaps) {
+      if (!snap.exists()) continue;
+      const data = snap.data();
+      const pools = data.classFeatureResourcePools as
+        | Record<string, ResourcePoolDefinition>
+        | undefined;
+      if (pools) poolsByClassId.set(snap.id, pools);
+      const features = data.classFeatures as ClassFeature[] | undefined;
+      if (features?.length) featuresByClassId.set(snap.id, features);
+    }
+
+    if (poolsByClassId.size === 0 && featuresByClassId.size === 0) return character;
+
+    const enrichedClasses = character.classes.classes.map((cls) => {
+      const docId = this.classDocId(cls.name);
+      const poolMap = poolsByClassId.get(docId);
+      const firestoreFeatures = featuresByClassId.get(docId);
+
+      // Merge Firestore features into the stored array, adding any that are
+      // missing (e.g. features gained after level-up that were never persisted).
+      const storedFeatures = Array.isArray(cls.classFeatures) ? cls.classFeatures : [];
+      const normalizedStored = storedFeatures.map((f) => ({
+        ...f,
+        effects: f.effects ?? [],
+      }));
+      const missingFeatures = (firestoreFeatures ?? [])
+        .filter((f) => f.level <= cls.level)
+        .filter(
+          (f) =>
+            !normalizedStored.some(
+              (existing) => existing.name === f.name && existing.level === f.level,
+            ),
+        )
+        .map((f) => ({ ...f, effects: f.effects ?? [] }));
+      let baseFeatures = [...normalizedStored, ...missingFeatures];
+
+      // Inject features granted by class choices that predate the grantsFeature system.
+      // For each choice on this class, check if the selected option grants a feature
+      // and inject it if it's missing from the stored features.
+      const choiceDefs = ALL_CLASS_CHOICE_DEFINITIONS.filter(
+        (d) => d.className === cls.name.toLowerCase(),
+      );
+      for (const choice of cls.classChoices ?? []) {
+        const def = choiceDefs.find((d) => d.featureName === choice.featureName);
+        if (!def?.optionGroups) continue;
+        const selectedId = Array.isArray(choice.selection) ? choice.selection[0] : choice.selection;
+        const option = def.optionGroups.flatMap((g) => g.options).find((o) => o.id === selectedId);
+        if (!option?.grantsFeature) continue;
+        if (!baseFeatures.some((f) => f.name === option.grantsFeature!.name)) {
+          baseFeatures = [...baseFeatures, { ...option.grantsFeature, effects: [] }];
+        }
+      }
+
+      if (!poolMap) return { ...cls, classFeatures: baseFeatures };
+
+      // classFeatures is still empty (no classFeatures field on the Firestore class doc).
+      // Synthesize minimal stubs from the pool definitions so computePools() can find them.
+      if (baseFeatures.length === 0) {
+        const synthetic: ClassFeature[] = Object.entries(poolMap).map(([name, poolDef]) => ({
+          name,
+          description: '',
+          level: 1,
+          effects: [],
+          resourcePool: poolDef,
+        }));
+        return { ...cls, classFeatures: synthetic };
+      }
+
+      const enrichedFeatures = baseFeatures.map((feature) => {
+        if (feature.resourcePool) return feature;
+        const poolDef = poolMap[feature.name];
+        return poolDef ? { ...feature, resourcePool: poolDef } : feature;
+      });
+
+      return { ...cls, classFeatures: enrichedFeatures };
+    });
+
+    return {
+      ...character,
+      classes: { ...character.classes, classes: enrichedClasses },
+    };
+  }
+
+  /**
+   * Load template documents from Firestore and inject toggle-capable features
+   * onto each AppliedTemplate that has none yet.
+   *
+   * For crTier templates, features are drawn from the highest paid tier.
+   * For flat templates (no crTiers), features are drawn from the top-level array.
+   * Only features with an `id` field are injected (toggle/pool capable features).
+   */
+  private static async mergeTemplateFeatures(character: Character): Promise<Character> {
+    const appliedTemplates = character.appliedTemplates ?? [];
+    const needsInjection = appliedTemplates.filter((t) => !t.features || t.features.length === 0);
+    if (needsInjection.length === 0) return character;
+
+    const uniqueIds = [...new Set(needsInjection.map((t) => t.templateId))];
+    const snaps = await Promise.all(uniqueIds.map((id) => getDoc(doc(db, 'templates', id))));
+
+    const templateDocsById = new Map<string, Record<string, unknown>>();
+    for (const snap of snaps) {
+      if (snap.exists()) templateDocsById.set(snap.id, snap.data());
+    }
+
+    if (templateDocsById.size === 0) return character;
+
+    const enriched = appliedTemplates.map((tpl) => {
+      if (tpl.features && tpl.features.length > 0) return tpl;
+
+      const templateDoc = templateDocsById.get(tpl.templateId);
+      if (!templateDoc) return tpl;
+
+      const crTiers = templateDoc.crTiers as
+        | Array<{ tierIndex: number; features: TemplateFeature[] }>
+        | undefined;
+
+      let candidateFeatures: TemplateFeature[] = [];
+      if (crTiers && crTiers.length > 0 && tpl.paidTiers.length > 0) {
+        const highestTierIdx = Math.max(...tpl.paidTiers);
+        const activeTier = crTiers.find((t) => t.tierIndex === highestTierIdx);
+        candidateFeatures = activeTier?.features ?? [];
+      } else if (!crTiers || crTiers.length === 0) {
+        candidateFeatures = (templateDoc.features as TemplateFeature[] | undefined) ?? [];
+      }
+
+      const toggleFeatures = candidateFeatures.filter(
+        (f): f is TemplateFeature & { id: string } =>
+          (f.scalingType === 'flat' || f.scalingType === 'hd_threshold') &&
+          'id' in f &&
+          typeof (f as { id?: unknown }).id === 'string',
+      );
+
+      if (toggleFeatures.length === 0) return tpl;
+      return { ...tpl, features: toggleFeatures };
+    });
+
+    return { ...character, appliedTemplates: enriched };
+  }
+
+  /** Derive the Firestore document ID for a class from its display name. */
+  private static classDocId(className: string): string {
+    return className
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-|-$/g, '');
   }
 
   /**
@@ -121,32 +333,10 @@ export class FirebaseCharacterService {
   }
 
   /**
-   * Serialize character for Firestore (Map -> Record conversion)
+   * Serialize character for Firestore (Date -> ISO string conversion)
    */
   private static serializeForFirestore(character: Character): Record<string, unknown> {
     const serialized = JSON.parse(JSON.stringify(character));
-
-    // Convert equippedSlots Map to plain object for Firestore
-    if (character.equipment?.equippedSlots instanceof Map) {
-      const slotsRecord: Record<string, string> = {};
-      for (const [slot, itemId] of character.equipment.equippedSlots.entries()) {
-        slotsRecord[slot] = itemId;
-      }
-      serialized.equipment.equippedSlots = slotsRecord;
-    }
-
-    // Convert each companion's equippedSlots Map to a plain object for Firestore
-    if (Array.isArray(character.companions) && Array.isArray(serialized.companions)) {
-      character.companions.forEach((companion, index) => {
-        if (companion.equipment?.equippedSlots instanceof Map) {
-          const slotsRecord: Record<string, string> = {};
-          for (const [slot, itemId] of companion.equipment.equippedSlots.entries()) {
-            slotsRecord[slot] = itemId;
-          }
-          serialized.companions[index].equipment.equippedSlots = slotsRecord;
-        }
-      });
-    }
 
     // Convert Date objects to ISO strings (Firestore will use serverTimestamp for created/updated)
     if (serialized.lastUpdated instanceof Date) {
@@ -157,33 +347,10 @@ export class FirebaseCharacterService {
   }
 
   /**
-   * Deserialize character from Firestore (Record -> Map conversion)
+   * Deserialize character from Firestore (timestamp deserialization and schema migration)
    */
   private static deserializeFromFirestore(data: Record<string, unknown>): Character {
     const character = data as unknown as Character;
-
-    // Convert equippedSlots Record back to Map
-    if (character.equipment && !(character.equipment.equippedSlots instanceof Map)) {
-      const slotsRecord = character.equipment.equippedSlots as unknown as Record<string, string>;
-      character.equipment.equippedSlots = new Map(
-        Object.entries(slotsRecord || {}) as [EquipmentSlot, string][],
-      );
-    }
-
-    // Convert each companion's equippedSlots Record back to Map
-    if (Array.isArray(character.companions)) {
-      character.companions.forEach((companion) => {
-        if (companion.equipment && !(companion.equipment.equippedSlots instanceof Map)) {
-          const slotsRecord = companion.equipment.equippedSlots as unknown as Record<
-            string,
-            string
-          >;
-          companion.equipment.equippedSlots = { ...(slotsRecord || {}) } as Partial<
-            Record<ItemSlot, string>
-          >;
-        }
-      });
-    }
 
     // Convert timestamp fields back to Date — handles string (from JSON), Firestore Timestamp, and Date
     if (data.lastUpdated && typeof data.lastUpdated === 'string') {
@@ -212,6 +379,14 @@ export class FirebaseCharacterService {
     // Schema migration: backfill companions for documents written before companions feature
     if (!character.companions) {
       character.companions = [];
+    }
+
+    // Schema migration: backfill equipment/equippedSlots for legacy documents
+    character.equipment ??= CharacterService.createDefaultEquipment();
+    character.equipment.equippedSlots ??= {};
+    for (const companion of character.companions) {
+      companion.equipment ??= { armor: [], weapons: [], magicItems: [], gear: [], equippedSlots: {} };
+      companion.equipment.equippedSlots ??= {};
     }
 
     return character;

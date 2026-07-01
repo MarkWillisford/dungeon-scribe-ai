@@ -1,3 +1,6 @@
+// SEEDING ONLY — do not use in runtime app code.
+// This array seeds Firestore. All runtime reads go through GameDataService → FirestoreGameDataConnector.
+
 import type { InvestigatorTalentEntry } from '@/types/classOptions';
 import { investigatorTalentsBatch1 } from './investigatorTalents-batch1';
 import { investigatorTalentsBatch2 } from './investigatorTalents-batch2';

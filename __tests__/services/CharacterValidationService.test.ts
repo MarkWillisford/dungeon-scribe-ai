@@ -5,7 +5,7 @@ import type { AbilityScore } from '@/types/abilities';
 import type { CharacterFeat } from '@/types/feats';
 import { Alignment, Size } from '@/types/base';
 import { BABProgression, SaveProgression } from '@/types/base';
-import { PRESET_PF1E_STANDARD } from '@/data/rulesets/presets';
+import { PRESET_PF1E_STANDARD } from '@/config/rulesetPresets';
 import type { ClassDataMap } from '@/utils/characterComputations';
 
 // Mocked computation fns ignore the map, so an empty Map suffices.
@@ -239,6 +239,7 @@ function blankCharacter(): Character {
     skills: {} as any,
     feats: { feats: [], totalFeats: 0, bonusFeats: 0 },
     traits: { traits: [], maxTraits: 2 },
+    flaws: { flaws: [], maxFlaws: 2 },
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     equipment: {} as any,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

@@ -1,5 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, ScrollView, StyleSheet, Pressable, Alert } from 'react-native';
+import React, { useEffect, useMemo, useState } from 'react';
+import {
+  View,
+  Text,
+  ScrollView,
+  StyleSheet,
+  Pressable,
+  Alert,
+  Modal,
+  TextInput,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useAppSelector, useAppDispatch } from '@/store/hooks';
@@ -11,6 +20,7 @@ import { OrnateTab } from '@/components/ui/OrnateTab';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import { FantasyDivider } from '@/components/ui/FantasyDivider';
 import { FeatRegistryService } from '@/services/FeatRegistryService';
+import { isDeleteConfirmationValid } from '@/utils/deleteConfirmation';
 import type { Character } from '@/types';
 import type { AppDispatch } from '@/store/store';
 import type { Skill, NamedSkill } from '@/types/skills';
@@ -29,8 +39,58 @@ export default function CharacterDetailScreen() {
   const dispatch = useAppDispatch();
   const { colors, fantasy } = useTheme();
   const [activeTab, setActiveTab] = useState('overview');
+  const [confirmVisible, setConfirmVisible] = useState(false);
+  const [confirmInput, setConfirmInput] = useState('');
+  const [deleting, setDeleting] = useState(false);
 
   const { activeCharacter, loading } = useAppSelector((state) => state.characters);
+
+  const characterName = activeCharacter?.info.name ?? '';
+  const canDelete = isDeleteConfirmationValid(confirmInput, characterName);
+
+  const modalThemeStyles = useMemo(
+    () => ({
+      card: { backgroundColor: colors.bg.primary, borderColor: colors.accent.DEFAULT },
+      title: { color: colors.accent.DEFAULT },
+      body: { color: colors.text.secondary },
+      nameHighlight: { color: colors.text.primary, fontWeight: '700' as const },
+      input: {
+        borderColor: colors.border.DEFAULT,
+        backgroundColor: colors.bg.secondary,
+        color: colors.text.primary,
+      },
+    }),
+    [colors],
+  );
+
+  const closeConfirm = () => {
+    if (deleting) return;
+    setConfirmVisible(false);
+    setConfirmInput('');
+  };
+
+  const handleConfirmDelete = async () => {
+    if (!canDelete || deleting) {
+      return;
+    }
+    setDeleting(true);
+    try {
+      await dispatch(deleteCharacter(id)).unwrap();
+      closeConfirm();
+      router.replace('/(tabs)/characters');
+    } catch (err: unknown) {
+      Alert.alert(
+        'Delete Failed',
+        typeof err === 'string'
+          ? err
+          : err instanceof Error
+            ? err.message
+            : 'An error occurred while deleting the character.',
+      );
+    } finally {
+      setDeleting(false);
+    }
+  };
 
   useEffect(() => {
     if (id) {
@@ -76,18 +136,26 @@ export default function CharacterDetailScreen() {
           <Pressable onPress={() => router.back()} style={styles.backButton}>
             <Text style={[styles.backText, { color: colors.text.tertiary }]}>{'< Back'}</Text>
           </Pressable>
-          <OrnateButton
-            title="Edit"
-            onPress={() =>
-              router.push(
-                `/(tabs)/characters/entry?mode=edit&characterId=${id}` as Parameters<
-                  typeof router.push
-                >[0],
-              )
-            }
-            variant="secondary"
-            testID="character-detail-edit"
-          />
+          <View style={styles.headerActions}>
+            <OrnateButton
+              title="Edit"
+              onPress={() =>
+                router.push(
+                  `/(tabs)/characters/entry?mode=edit&characterId=${id}` as Parameters<
+                    typeof router.push
+                  >[0],
+                )
+              }
+              variant="secondary"
+              testID="character-detail-edit"
+            />
+            <OrnateButton
+              title="Delete"
+              onPress={() => setConfirmVisible(true)}
+              variant="danger"
+              testID="delete-character-button"
+            />
+          </View>
         </View>
         <Text style={[styles.characterName, { color: fantasy.gold }]}>
           {activeCharacter.info.name}
@@ -113,42 +181,60 @@ export default function CharacterDetailScreen() {
         {activeTab === 'feats' && <FeatsTab character={activeCharacter} dispatch={dispatch} />}
       </ScrollView>
 
-      <View style={[styles.dangerZone, { borderTopColor: colors.accent.DEFAULT }]}>
-        <Pressable
-          style={[styles.deleteButton, { borderColor: colors.accent.DEFAULT }]}
-          onPress={() =>
-            Alert.alert(
-              'Delete Character',
-              `Are you sure you want to delete ${activeCharacter.info.name}? This cannot be undone.`,
-              [
-                { text: 'Cancel', style: 'cancel' },
-                {
-                  text: 'Delete',
-                  style: 'destructive',
-                  onPress: async () => {
-                    try {
-                      await dispatch(deleteCharacter(id)).unwrap();
-                      router.replace('/(tabs)/characters');
-                    } catch (err: unknown) {
-                      Alert.alert(
-                        'Delete Failed',
-                        err instanceof Error
-                          ? err.message
-                          : 'An error occurred while deleting the character.',
-                      );
-                    }
-                  },
-                },
-              ],
-            )
-          }
-          testID="delete-character-button"
-        >
-          <Text style={[styles.deleteButtonText, { color: colors.accent.DEFAULT }]}>
-            Delete Character
-          </Text>
+      <Modal
+        visible={confirmVisible}
+        transparent
+        animationType="fade"
+        onRequestClose={closeConfirm}
+      >
+        <Pressable style={styles.modalOverlay} onPress={closeConfirm} disabled={deleting}>
+          <Pressable
+            style={[styles.modalCard, modalThemeStyles.card]}
+            onPress={(e) => e.stopPropagation()}
+            testID="delete-confirm-modal"
+          >
+            <Text style={[styles.modalTitle, modalThemeStyles.title]}>
+              Delete Character
+            </Text>
+            <Text style={[styles.modalBody, modalThemeStyles.body]}>
+              This permanently deletes{' '}
+              <Text style={modalThemeStyles.nameHighlight}>
+                {activeCharacter.info.name}
+              </Text>{' '}
+              and cannot be undone. Type the character&apos;s name to confirm.
+            </Text>
+            <TextInput
+              style={[styles.modalInput, modalThemeStyles.input]}
+              value={confirmInput}
+              onChangeText={setConfirmInput}
+              placeholder={activeCharacter.info.name}
+              placeholderTextColor={colors.text.tertiary}
+              autoCapitalize="none"
+              autoCorrect={false}
+              autoFocus
+              testID="delete-confirm-input"
+            />
+            <View style={styles.modalActions}>
+              <OrnateButton
+                title="Cancel"
+                onPress={closeConfirm}
+                variant="ghost"
+                disabled={deleting}
+                style={styles.modalActionButton}
+                testID="delete-confirm-cancel"
+              />
+              <OrnateButton
+                title={deleting ? 'Deleting…' : 'Delete'}
+                onPress={handleConfirmDelete}
+                variant="danger"
+                disabled={!canDelete || deleting}
+                style={styles.modalActionButton}
+                testID="delete-confirm-submit"
+              />
+            </View>
+          </Pressable>
         </Pressable>
-      </View>
+      </Modal>
     </SafeAreaView>
   );
 }
@@ -586,6 +672,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 4,
   },
+  headerActions: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
   backButton: { paddingVertical: 4 },
   backText: { fontFamily: 'LibreBaskerville', fontSize: 13 },
   characterName: {
@@ -606,21 +697,51 @@ const styles = StyleSheet.create({
     lineHeight: 20,
   },
   buttonContainer: { marginTop: 16 },
-  dangerZone: {
-    marginTop: 32,
-    paddingTop: 16,
-    borderTopWidth: 1,
+
+  // Delete confirmation modal
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.6)',
+    justifyContent: 'center',
     alignItems: 'center',
+    padding: 24,
   },
-  deleteButton: {
-    paddingVertical: 12,
-    paddingHorizontal: 32,
-    borderRadius: 6,
+  modalCard: {
+    width: '100%',
+    maxWidth: 420,
+    borderRadius: 12,
     borderWidth: 1,
+    padding: 20,
   },
-  deleteButtonText: {
+  modalTitle: {
+    fontFamily: 'Cinzel',
+    fontSize: 18,
+    fontWeight: '700',
+    marginBottom: 8,
+  },
+  modalBody: {
     fontFamily: 'LibreBaskerville',
     fontSize: 14,
+    lineHeight: 20,
+    marginBottom: 16,
+  },
+  modalInput: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 16,
+    borderWidth: 1,
+    borderRadius: 6,
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+    minHeight: 44,
+    marginBottom: 16,
+  },
+  modalActions: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    gap: 12,
+  },
+  modalActionButton: {
+    minWidth: 110,
   },
 
   // Quick Stats

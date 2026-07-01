@@ -13,7 +13,7 @@ import { useTheme } from '@/hooks/useTheme';
 import { InlinePicker } from '@/components/ui/InlinePicker';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { setActiveRuleset, patchActiveRuleset } from '@/store/slices/rulesetSlice';
-import { SYSTEM_PRESETS } from '@/data/rulesets/presets';
+import { SYSTEM_PRESETS } from '@/config/rulesetPresets';
 import type { Ruleset, SourceCollection, OptionalRules, EitrMode } from '@/types/ruleset';
 
 // ---- Display labels ----
@@ -54,11 +54,13 @@ const OPTIONAL_RULE_LABELS: Record<BoolOptionalRuleKey, string> = {
   crRefunds: 'CR Refunds',
   laBuyback: 'LA Buyback',
   crLaAbilityScoreReductions: 'CR/LA Ability Score Reductions',
+  flaws: 'Flaws (3.5e)',
 };
 
 const OPTIONAL_RULE_ORDER: BoolOptionalRuleKey[] = [
   'pathOfWarMechanics',
   'tomeOfBattleMechanics',
+  'flaws',
   'heroPoints',
   'gestalt',
   'fractionalBABSaves',
@@ -336,7 +338,9 @@ export function RulesetSettingsSheet({ visible, onClose }: RulesetSettingsSheetP
           {/* Section D — Traits */}
           <SectionHeader title="Traits" colors={colors} />
           <View style={styles.numberRow}>
-            <Text style={[styles.numberLabel, { color: colors.text.secondary }]}>Traits allowed</Text>
+            <Text style={[styles.numberLabel, { color: colors.text.secondary }]}>
+              Traits allowed
+            </Text>
             <TextInput
               value={String(activeRuleset.validationSettings.maxTraits)}
               onChangeText={(t) => {
@@ -388,6 +392,37 @@ export function RulesetSettingsSheet({ visible, onClose }: RulesetSettingsSheetP
               fantasy={fantasy}
             />
           ))}
+          {activeRuleset.optionalRules.flaws && (
+            <View style={styles.numberRow}>
+              <Text style={[styles.numberLabel, { color: colors.text.secondary }]}>
+                Flaws allowed
+              </Text>
+              <TextInput
+                value={String(activeRuleset.validationSettings.maxFlaws)}
+                onChangeText={(t) => {
+                  const n = parseInt(t, 10);
+                  if (!isNaN(n) && n >= 0)
+                    patch({
+                      validationSettings: {
+                        ...activeRuleset.validationSettings,
+                        maxFlaws: n,
+                      },
+                    });
+                }}
+                keyboardType="number-pad"
+                selectTextOnFocus
+                style={[
+                  styles.numberInput,
+                  {
+                    color: colors.text.primary,
+                    borderColor: colors.border.DEFAULT,
+                    backgroundColor: isDark ? colors.bg.tertiary : colors.bg.secondary,
+                  },
+                ]}
+                accessibilityLabel="Flaws allowed"
+              />
+            </View>
+          )}
 
           <View style={styles.bottomPad} />
         </ScrollView>

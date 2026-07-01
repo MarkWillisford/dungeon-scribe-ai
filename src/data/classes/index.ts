@@ -1,3 +1,6 @@
+// SEEDING ONLY — do not use in runtime app code.
+// This array seeds Firestore. All runtime reads go through GameDataService → FirestoreGameDataConnector.
+
 // Barrel export for class data — single source of truth for all class information
 
 export type {
@@ -39,7 +42,7 @@ export {
   BLOODRAGER_KNOWN,
 } from './spellProgressionTables';
 
-import { ExpandedClassData } from './types';
+import { ExpandedClassData, isPrestigeCategory } from './types';
 import { CORE_CLASSES_EXPANDED } from './coreClasses';
 import { BASE_CLASSES_EXPANDED } from './baseClasses';
 import { HYBRID_CLASSES_EXPANDED } from './hybridClasses';
@@ -79,7 +82,7 @@ export function getClassesByCategory(category: string): ExpandedClassData[] {
 }
 
 export function getPrestigeClasses(): ExpandedClassData[] {
-  return ALL_EXPANDED_CLASSES.filter((cls) => cls.category === 'Prestige');
+  return ALL_EXPANDED_CLASSES.filter((cls) => isPrestigeCategory(cls.category));
 }
 
 export function getCasterClasses(): ExpandedClassData[] {

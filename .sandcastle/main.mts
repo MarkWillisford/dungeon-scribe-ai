@@ -34,12 +34,95 @@
 //   npx tsx .sandcastle/main.mts
 
 import { createSandbox, claudeCode } from '@ai-hero/sandcastle';
+import type { IterationResult } from '@ai-hero/sandcastle';
 import { docker } from '@ai-hero/sandcastle/sandboxes/docker';
-import { execSync, spawn } from 'node:child_process';
+import { execSync, execFileSync, spawn } from 'node:child_process';
 import { homedir } from 'node:os';
-import { readFileSync } from 'node:fs';
+import { readFileSync, appendFileSync, mkdirSync } from 'node:fs';
+import { join } from 'node:path';
 
-const POLL_INTERVAL_MS = 30_000;
+// ---------------------------------------------------------------------------
+// Token usage logging
+// ---------------------------------------------------------------------------
+
+const SANDCASTLE_MODEL = 'claude-sonnet-4-6';
+
+const TOKEN_RATES = {
+  input: 3.00 / 1_000_000,
+  output: 15.00 / 1_000_000,
+  cacheRead: 0.30 / 1_000_000,
+  cacheCreation: 3.75 / 1_000_000,
+} as const;
+
+const USAGE_LOG_PATH = join(
+  new URL(import.meta.url).pathname,
+  '../../.sandcastle/logs/usage.jsonl',
+);
+
+function ensureUsageLogDir(): void {
+  mkdirSync(join(USAGE_LOG_PATH, '..'), { recursive: true });
+}
+
+type UsageOutcome = 'complete' | 'needs_review' | 'error' | 'rate_limited';
+
+interface UsageRecord {
+  type: 'sandcastle_run';
+  ts: string;
+  issue_number: number;
+  model: string;
+  outcome: UsageOutcome;
+  duration_ms: number;
+  iteration_count: number;
+  tokens: {
+    input: number;
+    output: number;
+    cache_read: number;
+    cache_creation: number;
+  } | null;
+  estimated_cost_usd: number | null;
+  session_ids: string[];
+  completion_signal: string | undefined;
+  error: string | null;
+}
+
+function aggregateUsage(
+  iterations: IterationResult[],
+): { tokens: UsageRecord['tokens']; estimated_cost_usd: number } | null {
+  const withUsage = iterations.filter((it) => it.usage != null);
+  if (withUsage.length === 0) return null;
+
+  let input = 0;
+  let output = 0;
+  let cache_read = 0;
+  let cache_creation = 0;
+
+  for (const it of withUsage) {
+    const u = it.usage!;
+    input += u.inputTokens;
+    output += u.outputTokens;
+    cache_read += u.cacheReadInputTokens;
+    cache_creation += u.cacheCreationInputTokens;
+  }
+
+  const estimated_cost_usd =
+    input * TOKEN_RATES.input +
+    output * TOKEN_RATES.output +
+    cache_read * TOKEN_RATES.cacheRead +
+    cache_creation * TOKEN_RATES.cacheCreation;
+
+  return { tokens: { input, output, cache_read, cache_creation }, estimated_cost_usd };
+}
+
+function writeUsageRecord(record: UsageRecord): void {
+  try {
+    ensureUsageLogDir();
+    appendFileSync(USAGE_LOG_PATH, JSON.stringify(record) + '\n', 'utf8');
+  } catch (err) {
+    console.error('Failed to write usage log:', err);
+  }
+}
+
+const POLL_INTERVAL_MS = 300_000; // 5 minutes
 const DOCKER_IMAGE = 'sandcastle:dungeon-scribe-ai';
 const SCRIPT_PATH = new URL(import.meta.url).pathname;
 
@@ -47,6 +130,7 @@ const LABEL_SANDCASTLE = 'sandcastle';
 const LABEL_IN_PROGRESS = 'sandcastle-in-progress';
 const LABEL_ARCH_REVIEW = 'sandcastle-architecture-review';
 const LABEL_DONE = 'sandcastle-done';
+const LABEL_REVIEW_PASSED = 'review-passed';
 
 const COMPLETION_SIGNALS = ['<promise>COMPLETE</promise>', '<promise>NEEDS_REVIEW</promise>'];
 
@@ -86,6 +170,24 @@ function restartIfScriptChanged(): void {
     child.unref();
     process.exit(0);
   }
+}
+
+// ---------------------------------------------------------------------------
+// Rate limit handling
+// ---------------------------------------------------------------------------
+
+function parseResetEpoch(text: string): number | null {
+  const match = text.match(/resets (\d+):(\d+)(am|pm) \(UTC\)/i);
+  if (!match) return null;
+  let hours = parseInt(match[1], 10);
+  const minutes = parseInt(match[2], 10);
+  const ampm = match[3].toLowerCase();
+  if (ampm === 'pm' && hours !== 12) hours += 12;
+  if (ampm === 'am' && hours === 12) hours = 0;
+  const now = new Date();
+  const reset = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), hours, minutes, 0));
+  if (reset.getTime() <= Date.now()) reset.setUTCDate(reset.getUTCDate() + 1);
+  return reset.getTime();
 }
 
 // ---------------------------------------------------------------------------
@@ -140,33 +242,120 @@ function parseBlockers(body: string): number[] {
   return [...match[1].matchAll(/#(\d+)/g)].map((m) => parseInt(m[1], 10));
 }
 
-// Check whether a GitHub issue/PR is closed. Cached per poll cycle.
-const resolvedCache = new Map<number, boolean>();
-function isIssueResolved(issueNumber: number): boolean {
-  if (resolvedCache.has(issueNumber)) return resolvedCache.get(issueNumber)!;
+// A blocker is "resolved" when either:
+//   - the issue is CLOSED (merged into main), or
+//   - the issue has an open PR with the review-passed label (babysit converged,
+//     waiting on human review -- safe to start downstream work on that branch).
+//
+// baseBranch is non-null when the blocker resolved via review-passed rather than
+// merge, and downstream work should branch from that PR's head rather than main.
+interface BlockerResolution {
+  resolved: boolean;
+  baseBranch: string | null;
+}
+
+// Caches for the current poll cycle -- both cleared in the poll loop.
+const resolverCache = new Map<number, BlockerResolution>();
+let reviewPassedPRsCache: Array<{ number: number; headRefName: string; body: string }> | null =
+  null;
+
+function getReviewPassedPRs(): Array<{ number: number; headRefName: string; body: string }> {
+  if (reviewPassedPRsCache) return reviewPassedPRsCache;
+  try {
+    const out = execSync(
+      `gh pr list --state open --label "${LABEL_REVIEW_PASSED}" --json number,headRefName,body`,
+      { encoding: 'utf8' },
+    );
+    reviewPassedPRsCache = JSON.parse(out);
+  } catch {
+    reviewPassedPRsCache = [];
+  }
+  return reviewPassedPRsCache!;
+}
+
+function findReviewPassedPR(
+  issueNumber: number,
+): { headRefName: string } | null {
+  const matches = getReviewPassedPRs().filter((pr) =>
+    new RegExp(`(?:closes|fixes|resolves)\\s+#${issueNumber}\\b`, 'i').test(pr.body ?? ''),
+  );
+  const uniqueHeads = [...new Set(matches.map((pr) => pr.headRefName))];
+  if (uniqueHeads.length !== 1) return null;
+  return { headRefName: uniqueHeads[0] };
+}
+
+function resolveBlocker(issueNumber: number): BlockerResolution {
+  if (resolverCache.has(issueNumber)) return resolverCache.get(issueNumber)!;
+
+  // First: is the issue closed (merged)?
   try {
     const out = execSync(`gh issue view ${issueNumber} --json state`, { encoding: 'utf8' });
-    const resolved = JSON.parse(out).state === 'CLOSED';
-    resolvedCache.set(issueNumber, resolved);
-    return resolved;
-  } catch {
-    // Issue not found or inaccessible -- treat as resolved so it doesn't block forever.
-    resolvedCache.set(issueNumber, true);
-    return true;
+    if (JSON.parse(out).state === 'CLOSED') {
+      const result: BlockerResolution = { resolved: true, baseBranch: null };
+      resolverCache.set(issueNumber, result);
+      return result;
+    }
+  } catch (err) {
+    console.error(`Failed to inspect blocker #${issueNumber}:`, err);
+    // Retry next poll cycle instead of incorrectly unblocking downstream work.
+    const result: BlockerResolution = { resolved: false, baseBranch: null };
+    resolverCache.set(issueNumber, result);
+    return result;
   }
+
+  // Second: open issue with a review-passed PR? Safe to start downstream work.
+  const linkedPR = findReviewPassedPR(issueNumber);
+  if (linkedPR) {
+    const result: BlockerResolution = { resolved: true, baseBranch: linkedPR.headRefName };
+    resolverCache.set(issueNumber, result);
+    return result;
+  }
+
+  const result: BlockerResolution = { resolved: false, baseBranch: null };
+  resolverCache.set(issueNumber, result);
+  return result;
+}
+
+// The issue to work on next, paired with the git branch it should base on.
+// baseBranch is 'main' for fully-merged dependency chains, or a pre-merge
+// parent branch when starting downstream of a review-passed PR.
+interface IssueSelection {
+  issue: GitHubIssue;
+  baseBranch: string;
 }
 
 // Walk the dependency graph to find the best issue to work on.
 // If an issue has unresolved blockers, recurse into those first.
 // Skips issues whose blockers are all in-progress or outside the queue.
 // visited guards against cycles.
-function selectIssue(issues: GitHubIssue[], visited = new Set<number>()): GitHubIssue | null {
+function selectIssue(issues: GitHubIssue[], visited = new Set<number>()): IssueSelection | null {
   for (const issue of issues) {
     if (visited.has(issue.number)) continue;
     visited.add(issue.number);
 
-    const unresolvedBlockers = parseBlockers(issue.body).filter((n) => !isIssueResolved(n));
-    if (unresolvedBlockers.length === 0) return issue;
+    const blockerNumbers = parseBlockers(issue.body);
+    const unresolvedBlockers = blockerNumbers.filter((n) => !resolveBlocker(n).resolved);
+
+    if (unresolvedBlockers.length === 0) {
+      // All blockers resolved. Determine the base branch: if exactly one blocker
+      // resolved via review-passed (not yet merged), start downstream work on that
+      // branch. If multiple pre-merge parents exist, wait for merges to avoid a
+      // complex multi-parent base.
+      const reviewPassedBranches = [
+        ...new Set(
+          blockerNumbers
+            .map((n) => resolveBlocker(n).baseBranch)
+            .filter((b): b is string => b !== null),
+        ),
+      ];
+
+      if (reviewPassedBranches.length > 1) {
+        // Multiple unmerged parents -- too complex to base safely. Skip for now.
+        continue;
+      }
+
+      return { issue, baseBranch: reviewPassedBranches[0] ?? 'main' };
+    }
 
     for (const blockerNum of unresolvedBlockers) {
       const blockerIssue = issues.find(
@@ -186,21 +375,34 @@ function selectIssue(issues: GitHubIssue[], visited = new Set<number>()): GitHub
 // Issue processing
 // ---------------------------------------------------------------------------
 
-async function processIssue(issue: GitHubIssue): Promise<void> {
+function git(args: string[], options: Record<string, unknown> = {}): string {
+  return execFileSync('git', args, { encoding: 'utf8', ...options }) as string;
+}
+
+async function processIssue(issue: GitHubIssue, baseBranch = 'main'): Promise<void> {
   const { number: issueNumber, title } = issue;
   const branch = `sandcastle/issue-${issueNumber}`;
 
   console.log(`\nPicking up issue #${issueNumber}: ${title}`);
-  console.log(`Branch: ${branch}`);
+  console.log(`Branch: ${branch} (base: ${baseBranch})`);
 
-  // Ensure we are on main and fast-forward it to origin/main.
+  // Fetch main and, when branching from a pre-merge parent, that branch too.
   // Using fetch + reset (rather than pull) avoids both the "divergent branches"
   // error from unconfigured pull.rebase and the refspec rejection that occurs
   // when main is checked out and we try to fetch into refs/heads/main directly.
-  execSync('git fetch origin main', { encoding: 'utf8' });
-  execSync('git checkout main', { encoding: 'utf8', stdio: 'pipe' });
-  execSync('git reset --hard origin/main', { encoding: 'utf8', stdio: 'pipe' });
-  console.log('main updated.');
+  const fetchArgs = baseBranch !== 'main' ? ['origin', 'main', baseBranch] : ['origin', 'main'];
+  git(['fetch', ...fetchArgs]);
+
+  if (baseBranch !== 'main') {
+    // Position HEAD at the pre-merge parent so createSandbox branches from there
+    // if the issue branch doesn't exist yet.
+    git(['checkout', '--detach', `origin/${baseBranch}`], { stdio: 'pipe' });
+    console.log(`Positioned at base: ${baseBranch}`);
+  } else {
+    execSync('git checkout main', { encoding: 'utf8', stdio: 'pipe' });
+    execSync('git reset --hard origin/main', { encoding: 'utf8', stdio: 'pipe' });
+    console.log('main updated.');
+  }
 
   // Remove any stale worktree for this branch left over from a prior crashed run.
   try {
@@ -213,32 +415,41 @@ async function processIssue(issue: GitHubIssue): Promise<void> {
     // No stale worktree — nothing to do.
   }
 
-  // If the branch already exists, rebase it onto main so the agent doesn't work
-  // on stale code. If the rebase conflicts (e.g. squash-merged commits), reset
-  // the branch to main and start fresh.
+  // If the branch already exists, rebase it onto the base so the agent doesn't work
+  // on stale code. If the rebase conflicts (e.g. squash-merged commits, or parent
+  // branch was amended after babysit exited), reset the branch to the base and start fresh.
+  const rebaseTarget = baseBranch !== 'main' ? `origin/${baseBranch}` : 'main';
   let branchExists = false;
   try {
     execSync(`git rev-parse --verify ${branch}`, { encoding: 'utf8', stdio: 'pipe' });
     branchExists = true;
   } catch {
-    // Branch doesn't exist yet — createSandbox will create it from current main.
+    // Branch doesn't exist yet — createSandbox will create it from current HEAD.
   }
   if (branchExists) {
     try {
-      execSync(`git rebase main ${branch}`, { encoding: 'utf8', stdio: 'pipe' });
+      git(['rebase', rebaseTarget, branch], { stdio: 'pipe' });
       // git rebase <upstream> <branch> checks out <branch> into the working tree.
-      // We must return to main so the SDK can create a fresh worktree for the branch.
-      execSync(`git checkout main`, { encoding: 'utf8', stdio: 'pipe' });
-      console.log(`${branch} rebased onto main.`);
+      // Return to the base ref so the SDK can create a fresh worktree for the branch.
+      if (baseBranch !== 'main') {
+        git(['checkout', '--detach', `origin/${baseBranch}`], { stdio: 'pipe' });
+      } else {
+        execSync('git checkout main', { encoding: 'utf8', stdio: 'pipe' });
+      }
+      console.log(`${branch} rebased onto ${baseBranch}.`);
     } catch {
       try {
         execSync('git rebase --abort', { encoding: 'utf8', stdio: 'pipe' });
       } catch {
         // Rebase may have already been aborted or not started cleanly.
       }
-      execSync(`git checkout -f main`, { encoding: 'utf8', stdio: 'pipe' });
-      execSync(`git branch -f ${branch} main`, { encoding: 'utf8', stdio: 'pipe' });
-      console.log(`${branch} had rebase conflicts — reset to main.`);
+      if (baseBranch !== 'main') {
+        git(['checkout', '--detach', '--force', `origin/${baseBranch}`], { stdio: 'pipe' });
+      } else {
+        execSync('git checkout -f main', { encoding: 'utf8', stdio: 'pipe' });
+      }
+      git(['branch', '-f', branch, rebaseTarget], { stdio: 'pipe' });
+      console.log(`${branch} had rebase conflicts — reset to ${baseBranch}.`);
     }
   }
 
@@ -268,6 +479,7 @@ async function processIssue(issue: GitHubIssue): Promise<void> {
     hooks,
   });
 
+  const startTs = Date.now();
   try {
     const result = await box.run({
       name: `issue-${issueNumber}`,
@@ -278,7 +490,29 @@ async function processIssue(issue: GitHubIssue): Promise<void> {
       completionSignal: COMPLETION_SIGNALS,
     });
 
-    if (result.completionSignal === '<promise>NEEDS_REVIEW</promise>') {
+    const durationMs = Date.now() - startTs;
+    const usageData = aggregateUsage(result.iterations);
+    const outcome: UsageOutcome =
+      result.completionSignal === '<promise>NEEDS_REVIEW</promise>' ? 'needs_review' : 'complete';
+
+    writeUsageRecord({
+      type: 'sandcastle_run',
+      ts: new Date().toISOString(),
+      issue_number: issueNumber,
+      model: SANDCASTLE_MODEL,
+      outcome,
+      duration_ms: durationMs,
+      iteration_count: result.iterations.length,
+      tokens: usageData?.tokens ?? null,
+      estimated_cost_usd: usageData?.estimated_cost_usd ?? null,
+      session_ids: result.iterations
+        .map((it) => it.sessionId)
+        .filter((id): id is string => id !== undefined),
+      completion_signal: result.completionSignal,
+      error: null,
+    });
+
+    if (outcome === 'needs_review') {
       console.log(`Issue #${issueNumber} paused for review.`);
       removeLabel(issueNumber, LABEL_IN_PROGRESS);
       addLabel(issueNumber, LABEL_ARCH_REVIEW);
@@ -288,11 +522,89 @@ async function processIssue(issue: GitHubIssue): Promise<void> {
       addLabel(issueNumber, LABEL_DONE);
     }
   } catch (err) {
-    console.error(`Error processing issue #${issueNumber}:`, err);
-    removeLabel(issueNumber, LABEL_IN_PROGRESS);
-    addLabel(issueNumber, LABEL_SANDCASTLE);
+    const durationMs = Date.now() - startTs;
+    const msg = String((err as any)?.message ?? err ?? '');
+    const isRateLimited = msg.toLowerCase().includes('hit your limit');
+
+    writeUsageRecord({
+      type: 'sandcastle_run',
+      ts: new Date().toISOString(),
+      issue_number: issueNumber,
+      model: SANDCASTLE_MODEL,
+      outcome: isRateLimited ? 'rate_limited' : 'error',
+      duration_ms: durationMs,
+      iteration_count: 0,
+      tokens: null,
+      estimated_cost_usd: null,
+      session_ids: [],
+      completion_signal: undefined,
+      error: msg,
+    });
+
+    if (isRateLimited) {
+      const resetEpoch = parseResetEpoch(msg);
+      const waitMs = resetEpoch
+        ? Math.max(resetEpoch - Date.now() + 120_000, 0)
+        : 3_600_000;
+      const waitMins = Math.ceil(waitMs / 60_000);
+      console.log(
+        `Rate limited on issue #${issueNumber}. Re-queuing and waiting ${waitMins}m for reset...`,
+      );
+      removeLabel(issueNumber, LABEL_IN_PROGRESS);
+      addLabel(issueNumber, LABEL_SANDCASTLE);
+      await box.close();
+      await sleep(waitMs);
+    } else {
+      console.error(`Error processing issue #${issueNumber}:`, err);
+      removeLabel(issueNumber, LABEL_IN_PROGRESS);
+      addLabel(issueNumber, LABEL_SANDCASTLE);
+    }
   } finally {
-    await box.close();
+    await box.close().catch(() => {});
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Conflict watcher
+// ---------------------------------------------------------------------------
+
+// On each poll cycle, scan open PRs that babysit already cleared (review-passed)
+// for merge conflicts. A conflict means the parent branch changed after babysit
+// exited clean -- most likely because Mark requested changes on a parent PR.
+// Re-queue the linked issue so Sandcastle rebases it and re-runs babysit.
+async function checkConflictedReviewPassedPRs(): Promise<void> {
+  let prs: Array<{ number: number; mergeable: string; body: string }>;
+  try {
+    const out = execSync(
+      `gh pr list --state open --label "${LABEL_REVIEW_PASSED}" --json number,mergeable,body`,
+      { encoding: 'utf8' },
+    );
+    prs = JSON.parse(out);
+  } catch {
+    return;
+  }
+
+  for (const pr of prs) {
+    if (pr.mergeable !== 'CONFLICTING') continue;
+
+    const match = pr.body?.match(/(?:closes|fixes|resolves)\s+#(\d+)/i);
+    if (!match) continue;
+    const issueNumber = parseInt(match[1], 10);
+
+    console.log(
+      `PR #${pr.number} has a merge conflict — re-queuing issue #${issueNumber} for rebase`,
+    );
+    try {
+      execSync(
+        `gh issue edit ${issueNumber} --remove-label "${LABEL_ARCH_REVIEW}" --add-label "${LABEL_SANDCASTLE}"`,
+        { encoding: 'utf8' },
+      );
+      execSync(`gh pr edit ${pr.number} --remove-label "${LABEL_REVIEW_PASSED}"`, {
+        encoding: 'utf8',
+      });
+    } catch (err) {
+      console.error(`Failed to re-queue issue #${issueNumber}:`, err);
+    }
   }
 }
 
@@ -317,17 +629,23 @@ async function poll(): Promise<void> {
       continue;
     }
 
-    resolvedCache.clear();
+    // Clear per-cycle caches before any resolution or PR lookups.
+    resolverCache.clear();
+    reviewPassedPRsCache = null;
+
+    // Re-queue any review-passed PRs that developed a conflict since babysit
+    // last ran -- parent branch changed while child was waiting for human review.
+    await checkConflictedReviewPassedPRs();
 
     const issues = listSandcastleIssues();
     const eligible = issues.filter(
       (issue) => !issue.labels.some((l) => l.name === LABEL_ARCH_REVIEW),
     );
 
-    const next = selectIssue(eligible);
+    const selection = selectIssue(eligible);
 
-    if (next) {
-      await processIssue(next);
+    if (selection) {
+      await processIssue(selection.issue, selection.baseBranch);
     } else if (issues.length === 0) {
       console.log('Queue empty — all issues complete. Shutting down.');
       process.exit(0);

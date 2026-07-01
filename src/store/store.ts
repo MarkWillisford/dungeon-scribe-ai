@@ -28,10 +28,11 @@ export const store = configureStore({
           'auth/login/fulfilled',
           'auth/signup/fulfilled',
           'auth/googleLogin/fulfilled',
+          'characters/fetchCharacter/fulfilled',
           'characters/fetchCharacters/fulfilled',
           'characters/createCharacter/fulfilled',
           'characters/updateCharacter/fulfilled',
-          // Character entry actions carry full Character objects which contain Map fields.
+          // Character entry actions carry full Character objects which contain Date fields.
           'characterEntry/loadCharacter',
           'characterEntry/applyComputedStats',
           'characterEntry/save/fulfilled',
@@ -41,12 +42,10 @@ export const store = configureStore({
           'auth.user.lastLogin',
           'characters.characters',
           'characters.activeCharacter',
-          // Date objects and Map<ItemSlot,string> on the active character.
-          // Serializable state only applies at the persistence boundary;
-          // Map↔Record and Date↔string conversions are handled when saving to Firestore.
+          // Date objects on the active character entry.
+          // Date↔string conversions are handled when saving to Firestore.
           'characterEntry.character.lastUpdated',
           'characterEntry.character.createdAt',
-          'characterEntry.character.equipment.equippedSlots',
           'characterEntry.character.companions',
         ],
       },

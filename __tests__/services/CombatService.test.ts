@@ -94,7 +94,7 @@ describe('CombatService.getCombatAbilityEffects', () => {
   it('Power Attack produces melee attack penalty and damage bonus', () => {
     const effects = CombatService.getCombatAbilityEffects(fighter, {
       ...defaultAbilities,
-      powerAttack: true,
+      activeToggles: { power_attack: true },
     });
     const attackEffect = effects.find((e) => e.target === 'attack.melee');
     const damageEffect = effects.find((e) => e.target === 'damage.melee');
@@ -107,7 +107,7 @@ describe('CombatService.getCombatAbilityEffects', () => {
   it('Deadly Aim produces ranged attack penalty and damage bonus', () => {
     const effects = CombatService.getCombatAbilityEffects(fighter, {
       ...defaultAbilities,
-      deadlyAim: true,
+      activeToggles: { deadly_aim: true },
     });
     expect(effects.find((e) => e.target === 'attack.ranged')?.value).toBeLessThan(0);
     expect(effects.find((e) => e.target === 'damage.ranged')?.value).toBeGreaterThan(0);
@@ -116,7 +116,7 @@ describe('CombatService.getCombatAbilityEffects', () => {
   it('Rage produces STR, CON, Will bonuses and AC penalty', () => {
     const effects = CombatService.getCombatAbilityEffects(fighter, {
       ...defaultAbilities,
-      rage: true,
+      activeToggles: { rage: true },
     });
     const strEffect = effects.find((e) => e.target === 'ability.str');
     const conEffect = effects.find((e) => e.target === 'ability.con');
@@ -130,22 +130,31 @@ describe('CombatService.getCombatAbilityEffects', () => {
     expect(acEffect?.value).toBe(-2);
   });
 
-  it('Haste produces dodge AC, dodge Reflex, untyped attack, enhancement speed', () => {
+  it('Combat Expertise applies penalty to attacks and dodge bonus to AC', () => {
+    // fighter is level 1 (BAB 1): Math.floor(1/4)+1 = 1
     const effects = CombatService.getCombatAbilityEffects(fighter, {
       ...defaultAbilities,
-      haste: true,
+      activeToggles: { combat_expertise: true },
     });
-    expect(effects.find((e) => e.target === 'ac.dodge' && e.source === 'Haste')?.value).toBe(1);
-    expect(effects.find((e) => e.target === 'save.reflex')?.bonusType).toBe(BonusType.DODGE);
-    expect(effects.find((e) => e.target === 'attack.all')?.value).toBe(1);
-    expect(effects.find((e) => e.target === 'speed.base')?.value).toBe(30);
+    expect(effects.find((e) => e.target === 'attack.melee')?.value).toBe(-1);
+    expect(effects.find((e) => e.target === 'attack.ranged')?.value).toBe(-1);
+    expect(
+      effects.find((e) => e.target === 'ac.dodge' && e.source === 'Combat Expertise')?.value,
+    ).toBe(1);
   });
 
-  it('Combat Expertise applies penalty to attacks and dodge bonus to AC', () => {
-    const effects = CombatService.getCombatAbilityEffects(fighter, {
+  it('Combat Expertise penalty scales with BAB (BAB 8 → penalty 3)', () => {
+    const highBabFighter = { ...fighter } as typeof fighter;
+    highBabFighter.combatStats = {
+      ...fighter.combatStats,
+      attackBonuses: {
+        ...fighter.combatStats.attackBonuses,
+        baseAttack: [8],
+      },
+    };
+    const effects = CombatService.getCombatAbilityEffects(highBabFighter, {
       ...defaultAbilities,
-      combatExpertise: true,
-      combatExpertisePenalty: 3,
+      activeToggles: { combat_expertise: true },
     });
     expect(effects.find((e) => e.target === 'attack.melee')?.value).toBe(-3);
     expect(effects.find((e) => e.target === 'attack.ranged')?.value).toBe(-3);
@@ -170,6 +179,83 @@ describe('CombatService.getCombatAbilityEffects', () => {
       twoWeaponFightingLightOffhand: true,
     });
     expect(effects.find((e) => e.target === 'attack.melee')?.value).toBe(-4);
+  });
+
+  describe('Smite Evil', () => {
+    function makePaladin(chaScore = 16): Character {
+      const char = CharacterService.createDefaultCharacter({
+        name: 'Test Paladin',
+        race: mockRace,
+        selectedClass: 'Paladin',
+        abilityScoreMethod: AbilityScoreMethod.PointBuy,
+        abilityScores: { str: 14, dex: 10, con: 12, int: 8, wis: 14, cha: chaScore },
+        alignment: Alignment.LawfulGood,
+      });
+      return ModifierPipelineService.recalculate(char);
+    }
+
+    it('produces no effects when smite-evil toggle is off', () => {
+      const paladin = makePaladin();
+      const effects = CombatService.getCombatAbilityEffects(paladin, defaultAbilities);
+      expect(effects.every((e) => e.source !== 'Smite Evil')).toBe(true);
+    });
+
+    it('produces attack, damage, and deflection effects when toggle is on and CHA is positive', () => {
+      // CHA 16 → modifier +3; Paladin level 1
+      const paladin = makePaladin(16);
+      const effects = CombatService.getCombatAbilityEffects(paladin, {
+        ...defaultAbilities,
+        activeToggles: { 'smite-evil': true },
+      });
+
+      const attackEffect = effects.find(
+        (e) => e.target === 'attack.melee' && e.source === 'Smite Evil',
+      );
+      const damageEffect = effects.find(
+        (e) => e.target === 'damage.melee' && e.source === 'Smite Evil',
+      );
+      const deflectionEffect = effects.find(
+        (e) => e.target === 'ac.deflection' && e.source === 'Smite Evil',
+      );
+
+      expect(attackEffect).toBeDefined();
+      expect(attackEffect!.value).toBe(3); // +CHA modifier
+      expect(attackEffect!.bonusType).toBe(BonusType.UNTYPED);
+
+      expect(damageEffect).toBeDefined();
+      expect(damageEffect!.value).toBe(1); // +paladin level (1)
+      expect(damageEffect!.bonusType).toBe(BonusType.UNTYPED);
+
+      expect(deflectionEffect).toBeDefined();
+      expect(deflectionEffect!.value).toBe(3); // +CHA modifier
+      expect(deflectionEffect!.bonusType).toBe(BonusType.DEFLECTION);
+    });
+
+    it('omits attack and deflection effects when CHA modifier is not positive', () => {
+      // CHA 8 → modifier -1
+      const paladin = makePaladin(8);
+      const effects = CombatService.getCombatAbilityEffects(paladin, {
+        ...defaultAbilities,
+        activeToggles: { 'smite-evil': true },
+      });
+
+      const smiteEffects = effects.filter((e) => e.source === 'Smite Evil');
+      expect(smiteEffects.find((e) => e.target === 'attack.melee')).toBeUndefined();
+      expect(smiteEffects.find((e) => e.target === 'ac.deflection')).toBeUndefined();
+      // Damage bonus still applies (level 1 paladin)
+      expect(smiteEffects.find((e) => e.target === 'damage.melee')?.value).toBe(1);
+    });
+
+    it('does not produce smite effects for non-paladin characters', () => {
+      const effects = CombatService.getCombatAbilityEffects(fighter, {
+        ...defaultAbilities,
+        activeToggles: { 'smite-evil': true },
+      });
+
+      const smiteEffects = effects.filter((e) => e.source === 'Smite Evil');
+      // No paladin class → smiteLevel = 0, no damage effect; CHA -1 → no attack/deflection
+      expect(smiteEffects).toHaveLength(0);
+    });
   });
 });
 
@@ -352,7 +438,7 @@ describe('CombatService.calculateAllTotals', () => {
     const base = CombatService.calculateAllTotals(fighter, [], defaultAbilities);
     const withPA = CombatService.calculateAllTotals(fighter, [], {
       ...defaultAbilities,
-      powerAttack: true,
+      activeToggles: { power_attack: true },
     });
     expect(withPA.meleeAttack[0]).toBeLessThan(base.meleeAttack[0]);
   });
@@ -362,7 +448,7 @@ describe('CombatService.calculateAllTotals', () => {
     const base = CombatService.calculateAllTotals(fighter, [], defaultAbilities);
     const withRage = CombatService.calculateAllTotals(fighter, [], {
       ...defaultAbilities,
-      rage: true,
+      activeToggles: { rage: true },
     });
     // Rage adds +4 STR → +2 STR mod → +2 melee attack
     expect(withRage.meleeAttack[0]).toBe(base.meleeAttack[0] + 2);
@@ -373,20 +459,9 @@ describe('CombatService.calculateAllTotals', () => {
     const base = CombatService.calculateAllTotals(fighter, [], defaultAbilities);
     const withRage = CombatService.calculateAllTotals(fighter, [], {
       ...defaultAbilities,
-      rage: true,
+      activeToggles: { rage: true },
     });
     expect(withRage.ac.total).toBe(base.ac.total - 2);
-  });
-
-  it('Haste adds +1 to all attacks and +1 dodge AC', () => {
-    const fighter = makeFighter();
-    const base = CombatService.calculateAllTotals(fighter, [], defaultAbilities);
-    const withHaste = CombatService.calculateAllTotals(fighter, [], {
-      ...defaultAbilities,
-      haste: true,
-    });
-    expect(withHaste.meleeAttack[0]).toBe(base.meleeAttack[0] + 1);
-    expect(withHaste.ac.total).toBe(base.ac.total + 1);
   });
 
   it('skill buffs are included in skill totals', () => {
@@ -446,6 +521,27 @@ describe('CombatService.getHPState', () => {
   it('dead at or below -CON score', () => {
     expect(CombatService.getHPState(-14, MAX, CON)).toBe('dead');
     expect(CombatService.getHPState(-20, MAX, CON)).toBe('dead');
+  });
+
+  it('unconscious when nonlethal exceeds max HP', () => {
+    expect(CombatService.getHPState(15, MAX, CON, 21)).toBe('unconscious');
+    expect(CombatService.getHPState(20, MAX, CON, 25)).toBe('unconscious');
+  });
+
+  it('not unconscious when nonlethal equals max HP', () => {
+    expect(CombatService.getHPState(15, MAX, CON, 20)).not.toBe('unconscious');
+  });
+
+  it('dead takes priority over unconscious', () => {
+    expect(CombatService.getHPState(-14, MAX, CON, 25)).toBe('dead');
+  });
+
+  it('dying takes priority over unconscious', () => {
+    expect(CombatService.getHPState(-1, MAX, CON, 25)).toBe('dying');
+  });
+
+  it('defaults nonlethalDamage to 0 (backward compatible)', () => {
+    expect(CombatService.getHPState(15, MAX, CON)).toBe('healthy');
   });
 });
 

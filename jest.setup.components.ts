@@ -20,6 +20,7 @@ jest.mock('react-native', () => {
     Dimensions: { get: () => ({ width: 375, height: 812 }) },
     View: mockComponent('View'),
     Text: mockComponent('Text'),
+    SafeAreaView: mockComponent('SafeAreaView'),
     TextInput: (props: any) => {
       const { onChangeText, onFocus, onBlur, ...rest } = props;
       return React.createElement('TextInput', {
@@ -99,7 +100,7 @@ jest.mock('react-native', () => {
     Modal: (props: any) => {
       const { visible, children, ...rest } = props;
       if (!visible) return null;
-      return React.createElement('Modal', rest, children);
+      return React.createElement('Modal', { ...rest, visible }, children);
     },
     Alert: { alert: jest.fn() },
     Animated: {
@@ -172,7 +173,8 @@ jest.mock('react-native-safe-area-context', () => {
   const React = require('react');
   return {
     SafeAreaView: (props: any) => React.createElement('SafeAreaView', props, props.children),
-    SafeAreaProvider: (props: any) => React.createElement('SafeAreaProvider', props, props.children),
+    SafeAreaProvider: (props: any) =>
+      React.createElement('SafeAreaProvider', props, props.children),
     useSafeAreaInsets: () => ({ top: 0, right: 0, bottom: 0, left: 0 }),
     useSafeAreaFrame: () => ({ x: 0, y: 0, width: 375, height: 812 }),
   };

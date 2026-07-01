@@ -112,8 +112,7 @@ export interface Equipment {
   magicItems: CharacterMagicItem[];
   gear: Gear[];
 
-  // Equipment slot management — serialized as Record for Firestore
-  equippedSlots: Map<EquipmentSlot, string>;
+  equippedSlots: Partial<Record<EquipmentSlot, string>>;
 
   encumbranceSettings: EncumbranceSettings;
 

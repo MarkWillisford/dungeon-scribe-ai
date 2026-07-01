@@ -234,6 +234,7 @@ function blankCharacter(): Character {
     } as any,
     feats: { feats: [], totalFeats: 0, bonusFeats: 0 },
     traits: { traits: [], maxTraits: 2 },
+    flaws: { flaws: [], maxFlaws: 2 },
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     equipment: {} as any,
     spellcasting: {
@@ -569,6 +570,54 @@ describe('CharacterTimelineService', () => {
       // After Wizard 2 (ECL 5): CL 2
       const at5 = timeline.checkpoints[4].snapshot.spellcasting.pools;
       expect(at5[0].baseCasterLevel).toBe(2);
+    });
+
+    it('eidolons are included in snapshots when summoner class is present', () => {
+      const character = blankCharacter();
+      const summonerClass = makeClass('Summoner', 3, 'summoner-entry-1');
+      character.classes.classes = [summonerClass];
+      character.eidolons = [
+        {
+          id: 'eidolon-1',
+          name: 'Zephyr',
+          summonerClassEntryId: 'summoner-entry-1',
+          edition: 'apg',
+          baseForm: 'biped',
+          selectedEvolutions: [
+            { instanceId: 'ev-inst-1', evolutionId: 'evolution-bite' },
+            { instanceId: 'ev-inst-2', evolutionId: 'evolution-claws' },
+          ],
+        },
+      ];
+
+      const timeline = CharacterTimelineService.buildTimeline(character, undefined, EMPTY_MAP);
+      const finalSnapshot = timeline.checkpoints[timeline.checkpoints.length - 1].snapshot;
+      expect(finalSnapshot.eidolons).toHaveLength(1);
+      expect(finalSnapshot.eidolons[0].id).toBe('eidolon-1');
+      expect(finalSnapshot.eidolons[0].selectedEvolutions).toHaveLength(2);
+      expect(finalSnapshot.eidolons[0].selectedEvolutions[0].evolutionId).toBe('evolution-bite');
+    });
+
+    it('eidolons tied to a class not yet present are excluded from earlier snapshots', () => {
+      const character = blankCharacter();
+      character.classes.classes = [
+        makeClass('Fighter', 2, 'fighter-1'),
+        makeClass('Summoner', 1, 'summoner-1'),
+      ];
+      character.eidolons = [
+        {
+          id: 'eid-1',
+          name: 'Zephyr',
+          summonerClassEntryId: 'summoner-1',
+          edition: 'apg',
+          baseForm: 'biped',
+          selectedEvolutions: [{ instanceId: 'inst-1', evolutionId: 'evolution-bite' }],
+        },
+      ];
+
+      const timeline = CharacterTimelineService.buildTimeline(character, undefined, EMPTY_MAP);
+      // ECL 1 (Fighter 1): summoner not yet present, eidolon excluded
+      expect(timeline.checkpoints[0].snapshot.eidolons).toHaveLength(0);
     });
 
     it('totalLevel reflects HD only, not ECL', () => {

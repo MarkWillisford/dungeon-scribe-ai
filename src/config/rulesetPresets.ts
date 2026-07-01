@@ -24,6 +24,7 @@ export const PRESET_PF1E_STANDARD: Ruleset = {
     crRefunds: false,
     laBuyback: false,
     crLaAbilityScoreReductions: true,
+    flaws: false,
   },
   itemOverrides: { banned: [], allowed: [] },
   campaignRequirements: {},
@@ -31,6 +32,7 @@ export const PRESET_PF1E_STANDARD: Ruleset = {
     abilityScoreMethod: 'point-buy',
     pointBuyBudget: 20,
     maxTraits: 2,
+    maxFlaws: 2,
   },
   version: 1,
   createdAt: '2026-04-09T00:00:00.000Z',
@@ -42,8 +44,7 @@ export const PRESET_PF1E_STANDARD: Ruleset = {
 export const PRESET_PF1E_SOCIETY: Ruleset = {
   id: 'preset-pf1e-society',
   name: 'PF1e Society',
-  description:
-    'Pathfinder Society organized play rules. Ban list incomplete — research pending.',
+  description: 'Pathfinder Society organized play rules. Ban list incomplete — research pending.',
   visibility: 'global',
   ownerId: SYSTEM_OWNER_ID,
   allowedSources: ['pf1e-official'],
@@ -62,6 +63,7 @@ export const PRESET_PF1E_SOCIETY: Ruleset = {
     crRefunds: false,
     laBuyback: false,
     crLaAbilityScoreReductions: false,
+    flaws: false,
   },
   itemOverrides: {
     banned: [], // TODO: populate from PF Society organized play ban list
@@ -72,6 +74,7 @@ export const PRESET_PF1E_SOCIETY: Ruleset = {
     abilityScoreMethod: 'point-buy',
     pointBuyBudget: 20,
     maxTraits: 2,
+    maxFlaws: 2,
   },
   version: 1,
   createdAt: '2026-04-09T00:00:00.000Z',
@@ -107,12 +110,14 @@ export const PRESET_GO_NUTS: Ruleset = {
     crRefunds: true,
     laBuyback: true,
     crLaAbilityScoreReductions: false,
+    flaws: true,
   },
   itemOverrides: { banned: [], allowed: [] },
   campaignRequirements: {},
   validationSettings: {
     abilityScoreMethod: 'freeform',
     maxTraits: 99, // unlimited
+    maxFlaws: 99, // unlimited
   },
   version: 1,
   createdAt: '2026-04-09T00:00:00.000Z',

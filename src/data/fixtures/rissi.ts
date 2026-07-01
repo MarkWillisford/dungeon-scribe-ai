@@ -6,7 +6,7 @@
 // Nothing in the UI should reference this file directly — all data flows through Redux.
 
 import { Alignment, BABProgression, BonusType, SaveProgression, Size } from '@/types/base';
-import { PRESET_PF1E_STANDARD } from '@/data/rulesets/presets';
+import { PRESET_PF1E_STANDARD } from '@/config/rulesetPresets';
 import { CharacterService } from '@/services/CharacterService';
 import type { Character } from '@/types/index';
 import type { AbilityScore } from '@/types/abilities';
@@ -168,7 +168,8 @@ export const RISSI_FIXTURE: Character = {
     background:
       'A cleric of Milani who fights for the freedom of the oppressed. Trained in the Hathran tradition of the Rashemi witches, she has devoted her considerable magical gifts to liberating those who suffer under tyranny.',
     notes: '',
-    racialFlexAbility: 'wis',
+    racialFlexBonuses: [{ group: 'any', count: 1, modifier: 2 }],
+    racialFlexChoices: ['wis'],
   },
 
   // ---- Abilities ----
@@ -442,6 +443,8 @@ export const RISSI_FIXTURE: Character = {
     ],
     maxTraits: 2,
   },
+
+  flaws: { flaws: [], maxFlaws: 2 },
 
   // ---- Feats (assigned only) ----
   feats: {

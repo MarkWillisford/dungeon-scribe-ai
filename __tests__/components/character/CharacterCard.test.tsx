@@ -54,4 +54,14 @@ describe('CharacterCard', () => {
     const dateText = allText.find((t) => t.includes('Last updated:'));
     expect(dateText).toBeTruthy();
   });
+
+  test('should call onDelete with character id when long pressed', () => {
+    const onDelete = jest.fn();
+    const { getByRole } = render(
+      <CharacterCard character={mockCharacter} onPress={() => {}} onDelete={onDelete} />,
+    );
+    const button = getByRole('button');
+    button.props.onLongPress?.();
+    expect(onDelete).toHaveBeenCalledWith('char-001');
+  });
 });

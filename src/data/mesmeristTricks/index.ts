@@ -1,3 +1,6 @@
+// SEEDING ONLY — do not use in runtime app code.
+// This array seeds Firestore. All runtime reads go through GameDataService → FirestoreGameDataConnector.
+
 import type { MesmeristTrickEntry } from '@/types/classOptions';
 import { mesmeristTricksBatch1 } from './mesmerist-tricks-batch1';
 import { mesmeristTricksBatch2 } from './mesmerist-tricks-batch2';

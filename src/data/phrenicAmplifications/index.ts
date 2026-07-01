@@ -1,3 +1,6 @@
+// SEEDING ONLY — do not use in runtime app code.
+// This array seeds Firestore. All runtime reads go through GameDataService → FirestoreGameDataConnector.
+
 import type { PhrenicAmplificationEntry } from '@/types/classOptions';
 import { phrenicAmplificationsStandard } from './raw/phrenicAmplifications_standard';
 import { phrenicAmplificationsMajor } from './raw/phrenicAmplifications_major';
@@ -11,6 +14,6 @@ export const getPhrenicAmplificationById = (id: string): PhrenicAmplificationEnt
   ALL_PHRENIC_AMPLIFICATIONS.find((a) => a.id === id);
 
 export const getPhrenicAmplificationsByTier = (
-  tier: 'standard' | 'major'
+  tier: 'standard' | 'major',
 ): PhrenicAmplificationEntry[] =>
   ALL_PHRENIC_AMPLIFICATIONS.filter((a) => a.amplificationTier === tier);

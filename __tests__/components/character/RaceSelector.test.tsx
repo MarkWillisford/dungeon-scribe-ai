@@ -70,4 +70,105 @@ describe('RaceSelector', () => {
     );
     expect(queryByText('Choose one ability score to receive +2:')).toBeNull();
   });
+
+  test('should show group toggle for race with count:all any-group bonus', () => {
+    const groupRace = {
+      ...CORE_RACES[0],
+      name: 'Group Test Race',
+      flexibleAbilityBonuses: [{ group: 'any' as const, count: 'all' as const, modifier: 2 }],
+    };
+    const { getByText } = render(
+      <RaceSelector
+        selectedRace={groupRace}
+        onSelectRace={() => {}}
+        onFlexibleAbilityChoice={jest.fn()}
+      />,
+    );
+    expect(getByText('Mental')).toBeTruthy();
+    expect(getByText('Physical')).toBeTruthy();
+    expect(getByText('INT / WIS / CHA')).toBeTruthy();
+    expect(getByText('STR / DEX / CON')).toBeTruthy();
+  });
+
+  test('should show other-group ability picker when group is chosen', () => {
+    const groupRace = {
+      ...CORE_RACES[0],
+      name: 'Group Test Race',
+      flexibleAbilityBonuses: [
+        { group: 'any' as const, count: 'all' as const, modifier: 2 },
+        { group: 'other' as const, count: 1 as const, modifier: 4 },
+      ],
+    };
+    const { getAllText } = render(
+      <RaceSelector
+        selectedRace={groupRace}
+        onSelectRace={() => {}}
+        flexibleAbilityChoices={['mental']}
+        onFlexibleAbilityChoice={jest.fn()}
+      />,
+    );
+    const texts = getAllText();
+    // When mental is chosen, physical abilities should be available for the +4 picker
+    expect(texts.some((t) => t === 'STR')).toBe(true);
+    expect(texts.some((t) => t === 'DEX')).toBeTruthy();
+    expect(texts.some((t) => t === 'CON')).toBeTruthy();
+  });
+
+  test('should call onFlexibleAbilityChoice when group chip is pressed', () => {
+    const groupRace = {
+      ...CORE_RACES[0],
+      name: 'Group Test Race',
+      flexibleAbilityBonuses: [{ group: 'any' as const, count: 'all' as const, modifier: 2 }],
+    };
+    const onFlexibleAbilityChoice = jest.fn();
+    const { getAllByRole } = render(
+      <RaceSelector
+        selectedRace={groupRace}
+        onSelectRace={() => {}}
+        onFlexibleAbilityChoice={onFlexibleAbilityChoice}
+      />,
+    );
+    const radios = getAllByRole('radio');
+    const groupChips = radios.filter(
+      (r) =>
+        r.props.accessibilityLabel === 'Mental (INT/WIS/CHA)' ||
+        r.props.accessibilityLabel === 'Physical (STR/DEX/CON)',
+    );
+    expect(groupChips.length).toBeGreaterThan(0);
+    fireEvent.press(groupChips[0]);
+    expect(onFlexibleAbilityChoice).toHaveBeenCalledWith(0, 'mental');
+  });
+
+  test('should call onFlexibleAbilityChoice when ability chip is pressed', () => {
+    const human = CORE_RACES.find((r) => r.name === 'Human')!;
+    const onFlexibleAbilityChoice = jest.fn();
+    const { getAllByRole } = render(
+      <RaceSelector
+        selectedRace={human}
+        onSelectRace={() => {}}
+        onFlexibleAbilityChoice={onFlexibleAbilityChoice}
+      />,
+    );
+    const radios = getAllByRole('radio');
+    const strChip = radios.find((r) => r.props.accessibilityLabel === 'STR +2');
+    expect(strChip).toBeTruthy();
+    fireEvent.press(strChip!);
+    expect(onFlexibleAbilityChoice).toHaveBeenCalledWith(0, 'strength');
+  });
+
+  test('should highlight selected ability chip', () => {
+    const human = CORE_RACES.find((r) => r.name === 'Human')!;
+    const { getAllByRole } = render(
+      <RaceSelector
+        selectedRace={human}
+        onSelectRace={() => {}}
+        flexibleAbilityChoices={['strength']}
+        onFlexibleAbilityChoice={jest.fn()}
+      />,
+    );
+    const radios = getAllByRole('radio');
+    const strChip = radios.find((r) => r.props.accessibilityLabel === 'STR +2');
+    expect(strChip).toBeTruthy();
+    expect(strChip!.props.accessibilityState?.selected).toBe(true);
+  });
 });

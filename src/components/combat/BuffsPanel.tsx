@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Pressable, TextInput, ScrollView, Modal } from 
 import { useTheme } from '@/hooks/useTheme';
 import { Buff, SavedBuff } from '@/types/buff';
 import { BonusType } from '@/types/base';
+import { PF1E_CONDITIONS } from '@/data/conditions/pf1eConditions';
 
 const makeTimestamp = () => Date.now();
 
@@ -10,10 +11,14 @@ interface BuffsPanelProps {
   activeBuffs: Buff[];
   buffLibrary: SavedBuff[];
   round: number;
+  activeConditions: string[];
   onAddBuff: (buff: Buff) => void;
   onRemoveBuff: (id: string) => void;
   onToggleBuff: (id: string) => void;
   onSaveToLibrary: (buff: SavedBuff) => void;
+  onToggleCondition: (conditionName: string) => void;
+  onStartTurn: () => void;
+  onEndTurn: () => void;
   testID?: string;
 }
 
@@ -24,14 +29,22 @@ const CATEGORY_COLORS: Record<string, string> = {
   Custom: '#1A237E',
 };
 
+const ACTIVE_GREEN = '#4CAF50';
+const INACTIVE_GREY = '#9E9E9E';
+const CONDITION_ACTIVE = '#E53935';
+
 export function BuffsPanel({
   activeBuffs,
   buffLibrary,
   round: _round,
+  activeConditions,
   onAddBuff,
   onRemoveBuff,
   onToggleBuff,
   onSaveToLibrary: _onSaveToLibrary,
+  onToggleCondition,
+  onStartTurn,
+  onEndTurn,
   testID,
 }: BuffsPanelProps) {
   const { colors, fantasy } = useTheme();
@@ -40,6 +53,11 @@ export function BuffsPanel({
   const [customName, setCustomName] = useState('');
   const [customDuration, setCustomDuration] = useState('');
   const [expandedBuff, setExpandedBuff] = useState<string | null>(null);
+  const [spellSearch, setSpellSearch] = useState('');
+
+  const filteredLibrary = spellSearch.trim()
+    ? buffLibrary.filter((b) => b.name.toLowerCase().includes(spellSearch.toLowerCase()))
+    : buffLibrary;
 
   const handleAddFromLibrary = (saved: SavedBuff) => {
     const buff: Buff = {
@@ -55,6 +73,12 @@ export function BuffsPanel({
     };
     onAddBuff(buff);
     setShowLibrary(false);
+    setSpellSearch('');
+  };
+
+  const handleCloseLibrary = () => {
+    setShowLibrary(false);
+    setSpellSearch('');
   };
 
   const handleAddCustom = () => {
@@ -111,7 +135,7 @@ export function BuffsPanel({
                 <View
                   style={[
                     styles.buffDot,
-                    { backgroundColor: buff.isActive ? '#4CAF50' : '#9E9E9E' },
+                    { backgroundColor: buff.isActive ? ACTIVE_GREEN : INACTIVE_GREY },
                   ]}
                 />
                 <Text style={[styles.buffName, { color: colors.text.primary }]}>{buff.name}</Text>
@@ -143,7 +167,7 @@ export function BuffsPanel({
                   <Pressable
                     style={[
                       styles.actionBtn,
-                      { borderColor: buff.isActive ? '#FF9800' : '#4CAF50' },
+                      { borderColor: buff.isActive ? '#FF9800' : ACTIVE_GREEN },
                     ]}
                     onPress={() => onToggleBuff(buff.id)}
                     accessibilityLabel={
@@ -153,7 +177,7 @@ export function BuffsPanel({
                     <Text
                       style={[
                         styles.actionBtnText,
-                        { color: buff.isActive ? '#FF9800' : '#4CAF50' },
+                        { color: buff.isActive ? '#FF9800' : ACTIVE_GREEN },
                       ]}
                     >
                       {buff.isActive ? 'Pause' : 'Resume'}
@@ -172,6 +196,29 @@ export function BuffsPanel({
           </View>
         ))
       )}
+
+      <View style={styles.turnRow}>
+        <Pressable
+          style={[
+            styles.turnBtn,
+            { borderColor: ACTIVE_GREEN, backgroundColor: colors.bg.secondary },
+          ]}
+          onPress={onStartTurn}
+          accessibilityLabel="Start Turn"
+        >
+          <Text style={[styles.turnBtnText, { color: ACTIVE_GREEN }]}>Start Turn</Text>
+        </Pressable>
+        <Pressable
+          style={[
+            styles.turnBtn,
+            { borderColor: fantasy.bronze, backgroundColor: colors.bg.secondary },
+          ]}
+          onPress={onEndTurn}
+          accessibilityLabel="End Turn"
+        >
+          <Text style={[styles.turnBtnText, { color: fantasy.bronze }]}>End Turn</Text>
+        </Pressable>
+      </View>
 
       {/* Add buttons */}
       <View style={styles.addRow}>
@@ -194,6 +241,39 @@ export function BuffsPanel({
         </Pressable>
       </View>
 
+      <View style={[styles.conditionsSection, { borderColor: colors.border.DEFAULT }]}>
+        <Text style={[styles.sectionHeader, { color: fantasy.gold }]}>Conditions</Text>
+        <View style={styles.conditionsGrid}>
+          {PF1E_CONDITIONS.map((cond) => {
+            const isActive = activeConditions.includes(cond.name);
+            return (
+              <Pressable
+                key={cond.name}
+                style={[
+                  styles.conditionBtn,
+                  {
+                    borderColor: isActive ? CONDITION_ACTIVE : colors.border.DEFAULT,
+                    backgroundColor: isActive ? `${CONDITION_ACTIVE}22` : colors.bg.secondary,
+                  },
+                ]}
+                onPress={() => onToggleCondition(cond.name)}
+                accessibilityLabel={`Toggle ${cond.name} condition`}
+                accessibilityState={{ selected: isActive }}
+              >
+                <Text
+                  style={[
+                    styles.conditionText,
+                    { color: isActive ? CONDITION_ACTIVE : colors.text.secondary },
+                  ]}
+                >
+                  {cond.name}
+                </Text>
+              </Pressable>
+            );
+          })}
+        </View>
+      </View>
+
       {/* Library Modal */}
       <Modal visible={showLibrary} transparent animationType="slide">
         <View style={styles.modalOverlay}>
@@ -205,22 +285,37 @@ export function BuffsPanel({
           >
             <View style={styles.modalHeader}>
               <Text style={[styles.modalTitle, { color: fantasy.gold }]}>Buff Library</Text>
-              <Pressable onPress={() => setShowLibrary(false)} accessibilityLabel="Close library">
+              <Pressable onPress={handleCloseLibrary} accessibilityLabel="Close library">
                 <Text style={[styles.closeBtn, { color: colors.text.tertiary }]}>✕</Text>
               </Pressable>
             </View>
+            <TextInput
+              style={[
+                styles.searchInput,
+                {
+                  borderColor: colors.border.DEFAULT,
+                  backgroundColor: colors.bg.secondary,
+                  color: colors.text.primary,
+                },
+              ]}
+              value={spellSearch}
+              onChangeText={setSpellSearch}
+              placeholder="Search spells and abilities…"
+              placeholderTextColor={colors.text.tertiary}
+              accessibilityLabel="Search buff library"
+            />
             <ScrollView style={styles.libraryList} showsVerticalScrollIndicator={false}>
-              {buffLibrary.length === 0 ? (
+              {filteredLibrary.length === 0 ? (
                 <Text
                   style={[
                     styles.emptyText,
                     { color: colors.text.tertiary, textAlign: 'center', paddingVertical: 20 },
                   ]}
                 >
-                  No saved buffs yet
+                  {spellSearch.trim() ? 'No results' : 'No saved buffs yet'}
                 </Text>
               ) : (
-                buffLibrary.map((saved) => (
+                filteredLibrary.map((saved) => (
                   <Pressable
                     key={saved.id}
                     style={[
@@ -393,6 +488,24 @@ const styles = StyleSheet.create({
     fontSize: 11,
     fontWeight: '600',
   },
+  turnRow: {
+    flexDirection: 'row',
+    gap: 8,
+  },
+  turnBtn: {
+    flex: 1,
+    borderWidth: 1,
+    borderRadius: 8,
+    paddingVertical: 10,
+    alignItems: 'center',
+    minHeight: 44,
+    justifyContent: 'center',
+  },
+  turnBtnText: {
+    fontFamily: 'Cinzel',
+    fontSize: 13,
+    fontWeight: '600',
+  },
   addRow: {
     flexDirection: 'row',
     gap: 8,
@@ -409,6 +522,36 @@ const styles = StyleSheet.create({
     fontFamily: 'Cinzel',
     fontSize: 13,
     color: '#FFFFFF',
+    fontWeight: '600',
+  },
+  conditionsSection: {
+    borderWidth: 1,
+    borderRadius: 8,
+    padding: 10,
+    gap: 8,
+  },
+  sectionHeader: {
+    fontFamily: 'Cinzel',
+    fontSize: 13,
+    fontWeight: '700',
+  },
+  conditionsGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 6,
+  },
+  conditionBtn: {
+    borderWidth: 1,
+    borderRadius: 6,
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+    minHeight: 32,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  conditionText: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 12,
     fontWeight: '600',
   },
   modalOverlay: {
@@ -440,6 +583,16 @@ const styles = StyleSheet.create({
     fontFamily: 'Cinzel',
     fontSize: 18,
     padding: 4,
+  },
+  searchInput: {
+    borderWidth: 1,
+    borderRadius: 6,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    fontFamily: 'LibreBaskerville',
+    fontSize: 13,
+    minHeight: 40,
+    marginBottom: 10,
   },
   libraryList: { flex: 1 },
   libraryItem: {
