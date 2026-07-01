@@ -74,9 +74,17 @@ export function resolveTemplateChoice(
     return { newTemplateChoices, newFeatures: featuresWithoutPrior };
   }
 
+  // Only inject the feature into the features array when it has activationMode or
+  // resourcePool — matching the contract stated on AppliedTemplate.features.
+  // If neither is present, still record the choice but skip the feature injection.
+  const { grantsFeature } = selectedOption;
+  if (grantsFeature.activationMode == null && grantsFeature.resourcePool == null) {
+    return { newTemplateChoices, newFeatures: featuresWithoutPrior };
+  }
+
   // Inject the feature snapshot with the stable derived id
   const injectedFeature: FlatFeature = {
-    ...selectedOption.grantsFeature,
+    ...grantsFeature,
     id: featureSlotId,
   };
 
