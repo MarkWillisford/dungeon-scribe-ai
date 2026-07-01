@@ -491,7 +491,7 @@ export function FeatSlotList() {
   }, [
     character.classes.classes,
     character.feats.feats,
-    character.flaws.flaws,
+    character.flaws?.flaws,
     character.info.race.name,
   ]);
 
