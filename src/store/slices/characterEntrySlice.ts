@@ -74,18 +74,19 @@ function syncFeatSlotsFromClasses(character: Character): void {
     character.flaws?.flaws ?? [],
   );
 
-  // Build set of (source, level) pairs already in character feats
-  const existingKeys = new Set(character.feats.feats.map((f) => `${f.source}_${f.grantedAtLevel}`));
+  // Build set of source keys already in character feats
+  const existingKeys = new Set(character.feats.feats.map((f) => f.source));
 
   for (const slot of generated) {
-    const key = `${slot.source}_${slot.availableAtLevel}`;
+    const isFlawSlot = slot.id.startsWith('flaw-feat-');
+    const key = isFlawSlot ? slot.id : makeFeatSource(slot.source, slot.availableAtLevel);
     if (existingKeys.has(key)) continue;
     // Add an "empty" feat entry as a placeholder slot marker
     // We only add truly new slots (not already in feats.feats)
     character.feats.feats.push({
       featId: '',
       name: '',
-      source: makeFeatSource(slot.source, slot.availableAtLevel),
+      source: key,
       grantedAtLevel: slot.availableAtLevel,
       active: true,
       choices: {},
@@ -93,7 +94,11 @@ function syncFeatSlotsFromClasses(character: Character): void {
   }
   // Slots are computed on read — we just need to ensure assigned feats stay in sync.
   // Remove feat entries whose slots no longer exist
-  const validKeys = new Set(generated.map((s) => `${s.source}_${s.availableAtLevel}`));
+  const validKeys = new Set(
+    generated.map((s) =>
+      s.id.startsWith('flaw-feat-') ? s.id : makeFeatSource(s.source, s.availableAtLevel),
+    ),
+  );
   character.feats.feats = character.feats.feats.filter((f) => {
     if (!f.featId) return false; // Remove empty placeholders
     // f.source is already the full key e.g. "level_3" — compare directly
