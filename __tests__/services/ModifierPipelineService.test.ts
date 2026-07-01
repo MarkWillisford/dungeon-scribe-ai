@@ -1,10 +1,12 @@
 import { ModifierPipelineService } from '@services/ModifierPipelineService';
 import { FeatRegistryService } from '@services/FeatRegistryService';
+import { FlawRegistryService } from '@services/FlawRegistryService';
 import { CharacterService } from '@services/CharacterService';
 import { Size, Alignment, BonusType } from '@/types/base';
 import { AbilityScoreMethod } from '@/types/character';
 import type { Character } from '@/types';
 import type { FeatDefinition } from '@/types/feats';
+import type { FlawDefinition } from '@/types/flaws';
 import type { Race } from '@/types/race';
 
 const mockRace: Race = {
@@ -857,6 +859,49 @@ describe('ModifierPipelineService', () => {
       const result = ModifierPipelineService.recalculate(char);
       expect(result.combatStats.attackBonuses.meleeTotal).toBe(
         baseline.combatStats.attackBonuses.meleeTotal + 1,
+      );
+    });
+  });
+
+  describe('flaw effects', () => {
+    const meleeFlawDef: FlawDefinition = {
+      id: 'melee_penalty_flaw',
+      name: 'Melee Penalty Flaw',
+      description: '-2 penalty to melee attacks',
+      source: 'test',
+      effects: [
+        {
+          type: 'bonus',
+          target: 'attack.melee',
+          value: -2,
+          bonusType: BonusType.UNTYPED,
+          source: 'Melee Penalty Flaw',
+        },
+      ],
+    };
+
+    beforeEach(() => {
+      FlawRegistryService.clear();
+    });
+
+    test('equipped flaw effects are applied to stats', () => {
+      FlawRegistryService.register(meleeFlawDef);
+      const char = createTestCharacter();
+      char.flaws.flaws.push({ flawId: 'melee_penalty_flaw', name: 'Melee Penalty Flaw' });
+      const baseline = ModifierPipelineService.recalculate(createTestCharacter());
+      const result = ModifierPipelineService.recalculate(char);
+      expect(result.combatStats.attackBonuses.meleeTotal).toBe(
+        baseline.combatStats.attackBonuses.meleeTotal - 2,
+      );
+    });
+
+    test('flaw with no registry entry is silently skipped', () => {
+      const char = createTestCharacter();
+      char.flaws.flaws.push({ flawId: 'unknown_flaw', name: 'Unknown Flaw' });
+      const baseline = ModifierPipelineService.recalculate(createTestCharacter());
+      const result = ModifierPipelineService.recalculate(char);
+      expect(result.combatStats.attackBonuses.meleeTotal).toBe(
+        baseline.combatStats.attackBonuses.meleeTotal,
       );
     });
   });
