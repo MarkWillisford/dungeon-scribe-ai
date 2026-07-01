@@ -1522,6 +1522,7 @@ const characterEntrySlice = createSlice({
 
     addFlaw(state, action: PayloadAction<CharacterFlaw>) {
       state.character.flaws.flaws.push(action.payload);
+      syncFeatSlotsFromClasses(state.character);
       state.isDirty = true;
     },
 
@@ -1529,6 +1530,7 @@ const characterEntrySlice = createSlice({
       state.character.flaws.flaws = state.character.flaws.flaws.filter(
         (f) => f.flawId !== action.payload,
       );
+      syncFeatSlotsFromClasses(state.character);
       state.isDirty = true;
     },
 
