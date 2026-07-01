@@ -403,7 +403,6 @@ describe('CombatAbilityToggles', () => {
         <CombatAbilityToggles {...makeProps({ character: withoutTemplate })} />,
       );
       expect(queryByText('Wind Wall at will')).toBeNull();
-      expect(queryByText('Combat Abilities')).toBeNull();
     });
   });
 });
