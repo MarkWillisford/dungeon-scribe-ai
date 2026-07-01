@@ -122,6 +122,19 @@ describe('TemplateChoiceRow', () => {
     expect(text).toMatch(/Astral Deva/);
   });
 
+  it('renders raw id as fallback when currentSelection does not match any option', () => {
+    const r = render(
+      <TemplateChoiceRow
+        choice={CHOICE_DEF}
+        currentSelection="unknown-id"
+        appliedTemplateId="applied-1"
+        templateDefinition={TEMPLATE_DEF}
+      />,
+    );
+    const text = r.getAllText().join(' ');
+    expect(text).toMatch(/unknown-id/);
+  });
+
   it('tap opens the picker', () => {
     const r = render(
       <TemplateChoiceRow

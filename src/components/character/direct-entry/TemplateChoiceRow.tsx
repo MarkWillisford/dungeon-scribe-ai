@@ -24,6 +24,7 @@ export function TemplateChoiceRow({
   const [pickerOpen, setPickerOpen] = useState(false);
 
   const allOptions = choice.optionGroups?.flatMap((g) => g.options) ?? [];
+  const hasOptions = allOptions.length > 0;
 
   const selectedName = currentSelection
     ? (allOptions.find((o) => o.id === currentSelection)?.name ?? currentSelection)
@@ -50,8 +51,9 @@ export function TemplateChoiceRow({
   return (
     <View style={styles.container}>
       <Pressable
-        onPress={() => setPickerOpen(true)}
-        style={styles.row}
+        onPress={hasOptions ? () => setPickerOpen(true) : undefined}
+        disabled={!hasOptions}
+        style={[styles.row, !hasOptions && styles.rowDisabled]}
         accessibilityRole="button"
         accessibilityLabel={`Choose ${choice.label}`}
       >
@@ -107,5 +109,8 @@ const styles = StyleSheet.create({
   chevron: {
     fontSize: 18,
     fontWeight: '700',
+  },
+  rowDisabled: {
+    opacity: 0.4,
   },
 });
