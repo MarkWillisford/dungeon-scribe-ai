@@ -42,10 +42,14 @@ describe('template data integrity', () => {
     });
 
     it('resource-pool-bearing options have resourcePool set', () => {
-      const resourcePoolOptions = allOptions.filter(
-        (o) => o.name !== 'Bralani' && o.name !== 'Leonal',
-      );
-      for (const option of resourcePoolOptions) {
+      const withPool = allOptions.filter((o) => o.grantsFeature?.resourcePool != null);
+      const withoutPool = allOptions.filter((o) => o.grantsFeature?.resourcePool == null);
+      // 8 options have pools; Bralani (at-will) and Leonal (passive) do not
+      expect(withPool).toHaveLength(8);
+      expect(withoutPool).toHaveLength(2);
+      const withoutPoolNames = withoutPool.map((o) => o.name).sort();
+      expect(withoutPoolNames).toEqual(['Bralani', 'Leonal']);
+      for (const option of withPool) {
         expect(option.grantsFeature?.resourcePool).toBeDefined();
       }
     });
