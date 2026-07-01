@@ -428,7 +428,7 @@ export function FeatSlotList() {
     const computed = computeFeatSlots(
       character.classes.classes,
       character.info.race.name,
-      character.flaws.flaws,
+      character.flaws?.flaws ?? [],
     );
 
     // Build a map of slotId → assigned feat
