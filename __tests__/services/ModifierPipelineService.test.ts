@@ -881,10 +881,6 @@ describe('ModifierPipelineService', () => {
       ],
     };
 
-    beforeEach(() => {
-      FlawRegistryService.clear();
-    });
-
     test('equipped flaw effects are applied to stats', () => {
       FlawRegistryService.register(meleeFlawDef);
       const char = createTestCharacter();
