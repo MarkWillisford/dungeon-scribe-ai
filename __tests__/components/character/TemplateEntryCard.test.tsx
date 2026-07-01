@@ -105,20 +105,52 @@ jest.mock('@/data/templates', () => ({
 // can confirm it was rendered without needing a full picker test here.
 jest.mock('@/components/character/direct-entry/TemplateChoiceRow', () => {
   const React = require('react');
-  const { Text } = require('react-native');
+  const { View, Text } = require('react-native');
   return {
     TemplateChoiceRow: ({
       choice,
       currentSelection,
+      templateDefinition,
     }: {
-      choice: { id: string; label: string };
+      choice: {
+        id: string;
+        label: string;
+        optionGroups?: Array<{
+          options: Array<{ id: string; name: string; description?: string }>;
+        }>;
+      };
       currentSelection: string | undefined;
-    }) =>
-      React.createElement(
-        Text,
-        { testID: `choice-row-${choice.id}` },
-        `choice-row:${choice.label}:${currentSelection ?? 'unresolved'}`,
-      ),
+      templateDefinition: {
+        choices?: Array<{
+          id: string;
+          optionGroups?: Array<{
+            options: Array<{ id: string; name: string; description?: string }>;
+          }>;
+        }>;
+      };
+    }) => {
+      const choiceDef = templateDefinition.choices?.find((c) => c.id === choice.id);
+      const allOptions = choiceDef?.optionGroups?.flatMap((g) => g.options) ?? [];
+      const selectedOption = currentSelection
+        ? allOptions.find((o) => o.id === currentSelection)
+        : undefined;
+      return React.createElement(
+        View,
+        null,
+        React.createElement(
+          Text,
+          { testID: `choice-row-${choice.id}` },
+          `choice-row:${choice.label}:${currentSelection ?? 'unresolved'}`,
+        ),
+        selectedOption?.description
+          ? React.createElement(
+              Text,
+              { testID: `choice-description-${choice.id}` },
+              selectedOption.description,
+            )
+          : null,
+      );
+    },
   };
 });
 
@@ -179,6 +211,22 @@ describe('TemplateEntryCard', () => {
     const r = render(<TemplateEntryCard entry={entry} />);
     const text = r.getAllText().join(' ');
     expect(text).toMatch(/choice-row:Celestial Type:astral-deva/);
+  });
+
+  it('displays resolved option description below the row when a selection exists', () => {
+    const entry = makeEntry({
+      templateChoices: [{ choiceId: 'celestial-type', selection: 'astral-deva' }],
+    });
+    const r = render(<TemplateEntryCard entry={entry} />);
+    expect(r.getByTestId('choice-description-celestial-type')).toBeDefined();
+    const text = r.getAllText().join(' ');
+    expect(text).toMatch(/Stunning Strike 5\/day/);
+  });
+
+  it('does not display description block under the row when no selection exists', () => {
+    const entry = makeEntry();
+    const r = render(<TemplateEntryCard entry={entry} />);
+    expect(r.queryByTestId('choice-description-celestial-type')).toBeNull();
   });
 
   it('hides the choices section entirely when template has no choices', () => {

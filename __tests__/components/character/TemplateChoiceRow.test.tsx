@@ -122,6 +122,32 @@ describe('TemplateChoiceRow', () => {
     expect(text).toMatch(/Astral Deva/);
   });
 
+  it('displays selected option description below the row when resolved', () => {
+    const r = render(
+      <TemplateChoiceRow
+        choice={CHOICE_DEF}
+        currentSelection="astral-deva"
+        appliedTemplateId="applied-1"
+        templateDefinition={TEMPLATE_DEF}
+      />,
+    );
+    const text = r.getAllText().join(' ');
+    expect(text).toMatch(/Stunning Strike 5\/day/);
+    expect(r.getByTestId('choice-option-description')).toBeDefined();
+  });
+
+  it('does not display description block when no selection exists', () => {
+    const r = render(
+      <TemplateChoiceRow
+        choice={CHOICE_DEF}
+        currentSelection={undefined}
+        appliedTemplateId="applied-1"
+        templateDefinition={TEMPLATE_DEF}
+      />,
+    );
+    expect(r.queryByTestId('choice-option-description')).toBeNull();
+  });
+
   it('renders raw id as fallback when currentSelection does not match any option', () => {
     const r = render(
       <TemplateChoiceRow

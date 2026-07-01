@@ -1,7 +1,66 @@
+import { TEMPLATES_BATCH_003 } from '@/data/templates/raw/templates_batch_003';
 import { TEMPLATES_BATCH_010 } from '@/data/templates/raw/templates_batch_010';
 import { TEMPLATES_BATCH_018 } from '@/data/templates/raw/templates_batch_018';
 
+const EXPECTED_CELESTIAL_NAMES = [
+  'Astral Deva',
+  'Avoral',
+  'Bralani',
+  'Ghaele',
+  'Hound Archon',
+  'Lantern Archon',
+  'Leonal',
+  'Planetar',
+  'Solar',
+  'Trumpet Archon',
+];
+
 describe('template data integrity', () => {
+  describe('celestial-blessed-creature', () => {
+    const template = TEMPLATES_BATCH_003.find((t) => t.id === 'celestial-blessed-creature');
+    const celestialChoice = template?.choices?.[0];
+    const allOptions = celestialChoice?.optionGroups?.flatMap((g) => g.options) ?? [];
+
+    it('has exactly 10 celestial options', () => {
+      expect(allOptions).toHaveLength(10);
+    });
+
+    it('has all expected celestial names in order', () => {
+      const names = allOptions.map((o) => o.name);
+      expect(names).toEqual(EXPECTED_CELESTIAL_NAMES);
+    });
+
+    it('every option has a valid grantsFeature with non-empty id, name, description, and activationMode', () => {
+      for (const option of allOptions) {
+        const f = option.grantsFeature;
+        expect(f).toBeDefined();
+        expect(f!.id).toBeTruthy();
+        expect(f!.name).toBeTruthy();
+        expect(f!.description).toBeTruthy();
+        expect(f!.activationMode).toBeTruthy();
+      }
+    });
+
+    it('resource-pool-bearing options have resourcePool set', () => {
+      const resourcePoolOptions = allOptions.filter(
+        (o) => o.name !== 'Bralani' && o.name !== 'Leonal',
+      );
+      for (const option of resourcePoolOptions) {
+        expect(option.grantsFeature?.resourcePool).toBeDefined();
+      }
+    });
+
+    it('Celestial Quality (Su) feature is still present with pointer text', () => {
+      const feature = template?.features?.find((f) => f.name === 'Celestial Quality (Su)');
+      expect(feature).toBeDefined();
+      if (feature && 'description' in feature) {
+        expect(feature.description).toMatch(/see chosen Celestial Type/i);
+      } else {
+        throw new Error('Celestial Quality (Su) feature missing description field');
+      }
+    });
+  });
+
   describe('holy-creature', () => {
     it('does not appear in batch_018', () => {
       const batch018Entry = TEMPLATES_BATCH_018.find((t) => t.id === 'holy-creature');
