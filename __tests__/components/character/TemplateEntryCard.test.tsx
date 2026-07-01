@@ -2,6 +2,7 @@ import React from 'react';
 import { render } from '../../helpers/testUtils';
 import { TemplateEntryCard } from '@/components/character/direct-entry/TemplateEntryCard';
 import type { AppliedTemplate } from '@/types/templates';
+import type { TemplateChoiceRowProps } from '@/components/character/direct-entry/TemplateChoiceRow';
 
 // ---- Mocks ----
 
@@ -111,24 +112,7 @@ jest.mock('@/components/character/direct-entry/TemplateChoiceRow', () => {
       choice,
       currentSelection,
       templateDefinition,
-    }: {
-      choice: {
-        id: string;
-        label: string;
-        optionGroups?: Array<{
-          options: Array<{ id: string; name: string; description?: string }>;
-        }>;
-      };
-      currentSelection: string | undefined;
-      templateDefinition: {
-        choices?: Array<{
-          id: string;
-          optionGroups?: Array<{
-            options: Array<{ id: string; name: string; description?: string }>;
-          }>;
-        }>;
-      };
-    }) => {
+    }: TemplateChoiceRowProps) => {
       const choiceDef = templateDefinition.choices?.find((c) => c.id === choice.id);
       const allOptions = choiceDef?.optionGroups?.flatMap((g) => g.options) ?? [];
       const selectedOption = currentSelection
