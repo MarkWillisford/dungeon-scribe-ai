@@ -159,6 +159,7 @@ describe('ModifierPipelineService', () => {
 
   afterEach(() => {
     FeatRegistryService.clear();
+    FlawRegistryService.clear();
   });
 
   describe('recalculate', () => {
