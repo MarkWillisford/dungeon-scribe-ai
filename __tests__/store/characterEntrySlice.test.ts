@@ -1681,6 +1681,8 @@ describe('characterEntrySlice — templates', () => {
         addTemplate(makeTemplate('tpl-1', { templateId: 'celestial-blessed-creature' })),
       );
       const before = state.character.appliedTemplates[0];
+      // Reset isDirty so we can verify the no-op dispatch does not set it.
+      state = { ...state, isDirty: false };
       state = reducer(
         state,
         resolveTemplateChoice({
@@ -1691,6 +1693,7 @@ describe('characterEntrySlice — templates', () => {
         }),
       );
       expect(state.character.appliedTemplates[0]).toEqual(before);
+      expect(state.isDirty).toBe(false);
     });
 
     it('re-selection to different option replaces injected feature by derived id with no duplicate', () => {
