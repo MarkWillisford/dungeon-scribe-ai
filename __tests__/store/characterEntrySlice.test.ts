@@ -61,6 +61,7 @@ import reducer, {
   updateTemplate,
   reorderTemplates,
   setTemplateAcquiredAtECL,
+  resolveTemplateChoice,
   setCombatField,
   setSkillEntry,
   removeSkillEntry,
@@ -118,6 +119,7 @@ import type { RacialChoice } from '@/types/racialChoices';
 import { BABProgression, SaveProgression } from '@/types/base';
 import type { ClassEntry } from '@/types/classes';
 import type { AppliedTemplate } from '@/types/templates';
+import type { TemplateDefinition } from '@/data/templates/types';
 import type { CharacterTrait } from '@/types/traits';
 import type { CharacterFlaw } from '@/types/flaws';
 import type { SpellcastingPool } from '@/types/spells';
@@ -1583,6 +1585,100 @@ describe('characterEntrySlice — templates', () => {
       let state = reducer(makeInitialState(), addTemplate(makeTemplate('tpl-1')));
       state = reducer(state, setTemplateAcquiredAtECL({ id: 'does-not-exist', acquiredAtECL: 7 }));
       expect(state.character.appliedTemplates[0].acquiredAtCharacterLevel).toBeUndefined();
+    });
+  });
+
+  describe('resolveTemplateChoice', () => {
+    function makeChoiceDef(): TemplateDefinition {
+      return {
+        id: 'celestial-blessed-creature',
+        name: 'Celestial-Blessed Creature',
+        description: 'Test',
+        crAdjustment: 1,
+        acquisitionType: 'acquired',
+        isSimpleTemplate: false,
+        features: [],
+        sourceInfo: { type: 'third_party', publisher: 'Test', publication: 'Test' },
+        visibility: 'global',
+        rev: 1,
+        verificationStatus: 'needs_review',
+        choices: [
+          {
+            id: 'celestial-type',
+            label: 'Celestial Type',
+            optionSource: 'inline',
+            optionGroups: [
+              {
+                id: 'g1',
+                name: '',
+                options: [
+                  {
+                    id: 'astral-deva',
+                    name: 'Astral Deva',
+                    description: 'Stunning Strike',
+                    grantsFeature: {
+                      id: 'stunning-strike',
+                      scalingType: 'flat',
+                      name: 'Stunning Strike 5/day',
+                      description: 'Fort or stunned 1d6 rounds',
+                      activationMode: 'action',
+                      resourcePool: {
+                        id: 'stunning_strike_uses',
+                        name: 'Stunning Strike',
+                        rechargeOn: 'rest',
+                        maxFormula: '5',
+                        restRecoveryMode: 'full',
+                      },
+                    },
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      } as TemplateDefinition;
+    }
+
+    it('updates templateChoices and features on the matching AppliedTemplate', () => {
+      let state = reducer(
+        makeInitialState(),
+        addTemplate(makeTemplate('tpl-1', { templateId: 'celestial-blessed-creature' })),
+      );
+      const tplId = state.character.appliedTemplates[0].id!;
+      state = reducer(
+        state,
+        resolveTemplateChoice({
+          appliedTemplateId: tplId,
+          templateDefinition: makeChoiceDef(),
+          choiceId: 'celestial-type',
+          selectionId: 'astral-deva',
+        }),
+      );
+      const tpl = state.character.appliedTemplates[0];
+      expect(tpl.templateChoices).toEqual([
+        { choiceId: 'celestial-type', selection: 'astral-deva' },
+      ]);
+      expect(tpl.features).toHaveLength(1);
+      expect(tpl.features![0].name).toBe('Stunning Strike 5/day');
+      expect(state.isDirty).toBe(true);
+    });
+
+    it('is a no-op when appliedTemplateId does not match any template', () => {
+      let state = reducer(
+        makeInitialState(),
+        addTemplate(makeTemplate('tpl-1', { templateId: 'celestial-blessed-creature' })),
+      );
+      const before = state.character.appliedTemplates[0];
+      state = reducer(
+        state,
+        resolveTemplateChoice({
+          appliedTemplateId: 'wrong-id',
+          templateDefinition: makeChoiceDef(),
+          choiceId: 'celestial-type',
+          selectionId: 'astral-deva',
+        }),
+      );
+      expect(state.character.appliedTemplates[0]).toEqual(before);
     });
   });
 });
