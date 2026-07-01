@@ -178,4 +178,28 @@ describe('TemplateChoiceRow', () => {
       }),
     );
   });
+
+  it('disables row and is a no-op when choice has no options', () => {
+    const emptyChoice = { ...CHOICE_DEF, optionGroups: [] };
+    const r = render(
+      <TemplateChoiceRow
+        choice={emptyChoice}
+        currentSelection={undefined}
+        appliedTemplateId="applied-1"
+        templateDefinition={TEMPLATE_DEF}
+      />,
+    );
+
+    const row = r.getByTestId('template-choice-row');
+    expect(row.props.disabled).toBe(true);
+    expect(row.props.style).toEqual(
+      expect.arrayContaining([expect.objectContaining({ opacity: 0.4 })]),
+    );
+
+    fireEvent.press(row);
+    expect(mockDispatch).not.toHaveBeenCalled();
+    // Picker must stay closed: stub returns null when !visible, so no "picker-open" text
+    const text = r.getAllText().join(' ');
+    expect(text).not.toMatch(/picker-open/);
+  });
 });

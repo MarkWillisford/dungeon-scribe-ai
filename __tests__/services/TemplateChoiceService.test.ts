@@ -107,7 +107,7 @@ describe('resolveTemplateChoice', () => {
       { choiceId: 'celestial-type', selection: 'astral-deva' },
     ]);
     expect(result.newFeatures).toHaveLength(1);
-    expect(result.newFeatures[0]).toMatchObject({
+    expect(result.newFeatures![0]).toMatchObject({
       id: DERIVED_FEATURE_ID,
       scalingType: 'flat',
       name: 'Stunning Strike 5/day',
@@ -126,7 +126,7 @@ describe('resolveTemplateChoice', () => {
       { choiceId: 'celestial-type', selection: 'astral-deva' },
     ]);
     expect(result.newFeatures).toHaveLength(1);
-    expect(result.newFeatures[0]).toMatchObject({ id: DERIVED_FEATURE_ID });
+    expect(result.newFeatures![0]).toMatchObject({ id: DERIVED_FEATURE_ID });
   });
 
   it('re-selection to different option: removes old injected feature, injects new one', () => {
@@ -141,7 +141,7 @@ describe('resolveTemplateChoice', () => {
       { choiceId: 'celestial-type', selection: 'bralani' },
     ]);
     expect(result.newFeatures).toHaveLength(1);
-    expect(result.newFeatures[0]).toMatchObject({
+    expect(result.newFeatures![0]).toMatchObject({
       id: DERIVED_FEATURE_ID,
       name: 'Wind Wall at will',
     });
@@ -168,6 +168,53 @@ describe('resolveTemplateChoice', () => {
 
     expect(result.newTemplateChoices).toEqual(applied.templateChoices);
     expect(result.newFeatures).toEqual(applied.features);
+  });
+
+  it('returns original undefined references when choiceId is unknown', () => {
+    const def = makeTemplateDef();
+    const applied = makeApplied(); // templateChoices and features are both undefined
+
+    const result = resolveTemplateChoice(def, applied, 'unknown-choice-id', 'some-selection-id');
+
+    expect(result.newTemplateChoices).toBe(applied.templateChoices); // undefined === undefined
+    expect(result.newFeatures).toBe(applied.features); // undefined === undefined
+  });
+
+  it('grantsFeature without activationMode or resourcePool: stores choice, no feature injected', () => {
+    const def = makeTemplateDef({
+      choices: [
+        {
+          ...CELESTIAL_CHOICE,
+          optionGroups: [
+            {
+              id: 'celestial-types',
+              name: '',
+              options: [
+                {
+                  id: 'passive-herald',
+                  name: 'Passive Herald',
+                  description: 'Grants a passive aura with no toggle',
+                  grantsFeature: {
+                    scalingType: 'flat' as const,
+                    name: 'Aura of Courage',
+                    description: 'Immune to fear aura.',
+                    id: 'aura-of-courage',
+                    // no activationMode, no resourcePool
+                  },
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    });
+    const applied = makeApplied({ features: [] });
+    const result = resolveTemplateChoice(def, applied, 'celestial-type', 'passive-herald');
+
+    expect(result.newTemplateChoices).toEqual([
+      { choiceId: 'celestial-type', selection: 'passive-herald' },
+    ]);
+    expect(result.newFeatures).toHaveLength(0); // choice recorded, no feature injected
   });
 
   it('preserves other choices when resolving one', () => {

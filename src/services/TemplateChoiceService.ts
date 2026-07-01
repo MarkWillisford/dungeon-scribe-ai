@@ -13,8 +13,8 @@ function derivedFeatureId(templateId: string, choiceId: string): string {
 }
 
 export interface ResolveTemplateChoiceResult {
-  newTemplateChoices: TemplateChoice[];
-  newFeatures: TemplateFeature[];
+  newTemplateChoices: TemplateChoice[] | undefined;
+  newFeatures: TemplateFeature[] | undefined;
 }
 
 /**
@@ -33,8 +33,10 @@ export function resolveTemplateChoice(
   choiceId: string,
   newSelectionId: string,
 ): ResolveTemplateChoiceResult {
-  const existingChoices = currentAppliedTemplate.templateChoices ?? [];
-  const existingFeatures = currentAppliedTemplate.features ?? [];
+  // Preserve original references so the reducer's reference-equality guard fires correctly on
+  // no-op paths (undefined !== [] would break the guard if we eagerly coalesced here).
+  const existingChoices = currentAppliedTemplate.templateChoices;
+  const existingFeatures = currentAppliedTemplate.features;
 
   if (!templateDefinition.choices || templateDefinition.choices.length === 0) {
     return { newTemplateChoices: existingChoices, newFeatures: existingFeatures };
@@ -45,7 +47,8 @@ export function resolveTemplateChoice(
     return { newTemplateChoices: existingChoices, newFeatures: existingFeatures };
   }
 
-  const prior = existingChoices.find((c) => c.choiceId === choiceId);
+  const choiceList = existingChoices ?? [];
+  const prior = choiceList.find((c) => c.choiceId === choiceId);
 
   // Idempotent: same option already selected
   if (prior?.selection === newSelectionId) {
@@ -53,7 +56,7 @@ export function resolveTemplateChoice(
   }
 
   // Update the choices list
-  const otherChoices = existingChoices.filter((c) => c.choiceId !== choiceId);
+  const otherChoices = choiceList.filter((c) => c.choiceId !== choiceId);
   const newTemplateChoices: TemplateChoice[] = [
     ...otherChoices,
     { choiceId, selection: newSelectionId },
@@ -61,7 +64,8 @@ export function resolveTemplateChoice(
 
   // Remove any previously injected feature for this choice slot
   const featureSlotId = derivedFeatureId(templateDefinition.id, choiceId);
-  const featuresWithoutPrior = existingFeatures.filter(
+  const featureList = existingFeatures ?? [];
+  const featuresWithoutPrior = featureList.filter(
     (f) => !('id' in f) || f.id !== featureSlotId,
   );
 
