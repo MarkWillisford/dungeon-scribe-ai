@@ -63,7 +63,7 @@ export function FlawsSection() {
     const all = FlawRegistryService.getAllFlaws();
     const filtered =
       allowedSources.length > 0
-        ? all.filter((f) => (allowedSources as string[]).includes(f.source))
+        ? all.filter((f) => allowedSources.some((s) => s === f.source))
         : all;
     return filtered.map((f) => ({
       key: f.id,
