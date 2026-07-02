@@ -9,6 +9,13 @@ export type LevelUpDecision =
   | { type: 'la_payment'; templateId: string }
   | { type: 'la_buyback'; templateId: string };
 
+// ---- Template Choices (sub-option selections stored on applied templates) ----
+
+export interface TemplateChoice {
+  choiceId: string;
+  selection: string; // id of the chosen TemplateChoiceOption
+}
+
 // ---- Applied Templates (paid — carry ECL machinery) ----
 
 export interface AppliedTemplate {
@@ -34,6 +41,8 @@ export interface AppliedTemplate {
   // Toggle/pool features injected at load time from the Firestore template doc.
   // Only features with activationMode or resourcePool are stored here.
   features?: TemplateFeature[];
+  // Resolved sub-choices for templates with choices (e.g. celestial type).
+  templateChoices?: TemplateChoice[];
 }
 
 // ---- Granted Bonuses (free — no ECL impact) ----
@@ -65,6 +74,10 @@ export interface FlatFeature {
   description: string;
   // Toggle/resource fields — populate for abilities that appear in the combat panel.
   id?: string;
+  // When this feature was injected from a template choice, the original id from
+  // the choice option's grantsFeature — preserved so callers can cross-reference
+  // the source data even though the injected feature uses a derived slot id.
+  sourceFeatureId?: string;
   activationMode?: 'passive' | 'toggle' | 'conditional' | 'action';
   shortDescription?: string;
   effects?: Effect[];

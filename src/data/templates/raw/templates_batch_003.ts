@@ -10,9 +10,7 @@ export const TEMPLATES_BATCH_003: TemplateDefinition[] = [
     crAdjustment: 2,
     acquisitionType: 'acquired',
     isSimpleTemplate: false,
-    prerequisites: [
-      { type: 'special', description: 'Must have Intelligence 4 or higher' },
-    ],
+    prerequisites: [{ type: 'special', description: 'Must have Intelligence 4 or higher' }],
     abilityScoreChanges: [
       { ability: 'CON', change: 4 },
       { ability: 'INT', change: 4 },
@@ -41,7 +39,7 @@ export const TEMPLATES_BATCH_003: TemplateDefinition[] = [
         scalingType: 'flat',
         name: 'Blood Spell-Like Abilities (Sp)',
         description:
-          'Creatures with Intelligence or Wisdom 8 or higher gain cumulative spell-like abilities based on HD, each costing blood points equal to the spell level. Caster level equals the creature\'s HD or the base creature\'s caster level, whichever is higher.',
+          "Creatures with Intelligence or Wisdom 8 or higher gain cumulative spell-like abilities based on HD, each costing blood points equal to the spell level. Caster level equals the creature's HD or the base creature's caster level, whichever is higher.",
       },
     ],
     sourceInfo: {
@@ -63,9 +61,7 @@ export const TEMPLATES_BATCH_003: TemplateDefinition[] = [
     crAdjustment: 1,
     acquisitionType: 'inherited',
     isSimpleTemplate: false,
-    prerequisites: [
-      { type: 'creature_type', allowed: ['humanoid'] },
-    ],
+    prerequisites: [{ type: 'creature_type', allowed: ['humanoid'] }],
     typeChange: 'aberration (augmented humanoid)',
     subtypeGains: ['augmented humanoid'],
     abilityScoreChanges: [
@@ -163,14 +159,10 @@ export const TEMPLATES_BATCH_003: TemplateDefinition[] = [
       'A living brain removed from its body and encased in an armored glass cylinder, becoming an immobile construct retaining mental abilities but losing physical capabilities.',
     acquisitionType: 'acquired',
     isSimpleTemplate: false,
-    prerequisites: [
-      { type: 'special', description: 'Corporeal living creature with a brain.' },
-    ],
+    prerequisites: [{ type: 'special', description: 'Corporeal living creature with a brain.' }],
     typeChange: 'construct',
     sizeChange: -3,
-    abilityScoreChanges: [
-      { ability: 'WIS', change: -2 },
-    ],
+    abilityScoreChanges: [{ ability: 'WIS', change: -2 }],
     abilityScoreChangeNote:
       'Loses Strength and Constitution scores entirely. Dexterity reduced to 0. Intelligence and Charisma retained. Wisdom takes -2 from transplantation trauma.',
     naturalArmorChange: 6,
@@ -361,18 +353,17 @@ export const TEMPLATES_BATCH_003: TemplateDefinition[] = [
     id: 'calcified-creature',
     name: 'Calcified Creature',
     description:
-      "A living creature whose body has been calcified by an incutilis lord, becoming a mindless but physically powerful servant with enhanced natural armor and darkvision.",
+      'A living creature whose body has been calcified by an incutilis lord, becoming a mindless but physically powerful servant with enhanced natural armor and darkvision.',
     crAdjustment: 1,
     acquisitionType: 'inherited',
     isSimpleTemplate: true,
-    prerequisites: [
-      { type: 'special', description: 'Living corporeal creature.' },
-    ],
+    prerequisites: [{ type: 'special', description: 'Living corporeal creature.' }],
     abilityScoreChanges: [
       { ability: 'STR', change: 4 },
       { ability: 'CON', change: 4 },
     ],
-    abilityScoreChangeNote: 'Loses Intelligence score entirely, becoming mindless, but retains skill use.',
+    abilityScoreChangeNote:
+      'Loses Intelligence score entirely, becoming mindless, but retains skill use.',
     naturalArmorChange: 4,
     immunities: ['mind-affecting effects'],
     features: [
@@ -411,9 +402,7 @@ export const TEMPLATES_BATCH_003: TemplateDefinition[] = [
     crAdjustment: 1,
     acquisitionType: 'inherited',
     isSimpleTemplate: false,
-    prerequisites: [
-      { type: 'creature_type', allowed: ['animal'] },
-    ],
+    prerequisites: [{ type: 'creature_type', allowed: ['animal'] }],
     typeChange: 'construct (augmented animal)',
     subtypeGains: ['augmented animal'],
     damageReduction: { scalingType: 'flat', value: 10, bypassedBy: 'piercing' },
@@ -673,9 +662,7 @@ export const TEMPLATES_BATCH_003: TemplateDefinition[] = [
       },
     ],
     subtypeGains: ['good'],
-    resistances: [
-      { energyType: 'electricity', value: 20 },
-    ],
+    resistances: [{ energyType: 'electricity', value: 20 }],
     features: [
       {
         scalingType: 'flat',
@@ -691,7 +678,8 @@ export const TEMPLATES_BATCH_003: TemplateDefinition[] = [
       {
         scalingType: 'flat',
         name: 'Heavenly Health (Ex)',
-        description: 'Gains a +2 resistance bonus on Fortitude saves against poison and petrification.',
+        description:
+          'Gains a +2 resistance bonus on Fortitude saves against poison and petrification.',
       },
       {
         scalingType: 'flat',
@@ -702,8 +690,220 @@ export const TEMPLATES_BATCH_003: TemplateDefinition[] = [
       {
         scalingType: 'flat',
         name: 'Celestial Quality (Su)',
-        description:
-          "Gains a special ability based on the type of celestial merged: Astral Deva grants Stunning Strike 5/day (Fortitude or stunned 1d6 rounds); Avoral grants Lightning Bolt 3/day (Sp); Bralani grants Wind Wall at will (Sp); Ghaele grants Fear 3/day (Sp); Hound Archon grants Mage's Faithful Hound 1/day (Sp); Lantern Archon grants Searing Light 3/day (Sp); Leonal grants Pounce (Ex); Planetar grants Flame Strike 1/day (Sp); Solar grants Slaying Shot 1/day (Su, Fortitude or die); Trumpet Archon grants Clarion Call 1/day (Su, Fortitude or paralyzed 1d4 rounds within 30 ft.).",
+        description: 'Gains a celestial-specific ability — see chosen Celestial Type below.',
+      },
+    ],
+    choices: [
+      {
+        id: 'celestial-type',
+        label: 'Celestial Type',
+        optionSource: 'inline',
+        optionGroups: [
+          {
+            id: 'celestial-types',
+            name: '',
+            options: [
+              {
+                id: 'astral-deva',
+                name: 'Astral Deva',
+                description:
+                  'Grants Stunning Strike 5/day (Fortitude DC 10+HD+Str or stunned 1d6 rounds).',
+                grantsFeature: {
+                  id: 'stunning-strike',
+                  scalingType: 'flat',
+                  name: 'Stunning Strike 5/day',
+                  description:
+                    'The creature can attempt a stunning strike. The target must succeed on a Fortitude save (DC 10 + HD + Str modifier) or be stunned for 1d6 rounds.',
+                  shortDescription: 'Stun; Fort or stunned 1d6 rounds',
+                  activationMode: 'action',
+                  resourcePool: {
+                    id: 'stunning_strike_uses',
+                    name: 'Stunning Strike',
+                    rechargeOn: 'rest',
+                    maxFormula: '5',
+                    restRecoveryMode: 'full',
+                  },
+                },
+              },
+              {
+                id: 'avoral',
+                name: 'Avoral',
+                description: 'Grants Lightning Bolt 3/day (Sp).',
+                grantsFeature: {
+                  id: 'lightning-bolt',
+                  scalingType: 'flat',
+                  name: 'Lightning Bolt 3/day (Sp)',
+                  description:
+                    'The creature can use lightning bolt (as the spell) three times per day as a spell-like ability.',
+                  shortDescription: 'Lightning bolt 3/day',
+                  activationMode: 'action',
+                  resourcePool: {
+                    id: 'lightning_bolt_uses',
+                    name: 'Lightning Bolt',
+                    rechargeOn: 'rest',
+                    maxFormula: '3',
+                    restRecoveryMode: 'full',
+                  },
+                },
+              },
+              {
+                id: 'bralani',
+                name: 'Bralani',
+                description: 'Grants Wind Wall at will (Sp).',
+                grantsFeature: {
+                  id: 'wind-wall',
+                  scalingType: 'flat',
+                  name: 'Wind Wall (Sp)',
+                  description:
+                    'The creature can use wind wall (as the spell) at will as a spell-like ability.',
+                  shortDescription: 'Wind wall at will',
+                  activationMode: 'action',
+                },
+              },
+              {
+                id: 'ghaele',
+                name: 'Ghaele',
+                description: 'Grants Fear 3/day (Sp).',
+                grantsFeature: {
+                  id: 'fear-ghaele',
+                  scalingType: 'flat',
+                  name: 'Fear 3/day (Sp)',
+                  description:
+                    'The creature can use fear (as the spell) three times per day as a spell-like ability.',
+                  shortDescription: 'Fear 3/day',
+                  activationMode: 'action',
+                  resourcePool: {
+                    id: 'fear_uses',
+                    name: 'Fear',
+                    rechargeOn: 'rest',
+                    maxFormula: '3',
+                    restRecoveryMode: 'full',
+                  },
+                },
+              },
+              {
+                id: 'hound-archon',
+                name: 'Hound Archon',
+                description: "Grants Mage's Faithful Hound 1/day (Sp).",
+                grantsFeature: {
+                  id: 'mages-faithful-hound',
+                  scalingType: 'flat',
+                  name: "Mage's Faithful Hound 1/day (Sp)",
+                  description:
+                    "The creature can use Mage's faithful hound (as the spell) once per day as a spell-like ability.",
+                  shortDescription: "Mage's faithful hound 1/day",
+                  activationMode: 'action',
+                  resourcePool: {
+                    id: 'mages_faithful_hound_uses',
+                    name: "Mage's Faithful Hound",
+                    rechargeOn: 'rest',
+                    maxFormula: '1',
+                    restRecoveryMode: 'full',
+                  },
+                },
+              },
+              {
+                id: 'lantern-archon',
+                name: 'Lantern Archon',
+                description: 'Grants Searing Light 3/day (Sp).',
+                grantsFeature: {
+                  id: 'searing-light',
+                  scalingType: 'flat',
+                  name: 'Searing Light 3/day (Sp)',
+                  description:
+                    'The creature can use searing light (as the spell) three times per day as a spell-like ability.',
+                  shortDescription: 'Searing light 3/day',
+                  activationMode: 'action',
+                  resourcePool: {
+                    id: 'searing_light_uses',
+                    name: 'Searing Light',
+                    rechargeOn: 'rest',
+                    maxFormula: '3',
+                    restRecoveryMode: 'full',
+                  },
+                },
+              },
+              {
+                id: 'leonal',
+                name: 'Leonal',
+                description: 'Grants Pounce (Ex).',
+                grantsFeature: {
+                  id: 'pounce',
+                  scalingType: 'flat',
+                  name: 'Pounce (Ex)',
+                  description:
+                    'When the creature charges, it can make a full attack at the end of the charge.',
+                  shortDescription: 'Full attack on charge',
+                  activationMode: 'passive',
+                },
+              },
+              {
+                id: 'planetar',
+                name: 'Planetar',
+                description: 'Grants Flame Strike 1/day (Sp).',
+                grantsFeature: {
+                  id: 'flame-strike',
+                  scalingType: 'flat',
+                  name: 'Flame Strike 1/day (Sp)',
+                  description:
+                    'The creature can use flame strike (as the spell) once per day as a spell-like ability.',
+                  shortDescription: 'Flame strike 1/day',
+                  activationMode: 'action',
+                  resourcePool: {
+                    id: 'flame_strike_uses',
+                    name: 'Flame Strike',
+                    rechargeOn: 'rest',
+                    maxFormula: '1',
+                    restRecoveryMode: 'full',
+                  },
+                },
+              },
+              {
+                id: 'solar',
+                name: 'Solar',
+                description: 'Grants Slaying Shot 1/day (Su, Fortitude save or die instantly).',
+                grantsFeature: {
+                  id: 'slaying-shot',
+                  scalingType: 'flat',
+                  name: 'Slaying Shot 1/day (Su)',
+                  description:
+                    'Once per day the creature can fire a slaying shot. The target must succeed on a Fortitude save or die instantly.',
+                  shortDescription: 'Slaying shot; Fort or die 1/day',
+                  activationMode: 'action',
+                  resourcePool: {
+                    id: 'slaying_shot_uses',
+                    name: 'Slaying Shot',
+                    rechargeOn: 'rest',
+                    maxFormula: '1',
+                    restRecoveryMode: 'full',
+                  },
+                },
+              },
+              {
+                id: 'trumpet-archon',
+                name: 'Trumpet Archon',
+                description:
+                  'Grants Clarion Call 1/day (Su, Fortitude or paralyzed 1d4 rounds within 30 ft.).',
+                grantsFeature: {
+                  id: 'clarion-call',
+                  scalingType: 'flat',
+                  name: 'Clarion Call 1/day (Su)',
+                  description:
+                    'Once per day the creature can sound a clarion call. All creatures within 30 feet must succeed on a Fortitude save or be paralyzed for 1d4 rounds.',
+                  shortDescription: 'Clarion call; Fort or paralyzed 1d4 rounds 1/day',
+                  activationMode: 'action',
+                  resourcePool: {
+                    id: 'clarion_call_uses',
+                    name: 'Clarion Call',
+                    rechargeOn: 'rest',
+                    maxFormula: '1',
+                    restRecoveryMode: 'full',
+                  },
+                },
+              },
+            ],
+          },
+        ],
       },
     ],
     sourceInfo: {
@@ -870,9 +1070,7 @@ export const TEMPLATES_BATCH_003: TemplateDefinition[] = [
       { ability: 'CHA', change: 2 },
     ],
     naturalArmorChange: 3,
-    resistances: [
-      { energyType: 'fire', value: 20 },
-    ],
+    resistances: [{ energyType: 'fire', value: 20 }],
     features: [
       {
         scalingType: 'flat',
@@ -1017,7 +1215,8 @@ export const TEMPLATES_BATCH_003: TemplateDefinition[] = [
       {
         scalingType: 'flat',
         name: 'Oiled Workings (Ex)',
-        description: 'Grease spell cast on the automaton triggers a haste effect lasting 1d4 rounds.',
+        description:
+          'Grease spell cast on the automaton triggers a haste effect lasting 1d4 rounds.',
       },
       {
         scalingType: 'flat',
@@ -1034,7 +1233,8 @@ export const TEMPLATES_BATCH_003: TemplateDefinition[] = [
       {
         scalingType: 'flat',
         name: 'Metallic Body (Ex)',
-        description: 'Affected by metal-targeting spells. Rusting grasp causes stagger for 1d4 rounds.',
+        description:
+          'Affected by metal-targeting spells. Rusting grasp causes stagger for 1d4 rounds.',
       },
       {
         scalingType: 'flat',
@@ -1084,9 +1284,7 @@ export const TEMPLATES_BATCH_003: TemplateDefinition[] = [
     crAdjustment: 0,
     acquisitionType: 'either',
     isSimpleTemplate: true,
-    prerequisites: [
-      { type: 'creature_type', allowed: ['construct'] },
-    ],
+    prerequisites: [{ type: 'creature_type', allowed: ['construct'] }],
     subtypeGains: ['clockwork'],
     features: [
       {
@@ -1315,8 +1513,7 @@ export const TEMPLATES_BATCH_003: TemplateDefinition[] = [
       {
         scalingType: 'flat',
         name: 'Cold Body (Ex)',
-        description:
-          'Creatures that strike the cold creature in melee take 1d6 cold damage.',
+        description: 'Creatures that strike the cold creature in melee take 1d6 cold damage.',
       },
       {
         scalingType: 'flat',
@@ -1334,7 +1531,7 @@ export const TEMPLATES_BATCH_003: TemplateDefinition[] = [
         scalingType: 'flat',
         name: 'Freezing Blows (Ex)',
         description:
-          "Attacks deal extra cold damage based on the slam damage for a creature one size category larger than the cold creature.",
+          'Attacks deal extra cold damage based on the slam damage for a creature one size category larger than the cold creature.',
       },
       {
         scalingType: 'flat',
@@ -1547,7 +1744,7 @@ export const TEMPLATES_BATCH_003: TemplateDefinition[] = [
         scalingType: 'flat',
         name: 'Soul Destruction (Su)',
         description:
-          "Creatures that die within 100 ft. forfeit their souls unless they succeed at a Will save. When HD x 10 souls are absorbed, the monstrosity gains fly 60 ft. (clumsy) and starflight.",
+          'Creatures that die within 100 ft. forfeit their souls unless they succeed at a Will save. When HD x 10 souls are absorbed, the monstrosity gains fly 60 ft. (clumsy) and starflight.',
       },
       {
         scalingType: 'flat',
@@ -1602,16 +1799,15 @@ export const TEMPLATES_BATCH_003: TemplateDefinition[] = [
           {
             scalingType: 'flat',
             name: '10+ HD: 2-3 special attack options',
-            description: 'Selects 2 options at 9-12 HD or 3 options at 13+ HD from the special attack list.',
+            description:
+              'Selects 2 options at 9-12 HD or 3 options at 13+ HD from the special attack list.',
           },
         ],
       },
     ],
     acquisitionType: 'acquired',
     isSimpleTemplate: false,
-    prerequisites: [
-      { type: 'creature_type', allowed: ['construct'] },
-    ],
+    prerequisites: [{ type: 'creature_type', allowed: ['construct'] }],
     subtypeGains: ['augmented'],
     abilityScoreChanges: [
       { ability: 'STR', change: 4 },

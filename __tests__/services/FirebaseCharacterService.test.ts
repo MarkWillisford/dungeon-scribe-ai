@@ -1,5 +1,5 @@
 import { FirebaseCharacterService } from '@services/FirebaseCharacterService';
-import { Character } from '@/types';
+import { Character, AppliedTemplate } from '@/types';
 import { CharacterService } from '@services/CharacterService';
 import { Size, Alignment } from '@/types/base';
 import { AbilityScoreMethod } from '@/types/character';
@@ -401,6 +401,101 @@ describe('FirebaseCharacterService', () => {
       const result = await FirebaseCharacterService.getCharacter('char-deser-companion');
       expect(result.companions[0].equipment).toBeDefined();
       expect(result.companions[0].equipment.equippedSlots).toEqual({});
+    });
+  });
+
+  describe('template choice round-trip', () => {
+    function buildCharacterWithTemplate(tplOverrides: Partial<AppliedTemplate> = {}): Character {
+      const base: AppliedTemplate = {
+        id: 'tpl-round-trip',
+        templateId: 'celestial',
+        name: 'Celestial Creature',
+        appliedAs: 'cr',
+        cr: 1,
+        acquisitionType: 'acquired',
+        paidTiers: [],
+        sourceId: 'templates',
+        sourceRev: 1,
+        ...tplOverrides,
+      };
+      return { ...createTestCharacter(), appliedTemplates: [base] };
+    }
+
+    test('resolved template choice and injected feature survive the round-trip', async () => {
+      const character = buildCharacterWithTemplate({
+        templateChoices: [{ choiceId: 'celestial-type', selection: 'astral-deva' }],
+        features: [
+          {
+            scalingType: 'flat',
+            id: 'celestial__choice__celestial-type',
+            name: 'Stunning Strike',
+            description: '5/day',
+            effects: [],
+          },
+        ],
+      });
+
+      const serialized = JSON.parse(JSON.stringify(character));
+      serialized.equipment.equippedSlots = {};
+
+      mockFirestore.getDoc.mockResolvedValue({
+        exists: () => true,
+        id: 'char-rt-resolved',
+        data: () => serialized,
+      });
+
+      const result = await FirebaseCharacterService.getCharacter('char-rt-resolved');
+
+      expect(result.appliedTemplates).toHaveLength(1);
+      const loaded = result.appliedTemplates[0];
+      expect(loaded.templateChoices).toEqual([
+        { choiceId: 'celestial-type', selection: 'astral-deva' },
+      ]);
+      expect(loaded.features).toHaveLength(1);
+      expect(loaded.features![0]).toMatchObject({ id: 'celestial__choice__celestial-type' });
+      // mergeTemplateFeatures must not fetch extra template docs when features are already present
+      expect(mockFirestore.getDoc).toHaveBeenCalledTimes(1);
+    });
+
+    test('unresolved template choice loads back with no resolution (placeholder "— choose —" would render)', async () => {
+      const character = buildCharacterWithTemplate({
+        // no templateChoices, no features — fully unresolved
+      });
+
+      const serialized = JSON.parse(JSON.stringify(character));
+      serialized.equipment.equippedSlots = {};
+
+      mockFirestore.getDoc
+        .mockResolvedValueOnce({
+          exists: () => true,
+          id: 'char-rt-unresolved',
+          data: () => serialized,
+        })
+        // mergeTemplateFeatures tries to fetch the template doc since features is absent
+        .mockResolvedValueOnce({ exists: () => false });
+
+      const result = await FirebaseCharacterService.getCharacter('char-rt-unresolved');
+
+      expect(result.appliedTemplates).toHaveLength(1);
+      const loaded = result.appliedTemplates[0];
+      expect(loaded.templateChoices).toBeUndefined();
+      expect(loaded.features).toBeUndefined();
+    });
+
+    test('saving a character with unresolved template choices succeeds without blocking', async () => {
+      const character = buildCharacterWithTemplate({
+        // no templateChoices — unresolved choice left pending
+      });
+
+      mockFirestore.addDoc.mockResolvedValue({ id: 'char-unresolved-save' });
+
+      const result = await FirebaseCharacterService.create('user-1', character);
+
+      expect(result.info.firebaseId).toBe('char-unresolved-save');
+      const docData = mockFirestore.addDoc.mock.calls[0][1];
+      expect(docData.appliedTemplates).toHaveLength(1);
+      expect(docData.appliedTemplates[0].templateId).toBe('celestial');
+      expect(docData.appliedTemplates[0].templateChoices).toBeUndefined();
     });
   });
 });

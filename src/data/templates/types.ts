@@ -2,7 +2,8 @@
 // Seed scripts only — authoritative copy lives in Firestore at runtime.
 
 import type { DataQualityFields } from '@/types/base';
-import { TemplateFeature } from '@/types/templates';
+import type { ChoiceOption, ChoiceOptionGroup } from '@/types/choiceOption';
+import { FlatFeature, TemplateFeature } from '@/types/templates';
 
 // Provenance — discriminated union replaces overlapping boolean fields
 export type TemplateSourceInfo =
@@ -63,6 +64,23 @@ export interface CRTierDefinition {
   features: TemplateFeature[]; // imported from @/types/templates — not redefined
 }
 
+// ---- Template Sub-Choice Types ----
+
+export interface TemplateChoiceOption extends ChoiceOption {
+  grantsFeature?: FlatFeature & { id: string };
+}
+
+export type TemplateChoiceOptionGroup = ChoiceOptionGroup<TemplateChoiceOption>;
+
+export interface TemplateChoiceDefinition {
+  id: string;
+  label: string;
+  optionSource: 'inline' | 'collection';
+  optionGroups?: TemplateChoiceOptionGroup[];
+  collectionName?: string;
+  collectionFilter?: Record<string, unknown>;
+}
+
 export interface TemplateDefinition extends DataQualityFields {
   id: string; // kebab-case: 'half-dragon', 'druid-creature'
   name: string;
@@ -102,6 +120,9 @@ export interface TemplateDefinition extends DataQualityFields {
   // Features — imported type, not redefined
   features: TemplateFeature[];
   spellLikeAbilities?: TemplateSLA[];
+
+  // Sub-choices (e.g. celestial type) that the player must resolve after applying.
+  choices?: TemplateChoiceDefinition[];
 
   // Provenance
   sourceInfo: TemplateSourceInfo;
