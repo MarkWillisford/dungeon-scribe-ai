@@ -70,6 +70,34 @@ jest.mock('@/data/templates', () => ({
       rev: 1,
       verificationStatus: 'verified',
     },
+    {
+      id: 'celestial-with-companion',
+      name: 'Celestial With Companion',
+      description: 'Test',
+      crAdjustment: 2,
+      acquisitionType: 'acquired',
+      isSimpleTemplate: false,
+      features: [],
+      choices: [
+        {
+          id: 'companion-bond',
+          label: 'Companion Bond',
+          optionSource: 'inline',
+          optionGroups: [
+            {
+              id: 'g1',
+              name: '',
+              options: [{ id: 'wolf', name: 'Wolf', description: 'A wolf companion' }],
+            },
+          ],
+        },
+      ],
+      grantsCompanion: { effectiveLevelFormula: 'characterLevel', pickerFilter: 'full' },
+      sourceInfo: { type: 'official', publication: 'MM' },
+      visibility: 'global',
+      rev: 1,
+      verificationStatus: 'verified',
+    },
   ],
 }));
 
@@ -94,10 +122,15 @@ jest.mock('@/components/character/direct-entry/TemplateChoiceRow', () => {
   };
 });
 
-// TemplateCompanionSection — stub out since it has its own tests.
-jest.mock('@/components/character/direct-entry/TemplateCompanionSection', () => ({
-  TemplateCompanionSection: () => null,
-}));
+// TemplateCompanionSection — stub that renders an identifiable marker so
+// coexistence with TemplateChoiceRow can be verified in one tree.
+jest.mock('@/components/character/direct-entry/TemplateCompanionSection', () => {
+  const React = require('react');
+  const { View } = require('react-native');
+  return {
+    TemplateCompanionSection: () => React.createElement(View, { testID: 'companion-section' }),
+  };
+});
 
 // InlinePicker — simple stub.
 jest.mock('@/components/ui/InlinePicker', () => {
@@ -158,5 +191,15 @@ describe('TemplateEntryCard', () => {
     const entry = makeEntry({ isFreeGrant: true });
     const r = render(<TemplateEntryCard entry={entry} />);
     expect(r.queryByTestId('choice-row-celestial-type')).toBeNull();
+  });
+
+  it('renders TemplateChoiceRow and TemplateCompanionSection together on the same card without layout regression', () => {
+    const entry = makeEntry({
+      templateId: 'celestial-with-companion',
+      name: 'Celestial With Companion',
+    });
+    const r = render(<TemplateEntryCard entry={entry} />);
+    expect(r.getByTestId('choice-row-companion-bond')).toBeDefined();
+    expect(r.getByTestId('companion-section')).toBeDefined();
   });
 });

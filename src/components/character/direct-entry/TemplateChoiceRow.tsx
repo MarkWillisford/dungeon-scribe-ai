@@ -51,6 +51,7 @@ export function TemplateChoiceRow({
   return (
     <View style={styles.container}>
       <Pressable
+        testID="template-choice-row"
         onPress={hasOptions ? () => setPickerOpen(true) : undefined}
         disabled={!hasOptions}
         style={[styles.row, !hasOptions && styles.rowDisabled]}

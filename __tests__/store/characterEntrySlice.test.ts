@@ -1680,6 +1680,64 @@ describe('characterEntrySlice — templates', () => {
       );
       expect(state.character.appliedTemplates[0]).toEqual(before);
     });
+
+    it('does not mutate state on idempotent re-selection of same option', () => {
+      let state = reducer(
+        makeInitialState(),
+        addTemplate(makeTemplate('tpl-1', { templateId: 'celestial-blessed-creature' })),
+      );
+      const tplId = state.character.appliedTemplates[0].id!;
+      const choiceDef = makeChoiceDef();
+
+      // First resolution
+      state = reducer(
+        state,
+        resolveTemplateChoice({
+          appliedTemplateId: tplId,
+          templateDefinition: choiceDef,
+          choiceId: 'celestial-type',
+          selectionId: 'astral-deva',
+        }),
+      );
+      const stateAfterFirst = state;
+
+      // Re-select the same option
+      state = reducer(
+        state,
+        resolveTemplateChoice({
+          appliedTemplateId: tplId,
+          templateDefinition: choiceDef,
+          choiceId: 'celestial-type',
+          selectionId: 'astral-deva',
+        }),
+      );
+
+      // Immer creates a new object only on mutation; same reference proves no write happened
+      expect(state.character.appliedTemplates).toBe(stateAfterFirst.character.appliedTemplates);
+      expect(state.isDirty).toBe(stateAfterFirst.isDirty);
+    });
+
+    it('does not mutate state for unknown choiceId', () => {
+      let state = reducer(
+        makeInitialState(),
+        addTemplate(makeTemplate('tpl-1', { templateId: 'celestial-blessed-creature' })),
+      );
+      const tplId = state.character.appliedTemplates[0].id!;
+      const stateBefore = state;
+
+      state = reducer(
+        state,
+        resolveTemplateChoice({
+          appliedTemplateId: tplId,
+          templateDefinition: makeChoiceDef(),
+          choiceId: 'unknown-choice-id',
+          selectionId: 'some-option-id',
+        }),
+      );
+
+      expect(state.character.appliedTemplates[0]).toBe(stateBefore.character.appliedTemplates[0]);
+      expect(state.isDirty).toBe(stateBefore.isDirty);
+    });
   });
 });
 
