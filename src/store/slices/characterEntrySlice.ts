@@ -44,6 +44,7 @@ export type EntryTabKey =
   | 'combat'
   | 'skills'
   | 'traits'
+  | 'flaws'
   | 'feats'
   | 'spells'
   | 'equipment'
