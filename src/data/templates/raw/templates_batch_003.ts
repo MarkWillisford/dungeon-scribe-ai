@@ -690,8 +690,7 @@ export const TEMPLATES_BATCH_003: TemplateDefinition[] = [
       {
         scalingType: 'flat',
         name: 'Celestial Quality (Su)',
-        description:
-          "Gains a special ability based on the type of celestial merged: Astral Deva grants Stunning Strike 5/day (Fortitude or stunned 1d6 rounds); Avoral grants Lightning Bolt 3/day (Sp); Bralani grants Wind Wall at will (Sp); Ghaele grants Fear 3/day (Sp); Hound Archon grants Mage's Faithful Hound 1/day (Sp); Lantern Archon grants Searing Light 3/day (Sp); Leonal grants Pounce (Ex); Planetar grants Flame Strike 1/day (Sp); Solar grants Slaying Shot 1/day (Su, Fortitude or die); Trumpet Archon grants Clarion Call 1/day (Su, Fortitude or paralyzed 1d4 rounds within 30 ft.).",
+        description: 'Gains a celestial-specific ability — see chosen Celestial Type below.',
       },
     ],
     choices: [
@@ -722,6 +721,182 @@ export const TEMPLATES_BATCH_003: TemplateDefinition[] = [
                     name: 'Stunning Strike',
                     rechargeOn: 'rest',
                     maxFormula: '5',
+                    restRecoveryMode: 'full',
+                  },
+                },
+              },
+              {
+                id: 'avoral',
+                name: 'Avoral',
+                description: 'Grants Lightning Bolt 3/day (Sp).',
+                grantsFeature: {
+                  id: 'lightning-bolt',
+                  scalingType: 'flat',
+                  name: 'Lightning Bolt 3/day (Sp)',
+                  description:
+                    'The creature can use lightning bolt (as the spell) three times per day as a spell-like ability.',
+                  shortDescription: 'Lightning bolt 3/day',
+                  activationMode: 'action',
+                  resourcePool: {
+                    id: 'lightning_bolt_uses',
+                    name: 'Lightning Bolt',
+                    rechargeOn: 'rest',
+                    maxFormula: '3',
+                    restRecoveryMode: 'full',
+                  },
+                },
+              },
+              {
+                id: 'bralani',
+                name: 'Bralani',
+                description: 'Grants Wind Wall at will (Sp).',
+                grantsFeature: {
+                  id: 'wind-wall',
+                  scalingType: 'flat',
+                  name: 'Wind Wall (Sp)',
+                  description:
+                    'The creature can use wind wall (as the spell) at will as a spell-like ability.',
+                  shortDescription: 'Wind wall at will',
+                  activationMode: 'action',
+                },
+              },
+              {
+                id: 'ghaele',
+                name: 'Ghaele',
+                description: 'Grants Fear 3/day (Sp).',
+                grantsFeature: {
+                  id: 'fear-ghaele',
+                  scalingType: 'flat',
+                  name: 'Fear 3/day (Sp)',
+                  description:
+                    'The creature can use fear (as the spell) three times per day as a spell-like ability.',
+                  shortDescription: 'Fear 3/day',
+                  activationMode: 'action',
+                  resourcePool: {
+                    id: 'fear_uses',
+                    name: 'Fear',
+                    rechargeOn: 'rest',
+                    maxFormula: '3',
+                    restRecoveryMode: 'full',
+                  },
+                },
+              },
+              {
+                id: 'hound-archon',
+                name: 'Hound Archon',
+                description: "Grants Mage's Faithful Hound 1/day (Sp).",
+                grantsFeature: {
+                  id: 'mages-faithful-hound',
+                  scalingType: 'flat',
+                  name: "Mage's Faithful Hound 1/day (Sp)",
+                  description:
+                    "The creature can use Mage's faithful hound (as the spell) once per day as a spell-like ability.",
+                  shortDescription: "Mage's faithful hound 1/day",
+                  activationMode: 'action',
+                  resourcePool: {
+                    id: 'mages_faithful_hound_uses',
+                    name: "Mage's Faithful Hound",
+                    rechargeOn: 'rest',
+                    maxFormula: '1',
+                    restRecoveryMode: 'full',
+                  },
+                },
+              },
+              {
+                id: 'lantern-archon',
+                name: 'Lantern Archon',
+                description: 'Grants Searing Light 3/day (Sp).',
+                grantsFeature: {
+                  id: 'searing-light',
+                  scalingType: 'flat',
+                  name: 'Searing Light 3/day (Sp)',
+                  description:
+                    'The creature can use searing light (as the spell) three times per day as a spell-like ability.',
+                  shortDescription: 'Searing light 3/day',
+                  activationMode: 'action',
+                  resourcePool: {
+                    id: 'searing_light_uses',
+                    name: 'Searing Light',
+                    rechargeOn: 'rest',
+                    maxFormula: '3',
+                    restRecoveryMode: 'full',
+                  },
+                },
+              },
+              {
+                id: 'leonal',
+                name: 'Leonal',
+                description: 'Grants Pounce (Ex).',
+                grantsFeature: {
+                  id: 'pounce',
+                  scalingType: 'flat',
+                  name: 'Pounce (Ex)',
+                  description:
+                    'When the creature charges, it can make a full attack at the end of the charge.',
+                  shortDescription: 'Full attack on charge',
+                  activationMode: 'passive',
+                },
+              },
+              {
+                id: 'planetar',
+                name: 'Planetar',
+                description: 'Grants Flame Strike 1/day (Sp).',
+                grantsFeature: {
+                  id: 'flame-strike',
+                  scalingType: 'flat',
+                  name: 'Flame Strike 1/day (Sp)',
+                  description:
+                    'The creature can use flame strike (as the spell) once per day as a spell-like ability.',
+                  shortDescription: 'Flame strike 1/day',
+                  activationMode: 'action',
+                  resourcePool: {
+                    id: 'flame_strike_uses',
+                    name: 'Flame Strike',
+                    rechargeOn: 'rest',
+                    maxFormula: '1',
+                    restRecoveryMode: 'full',
+                  },
+                },
+              },
+              {
+                id: 'solar',
+                name: 'Solar',
+                description: 'Grants Slaying Shot 1/day (Su, Fortitude save or die instantly).',
+                grantsFeature: {
+                  id: 'slaying-shot',
+                  scalingType: 'flat',
+                  name: 'Slaying Shot 1/day (Su)',
+                  description:
+                    'Once per day the creature can fire a slaying shot. The target must succeed on a Fortitude save or die instantly.',
+                  shortDescription: 'Slaying shot; Fort or die 1/day',
+                  activationMode: 'action',
+                  resourcePool: {
+                    id: 'slaying_shot_uses',
+                    name: 'Slaying Shot',
+                    rechargeOn: 'rest',
+                    maxFormula: '1',
+                    restRecoveryMode: 'full',
+                  },
+                },
+              },
+              {
+                id: 'trumpet-archon',
+                name: 'Trumpet Archon',
+                description:
+                  'Grants Clarion Call 1/day (Su, Fortitude or paralyzed 1d4 rounds within 30 ft.).',
+                grantsFeature: {
+                  id: 'clarion-call',
+                  scalingType: 'flat',
+                  name: 'Clarion Call 1/day (Su)',
+                  description:
+                    'Once per day the creature can sound a clarion call. All creatures within 30 feet must succeed on a Fortitude save or be paralyzed for 1d4 rounds.',
+                  shortDescription: 'Clarion call; Fort or paralyzed 1d4 rounds 1/day',
+                  activationMode: 'action',
+                  resourcePool: {
+                    id: 'clarion_call_uses',
+                    name: 'Clarion Call',
+                    rechargeOn: 'rest',
+                    maxFormula: '1',
                     restRecoveryMode: 'full',
                   },
                 },

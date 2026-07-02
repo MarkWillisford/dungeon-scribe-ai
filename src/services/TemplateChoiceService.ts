@@ -86,10 +86,13 @@ export function resolveTemplateChoice(
     return { newTemplateChoices, newFeatures: featuresWithoutPrior };
   }
 
-  // Inject the feature snapshot with the stable derived id
+  // Inject the feature snapshot with the stable derived id.
+  // sourceFeatureId preserves the original id from the template data so callers
+  // can cross-reference back to the source definition after the slot id replaces it.
   const injectedFeature: FlatFeature = {
     ...grantsFeature,
     id: featureSlotId,
+    sourceFeatureId: selectedOption.grantsFeature.id,
   };
 
   return { newTemplateChoices, newFeatures: [...featuresWithoutPrior, injectedFeature] };

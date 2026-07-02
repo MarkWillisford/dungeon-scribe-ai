@@ -122,6 +122,32 @@ describe('TemplateChoiceRow', () => {
     expect(text).toMatch(/Astral Deva/);
   });
 
+  it('displays selected option description below the row when resolved', () => {
+    const r = render(
+      <TemplateChoiceRow
+        choice={CHOICE_DEF}
+        currentSelection="astral-deva"
+        appliedTemplateId="applied-1"
+        templateDefinition={TEMPLATE_DEF}
+      />,
+    );
+    const text = r.getAllText().join(' ');
+    expect(text).toMatch(/Stunning Strike 5\/day/);
+    expect(r.getByTestId('choice-option-description-celestial-type')).toBeDefined();
+  });
+
+  it('does not display description block when no selection exists', () => {
+    const r = render(
+      <TemplateChoiceRow
+        choice={CHOICE_DEF}
+        currentSelection={undefined}
+        appliedTemplateId="applied-1"
+        templateDefinition={TEMPLATE_DEF}
+      />,
+    );
+    expect(r.queryByTestId('choice-option-description-celestial-type')).toBeNull();
+  });
+
   it('renders raw id as fallback when currentSelection does not match any option', () => {
     const r = render(
       <TemplateChoiceRow
@@ -133,6 +159,26 @@ describe('TemplateChoiceRow', () => {
     );
     const text = r.getAllText().join(' ');
     expect(text).toMatch(/unknown-id/);
+  });
+
+  it('renders nothing for collection-backed option sources (not yet implemented)', () => {
+    const collectionChoice: TemplateChoiceDefinition = {
+      id: 'collection-choice',
+      label: 'Some Choice',
+      optionSource: 'collection',
+      collectionName: 'some-collection',
+    };
+    const r = render(
+      <TemplateChoiceRow
+        choice={collectionChoice}
+        currentSelection={undefined}
+        appliedTemplateId="applied-1"
+        templateDefinition={TEMPLATE_DEF}
+      />,
+    );
+    // null return — no button, no text content rendered
+    expect(r.getAllByRole('button')).toHaveLength(0);
+    expect(r.getAllText()).toHaveLength(0);
   });
 
   it('tap opens the picker', () => {

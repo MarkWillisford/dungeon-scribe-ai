@@ -74,6 +74,10 @@ export interface FlatFeature {
   description: string;
   // Toggle/resource fields — populate for abilities that appear in the combat panel.
   id?: string;
+  // When this feature was injected from a template choice, the original id from
+  // the choice option's grantsFeature — preserved so callers can cross-reference
+  // the source data even though the injected feature uses a derived slot id.
+  sourceFeatureId?: string;
   activationMode?: 'passive' | 'toggle' | 'conditional' | 'action';
   shortDescription?: string;
   effects?: Effect[];

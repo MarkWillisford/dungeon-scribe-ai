@@ -111,6 +111,7 @@ describe('resolveTemplateChoice', () => {
       id: DERIVED_FEATURE_ID,
       scalingType: 'flat',
       name: 'Stunning Strike 5/day',
+      sourceFeatureId: 'stunning-strike',
     });
   });
 
@@ -144,6 +145,7 @@ describe('resolveTemplateChoice', () => {
     expect(result.newFeatures![0]).toMatchObject({
       id: DERIVED_FEATURE_ID,
       name: 'Wind Wall at will',
+      sourceFeatureId: 'wind-wall',
     });
   });
 

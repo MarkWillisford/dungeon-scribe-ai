@@ -23,12 +23,20 @@ export function TemplateChoiceRow({
   const dispatch = useAppDispatch();
   const [pickerOpen, setPickerOpen] = useState(false);
 
+  // collection-backed option sources are not yet implemented; skip rendering
+  // rather than showing an inert disabled row with no explanation.
+  if (choice.optionSource !== 'inline') {
+    return null;
+  }
+
   const allOptions = choice.optionGroups?.flatMap((g) => g.options) ?? [];
   const hasOptions = allOptions.length > 0;
 
-  const selectedName = currentSelection
-    ? (allOptions.find((o) => o.id === currentSelection)?.name ?? currentSelection)
-    : undefined;
+  const selectedOption = currentSelection
+    ? (allOptions.find((o) => o.id === currentSelection) ?? null)
+    : null;
+  const selectedName = selectedOption?.name ?? currentSelection ?? undefined;
+  const selectedDescription = selectedOption?.description ?? undefined;
 
   const pickerItems: SearchItem[] = allOptions.map((o) => ({
     key: o.id,
@@ -75,6 +83,15 @@ export function TemplateChoiceRow({
         </Text>
       </Pressable>
 
+      {selectedDescription && (
+        <Text
+          style={[styles.optionDescription, { color: colors.text.secondary }]}
+          testID={`choice-option-description-${choice.id}`}
+        >
+          {selectedDescription}
+        </Text>
+      )}
+
       <SearchPickerSheet
         visible={pickerOpen}
         title={choice.label}
@@ -113,5 +130,12 @@ const styles = StyleSheet.create({
   },
   rowDisabled: {
     opacity: 0.4,
+  },
+  optionDescription: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 12,
+    fontStyle: 'italic',
+    paddingHorizontal: 12,
+    paddingBottom: 6,
   },
 });
