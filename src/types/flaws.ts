@@ -1,11 +1,11 @@
-import { TraitEffect } from './traits';
+import { Effect } from './base';
 
 export interface FlawDefinition {
   id: string;
   name: string;
   description: string;
   source: string;
-  effects: TraitEffect[];
+  effects: Effect[];
 }
 
 export interface CharacterFlaw {

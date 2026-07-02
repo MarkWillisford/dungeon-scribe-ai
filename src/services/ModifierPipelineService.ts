@@ -4,6 +4,7 @@ import type { AbilityScores } from '@/types/abilities';
 import { Size, SaveProgression } from '@/types/base';
 import { FormulaService, type FormulaContext } from './FormulaService';
 import { FeatRegistryService } from './FeatRegistryService';
+import { FlawRegistryService } from './FlawRegistryService';
 import { ResourcePoolService } from './ResourcePoolService';
 
 // ---- Resolved Effect (after formula evaluation) ----
@@ -203,6 +204,15 @@ export class ModifierPipelineService {
     // 6. Conditions
     for (const condition of character.conditions.activeConditions) {
       for (const effect of condition.effects) {
+        effects.push(effect);
+      }
+    }
+
+    // 6b. Flaws
+    for (const charFlaw of character.flaws.flaws) {
+      const flawDef = FlawRegistryService.getFlaw(charFlaw.flawId);
+      if (!flawDef) continue;
+      for (const effect of flawDef.effects) {
         effects.push(effect);
       }
     }

@@ -14,7 +14,7 @@ describe('FlawDefinition type shape', () => {
         {
           type: 'penalty',
           bonusType: BonusType.UNTYPED,
-          target: 'constitution',
+          target: 'ability.con',
           value: -2,
           source: 'Frail',
         },
