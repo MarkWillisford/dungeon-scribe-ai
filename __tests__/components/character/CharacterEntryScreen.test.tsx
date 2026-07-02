@@ -29,6 +29,7 @@ let mockWarnings: { section: string; isAcknowledged: boolean }[] = [];
 let mockLastValidatedAt: number | null = null;
 let mockIsDirty = false;
 let mockIsSaving = false;
+let mockFlawsEnabled = false;
 
 jest.mock('@/store/hooks', () => ({
   useAppDispatch: () => mockDispatch,
@@ -52,7 +53,15 @@ jest.mock('@/store/hooks', () => ({
         isDirty: mockIsDirty,
         isSaving: mockIsSaving,
       },
-      ruleset: { activeRuleset: null },
+      ruleset: {
+        activeRuleset: mockFlawsEnabled
+          ? {
+              optionalRules: { flaws: true },
+              validationSettings: { maxFlaws: 2 },
+              allowedSources: [],
+            }
+          : null,
+      },
       gameData: { classes: {}, classChoiceDefinitions: {} },
     }),
 }));
@@ -182,6 +191,7 @@ beforeEach(() => {
   mockLastValidatedAt = null;
   mockIsDirty = false;
   mockIsSaving = false;
+  mockFlawsEnabled = false;
 });
 
 // ---- Tests: handleSave ----
@@ -507,5 +517,32 @@ describe('CharacterEntryScreen — validation FAB', () => {
     const buttons = findByType(tree, 'Pressable');
     const fab = buttons.find((b) => b.props.accessibilityLabel === 'Validation passed');
     expect(fab).toBeDefined();
+  });
+});
+
+// ---- Tests: flaws tab ----
+
+describe('CharacterEntryScreen — flaws tab', () => {
+  it('does not include Flaws tab when optionalRules.flaws is false', () => {
+    mockFlawsEnabled = false;
+    const { tree } = render(<CharacterEntryScreen />);
+    const { tabs } = ornateTabNode(tree).props as { tabs: { key: string; label: string }[] };
+    expect(tabs.some((t) => t.key === 'flaws')).toBe(false);
+  });
+
+  it('inserts Flaws tab directly after Traits when optionalRules.flaws is true', () => {
+    mockFlawsEnabled = true;
+    const { tree } = render(<CharacterEntryScreen />);
+    const { tabs } = ornateTabNode(tree).props as { tabs: { key: string; label: string }[] };
+    const traitsIdx = tabs.findIndex((t) => t.key === 'traits');
+    const flawsIdx = tabs.findIndex((t) => t.key === 'flaws');
+    expect(traitsIdx).toBeGreaterThanOrEqual(0);
+    expect(flawsIdx).toBe(traitsIdx + 1);
+  });
+
+  it('renders without crashing when flaws tab is the active tab', () => {
+    mockFlawsEnabled = true;
+    mockActiveTab = 'flaws';
+    expect(() => render(<CharacterEntryScreen />)).not.toThrow();
   });
 });

@@ -225,4 +225,45 @@ describe('FlawsSection', () => {
     render(<FlawsSection />);
     expect(FlawRegistryService.getAllFlaws).toHaveBeenCalled();
   });
+
+  it('shows all registry flaws when allowedSources is empty', () => {
+    mockAllowedSources = [];
+    render(<FlawsSection />);
+    expect(lastPickerProps).not.toBeNull();
+    expect(lastPickerProps!.items).toHaveLength(3);
+  });
+
+  it('opens the picker when add button is pressed', () => {
+    mockFlaws = [];
+    const { getByTestId, rerender } = render(<FlawsSection />);
+    expect(lastPickerProps!.visible).toBeFalsy();
+    fireEvent.press(getByTestId('add-flaw-button'));
+    rerender();
+    expect(lastPickerProps!.visible).toBe(true);
+  });
+
+  it('does not open the picker when at maxFlaws limit', () => {
+    mockFlaws = [
+      { flawId: 'flaw-1', name: 'Noncombatant' },
+      { flawId: 'flaw-2', name: 'Shaky' },
+    ];
+    mockMaxFlaws = 2;
+    const { getByTestId } = render(<FlawsSection />);
+    const addButton = getByTestId('add-flaw-button');
+    expect(addButton.props.disabled).toBe(true);
+    const previousVisible = lastPickerProps?.visible;
+    fireEvent.press(addButton);
+    expect(lastPickerProps?.visible).toBe(previousVisible ?? false);
+  });
+
+  it('does not dispatch addFlaw when at limit and an item is selected', () => {
+    mockFlaws = [
+      { flawId: 'flaw-1', name: 'Noncombatant' },
+      { flawId: 'flaw-2', name: 'Shaky' },
+    ];
+    mockMaxFlaws = 2;
+    render(<FlawsSection />);
+    lastPickerProps!.onSelect({ key: 'flaw-pf', label: 'PF Flaw' });
+    expect(mockDispatch).not.toHaveBeenCalled();
+  });
 });

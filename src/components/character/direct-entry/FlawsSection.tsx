@@ -76,6 +76,10 @@ export function FlawsSection() {
   const atLimit = flaws.length >= maxFlaws;
 
   const handleSelect = (item: SearchItem) => {
+    if (atLimit) {
+      setPickerOpen(false);
+      return;
+    }
     if (flaws.some((f) => f.flawId === item.key)) {
       setPickerOpen(false);
       return;
