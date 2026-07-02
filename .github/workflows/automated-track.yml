@@ -14,7 +14,7 @@ name: Automated Track
 #   7. Commit, push, open PR.
 #
 # Bail conditions (no PR, no push, relabel to sandcastle):
-#   - Cannot write a reproducing test in the first 8 turns
+#   - Cannot write a reproducing test within REPRO_TURN_LIMIT turns
 #   - Turn budget exhausted before tests pass
 #   - Fix would touch more than 3 files
 #   - Full test suite regressions the agent cannot resolve
@@ -40,6 +40,8 @@ jobs:
     if: github.event.label.name == 'bug'
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    env:
+      REPRO_TURN_LIMIT: 8
     permissions:
       contents: write
       issues: write
@@ -87,7 +89,7 @@ jobs:
 
             Hard limits:
             - Max files to modify (source code, not tests): 3
-            - If you cannot write a reproducing test within your first 8 turns, BAIL.
+            - If you cannot write a reproducing test within your first ${{ env.REPRO_TURN_LIMIT }} turns, BAIL.
             - Do not use WebFetch or WebSearch. Work only from the codebase.
 
             == STRICT TDD LOOP ==
@@ -108,7 +110,7 @@ jobs:
             The test MUST FAIL against the current code. This is the reproduction gate.
             If the test passes on current code, you have not captured the bug.
             Iterate on the test until it fails. If you cannot produce a failing test
-            within your first 8 turns total, BAIL (see below).
+            within your first ${{ env.REPRO_TURN_LIMIT }} turns total, BAIL (see below).
 
             STEP 3 — Fix the code.
             Identify the root cause. Write the minimal fix. Do not refactor unrelated
@@ -150,6 +152,8 @@ jobs:
         run: |
           # If the agent committed, HEAD will differ from origin/main.
           # If it bailed, nothing was committed and HEAD == origin/main.
+          # Fetch first so a mid-run merge to main doesn't skew the count.
+          git fetch origin main
           COMMITS=$(git rev-list origin/main..HEAD --count)
           echo "commit_count=${COMMITS}" >> $GITHUB_OUTPUT
           if [ "$COMMITS" -gt 0 ]; then
