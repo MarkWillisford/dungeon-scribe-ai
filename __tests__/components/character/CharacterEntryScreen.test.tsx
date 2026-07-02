@@ -41,6 +41,7 @@ jest.mock('@/store/hooks', () => ({
           classes: { classes: mockClasses },
           combatStats: { hitPoints: { current: mockCurrentHP } },
           traits: { traits: mockTraits },
+          flaws: { flaws: [] },
           feats: { feats: mockFeats },
           spellcasting: { pools: mockSpellPools },
           editorEquipment: mockEditorEquipment,
@@ -121,6 +122,9 @@ jest.mock('@/components/character/direct-entry/EquipmentSection', () => ({
 }));
 jest.mock('@/components/character/direct-entry/TraitsSection', () => ({
   TraitsSection: () => null,
+}));
+jest.mock('@/components/character/direct-entry/FlawsSection', () => ({
+  FlawsSection: () => null,
 }));
 jest.mock('@/components/character/direct-entry/FeatSlotList', () => ({
   FeatSlotList: () => null,

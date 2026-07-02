@@ -1,13 +1,5 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  Pressable,
-  Modal,
-  SectionList,
-  StyleSheet,
-  SafeAreaView,
-} from 'react-native';
+import { View, Text, Pressable, Modal, SectionList, StyleSheet, SafeAreaView } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import {
@@ -34,6 +26,7 @@ const TAB_ORDER: EntryTabKey[] = [
   'combat',
   'skills',
   'traits',
+  'flaws',
   'feats',
   'spells',
   'equipment',
@@ -47,6 +40,7 @@ const TAB_LABELS: Record<EntryTabKey, string> = {
   combat: 'Combat',
   skills: 'Skills',
   traits: 'Traits',
+  flaws: 'Flaws',
   feats: 'Feats',
   spells: 'Spells',
   equipment: 'Equipment',
@@ -60,18 +54,16 @@ interface WarningSection {
 }
 
 function buildSections(warnings: EntryValidationWarning[]): WarningSection[] {
-  return TAB_ORDER
-    .map((tab) => {
-      const sectionWarnings = warnings
-        .filter((w) => w.section === tab)
-        .sort((a, b) => {
-          // Acknowledged warnings sink to the bottom within their section
-          if (a.isAcknowledged !== b.isAcknowledged) return a.isAcknowledged ? 1 : -1;
-          return 0;
-        });
-      return { title: TAB_LABELS[tab].toUpperCase(), tabKey: tab, data: sectionWarnings };
-    })
-    .filter((s) => s.data.length > 0);
+  return TAB_ORDER.map((tab) => {
+    const sectionWarnings = warnings
+      .filter((w) => w.section === tab)
+      .sort((a, b) => {
+        // Acknowledged warnings sink to the bottom within their section
+        if (a.isAcknowledged !== b.isAcknowledged) return a.isAcknowledged ? 1 : -1;
+        return 0;
+      });
+    return { title: TAB_LABELS[tab].toUpperCase(), tabKey: tab, data: sectionWarnings };
+  }).filter((s) => s.data.length > 0);
 }
 
 // ---- Warning row ----
@@ -125,24 +117,16 @@ function WarningRow({ warning, onAcknowledge, onFixIn }: WarningRowProps) {
             accessibilityRole="button"
             accessibilityLabel="Override — trust player"
           >
-            <Text style={[rowStyles.actionText, { color: colors.text.tertiary }]}>
-              Override
-            </Text>
+            <Text style={[rowStyles.actionText, { color: colors.text.tertiary }]}>Override</Text>
           </Pressable>
           <Pressable
             onPress={onFixIn}
-            style={[
-              rowStyles.actionBtn,
-              { borderColor: isDark ? fantasy.gold : fantasy.bronze },
-            ]}
+            style={[rowStyles.actionBtn, { borderColor: isDark ? fantasy.gold : fantasy.bronze }]}
             accessibilityRole="button"
             accessibilityLabel={`Fix in ${TAB_LABELS[warning.section]}`}
           >
             <Text
-              style={[
-                rowStyles.actionText,
-                { color: isDark ? fantasy.gold : fantasy.darkWood },
-              ]}
+              style={[rowStyles.actionText, { color: isDark ? fantasy.gold : fantasy.darkWood }]}
             >
               Fix in {TAB_LABELS[warning.section]}
             </Text>
@@ -278,9 +262,17 @@ export function ValidationReportSheet({ visible, onClose, onSave }: ValidationRe
             keyExtractor={(item) => item.id}
             renderSectionHeader={({ section }) => (
               <View
-                style={[styles.sectionHeader, { backgroundColor: isDark ? colors.bg.tertiary : colors.bg.primary }]}
+                style={[
+                  styles.sectionHeader,
+                  { backgroundColor: isDark ? colors.bg.tertiary : colors.bg.primary },
+                ]}
               >
-                <Text style={[styles.sectionTitle, { color: isDark ? fantasy.bronze : fantasy.darkWood }]}>
+                <Text
+                  style={[
+                    styles.sectionTitle,
+                    { color: isDark ? fantasy.bronze : fantasy.darkWood },
+                  ]}
+                >
                   {section.title}
                 </Text>
                 <Text style={[styles.sectionCount, { color: colors.text.tertiary }]}>

@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import {
   View,
   Text,
@@ -34,13 +34,14 @@ import { CombatStatsSection } from './CombatStatsSection';
 import { SkillsSection } from './SkillsSection';
 import { EquipmentSection } from './EquipmentSection';
 import { TraitsSection } from './TraitsSection';
+import { FlawsSection } from './FlawsSection';
 import { FeatSlotList } from './FeatSlotList';
 import { SpellcastingSection } from './SpellcastingSection';
 import { NotesSection } from './NotesSection';
 
 // ---- Tab definitions ----
 
-const TABS: { key: EntryTabKey; label: string }[] = [
+const BASE_TABS: { key: EntryTabKey; label: string }[] = [
   { key: 'identity', label: 'Identity' },
   { key: 'abilities', label: 'Abilities' },
   { key: 'classes', label: 'Classes' },
@@ -105,6 +106,11 @@ function useTabStatus(): Record<EntryTabKey, TabStatus> {
       : character.traits.traits.length > 0
         ? 'complete'
         : 'empty',
+    flaws: hasWarning('flaws')
+      ? 'warnings'
+      : character.flaws.flaws.length > 0
+        ? 'complete'
+        : 'empty',
     feats: hasWarning('feats')
       ? 'warnings'
       : character.feats.feats.length > 0
@@ -139,6 +145,13 @@ export function CharacterEntryScreen() {
   const ruleset = useAppSelector((state) => state.ruleset.activeRuleset ?? PRESET_PF1E_STANDARD);
   const classDataMap = useAppSelector(selectClassDataMap);
   const tabStatus = useTabStatus();
+
+  const tabs = useMemo(() => {
+    if (!ruleset.optionalRules.flaws) return BASE_TABS;
+    const result = [...BASE_TABS];
+    result.splice(6, 0, { key: 'flaws' as EntryTabKey, label: 'Flaws' });
+    return result;
+  }, [ruleset.optionalRules.flaws]);
 
   const [showValidationSheet, setShowValidationSheet] = useState(false);
 
@@ -201,7 +214,7 @@ export function CharacterEntryScreen() {
 
       {/* Tab bar */}
       <OrnateTab
-        tabs={TABS}
+        tabs={tabs}
         activeTab={activeTab}
         onTabChange={handleTabChange}
         tabStatus={tabStatus}
@@ -232,6 +245,7 @@ export function CharacterEntryScreen() {
           {activeTab === 'skills' && <SkillsSection />}
           {activeTab === 'equipment' && <EquipmentSection />}
           {activeTab === 'traits' && <TraitsSection />}
+          {activeTab === 'flaws' && <FlawsSection />}
           {activeTab === 'feats' && <FeatSlotList />}
           {activeTab === 'spells' && <SpellcastingSection />}
           {activeTab === 'notes' && <NotesSection />}
@@ -242,6 +256,7 @@ export function CharacterEntryScreen() {
             activeTab !== 'skills' &&
             activeTab !== 'equipment' &&
             activeTab !== 'traits' &&
+            activeTab !== 'flaws' &&
             activeTab !== 'feats' &&
             activeTab !== 'spells' &&
             activeTab !== 'notes' && <PlaceholderSection tab={activeTab} />}
