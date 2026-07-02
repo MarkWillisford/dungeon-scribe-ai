@@ -23,10 +23,17 @@ export function TemplateChoiceRow({
   const dispatch = useAppDispatch();
   const [pickerOpen, setPickerOpen] = useState(false);
 
-  // collection-backed option sources are not yet implemented; skip rendering
-  // rather than showing an inert disabled row with no explanation.
   if (choice.optionSource !== 'inline') {
-    return null;
+    return (
+      <View style={styles.container}>
+        <View style={[styles.row, styles.rowDisabled]}>
+          <Text style={[styles.label, { color: colors.text.secondary }]}>{choice.label}</Text>
+          <Text style={[styles.value, { color: colors.text.tertiary, fontStyle: 'italic' }]}>
+            {'— not yet available —'}
+          </Text>
+        </View>
+      </View>
+    );
   }
 
   const allOptions = choice.optionGroups?.flatMap((g) => g.options) ?? [];

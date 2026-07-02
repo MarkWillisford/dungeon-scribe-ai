@@ -161,7 +161,7 @@ describe('TemplateChoiceRow', () => {
     expect(text).toMatch(/unknown-id/);
   });
 
-  it('renders nothing for collection-backed option sources (not yet implemented)', () => {
+  it('renders a disabled placeholder row for collection-backed option sources (not yet implemented)', () => {
     const collectionChoice: TemplateChoiceDefinition = {
       id: 'collection-choice',
       label: 'Some Choice',
@@ -176,9 +176,11 @@ describe('TemplateChoiceRow', () => {
         templateDefinition={TEMPLATE_DEF}
       />,
     );
-    // null return — no button, no text content rendered
+    const text = r.getAllText().join(' ');
+    expect(text).toMatch(/Some Choice/);
+    expect(text).toMatch(/not yet available/);
+    // Disabled row — no interactive button
     expect(r.getAllByRole('button')).toHaveLength(0);
-    expect(r.getAllText()).toHaveLength(0);
   });
 
   it('tap opens the picker', () => {
