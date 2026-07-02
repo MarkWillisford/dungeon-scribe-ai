@@ -85,6 +85,10 @@ export function FlawsSection() {
   };
 
   const handleAddCustom = (name: string) => {
+    if (atLimit) {
+      setPickerOpen(false);
+      return;
+    }
     dispatch(addFlaw({ flawId: genId(), name }));
     setPickerOpen(false);
   };
