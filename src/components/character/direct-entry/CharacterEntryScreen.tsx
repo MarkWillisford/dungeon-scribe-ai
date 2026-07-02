@@ -149,7 +149,8 @@ export function CharacterEntryScreen() {
   const tabs = useMemo(() => {
     if (!ruleset.optionalRules.flaws) return BASE_TABS;
     const result = [...BASE_TABS];
-    result.splice(6, 0, { key: 'flaws' as EntryTabKey, label: 'Flaws' });
+    const traitsIdx = result.findIndex((t) => t.key === 'traits');
+    result.splice(traitsIdx + 1, 0, { key: 'flaws' as EntryTabKey, label: 'Flaws' });
     return result;
   }, [ruleset.optionalRules.flaws]);
 
