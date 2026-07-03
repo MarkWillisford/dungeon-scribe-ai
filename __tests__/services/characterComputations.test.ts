@@ -470,6 +470,7 @@ describe('computeFeatSlots', () => {
     const humanRacial = humanSlots.find((s) => s.source === 'racial')!;
     const elvenRacial = elvenSlots.find((s) => s.source === 'racial')!;
     expect(humanRacial.availableAt).not.toBe(elvenRacial.availableAt);
+    expect(elvenRacial.availableAt).toBe('Elven Noble Bonus');
   });
 
   it('human racial feat slot is unaffected by elven noble addition', () => {
