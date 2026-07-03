@@ -235,11 +235,17 @@ export function computeFeatSlots(
     });
   }
 
-  if (race.toLowerCase() === 'human') {
+  const racialFeatRaces: { key: string; id: string; label: string }[] = [
+    { key: 'human', id: 'racial-feat-human-1', label: 'Human Bonus' },
+    { key: 'elven noble', id: 'racial-feat-elven-noble-1', label: 'Elven Noble Bonus' },
+  ];
+  const raceLower = race.toLowerCase();
+  const racialFeatEntry = racialFeatRaces.find((r) => r.key === raceLower);
+  if (racialFeatEntry) {
     slots.push({
-      id: 'racial-feat-human-1',
+      id: racialFeatEntry.id,
       source: 'racial',
-      availableAt: 'Human Bonus',
+      availableAt: racialFeatEntry.label,
       availableAtLevel: 1,
       prereqOverride: false,
     });

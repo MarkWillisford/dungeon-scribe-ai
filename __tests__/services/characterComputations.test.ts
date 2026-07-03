@@ -455,6 +455,29 @@ describe('computeFeatSlots', () => {
     const slots = computeFeatSlots([cls('Fighter', 1)], 'Dwarf', []);
     expect(slots.filter((s) => s.source === 'bonus')).toHaveLength(0);
   });
+
+  it('elven noble gets a racial bonus feat slot at level 1', () => {
+    const slots = computeFeatSlots([cls('Fighter', 1)], 'Elven Noble', []);
+    const racial = slots.filter((s) => s.source === 'racial');
+    expect(racial).toHaveLength(1);
+    expect(racial[0].availableAtLevel).toBe(1);
+    expect(racial[0].id).toBe('racial-feat-elven-noble-1');
+  });
+
+  it('elven noble racial slot label is distinct from human slot', () => {
+    const humanSlots = computeFeatSlots([cls('Fighter', 1)], 'Human', []);
+    const elvenSlots = computeFeatSlots([cls('Fighter', 1)], 'Elven Noble', []);
+    const humanRacial = humanSlots.find((s) => s.source === 'racial')!;
+    const elvenRacial = elvenSlots.find((s) => s.source === 'racial')!;
+    expect(humanRacial.availableAt).not.toBe(elvenRacial.availableAt);
+  });
+
+  it('human racial feat slot is unaffected by elven noble addition', () => {
+    const slots = computeFeatSlots([cls('Fighter', 1)], 'Human', []);
+    const racial = slots.filter((s) => s.source === 'racial');
+    expect(racial).toHaveLength(1);
+    expect(racial[0].id).toBe('racial-feat-human-1');
+  });
 });
 
 // ---- computeTotalBABFractional ----
