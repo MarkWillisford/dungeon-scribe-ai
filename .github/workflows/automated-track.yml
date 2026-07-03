@@ -75,10 +75,11 @@ jobs:
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          model: claude-sonnet-4-6
-          max_turns: 25
-          allowed_tools: "Read,Edit,Write,Bash(git:*),Bash(npm:*),Bash(gh:*)"
-          direct_prompt: |
+          claude_args: |
+            --model claude-sonnet-4-6
+            --max-turns 25
+            --allowed-tools Read,Edit,Write,Bash(git:*),Bash(npm:*),Bash(gh:*)
+          prompt: |
             You are an autonomous bug-fix agent running in GitHub Actions.
             You follow a strict TDD loop. Do not deviate from these steps.
 
