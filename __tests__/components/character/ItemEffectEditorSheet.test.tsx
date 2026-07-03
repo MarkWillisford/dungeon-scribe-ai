@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent, type RenderedNode } from '../../helpers/testUtils';
+import { render, fireEvent, findTextNode, type RenderedNode } from '../../helpers/testUtils';
 import {
   buildClassAbilityTargets,
   buildTargetLabelMap,
@@ -641,17 +641,6 @@ describe('ItemEffectEditorSheet', () => {
         onClose={onClose}
       />,
     );
-
-    function findTextNode(node: RenderedNode, text: string): RenderedNode | null {
-      if (node.type === 'Text' && node.children.some((c) => c === text)) return node;
-      for (const child of node.children) {
-        if (typeof child !== 'string') {
-          const found = findTextNode(child, text);
-          if (found) return found;
-        }
-      }
-      return null;
-    }
 
     const titleNode = findTextNode(tree, item.name);
     expect(titleNode).not.toBeNull();
