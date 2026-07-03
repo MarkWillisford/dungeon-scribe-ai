@@ -3,9 +3,17 @@ import { ClassChoiceDefinition } from '@/types/classChoices';
 // Favored enemy types. Humanoid and Outsider carry subtypePrompt (Phase A field).
 // subtypePrompt is used by the UI to ask the player to specify a subtype.
 const FAVORED_ENEMY_OPTIONS = [
-  { id: 'aberration', name: 'Aberration', description: 'Aberrations such as aboleths, beholders, and oozes.' },
+  {
+    id: 'aberration',
+    name: 'Aberration',
+    description: 'Aberrations such as aboleths, beholders, and oozes.',
+  },
   { id: 'animal', name: 'Animal', description: 'Natural animals.' },
-  { id: 'construct', name: 'Construct', description: 'Constructs including golems and animated objects.' },
+  {
+    id: 'construct',
+    name: 'Construct',
+    description: 'Constructs including golems and animated objects.',
+  },
   { id: 'dragon', name: 'Dragon', description: 'True dragons and related creatures.' },
   { id: 'fey', name: 'Fey', description: 'Fey creatures such as dryads, nymphs, and pixies.' },
   {
@@ -15,13 +23,30 @@ const FAVORED_ENEMY_OPTIONS = [
     subtypePrompt: {
       label: 'Choose a humanoid subtype',
       options: [
-        'aquatic', 'dwarf', 'elf', 'giant', 'gnoll', 'gnome',
-        'goblinoid', 'halfling', 'human', 'orc', 'reptilian',
+        'aquatic',
+        'dwarf',
+        'elf',
+        'giant',
+        'gnoll',
+        'gnome',
+        'goblinoid',
+        'halfling',
+        'human',
+        'orc',
+        'reptilian',
       ],
     },
   },
-  { id: 'magical-beast', name: 'Magical Beast', description: 'Magical beasts such as basilisks and owlbears.' },
-  { id: 'monstrous-humanoid', name: 'Monstrous Humanoid', description: 'Monstrous humanoids such as harpies and medusas.' },
+  {
+    id: 'magical-beast',
+    name: 'Magical Beast',
+    description: 'Magical beasts such as basilisks and owlbears.',
+  },
+  {
+    id: 'monstrous-humanoid',
+    name: 'Monstrous Humanoid',
+    description: 'Monstrous humanoids such as harpies and medusas.',
+  },
   { id: 'ooze', name: 'Ooze', description: 'Oozes such as black puddings and gelatinous cubes.' },
   {
     id: 'outsider',
@@ -30,36 +55,167 @@ const FAVORED_ENEMY_OPTIONS = [
     subtypePrompt: {
       label: 'Choose an outsider subtype',
       options: [
-        'air', 'chaotic', 'daemon', 'demon', 'devil', 'earth',
-        'elemental', 'evil', 'extraplanar', 'fire', 'good',
-        'inevitable', 'lawful', 'native', 'protean', 'water',
+        'air',
+        'chaotic',
+        'daemon',
+        'demon',
+        'devil',
+        'earth',
+        'elemental',
+        'evil',
+        'extraplanar',
+        'fire',
+        'good',
+        'inevitable',
+        'lawful',
+        'native',
+        'protean',
+        'water',
       ],
     },
   },
-  { id: 'plant', name: 'Plant', description: 'Plant creatures such as shambling mounds and treants.' },
+  {
+    id: 'plant',
+    name: 'Plant',
+    description: 'Plant creatures such as shambling mounds and treants.',
+  },
   { id: 'undead', name: 'Undead', description: 'Undead creatures of all kinds.' },
-  { id: 'vermin', name: 'Vermin', description: 'Vermin such as centipedes, scorpions, and spiders.' },
+  {
+    id: 'vermin',
+    name: 'Vermin',
+    description: 'Vermin such as centipedes, scorpions, and spiders.',
+  },
+];
+
+export const PLANES_FAVORED_TERRAIN_OPTIONS = [
+  {
+    id: 'planes-astral',
+    name: 'Planes (Astral Plane)',
+    description: 'The Astral Plane, a silvery void connecting the planes.',
+  },
+  {
+    id: 'planes-ethereal',
+    name: 'Planes (Ethereal Plane)',
+    description: 'The Ethereal Plane, a misty border between the Material and the Inner Planes.',
+  },
+  {
+    id: 'planes-shadow',
+    name: 'Planes (Shadow Plane)',
+    description: 'The Shadow Plane, a dark reflection of the Material Plane.',
+  },
+  {
+    id: 'planes-positive',
+    name: 'Planes (Positive Energy Plane)',
+    description: 'The Positive Energy Plane, a blazing font of life energy.',
+  },
+  {
+    id: 'planes-negative',
+    name: 'Planes (Negative Energy Plane)',
+    description: 'The Negative Energy Plane, a dark void of entropic energy.',
+  },
+  {
+    id: 'planes-air',
+    name: 'Planes (Elemental Plane of Air)',
+    description: 'The Elemental Plane of Air, a boundless sky.',
+  },
+  {
+    id: 'planes-earth',
+    name: 'Planes (Elemental Plane of Earth)',
+    description: 'The Elemental Plane of Earth, an infinite expanse of stone and soil.',
+  },
+  {
+    id: 'planes-fire',
+    name: 'Planes (Elemental Plane of Fire)',
+    description: 'The Elemental Plane of Fire, a realm of endless flame.',
+  },
+  {
+    id: 'planes-water',
+    name: 'Planes (Elemental Plane of Water)',
+    description: 'The Elemental Plane of Water, a vast eternal ocean.',
+  },
+  {
+    id: 'planes-heaven',
+    name: 'Planes (Heaven)',
+    description: 'Heaven, the lawful good Outer Plane of mountains and celestial order.',
+  },
+  {
+    id: 'planes-nirvana',
+    name: 'Planes (Nirvana)',
+    description: 'Nirvana, the neutral good Outer Plane of enlightenment and peace.',
+  },
+  {
+    id: 'planes-elysium',
+    name: 'Planes (Elysium)',
+    description: 'Elysium, the chaotic good Outer Plane of boundless freedom and joy.',
+  },
+  {
+    id: 'planes-axis',
+    name: 'Planes (Axis)',
+    description: 'Axis, the lawful neutral Outer Plane of perfect order and law.',
+  },
+  {
+    id: 'planes-maelstrom',
+    name: 'Planes (Maelstrom)',
+    description: 'The Maelstrom, the chaotic neutral Outer Plane of primordial chaos.',
+  },
+  {
+    id: 'planes-hell',
+    name: 'Planes (Hell)',
+    description: 'Hell, the lawful evil Outer Plane of tyranny and suffering.',
+  },
+  {
+    id: 'planes-abaddon',
+    name: 'Planes (Abaddon)',
+    description: 'Abaddon, the neutral evil Outer Plane of apocalypse and hunger.',
+  },
+  {
+    id: 'planes-abyss',
+    name: 'Planes (The Abyss)',
+    description: 'The Abyss, the chaotic evil Outer Plane of demonic corruption.',
+  },
+  {
+    id: 'planes-boneyard',
+    name: 'Planes (Boneyard)',
+    description: 'The Boneyard, the true neutral Outer Plane where souls are judged.',
+  },
 ];
 
 const FAVORED_TERRAIN_OPTIONS = [
-  { id: 'cold', name: 'Cold', description: 'Cold environments including arctic tundra and glaciers.' },
-  { id: 'desert', name: 'Desert', description: 'Desert environments including sandy and rocky deserts.' },
+  {
+    id: 'cold',
+    name: 'Cold',
+    description: 'Cold environments including arctic tundra and glaciers.',
+  },
+  {
+    id: 'desert',
+    name: 'Desert',
+    description: 'Desert environments including sandy and rocky deserts.',
+  },
   { id: 'forest', name: 'Forest', description: 'Forest and woodland environments.' },
   { id: 'jungle', name: 'Jungle', description: 'Tropical jungle environments.' },
   { id: 'mountain', name: 'Mountain', description: 'Mountain and highlands environments.' },
   { id: 'plains', name: 'Plains', description: 'Open plains and grasslands.' },
-  { id: 'planes', name: 'Planes (choose type)', description: 'A specific plane of existence.' },
+  ...PLANES_FAVORED_TERRAIN_OPTIONS,
   { id: 'swamp', name: 'Swamp', description: 'Swamp and bog environments.' },
-  { id: 'underground', name: 'Underground', description: 'Underground environments including caves and dungeons.' },
+  {
+    id: 'underground',
+    name: 'Underground',
+    description: 'Underground environments including caves and dungeons.',
+  },
   { id: 'urban', name: 'Urban', description: 'Cities, towns, and other urban settings.' },
-  { id: 'water', name: 'Water', description: 'Aquatic environments including oceans, rivers, and lakes.' },
+  {
+    id: 'water',
+    name: 'Water',
+    description: 'Aquatic environments including oceans, rivers, and lakes.',
+  },
 ];
 
 const COMBAT_STYLE_OPTIONS = [
   {
     id: 'archery',
     name: 'Archery',
-    description: 'Bonus feats from the archery combat style list (Point-Blank Shot, Precise Shot, etc.).',
+    description:
+      'Bonus feats from the archery combat style list (Point-Blank Shot, Precise Shot, etc.).',
   },
   {
     id: 'crossbow',
@@ -79,7 +235,8 @@ const COMBAT_STYLE_OPTIONS = [
   {
     id: 'two-handed-weapon',
     name: 'Two-Handed Weapon',
-    description: 'Bonus feats from the two-handed weapon combat style list (Power Attack, Cleave, etc.).',
+    description:
+      'Bonus feats from the two-handed weapon combat style list (Power Attack, Cleave, etc.).',
   },
   {
     id: 'two-weapon-combat',
