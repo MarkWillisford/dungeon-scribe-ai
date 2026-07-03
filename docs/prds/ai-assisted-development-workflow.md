@@ -108,3 +108,13 @@ No new Jest test files are required for this feature. The existing test suite co
 **Self-escalation thresholds are under observation.** The 3-file and 2-attempt limits are starting points. Adjust based on real failure patterns as the Automated Track accumulates runs.
 
 **The workflow is designed to grow.** The Automated Track handles simple cases today. As confidence in the agent's output builds, the definition of "simple" can expand and thresholds can relax.
+
+**Automated Track agent logs — where to find them:**
+
+Two log surfaces exist for every Fix agent run:
+
+1. **GitHub Actions step log** (primary). The "Fix agent (TDD loop)" step streams the full agent conversation — every tool call, file read, test run, and reasoning step — directly to the Actions log. Find it at: `Actions → automated-track run → Fix agent (TDD loop)`. Retained 90 days by GitHub's default log retention policy.
+
+2. **Structured JSON artifact** (secondary). After each run, the workflow uploads `claude-execution-output.json` as an artifact named `agent-log-issue-<N>-run-<run_id>`. This contains the full structured execution record including turn count, cost, session ID, and all tool call inputs/outputs in machine-readable form. Find it in the Artifacts section at the bottom of the Actions run summary page. Retained 30 days.
+
+If a run silently fails or hits `error_max_turns`, download the JSON artifact to see exactly which turn the agent was on and what it was attempting. The session ID in the artifact can also be used to correlate with Anthropic usage logs if needed.
