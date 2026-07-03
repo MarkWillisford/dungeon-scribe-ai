@@ -628,6 +628,44 @@ describe('ItemEffectEditorSheet', () => {
     expect(queryByText('Cloak of Resistance +1')).toBeTruthy();
   });
 
+  it('header title for DB items has no flex:1 style that causes slot label to overlap name', () => {
+    // flex: 1 on the title Text collapses it to 0 height inside the unconstrained
+    // headerLeft column, pushing the slot subtitle up to overlap the item name.
+    const item = makeItem({ definitionId: 'db-123', slot: 'ring_left' as const });
+    const { tree } = render(
+      <ItemEffectEditorSheet
+        item={item}
+        character={character}
+        onSave={onSave}
+        onRemoveItem={onRemoveItem}
+        onClose={onClose}
+      />,
+    );
+
+    function findTextNode(node: RenderedNode, text: string): RenderedNode | null {
+      if (node.type === 'Text' && node.children.some((c) => c === text)) return node;
+      for (const child of node.children) {
+        if (typeof child !== 'string') {
+          const found = findTextNode(child, text);
+          if (found) return found;
+        }
+      }
+      return null;
+    }
+
+    const titleNode = findTextNode(tree, item.name);
+    expect(titleNode).not.toBeNull();
+
+    const styleArr = Array.isArray(titleNode!.props.style)
+      ? titleNode!.props.style
+      : [titleNode!.props.style];
+    const hasFlex1 = styleArr.some(
+      (s: unknown) =>
+        s !== null && typeof s === 'object' && (s as Record<string, unknown>).flex === 1,
+    );
+    expect(hasFlex1).toBe(false);
+  });
+
   it('cancels the add-effect form when Cancel is pressed', () => {
     const item = makeItem();
     const rendered = render(
@@ -1382,8 +1420,18 @@ describe('ItemEffectEditorSheet', () => {
       description: '',
       source: '',
       choices: [
-        { type: 'school', label: 'School', affectsEffects: true, options: ['Evocation', 'Abjuration'] },
-        { type: 'ability', label: 'Ability', affectsEffects: false, options: ['Strength', 'Dexterity'] },
+        {
+          type: 'school',
+          label: 'School',
+          affectsEffects: true,
+          options: ['Evocation', 'Abjuration'],
+        },
+        {
+          type: 'ability',
+          label: 'Ability',
+          affectsEffects: false,
+          options: ['Strength', 'Dexterity'],
+        },
       ],
     };
 
