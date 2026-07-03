@@ -126,22 +126,9 @@ describe('EvolutionPickerSheet', () => {
     it('FlatList has keyboardShouldPersistTaps="handled" so taps register while keyboard is open', () => {
       // Regression test for issue #252: tapping a result while the search keyboard is
       // open should select the item, not just dismiss the keyboard.
-      const { tree } = render(<EvolutionPickerSheet {...BASE_PROPS} />);
-
-      function findFlatList(node: typeof tree): typeof tree | null {
-        if (node.type === 'FlatList') return node;
-        for (const c of node.children) {
-          if (typeof c !== 'string') {
-            const found = findFlatList(c);
-            if (found) return found;
-          }
-        }
-        return null;
-      }
-
-      const flatList = findFlatList(tree);
-      expect(flatList).not.toBeNull();
-      expect(flatList!.props.keyboardShouldPersistTaps).toBe('handled');
+      const { getByTestId } = render(<EvolutionPickerSheet {...BASE_PROPS} />);
+      const flatList = getByTestId('evolution-list');
+      expect(flatList.props.keyboardShouldPersistTaps).toBe('handled');
     });
   });
 
