@@ -1,7 +1,5 @@
 import { ClassChoiceDefinition } from '@/types/classChoices';
 
-// Favored enemy types. Humanoid and Outsider carry subtypePrompt (Phase A field).
-// subtypePrompt is used by the UI to ask the player to specify a subtype.
 const FAVORED_ENEMY_OPTIONS = [
   {
     id: 'aberration',
@@ -17,25 +15,56 @@ const FAVORED_ENEMY_OPTIONS = [
   { id: 'dragon', name: 'Dragon', description: 'True dragons and related creatures.' },
   { id: 'fey', name: 'Fey', description: 'Fey creatures such as dryads, nymphs, and pixies.' },
   {
-    id: 'humanoid',
-    name: 'Humanoid',
-    description: 'Humanoids of a chosen subtype (dwarf, elf, goblinoid, human, etc.).',
-    subtypePrompt: {
-      label: 'Choose a humanoid subtype',
-      options: [
-        'aquatic',
-        'dwarf',
-        'elf',
-        'giant',
-        'gnoll',
-        'gnome',
-        'goblinoid',
-        'halfling',
-        'human',
-        'orc',
-        'reptilian',
-      ],
-    },
+    id: 'humanoid-aquatic',
+    name: 'Humanoid (aquatic)',
+    description: 'Humanoids with the aquatic subtype.',
+  },
+  {
+    id: 'humanoid-dwarf',
+    name: 'Humanoid (dwarf)',
+    description: 'Humanoids with the dwarf subtype.',
+  },
+  { id: 'humanoid-elf', name: 'Humanoid (elf)', description: 'Humanoids with the elf subtype.' },
+  {
+    id: 'humanoid-giant',
+    name: 'Humanoid (giant)',
+    description: 'Humanoids with the giant subtype.',
+  },
+  {
+    id: 'humanoid-goblinoid',
+    name: 'Humanoid (goblinoid)',
+    description: 'Humanoids with the goblinoid subtype.',
+  },
+  {
+    id: 'humanoid-gnoll',
+    name: 'Humanoid (gnoll)',
+    description: 'Humanoids with the gnoll subtype.',
+  },
+  {
+    id: 'humanoid-gnome',
+    name: 'Humanoid (gnome)',
+    description: 'Humanoids with the gnome subtype.',
+  },
+  {
+    id: 'humanoid-halfling',
+    name: 'Humanoid (halfling)',
+    description: 'Humanoids with the halfling subtype.',
+  },
+  {
+    id: 'humanoid-human',
+    name: 'Humanoid (human)',
+    description: 'Humanoids with the human subtype.',
+  },
+  { id: 'humanoid-orc', name: 'Humanoid (orc)', description: 'Humanoids with the orc subtype.' },
+  {
+    id: 'humanoid-reptilian',
+    name: 'Humanoid (reptilian)',
+    description: 'Humanoids with the reptilian subtype.',
+  },
+  {
+    id: 'humanoid-other',
+    name: 'Humanoid (other subtype)',
+    description: 'Humanoids of any other subtype not listed.',
   },
   {
     id: 'magical-beast',
@@ -48,31 +77,34 @@ const FAVORED_ENEMY_OPTIONS = [
     description: 'Monstrous humanoids such as harpies and medusas.',
   },
   { id: 'ooze', name: 'Ooze', description: 'Oozes such as black puddings and gelatinous cubes.' },
+  { id: 'outsider-air', name: 'Outsider (air)', description: 'Outsiders with the air subtype.' },
   {
-    id: 'outsider',
-    name: 'Outsider',
-    description: 'Outsiders of a chosen subtype (air, chaotic, devil, demon, etc.).',
-    subtypePrompt: {
-      label: 'Choose an outsider subtype',
-      options: [
-        'air',
-        'chaotic',
-        'daemon',
-        'demon',
-        'devil',
-        'earth',
-        'elemental',
-        'evil',
-        'extraplanar',
-        'fire',
-        'good',
-        'inevitable',
-        'lawful',
-        'native',
-        'protean',
-        'water',
-      ],
-    },
+    id: 'outsider-chaotic',
+    name: 'Outsider (chaotic)',
+    description: 'Outsiders with the chaotic subtype.',
+  },
+  {
+    id: 'outsider-earth',
+    name: 'Outsider (earth)',
+    description: 'Outsiders with the earth subtype.',
+  },
+  { id: 'outsider-evil', name: 'Outsider (evil)', description: 'Outsiders with the evil subtype.' },
+  { id: 'outsider-fire', name: 'Outsider (fire)', description: 'Outsiders with the fire subtype.' },
+  { id: 'outsider-good', name: 'Outsider (good)', description: 'Outsiders with the good subtype.' },
+  {
+    id: 'outsider-lawful',
+    name: 'Outsider (lawful)',
+    description: 'Outsiders with the lawful subtype.',
+  },
+  {
+    id: 'outsider-native',
+    name: 'Outsider (native)',
+    description: 'Outsiders with the native subtype.',
+  },
+  {
+    id: 'outsider-water',
+    name: 'Outsider (water)',
+    description: 'Outsiders with the water subtype.',
   },
   {
     id: 'plant',
