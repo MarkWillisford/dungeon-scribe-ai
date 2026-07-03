@@ -103,6 +103,37 @@ describe('EntryRoute — ruleset sync on load', () => {
     expect(rulesetCalls).toHaveLength(0);
   });
 
+  it('does not dispatch setActiveRuleset when loadCharacterById rejects', async () => {
+    mockParams = { mode: 'edit', characterId: 'char-abc' };
+
+    mockDispatch.mockImplementation((action) => {
+      if (action === 'LOAD_THUNK') {
+        return { unwrap: () => Promise.reject(new Error('load failed')) };
+      }
+      return {};
+    });
+
+    await act(async () => {
+      create(<EntryRoute />);
+      await Promise.resolve();
+      await Promise.resolve();
+      await Promise.resolve();
+    });
+
+    const calls = mockDispatch.mock.calls.map((c) => c[0]);
+
+    const rulesetCalls = calls.filter(
+      (a) => typeof a === 'object' && a !== null && a.type === 'ruleset/setActiveRuleset',
+    );
+    expect(rulesetCalls).toHaveLength(0);
+
+    const loadCalls = calls.filter(
+      (a) => typeof a === 'object' && a !== null && a.type === 'characterEntry/load',
+    );
+    expect(loadCalls).toHaveLength(1);
+    expect(loadCalls[0].payload.mode).toBe('new');
+  });
+
   it('dispatches clearRuleset on unmount', async () => {
     mockParams = {};
 
