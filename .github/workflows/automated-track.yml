@@ -1,15 +1,26 @@
 name: Automated Track
 
 # Triggered when an issue is labeled. Filtered to the `bug` label below.
-# Reads the issue, writes a fix on a new branch, runs self-review, and opens
-# a PR — all without human involvement until the PR is open.
+# Reads the issue, writes a failing test, fixes the code, then opens a PR.
+# All without human involvement until the PR is open.
 #
-# Self-escalation: if the fix is too complex (more than ESCALATION_FILE_THRESHOLD
-# files) or tests cannot pass (after ESCALATION_ATTEMPT_MAX attempts), the issue
-# is relabeled `sandcastle` and the workflow exits cleanly. No PR is created.
+# Strict TDD loop:
+#   1. Extract acceptance criteria from the issue body.
+#   2. Write or adjust a test that captures the correct behavior.
+#   3. Run the test against current code — it MUST fail (reproduction gate).
+#   4. Fix the code until the test passes.
+#   5. Run the full test suite (npm test). No regressions.
+#   6. Run npm run typecheck. Must pass.
+#   7. Commit, push, open PR.
+#
+# Bail conditions (no PR, no push, relabel to sandcastle):
+#   - Cannot write a reproducing test within REPRO_TURN_LIMIT turns
+#   - Turn budget exhausted before tests pass
+#   - Fix would touch more than 3 files
+#   - Full test suite regressions the agent cannot resolve
 #
 # Required secrets:
-#   ANTHROPIC_API_KEY — Claude API key
+#   CLAUDE_CODE_OAUTH_TOKEN — Claude Max plan OAuth token
 #
 # Required files:
 #   .claude/reviewer-rotation.json — { "next": "mark" } or { "next": "doug" }
@@ -24,16 +35,13 @@ concurrency:
   group: issue-${{ github.event.issue.number }}
   cancel-in-progress: true
 
-env:
-  # Self-escalation thresholds. These are starting points — adjust based on
-  # observed failure patterns as the automated track accumulates real runs.
-  ESCALATION_FILE_THRESHOLD: 3
-  ESCALATION_ATTEMPT_MAX: 2
-
 jobs:
   automated-fix:
     if: github.event.label.name == 'bug'
     runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      REPRO_TURN_LIMIT: 8
     permissions:
       contents: write
       issues: write
@@ -59,99 +67,120 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git checkout -b "automated/issue-${{ github.event.issue.number }}"
+          git checkout -b "MW/bug-${{ github.event.issue.number }}"
 
-      - name: Fix agent
+      - name: Fix agent (TDD loop)
+        id: fix_agent
         uses: anthropics/claude-code-action@v1
         with:
-          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          model: claude-sonnet-4-6
+          max_turns: 25
+          allowed_tools: "Read,Edit,Write,Bash(git:*),Bash(npm:*),Bash(gh:*)"
           direct_prompt: |
             You are an autonomous bug-fix agent running in GitHub Actions.
+            You follow a strict TDD loop. Do not deviate from these steps.
 
-            Fix the bug described in issue #${{ github.event.issue.number }}.
-
-            Issue title: ${{ github.event.issue.title }}
+            Issue #${{ github.event.issue.number }}: ${{ github.event.issue.title }}
 
             Issue body:
             ${{ github.event.issue.body }}
 
-            Escalation thresholds (hard limits):
-            - Max files to modify: ${{ env.ESCALATION_FILE_THRESHOLD }}
-            - Max test attempts: ${{ env.ESCALATION_ATTEMPT_MAX }}
+            Hard limits:
+            - Max files to modify (source code, not tests): 3
+            - If you cannot write a reproducing test within your first ${{ env.REPRO_TURN_LIMIT }} turns, BAIL.
+            - Do not use WebFetch or WebSearch. Work only from the codebase.
 
-            Steps:
-            1. Read the issue carefully. Understand the root cause before writing any code.
-            2. Identify every file that needs to change. If the count exceeds
-               ${{ env.ESCALATION_FILE_THRESHOLD }}, write the single word ESCALATE to
-               .github/agent-result.txt and stop. Do not write any code.
-            3. Write the minimal fix.
-            4. Run: npm test
-               If tests fail, revise and retry. Count each npm test invocation as one attempt.
-               If tests still fail after ${{ env.ESCALATION_ATTEMPT_MAX }} total attempts,
-               write ESCALATE to .github/agent-result.txt and stop. Do not commit.
-            5. Run: npm run typecheck
-               Fix any type errors before continuing.
-            6. Commit the fix. Do NOT include .github/agent-result.txt in the commit:
-                 git add -A
-                 git reset .github/agent-result.txt
-                 git commit -m "fix: <one-line summary>
+            == STRICT TDD LOOP ==
+
+            STEP 1 — Read and understand.
+            Read the issue body carefully. Extract the acceptance criteria: what is the
+            correct behavior? What input triggers the bug? What output or side-effect
+            is wrong?
+
+            STEP 2 — Write a reproducing test.
+            Write or adjust a test file that captures the correct behavior from the
+            acceptance criteria. The test must be specific to this bug — not a generic
+            smoke test. Place the test in the appropriate __tests__ directory following
+            existing conventions.
+
+            Run: npm test -- --testPathPattern=<your-test-file> --no-coverage
+
+            The test MUST FAIL against the current code. This is the reproduction gate.
+            If the test passes on current code, you have not captured the bug.
+            Iterate on the test until it fails. If you cannot produce a failing test
+            within your first ${{ env.REPRO_TURN_LIMIT }} turns total, BAIL (see below).
+
+            STEP 3 — Fix the code.
+            Identify the root cause. Write the minimal fix. Do not refactor unrelated
+            code. Count the number of source files you modify (excluding test files).
+            If fixing the bug requires modifying more than 3 source files, BAIL.
+
+            STEP 4 — Verify the fix.
+            Run: npm test -- --testPathPattern=<your-test-file> --no-coverage
+            Your new test must now PASS. If it still fails, iterate on the fix.
+
+            STEP 5 — Full suite, no regressions.
+            Run: npm test
+            All tests must pass. If you introduce regressions you cannot resolve, BAIL.
+
+            STEP 6 — Typecheck.
+            Run: npm run typecheck
+            Fix any type errors before continuing.
+
+            STEP 7 — Commit.
+            Stage all changed files (source and test). Commit with:
+              git add -A
+              git commit -m "fix: <one-line summary>
 
             Closes #${{ github.event.issue.number }}"
-            7. Write DONE to .github/agent-result.txt.
 
-      - name: Read agent result
-        id: agent
-        run: |
-          RESULT=$(cat .github/agent-result.txt 2>/dev/null | tr -d '[:space:]')
-          echo "result=${RESULT:-UNKNOWN}" >> $GITHUB_OUTPUT
+            Do NOT push. The workflow handles pushing.
 
-      - name: Escalate to sandcastle
-        if: steps.agent.outputs.result != 'DONE'
+            == BAIL CONDITIONS ==
+
+            If any bail condition is met, do the following and then STOP:
+            1. Post a comment on the issue explaining what was tried and why you are bailing:
+               gh issue comment ${{ github.event.issue.number }} --body "<your explanation>"
+            2. Relabel the issue:
+               gh issue edit ${{ github.event.issue.number }} --remove-label bug --add-label sandcastle
+            3. Exit. Do not commit. Do not push. Do not create a PR.
+
+      - name: Check for commit (did the agent succeed?)
+        id: agent_result
         run: |
-          gh issue edit "${{ github.event.issue.number }}" \
-            --remove-label "bug" \
-            --add-label "sandcastle"
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # If the agent committed, HEAD will differ from origin/main.
+          # If it bailed, nothing was committed and HEAD == origin/main.
+          # Fetch first so a mid-run merge to main doesn't skew the count.
+          git fetch origin main
+          COMMITS=$(git rev-list origin/main..HEAD --count)
+          echo "commit_count=${COMMITS}" >> $GITHUB_OUTPUT
+          if [ "$COMMITS" -gt 0 ]; then
+            echo "status=DONE" >> $GITHUB_OUTPUT
+          else
+            echo "status=BAILED" >> $GITHUB_OUTPUT
+          fi
 
       - name: Push fix branch
-        if: steps.agent.outputs.result == 'DONE'
-        run: git push origin "automated/issue-${{ github.event.issue.number }}"
-
-      - name: Self-review
-        if: steps.agent.outputs.result == 'DONE'
-        uses: anthropics/claude-code-action@v1
-        with:
-          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          direct_prompt: |
-            Run the self-review skill on branch automated/issue-${{ github.event.issue.number }}.
-
-            Read the skill at .claude/skills/self-review/SKILL.md and follow it exactly.
-
-            The skill reviews git diff main...<BRANCH>, scores every issue 0-100, and
-            auto-fixes issues scoring 50 or above with one commit per fix.
-
-            After all fixes are committed, stop. The workflow will push the commits.
-
-      - name: Push self-review commits
-        if: steps.agent.outputs.result == 'DONE'
-        run: git push origin "automated/issue-${{ github.event.issue.number }}"
+        if: steps.agent_result.outputs.status == 'DONE'
+        run: git push origin "MW/bug-${{ github.event.issue.number }}"
 
       - name: Create PR and assign reviewer
-        if: steps.agent.outputs.result == 'DONE'
+        if: steps.agent_result.outputs.status == 'DONE'
         run: |
           REVIEWER=$(jq -r '.next' .claude/reviewer-rotation.json)
 
-          PR_BODY=$(printf "Automated fix for issue #%s.\n\nCloses #%s" \
-            "${{ github.event.issue.number }}" "${{ github.event.issue.number }}")
-
           PR_URL=$(gh pr create \
             --base main \
-            --head "automated/issue-${{ github.event.issue.number }}" \
+            --head "MW/bug-${{ github.event.issue.number }}" \
             --title "fix: ${{ github.event.issue.title }}" \
-            --body "$PR_BODY")
+            --body "Automated fix for issue #${{ github.event.issue.number }}.
+
+          Closes #${{ github.event.issue.number }}
+
+          ---
+          _Generated by the automated-track workflow (TDD loop). Reviewer: @${REVIEWER}._")
 
           PR_NUMBER=$(echo "$PR_URL" | grep -oE '[0-9]+$')
 
