@@ -87,21 +87,7 @@ const FAVORED_ENEMY_OPTIONS = [
   },
 ];
 
-const FAVORED_TERRAIN_OPTIONS = [
-  {
-    id: 'cold',
-    name: 'Cold',
-    description: 'Cold environments including arctic tundra and glaciers.',
-  },
-  {
-    id: 'desert',
-    name: 'Desert',
-    description: 'Desert environments including sandy and rocky deserts.',
-  },
-  { id: 'forest', name: 'Forest', description: 'Forest and woodland environments.' },
-  { id: 'jungle', name: 'Jungle', description: 'Tropical jungle environments.' },
-  { id: 'mountain', name: 'Mountain', description: 'Mountain and highlands environments.' },
-  { id: 'plains', name: 'Plains', description: 'Open plains and grasslands.' },
+export const PLANES_FAVORED_TERRAIN_OPTIONS = [
   {
     id: 'planes-astral',
     name: 'Planes (Astral Plane)',
@@ -192,6 +178,24 @@ const FAVORED_TERRAIN_OPTIONS = [
     name: 'Planes (Boneyard)',
     description: 'The Boneyard, the true neutral Outer Plane where souls are judged.',
   },
+];
+
+const FAVORED_TERRAIN_OPTIONS = [
+  {
+    id: 'cold',
+    name: 'Cold',
+    description: 'Cold environments including arctic tundra and glaciers.',
+  },
+  {
+    id: 'desert',
+    name: 'Desert',
+    description: 'Desert environments including sandy and rocky deserts.',
+  },
+  { id: 'forest', name: 'Forest', description: 'Forest and woodland environments.' },
+  { id: 'jungle', name: 'Jungle', description: 'Tropical jungle environments.' },
+  { id: 'mountain', name: 'Mountain', description: 'Mountain and highlands environments.' },
+  { id: 'plains', name: 'Plains', description: 'Open plains and grasslands.' },
+  ...PLANES_FAVORED_TERRAIN_OPTIONS,
   { id: 'swamp', name: 'Swamp', description: 'Swamp and bog environments.' },
   {
     id: 'underground',
