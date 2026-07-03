@@ -44,10 +44,11 @@ describe('Favored Enemy options', () => {
     expect(def).toBeDefined();
   });
 
-  test('each expected option is present', () => {
-    for (const expected of EXPECTED_NAMES) {
-      expect(names).toContain(expected);
-    }
+  test('each expected option is present and there are no unexpected options', () => {
+    expect(names.length).toBe(EXPECTED_NAMES.length);
+    const sortedNames = [...names].sort();
+    const sortedExpected = [...EXPECTED_NAMES].sort();
+    expect(sortedNames).toEqual(sortedExpected);
   });
 
   test('bare "Humanoid" entry is not present', () => {
