@@ -207,6 +207,8 @@ export function EvolutionPickerSheet({
             <FlatList
               data={[1, 2, 3, 4] as const}
               keyExtractor={(c) => `cost-${c}`}
+              keyboardShouldPersistTaps="handled"
+              testID="evolution-list"
               renderItem={({ item: cost }) => {
                 const list = groupedByCost[cost];
                 if (list.length === 0) return null;

@@ -122,6 +122,14 @@ describe('EvolutionPickerSheet', () => {
       }
       expect(findPlaceholder(tree)).toBe(true);
     });
+
+    it('FlatList has keyboardShouldPersistTaps="handled" so taps register while keyboard is open', () => {
+      // Regression test for issue #252: tapping a result while the search keyboard is
+      // open should select the item, not just dismiss the keyboard.
+      const { getByTestId } = render(<EvolutionPickerSheet {...BASE_PROPS} />);
+      const flatList = getByTestId('evolution-list');
+      expect(flatList.props.keyboardShouldPersistTaps).toBe('handled');
+    });
   });
 
   describe('close button', () => {
