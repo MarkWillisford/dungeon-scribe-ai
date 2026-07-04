@@ -894,7 +894,6 @@ const styles = StyleSheet.create({
     fontFamily: 'Cinzel',
     fontSize: 16,
     fontWeight: '700',
-    flex: 1,
   },
   headerTitleInput: {
     fontFamily: 'Cinzel',

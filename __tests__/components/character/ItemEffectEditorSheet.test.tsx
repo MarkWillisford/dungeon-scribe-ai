@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent, type RenderedNode } from '../../helpers/testUtils';
+import { render, fireEvent, findTextNode, type RenderedNode } from '../../helpers/testUtils';
 import {
   buildClassAbilityTargets,
   buildTargetLabelMap,
@@ -626,6 +626,33 @@ describe('ItemEffectEditorSheet', () => {
       />,
     );
     expect(queryByText('Cloak of Resistance +1')).toBeTruthy();
+  });
+
+  it('header title for DB items has no flex:1 style that causes slot label to overlap name', () => {
+    // flex: 1 on the title Text collapses it to 0 height inside the unconstrained
+    // headerLeft column, pushing the slot subtitle up to overlap the item name.
+    const item = makeItem({ definitionId: 'db-123', slot: 'ring_left' as const });
+    const { tree } = render(
+      <ItemEffectEditorSheet
+        item={item}
+        character={character}
+        onSave={onSave}
+        onRemoveItem={onRemoveItem}
+        onClose={onClose}
+      />,
+    );
+
+    const titleNode = findTextNode(tree, item.name);
+    expect(titleNode).not.toBeNull();
+
+    const styleArr = Array.isArray(titleNode!.props.style)
+      ? titleNode!.props.style
+      : [titleNode!.props.style];
+    const hasFlex1 = styleArr.some(
+      (s: unknown) =>
+        s !== null && typeof s === 'object' && (s as Record<string, unknown>).flex === 1,
+    );
+    expect(hasFlex1).toBe(false);
   });
 
   it('cancels the add-effect form when Cancel is pressed', () => {
@@ -1382,8 +1409,18 @@ describe('ItemEffectEditorSheet', () => {
       description: '',
       source: '',
       choices: [
-        { type: 'school', label: 'School', affectsEffects: true, options: ['Evocation', 'Abjuration'] },
-        { type: 'ability', label: 'Ability', affectsEffects: false, options: ['Strength', 'Dexterity'] },
+        {
+          type: 'school',
+          label: 'School',
+          affectsEffects: true,
+          options: ['Evocation', 'Abjuration'],
+        },
+        {
+          type: 'ability',
+          label: 'Ability',
+          affectsEffects: false,
+          options: ['Strength', 'Dexterity'],
+        },
       ],
     };
 
