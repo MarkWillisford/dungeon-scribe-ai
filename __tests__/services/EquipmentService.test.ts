@@ -373,8 +373,18 @@ describe('EquipmentDatabaseService', () => {
     it('retrieves Holy Avenger by id', async () => {
       const item = await EquipmentDatabaseService.getEquipmentById('weapon-holy-avenger');
       expect(item).not.toBeNull();
+      expect(item!.id).toBe('weapon-holy-avenger');
       expect(item!.name).toBe('Holy Avenger');
       expect(item!.category).toBe('magic_weapon');
+
+      const properties = item!.properties as Record<string, unknown>;
+      expect(properties).toBeDefined();
+      expect(properties.baseWeaponId).toBe('longsword');
+      expect(properties.enhancementBonus).toBe(2);
+      expect(properties.weaponSpecialAbilities).toEqual(
+        expect.arrayContaining([expect.objectContaining({ id: 'holy' })]),
+      );
+      expect(properties.slot).toBe('none');
     });
 
     it('includes magic weapons in getAllEquipment', async () => {
