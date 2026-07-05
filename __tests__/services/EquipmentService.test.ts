@@ -361,6 +361,32 @@ describe('EquipmentDatabaseService', () => {
       const result = await EquipmentDatabaseService.getEquipmentByCategory('potions');
       expect(result).toHaveLength(0);
     });
+
+    it('returns magic weapons for category "magic_weapon"', async () => {
+      const results = await EquipmentDatabaseService.getEquipmentByCategory('magic_weapon');
+      expect(results.length).toBeGreaterThan(0);
+      expect(results.every((w) => w.category === 'magic_weapon')).toBe(true);
+    });
+  });
+
+  describe('magic weapon loading', () => {
+    it('retrieves Holy Avenger by id', async () => {
+      const item = await EquipmentDatabaseService.getEquipmentById('weapon-holy-avenger');
+      expect(item).not.toBeNull();
+      expect(item!.name).toBe('Holy Avenger');
+      expect(item!.category).toBe('magic_weapon');
+    });
+
+    it('includes magic weapons in getAllEquipment', async () => {
+      const all = await EquipmentDatabaseService.getAllEquipment();
+      const holyAvenger = all.find((i) => i.id === 'weapon-holy-avenger');
+      expect(holyAvenger).toBeDefined();
+    });
+
+    it('magic weapon templates have correct type', async () => {
+      const results = await EquipmentDatabaseService.getEquipmentByCategory('magic_weapon');
+      expect(results.every((w) => w.type === 'magic_item')).toBe(true);
+    });
   });
 
   describe('searchEquipment', () => {

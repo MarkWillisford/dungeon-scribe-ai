@@ -14,6 +14,7 @@ import type {
   ShieldDefinition,
   GearDefinition,
 } from '@/types/equipment';
+import type { MagicWeaponDefinition } from '@/types/magicItems';
 import { Size } from '@/types/base';
 import { GameDataService } from '@/services/GameDataService';
 
@@ -22,6 +23,7 @@ export class EquipmentDatabaseService {
   private static _armorTemplates: EquipmentTemplate[] = [];
   private static _shieldTemplates: EquipmentTemplate[] = [];
   private static _gearTemplates: EquipmentTemplate[] = [];
+  private static _magicWeaponTemplates: EquipmentTemplate[] = [];
   private static _initPromise: Promise<void> | null = null;
 
   static initialize(): Promise<void> {
@@ -31,12 +33,14 @@ export class EquipmentDatabaseService {
       GameDataService.getArmor(),
       GameDataService.getShields(),
       GameDataService.getGear(),
+      GameDataService.getMagicWeaponTemplates(),
     ])
-      .then(([weapons, armor, shields, gear]) => {
+      .then(([weapons, armor, shields, gear, magicWeapons]) => {
         this._weaponTemplates = weapons.map(this._weaponDefToTemplate);
         this._armorTemplates = armor.map(this._armorDefToTemplate);
         this._shieldTemplates = shields.map(this._shieldDefToTemplate);
         this._gearTemplates = gear.map(this._gearDefToTemplate);
+        this._magicWeaponTemplates = magicWeapons.map(this._magicWeaponDefToTemplate);
       })
       .catch((e: unknown) => {
         // Clear the cached promise so callers can retry after a transient failure.
@@ -53,6 +57,7 @@ export class EquipmentDatabaseService {
       ...this._armorTemplates,
       ...this._shieldTemplates,
       ...this._gearTemplates,
+      ...this._magicWeaponTemplates,
     ];
   }
 
@@ -68,6 +73,8 @@ export class EquipmentDatabaseService {
         return this._shieldTemplates;
       case 'gear':
         return this._gearTemplates;
+      case 'magic_weapon':
+        return this._magicWeaponTemplates;
       default:
         return [];
     }
@@ -379,6 +386,26 @@ export class EquipmentDatabaseService {
       properties: {
         type: def.gearType,
         isConsumable: def.isConsumable,
+      },
+    };
+  }
+
+  private static _magicWeaponDefToTemplate(def: MagicWeaponDefinition): EquipmentTemplate {
+    return {
+      id: def.id,
+      name: def.name,
+      type: EquipmentType.MAGIC_ITEM,
+      category: 'magic_weapon',
+      subcategory: 'Magic Weapon',
+      source: typeof def.source === 'string' ? def.source : String(def.source),
+      basePrice: def.price ?? 0,
+      baseWeight: def.weight ?? 0,
+      description: def.description,
+      properties: {
+        baseWeaponId: def.baseWeaponId,
+        enhancementBonus: def.enhancementBonus,
+        weaponSpecialAbilities: def.weaponSpecialAbilities,
+        slot: def.slot,
       },
     };
   }

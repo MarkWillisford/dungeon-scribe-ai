@@ -22,7 +22,7 @@ import type {
   ShieldDefinition,
   GearDefinition,
 } from '@/types/equipment';
-import type { MagicItemDefinition, ItemSlot } from '@/types/magicItems';
+import type { MagicItemDefinition, MagicWeaponDefinition, ItemSlot } from '@/types/magicItems';
 import type {
   DisciplineDefinition,
   ManeuverDefinition,
@@ -150,6 +150,7 @@ export interface GameDataConnector {
   getShields(context?: QueryContext): Promise<ShieldDefinition[]>;
   getGear(context?: QueryContext): Promise<GearDefinition[]>;
   getMagicItemsBySlot(slot: ItemSlot): Promise<MagicItemDefinition[]>;
+  getMagicWeaponTemplates(): Promise<MagicWeaponDefinition[]>;
   searchMagicItems(query: string): Promise<MagicItemDefinition[]>;
   searchFeats(query: string): Promise<FeatDefinition[]>;
 

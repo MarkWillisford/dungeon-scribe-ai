@@ -30,7 +30,7 @@ import type {
   ShieldDefinition,
   GearDefinition,
 } from '@/types/equipment';
-import type { MagicItemDefinition, ItemSlot } from '@/types/magicItems';
+import type { MagicItemDefinition, MagicWeaponDefinition, ItemSlot } from '@/types/magicItems';
 import type {
   ShamanSpiritEntry,
   EidolonEvolutionEntry,
@@ -730,6 +730,10 @@ export class GameDataService {
 
   static async getMagicItemsBySlot(slot: ItemSlot): Promise<MagicItemDefinition[]> {
     return GameDataService.connector.getMagicItemsBySlot(slot);
+  }
+
+  static async getMagicWeaponTemplates(): Promise<MagicWeaponDefinition[]> {
+    return GameDataService.connector.getMagicWeaponTemplates();
   }
 
   static async searchMagicItems(query: string): Promise<MagicItemDefinition[]> {
