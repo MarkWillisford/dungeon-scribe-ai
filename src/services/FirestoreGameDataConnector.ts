@@ -34,7 +34,7 @@ import type {
   ShieldDefinition,
   GearDefinition,
 } from '@/types/equipment';
-import type { MagicItemDefinition, ItemSlot } from '@/types/magicItems';
+import type { MagicItemDefinition, MagicWeaponDefinition, ItemSlot } from '@/types/magicItems';
 import {
   ALL_WONDROUS_ITEMS,
   ALL_RINGS,
@@ -624,6 +624,29 @@ export class FirestoreGameDataConnector implements GameDataConnector {
         return results;
       } catch (e) {
         console.error(`FirestoreGameDataConnector: getMagicItemsBySlot(${slot}) failed:`, e);
+        return [];
+      }
+    });
+  }
+
+  async getMagicWeaponTemplates(): Promise<MagicWeaponDefinition[]> {
+    const cacheKey = 'magicItems/category/magic_weapon';
+    const cached = GameDataCache.get<MagicWeaponDefinition[]>(cacheKey);
+    if (cached) return cached;
+
+    return FirestoreGameDataConnector.dedup(cacheKey, async () => {
+      try {
+        const q = query(
+          collection(db, 'magicItems'),
+          where('visibility', '==', 'global'),
+          where('category', '==', 'magic_weapon'),
+        );
+        const snap = await getDocs(q);
+        const results = snap.docs.map((d) => d.data() as MagicWeaponDefinition);
+        GameDataCache.set(cacheKey, results, TTL.OFFICIAL);
+        return results;
+      } catch (e) {
+        console.error('FirestoreGameDataConnector: getMagicWeaponTemplates() failed:', e);
         return [];
       }
     });

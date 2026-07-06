@@ -52,7 +52,7 @@ import {
   ALL_MAGIC_ARMOR,
   ALL_IOUN_STONES,
 } from '@/data/magicItems/index';
-import type { MagicItemDefinition, ItemSlot } from '@/types/magicItems';
+import type { MagicItemDefinition, MagicWeaponDefinition, ItemSlot } from '@/types/magicItems';
 import type { AnimalCompanionEntry, BodyShape } from '@/types/animalCompanions';
 import {
   CORE_RACES,
@@ -345,6 +345,14 @@ export class StaticGameDataConnector implements GameDataConnector {
 
   async getMagicItemsBySlot(slot: ItemSlot): Promise<MagicItemDefinition[]> {
     return Promise.resolve(this._allMagicItems.filter((item) => item.slot === slot));
+  }
+
+  async getMagicWeaponTemplates(): Promise<MagicWeaponDefinition[]> {
+    return Promise.resolve(
+      this._allMagicItems.filter(
+        (item): item is MagicWeaponDefinition => item.category === 'magic_weapon',
+      ),
+    );
   }
 
   async searchMagicItems(query: string): Promise<MagicItemDefinition[]> {
