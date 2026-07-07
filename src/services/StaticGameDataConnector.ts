@@ -212,7 +212,7 @@ export class StaticGameDataConnector implements GameDataConnector {
         return ALL_PHRENIC_AMPLIFICATIONS as ClassOptionBase[];
 
       case 'deities':
-        return ALL_DEITIES as unknown as ClassOptionBase[];
+        return ALL_DEITIES.map((d) => ({ ...d, description: d.description ?? '' })) as ClassOptionBase[];
 
       case 'spells': {
         const classNames = filters.classNames ?? [];
