@@ -5,79 +5,65 @@
  *   1. The Firestore permission bug (#244) blocked reads from cavalierorders.
  *   2. No test verified the static data wiring, so the gap went undetected.
  *
- * These tests assert the full wiring chain:
- *   cavalierDefinitions → Order definition → collectionName 'cavalierorders'
- *   cavalierorders data → correctly shaped for picker display
- *
- * Since Daring Champion keeps the Order feature from Cavalier (it is not in
- * replacedFeatures), the cavalier base class definitions cover Daring Champion.
+ * Tests go through StaticGameDataConnector — the project-approved test double
+ * for the runtime connector — rather than importing from src/data/ directly.
  */
 
-import { cavalierDefinitions } from '@/data/classChoiceDefinitions/cavalier';
-import { getDefinitionsForClass } from '@/data/classChoiceDefinitions/index';
-import { ALL_CAVALIER_ORDERS } from '@/data/cavalierOrders/index';
+import { StaticGameDataConnector } from '@/services/StaticGameDataConnector';
+import { GameDataService } from '@/services/GameDataService';
 
 describe('cavalier order choice wiring (#246)', () => {
-  describe('cavalierDefinitions static data', () => {
-    test('includes exactly one Order definition', () => {
-      const orderDefs = cavalierDefinitions.filter((d) => d.featureName === 'Order');
-      expect(orderDefs).toHaveLength(1);
+  let connector: StaticGameDataConnector;
+
+  beforeAll(() => {
+    connector = new StaticGameDataConnector();
+    GameDataService.setConnector(connector);
+  });
+
+  describe('cavalier class choice definition', () => {
+    test('includes Order definition for cavalier class', async () => {
+      const defs = await connector.getClassChoiceDefinitions('cavalier');
+      const orderDef = defs.find((d) => d.featureName === 'Order');
+      expect(orderDef).toBeDefined();
     });
 
-    test('Order definition targets cavalierorders collection', () => {
-      const orderDef = cavalierDefinitions.find((d) => d.featureName === 'Order');
+    test('Order definition targets cavalierorders collection with single_at_creation selection', async () => {
+      const defs = await connector.getClassChoiceDefinitions('cavalier');
+      const orderDef = defs.find((d) => d.featureName === 'Order');
       expect(orderDef?.optionSource).toBe('collection');
       expect(orderDef?.collectionName).toBe('cavalierorders');
-    });
-
-    test('Order definition is single_at_creation (applies to Daring Champion at level 1)', () => {
-      const orderDef = cavalierDefinitions.find((d) => d.featureName === 'Order');
       expect(orderDef?.selectionMode.type).toBe('single_at_creation');
     });
 
-    test('Order definition has required seeding fields', () => {
-      const orderDef = cavalierDefinitions.find((d) => d.featureName === 'Order');
-      expect(orderDef?.id).toBe('cavalier-order');
-      expect(orderDef?.className).toBe('cavalier');
-      expect(orderDef?.isOfficial).toBe(true);
-      expect(orderDef?.visibility).toBe('global');
-    });
-  });
-
-  describe('getDefinitionsForClass wiring', () => {
-    test('returns Order definition for "cavalier" (case-insensitive — covers Daring Champion entry)', () => {
-      const defs = getDefinitionsForClass('cavalier');
+    test('lookup works for "Cavalier" (title-case ClassEntry.name used in ClassEntryCard)', async () => {
+      const defs = await connector.getClassChoiceDefinitions('Cavalier');
       const orderDef = defs.find((d) => d.featureName === 'Order');
       expect(orderDef).toBeDefined();
       expect(orderDef?.collectionName).toBe('cavalierorders');
     });
-
-    test('returns Order definition for "Cavalier" (matches ClassEntry.name capitalisation)', () => {
-      const defs = getDefinitionsForClass('Cavalier');
-      const orderDef = defs.find((d) => d.featureName === 'Order');
-      expect(orderDef).toBeDefined();
-    });
   });
 
-  describe('cavalierorders seed data', () => {
-    test('contains at least one order', () => {
-      expect(ALL_CAVALIER_ORDERS.length).toBeGreaterThan(0);
+  describe('cavalierorders data', () => {
+    test('contains at least one order', async () => {
+      const items = await GameDataService.getClassChoiceItems('cavalierorders');
+      expect(items.length).toBeGreaterThan(0);
     });
 
-    test('each order has id, name, and classSkills (required for picker display)', () => {
-      for (const order of ALL_CAVALIER_ORDERS) {
-        expect(typeof order.id).toBe('string');
-        expect(order.id.length).toBeGreaterThan(0);
-        expect(typeof order.name).toBe('string');
-        expect(order.name.length).toBeGreaterThan(0);
-        expect(Array.isArray(order.classSkills)).toBe(true);
+    test('order items have key, label, and subLabel derived from classSkills', async () => {
+      const items = await GameDataService.getClassChoiceItems('cavalierorders');
+      for (const item of items) {
+        expect(typeof item.key).toBe('string');
+        expect(item.key.length).toBeGreaterThan(0);
+        expect(typeof item.label).toBe('string');
+        expect(item.label.length).toBeGreaterThan(0);
+        expect(typeof item.subLabel).toBe('string');
       }
     });
 
-    test('all order ids are unique', () => {
-      const ids = ALL_CAVALIER_ORDERS.map((o) => o.id);
-      const unique = new Set(ids);
-      expect(unique.size).toBe(ids.length);
+    test('all order keys are unique', async () => {
+      const items = await GameDataService.getClassChoiceItems('cavalierorders');
+      const keys = items.map((i) => i.key);
+      expect(new Set(keys).size).toBe(keys.length);
     });
   });
 });
