@@ -342,6 +342,11 @@ export class FirestoreGameDataConnector implements GameDataConnector {
           break;
         }
 
+        case 'deities': {
+          results = await fetchAll<ClassOptionBase>('deities');
+          break;
+        }
+
         default: {
           // Simple collections with no filter support
           const q = query(collection(db, collectionName), where('visibility', '==', 'global'));

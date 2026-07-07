@@ -2,6 +2,21 @@ import { type ClassChoiceDefinition } from '@/types/classChoices';
 
 export const warpriestDefinitions: ClassChoiceDefinition[] = [
   {
+    id: 'warpriest-deity',
+    className: 'warpriest',
+    featureName: 'Deity',
+    description:
+      "A warpriest must worship a deity. The chosen deity determines which blessings are available and defines the warpriest's sacred focus.",
+    selectionMode: { type: 'single_at_creation' },
+    optionSource: 'collection',
+    collectionName: 'deities',
+    source: 'pf1e-acg',
+    isOfficial: true,
+    verificationStatus: 'needs_review' as const,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
     id: 'warpriest-blessings',
     className: 'warpriest',
     featureName: 'Blessings',
