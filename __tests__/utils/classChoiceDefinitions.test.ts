@@ -66,7 +66,13 @@ describe('classChoiceDefinitions — summoner (unchained)', () => {
   test('returns unchained summoner definitions for "Summoner (Unchained)"', async () => {
     const defs = await connector.getClassChoiceDefinitions('Summoner (Unchained)');
     expect(defs.length).toBeGreaterThan(0);
-    expect(defs.find((d) => d.id === 'summoner-unchained-subtype')).toBeDefined();
-    expect(defs.find((d) => d.id === 'summoner-unchained-eidolon-evolution')).toBeDefined();
+
+    const subtypeDef = defs.find((d) => d.id === 'summoner-unchained-subtype');
+    expect(subtypeDef).toBeDefined();
+    expect(subtypeDef?.className).toBe('summoner (unchained)');
+
+    const eidolonEvolutionDef = defs.find((d) => d.id === 'summoner-unchained-eidolon-evolution');
+    expect(eidolonEvolutionDef).toBeDefined();
+    expect(eidolonEvolutionDef?.className).toBe('summoner (unchained)');
   });
 });
