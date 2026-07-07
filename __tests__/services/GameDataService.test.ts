@@ -696,11 +696,10 @@ describe('GameDataService', () => {
       expect(items[0].key).toBe('order-of-the-star');
     });
 
-    test('cavalierorders items have key, label, and subLabel from classSkills — picker display for Daring Champion (#246)', async () => {
+    test('cavalierorders items map classSkills to subLabel — picker display for Daring Champion (#246)', async () => {
       const items = await GameDataService.getClassChoiceItems('cavalierorders');
       expect(items.length).toBeGreaterThan(0);
       const item = items[0];
-      expect(item.key).toBe('order-of-the-star');
       expect(item.label).toBe('Order of the Star');
       expect(item.subLabel).toBe('Heal, Knowledge (religion)');
     });
