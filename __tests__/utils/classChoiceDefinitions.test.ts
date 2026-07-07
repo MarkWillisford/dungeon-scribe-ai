@@ -1,29 +1,40 @@
-import { getDefinitionsForClass, getDefinitionById } from '@/data/classChoiceDefinitions/index';
+import { StaticGameDataConnector } from '@/services/StaticGameDataConnector';
 
-describe('classChoiceDefinitions — rogue', () => {
-  test('getDefinitionsForClass("Rogue") returns the rogue talent definition', () => {
-    const defs = getDefinitionsForClass('Rogue');
+const connector = new StaticGameDataConnector();
+
+describe('classChoiceDefinitions — rogue (chained)', () => {
+  test('returns rogue talent definition for "Rogue"', async () => {
+    const defs = await connector.getClassChoiceDefinitions('Rogue');
     expect(defs.length).toBeGreaterThan(0);
     const talentDef = defs.find((d) => d.id === 'rogue-talent');
     expect(talentDef).toBeDefined();
+    expect(talentDef?.className).toBe('rogue');
     expect(talentDef?.featureName).toBe('Rogue Talent');
     expect(talentDef?.selectionMode.type).toBe('at_class_levels');
   });
 
-  test('getDefinitionsForClass("rogue") also works (case-insensitive)', () => {
-    const defs = getDefinitionsForClass('rogue');
+  test('lookup is case-insensitive ("rogue" works like "Rogue")', async () => {
+    const defs = await connector.getClassChoiceDefinitions('rogue');
     expect(defs.find((d) => d.id === 'rogue-talent')).toBeDefined();
   });
+});
 
-  test('getDefinitionsForClass("Rogue (Unchained)") returns unchained rogue definitions', () => {
-    const defs = getDefinitionsForClass('Rogue (Unchained)');
+describe('classChoiceDefinitions — rogue (unchained)', () => {
+  test('returns unchained rogue definitions for "Rogue (Unchained)"', async () => {
+    const defs = await connector.getClassChoiceDefinitions('Rogue (Unchained)');
     expect(defs.length).toBeGreaterThanOrEqual(2);
     expect(defs.find((d) => d.id === 'rogue-unchained-talent')).toBeDefined();
     expect(defs.find((d) => d.id === 'rogue-unchained-finesse-training')).toBeDefined();
   });
 
-  test('unchained rogue talent definition has correct levels', () => {
-    const defs = getDefinitionsForClass('Rogue (Unchained)');
+  test('unchained talent definition has className matching class display name', async () => {
+    const defs = await connector.getClassChoiceDefinitions('Rogue (Unchained)');
+    const talentDef = defs.find((d) => d.id === 'rogue-unchained-talent');
+    expect(talentDef?.className).toBe('rogue (unchained)');
+  });
+
+  test('unchained talent definition has correct levels', async () => {
+    const defs = await connector.getClassChoiceDefinitions('Rogue (Unchained)');
     const talentDef = defs.find((d) => d.id === 'rogue-unchained-talent');
     expect(talentDef?.selectionMode.type).toBe('at_class_levels');
     if (talentDef?.selectionMode.type === 'at_class_levels') {
@@ -31,38 +42,29 @@ describe('classChoiceDefinitions — rogue', () => {
     }
   });
 
-  test('unchained finesse training definition has correct levels', () => {
-    const defs = getDefinitionsForClass('Rogue (Unchained)');
+  test('finesse training definition has correct levels', async () => {
+    const defs = await connector.getClassChoiceDefinitions('Rogue (Unchained)');
     const finesseDef = defs.find((d) => d.id === 'rogue-unchained-finesse-training');
     expect(finesseDef?.selectionMode.type).toBe('at_class_levels');
     if (finesseDef?.selectionMode.type === 'at_class_levels') {
       expect(finesseDef.selectionMode.levels).toEqual([3, 11, 19]);
     }
   });
-
-  test('getDefinitionById returns rogue-talent definition', () => {
-    const def = getDefinitionById('rogue-talent');
-    expect(def).toBeDefined();
-    expect(def?.className).toBe('rogue');
-  });
-
-  test('getDefinitionById returns rogue-unchained-talent definition', () => {
-    const def = getDefinitionById('rogue-unchained-talent');
-    expect(def).toBeDefined();
-  });
 });
 
 describe('classChoiceDefinitions — barbarian (unchained)', () => {
-  test('getDefinitionsForClass("Barbarian (Unchained)") returns unchained barbarian definitions', () => {
-    const defs = getDefinitionsForClass('Barbarian (Unchained)');
+  test('returns unchained barbarian definitions for "Barbarian (Unchained)"', async () => {
+    const defs = await connector.getClassChoiceDefinitions('Barbarian (Unchained)');
     expect(defs.length).toBeGreaterThan(0);
-    expect(defs.find((d) => d.id === 'barbarian-unchained-rage-power')).toBeDefined();
+    const ragePowerDef = defs.find((d) => d.id === 'barbarian-unchained-rage-power');
+    expect(ragePowerDef).toBeDefined();
+    expect(ragePowerDef?.className).toBe('barbarian (unchained)');
   });
 });
 
 describe('classChoiceDefinitions — summoner (unchained)', () => {
-  test('getDefinitionsForClass("Summoner (Unchained)") returns unchained summoner definitions', () => {
-    const defs = getDefinitionsForClass('Summoner (Unchained)');
+  test('returns unchained summoner definitions for "Summoner (Unchained)"', async () => {
+    const defs = await connector.getClassChoiceDefinitions('Summoner (Unchained)');
     expect(defs.length).toBeGreaterThan(0);
     expect(defs.find((d) => d.id === 'summoner-unchained-subtype')).toBeDefined();
     expect(defs.find((d) => d.id === 'summoner-unchained-eidolon-evolution')).toBeDefined();
