@@ -2,6 +2,7 @@ import React from 'react';
 import { render } from '../../helpers/testUtils';
 import {
   filterExcludedChoiceItems,
+  resolveFilterTokens,
   ClassChoiceRow,
 } from '@/components/character/direct-entry/ClassChoiceRow';
 import type { SearchItem } from '@/components/ui/SearchPickerSheet';
@@ -169,6 +170,41 @@ const domainDefinition: ClassChoiceDefinition = {
   visibility: 'global',
   rev: 1,
 };
+
+describe('resolveFilterTokens', () => {
+  it('resolves {chosen_deity} from a sibling Deity class choice', () => {
+    const siblings = [{ featureName: 'Deity', takenAtLevel: 1, selection: 'Milani' }];
+    const result = resolveFilterTokens({ deityIds: '{chosen_deity}' }, siblings, undefined);
+    expect(result).toEqual({ deityIds: 'Milani' });
+  });
+
+  it('falls back to characterDeity when no sibling Deity choice exists', () => {
+    const result = resolveFilterTokens({ deityIds: '{chosen_deity}' }, [], 'Iomedae');
+    expect(result).toEqual({ deityIds: 'Iomedae' });
+  });
+
+  it('prefers sibling Deity choice over characterDeity when both exist', () => {
+    const siblings = [{ featureName: 'Deity', takenAtLevel: 1, selection: 'Milani' }];
+    const result = resolveFilterTokens({ deityIds: '{chosen_deity}' }, siblings, 'Iomedae');
+    expect(result).toEqual({ deityIds: 'Milani' });
+  });
+
+  it('returns undefined deityIds when neither sibling choice nor characterDeity is set', () => {
+    const result = resolveFilterTokens({ deityIds: '{chosen_deity}' }, [], undefined);
+    expect(result).toEqual({ deityIds: undefined });
+  });
+
+  it('resolves other {chosen_X} tokens from sibling choices', () => {
+    const siblings = [{ featureName: 'mystery', takenAtLevel: 1, selection: 'battle' }];
+    const result = resolveFilterTokens({ mysteryId: '{chosen_mystery}' }, siblings, undefined);
+    expect(result).toEqual({ mysteryId: 'battle' });
+  });
+
+  it('passes through non-token values unchanged', () => {
+    const result = resolveFilterTokens({ talentTier: 'advanced' }, [], undefined);
+    expect(result).toEqual({ talentTier: 'advanced' });
+  });
+});
 
 describe('ClassChoiceRow', () => {
   it('renders featureLabel and empty-state placeholder when no selection is made', () => {

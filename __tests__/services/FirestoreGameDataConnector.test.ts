@@ -675,6 +675,27 @@ describe('FirestoreGameDataConnector', () => {
       });
       expect(result).toEqual([]);
     });
+
+    test('deities — returns all deities from Firestore', async () => {
+      mockGetDocs.mockResolvedValueOnce(
+        mockSnap([
+          { id: 'milani', name: 'Milani', title: 'The Everbloom', alignment: 'CG' },
+          { id: 'iomedae', name: 'Iomedae', title: 'The Inheritor', alignment: 'LG' },
+        ]) as never,
+      );
+
+      const result = await connector.getClassChoiceOptions('deities', {});
+      expect(result).toHaveLength(2);
+      expect(result[0].id).toBe('milani');
+      expect(result[1].id).toBe('iomedae');
+    });
+
+    test('deities — Firestore error returns empty array', async () => {
+      mockGetDocs.mockRejectedValueOnce(new Error('Permission denied'));
+
+      const result = await connector.getClassChoiceOptions('deities', {});
+      expect(result).toEqual([]);
+    });
   });
 
   // ---- Eidolon static catalogs ------------------------------------------------
