@@ -78,8 +78,11 @@ interface ClassChoiceRowProps {
 // Resolve {chosen_X} tokens in a collectionFilter using sibling class choices
 // and character-level state (e.g. deity from the Identity section).
 // e.g. { mysteryId: '{chosen_mystery}' } → { mysteryId: 'battle' }
-// e.g. { deityIds: '{chosen_deity}' } → { deityIds: 'milani' }
-function resolveFilterTokens(
+// e.g. { deityIds: '{chosen_deity}' } → { deityIds: 'Milani' }
+// For {chosen_deity}: sibling 'Deity' class choice takes precedence over the
+// identity-section characterDeity text field (fallback for classes without a
+// deity class choice definition).
+export function resolveFilterTokens(
   filter: Record<string, unknown>,
   siblingChoices: ClassChoice[],
   characterDeity?: string,
@@ -89,7 +92,12 @@ function resolveFilterTokens(
     if (typeof value === 'string' && value.startsWith('{') && value.endsWith('}')) {
       const tokenName = value.slice(1, -1); // e.g. 'chosen_mystery' or 'chosen_deity'
       if (tokenName === 'chosen_deity') {
-        resolved[key] = characterDeity || undefined;
+        const siblingDeity = siblingChoices.find((c) => c.featureName.toLowerCase() === 'deity');
+        const deityFromChoice =
+          typeof siblingDeity?.selection === 'string' && siblingDeity.selection
+            ? siblingDeity.selection
+            : undefined;
+        resolved[key] = deityFromChoice ?? characterDeity ?? undefined;
       } else if (tokenName.startsWith('chosen_')) {
         const featureKeyword = tokenName.slice('chosen_'.length); // e.g. 'mystery'
         const match = siblingChoices.find((c) => c.featureName.toLowerCase() === featureKeyword);

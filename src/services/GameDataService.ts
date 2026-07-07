@@ -218,6 +218,7 @@ export class GameDataService {
       'disciplines',
       'maneuvers',
       'stances',
+      'deities',
     ];
 
     if (!validCollections.includes(collectionName)) return [];
@@ -431,6 +432,15 @@ export class GameDataService {
           subLabel: a.description?.slice(0, 80),
           category: a.amplificationTier === 'major' ? 'Major Amplifications' : 'Amplifications',
         }));
+
+      case 'deities':
+        return (items as { id: string; name: string; title?: string; alignment: string }[]).map(
+          (d) => ({
+            key: d.name,
+            label: d.name,
+            subLabel: d.title ? `${d.title} (${d.alignment})` : d.alignment,
+          }),
+        );
 
       // TODO Phase 8: wire getDisciplines/getManeuvers/getStances through connector
       case 'disciplines':

@@ -27,7 +27,7 @@ import { ALL_MESMERIST_TRICKS } from '@/data/mesmeristTricks/index';
 import { ALL_WILD_TALENTS } from '@/data/kineticistWildTalents/index';
 import { ALL_OCCULTIST_FOCUS_POWERS } from '@/data/occultistFocusPowers/index';
 import { ALL_PHRENIC_AMPLIFICATIONS } from '@/data/phrenicAmplifications/index';
-import { getDeityByName } from '@/data/deities/index';
+import { ALL_DEITIES, getDeityByName } from '@/data/deities/index';
 import { ALL_NINJA_TRICKS } from '@/data/ninjaTricks/index';
 import { ALL_SLAYER_TALENTS } from '@/data/slayerTalents/index';
 import { ALL_MAGUS_ARCANA } from '@/data/magusArcana/index';
@@ -210,6 +210,9 @@ export class StaticGameDataConnector implements GameDataConnector {
 
       case 'phrenicamplifications':
         return ALL_PHRENIC_AMPLIFICATIONS as ClassOptionBase[];
+
+      case 'deities':
+        return ALL_DEITIES as unknown as ClassOptionBase[];
 
       case 'spells': {
         const classNames = filters.classNames ?? [];
