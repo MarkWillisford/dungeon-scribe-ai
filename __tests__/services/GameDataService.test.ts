@@ -555,6 +555,7 @@ describe('GameDataService', () => {
         },
       ]);
       const defs = await GameDataService.getClassChoiceDefinitions('cavalier');
+      expect(module.getDefinitionsForClass).toHaveBeenCalledWith('cavalier');
       const orderDef = defs.find((d) => d.featureName === 'Order');
       expect(orderDef).toBeDefined();
       expect(orderDef?.collectionName).toBe('cavalierorders');
@@ -698,10 +699,11 @@ describe('GameDataService', () => {
 
     test('cavalierorders items map classSkills to subLabel — picker display for Daring Champion (#246)', async () => {
       const items = await GameDataService.getClassChoiceItems('cavalierorders');
-      expect(items.length).toBeGreaterThan(0);
-      const item = items[0];
-      expect(item.label).toBe('Order of the Star');
-      expect(item.subLabel).toBe('Heal, Knowledge (religion)');
+      const item = items.find(({ key }) => key === 'order-of-the-star');
+
+      expect(item).toBeDefined();
+      expect(item?.label).toBe('Order of the Star');
+      expect(item?.subLabel).toBe('Heal, Knowledge (religion)');
     });
 
     test('hexes — assigns category by tier', async () => {

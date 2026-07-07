@@ -20,6 +20,10 @@ describe('cavalier order choice wiring (#246)', () => {
     GameDataService.setConnector(connector);
   });
 
+  afterAll(() => {
+    GameDataService.setConnector(new StaticGameDataConnector());
+  });
+
   describe('cavalier class choice definition', () => {
     test('includes Order definition for cavalier class', async () => {
       const defs = await connector.getClassChoiceDefinitions('cavalier');
