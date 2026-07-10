@@ -65,7 +65,8 @@ export type ClassChoiceCollection =
   | 'wildtalents'
   | 'occultistfocuspowers'
   | 'phrenicamplifications'
-  | 'spells';
+  | 'spells'
+  | 'deities';
 
 /**
  * Filter options for getClassChoiceOptions.

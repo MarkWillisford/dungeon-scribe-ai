@@ -5,6 +5,21 @@ import { type ClassChoiceDefinition } from '@/types/classChoices';
 
 export const inquisitorDefinitions: ClassChoiceDefinition[] = [
   {
+    id: 'inquisitor-deity',
+    className: 'inquisitor',
+    featureName: 'Deity',
+    description:
+      'An inquisitor must worship a deity. The chosen deity determines which domains and inquisitions are available to her.',
+    selectionMode: { type: 'single_at_creation' },
+    optionSource: 'collection',
+    collectionName: 'deities',
+    source: 'pf1e-apg',
+    isOfficial: true,
+    verificationStatus: 'needs_review' as const,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
     id: 'inquisitor-domain',
     className: 'inquisitor',
     featureName: 'Domain',
