@@ -82,7 +82,15 @@ Without the scope constraint, an agent given only a concrete example will often 
 
 ### 5. Create the issue
 
-If the two-question cap was reached and uncertainty about scope or reproduction remains, add `needs-context` as a second label alongside the routing label. Note the specific uncertainty in the "What to build" section of the issue body.
+```bash
+gh issue create \
+  --repo MarkWillisford/dungeon-scribe-ai \
+  --title "[concise bug title]" \
+  --label "[confirmed label]" \
+  --body-file /tmp/bug-issue.md
+```
+
+If the two-question cap was reached and uncertainty about scope or reproduction remains, add `--label "needs-context"` and note the specific uncertainty in the "What to build" section of the issue body:
 
 ```bash
 gh issue create \
@@ -92,8 +100,6 @@ gh issue create \
   --label "needs-context" \
   --body-file /tmp/bug-issue.md
 ```
-
-(Omit `--label "needs-context"` if the issue is well-understood.)
 
 **Rules:**
 - Do NOT assign a milestone — bugs are reactive, not part of planned feature work
