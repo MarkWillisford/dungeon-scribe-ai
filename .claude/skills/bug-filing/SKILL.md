@@ -86,7 +86,6 @@ If the two-question cap was reached and uncertainty about scope or reproduction 
 
 ```bash
 gh issue create \
-  --repo MarkWillisford/dungeon-scribe-ai \
   --title "[concise bug title]" \
   --label "[confirmed label]" \
   --label "needs-context" \

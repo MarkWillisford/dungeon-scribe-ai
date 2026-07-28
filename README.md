@@ -119,7 +119,7 @@ plans/                  Design specs and implementation plans
 - **Play-state persistence** — Combat state (HP, active buffs, spell slots used, resources) persists to Firestore and survives app close; "Resume" or "New Session" on re-entry
 - **Spell slot tracking** — Per-pool, per-level slot use controls on the playsheet; prepared vs. spontaneous caster modes
 - **Resource pool tracking** — Ki, rage, channel energy, bardic performance, lay on hands, and all other class resources with tap-to-decrement and per-encounter reset
-- **Rest and recovery** — Long rest and short rest actions that reset HP, slots, and resource pools and write recovered state back to Firestore
+- **Rest and recovery** — Long rest (8 hours) resets HP, slots, and resource pools and writes recovered state back to Firestore; per-encounter reset ("New Encounter" button) surfaces for Path of War / Tomb of Battle characters
 
 ### Next
 
