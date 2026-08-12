@@ -16,7 +16,7 @@ const mockUseAppSelector = jest.fn((selector: (s: unknown) => unknown) =>
     },
     ruleset: { activeRuleset: { optionalRules: { eitrMode: 'off' } } },
     gameData: { classes: [] },
-  })
+  }),
 );
 
 jest.mock('@/store/hooks', () => ({
@@ -40,8 +40,12 @@ jest.mock('@/utils/characterComputations', () => ({
   computeFeatSlots: jest.fn(() => []),
 }));
 
+const featPickerProps: Record<string, unknown>[] = [];
 jest.mock('@/components/character/direct-entry/FeatPickerSheet', () => ({
-  FeatPickerSheet: () => null,
+  FeatPickerSheet: (props: Record<string, unknown>) => {
+    featPickerProps.push(props);
+    return null;
+  },
 }));
 
 jest.mock('@/components/ui/SearchPickerSheet', () => ({
@@ -60,6 +64,7 @@ jest.mock('@/services/GameDataService', () => ({
   GameDataService: {
     getWeapons: () => Promise.resolve([]),
     buildCastableSpellItems: () => Promise.resolve([]),
+    getArchetypesByClass: () => Promise.resolve([]),
   },
 }));
 
@@ -303,6 +308,91 @@ describe('FeatSlotList - Slot rendering', () => {
     expect(allText.some((t) => t === 'RACIAL')).toBe(true);
     expect(allText.some((t) => t === 'BONUS')).toBe(true);
     expect(allText.some((t) => t === 'MYTHIC')).toBe(true);
+  });
+
+  // ---- class-granted slots (issue #256) ----
+
+  const rawClassSlot = {
+    id: 'class:cls-1:bonus-feat:4',
+    source: 'class',
+    availableAt: 'Fighter 4',
+    availableAtLevel: 4,
+    sourceLabel: 'Fighter 4',
+    classLevel: 4,
+    allowedFeatTypes: ['combat'],
+  };
+
+  it('renders a class-granted slot with a CLASS badge and its class label', () => {
+    computeFeatSlotsMock.mockReturnValueOnce([rawClassSlot]);
+    const result = render(<FeatSlotList />);
+    const allText = getAllText(result.tree);
+    expect(allText.some((t) => t === 'CLASS')).toBe(true);
+    expect(allText.some((t) => t === 'Fighter 4')).toBe(true);
+  });
+
+  it('matches an assigned feat to a class slot by its composite id', () => {
+    const assignedClassFeat: CharacterFeat = {
+      featId: 'power-attack',
+      name: 'Power Attack',
+      source: 'class:cls-1:bonus-feat:4',
+      grantedAtLevel: 4,
+      active: true,
+      prereqOverride: false,
+      choices: {},
+      sourceLabel: 'Fighter 4',
+    };
+    computeFeatSlotsMock.mockReturnValueOnce([rawClassSlot]);
+    mockUseAppSelector.mockImplementation(stateWith([assignedClassFeat]));
+    const { getAllByRole } = render(<FeatSlotList />);
+    const slotBtn = getAllByRole('button').find(
+      (b) => b.props.accessibilityLabel === 'Fighter 4: Power Attack',
+    );
+    expect(slotBtn).toBeTruthy();
+  });
+
+  it('keeps an assigned class feat visible when its slot is no longer computed', () => {
+    const orphanedClassFeat: CharacterFeat = {
+      featId: 'cleave',
+      name: 'Cleave',
+      source: 'class:cls-gone:bonus-feat:2',
+      grantedAtLevel: 2,
+      active: true,
+      prereqOverride: false,
+      choices: {},
+      sourceLabel: 'Fighter 2',
+    };
+    mockUseAppSelector.mockImplementation(stateWith([orphanedClassFeat]));
+    const { getAllByRole } = render(<FeatSlotList />);
+    const slotBtn = getAllByRole('button').find(
+      (b) => b.props.accessibilityLabel === 'Fighter 2: Cleave',
+    );
+    expect(slotBtn).toBeTruthy();
+  });
+
+  it('passes the slot restriction through to the feat picker', () => {
+    featPickerProps.length = 0;
+    computeFeatSlotsMock.mockReturnValueOnce([rawClassSlot]);
+    render(<FeatSlotList />);
+    expect(featPickerProps.some((p) => p.allowedTypes === rawClassSlot.allowedFeatTypes)).toBe(
+      true,
+    );
+  });
+
+  it('leaves the picker unrestricted for ordinary level slots', () => {
+    featPickerProps.length = 0;
+    computeFeatSlotsMock.mockReturnValueOnce([rawLevelSlot]);
+    render(<FeatSlotList />);
+    expect(featPickerProps.length).toBeGreaterThan(0);
+    expect(featPickerProps.every((p) => p.allowedTypes === undefined)).toBe(true);
+  });
+
+  it('does not offer a remove button on class-granted slots', () => {
+    computeFeatSlotsMock.mockReturnValueOnce([rawClassSlot]);
+    const { getAllByRole } = render(<FeatSlotList />);
+    const removeBtn = getAllByRole('button').find(
+      (b) => b.props.accessibilityLabel === 'Remove bonus slot',
+    );
+    expect(removeBtn).toBeFalsy();
   });
 
   it('pressing an unassigned slot row does not dispatch', () => {
