@@ -12,14 +12,13 @@ import {
 } from '@/store/slices/characterEntrySlice';
 import { FeatPickerSheet } from './FeatPickerSheet';
 import { SearchPickerSheet, type SearchItem } from '@/components/ui/SearchPickerSheet';
-import { computeFeatSlots } from '@/utils/characterComputations';
+import { computeFeatSlots, type FeatSlotSource } from '@/utils/characterComputations';
 import { FeatRegistryService } from '@/services/FeatRegistryService';
 import { GameDataService } from '@/services/GameDataService';
 import { computePoolEsl } from '@/utils/spellcastingUtils';
 import { selectClassDataMap } from '@/store/slices/gameDataSlice';
-import type { FeatChoice } from '@/types/feats';
-
-type FeatSlotSource = 'racial' | 'level' | 'bonus' | 'mythic';
+import type { FeatChoice, FeatType } from '@/types/feats';
+import type { ArchetypeData } from '@/data/classes/types';
 
 function genId(): string {
   return Math.random().toString(36).slice(2) + Date.now().toString(36);
@@ -37,6 +36,7 @@ interface FeatSlotDisplay {
   prereqOverride: boolean;
   featChoices: Record<string, string>;
   sourceLabel?: string;
+  allowedFeatTypes?: FeatType[];
 }
 
 // ---- Source badge ----
@@ -46,6 +46,7 @@ const SOURCE_COLORS: Record<FeatSlotSource, { bg: string; text: string }> = {
   level: { bg: 'rgba(59,130,246,0.15)', text: '#3B82F6' },
   bonus: { bg: 'rgba(16,185,129,0.15)', text: '#10B981' },
   mythic: { bg: 'rgba(139,92,246,0.15)', text: '#8B5CF6' },
+  class: { bg: 'rgba(244,114,182,0.15)', text: '#F472B6' },
 };
 
 function SourceBadge({ source }: { source: FeatSlotSource }) {
@@ -306,8 +307,11 @@ function FeatSlotRow({ slot }: FeatSlotRowProps) {
       <FeatPickerSheet
         visible={pickerOpen}
         title={`${slot.availableAt} — Assign Feat`}
+        allowedTypes={slot.allowedFeatTypes}
         onSelect={({ featId, featName }) => {
-          dispatch(assignFeat({ slotId: slot.slotId, featId, featName }));
+          dispatch(
+            assignFeat({ slotId: slot.slotId, featId, featName, sourceLabel: slot.sourceLabel }),
+          );
           setPickerOpen(false);
           const def = FeatRegistryService.getFeat(featId);
           if (def?.choices?.length) {
@@ -419,13 +423,69 @@ export function FeatSlotList() {
   const { colors, fantasy, isDark } = useTheme();
   const dispatch = useAppDispatch();
   const character = useAppSelector((state) => state.characterEntry.character);
+  const classDataMap = useAppSelector(selectClassDataMap);
   const [bonusLabelVisible, setBonusLabelVisible] = useState(false);
   const [bonusLabelText, setBonusLabelText] = useState('');
   const bonusLabelInputRef = useRef<TextInput>(null);
 
+  const classes = character.classes.classes;
+  const levelOrder = character.classes.levelOrder;
+
+  // Archetypes trade class features away, bonus feat grants among them. Load
+  // the archetype definitions for the classes that actually have one selected.
+  const [archetypesByClassName, setArchetypesByClassName] = useState<Map<string, ArchetypeData[]>>(
+    new Map(),
+  );
+
+  // Joined into a string so the effect only re-runs when the set of class
+  // names with archetypes changes, not on every unrelated class edit.
+  const archetypeClassNames = useMemo(
+    () =>
+      Array.from(new Set(classes.filter((c) => c.archetype?.length).map((c) => c.name)))
+        .sort()
+        .join('|'),
+    [classes],
+  );
+
+  useEffect(() => {
+    const names = archetypeClassNames ? archetypeClassNames.split('|') : [];
+    let cancelled = false;
+    // An empty name list resolves to an empty map on the same code path, which
+    // keeps the state update out of the effect body.
+    Promise.all(
+      names.map((name) =>
+        GameDataService.getArchetypesByClass(name).then((defs) => [name, defs] as const),
+      ),
+    )
+      .then((entries) => {
+        if (!cancelled) setArchetypesByClassName(new Map(entries));
+      })
+      .catch((e) => console.error('Failed to load archetypes for feat slots:', e));
+    return () => {
+      cancelled = true;
+    };
+  }, [archetypeClassNames]);
+
+  const replacedFeaturesByClassId = useMemo(() => {
+    const map = new Map<string, string[]>();
+    for (const cls of classes) {
+      if (!cls.archetype?.length) continue;
+      const selected = cls.archetype.map((n) => n.toLowerCase());
+      const replaced = (archetypesByClassName.get(cls.name) ?? [])
+        .filter((a) => selected.includes(a.name.toLowerCase()))
+        .flatMap((a) => a.replacedFeatures ?? []);
+      if (replaced.length > 0) map.set(cls.id ?? cls.name, replaced);
+    }
+    return map;
+  }, [classes, archetypesByClassName]);
+
   // Build the display slot list by merging computed slots with assigned feats
   const featSlots = useMemo<FeatSlotDisplay[]>(() => {
-    const computed = computeFeatSlots(character.classes.classes, character.info.race.name);
+    const computed = computeFeatSlots(classes, character.info.race.name, {
+      classDataMap,
+      levelOrder,
+      replacedFeaturesByClassId,
+    });
 
     // Build a map of slotId → assigned feat
     const assignedMap = new Map<
@@ -447,17 +507,21 @@ export function FeatSlotList() {
     }
 
     const slots: FeatSlotDisplay[] = computed.map((s) => {
-      const slotId = `${s.source}_${s.availableAtLevel}`;
+      // Class-granted slots carry their own composite id — a level alone can't
+      // tell Fighter 4 apart from Wizard 4.
+      const slotId = s.source === 'class' ? s.id : `${s.source}_${s.availableAtLevel}`;
       const assigned = assignedMap.get(slotId);
       return {
         slotId,
-        source: s.source as FeatSlotSource,
+        source: s.source,
         availableAt: s.availableAt,
         availableAtLevel: s.availableAtLevel,
         featId: assigned?.featId ?? '',
         featName: assigned?.name ?? '',
         prereqOverride: assigned?.prereqOverride ?? false,
         featChoices: assigned?.choices ?? {},
+        sourceLabel: s.sourceLabel,
+        allowedFeatTypes: s.allowedFeatTypes,
       };
     });
 
@@ -483,8 +547,34 @@ export function FeatSlotList() {
       }
     }
 
+    // Surface assigned class feats whose slot is no longer computed — class
+    // data still loading, or an archetype that now trades the grant away. They
+    // stay visible so the feat can be seen and cleared rather than vanishing.
+    for (const f of character.feats.feats) {
+      if (!f.source.startsWith('class:') || !f.featId) continue;
+      if (slots.some((s) => s.slotId === f.source)) continue;
+      slots.push({
+        slotId: f.source,
+        source: 'class',
+        availableAt: f.sourceLabel ?? 'Class',
+        availableAtLevel: f.grantedAtLevel,
+        featId: f.featId,
+        featName: f.name,
+        prereqOverride: f.prereqOverride ?? false,
+        featChoices: f.choices ?? {},
+        sourceLabel: f.sourceLabel,
+      });
+    }
+
     return slots;
-  }, [character.classes.classes, character.feats.feats, character.info.race.name]);
+  }, [
+    classes,
+    classDataMap,
+    levelOrder,
+    replacedFeaturesByClassId,
+    character.feats.feats,
+    character.info.race.name,
+  ]);
 
   const total = featSlots.length;
   const assignedCount = featSlots.filter((s) => !!s.featName).length;

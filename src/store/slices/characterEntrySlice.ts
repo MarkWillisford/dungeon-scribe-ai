@@ -10,7 +10,11 @@ import type {
 } from '@/types/companions';
 import type { AppliedTemplate } from '@/types/templates';
 import type { CharacterMagicItem, ItemSlot } from '@/types/magicItems';
-import { computeFeatSlots } from '@/utils/characterComputations';
+import {
+  characterLevelForClassLevel,
+  computeFeatSlots,
+  parseClassFeatSlotId,
+} from '@/utils/characterComputations';
 import type { AbilityKey } from '@/types/abilities';
 import type { Character, ManualAbilityBonus } from '@/types';
 import type { LevelIncrementSlot } from '@/types/character';
@@ -57,9 +61,22 @@ export interface EntryValidationWarning {
 
 // ---- Feat slot helpers ----
 
-// Canonical source string format: "{source}_{level}" e.g. "level_3", "racial_1"
+// Canonical source string format: "{source}_{level}" e.g. "level_3", "racial_1".
+// Class-granted slots are the exception — they carry their own composite id
+// ("class:{classId}:{featureSlug}:{classLevel}") because a level alone can't
+// distinguish Fighter 4 from Wizard 4.
 function makeFeatSource(source: 'racial' | 'level' | 'bonus' | 'mythic', level: number): string {
   return `${source}_${level}`;
+}
+
+// Class slots are computed on read from Firestore-backed class data, which the
+// slice has no access to. It can still tell when one has gone stale: the class
+// entry was deleted, or its level dropped below the level that granted it.
+function isClassFeatSlotStillGranted(character: Character, slotId: string): boolean {
+  const parsed = parseClassFeatSlotId(slotId);
+  if (!parsed) return false;
+  const cls = character.classes.classes.find((c) => (c.id ?? c.name) === parsed.classId);
+  return !!cls && cls.level >= parsed.classLevel;
 }
 
 function syncFeatSlotsFromClasses(character: Character): void {
@@ -70,6 +87,9 @@ function syncFeatSlotsFromClasses(character: Character): void {
   const existingKeys = new Set(character.feats.feats.map((f) => `${f.source}_${f.grantedAtLevel}`));
 
   for (const slot of generated) {
+    // Class-granted slots are computed on read from Firestore class data the
+    // slice can't see, so they're never generated here and need no placeholder.
+    if (slot.source === 'class') continue;
     const key = `${slot.source}_${slot.availableAtLevel}`;
     if (existingKeys.has(key)) continue;
     // Add an "empty" feat entry as a placeholder slot marker
@@ -88,8 +108,10 @@ function syncFeatSlotsFromClasses(character: Character): void {
   const validKeys = new Set(generated.map((s) => `${s.source}_${s.availableAtLevel}`));
   character.feats.feats = character.feats.feats.filter((f) => {
     if (!f.featId) return false; // Remove empty placeholders
+    if (f.source.startsWith('bonus_')) return true; // Keep bonus feats regardless
+    if (f.source.startsWith('class:')) return isClassFeatSlotStillGranted(character, f.source);
     // f.source is already the full key e.g. "level_3" — compare directly
-    return validKeys.has(f.source) || f.source.startsWith('bonus_'); // Keep bonus feats regardless
+    return validKeys.has(f.source);
   });
 }
 
@@ -1494,27 +1516,40 @@ const characterEntrySlice = createSlice({
     },
 
     removeFeatSlot(state, action: PayloadAction<string>) {
-      // action.payload is the slot id (= source_level key)
+      // action.payload is the slot id, which is exactly what f.source stores
       state.character.feats.feats = state.character.feats.feats.filter(
-        (f) =>
-          makeFeatSource(
-            f.source.split('_')[0] as 'racial' | 'level' | 'bonus' | 'mythic',
-            f.grantedAtLevel,
-          ) !== action.payload,
+        (f) => f.source !== action.payload,
       );
       state.isDirty = true;
     },
 
-    assignFeat(state, action: PayloadAction<{ slotId: string; featId: string; featName: string }>) {
-      // slotId format: "{source}_{level}" e.g. "level_3"
-      const [sourceStr, levelStr] = action.payload.slotId.split('_');
-      const grantedAtLevel = parseInt(levelStr, 10);
-      const existing = state.character.feats.feats.find(
-        (f) => f.source === sourceStr + '_' + grantedAtLevel,
-      );
+    assignFeat(
+      state,
+      action: PayloadAction<{
+        slotId: string;
+        featId: string;
+        featName: string;
+        sourceLabel?: string;
+      }>,
+    ) {
+      // slotId is "{source}_{level}" ("level_3"), or the composite class key
+      // "class:{classId}:{featureSlug}:{classLevel}".
+      const slotId = action.payload.slotId;
+      const classSlot = parseClassFeatSlotId(slotId);
+      // grantedAtLevel is a character level everywhere it's consumed, so a
+      // class slot resolves its class level through the level order.
+      const grantedAtLevel = classSlot
+        ? (characterLevelForClassLevel(
+            classSlot.classId,
+            classSlot.classLevel,
+            state.character.classes.levelOrder,
+          ) ?? classSlot.classLevel)
+        : parseInt(slotId.split('_').pop() ?? '', 10);
+      const existing = state.character.feats.feats.find((f) => f.source === slotId);
       if (existing) {
         existing.featId = action.payload.featId;
         existing.name = action.payload.featName;
+        if (action.payload.sourceLabel) existing.sourceLabel = action.payload.sourceLabel;
       } else {
         state.character.feats.feats.push({
           featId: action.payload.featId,
@@ -1523,6 +1558,7 @@ const characterEntrySlice = createSlice({
           grantedAtLevel,
           active: true,
           choices: {},
+          ...(action.payload.sourceLabel ? { sourceLabel: action.payload.sourceLabel } : {}),
         });
       }
       state.isDirty = true;

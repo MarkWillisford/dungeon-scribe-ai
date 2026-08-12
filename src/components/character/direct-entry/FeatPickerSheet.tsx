@@ -2,7 +2,7 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { View, Text, TextInput, Pressable, Modal, FlatList, StyleSheet } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import { GameDataService } from '@/services/GameDataService';
-import { type FeatDefinition } from '@/types/feats';
+import { type FeatDefinition, type FeatType } from '@/types/feats';
 
 // ---- Feat type pill colors ----
 
@@ -110,14 +110,31 @@ interface FeatPickerSheetProps {
   title: string;
   onSelect: (result: FeatPickerResult) => void;
   onClose: () => void;
+  // Feat types this slot is normally restricted to (e.g. a fighter bonus feat
+  // takes combat feats). The list opens pre-filtered but never blocks: a DM
+  // exemption or an unmodelled class feature can always reach the full list.
+  allowedTypes?: FeatType[];
+}
+
+function formatTypeList(types: FeatType[]): string {
+  return types.map((t) => t.replace(/_/g, ' ')).join(' / ');
 }
 
 // ---- Component ----
 
-export function FeatPickerSheet({ visible, title, onSelect, onClose }: FeatPickerSheetProps) {
+export function FeatPickerSheet({
+  visible,
+  title,
+  onSelect,
+  onClose,
+  allowedTypes,
+}: FeatPickerSheetProps) {
   const { colors, fantasy, isDark } = useTheme();
   const [query, setQuery] = useState('');
   const [allItems, setAllItems] = useState<FeatItem[]>([]);
+  const [showAllTypes, setShowAllTypes] = useState(false);
+
+  const restricted = !!allowedTypes?.length && !showAllTypes;
 
   useEffect(() => {
     getFeatItems()
@@ -125,31 +142,44 @@ export function FeatPickerSheet({ visible, title, onSelect, onClose }: FeatPicke
       .catch((e) => console.error('Failed to load feats:', e));
   }, []);
 
+  const typeScoped = useMemo(() => {
+    if (!restricted || !allowedTypes) return allItems;
+    return allItems.filter((item) => item.types.some((t) => allowedTypes.includes(t)));
+  }, [allItems, allowedTypes, restricted]);
+
   const filtered = useMemo(() => {
     const q = query.toLowerCase().trim();
-    if (!q) return allItems.slice(0, 80); // cap initial list for performance
-    return allItems.filter(
+    if (!q) return typeScoped.slice(0, 80); // cap initial list for performance
+    return typeScoped.filter(
       (item) =>
         item.label.toLowerCase().includes(q) ||
         item.prereqSummary?.toLowerCase().includes(q) ||
         item.description?.toLowerCase().includes(q) ||
         item.types.some((t) => t.toLowerCase().includes(q)),
     );
-  }, [allItems, query]);
+  }, [typeScoped, query]);
+
+  // The sheet stays mounted between openings, so dismissing resets both the
+  // query and the type override — the restriction is the default every time
+  // rather than a sticky preference.
+  const resetOnDismiss = () => {
+    setQuery('');
+    setShowAllTypes(false);
+  };
 
   const handleClose = () => {
-    setQuery('');
+    resetOnDismiss();
     onClose();
   };
 
   const handleSelect = (item: FeatItem) => {
-    setQuery('');
+    resetOnDismiss();
     onSelect({ featId: item.key, featName: item.label });
   };
 
   const handleAddCustom = () => {
     if (!query.trim()) return;
-    setQuery('');
+    resetOnDismiss();
     onSelect({ featId: `custom-${Date.now()}`, featName: query.trim() });
   };
 
@@ -202,6 +232,27 @@ export function FeatPickerSheet({ visible, title, onSelect, onClose }: FeatPicke
           />
         </View>
 
+        {/* Restriction notice + escape hatch */}
+        {!!allowedTypes?.length && (
+          <View style={[styles.restrictionRow, { borderBottomColor: colors.border.DEFAULT }]}>
+            <Text style={[styles.restrictionText, { color: colors.text.tertiary }]}>
+              {restricted
+                ? `Showing ${formatTypeList(allowedTypes)} feats only`
+                : 'Showing all feats'}
+            </Text>
+            <Pressable
+              onPress={() => setShowAllTypes((prev) => !prev)}
+              hitSlop={8}
+              accessibilityRole="button"
+              accessibilityLabel={restricted ? 'Show all feats' : 'Show only allowed feats'}
+            >
+              <Text style={[styles.restrictionAction, { color: fantasy.bronze }]}>
+                {restricted ? 'Show all' : 'Show allowed only'}
+              </Text>
+            </Pressable>
+          </View>
+        )}
+
         {/* Results */}
         <FlatList
           data={filtered}
@@ -241,6 +292,7 @@ export function FeatPickerSheet({ visible, title, onSelect, onClose }: FeatPicke
             <View style={styles.empty}>
               <Text style={[styles.emptyText, { color: colors.text.tertiary }]}>
                 {query ? `No feats matching "${query}"` : 'Start typing to search...'}
+                {restricted ? ' — tap “Show all” to search every feat.' : ''}
               </Text>
             </View>
           }
@@ -307,6 +359,26 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 10,
     minHeight: 44,
+  },
+  restrictionRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    gap: 12,
+  },
+  restrictionText: {
+    flex: 1,
+    fontFamily: 'LibreBaskerville',
+    fontSize: 12,
+    fontStyle: 'italic',
+  },
+  restrictionAction: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 12,
+    fontWeight: '700',
   },
   listContent: {
     flexGrow: 1,

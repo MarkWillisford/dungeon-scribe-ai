@@ -10,6 +10,7 @@ import type { ClassEntry } from '@/types/classes';
 import type { AppliedTemplate } from '@/types/templates';
 import type { ExpandedClassData } from '@/data/classes/types';
 import type { FavoredClassBonusEntry, FCBMechanicalEffect } from '@/types/favoredClassBonuses';
+import type { FeatType } from '@/types/feats';
 
 // ---- Class data lookup ----
 
@@ -208,15 +209,231 @@ export function computeMaxHP(
 
 // ---- Feat slots ----
 
+export type FeatSlotSource = 'racial' | 'level' | 'bonus' | 'mythic' | 'class';
+
 export interface FeatSlot {
   id: string;
-  source: 'racial' | 'level' | 'bonus' | 'mythic';
+  source: FeatSlotSource;
   availableAt: string;
   availableAtLevel: number;
   prereqOverride: boolean;
+  // ---- class-granted slots only ----
+  // Long-form origin shown in the row, e.g. "Fighter 4".
+  sourceLabel?: string;
+  // Identity of the granting class entry (ClassEntry.id, falling back to name).
+  classId?: string;
+  // Level within the granting class — not the character level.
+  classLevel?: number;
+  // Class feature that granted the slot, verbatim, e.g. "Combat Style Feat".
+  featureName?: string;
+  // Feat types this slot is normally restricted to. Undefined means the rules
+  // restriction isn't modelled, so the picker shows everything.
+  allowedFeatTypes?: FeatType[];
 }
 
-export function computeFeatSlots(classes: ClassEntry[], race: string): FeatSlot[] {
+// Display order when several slots land on the same character level.
+const SOURCE_RANK: Record<FeatSlotSource, number> = {
+  level: 0,
+  racial: 1,
+  class: 2,
+  bonus: 3,
+  mythic: 4,
+};
+
+function sortFeatSlots(slots: FeatSlot[]): FeatSlot[] {
+  return slots.sort(
+    (a, b) =>
+      a.availableAtLevel - b.availableAtLevel ||
+      SOURCE_RANK[a.source] - SOURCE_RANK[b.source] ||
+      a.id.localeCompare(b.id),
+  );
+}
+
+// ---- Class-granted bonus feat slots ----
+//
+// Classes grant extra feats through ordinary class features — Fighter's
+// "Bonus Feat", Ranger's "Combat Style Feat", Inquisitor's "Teamwork Feat".
+// They are detected by name rather than a dedicated data field, because that
+// is how the class catalog stores them.
+
+// A feat-granting feature is one whose name ends in "feat" or "feats", once any
+// trailing parenthetical is stripped: "Bonus Feat", "Bonus Feats (Zen Archer)".
+const FEAT_FEATURE_SUFFIX = /\bfeats?$/i;
+
+export interface FeatFeatureRef {
+  // Normalized feature name, singularized and lowercased: "bonus feat".
+  base: string;
+  // Levels named in a parenthetical, e.g. "Bonus Feats (4th, 8th)" → [4, 8].
+  // Null when the name carries no level list, meaning "all of them".
+  levels: number[] | null;
+}
+
+// Parses a parenthetical as an ordinal level list. Returns null when the
+// contents are descriptive rather than levels ("(Zen Archer)").
+function parseOrdinalLevels(inner: string): number[] | null {
+  const parts = inner
+    .split(',')
+    .map((p) => p.trim())
+    .filter(Boolean);
+  if (parts.length === 0) return null;
+  const levels: number[] = [];
+  for (const part of parts) {
+    const match = part.match(/^(\d+)(?:st|nd|rd|th)$/i);
+    if (!match) return null;
+    levels.push(parseInt(match[1], 10));
+  }
+  return levels;
+}
+
+function normalizeFeatureBase(base: string): string {
+  return base.toLowerCase().replace(/\bfeats$/, 'feat');
+}
+
+// Recognizes a class feature (or an archetype's replacedFeatures entry) as a
+// feat grant. Returns null for anything that isn't one.
+export function parseFeatGrantingFeatureName(name: string): FeatFeatureRef | null {
+  const trimmed = name.trim();
+  const parenthetical = trimmed.match(/^(.*?)\s*\(([^)]*)\)$/);
+  const base = (parenthetical ? parenthetical[1] : trimmed).trim();
+  if (!FEAT_FEATURE_SUFFIX.test(base)) return null;
+  return {
+    base: normalizeFeatureBase(base),
+    levels: parenthetical ? parseOrdinalLevels(parenthetical[2]) : null,
+  };
+}
+
+// Feature names that state their own restriction.
+const FEATURE_KEYWORD_TYPES: { keyword: string; types: FeatType[] }[] = [
+  { keyword: 'combat', types: ['combat'] },
+  { keyword: 'teamwork', types: ['teamwork'] },
+  { keyword: 'metamagic', types: ['metamagic'] },
+  { keyword: 'style', types: ['style'] },
+];
+
+// A plain "Bonus Feat" means something different per class. Only classes whose
+// restriction is unambiguous in the rules are listed here; anything absent is
+// left unrestricted rather than guessed at. Every slot can be opened to the
+// full feat list in the picker regardless.
+const CLASS_BONUS_FEAT_TYPES: Record<string, FeatType[]> = {
+  brawler: ['combat'],
+  cavalier: ['combat'],
+  fighter: ['combat'],
+  gunslinger: ['combat'],
+  magus: ['combat', 'item_creation', 'metamagic'],
+  monk: ['combat'],
+  'monk (unchained)': ['combat'],
+  samurai: ['combat'],
+  swashbuckler: ['combat'],
+  warpriest: ['combat'],
+  wizard: ['item_creation', 'metamagic'],
+};
+
+function allowedFeatTypesFor(className: string, featureBase: string): FeatType[] | undefined {
+  for (const { keyword, types } of FEATURE_KEYWORD_TYPES) {
+    if (featureBase.includes(keyword)) return types;
+  }
+  return CLASS_BONUS_FEAT_TYPES[className.toLowerCase()];
+}
+
+// Slot ids are `class:{classId}:{featureSlug}:{classLevel}`. The class entry id
+// is generated (base36) and the slug is alphanumeric, so ':' never collides.
+export function makeClassFeatSlotId(
+  classId: string,
+  featureBase: string,
+  classLevel: number,
+): string {
+  const slug = featureBase.replace(/[^a-z0-9]+/gi, '-').toLowerCase();
+  return `class:${classId}:${slug}:${classLevel}`;
+}
+
+export function parseClassFeatSlotId(
+  slotId: string,
+): { classId: string; classLevel: number } | null {
+  if (!slotId.startsWith('class:')) return null;
+  const parts = slotId.split(':');
+  if (parts.length !== 4) return null;
+  const classLevel = parseInt(parts[3], 10);
+  if (!Number.isFinite(classLevel)) return null;
+  return { classId: parts[1], classLevel };
+}
+
+// Maps a class level back to the character level it was taken at, using the
+// per-character-level class order. Returns null when the order isn't recorded.
+export function characterLevelForClassLevel(
+  classId: string,
+  classLevel: number,
+  levelOrder: string[] | undefined,
+): number | null {
+  if (!levelOrder?.length) return null;
+  let seen = 0;
+  for (let i = 0; i < levelOrder.length; i++) {
+    if (levelOrder[i] !== classId) continue;
+    seen += 1;
+    if (seen === classLevel) return i + 1;
+  }
+  return null;
+}
+
+export interface ClassFeatSlotOptions {
+  classDataMap: ClassDataMap;
+  // levelOrder[i] is the class entry id taken at character level i + 1.
+  levelOrder?: string[];
+  // Feature names each class entry's archetypes trade away, keyed by entry id.
+  replacedFeaturesByClassId?: Map<string, string[]>;
+}
+
+export function computeClassBonusFeatSlots(
+  classes: ClassEntry[],
+  options: ClassFeatSlotOptions,
+): FeatSlot[] {
+  const slots: FeatSlot[] = [];
+
+  for (const entry of classes) {
+    const classId = entry.id ?? entry.name;
+    const classData = lookupClassData(entry.name, options.classDataMap);
+    if (!classData) continue;
+
+    const removed = (options.replacedFeaturesByClassId?.get(classId) ?? [])
+      .map(parseFeatGrantingFeatureName)
+      .filter((ref): ref is FeatFeatureRef => ref !== null);
+
+    for (const feature of classData.classFeatures) {
+      if (feature.level > entry.level) continue;
+      const ref = parseFeatGrantingFeatureName(feature.name);
+      if (!ref) continue;
+
+      const tradedAway = removed.some(
+        (r) => r.base === ref.base && (r.levels === null || r.levels.includes(feature.level)),
+      );
+      if (tradedAway) continue;
+
+      const characterLevel =
+        characterLevelForClassLevel(classId, feature.level, options.levelOrder) ?? feature.level;
+      const label = `${entry.name} ${feature.level}`;
+
+      slots.push({
+        id: makeClassFeatSlotId(classId, ref.base, feature.level),
+        source: 'class',
+        availableAt: label,
+        availableAtLevel: characterLevel,
+        prereqOverride: false,
+        sourceLabel: label,
+        classId,
+        classLevel: feature.level,
+        featureName: feature.name,
+        allowedFeatTypes: allowedFeatTypesFor(entry.name, ref.base),
+      });
+    }
+  }
+
+  return slots;
+}
+
+export function computeFeatSlots(
+  classes: ClassEntry[],
+  race: string,
+  options?: ClassFeatSlotOptions,
+): FeatSlot[] {
   const totalHD = classes.reduce((sum, c) => sum + c.level, 0);
   const slots: FeatSlot[] = [];
 
@@ -240,7 +457,13 @@ export function computeFeatSlots(classes: ClassEntry[], race: string): FeatSlot[
     });
   }
 
-  return slots.sort((a, b) => a.availableAtLevel - b.availableAtLevel || a.id.localeCompare(b.id));
+  // Class data is only available to callers wired to the gameData slice, so
+  // class-granted slots are opt-in. Without it the other slots still compute.
+  if (options) {
+    slots.push(...computeClassBonusFeatSlots(classes, options));
+  }
+
+  return sortFeatSlots(slots);
 }
 
 // ---- ECL ----
