@@ -38,6 +38,11 @@ jest.mock('@/hooks/useTheme', () => ({
 
 jest.mock('@/utils/characterComputations', () => ({
   computeFeatSlots: jest.fn(() => []),
+  // Pure helpers — exercised for real in the characterComputations suite, so
+  // keep the genuine behaviour here rather than stubbing it out.
+  selectedArchetypeNames: (cls: { archetype?: string[]; archetypeName?: string }) =>
+    cls.archetypeName ? [...(cls.archetype ?? []), cls.archetypeName] : (cls.archetype ?? []),
+  buildReplacedFeaturesByClassId: () => new Map(),
 }));
 
 const featPickerProps: Record<string, unknown>[] = [];

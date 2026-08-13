@@ -12,7 +12,12 @@ import {
 } from '@/store/slices/characterEntrySlice';
 import { FeatPickerSheet } from './FeatPickerSheet';
 import { SearchPickerSheet, type SearchItem } from '@/components/ui/SearchPickerSheet';
-import { computeFeatSlots, type FeatSlotSource } from '@/utils/characterComputations';
+import {
+  buildReplacedFeaturesByClassId,
+  computeFeatSlots,
+  selectedArchetypeNames,
+  type FeatSlotSource,
+} from '@/utils/characterComputations';
 import { FeatRegistryService } from '@/services/FeatRegistryService';
 import { GameDataService } from '@/services/GameDataService';
 import { computePoolEsl } from '@/utils/spellcastingUtils';
@@ -441,7 +446,9 @@ export function FeatSlotList() {
   // names with archetypes changes, not on every unrelated class edit.
   const archetypeClassNames = useMemo(
     () =>
-      Array.from(new Set(classes.filter((c) => c.archetype?.length).map((c) => c.name)))
+      Array.from(
+        new Set(classes.filter((c) => selectedArchetypeNames(c).length > 0).map((c) => c.name)),
+      )
         .sort()
         .join('|'),
     [classes],
@@ -466,18 +473,10 @@ export function FeatSlotList() {
     };
   }, [archetypeClassNames]);
 
-  const replacedFeaturesByClassId = useMemo(() => {
-    const map = new Map<string, string[]>();
-    for (const cls of classes) {
-      if (!cls.archetype?.length) continue;
-      const selected = cls.archetype.map((n) => n.toLowerCase());
-      const replaced = (archetypesByClassName.get(cls.name) ?? [])
-        .filter((a) => selected.includes(a.name.toLowerCase()))
-        .flatMap((a) => a.replacedFeatures ?? []);
-      if (replaced.length > 0) map.set(cls.id ?? cls.name, replaced);
-    }
-    return map;
-  }, [classes, archetypesByClassName]);
+  const replacedFeaturesByClassId = useMemo(
+    () => buildReplacedFeaturesByClassId(classes, archetypesByClassName),
+    [classes, archetypesByClassName],
+  );
 
   // Build the display slot list by merging computed slots with assigned feats
   const featSlots = useMemo<FeatSlotDisplay[]>(() => {

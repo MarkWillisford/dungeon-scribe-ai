@@ -8,7 +8,7 @@
 import { BABProgression, SaveProgression } from '@/types/base';
 import type { ClassEntry } from '@/types/classes';
 import type { AppliedTemplate } from '@/types/templates';
-import type { ExpandedClassData } from '@/data/classes/types';
+import type { ArchetypeData, ExpandedClassData } from '@/data/classes/types';
 import type { FavoredClassBonusEntry, FCBMechanicalEffect } from '@/types/favoredClassBonuses';
 import type { FeatType } from '@/types/feats';
 
@@ -372,6 +372,35 @@ export function characterLevelForClassLevel(
     if (seen === classLevel) return i + 1;
   }
   return null;
+}
+
+// `archetypeName` is what the character editor writes. The legacy `archetype`
+// array only appears on older persisted characters — reading both keeps this
+// correct today and when a class can carry several archetypes (issue #249).
+export function selectedArchetypeNames(
+  cls: Pick<ClassEntry, 'archetype' | 'archetypeName'>,
+): string[] {
+  const names = cls.archetype ?? [];
+  return cls.archetypeName ? [...names, cls.archetypeName] : names;
+}
+
+// Collapses each class entry's selected archetypes down to the class feature
+// names they trade away, keyed by class entry id. Only entries with something
+// to remove appear in the map.
+export function buildReplacedFeaturesByClassId(
+  classes: ClassEntry[],
+  archetypesByClassName: Map<string, Pick<ArchetypeData, 'name' | 'replacedFeatures'>[]>,
+): Map<string, string[]> {
+  const map = new Map<string, string[]>();
+  for (const cls of classes) {
+    const selected = selectedArchetypeNames(cls).map((n) => n.toLowerCase());
+    if (selected.length === 0) continue;
+    const replaced = (archetypesByClassName.get(cls.name) ?? [])
+      .filter((a) => selected.includes(a.name.toLowerCase()))
+      .flatMap((a) => a.replacedFeatures ?? []);
+    if (replaced.length > 0) map.set(cls.id ?? cls.name, replaced);
+  }
+  return map;
 }
 
 export interface ClassFeatSlotOptions {

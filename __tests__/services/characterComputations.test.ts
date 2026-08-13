@@ -14,6 +14,8 @@ import {
   computeMaxHP,
   computeFeatSlots,
   computeClassBonusFeatSlots,
+  selectedArchetypeNames,
+  buildReplacedFeaturesByClassId,
   parseFeatGrantingFeatureName,
   makeClassFeatSlotId,
   parseClassFeatSlotId,
@@ -339,6 +341,81 @@ describe('computeClassBonusFeatSlots', () => {
       });
       expect(slots.map((s) => s.classLevel)).toEqual([1, 2, 4]);
     });
+  });
+});
+
+// ---- archetype selection ----
+//
+// The character editor writes `archetypeName`; the legacy `archetype` array
+// only appears on older persisted characters. Reading only the array silently
+// disabled archetype-aware slot removal, so both are covered here.
+
+describe('selectedArchetypeNames', () => {
+  it('reads the name the editor writes', () => {
+    expect(selectedArchetypeNames({ archetypeName: 'Myrmidon' })).toEqual(['Myrmidon']);
+  });
+
+  it('reads the legacy array', () => {
+    expect(selectedArchetypeNames({ archetype: ['Zen Archer'] })).toEqual(['Zen Archer']);
+  });
+
+  it('combines both when both are present', () => {
+    expect(selectedArchetypeNames({ archetype: ['Zen Archer'], archetypeName: 'Sohei' })).toEqual([
+      'Zen Archer',
+      'Sohei',
+    ]);
+  });
+
+  it('returns nothing when no archetype is selected', () => {
+    expect(selectedArchetypeNames({})).toEqual([]);
+  });
+});
+
+describe('buildReplacedFeaturesByClassId', () => {
+  const archetypes = new Map([
+    [
+      'Fighter',
+      [
+        { name: 'Myrmidon', replacedFeatures: ['Bonus Feats (2nd)', 'Bravery'] },
+        { name: 'Unbreakable', replacedFeatures: ['Bonus Feats (1st)'] },
+      ],
+    ],
+  ]);
+
+  it('collects the features the selected archetype trades away', () => {
+    const classes = [cls('Fighter', 4)];
+    classes[0].archetypeName = 'Myrmidon';
+    expect(buildReplacedFeaturesByClassId(classes, archetypes).get('class-fighter')).toEqual([
+      'Bonus Feats (2nd)',
+      'Bravery',
+    ]);
+  });
+
+  it('ignores archetypes the class has not selected', () => {
+    const classes = [cls('Fighter', 4)];
+    classes[0].archetypeName = 'Myrmidon';
+    const replaced = buildReplacedFeaturesByClassId(classes, archetypes).get('class-fighter');
+    expect(replaced).not.toContain('Bonus Feats (1st)');
+  });
+
+  it('omits classes with no archetype selected', () => {
+    expect(buildReplacedFeaturesByClassId([cls('Fighter', 4)], archetypes).size).toBe(0);
+  });
+
+  it('omits classes whose archetype data has not loaded yet', () => {
+    const classes = [cls('Fighter', 4)];
+    classes[0].archetypeName = 'Myrmidon';
+    expect(buildReplacedFeaturesByClassId(classes, new Map()).size).toBe(0);
+  });
+
+  it('feeds through to slot computation so the traded grant disappears', () => {
+    const classes = [cls('Fighter', 4)];
+    classes[0].archetypeName = 'Myrmidon';
+    const slots = computeClassBonusFeatSlots(classes, {
+      classDataMap: TEST_CLASS_MAP,
+      replacedFeaturesByClassId: buildReplacedFeaturesByClassId(classes, archetypes),
+    });
+    expect(slots.map((s) => s.classLevel)).toEqual([1, 4]);
   });
 });
 
