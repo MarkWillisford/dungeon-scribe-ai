@@ -209,7 +209,15 @@ function findAllNodes(node: RenderedNode, predicate: (n: RenderedNode) => boolea
   return results;
 }
 
-function getAllText(node: RenderedNode): string[] {
+export function findTextNode(node: RenderedNode, text: string): RenderedNode | null {
+  const results = findAllNodes(
+    node,
+    (n) => n.type === 'Text' && n.children.some((c) => c === text),
+  );
+  return results.length > 0 ? results[0] : null;
+}
+
+export function getAllText(node: RenderedNode): string[] {
   const texts: string[] = [];
   for (const child of node.children) {
     if (typeof child === 'string') {

@@ -12,6 +12,7 @@
 import type { FeatDefinition } from '@/types/feats';
 import type { TraitDefinition } from '@/types/traits';
 import type { ClassChoiceDefinition } from '@/types/classChoices';
+import type { RacialChoiceDefinition } from '@/types/racialChoices';
 import type { ExpandedClassData, SpellProgressionTable } from '@/data/classes/types';
 import type { ClassData } from '@/data/classes';
 import type { ClassOptionBase, BloodlineClassId } from '@/types/classOptions';
@@ -21,7 +22,7 @@ import type {
   ShieldDefinition,
   GearDefinition,
 } from '@/types/equipment';
-import type { MagicItemDefinition, ItemSlot } from '@/types/magicItems';
+import type { MagicItemDefinition, MagicWeaponDefinition, ItemSlot } from '@/types/magicItems';
 import type {
   DisciplineDefinition,
   ManeuverDefinition,
@@ -64,7 +65,8 @@ export type ClassChoiceCollection =
   | 'wildtalents'
   | 'occultistfocuspowers'
   | 'phrenicamplifications'
-  | 'spells';
+  | 'spells'
+  | 'deities';
 
 /**
  * Filter options for getClassChoiceOptions.
@@ -137,6 +139,7 @@ export interface GameDataConnector {
   getCoreClasses(context?: QueryContext): Promise<ClassData[]>;
   getClassByName(name: string, context?: QueryContext): Promise<ExpandedClassData | null>;
   getClassChoiceDefinitions(classId: string): Promise<ClassChoiceDefinition[]>;
+  getRacialChoiceDefinitions(raceName: string): Promise<RacialChoiceDefinition[]>;
   getSpellTables(): Promise<SpellTables>;
 
   // ---- Races ----
@@ -148,6 +151,7 @@ export interface GameDataConnector {
   getShields(context?: QueryContext): Promise<ShieldDefinition[]>;
   getGear(context?: QueryContext): Promise<GearDefinition[]>;
   getMagicItemsBySlot(slot: ItemSlot): Promise<MagicItemDefinition[]>;
+  getMagicWeaponTemplates(): Promise<MagicWeaponDefinition[]>;
   searchMagicItems(query: string): Promise<MagicItemDefinition[]>;
   searchFeats(query: string): Promise<FeatDefinition[]>;
 

@@ -295,4 +295,114 @@ describe('CombatAbilityToggles', () => {
       expect(getByText('Rage')).toBeTruthy();
     });
   });
+
+  describe('template feature scanning', () => {
+    const FEATURE_ID = 'celestial-blessed-creature__choice__celestial-type';
+
+    function makeCharacterWithTemplateFeature(
+      features: Array<{ id: string; name: string; description: string; activationMode: string }>,
+    ): Character {
+      return {
+        feats: { feats: [], totalFeats: 0, bonusFeats: 0 },
+        classes: { classes: [] },
+        appliedTemplates: [
+          {
+            id: 'tpl-1',
+            templateId: 'celestial-blessed-creature',
+            name: 'Celestial-Blessed Creature',
+            appliedAs: 'cr',
+            cr: 1,
+            acquisitionType: 'acquired',
+            paidTiers: [],
+            sourceId: 'templates',
+            sourceRev: 1,
+            features: features.map((f) => ({ ...f, scalingType: 'flat' as const })),
+          },
+        ],
+      } as unknown as Character;
+    }
+
+    it('shows a template toggle feature in the combat panel', () => {
+      const character = makeCharacterWithTemplateFeature([
+        {
+          id: FEATURE_ID,
+          name: 'Wind Wall at will',
+          description: 'Wind Wall SLA',
+          activationMode: 'toggle',
+        },
+      ]);
+      const { getByText } = render(<CombatAbilityToggles {...makeProps({ character })} />);
+      expect(getByText('Wind Wall at will')).toBeTruthy();
+    });
+
+    it('does not show a template feature with activationMode action', () => {
+      const character = makeCharacterWithTemplateFeature([
+        {
+          id: FEATURE_ID,
+          name: 'Stunning Strike 5/day',
+          description: 'Stun on hit',
+          activationMode: 'action',
+        },
+      ]);
+      const { queryByText } = render(<CombatAbilityToggles {...makeProps({ character })} />);
+      expect(queryByText('Stunning Strike 5/day')).toBeNull();
+    });
+
+    it('switching template option removes old feature and surfaces new one', () => {
+      const beforeCharacter = makeCharacterWithTemplateFeature([
+        {
+          id: FEATURE_ID,
+          name: 'Wind Wall at will',
+          description: 'Wind Wall SLA',
+          activationMode: 'toggle',
+        },
+      ]);
+      const afterCharacter = makeCharacterWithTemplateFeature([
+        {
+          id: FEATURE_ID,
+          name: 'Faerie Fire at will',
+          description: 'Faerie Fire SLA',
+          activationMode: 'toggle',
+        },
+      ]);
+
+      const { getByText: getByText1, queryByText: queryByText1 } = render(
+        <CombatAbilityToggles {...makeProps({ character: beforeCharacter })} />,
+      );
+      expect(getByText1('Wind Wall at will')).toBeTruthy();
+      expect(queryByText1('Faerie Fire at will')).toBeNull();
+
+      const { getByText: getByText2, queryByText: queryByText2 } = render(
+        <CombatAbilityToggles {...makeProps({ character: afterCharacter })} />,
+      );
+      expect(queryByText2('Wind Wall at will')).toBeNull();
+      expect(getByText2('Faerie Fire at will')).toBeTruthy();
+    });
+
+    it('removing the template drops its injected feature with no orphan toggles', () => {
+      const withTemplate = makeCharacterWithTemplateFeature([
+        {
+          id: FEATURE_ID,
+          name: 'Wind Wall at will',
+          description: 'Wind Wall SLA',
+          activationMode: 'toggle',
+        },
+      ]);
+      const withoutTemplate: Character = {
+        feats: { feats: [], totalFeats: 0, bonusFeats: 0 },
+        classes: { classes: [] },
+        appliedTemplates: [],
+      } as unknown as Character;
+
+      const { getByText } = render(
+        <CombatAbilityToggles {...makeProps({ character: withTemplate })} />,
+      );
+      expect(getByText('Wind Wall at will')).toBeTruthy();
+
+      const { queryByText } = render(
+        <CombatAbilityToggles {...makeProps({ character: withoutTemplate })} />,
+      );
+      expect(queryByText('Wind Wall at will')).toBeNull();
+    });
+  });
 });

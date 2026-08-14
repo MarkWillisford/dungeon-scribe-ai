@@ -1,10 +1,12 @@
 import { ModifierPipelineService } from '@services/ModifierPipelineService';
 import { FeatRegistryService } from '@services/FeatRegistryService';
+import { FlawRegistryService } from '@services/FlawRegistryService';
 import { CharacterService } from '@services/CharacterService';
 import { Size, Alignment, BonusType } from '@/types/base';
 import { AbilityScoreMethod } from '@/types/character';
 import type { Character } from '@/types';
 import type { FeatDefinition } from '@/types/feats';
+import type { FlawDefinition } from '@/types/flaws';
 import type { Race } from '@/types/race';
 
 const mockRace: Race = {
@@ -157,6 +159,7 @@ describe('ModifierPipelineService', () => {
 
   afterEach(() => {
     FeatRegistryService.clear();
+    FlawRegistryService.clear();
   });
 
   describe('recalculate', () => {
@@ -656,6 +659,161 @@ describe('ModifierPipelineService', () => {
     });
   });
 
+  describe('collectEquipmentEffects — item-granted feats', () => {
+    test('passive granted feat effects appear in computed stats', () => {
+      const char = createTestCharacter();
+      char.editorEquipment = [
+        {
+          id: 'item-feat-1',
+          collection: 'magicItems',
+          name: 'Ring of Reflexes',
+          slot: 'ring_left',
+          grantedFeats: [{ featId: 'lightning_reflexes', choices: {}, active: true }],
+        },
+      ];
+      const baseline = ModifierPipelineService.recalculate(createTestCharacter());
+      const result = ModifierPipelineService.recalculate(char);
+      expect(result.combatStats.savingThrows.reflex.total).toBe(
+        baseline.combatStats.savingThrows.reflex.total + 2,
+      );
+    });
+
+    test('toggle granted feat does not apply effects when active is false', () => {
+      const char = createTestCharacter();
+      char.editorEquipment = [
+        {
+          id: 'item-feat-2',
+          collection: 'magicItems',
+          name: 'Belt of Power Attack',
+          slot: 'belt',
+          grantedFeats: [{ featId: 'power_attack', choices: {}, active: false }],
+        },
+      ];
+      const baseline = ModifierPipelineService.recalculate(createTestCharacter());
+      const result = ModifierPipelineService.recalculate(char);
+      expect(result.combatStats.attackBonuses.meleeTotal).toBe(
+        baseline.combatStats.attackBonuses.meleeTotal,
+      );
+    });
+
+    test('toggle granted feat applies effects when active is true', () => {
+      const char = createTestCharacter();
+      char.editorEquipment = [
+        {
+          id: 'item-feat-3',
+          collection: 'magicItems',
+          name: 'Belt of Power Attack',
+          slot: 'belt',
+          grantedFeats: [{ featId: 'power_attack', choices: {}, active: true }],
+        },
+      ];
+      const baseline = ModifierPipelineService.recalculate(createTestCharacter());
+      const result = ModifierPipelineService.recalculate(char);
+      // Power Attack at BAB 1: -(floor(1/4)+1) = -1 attack penalty
+      expect(result.combatStats.attackBonuses.meleeTotal).toBeLessThan(
+        baseline.combatStats.attackBonuses.meleeTotal,
+      );
+    });
+
+    test('granted feat source is set to item.name in ability score breakdowns', () => {
+      const abilityFeat: FeatDefinition = {
+        id: 'str_bonus_test',
+        name: 'Strength Bonus',
+        description: '+2 STR (test)',
+        source: 'Test',
+        verificationStatus: 'needs_review' as const,
+        types: ['general'],
+        prerequisites: [],
+        effects: [
+          {
+            type: 'bonus',
+            target: 'ability.str',
+            value: 2,
+            bonusType: BonusType.MORALE,
+            source: 'Strength Bonus',
+          },
+        ],
+        activationMode: 'passive',
+      };
+      FeatRegistryService.register(abilityFeat);
+
+      const itemName = 'Belt of Strength Bonus';
+      const char = createTestCharacter();
+      char.editorEquipment = [
+        {
+          id: 'item-feat-source',
+          collection: 'magicItems',
+          name: itemName,
+          slot: 'belt',
+          grantedFeats: [{ featId: 'str_bonus_test', choices: {}, active: true }],
+        },
+      ];
+      const result = ModifierPipelineService.recalculate(char);
+      const moraleBonuses = result.abilityScores.str.bonuses.morale ?? [];
+      expect(moraleBonuses.length).toBeGreaterThan(0);
+      expect(moraleBonuses[0].source).toBe(itemName);
+    });
+
+    test('unequipped item (no slot, not orbiting) granted feats do not apply', () => {
+      const char = createTestCharacter();
+      char.editorEquipment = [
+        {
+          id: 'item-feat-5',
+          collection: 'magicItems',
+          name: 'Ring (carried)',
+          grantedFeats: [{ featId: 'lightning_reflexes', choices: {}, active: true }],
+        },
+      ];
+      const baseline = ModifierPipelineService.recalculate(createTestCharacter());
+      const result = ModifierPipelineService.recalculate(char);
+      expect(result.combatStats.savingThrows.reflex.total).toBe(
+        baseline.combatStats.savingThrows.reflex.total,
+      );
+    });
+
+    test('choice placeholder in target is substituted from grant.choices', () => {
+      const choiceFeat: FeatDefinition = {
+        id: 'weapon_focus_test',
+        name: 'Weapon Focus',
+        description: '+1 attack',
+        source: 'CRB',
+        verificationStatus: 'needs_review' as const,
+        types: ['combat'],
+        prerequisites: [],
+        effects: [
+          {
+            type: 'bonus',
+            target: 'attack.melee',
+            value: 1,
+            bonusType: BonusType.UNTYPED,
+            source: 'Weapon Focus ({weapon})',
+          },
+        ],
+        activationMode: 'passive',
+        choices: [{ type: 'weapon', label: 'Weapon', affectsEffects: true }],
+      };
+      FeatRegistryService.register(choiceFeat);
+
+      const char = createTestCharacter();
+      char.editorEquipment = [
+        {
+          id: 'item-feat-6',
+          collection: 'magicItems',
+          name: 'Longsword of Focus',
+          slot: 'main_hand',
+          grantedFeats: [
+            { featId: 'weapon_focus_test', choices: { weapon: 'longsword' }, active: true },
+          ],
+        },
+      ];
+      const baseline = ModifierPipelineService.recalculate(createTestCharacter());
+      const result = ModifierPipelineService.recalculate(char);
+      expect(result.combatStats.attackBonuses.meleeTotal).toBe(
+        baseline.combatStats.attackBonuses.meleeTotal + 1,
+      );
+    });
+  });
+
   describe('resource pools', () => {
     test('recalculate computes resource pools from class features', () => {
       const char = createTestCharacter();
@@ -703,6 +861,124 @@ describe('ModifierPipelineService', () => {
       expect(result.combatStats.attackBonuses.meleeTotal).toBe(
         baseline.combatStats.attackBonuses.meleeTotal + 1,
       );
+    });
+  });
+
+  describe('flaw effects', () => {
+    const meleeFlawDef: FlawDefinition = {
+      id: 'melee_penalty_flaw',
+      name: 'Melee Penalty Flaw',
+      description: '-2 penalty to melee attacks',
+      source: 'test',
+      effects: [
+        {
+          type: 'bonus',
+          target: 'attack.melee',
+          value: -2,
+          bonusType: BonusType.UNTYPED,
+          source: 'Melee Penalty Flaw',
+        },
+      ],
+    };
+
+    test('equipped flaw effects are applied to stats', () => {
+      FlawRegistryService.register(meleeFlawDef);
+      const char = createTestCharacter();
+      char.flaws.flaws.push({ flawId: 'melee_penalty_flaw', name: 'Melee Penalty Flaw' });
+      const baseline = ModifierPipelineService.recalculate(createTestCharacter());
+      const result = ModifierPipelineService.recalculate(char);
+      expect(result.combatStats.attackBonuses.meleeTotal).toBe(
+        baseline.combatStats.attackBonuses.meleeTotal - 2,
+      );
+    });
+
+    test('flaw with no registry entry is silently skipped', () => {
+      const char = createTestCharacter();
+      char.flaws.flaws.push({ flawId: 'unknown_flaw', name: 'Unknown Flaw' });
+      const baseline = ModifierPipelineService.recalculate(createTestCharacter());
+      const result = ModifierPipelineService.recalculate(char);
+      expect(result.combatStats.attackBonuses.meleeTotal).toBe(
+        baseline.combatStats.attackBonuses.meleeTotal,
+      );
+    });
+  });
+
+  describe('getBreakdown — typed bonus stacking', () => {
+    test('applies best-of stacking for typed (non-DODGE, non-UNTYPED) bonuses', () => {
+      // Register a feat with a MORALE bonus so the reduce path in getBreakdown is exercised
+      const moraleWillFeat: FeatDefinition = {
+        id: 'indomitable_will',
+        name: 'Indomitable Will',
+        description: '+2 morale to Will',
+        source: 'CRB',
+        verificationStatus: 'needs_review' as const,
+        types: ['general'],
+        prerequisites: [],
+        effects: [
+          {
+            type: 'bonus',
+            target: 'save.will',
+            value: 2,
+            bonusType: BonusType.MORALE,
+            source: 'Indomitable Will',
+          },
+        ],
+        activationMode: 'passive',
+      };
+      FeatRegistryService.registerBatch([...testFeats, moraleWillFeat]);
+
+      const char = createTestCharacter();
+      char.feats.feats.push({
+        featId: 'indomitable_will',
+        name: 'Indomitable Will',
+        source: 'level_1',
+        grantedAtLevel: 1,
+        active: true,
+        choices: {},
+      });
+
+      // Add a lower MORALE bonus; stacking rules should keep only the higher (+2)
+      char.buffs.push({
+        id: 'heroism',
+        name: 'Heroism',
+        source: 'Wizard',
+        bonusType: BonusType.MORALE,
+        duration: 10,
+        durationType: 'rounds',
+        isActive: true,
+        effects: [
+          {
+            type: 'bonus',
+            bonusType: BonusType.MORALE,
+            target: 'save.will',
+            value: 1,
+            source: 'Heroism',
+          },
+        ],
+      });
+
+      const breakdown = ModifierPipelineService.getBreakdown(char, 'save.will');
+      expect(breakdown.bonuses.some((b) => b.source === 'Indomitable Will')).toBe(true);
+      expect(breakdown.bonuses.find((b) => b.source === 'Indomitable Will')?.stacked).toBe(true);
+      expect(breakdown.bonuses.find((b) => b.source === 'Heroism')?.stacked).toBe(false);
+    });
+  });
+
+  describe('recalculate — favored class HP bonus', () => {
+    test('includes HP favored class bonus in hitPoints.favoredClass', () => {
+      const char = createTestCharacter();
+      char.classes.favoredClassBonuses = [{ className: 'Fighter', bonusType: 'HP', value: 3 }];
+      const result = ModifierPipelineService.recalculate(char);
+      expect(result.combatStats.hitPoints.favoredClass).toBe(3);
+    });
+
+    test('ignores non-HP favored class bonuses', () => {
+      const char = createTestCharacter();
+      char.classes.favoredClassBonuses = [
+        { className: 'Fighter', bonusType: 'skill_rank', value: 1 },
+      ];
+      const result = ModifierPipelineService.recalculate(char);
+      expect(result.combatStats.hitPoints.favoredClass).toBe(0);
     });
   });
 });

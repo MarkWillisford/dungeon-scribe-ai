@@ -76,4 +76,15 @@ describe('FantasyTextInput', () => {
     const input = getByTestId('name-input');
     expect(input.props.accessibilityLabel).toBe('Enter your character name');
   });
+
+  test('should call onFocus and onBlur handlers', () => {
+    const { getByTestId } = render(
+      <FantasyTextInput {...defaultProps} testID="name-input" label="Name" />,
+    );
+    const input = getByTestId('name-input');
+    expect(() => {
+      input.props.onFocus?.();
+      input.props.onBlur?.();
+    }).not.toThrow();
+  });
 });

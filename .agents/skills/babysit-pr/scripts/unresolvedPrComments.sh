@@ -43,7 +43,7 @@ validate_prerequisites() {
   if ! perl -MDigest::SHA -e1 >/dev/null 2>&1; then
     output_error "Perl Digest::SHA module not found (should be in core Perl since 5.9.3)."
   fi
-  if ! gh api user --jq '.login' >/dev/null 2>&1; then
+  if ! gh api graphql -f query='query{viewer{login}}' --jq '.data.viewer.login' >/dev/null 2>&1; then
     output_error "Not authenticated with GitHub. Run: gh auth login"
   fi
 }

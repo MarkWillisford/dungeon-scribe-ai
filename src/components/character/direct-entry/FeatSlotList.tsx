@@ -480,11 +480,16 @@ export function FeatSlotList() {
 
   // Build the display slot list by merging computed slots with assigned feats
   const featSlots = useMemo<FeatSlotDisplay[]>(() => {
-    const computed = computeFeatSlots(classes, character.info.race.name, {
-      classDataMap,
-      levelOrder,
-      replacedFeaturesByClassId,
-    });
+    const computed = computeFeatSlots(
+      classes,
+      character.info.race.name,
+      character.flaws?.flaws ?? [],
+      {
+        classDataMap,
+        levelOrder,
+        replacedFeaturesByClassId,
+      },
+    );
 
     // Build a map of slotId → assigned feat
     const assignedMap = new Map<
@@ -572,6 +577,7 @@ export function FeatSlotList() {
     levelOrder,
     replacedFeaturesByClassId,
     character.feats.feats,
+    character.flaws?.flaws,
     character.info.race.name,
   ]);
 

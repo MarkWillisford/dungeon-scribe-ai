@@ -2,7 +2,7 @@
 // Sources: https://www.d20pfsrd.com/races/other-races/more-races/
 
 import { Size } from '@/types/base';
-import { ExpandedRaceData } from './types';
+import { ExpandedRaceData, SLAComponent, TraitDowngradeEntry } from './types';
 
 // ============================================================
 // Standard RP (1-10) — races not in Core/Featured/Uncommon
@@ -769,6 +769,93 @@ export const MONSTROUS_AND_POWERFUL_RACES: ExpandedRaceData[] = [
     languages: ['Common', 'Terran'],
     bonusLanguages: ['Auran', 'Dwarven', 'Elven', 'Giant'],
     source: 'Advanced Race Guide',
+  },
+  {
+    name: 'Elven Noble',
+    category: 'Uncommon',
+    powerTier: 'Very Powerful (31+ RP)',
+    racePoints: 43,
+    size: Size.Medium,
+    speed: 30,
+    type: 'Humanoid',
+    subtypes: ['Elf', 'Aasimar'],
+    abilityModifiers: {},
+    flexibleAbilityBonuses: [
+      { group: 'any', count: 'all', modifier: 2 },
+      { group: 'other', count: 1, modifier: 4 },
+      { group: 'other', count: 1, modifier: -2 },
+    ],
+    senses: ['Low-light vision', 'Darkvision 60 ft.'],
+    racialTraits: [
+      {
+        name: 'Ability Score Racial Traits',
+        description:
+          'Elven Nobles are the pinnacle of their race. Choose either mental (Intelligence, Wisdom, Charisma) or physical (Strength, Dexterity, Constitution) ability scores. The character gains a +2 bonus to all three scores of the chosen group, a +4 bonus to one score of the other group, and a -2 penalty to one other score of that group.',
+      },
+      {
+        name: 'Elven Immunities',
+        description:
+          'Elven Nobles are immune to magic sleep effects and gain a +2 racial bonus on saving throws against enchantment spells and effects.',
+      },
+      {
+        name: 'Bonus Feat',
+        description: 'Elven Nobles select one bonus feat at 1st level.',
+      },
+      {
+        name: 'Keen Senses',
+        description: 'Elven Nobles receive a +2 racial bonus on Perception checks.',
+      },
+      {
+        name: 'Agile Fighters',
+        description:
+          'Elven Nobles receive Dodge, Weapon Focus, or Combat Casting as a bonus feat at 1st level. Once chosen, this feat cannot be changed.',
+      },
+      {
+        name: 'Insightful Leaders',
+        description:
+          "Elven Nobles gain the planetar's visions or ethical leader trait as a bonus trait at 1st level. Once chosen, this trait cannot be changed.",
+      },
+      {
+        name: 'Elevated Elven Magic',
+        description:
+          'Elven Nobles gain a +4 racial bonus on caster level checks made to overcome spell resistance. They also receive a +4 racial bonus on Spellcraft checks made to identify the properties of magic items.',
+      },
+      {
+        name: 'Spell-Like Abilities',
+        description:
+          'Elven Nobles can cast eagle eye (2nd level), daylight (3rd level), and feather step (1st level) each at will, and have detect magic as a constant spell-like ability. At 1st level they select one 1/day ability: arcane sight, deadly juggernaut, or ranged deadly juggernaut. Caster level equals effective character level.',
+      },
+      {
+        name: 'Weapon Familiarity',
+        description:
+          'Elven Nobles are proficient with the longsword, rapier, longbow (including composite longbow), and shortbow (including composite shortbow). They treat any weapon with "elven" in its name as a martial weapon.',
+      },
+      {
+        name: 'Alternate Racial Traits',
+        description:
+          'Elven Nobles qualify for any alternate racial trait available to Elves or Aasimars, and for any feat or ability that lists Elf or Aasimar as a prerequisite.',
+      },
+    ],
+    inheritsAltTraitsFrom: ['Elf', 'Aasimar'],
+    traitDowngrades: [
+      { from: 'Elevated Elven Magic', to: 'Elven Magic', asCurrency: 'Elven Magic' },
+      { from: 'Elven Magic', to: null, asCurrency: 'Elven Magic' },
+    ] satisfies TraitDowngradeEntry[],
+    slaComponents: [
+      { name: 'Detect Magic', level: 0, frequency: 'Constant' },
+      { name: 'Eagle Eye', level: 2, frequency: 'AtWill' },
+      { name: 'Daylight', level: 3, frequency: 'AtWill' },
+      { name: 'Feather Step', level: 1, frequency: 'AtWill' },
+      {
+        name: 'Arcane Sight',
+        level: 3,
+        frequency: 'OnePerDay',
+        options: ['Arcane Sight', 'Deadly Juggernaut', 'Ranged Deadly Juggernaut'],
+      },
+    ] satisfies SLAComponent[],
+    languages: ['Common', 'Elven', 'Celestial'],
+    bonusLanguages: [],
+    source: 'homebrew',
   },
 ];
 

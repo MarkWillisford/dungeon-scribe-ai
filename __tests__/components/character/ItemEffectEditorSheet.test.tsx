@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent, type RenderedNode } from '../../helpers/testUtils';
+import { render, fireEvent, findTextNode, type RenderedNode } from '../../helpers/testUtils';
 import {
   buildClassAbilityTargets,
   buildTargetLabelMap,
@@ -33,6 +33,53 @@ jest.mock('@/services/GameDataService', () => ({
   GameDataService: {
     searchFeats: jest.fn().mockResolvedValue([]),
     getFeatById: jest.fn().mockResolvedValue(null),
+    getWeapons: jest.fn().mockResolvedValue([]),
+  },
+}));
+
+jest.mock('@/services/FeatRegistryService', () => ({
+  FeatRegistryService: {
+    getFeat: jest.fn().mockReturnValue(undefined),
+  },
+}));
+
+jest.mock('@/components/ui/SearchPickerSheet', () => ({
+  SearchPickerSheet: ({
+    visible,
+    testID,
+    items,
+    onSelect,
+    onClose,
+  }: {
+    visible: boolean;
+    testID?: string;
+    title: string;
+    items: { key: string; label: string }[];
+    onSelect: (item: { key: string; label: string }) => void;
+    onClose: () => void;
+    placeholder?: string;
+    allowCustom?: boolean;
+    onAddCustom?: (val: string) => void;
+  }) => {
+    if (!visible) return null;
+    const React = require('react');
+    const { View, Pressable, Text } = require('react-native');
+    return React.createElement(
+      View,
+      { testID },
+      ...items.map((item: { key: string; label: string }) =>
+        React.createElement(
+          Pressable,
+          { key: item.key, testID: `search-item-${item.key}`, onPress: () => onSelect(item) },
+          React.createElement(Text, null, item.label),
+        ),
+      ),
+      React.createElement(
+        Pressable,
+        { testID: 'search-picker-close', onPress: onClose },
+        React.createElement(Text, null, 'Close'),
+      ),
+    );
   },
 }));
 
@@ -63,7 +110,13 @@ jest.mock('@/components/character/direct-entry/MagicItemEffectImportSheet', () =
           testID: 'mock-import-effects-btn',
           onPress: () => {
             onImport([
-              { type: 'bonus', target: 'save.all', value: 2, bonusType: 'resistance', source: currentItemName },
+              {
+                type: 'bonus',
+                target: 'save.all',
+                value: 2,
+                bonusType: 'resistance',
+                source: currentItemName,
+              },
             ]);
             onBack();
           },
@@ -575,6 +628,33 @@ describe('ItemEffectEditorSheet', () => {
     expect(queryByText('Cloak of Resistance +1')).toBeTruthy();
   });
 
+  it('header title for DB items has no flex:1 style that causes slot label to overlap name', () => {
+    // flex: 1 on the title Text collapses it to 0 height inside the unconstrained
+    // headerLeft column, pushing the slot subtitle up to overlap the item name.
+    const item = makeItem({ definitionId: 'db-123', slot: 'ring_left' as const });
+    const { tree } = render(
+      <ItemEffectEditorSheet
+        item={item}
+        character={character}
+        onSave={onSave}
+        onRemoveItem={onRemoveItem}
+        onClose={onClose}
+      />,
+    );
+
+    const titleNode = findTextNode(tree, item.name);
+    expect(titleNode).not.toBeNull();
+
+    const styleArr = Array.isArray(titleNode!.props.style)
+      ? titleNode!.props.style
+      : [titleNode!.props.style];
+    const hasFlex1 = styleArr.some(
+      (s: unknown) =>
+        s !== null && typeof s === 'object' && (s as Record<string, unknown>).flex === 1,
+    );
+    expect(hasFlex1).toBe(false);
+  });
+
   it('cancels the add-effect form when Cancel is pressed', () => {
     const item = makeItem();
     const rendered = render(
@@ -1047,7 +1127,7 @@ describe('ItemEffectEditorSheet', () => {
     expect(findTestId(updated, 'add-feat-btn')).toBeTruthy();
   });
 
-  it('saves grantedFeatIds on the item when feats added', () => {
+  it('saves grantedFeats as undefined on the item when no feats added', () => {
     const item = makeItem();
     const rendered = render(
       <ItemEffectEditorSheet
@@ -1065,19 +1145,19 @@ describe('ItemEffectEditorSheet', () => {
     fireEvent.press(backBtn!);
     rendered.rerender();
     fireEvent.press(rendered.getByTestId('save-btn'));
-    // With no feats added, grantedFeatIds should be undefined
-    expect(onSave).toHaveBeenCalledWith(
-      expect.objectContaining({ id: 'item-1' }),
-    );
+    // With no feats added, grantedFeats should be undefined
+    expect(onSave).toHaveBeenCalledWith(expect.objectContaining({ id: 'item-1' }));
     const saved = onSave.mock.calls[0][0];
-    expect(saved.grantedFeatIds).toBeUndefined();
+    expect(saved.grantedFeats).toBeUndefined();
   });
 
-  it('initializes workingFeatIds from item.grantedFeatIds', () => {
+  it('initializes workingGrantedFeats from item.grantedFeats', () => {
     const { GameDataService: mockGDS } = require('@/services/GameDataService');
     mockGDS.getFeatById.mockResolvedValue({ id: 'power-attack', name: 'Power Attack' });
 
-    const item = makeItem({ grantedFeatIds: ['power-attack'] });
+    const item = makeItem({
+      grantedFeats: [{ featId: 'power-attack', choices: {}, active: true }],
+    });
     const rendered = render(
       <ItemEffectEditorSheet
         item={item}
@@ -1089,7 +1169,7 @@ describe('ItemEffectEditorSheet', () => {
     );
     fireEvent.press(rendered.getByTestId('save-btn'));
     const saved = onSave.mock.calls[0][0];
-    expect(saved.grantedFeatIds).toEqual(['power-attack']);
+    expect(saved.grantedFeats).toEqual([{ featId: 'power-attack', choices: {}, active: true }]);
   });
 
   it('merges imported effects into the working list (handleImportEffects)', () => {
@@ -1130,7 +1210,18 @@ describe('ItemEffectEditorSheet', () => {
     );
     // Switch to featSearch view (slot 0) and inject feat results (slot 9)
     setHookStateAt(0, 'featSearch');
-    setHookStateAt(9, [{ id: 'power-attack', name: 'Power Attack' }]);
+    setHookStateAt(9, [
+      {
+        id: 'power-attack',
+        name: 'Power Attack',
+        activationMode: 'toggle',
+        effects: [],
+        types: [],
+        prerequisites: [],
+        description: '',
+        source: '',
+      },
+    ]);
     const withResults = rendered.rerender();
     const featBtn = findTestId(withResults, 'feat-result-power-attack');
     expect(featBtn).toBeTruthy();
@@ -1139,12 +1230,16 @@ describe('ItemEffectEditorSheet', () => {
     const updated = rendered.rerender();
     fireEvent.press(findTestId(updated, 'save-btn')!);
     const saved = onSave.mock.calls[0][0];
-    expect(saved.grantedFeatIds).toContain('power-attack');
+    expect(saved.grantedFeats).toEqual(
+      expect.arrayContaining([expect.objectContaining({ featId: 'power-attack' })]),
+    );
   });
 
   it('removes a granted feat (handleRemoveFeat)', () => {
     const { setHookStateAt } = require('../../helpers/testUtils');
-    const item = makeItem({ grantedFeatIds: ['power-attack'] });
+    const item = makeItem({
+      grantedFeats: [{ featId: 'power-attack', choices: {}, active: false }],
+    });
     const rendered = render(
       <ItemEffectEditorSheet
         item={item}
@@ -1163,8 +1258,347 @@ describe('ItemEffectEditorSheet', () => {
     const updated = rendered.rerender();
     fireEvent.press(findTestId(updated, 'save-btn')!);
     const saved = onSave.mock.calls[0][0];
-    // handleSave sets grantedFeatIds to undefined when the array is empty
-    expect(saved.grantedFeatIds).toBeUndefined();
+    // handleSave sets grantedFeats to undefined when the array is empty
+    expect(saved.grantedFeats).toBeUndefined();
+  });
+
+  it('shows choice prompt when adding a feat with choices', () => {
+    const { setHookStateAt } = require('../../helpers/testUtils');
+    const item = makeItem();
+    const rendered = render(
+      <ItemEffectEditorSheet
+        item={item}
+        character={character}
+        onSave={onSave}
+        onRemoveItem={onRemoveItem}
+        onClose={onClose}
+      />,
+    );
+    // Set featSearch view (slot 0) and inject a choice-based feat result (slot 9)
+    setHookStateAt(0, 'featSearch');
+    setHookStateAt(9, [
+      {
+        id: 'spell-focus',
+        name: 'Spell Focus',
+        activationMode: 'passive',
+        effects: [],
+        types: [],
+        prerequisites: [],
+        description: '',
+        source: '',
+        choices: [
+          { type: 'school', label: 'School', affectsEffects: true, options: ['Evocation'] },
+        ],
+      },
+    ]);
+    const withResults = rendered.rerender();
+    const featBtn = findTestId(withResults, 'feat-result-spell-focus');
+    expect(featBtn).toBeTruthy();
+    fireEvent.press(featBtn!);
+    const withChoice = rendered.rerender();
+    expect(findTestId(withChoice, 'feat-choice-picker')).toBeTruthy();
+  });
+
+  it('adds feat with choice after selection and saves choices', () => {
+    const { setHookStateAt } = require('../../helpers/testUtils');
+    const item = makeItem();
+    const rendered = render(
+      <ItemEffectEditorSheet
+        item={item}
+        character={character}
+        onSave={onSave}
+        onRemoveItem={onRemoveItem}
+        onClose={onClose}
+      />,
+    );
+    // Inject choice prompt state via slots:
+    // slot 11 = pendingFeat, slot 12 = pendingGrant, slot 13 = activeChoice
+    setHookStateAt(11, {
+      id: 'spell-focus',
+      name: 'Spell Focus',
+      activationMode: 'passive',
+      effects: [],
+      types: [],
+      prerequisites: [],
+      description: '',
+      source: '',
+      choices: [{ type: 'school', label: 'School', affectsEffects: true, options: ['Evocation'] }],
+    });
+    setHookStateAt(12, { featId: 'spell-focus', choices: {}, active: true });
+    setHookStateAt(13, {
+      type: 'school',
+      label: 'School',
+      affectsEffects: true,
+      options: ['Evocation'],
+    });
+    const withChoice = rendered.rerender();
+    expect(findTestId(withChoice, 'feat-choice-picker')).toBeTruthy();
+    const pickBtn = findTestId(withChoice, 'search-item-Evocation');
+    expect(pickBtn).toBeTruthy();
+    fireEvent.press(pickBtn!);
+    const updated = rendered.rerender();
+    fireEvent.press(findTestId(updated, 'save-btn')!);
+    const saved = onSave.mock.calls[0][0];
+    expect(saved.grantedFeats).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          featId: 'spell-focus',
+          choices: { school: 'Evocation' },
+        }),
+      ]),
+    );
+  });
+
+  it('cancels choice prompt without adding feat (handleChoiceCancel)', () => {
+    const { setHookStateAt } = require('../../helpers/testUtils');
+    const item = makeItem();
+    const rendered = render(
+      <ItemEffectEditorSheet
+        item={item}
+        character={character}
+        onSave={onSave}
+        onRemoveItem={onRemoveItem}
+        onClose={onClose}
+      />,
+    );
+    setHookStateAt(11, {
+      id: 'spell-focus',
+      name: 'Spell Focus',
+      activationMode: 'passive',
+      effects: [],
+      types: [],
+      prerequisites: [],
+      description: '',
+      source: '',
+      choices: [{ type: 'school', label: 'School', affectsEffects: true }],
+    });
+    setHookStateAt(12, { featId: 'spell-focus', choices: {}, active: true });
+    setHookStateAt(13, { type: 'school', label: 'School', affectsEffects: true, options: [] });
+    const withChoice = rendered.rerender();
+    expect(findTestId(withChoice, 'feat-choice-picker')).toBeTruthy();
+    const closeBtn = findTestId(withChoice, 'search-picker-close');
+    expect(closeBtn).toBeTruthy();
+    fireEvent.press(closeBtn!);
+    const updated = rendered.rerender();
+    fireEvent.press(findTestId(updated, 'save-btn')!);
+    const saved = onSave.mock.calls[0][0];
+    expect(saved.grantedFeats).toBeUndefined();
+  });
+
+  it('advances to second choice picker when feat has two choices (multi-step branch)', () => {
+    const { setHookStateAt } = require('../../helpers/testUtils');
+    const item = makeItem();
+    const rendered = render(
+      <ItemEffectEditorSheet
+        item={item}
+        character={character}
+        onSave={onSave}
+        onRemoveItem={onRemoveItem}
+        onClose={onClose}
+      />,
+    );
+
+    // A feat with two choices: 'school' then 'ability'
+    const twoChoiceFeat = {
+      id: 'dual-choice-feat',
+      name: 'Dual Choice Feat',
+      activationMode: 'passive' as const,
+      effects: [],
+      types: [],
+      prerequisites: [],
+      description: '',
+      source: '',
+      choices: [
+        {
+          type: 'school',
+          label: 'School',
+          affectsEffects: true,
+          options: ['Evocation', 'Abjuration'],
+        },
+        {
+          type: 'ability',
+          label: 'Ability',
+          affectsEffects: false,
+          options: ['Strength', 'Dexterity'],
+        },
+      ],
+    };
+
+    // Inject state for the first choice prompt
+    setHookStateAt(11, twoChoiceFeat);
+    setHookStateAt(12, { featId: 'dual-choice-feat', choices: {}, active: true });
+    setHookStateAt(13, {
+      type: 'school',
+      label: 'School',
+      affectsEffects: true,
+      options: ['Evocation', 'Abjuration'],
+    });
+
+    const withFirstChoice = rendered.rerender();
+    // Picker is visible for the first choice
+    expect(findTestId(withFirstChoice, 'feat-choice-picker')).toBeTruthy();
+
+    // Press the first choice item — this should trigger the multi-step branch
+    const firstPickBtn = findTestId(withFirstChoice, 'search-item-Evocation');
+    expect(firstPickBtn).toBeTruthy();
+    fireEvent.press(firstPickBtn!);
+
+    // After the first selection, the component calls setPendingGrant + setActiveChoice (not commit)
+    // Inject the second choice options via slot 13 to simulate state update
+    setHookStateAt(13, {
+      type: 'ability',
+      label: 'Ability',
+      affectsEffects: false,
+      options: ['Strength', 'Dexterity'],
+    });
+
+    const withSecondChoice = rendered.rerender();
+    // Picker should still be visible for the second choice
+    expect(findTestId(withSecondChoice, 'feat-choice-picker')).toBeTruthy();
+
+    // Press the second choice item — this should commit the feat
+    const secondPickBtn = findTestId(withSecondChoice, 'search-item-Strength');
+    expect(secondPickBtn).toBeTruthy();
+    fireEvent.press(secondPickBtn!);
+
+    const updated = rendered.rerender();
+    fireEvent.press(findTestId(updated, 'save-btn')!);
+    const saved = onSave.mock.calls[0][0];
+    expect(saved.grantedFeats).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          featId: 'dual-choice-feat',
+          choices: expect.objectContaining({ school: 'Evocation', ability: 'Strength' }),
+        }),
+      ]),
+    );
+  });
+
+  it('displays toggle chip for toggle feats', () => {
+    const { FeatRegistryService: mockFRS } = require('@/services/FeatRegistryService');
+    mockFRS.getFeat.mockImplementation((id: string) => {
+      if (id === 'power-attack') {
+        return {
+          id: 'power-attack',
+          name: 'Power Attack',
+          activationMode: 'toggle',
+          effects: [],
+          types: [],
+          prerequisites: [],
+          description: '',
+          source: '',
+        };
+      }
+      return undefined;
+    });
+    const { setHookStateAt } = require('../../helpers/testUtils');
+    const item = makeItem({
+      grantedFeats: [{ featId: 'power-attack', choices: {}, active: false }],
+    });
+    const rendered = render(
+      <ItemEffectEditorSheet
+        item={item}
+        character={character}
+        onSave={onSave}
+        onRemoveItem={onRemoveItem}
+        onClose={onClose}
+      />,
+    );
+    setHookStateAt(3, [{ featId: 'power-attack', choices: {}, active: false }]);
+    setHookStateAt(10, new Map([['power-attack', 'Power Attack']]));
+    const withFeat = rendered.rerender();
+    expect(findTestId(withFeat, 'toggle-feat-power-attack')).toBeTruthy();
+    const chip = findTestId(withFeat, 'toggle-feat-power-attack');
+    const texts: string[] = [];
+    function collectText(node: RenderedNode | string): void {
+      if (typeof node === 'string') {
+        texts.push(node);
+        return;
+      }
+      node.children.forEach(collectText);
+    }
+    collectText(chip!);
+    expect(texts.join('')).toContain('Off');
+  });
+
+  it('does not display toggle chip for passive feats', () => {
+    const { FeatRegistryService: mockFRS } = require('@/services/FeatRegistryService');
+    mockFRS.getFeat.mockImplementation((id: string) => {
+      if (id === 'toughness') {
+        return {
+          id: 'toughness',
+          name: 'Toughness',
+          activationMode: 'passive',
+          effects: [],
+          types: [],
+          prerequisites: [],
+          description: '',
+          source: '',
+        };
+      }
+      return undefined;
+    });
+    const { setHookStateAt } = require('../../helpers/testUtils');
+    const item = makeItem({
+      grantedFeats: [{ featId: 'toughness', choices: {}, active: true }],
+    });
+    const rendered = render(
+      <ItemEffectEditorSheet
+        item={item}
+        character={character}
+        onSave={onSave}
+        onRemoveItem={onRemoveItem}
+        onClose={onClose}
+      />,
+    );
+    setHookStateAt(3, [{ featId: 'toughness', choices: {}, active: true }]);
+    setHookStateAt(10, new Map([['toughness', 'Toughness']]));
+    const withFeat = rendered.rerender();
+    expect(findTestId(withFeat, 'toggle-feat-toughness')).toBeNull();
+  });
+
+  it('toggling a feat chip flips active state and saves it', () => {
+    const { FeatRegistryService: mockFRS } = require('@/services/FeatRegistryService');
+    mockFRS.getFeat.mockImplementation((id: string) => {
+      if (id === 'power-attack') {
+        return {
+          id: 'power-attack',
+          name: 'Power Attack',
+          activationMode: 'toggle',
+          effects: [],
+          types: [],
+          prerequisites: [],
+          description: '',
+          source: '',
+        };
+      }
+      return undefined;
+    });
+    const { setHookStateAt } = require('../../helpers/testUtils');
+    const item = makeItem({
+      grantedFeats: [{ featId: 'power-attack', choices: {}, active: false }],
+    });
+    const rendered = render(
+      <ItemEffectEditorSheet
+        item={item}
+        character={character}
+        onSave={onSave}
+        onRemoveItem={onRemoveItem}
+        onClose={onClose}
+      />,
+    );
+    setHookStateAt(3, [{ featId: 'power-attack', choices: {}, active: false }]);
+    setHookStateAt(10, new Map([['power-attack', 'Power Attack']]));
+    const withFeat = rendered.rerender();
+    const toggleBtn = findTestId(withFeat, 'toggle-feat-power-attack');
+    expect(toggleBtn).toBeTruthy();
+    fireEvent.press(toggleBtn!);
+    const updated = rendered.rerender();
+    fireEvent.press(findTestId(updated, 'save-btn')!);
+    const saved = onSave.mock.calls[0][0];
+    expect(saved.grantedFeats).toEqual(
+      expect.arrayContaining([expect.objectContaining({ featId: 'power-attack', active: true })]),
+    );
   });
 });
 

@@ -1,0 +1,76 @@
+name: AI Reviewer
+
+# Fires on two events:
+#   ready_for_review — first pass. Waits for CI checks to be green before reviewing.
+#   synchronize      — subsequent passes. Fires immediately; concurrency cancels the
+#                      in-progress run so stale state is never reviewed.
+#
+# Draft PRs are excluded at the job level. The workflow fires, but the job
+# condition short-circuits before any work is done.
+#
+# Required secrets:
+#   ANTHROPIC_API_KEY — Claude API key
+#
+# Required files:
+#   .github/prompts/ai-reviewer.md       — review criteria (read by the agent)
+#   .claude/reviewer-rotation.json       — { "next": "<github-username>" }
+
+on:
+  pull_request:
+    types: [ready_for_review, synchronize]
+
+concurrency:
+  # Cancel any in-progress review for this PR when new commits arrive.
+  group: ai-review-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  review:
+    # Never run on draft PRs. This catches the synchronize event on a draft
+    # (e.g. a push while the PR is still in draft state).
+    if: github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write       # push rotation file commit to the PR branch
+      pull-requests: write  # post review comments and assign reviewer
+
+    steps:
+      - name: Checkout PR branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.ref }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install eza
+        # eza is available in ubuntu-24.04 (current ubuntu-latest) via apt.
+        run: sudo apt-get install -y eza
+
+      - name: Wait for CI checks
+        # First pass only: block until the required CI checks on this SHA pass.
+        # If CI is already complete, returns immediately. If CI fails, this step
+        # fails and the reviewer never runs -- no point reviewing broken code.
+        # Subsequent-pass runs (synchronize) skip this step intentionally; the
+        # concurrency group ensures stale runs are cancelled rather than piled up.
+        if: github.event.action == 'ready_for_review'
+        run: gh pr checks "${{ github.event.pull_request.number }}" --watch
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Run AI reviewer
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          direct_prompt: |
+            Review pull request #${{ github.event.pull_request.number }} on ${{ github.repository }}.
+
+            Read your complete review instructions and criteria from .github/prompts/ai-reviewer.md
+            and follow them exactly.
+
+            PR number: ${{ github.event.pull_request.number }}

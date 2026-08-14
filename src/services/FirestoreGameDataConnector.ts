@@ -24,6 +24,7 @@ import { ALL_FEATS } from '@/data/feats/index';
 import type { FeatDefinition } from '@/types/feats';
 import type { TraitDefinition } from '@/types/traits';
 import type { ClassChoiceDefinition } from '@/types/classChoices';
+import type { RacialChoiceDefinition } from '@/types/racialChoices';
 import type { ExpandedClassData, ArchetypeData } from '@/data/classes/types';
 import type { ClassData } from '@/data/classes';
 import type { ClassOptionBase, EidolonEvolutionEntry } from '@/types/classOptions';
@@ -33,7 +34,7 @@ import type {
   ShieldDefinition,
   GearDefinition,
 } from '@/types/equipment';
-import type { MagicItemDefinition, ItemSlot } from '@/types/magicItems';
+import type { MagicItemDefinition, MagicWeaponDefinition, ItemSlot } from '@/types/magicItems';
 import {
   ALL_WONDROUS_ITEMS,
   ALL_RINGS,
@@ -341,6 +342,11 @@ export class FirestoreGameDataConnector implements GameDataConnector {
           break;
         }
 
+        case 'deities': {
+          results = await fetchAll<ClassOptionBase>('deities');
+          break;
+        }
+
         default: {
           // Simple collections with no filter support
           const q = query(collection(db, collectionName), where('visibility', '==', 'global'));
@@ -418,9 +424,7 @@ export class FirestoreGameDataConnector implements GameDataConnector {
   async searchFeats(query: string): Promise<FeatDefinition[]> {
     if (!query) return [];
     const q = query.toLowerCase();
-    return Promise.resolve(
-      ALL_FEATS.filter((f) => f.name.toLowerCase().includes(q)).slice(0, 50),
-    );
+    return Promise.resolve(ALL_FEATS.filter((f) => f.name.toLowerCase().includes(q)).slice(0, 50));
   }
 
   // ---- Traits ----------------------------------------------------------------
@@ -483,6 +487,29 @@ export class FirestoreGameDataConnector implements GameDataConnector {
     }
   }
 
+  async getRacialChoiceDefinitions(raceName: string): Promise<RacialChoiceDefinition[]> {
+    const cacheKey = `racialChoiceDefinitions/${raceName.toLowerCase()}`;
+    const cached = GameDataCache.get<RacialChoiceDefinition[]>(cacheKey);
+    if (cached) return cached;
+
+    try {
+      const q = query(
+        collection(db, 'racialChoiceDefinitions'),
+        where('raceName', '==', raceName.toLowerCase()),
+      );
+      const snap = await getDocs(q);
+      const results = snap.docs.map((d) => d.data() as RacialChoiceDefinition);
+      GameDataCache.set(cacheKey, results);
+      return results;
+    } catch (e) {
+      console.error(
+        `FirestoreGameDataConnector: failed to fetch racial choice definitions for "${raceName}":`,
+        e,
+      );
+      return [];
+    }
+  }
+
   async getClassChoiceDefinitions(classId: string): Promise<ClassChoiceDefinition[]> {
     const cacheKey = `classChoiceDefinitions/${classId}`;
     const cached = GameDataCache.get<ClassChoiceDefinition[]>(cacheKey);
@@ -533,7 +560,9 @@ export class FirestoreGameDataConnector implements GameDataConnector {
         core: all.filter((r) => r.category === 'Core'),
         featured: all.filter((r) => r.category === 'Featured'),
         uncommon: all.filter((r) => r.category === 'Uncommon'),
-        flexibleAbility: all.filter((r) => r.flexibleAbilityBonus === true),
+        flexibleAbility: all.filter(
+          (r) => r.flexibleAbilityBonuses && r.flexibleAbilityBonuses.length > 0,
+        ),
       };
 
       GameDataCache.set(cacheKey, result);
@@ -600,6 +629,29 @@ export class FirestoreGameDataConnector implements GameDataConnector {
         return results;
       } catch (e) {
         console.error(`FirestoreGameDataConnector: getMagicItemsBySlot(${slot}) failed:`, e);
+        return [];
+      }
+    });
+  }
+
+  async getMagicWeaponTemplates(): Promise<MagicWeaponDefinition[]> {
+    const cacheKey = 'magicItems/category/magic_weapon';
+    const cached = GameDataCache.get<MagicWeaponDefinition[]>(cacheKey);
+    if (cached) return cached;
+
+    return FirestoreGameDataConnector.dedup(cacheKey, async () => {
+      try {
+        const q = query(
+          collection(db, 'magicItems'),
+          where('visibility', '==', 'global'),
+          where('category', '==', 'magic_weapon'),
+        );
+        const snap = await getDocs(q);
+        const results = snap.docs.map((d) => d.data() as MagicWeaponDefinition);
+        GameDataCache.set(cacheKey, results, TTL.OFFICIAL);
+        return results;
+      } catch (e) {
+        console.error('FirestoreGameDataConnector: getMagicWeaponTemplates() failed:', e);
         return [];
       }
     });
@@ -857,7 +909,8 @@ export class FirestoreGameDataConnector implements GameDataConnector {
   }
 
   async getArchetypesByClass(className: string, _context?: QueryContext): Promise<ArchetypeData[]> {
-    const cacheKey = `archetypes/${className}`;
+    const baseClassName = className.replace(/ \(Unchained\)$/, '');
+    const cacheKey = `archetypes/${baseClassName}`;
     const cached = GameDataCache.get<ArchetypeData[]>(cacheKey);
     if (cached) return cached;
 
@@ -866,7 +919,7 @@ export class FirestoreGameDataConnector implements GameDataConnector {
         const q = query(
           collection(db, 'archetypes'),
           where('visibility', '==', 'global'),
-          where('className', '==', className),
+          where('className', '==', baseClassName),
         );
         const snap = await getDocs(q);
         const results = snap.docs.map((d) => d.data() as ArchetypeData);
@@ -884,7 +937,8 @@ export class FirestoreGameDataConnector implements GameDataConnector {
     className: string,
     _context?: QueryContext,
   ): Promise<FavoredClassBonusEntry[]> {
-    const cacheKey = `fcb/${raceName}/${className}`;
+    const baseClassName = className.replace(/ \(Unchained\)$/, '');
+    const cacheKey = `fcb/${raceName}/${baseClassName}`;
     const cached = GameDataCache.get<FavoredClassBonusEntry[]>(cacheKey);
     if (cached) return cached;
 
@@ -894,7 +948,7 @@ export class FirestoreGameDataConnector implements GameDataConnector {
           collection(db, 'favoredClassBonuses'),
           where('visibility', '==', 'global'),
           where('raceName', '==', raceName),
-          where('className', '==', className),
+          where('className', '==', baseClassName),
         );
         const snap = await getDocs(q);
         const results = snap.docs.map((d) => d.data() as FavoredClassBonusEntry);

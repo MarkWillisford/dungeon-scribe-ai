@@ -11,6 +11,7 @@ import type { AppliedTemplate } from '@/types/templates';
 import type { ArchetypeData, ExpandedClassData } from '@/data/classes/types';
 import type { FavoredClassBonusEntry, FCBMechanicalEffect } from '@/types/favoredClassBonuses';
 import type { FeatType } from '@/types/feats';
+import type { CharacterFlaw } from '@/types/flaws';
 
 // ---- Class data lookup ----
 
@@ -461,6 +462,7 @@ export function computeClassBonusFeatSlots(
 export function computeFeatSlots(
   classes: ClassEntry[],
   race: string,
+  flaws: CharacterFlaw[],
   options?: ClassFeatSlotOptions,
 ): FeatSlot[] {
   const totalHD = classes.reduce((sum, c) => sum + c.level, 0);
@@ -476,11 +478,27 @@ export function computeFeatSlots(
     });
   }
 
-  if (race.toLowerCase() === 'human') {
+  const racialFeatRaces: { key: string; id: string; label: string }[] = [
+    { key: 'human', id: 'racial-feat-human-1', label: 'Human Bonus' },
+    { key: 'elven noble', id: 'racial-feat-elven-noble-1', label: 'Elven Noble Bonus' },
+  ];
+  const raceLower = race.toLowerCase();
+  const racialFeatEntry = racialFeatRaces.find((r) => r.key === raceLower);
+  if (racialFeatEntry) {
     slots.push({
-      id: 'racial-feat-human-1',
+      id: racialFeatEntry.id,
       source: 'racial',
-      availableAt: 'Human Bonus',
+      availableAt: racialFeatEntry.label,
+      availableAtLevel: 1,
+      prereqOverride: false,
+    });
+  }
+
+  for (const flaw of flaws) {
+    slots.push({
+      id: `flaw-feat-${flaw.flawId}`,
+      source: 'bonus',
+      availableAt: `Flaw: ${flaw.name}`,
       availableAtLevel: 1,
       prereqOverride: false,
     });

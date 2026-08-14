@@ -6,6 +6,8 @@ import authReducer, {
   logout,
   resetPassword,
   setUser,
+  setIsAdmin,
+  setAuthInitialized,
   clearError,
 } from '@store/slices/authSlice';
 import type { AppUser } from '@/types/auth';
@@ -66,6 +68,28 @@ describe('authSlice', () => {
       const state = authReducer(authenticatedState, setUser(null));
       expect(state.user).toBeNull();
       expect(state.isAuthenticated).toBe(false);
+    });
+  });
+
+  describe('setIsAdmin', () => {
+    it('should set isAdmin to true', () => {
+      const state = authReducer(undefined, setIsAdmin(true));
+      expect(state.isAdmin).toBe(true);
+    });
+
+    it('should set isAdmin to false', () => {
+      const state = authReducer(
+        { ...authReducer(undefined, { type: 'unknown' }), isAdmin: true },
+        setIsAdmin(false),
+      );
+      expect(state.isAdmin).toBe(false);
+    });
+  });
+
+  describe('setAuthInitialized', () => {
+    it('should set authInitialized to true', () => {
+      const state = authReducer(undefined, setAuthInitialized());
+      expect(state.authInitialized).toBe(true);
     });
   });
 
@@ -254,7 +278,9 @@ describe('authSlice', () => {
     it('signup succeeds - sets user in store', async () => {
       const store = makeAuthStore();
       (FirebaseAuthService.signUp as jest.Mock).mockResolvedValue(mockUser);
-      await store.dispatch(signup({ email: 'new@example.com', password: 'pass', displayName: 'New' }));
+      await store.dispatch(
+        signup({ email: 'new@example.com', password: 'pass', displayName: 'New' }),
+      );
       expect(store.getState().auth.user).toEqual(mockUser);
     });
 
@@ -325,7 +351,9 @@ describe('authSlice', () => {
 
     it('resetPassword fails with Error - sets error.message', async () => {
       const store = makeAuthStore();
-      (FirebaseAuthService.resetPassword as jest.Mock).mockRejectedValue(new Error('User not found'));
+      (FirebaseAuthService.resetPassword as jest.Mock).mockRejectedValue(
+        new Error('User not found'),
+      );
       await store.dispatch(resetPassword('unknown@example.com'));
       expect(store.getState().auth.error).toBe('User not found');
     });

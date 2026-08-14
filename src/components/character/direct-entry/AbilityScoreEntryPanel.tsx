@@ -10,7 +10,7 @@ import {
   addOtherBonus,
   removeOtherBonus,
   updateOtherBonus,
-  setRacialFlexAbility,
+  setRacialFlexChoice,
 } from '@/store/slices/characterEntrySlice';
 import type { AbilityKey } from '@/types/abilities';
 import type { AbilityScore } from '@/types/abilities';
@@ -646,7 +646,9 @@ function BreakdownPanel({ abilityKey, score, onCollapse }: BreakdownPanelProps) 
 function RacialFlexPicker() {
   const { colors, fantasy, isDark } = useTheme();
   const dispatch = useAppDispatch();
-  const current = useAppSelector((state) => state.characterEntry.character.info.racialFlexAbility);
+  const current = useAppSelector(
+    (state) => state.characterEntry.character.info.racialFlexChoices?.[0],
+  );
 
   return (
     <View
@@ -665,7 +667,7 @@ function RacialFlexPicker() {
           return (
             <Pressable
               key={key}
-              onPress={() => dispatch(setRacialFlexAbility(key))}
+              onPress={() => dispatch(setRacialFlexChoice({ index: 0, value: key }))}
               style={[
                 styles.flexBtn,
                 {
@@ -710,7 +712,9 @@ export function AbilityScoreEntryPanel() {
   return (
     <OrnatePanel title="Ability Scores">
       {/* Racial flex ability picker — shown for races with a flexible +2 */}
-      {character.info.racialFlexBonus && <RacialFlexPicker />}
+      {character.info.racialFlexBonuses?.length === 1 &&
+        character.info.racialFlexBonuses[0].group === 'any' &&
+        character.info.racialFlexBonuses[0].count === 1 && <RacialFlexPicker />}
 
       {/* 3×2 grid */}
       <View style={styles.grid}>

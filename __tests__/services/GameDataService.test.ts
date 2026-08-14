@@ -536,6 +536,31 @@ describe('GameDataService', () => {
       const defs = await GameDataService.getClassChoiceDefinitions('fighter');
       expect(Array.isArray(defs)).toBe(true);
     });
+
+    test('returns Order definition for cavalier — covers Daring Champion archetype (#246)', async () => {
+      const module = jest.requireMock('@/data/classChoiceDefinitions/index');
+      module.getDefinitionsForClass.mockReturnValueOnce([
+        {
+          id: 'cavalier-order',
+          className: 'cavalier',
+          featureName: 'Order',
+          selectionMode: { type: 'single_at_creation' },
+          optionSource: 'collection',
+          collectionName: 'cavalierorders',
+          source: 'pf1e-core',
+          isOfficial: true,
+          verificationStatus: 'needs_review',
+          visibility: 'global',
+          rev: 1,
+        },
+      ]);
+      const defs = await GameDataService.getClassChoiceDefinitions('cavalier');
+      expect(module.getDefinitionsForClass).toHaveBeenCalledWith('cavalier');
+      const orderDef = defs.find((d) => d.featureName === 'Order');
+      expect(orderDef).toBeDefined();
+      expect(orderDef?.collectionName).toBe('cavalierorders');
+      expect(orderDef?.selectionMode.type).toBe('single_at_creation');
+    });
   });
 
   describe('getSpellTables', () => {
@@ -670,6 +695,15 @@ describe('GameDataService', () => {
     test('cavalierorders returns all orders', async () => {
       const items = await GameDataService.getClassChoiceItems('cavalierorders');
       expect(items[0].key).toBe('order-of-the-star');
+    });
+
+    test('cavalierorders items map classSkills to subLabel — picker display for Daring Champion (#246)', async () => {
+      const items = await GameDataService.getClassChoiceItems('cavalierorders');
+      const item = items.find(({ key }) => key === 'order-of-the-star');
+
+      expect(item).toBeDefined();
+      expect(item?.label).toBe('Order of the Star');
+      expect(item?.subLabel).toBe('Heal, Knowledge (religion)');
     });
 
     test('hexes — assigns category by tier', async () => {

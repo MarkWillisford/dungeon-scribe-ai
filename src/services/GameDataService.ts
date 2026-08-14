@@ -19,6 +19,7 @@ import type { SearchItem } from '@/components/ui/SearchPickerSheet';
 import type { FeatDefinition, FeatType } from '@/types/feats';
 import type { TraitDefinition } from '@/types/traits';
 import type { ClassChoiceDefinition } from '@/types/classChoices';
+import type { RacialChoiceDefinition } from '@/types/racialChoices';
 import type { ExpandedClassData, SpellProgressionTable, ArchetypeData } from '@/data/classes/types';
 import type { FavoredClassBonusEntry } from '@/types/favoredClassBonuses';
 import type { ClassData } from '@/data/classes';
@@ -29,7 +30,7 @@ import type {
   ShieldDefinition,
   GearDefinition,
 } from '@/types/equipment';
-import type { MagicItemDefinition, ItemSlot } from '@/types/magicItems';
+import type { MagicItemDefinition, MagicWeaponDefinition, ItemSlot } from '@/types/magicItems';
 import type {
   ShamanSpiritEntry,
   EidolonEvolutionEntry,
@@ -217,6 +218,7 @@ export class GameDataService {
       'disciplines',
       'maneuvers',
       'stances',
+      'deities',
     ];
 
     if (!validCollections.includes(collectionName)) return [];
@@ -430,6 +432,15 @@ export class GameDataService {
           subLabel: a.description?.slice(0, 80),
           category: a.amplificationTier === 'major' ? 'Major Amplifications' : 'Amplifications',
         }));
+
+      case 'deities':
+        return (items as { id: string; name: string; title?: string; alignment: string }[]).map(
+          (d) => ({
+            key: d.name,
+            label: d.name,
+            subLabel: d.title ? `${d.title} (${d.alignment})` : d.alignment,
+          }),
+        );
 
       // TODO Phase 8: wire getDisciplines/getManeuvers/getStances through connector
       case 'disciplines':
@@ -661,6 +672,10 @@ export class GameDataService {
     return GameDataService.connector.getClassChoiceDefinitions(classId);
   }
 
+  static async getRacialChoiceDefinitions(raceName: string): Promise<RacialChoiceDefinition[]> {
+    return GameDataService.connector.getRacialChoiceDefinitions(raceName);
+  }
+
   static async getSpellTables(): Promise<Record<string, SpellProgressionTable>> {
     return GameDataService.connector.getSpellTables();
   }
@@ -695,6 +710,16 @@ export class GameDataService {
     return GameDataService.connector.getRaceGroups(ctx);
   }
 
+  /**
+   * Synchronous accessor — Phase B concession.
+   * Used by AltRacialTraitsSection as a synchronous useMemo lookup.
+   * Phase B cleanup: replace with async getRaceByName through the connector once
+   * the connector exposes single-race lookup.
+   */
+  static getRaceByNameSync(name: string): ExpandedRaceData | undefined {
+    return ALL_EXPANDED_RACES.find((r) => r.name === name);
+  }
+
   // ---- Equipment -------------------------------------------------------------
 
   static async getWeapons(): Promise<WeaponDefinition[]> {
@@ -715,6 +740,10 @@ export class GameDataService {
 
   static async getMagicItemsBySlot(slot: ItemSlot): Promise<MagicItemDefinition[]> {
     return GameDataService.connector.getMagicItemsBySlot(slot);
+  }
+
+  static async getMagicWeaponTemplates(): Promise<MagicWeaponDefinition[]> {
+    return GameDataService.connector.getMagicWeaponTemplates();
   }
 
   static async searchMagicItems(query: string): Promise<MagicItemDefinition[]> {

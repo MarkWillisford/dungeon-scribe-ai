@@ -25,6 +25,7 @@ import { AppliedTemplate, GrantedBonus, LevelUpDecision, CharacterCRTracking } f
 import { Ruleset, CampaignRulesetLink } from './ruleset';
 import { CompanionInstance } from './companions';
 import { Eidolon } from './eidolon';
+import { CharacterFlaws } from './flaws';
 
 export interface ManualAbilityBonus {
   ability: AbilityKey;
@@ -87,6 +88,8 @@ export interface Character {
   // until item picker provides full definition data)
   editorEquipment?: EditorEquipmentItem[];
 
+  flaws: CharacterFlaws;
+
   // Editor metadata — user-entered typed bonuses for ability scores (morale, sacred, etc.)
   // Stored here so the pipeline can pick them up as effects without overwriting computed bonuses.
   manualAbilityBonuses?: ManualAbilityBonus[];
@@ -124,6 +127,7 @@ export * from './dice';
 export * from './templates';
 export * from './mythic';
 export * from './resources';
+export * from './choiceOption';
 export * from './classChoices';
 export * from './classOptions';
 export * from './deities';
@@ -135,3 +139,4 @@ export * from './gameData';
 export * from './companions';
 export * from './favoredClassBonuses';
 export * from './eidolon';
+export * from './flaws';

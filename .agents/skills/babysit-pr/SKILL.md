@@ -1,12 +1,12 @@
 ---
 name: babysit-pr
-description: "Watch a DS AI PR through CI and CodeRabbit review feedback: wait for CI, auto-fix high-confidence failures, reply to active review threads, and summarize parsed CodeRabbit review-body comments with sentinel-tagged comments. Runs one pass against the current branch's PR; pass a PR number or URL to check out that PR first. Use when invoked as 'babysit-pr', 'babysit PR 123', 'watch my PR', or 'respond to comments'."
+description: "Watch a DS AI PR through CI and Sourcery review feedback: wait for CI, auto-fix high-confidence failures, reply to active review threads, and summarize parsed Sourcery review-body comments with sentinel-tagged comments. Runs one pass against the current branch's PR; pass a PR number or URL to check out that PR first. Use when invoked as 'babysit-pr', 'babysit PR 123', 'watch my PR', or 'respond to comments'."
 argument-hint: '[pr-number-or-url]'
 ---
 
 # Babysit PR (DS AI)
 
-Watch one PR through CI, auto-fix high-confidence failures, and leave a paper-trail reply on every active review thread and CodeRabbit review-body comment. Threads stay open for human resolution — this skill only posts replies, it never resolves.
+Watch one PR through CI, auto-fix high-confidence failures, and leave a paper-trail reply on every active review thread and Sourcery review-body comment. Threads stay open for human resolution — this skill only posts replies, it never resolves.
 
 Scripts live at `.agents/skills/babysit-pr/scripts/` in the DS AI repo root. All script paths in this document are relative to that directory — invoke them as `bash .agents/skills/babysit-pr/scripts/<name>.sh`.
 
@@ -116,7 +116,7 @@ Exit codes 0 (pass), 1 (fail), 8 (pending), 124 (timeout) are expected. Others r
 bash .agents/skills/babysit-pr/scripts/unresolvedPrComments.sh
 ```
 
-Output JSON fields: `threads`, `activeThreads`, `uncertainThreads`, `nitpickComments` (includes CodeRabbit Nitpick, Minor, and Outside diff range comments), `totalActiveThreads`, `totalUncertainThreads`, `totalNitpicks`, `totalUnresolvedComments`.
+Output JSON fields: `threads`, `activeThreads`, `uncertainThreads`, `nitpickComments` (includes Sourcery Nitpick, Minor, and Outside diff range comments), `totalActiveThreads`, `totalUncertainThreads`, `totalNitpicks`, `totalUnresolvedComments`.
 
 ### Scope
 
@@ -162,7 +162,7 @@ Read logs. Diagnose build/type errors first (they cause cascading failures), the
 - Permission / auth / missing-secret failures.
 - Unrelated failures (code this PR didn't modify).
 - Ambiguous test intent.
-- External checks with no inspectable logs (CodeRabbit, Devin, etc.).
+- External checks with no inspectable logs (Sourcery, Devin, etc.).
 
 CI fixes are never Deferred as follow-ups: CI must pass on this PR.
 
@@ -189,11 +189,11 @@ DS AI specifics to watch for when applying fixes:
 - TypeScript: never introduce `any`; use `unknown` with a narrowing guard.
 - Tests: if fixing implementation changes behavior, update the test to assert the correct behavior. Don't defer a test update — update it alongside the fix.
 
-### 7. Assess CodeRabbit review-body comments
+### 7. Assess Sourcery review-body comments
 
 **NO COMMITS IN THIS STEP.** Edit files freely. Do not run `git add`, `git commit`, or `commitAndPush.sh` here. All changes accumulate in the working tree and are committed once in Step 8 after Steps 5, 6, AND 7 are all complete.
 
-For every parsed CodeRabbit review-body comment in `nitpickComments`:
+For every parsed Sourcery review-body comment in `nitpickComments`:
 
 - Check whether its `fingerprint` already appears in a prior babysit-pr sentinel comment. If yes, skip.
 - Classify scope (in / out) using the Scope section.
@@ -201,7 +201,7 @@ For every parsed CodeRabbit review-body comment in `nitpickComments`:
   - In-scope → Agree / Disagree / Already fixed. If Agree, apply the fix.
   - Out-of-scope → meets bar → Agree (note). Does not meet bar → **Defer** (goes into summary under Deferred heading, not a separate thread reply).
 
-Deferred CodeRabbit fingerprints go into the fenced fingerprint block at the end of the summary so future runs dedupe correctly.
+Deferred Sourcery fingerprints go into the fenced fingerprint block at the end of the summary so future runs dedupe correctly.
 
 ### 8. Commit (do NOT push yet)
 
@@ -218,7 +218,7 @@ bash .agents/skills/babysit-pr/scripts/commitOnly.sh "fix: babysit-pr — <messa
 
 Capture the `url=` line for reply templates in step 9.
 
-**Do NOT push here.** Pushing triggers CodeRabbit to re-review, which fires a new babysit-pr run that cancels this one before replies are posted. The push happens at the end of step 9, after all sentinel replies are sent.
+**Do NOT push here.** Pushing triggers Sourcery to re-review, which fires a new babysit-pr run that cancels this one before replies are posted. The push happens at the end of step 9, after all sentinel replies are sent.
 
 ### 9. Post replies, then push
 
@@ -239,46 +239,46 @@ Body templates:
 
 The script appends the `addressed` sentinel.
 
-If any CodeRabbit review-body comments were assessed in step 7, post ONE top-level PR comment:
+If any Sourcery review-body comments were assessed in step 7, post ONE top-level PR comment:
 
 ```bash
 bash .agents/skills/babysit-pr/scripts/postSentinelPrComment.sh "$PR_NUMBER" "$BODY"
 ```
 
-The CodeRabbit summary body:
+The Sourcery summary body:
 
 - Groups verdicts under **Agree / Disagree / Already fixed / Deferred (out of scope)** headings.
 - Lists each deferred item with `<!-- babysit-pr:followup v1 ds-ai@0.1.0 -->` on its own line.
 - Includes the commit URL for fixes.
 - Includes every current fingerprint in a fenced block at the end (addressed and deferred).
 
-**Push after all replies are posted.** Once every sentinel reply (thread replies + CodeRabbit summary comment) is sent, push the commit:
+**Push after all replies are posted.** Once every sentinel reply (thread replies + Sourcery summary comment) is sent, push the commit:
 
 ```bash
 git push
 ```
 
-All sentinels are now in place before CodeRabbit sees the new commit. When CodeRabbit re-reviews and triggers the next babysit-pr run, it will find those threads already addressed.
+All sentinels are now in place before Sourcery sees the new commit. When Sourcery re-reviews and triggers the next babysit-pr run, it will find those threads already addressed.
 
 ### 9a. Create follow-up issue for deferred items (if any)
 
-If any threads or CodeRabbit comments were Deferred this pass, create ONE GitHub issue aggregating them:
+If any threads or Sourcery comments were Deferred this pass, create ONE GitHub issue aggregating them:
 
 ```bash
 gh issue create \
-  --title "CodeRabbit deferred items from PR #${PR_NUMBER}" \
-  --label "coderabbit-deferred" \
+  --title "Sourcery deferred items from PR #${PR_NUMBER}" \
+  --label "sourcery-deferred" \
   --body "<checklist of deferred items with rationale>"
 ```
 
-Format the body as a markdown checklist. Each item should include: the file/line referenced, the CodeRabbit finding or reviewer comment (one-line summary), and the reason it was deferred. Link back to the PR.
+Format the body as a markdown checklist. Each item should include: the file/line referenced, the Sourcery finding or reviewer comment (one-line summary), and the reason it was deferred. Link back to the PR.
 
 Do NOT label the issue `sandcastle` — these are for human review, not autonomous pickup.
 
-If the `coderabbit-deferred` label does not exist yet, create it first:
+If the `sourcery-deferred` label does not exist yet, create it first:
 
 ```bash
-gh label create "coderabbit-deferred" --color "FBCA04" --description "CodeRabbit findings deferred for manual review"
+gh label create "sourcery-deferred" --color "FBCA04" --description "Sourcery findings deferred for manual review"
 ```
 
 ### 10. Summarize and exit
@@ -289,7 +289,7 @@ Report:
 - Merge conflict status if relevant.
 - CI checks fixed / still failing / skipped-with-diagnosis.
 - Review threads replied to, grouped by verdict.
-- CodeRabbit comments summarized (or skipped as already covered).
+- Sourcery comments summarized (or skipped as already covered).
 - Any deferred items (count + link to the follow-up issue created in 9a).
 - The stop condition for this pass (clean / progressing / stuck).
 
@@ -303,7 +303,7 @@ gh api graphql -f query='query($o:String!,$r:String!,$n:Int!){repository(owner:$
 
 After the single pass, pick exactly one outcome:
 
-- **Exit clean** — CI green AND every thread in `activeThreads` was either Skip-reply or received a fresh sentinel reply (Agree / Disagree / Already-fixed / Defer all count) AND every current CodeRabbit fingerprint is covered. On clean exit:
+- **Exit clean** — CI green AND every thread in `activeThreads` was either Skip-reply or received a fresh sentinel reply (Agree / Disagree / Already-fixed / Defer all count) AND every current Sourcery fingerprint is covered. On clean exit:
   1. Add the `review-passed` label:
 
      ```bash

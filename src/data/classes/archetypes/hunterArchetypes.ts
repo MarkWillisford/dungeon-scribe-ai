@@ -17,18 +17,21 @@ export const HUNTER_ARCHETYPES: ArchetypeData[] = [
         level: 1,
         description:
           "A divine hunter selects a deity at 1st level whose domain list includes Animal, Hunt, or a related thematic domain. She adds all domain spells of one domain from her deity's list to her hunter spell list.",
+        effects: [],
       },
       {
         name: 'Sacred Animal',
         level: 4,
         description:
           "At 4th level, the divine hunter's animal companion gains the celestial, fiendish, or entropic template (chosen to match the divine hunter's deity's alignment) and gains SR equal to the hunter's level + 5.",
+        effects: [],
       },
       {
         name: 'Holy Strike',
         level: 8,
         description:
           "At 8th level, the divine hunter's weapon attacks are treated as good (or evil, matching her deity) aligned for the purpose of overcoming damage reduction. She also adds her Wisdom modifier to damage rolls against creatures with the alignment subtype opposing her deity.",
+        effects: [],
       },
     ],
     source: 'Advanced Class Guide',
@@ -50,24 +53,28 @@ export const HUNTER_ARCHETYPES: ArchetypeData[] = [
         level: 1,
         description:
           'A feykiller adds her Wisdom modifier (minimum +1) as a bonus on attack rolls and damage rolls against fey creatures. She is also never affected by fey enchantments that impose the confused or fascinated conditions unless she fails her saving throw by 5 or more.',
+        effects: [],
       },
       {
         name: 'Cold Iron Weapon',
         level: 2,
         description:
           "At 2nd level, the feykiller's attacks are treated as cold iron for the purpose of overcoming fey damage reduction. At 6th level, she can extend this benefit to her animal companion's natural attacks.",
+        effects: [],
       },
       {
         name: 'Iron Will Aura',
         level: 8,
         description:
           'At 8th level, the feykiller and allies within 10 feet gain a +4 morale bonus on saving throws against mind-affecting effects created by fey creatures.',
+        effects: [],
       },
       {
         name: "Fey Hunter's Quarry",
         level: 11,
         description:
           'At 11th level, once per day the feykiller can designate a fey creature as her quarry. Against her quarry, she automatically confirms all critical threats and gains blindsense 30 feet that functions only against the quarry.',
+        effects: [],
       },
     ],
     source: 'Advanced Class Guide',
@@ -89,24 +96,28 @@ export const HUNTER_ARCHETYPES: ArchetypeData[] = [
         level: 1,
         description:
           'A forester can move through any sort of undergrowth at her normal speed without taking damage or suffering any other impairment. This extends to magically manipulated vegetation at 8th level.',
+        effects: [],
       },
       {
         name: 'Forest Bond',
         level: 4,
         description:
           "At 4th level, the forester can commune with trees within 100 feet as a full-round action, learning general information about creatures that have passed within the trees' root network in the last 24 hours.",
+        effects: [],
       },
       {
         name: 'One with Trees',
         level: 8,
         description:
           'At 8th level, the forester can enter a tree and exit from any other tree within 100 feet, as tree stride. She can do this a number of times per day equal to 3 + her Wisdom modifier.',
+        effects: [],
       },
       {
         name: 'Tree Shape',
         level: 12,
         description:
           'At 12th level, the forester can assume the form of a Large tree as a standard action, gaining tremorsense 30 feet and the ability to observe everything within 30 feet. She can remain in tree form indefinitely and return to her normal form as a free action.',
+        effects: [],
       },
     ],
     source: 'Advanced Class Guide',
@@ -128,18 +139,21 @@ export const HUNTER_ARCHETYPES: ArchetypeData[] = [
         level: 1,
         description:
           "A primal companion hunter's animal companion gains the benefits of two animal focus aspects simultaneously instead of one. Additionally, the companion's animal focus aspects are treated as if the hunter were 4 levels higher when determining their effects.",
+        effects: [],
       },
       {
         name: 'Primal Transformation',
         level: 8,
         description:
           "At 8th level, the primal companion hunter's animal companion can shift to a more powerful form once per day for 1 minute per hunter level. In this form, it gains a +4 enhancement bonus to Strength and Constitution, a +2 natural armor bonus, and its natural attacks are treated as magic for overcoming damage reduction.",
+        effects: [],
       },
       {
         name: 'Empowered Companion',
         level: 12,
         description:
           "At 12th level, the animal companion gains spell resistance equal to 11 + the hunter's level and becomes immune to mind-affecting effects while in its primal transformation.",
+        effects: [],
       },
     ],
     source: 'Advanced Class Guide',
@@ -161,24 +175,28 @@ export const HUNTER_ARCHETYPES: ArchetypeData[] = [
         level: 1,
         description:
           'A scarab stalker can detect undead creatures as a move action within 60 feet, as if using detect undead. She is also immune to the paralysis and energy drain caused by undead of CR equal to or less than her hunter level.',
+        effects: [],
       },
       {
         name: 'Sacred Scarab',
         level: 4,
         description:
           "At 4th level, the scarab stalker's animal companion gains the ability to detect undead creatures within 30 feet automatically, and its natural attacks are treated as if they have the ghost touch property against incorporeal undead.",
+        effects: [],
       },
       {
         name: 'Desert Adaptation',
         level: 6,
         description:
           'At 6th level, the scarab stalker and her animal companion are immune to the fatigued condition from environmental heat and need only half the normal amount of water to survive.',
+        effects: [],
       },
       {
         name: 'Tomb Raider',
         level: 10,
         description:
           'At 10th level, when the scarab stalker confirms a critical hit against an undead creature, she can choose to destroy it outright (no save) if its CR is equal to or less than half her hunter level.',
+        effects: [],
       },
     ],
     source: "Pathfinder Player Companion: Mummy's Mask",
@@ -200,18 +218,21 @@ export const HUNTER_ARCHETYPES: ArchetypeData[] = [
         level: 1,
         description:
           'As a swift action, the targeted striker can study an opponent she can see to gain a +1 competence bonus on Bluff, Knowledge, Perception, Sense Motive, and Survival checks against that target, and a +1 competence bonus on weapon attack rolls and damage rolls. This bonus increases by +1 for every 5 hunter levels.',
+        effects: [],
       },
       {
         name: 'Crippling Strike',
         level: 5,
         description:
           'At 5th level, once per day the targeted striker can declare a crippling strike when she confirms a critical hit against her studied target. The target is stunned for 1 round and its movement speed is reduced by half for 1 minute (Fortitude DC 10 + 1/2 hunter level + Wis modifier negates the movement reduction).',
+        effects: [],
       },
       {
         name: 'Coordinated Takedown',
         level: 9,
         description:
           "At 9th level, whenever the targeted striker and her animal companion both attack the studied target in the same round, the target takes a cumulative -2 penalty to AC and saving throws until the start of the targeted striker's next turn.",
+        effects: [],
       },
     ],
     source: 'Advanced Class Guide',
@@ -233,24 +254,28 @@ export const HUNTER_ARCHETYPES: ArchetypeData[] = [
         level: 1,
         description:
           "A verminous hunter selects a vermin companion instead of an animal companion. The vermin companion functions as a druid's animal companion, gaining the share spells and empathic link abilities. Vermin companions with Intelligence 1 or 2 cannot be taught tricks but can be commanded in combat via mental signals.",
+        effects: [],
       },
       {
         name: 'Vermin Empathy',
         level: 1,
         description:
           'The verminous hunter can improve the attitude of vermin creatures as a druid of her level, using a Charisma check against a base DC of 15 rather than a Diplomacy check.',
+        effects: [],
       },
       {
         name: 'Chitin Adaptation',
         level: 6,
         description:
           'At 6th level, the verminous hunter develops chitinous patches on her skin, granting her a +1 natural armor bonus to AC. This increases to +2 at 10th level and +3 at 14th level.',
+        effects: [],
       },
       {
         name: 'Vermin Shape',
         level: 10,
         description:
           'At 10th level, three times per day the verminous hunter can transform into any vermin of size Small to Large, as beast shape II but restricted to vermin. She can remain in vermin form for 1 hour per level per day, split up as desired.',
+        effects: [],
       },
     ],
     source: 'Advanced Class Guide',
@@ -272,18 +297,21 @@ export const HUNTER_ARCHETYPES: ArchetypeData[] = [
         level: 4,
         description:
           'At 4th level, the wild stalker gains the barbarian rage ability, usable for a number of rounds per day equal to 4 + her Constitution modifier. She gains additional rounds of rage for every hunter level beyond 4th as if she were a barbarian.',
+        effects: [],
       },
       {
         name: 'Rage Powers',
         level: 6,
         description:
           "At 6th level and every 3 levels thereafter, the wild stalker gains one rage power from the barbarian's list, treating her hunter level as her barbarian level for determining prerequisites and effects.",
+        effects: [],
       },
       {
         name: 'Primal Senses',
         level: 8,
         description:
           'At 8th level, the wild stalker gains scent as an extraordinary ability while raging. At 14th level, she gains blindsense 10 feet while raging.',
+        effects: [],
       },
     ],
     source: 'Advanced Class Guide',
@@ -309,24 +337,28 @@ export const HUNTER_ARCHETYPES: ArchetypeData[] = [
         level: 1,
         description:
           'Instead of one animal companion, a packmaster gains two animal companions whose combined levels equal her effective hunter level - 2 (minimum 1 each). She may command all companions simultaneously as a move action and apply her animal focus to each companion separately, though she cannot apply animal focus to herself.',
+        effects: [],
       },
       {
         name: 'Pack Tactics',
         level: 4,
         description:
           "At 4th level, all of the packmaster's animal companions gain the ability to flank together even if they are not on opposite sides of a target, as long as at least two companions threaten the same creature.",
+        effects: [],
       },
       {
         name: 'Coordinated Pack',
         level: 8,
         description:
           'At 8th level, the packmaster can grant all her animal companions a teamwork feat she knows as a swift action for 1 minute, even if the companions do not meet the prerequisites.',
+        effects: [],
       },
       {
         name: 'Pack Leader',
         level: 12,
         description:
           'At 12th level, the packmaster can add a third animal companion whose level counts against the same pool. Additionally, all animal companions gain a bonus on attack rolls equal to the number of other companions currently threatening the same target.',
+        effects: [],
       },
     ],
     source: 'Advanced Class Guide',
@@ -348,24 +380,28 @@ export const HUNTER_ARCHETYPES: ArchetypeData[] = [
         level: 1,
         description:
           'The colluding scoundrel\'s animal companion gains Disable Device, Sleight of Hand, and Stealth as class skills. The companion can be trained to perform tasks equivalent to the "work" and "assist" tricks for these skills, using the hunter\'s bonus on those skill checks.',
+        effects: [],
       },
       {
         name: 'Diversion',
         level: 3,
         description:
           'At 3rd level, once per day per hunter level, the colluding scoundrel can direct her animal companion to create a diversion to allow the hunter to hide (as per the Bluff use for feinting in combat). While the companion performs the diversion, the hunter can also attempt Sleight of Hand with a +4 bonus.',
+        effects: [],
       },
       {
         name: 'Con Artist',
         level: 7,
         description:
           'At 7th level, the colluding scoundrel adds her Wisdom modifier to Bluff and Sleight of Hand checks. When the hunter and companion successfully use teamwork to pickpocket a target, the hunter can attempt a second, different pickpocket attempt against the same target in the same round as a free action.',
+        effects: [],
       },
       {
         name: 'Perfect Con',
         level: 11,
         description:
           "At 11th level, the colluding scoundrel can spend a full-round action directing her animal companion to take a completely different, seemingly unrelated action. Any creature observing the companion cannot attempt Perception checks to notice the hunter's own actions during that round unless the observer succeeds on a Sense Motive check (DC 20 + hunter's level).",
+        effects: [],
       },
     ],
     source: 'Advanced Class Guide',
@@ -387,24 +423,28 @@ export const HUNTER_ARCHETYPES: ArchetypeData[] = [
         level: 1,
         description:
           'A courtly hunter gains Diplomacy, Bluff, and Knowledge (nobility) as class skills. She adds half her hunter level (minimum 1) as a bonus on Diplomacy checks made to gather information about a target she is hunting.',
+        effects: [],
       },
       {
         name: 'Civilized Companion',
         level: 1,
         description:
           "The courtly hunter's animal companion is trained to behave in civilized settings. It ignores the penalties from crowded areas and can make Perception checks to aid the hunter's Sense Motive checks as a free action.",
+        effects: [],
       },
       {
         name: 'Social Hunter',
         level: 5,
         description:
           'At 5th level, the courtly hunter can use her hunter abilities to track creatures through social interactions and paper trails. She substitutes Diplomacy or Bluff for Survival when tracking humanoid prey through civilized environments.',
+        effects: [],
       },
       {
         name: 'Network',
         level: 9,
         description:
           'At 9th level, the courtly hunter has cultivated informants in every major city she has spent at least one week in. She can spend 10 minutes and make a Diplomacy check (DC 15 + CR of prey) to locate the general whereabouts of a specific creature within such a city.',
+        effects: [],
       },
     ],
     source: 'Advanced Class Guide',

@@ -61,18 +61,21 @@ export const PRIMAL_DISCIPLE_ARCHETYPE: ArchetypeData = {
       level: 1,
       description:
         "A primal disciple begins her career with knowledge of three martial maneuvers. The disciplines available to her are Golden Lion, Piercing Thunder, Primal Fury, and Thrashing Dragon. A primal disciple gains Diplomacy as a class skill. Once the primal disciple knows a maneuver, she must ready it before she can use it. A maneuver usable by primal disciples is considered an extraordinary ability unless otherwise noted in it or its discipline's description. A primal disciple's maneuvers are not affected by spell resistance, and she does not provoke attacks of opportunity when she initiates one. The primal disciple learns additional maneuvers at higher levels, as indicated on Table: Archetype Maneuver Progression. The maximum level of maneuvers gained through primal disciple levels is limited by those listed in that table as well, although this restriction does not apply to maneuvers added to his maneuvers known through other methods, such as prestige classes or the Advanced Study feat. A primal disciple must meet a maneuver's prerequisite to learn it. Upon reaching 4th level, and at every even numbered initiator level thereafter (6th, 8th, 10th, and so on), the primal disciple can choose to learn a new maneuver in place of one she already knows. In effect, she loses the old maneuver in exchange for the new one. She can choose a new maneuver of any level she likes, as long as she observes the restriction on the highest-level maneuvers she knows; the primal disciple need not replace the old maneuver with a maneuver of the same level. She can swap only a single maneuver at any given level. A primal disciple's initiation modifier is Wisdom, and each primal disciple level is counted as a full initiator level.",
+      effects: [],
     },
     {
       name: 'Maneuvers Readied',
       level: 1,
       description:
         'A primal disciple can ready all three of her maneuvers known at 1st level, and as she advances in level and learns more maneuvers, she is able to ready more, but must still choose which maneuvers to ready. A primal disciple must always ready her maximum number of maneuvers readied. She readies her maneuvers by practicing weapon drills or communing with her ancestors for ten minutes. The maneuvers she chooses remain readied until she decides to meditate again and change them. The primal disciple does not need to sleep or rest for any long period of time in order to ready her maneuvers; any time she spends ten minutes in communion with her ancestors, she can change her readied maneuvers. A primal disciple begins an encounter with all her readied maneuvers unexpended, regardless of how many times she might have already used them since she chose them. When she initiates a maneuver, she expends it for the current encounter, so each of her readied maneuvers can be used once per encounter (unless she recovers them, as described below). In order for the primal disciple to recover maneuvers, she must draw on the strength of her ancestors as a full-round action. When she does so, she recovers a number of expended maneuvers equal to her primal disciple initiation modifier (minimum 2), regains one round of rage, and if she is fatigued as a result of her rage class feature, she can make a Fortitude save (DC 10 + the number of rounds the fatigue would last) to not become fatigued. Alternately, the primal disciple may focus inward and recover a single maneuver as a standard action.',
+      effects: [],
     },
     {
       name: 'Stances Known',
       level: 1,
       description:
         'A primal disciple begins play with knowledge of one stance from any discipline open to primal disciples. At 4th, 7th, 11th, and 13th levels, she can select an additional stance to learn. The maximum level of stances gained through primal disciple levels is limited by those listed in Table: Archetype Maneuver Progression. Unlike maneuvers, stances are not expended and the primal disciple does not have to ready them. All the stances she knows are available to her at all times, and she can change the stance she is currently maintaining as a swift action. A stance is an extraordinary ability unless otherwise stated in the stance or discipline description. Unlike with maneuvers, a primal disciple cannot learn a new stance at higher levels in place of one she already knows. This ability replaces the rage powers gained at 4th, 6th, 8th, 10th, 12th, 14th, 16th, 18th, and 20th levels.',
+      effects: [],
     },
 
     // ── Ancestral Style ──
@@ -81,6 +84,7 @@ export const PRIMAL_DISCIPLE_ARCHETYPE: ArchetypeData = {
       level: 1,
       description:
         'Primal disciples draw their skill and strength from longstanding traditions of combat and skill in their tribes. At 1st level and again at 6th level, a primal disciple gains one of the following feats as a bonus feat: Enduring Protector, Martial Charge, Martial Power, Prodigious Two-Weapon Fighting, Seize the Opportunity, or Victorious Recovery. She must meet the prerequisites for these feats as normal. This ability replaces fast movement and trap sense.',
+      effects: [],
     },
   ],
   initiating: {

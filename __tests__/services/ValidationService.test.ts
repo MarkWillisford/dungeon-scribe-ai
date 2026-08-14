@@ -152,6 +152,25 @@ describe('ValidationService', () => {
         'No roll history provided - cannot verify legitimacy of rolled stats',
       );
     });
+
+    test('should detect impossible roll totals above maximum', () => {
+      const scores = createMockAbilityScores({
+        str: 20,
+        dex: 12,
+        con: 10,
+        int: 8,
+        wis: 10,
+        cha: 10,
+      });
+      const rollHistory = [
+        { ability: 'str', rolls: [6, 6, 6, 6], total: 20, timestamp: new Date() },
+        { ability: 'dex', rolls: [4, 4, 4], total: 12, timestamp: new Date() },
+      ];
+      const result = ValidationService.validateRolledStats(scores, rollHistory);
+      expect(result.isValid).toBe(false);
+      expect(result.errors.some((e) => e.includes('Impossible roll totals detected'))).toBe(true);
+      expect(result.errors.some((e) => e.includes('str:20'))).toBe(true);
+    });
   });
 
   describe('validateCharacterName', () => {

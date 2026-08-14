@@ -5,6 +5,7 @@ import { CharacterEntryScreen } from '@/components/character/direct-entry/Charac
 import { useAppDispatch } from '@/store/hooks';
 import { loadCharacter, type EntryMode } from '@/store/slices/characterEntrySlice';
 import { loadClasses } from '@/store/slices/gameDataSlice';
+import { setActiveRuleset, clearRuleset } from '@/store/slices/rulesetSlice';
 import { CharacterService } from '@/services/CharacterService';
 import { loadCharacterById } from '@/store/thunks/loadCharacterById';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
@@ -33,6 +34,7 @@ export default function EntryRoute() {
         try {
           const character = await dispatch(loadCharacterById(characterId)).unwrap();
           dispatch(loadCharacter({ character, mode: resolvedMode, characterId }));
+          dispatch(setActiveRuleset(character.ruleset));
         } catch {
           // Fall back to blank on load failure
           dispatch(
@@ -56,6 +58,10 @@ export default function EntryRoute() {
     }
 
     initCharacter();
+
+    return () => {
+      dispatch(clearRuleset());
+    };
   }, [dispatch, resolvedMode, characterId]);
 
   useEffect(() => {

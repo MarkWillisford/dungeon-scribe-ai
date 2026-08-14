@@ -1,6 +1,7 @@
 import {
   CompanionService,
   AC_PROGRESSION,
+  computeCompanionEffectiveLevel,
   effectiveLevelFromDraftClass,
   pickerFilterFromDraftClass,
 } from '@services/CompanionService';
@@ -618,5 +619,63 @@ describe('CompanionService.computeAvailableSlots', () => {
     const spider: AnimalCompanionEntry = { ...wolfBase, id: 'giant-spider', bodyShape: 'unusual' };
     const slots = CompanionService.computeAvailableSlots(spider, makeInstance());
     expect(slots).toEqual([]);
+  });
+});
+
+describe('computeCompanionEffectiveLevel', () => {
+  const druid = makeClassEntry({ name: 'Druid', level: 10, id: 'druid-1' });
+
+  it('returns base level when no other classes stack', () => {
+    expect(computeCompanionEffectiveLevel(druid, [druid])).toBe(10);
+  });
+
+  it('adds levels from a class that advances via "all"', () => {
+    const natureWarden = makeClassEntry({
+      name: 'Nature Warden',
+      level: 5,
+      advancesCompanionOf: 'all',
+    });
+    expect(computeCompanionEffectiveLevel(druid, [druid, natureWarden])).toBe(15);
+  });
+
+  it('adds levels from a class that advances the specific granting class by id', () => {
+    const stacker = makeClassEntry({ name: 'Stacker', level: 3, advancesCompanionOf: 'druid-1' });
+    expect(computeCompanionEffectiveLevel(druid, [druid, stacker])).toBe(13);
+  });
+
+  it('does not double-count the granting class itself even when it has advancesCompanionOf', () => {
+    const selfRef = makeClassEntry({
+      name: 'Druid',
+      level: 10,
+      id: 'druid-1',
+      advancesCompanionOf: 'all',
+    });
+    expect(computeCompanionEffectiveLevel(selfRef, [selfRef])).toBe(10);
+  });
+
+  it('ignores classes with no advancesCompanionOf set', () => {
+    const fighter = makeClassEntry({ name: 'Fighter', level: 8 });
+    expect(computeCompanionEffectiveLevel(druid, [druid, fighter])).toBe(10);
+  });
+
+  it('ignores classes that advance a different class id', () => {
+    const wrongStacker = makeClassEntry({
+      name: 'Stacker',
+      level: 4,
+      advancesCompanionOf: 'ranger-1',
+    });
+    expect(computeCompanionEffectiveLevel(druid, [druid, wrongStacker])).toBe(10);
+  });
+
+  it('accumulates multiple stacking classes', () => {
+    const stacker1 = makeClassEntry({ name: 'Stacker1', level: 3, advancesCompanionOf: 'all' });
+    const stacker2 = makeClassEntry({ name: 'Stacker2', level: 2, advancesCompanionOf: 'druid-1' });
+    expect(computeCompanionEffectiveLevel(druid, [druid, stacker1, stacker2])).toBe(15);
+  });
+
+  it('falls back to name when granting class has no id', () => {
+    const noId = makeClassEntry({ name: 'Druid', level: 10 });
+    const stacksByName = makeClassEntry({ name: 'NW', level: 4, advancesCompanionOf: 'Druid' });
+    expect(computeCompanionEffectiveLevel(noId, [noId, stacksByName])).toBe(14);
   });
 });

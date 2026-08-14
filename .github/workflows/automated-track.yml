@@ -1,0 +1,202 @@
+name: Automated Track
+
+# Triggered when an issue is labeled. Filtered to the `bug` label below.
+# Reads the issue, writes a failing test, fixes the code, then opens a PR.
+# All without human involvement until the PR is open.
+#
+# Strict TDD loop:
+#   1. Extract acceptance criteria from the issue body.
+#   2. Write or adjust a test that captures the correct behavior.
+#   3. Run the test against current code — it MUST fail (reproduction gate).
+#   4. Fix the code until the test passes.
+#   5. Run the full test suite (npm test). No regressions.
+#   6. Run npm run typecheck. Must pass.
+#   7. Commit, push, open PR.
+#
+# Bail conditions (no PR, no push, relabel to sandcastle):
+#   - Cannot write a reproducing test within REPRO_TURN_LIMIT turns
+#   - Turn budget exhausted before tests pass
+#   - Fix would touch more than 3 files
+#   - Full test suite regressions the agent cannot resolve
+#
+# Required secrets:
+#   CLAUDE_CODE_OAUTH_TOKEN — Claude Max plan OAuth token
+
+on:
+  issues:
+    types: [labeled]
+
+concurrency:
+  # One run per issue at a time. Cancel any in-progress run if the label fires again.
+  group: issue-${{ github.event.issue.number }}
+  cancel-in-progress: true
+
+jobs:
+  automated-fix:
+    if: github.event.label.name == 'bug'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      REPRO_TURN_LIMIT: 8
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Configure git and create fix branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout -b "MW/bug-${{ github.event.issue.number }}"
+
+      - name: Fix agent (TDD loop)
+        id: fix_agent
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          show_full_output: true
+          claude_args: |
+            --model claude-sonnet-4-6
+            --max-turns 25
+            --allowed-tools Read,Edit,Write,Bash(git:*),Bash(npm:*),Bash(gh:*)
+          prompt: |
+            You are an autonomous bug-fix agent running in GitHub Actions.
+            You follow a strict TDD loop. Do not deviate from these steps.
+
+            Issue #${{ github.event.issue.number }}: ${{ github.event.issue.title }}
+
+            Issue body:
+            ${{ github.event.issue.body }}
+
+            Hard limits:
+            - Max files to modify (source code, not tests): 3
+            - If you cannot write a reproducing test within your first ${{ env.REPRO_TURN_LIMIT }} turns, BAIL.
+            - Do not use WebFetch or WebSearch. Work only from the codebase.
+
+            == STRICT TDD LOOP ==
+
+            STEP 1 — Read and understand.
+            Read the issue body carefully. Extract the acceptance criteria: what is the
+            correct behavior? What input triggers the bug? What output or side-effect
+            is wrong?
+
+            STEP 2 — Write a reproducing test.
+            Write or adjust a test file that captures the correct behavior from the
+            acceptance criteria. The test must be specific to this bug — not a generic
+            smoke test. Place the test in the appropriate __tests__ directory following
+            existing conventions.
+
+            Run: npm test -- --testPathPattern=<your-test-file> --no-coverage
+
+            The test MUST FAIL against the current code. This is the reproduction gate.
+            If the test passes on current code, you have not captured the bug.
+            Iterate on the test until it fails. If you cannot produce a failing test
+            within your first ${{ env.REPRO_TURN_LIMIT }} turns total, BAIL (see below).
+
+            STEP 3 — Fix the code.
+            Identify the root cause. Write the minimal fix. Do not refactor unrelated
+            code. Count the number of source files you modify (excluding test files).
+            If fixing the bug requires modifying more than 3 source files, BAIL.
+
+            STEP 4 — Verify the fix.
+            Run: npm test -- --testPathPattern=<your-test-file> --no-coverage
+            Your new test must now PASS. If it still fails, iterate on the fix.
+
+            STEP 5 — Full suite, no regressions.
+            Run: npm test
+            All tests must pass. If you introduce regressions you cannot resolve, BAIL.
+
+            STEP 6 — Typecheck.
+            Run: npm run typecheck
+            Fix any type errors before continuing.
+
+            STEP 7 — Commit.
+            Stage all changed files (source and test). Commit with:
+              git add -A
+              git commit -m "fix: <one-line summary>
+
+            Closes #${{ github.event.issue.number }}"
+
+            Do NOT push. The workflow handles pushing.
+
+            == BAIL CONDITIONS ==
+
+            If any bail condition is met, do the following and then STOP:
+            1. Post a comment on the issue explaining what was tried and why you are bailing:
+               gh issue comment ${{ github.event.issue.number }} --body "<your explanation>"
+            2. Relabel the issue:
+               gh issue edit ${{ github.event.issue.number }} --remove-label bug --add-label sandcastle
+            3. Exit. Do not commit. Do not push. Do not create a PR.
+
+      - name: Upload agent execution log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: agent-log-issue-${{ github.event.issue.number }}-run-${{ github.run_id }}
+          path: /home/runner/work/_temp/claude-execution-output.json
+          retention-days: 30
+          if-no-files-found: ignore
+
+      - name: Check for commit (did the agent succeed?)
+        id: agent_result
+        run: |
+          # If the agent committed, HEAD will differ from origin/main.
+          # If it bailed, nothing was committed and HEAD == origin/main.
+          # Fetch first so a mid-run merge to main doesn't skew the count.
+          git fetch origin main
+          COMMITS=$(git rev-list origin/main..HEAD --count)
+          echo "commit_count=${COMMITS}" >> $GITHUB_OUTPUT
+          if [ "$COMMITS" -gt 0 ]; then
+            echo "status=DONE" >> $GITHUB_OUTPUT
+          else
+            echo "status=BAILED" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Push fix branch
+        if: steps.agent_result.outputs.status == 'DONE'
+        run: git push origin "MW/bug-${{ github.event.issue.number }}"
+
+      - name: Create PR
+        id: create_pr
+        if: steps.agent_result.outputs.status == 'DONE'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+        run: |
+          PR_URL=$(gh pr create \
+            --base main \
+            --head "MW/bug-${ISSUE_NUMBER}" \
+            --title "fix: ${ISSUE_TITLE}" \
+            --body "Automated fix for issue #${ISSUE_NUMBER}.
+
+          Closes #${ISSUE_NUMBER}
+
+          ---
+          _Generated by the automated-track workflow (TDD loop)._")
+          PR_NUMBER="${PR_URL##*/}"
+          echo "pr_number=${PR_NUMBER}" >> "$GITHUB_OUTPUT"
+
+      - name: Assign reviewer
+        if: steps.agent_result.outputs.status == 'DONE' && steps.create_pr.outputs.pr_number != ''
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh pr edit "${{ steps.create_pr.outputs.pr_number }}" --add-reviewer MarkWillisford

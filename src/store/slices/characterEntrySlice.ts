@@ -9,6 +9,8 @@ import type {
   TrickName,
 } from '@/types/companions';
 import type { AppliedTemplate } from '@/types/templates';
+import type { TemplateDefinition } from '@/data/templates/types';
+import { resolveTemplateChoice as resolveTemplateChoicePure } from '@/services/TemplateChoiceService';
 import type { CharacterMagicItem, ItemSlot } from '@/types/magicItems';
 import {
   characterLevelForClassLevel,
@@ -16,11 +18,14 @@ import {
   parseClassFeatSlotId,
 } from '@/utils/characterComputations';
 import type { AbilityKey } from '@/types/abilities';
+import type { FlexibleAbilityBonus } from '@/data/races/types';
+import type { RacialChoice } from '@/types/racialChoices';
 import type { Character, ManualAbilityBonus } from '@/types';
 import type { LevelIncrementSlot } from '@/types/character';
 import type { CharacterFeat, Feats } from '@/types/feats';
 import type { ClassEntry, CharacterClasses, FavoredClassBonusSelection } from '@/types/classes';
 import type { CharacterTrait } from '@/types/traits';
+import type { CharacterFlaw } from '@/types/flaws';
 import type { SpellcastingAdvancement, SpellcastingPool } from '@/types/spells';
 import type { EditorEquipmentItem, EditorEquippedSlot } from '@/types/character';
 import type {
@@ -32,6 +37,7 @@ import type {
 } from '@/types/eidolon';
 import { CharacterService } from '@/services/CharacterService';
 import { computeCompanionEffectiveLevel } from '@/services/CompanionService';
+import { ModifierPipelineService } from '@/services/ModifierPipelineService';
 
 // ---- Supporting types ----
 
@@ -42,6 +48,7 @@ export type EntryTabKey =
   | 'combat'
   | 'skills'
   | 'traits'
+  | 'flaws'
   | 'feats'
   | 'spells'
   | 'equipment'
@@ -81,23 +88,28 @@ function isClassFeatSlotStillGranted(character: Character, slotId: string): bool
 
 function syncFeatSlotsFromClasses(character: Character): void {
   const raceName = character.info.race?.name ?? '';
-  const generated = computeFeatSlots(character.classes.classes, raceName);
+  const generated = computeFeatSlots(
+    character.classes.classes,
+    raceName,
+    character.flaws?.flaws ?? [],
+  );
 
-  // Build set of (source, level) pairs already in character feats
-  const existingKeys = new Set(character.feats.feats.map((f) => `${f.source}_${f.grantedAtLevel}`));
+  // Build set of source keys already in character feats
+  const existingKeys = new Set(character.feats.feats.map((f) => f.source));
 
   for (const slot of generated) {
     // Class-granted slots are computed on read from Firestore class data the
     // slice can't see, so they're never generated here and need no placeholder.
     if (slot.source === 'class') continue;
-    const key = `${slot.source}_${slot.availableAtLevel}`;
+    const isFlawSlot = slot.id.startsWith('flaw-feat-');
+    const key = isFlawSlot ? slot.id : makeFeatSource(slot.source, slot.availableAtLevel);
     if (existingKeys.has(key)) continue;
     // Add an "empty" feat entry as a placeholder slot marker
     // We only add truly new slots (not already in feats.feats)
     character.feats.feats.push({
       featId: '',
       name: '',
-      source: makeFeatSource(slot.source, slot.availableAtLevel),
+      source: key,
       grantedAtLevel: slot.availableAtLevel,
       active: true,
       choices: {},
@@ -105,7 +117,15 @@ function syncFeatSlotsFromClasses(character: Character): void {
   }
   // Slots are computed on read — we just need to ensure assigned feats stay in sync.
   // Remove feat entries whose slots no longer exist
-  const validKeys = new Set(generated.map((s) => `${s.source}_${s.availableAtLevel}`));
+  // Class slots are excluded: their feats key off the composite class slot id
+  // and are validated by isClassFeatSlotStillGranted below, not by this set.
+  const validKeys = new Set<string>();
+  for (const s of generated) {
+    if (s.source === 'class') continue;
+    validKeys.add(
+      s.id.startsWith('flaw-feat-') ? s.id : makeFeatSource(s.source, s.availableAtLevel),
+    );
+  }
   character.feats.feats = character.feats.feats.filter((f) => {
     if (!f.featId) return false; // Remove empty placeholders
     if (f.source.startsWith('bonus_')) return true; // Keep bonus feats regardless
@@ -131,23 +151,36 @@ function syncLevelIncrementSlots(character: Character): void {
 }
 
 const ABILITY_KEYS: AbilityKey[] = ['str', 'dex', 'con', 'int', 'wis', 'cha'];
+const MENTAL_KEYS: AbilityKey[] = ['int', 'wis', 'cha'];
+const PHYSICAL_KEYS: AbilityKey[] = ['str', 'dex', 'con'];
 
-function syncEnhancementBonuses(character: Character): void {
-  for (const key of ABILITY_KEYS) character.abilityScores[key].bonuses.enhancement = [];
-  const accumulated: Partial<Record<AbilityKey, number[]>> = {};
-  for (const item of character.editorEquipment ?? []) {
-    if (item.slot && item.abilityScoreBonuses) {
-      for (const [ab, val] of Object.entries(item.abilityScoreBonuses)) {
-        (accumulated[ab as AbilityKey] ??= []).push(val as number);
-      }
+function applyFlexChoices(
+  abilityScores: Record<AbilityKey, { racial: number }>,
+  bonuses: FlexibleAbilityBonus[],
+  choices: string[],
+) {
+  ABILITY_KEYS.forEach((k) => {
+    abilityScores[k].racial = 0;
+  });
+  bonuses.forEach((bonus, i) => {
+    const choice = choices[i];
+    if (!choice) return;
+    if (bonus.count === 'all' && bonus.group === 'any') {
+      const pool = choice === 'mental' ? MENTAL_KEYS : PHYSICAL_KEYS;
+      pool.forEach((k) => {
+        abilityScores[k].racial += bonus.modifier;
+      });
+    } else if (bonus.count === 1) {
+      const pool =
+        bonus.group === 'other'
+          ? choices[0] === 'mental'
+            ? PHYSICAL_KEYS
+            : MENTAL_KEYS
+          : ABILITY_KEYS;
+      const k = choice as AbilityKey;
+      if (pool.includes(k)) abilityScores[k].racial += bonus.modifier;
     }
-  }
-  for (const [ab, vals] of Object.entries(accumulated)) {
-    const maxVal = Math.max(...(vals as number[]));
-    character.abilityScores[ab as AbilityKey].bonuses.enhancement = [
-      { value: maxVal, source: 'equipment', type: BonusType.ENHANCEMENT },
-    ];
-  }
+  });
 }
 
 // ---- Slice state ----
@@ -270,35 +303,67 @@ const characterEntrySlice = createSlice({
         raceName: string;
         racialBonuses: Partial<Record<AbilityKey, number>>;
         hasFlexBonus?: boolean;
+        flexibleAbilityBonuses?: FlexibleAbilityBonus[];
       }>,
     ) {
-      // Update race info on CharacterInfo
       state.character.info.race = {
         ...state.character.info.race,
         name: action.payload.raceName,
         abilityModifiers: action.payload.racialBonuses as Record<string, number>,
       };
-      state.character.info.racialFlexBonus = action.payload.hasFlexBonus ?? false;
-      if (!action.payload.hasFlexBonus) {
-        state.character.info.racialFlexAbility = undefined;
-      }
-      // Apply racial bonuses to ability scores (clear old ones first)
-      const keys: AbilityKey[] = ['str', 'dex', 'con', 'int', 'wis', 'cha'];
-      keys.forEach((k) => {
+      const bonuses = action.payload.flexibleAbilityBonuses ?? [];
+      state.character.info.racialFlexBonuses = bonuses.length > 0 ? bonuses : undefined;
+      state.character.info.racialFlexChoices = bonuses.length > 0 ? [] : undefined;
+      state.character.info.racialChoices = undefined;
+      state.character.info.selectedAlternateRacialTraits = undefined;
+      // Apply fixed racial bonuses (zero out flex contributions first)
+      ABILITY_KEYS.forEach((k) => {
         state.character.abilityScores[k].racial = action.payload.racialBonuses[k] ?? 0;
       });
       syncFeatSlotsFromClasses(state.character);
       state.isDirty = true;
     },
 
-    setRacialFlexAbility(state, action: PayloadAction<AbilityKey>) {
-      const prev = state.character.info.racialFlexAbility;
-      const next = action.payload;
-      if (prev && prev !== next) {
-        state.character.abilityScores[prev].racial = 0;
+    setRacialFlexChoice(state, action: PayloadAction<{ index: number; value: string }>) {
+      const bonuses = state.character.info.racialFlexBonuses ?? [];
+      if (!state.character.info.racialFlexChoices) {
+        state.character.info.racialFlexChoices = [];
       }
-      state.character.abilityScores[next].racial = 2;
-      state.character.info.racialFlexAbility = next;
+      state.character.info.racialFlexChoices[action.payload.index] = action.payload.value;
+      applyFlexChoices(
+        state.character.abilityScores as Record<AbilityKey, { racial: number }>,
+        bonuses,
+        state.character.info.racialFlexChoices,
+      );
+      state.isDirty = true;
+    },
+
+    upsertRacialChoice(state, action: PayloadAction<RacialChoice>) {
+      if (!state.character.info.racialChoices) {
+        state.character.info.racialChoices = [];
+      }
+      const idx = state.character.info.racialChoices.findIndex(
+        (c) => c.featureName === action.payload.featureName,
+      );
+      if (idx >= 0) {
+        state.character.info.racialChoices[idx] = action.payload;
+      } else {
+        state.character.info.racialChoices.push(action.payload);
+      }
+      state.isDirty = true;
+    },
+
+    toggleAlternateRacialTrait(state, action: PayloadAction<string>) {
+      if (!state.character.info.selectedAlternateRacialTraits) {
+        state.character.info.selectedAlternateRacialTraits = [];
+      }
+      const artName = action.payload;
+      const idx = state.character.info.selectedAlternateRacialTraits.indexOf(artName);
+      if (idx >= 0) {
+        state.character.info.selectedAlternateRacialTraits.splice(idx, 1);
+      } else {
+        state.character.info.selectedAlternateRacialTraits.push(artName);
+      }
       state.isDirty = true;
     },
 
@@ -1353,6 +1418,38 @@ const characterEntrySlice = createSlice({
       }
     },
 
+    resolveTemplateChoice(
+      state,
+      action: PayloadAction<{
+        appliedTemplateId: string;
+        templateDefinition: TemplateDefinition;
+        choiceId: string;
+        selectionId: string;
+      }>,
+    ) {
+      const { appliedTemplateId, templateDefinition, choiceId, selectionId } = action.payload;
+      const idx = state.character.appliedTemplates.findIndex((t) => t.id === appliedTemplateId);
+      if (idx < 0) return;
+      const applied = state.character.appliedTemplates[idx];
+      const existingChoice = applied.templateChoices?.find((c) => c.choiceId === choiceId);
+      if (existingChoice?.selection === selectionId) return;
+      const { newTemplateChoices, newFeatures } = resolveTemplateChoicePure(
+        templateDefinition,
+        applied,
+        choiceId,
+        selectionId,
+      );
+      if (newTemplateChoices === applied.templateChoices && newFeatures === applied.features) {
+        return;
+      }
+      state.character.appliedTemplates[idx] = {
+        ...applied,
+        templateChoices: newTemplateChoices,
+        features: newFeatures,
+      };
+      state.isDirty = true;
+    },
+
     // ---- Combat stats ----
 
     setCombatField(
@@ -1479,6 +1576,22 @@ const characterEntrySlice = createSlice({
       state.character.traits.traits = state.character.traits.traits.filter(
         (t) => (t.id ?? t.traitId) !== action.payload,
       );
+      state.isDirty = true;
+    },
+
+    // ---- Flaws ----
+
+    addFlaw(state, action: PayloadAction<CharacterFlaw>) {
+      state.character.flaws.flaws.push(action.payload);
+      syncFeatSlotsFromClasses(state.character);
+      state.isDirty = true;
+    },
+
+    removeFlaw(state, action: PayloadAction<string>) {
+      state.character.flaws.flaws = state.character.flaws.flaws.filter(
+        (f) => f.flawId !== action.payload,
+      );
+      syncFeatSlotsFromClasses(state.character);
       state.isDirty = true;
     },
 
@@ -1634,7 +1747,7 @@ const characterEntrySlice = createSlice({
     addEquipment(state, action: PayloadAction<EditorEquipmentItem>) {
       if (!state.character.editorEquipment) state.character.editorEquipment = [];
       state.character.editorEquipment.push(action.payload);
-      syncEnhancementBonuses(state.character);
+      state.character = ModifierPipelineService.recalculate(state.character);
       state.isDirty = true;
     },
 
@@ -1643,7 +1756,7 @@ const characterEntrySlice = createSlice({
         state.character.editorEquipment = state.character.editorEquipment.filter(
           (e) => e.id !== action.payload,
         );
-        syncEnhancementBonuses(state.character);
+        state.character = ModifierPipelineService.recalculate(state.character);
         state.isDirty = true;
       }
     },
@@ -1653,7 +1766,7 @@ const characterEntrySlice = createSlice({
         const idx = state.character.editorEquipment.findIndex((e) => e.id === action.payload.id);
         if (idx >= 0) {
           state.character.editorEquipment[idx] = action.payload;
-          syncEnhancementBonuses(state.character);
+          state.character = ModifierPipelineService.recalculate(state.character);
           state.isDirty = true;
         }
       }
@@ -1665,7 +1778,7 @@ const characterEntrySlice = createSlice({
         item.slot = action.payload.slot;
         item.containerId = undefined;
         item.unequippedFromSlot = undefined;
-        syncEnhancementBonuses(state.character);
+        state.character = ModifierPipelineService.recalculate(state.character);
         state.isDirty = true;
       }
     },
@@ -1681,7 +1794,7 @@ const characterEntrySlice = createSlice({
           item.containerId = firstContainer.id;
         }
         item.slot = undefined;
-        syncEnhancementBonuses(state.character);
+        state.character = ModifierPipelineService.recalculate(state.character);
         state.isDirty = true;
       }
     },
@@ -1706,7 +1819,7 @@ const characterEntrySlice = createSlice({
       item.slot = targetSlot;
       item.unequippedFromSlot = undefined;
       item.containerId = undefined;
-      syncEnhancementBonuses(state.character);
+      state.character = ModifierPipelineService.recalculate(state.character);
       state.isDirty = true;
     },
 
@@ -1715,6 +1828,8 @@ const characterEntrySlice = createSlice({
       if (item) {
         item.containerId = action.payload.containerId;
         item.slot = undefined;
+        item.isOrbiting = false;
+        state.character = ModifierPipelineService.recalculate(state.character);
         state.isDirty = true;
       }
     },
@@ -1992,7 +2107,9 @@ export const {
   setName,
   setPlayer,
   setRace,
-  setRacialFlexAbility,
+  setRacialFlexChoice,
+  upsertRacialChoice,
+  toggleAlternateRacialTrait,
   setAlignment,
   setDeity,
   setGender,
@@ -2050,11 +2167,14 @@ export const {
   updateTemplate,
   reorderTemplates,
   setTemplateAcquiredAtECL,
+  resolveTemplateChoice,
   setCombatField,
   setSkillEntry,
   removeSkillEntry,
   addTrait,
   removeTrait,
+  addFlaw,
+  removeFlaw,
   syncFeatSlots,
   addFeatSlot,
   removeFeatSlot,

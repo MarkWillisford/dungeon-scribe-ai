@@ -27,7 +27,7 @@ import { ALL_MESMERIST_TRICKS } from '@/data/mesmeristTricks/index';
 import { ALL_WILD_TALENTS } from '@/data/kineticistWildTalents/index';
 import { ALL_OCCULTIST_FOCUS_POWERS } from '@/data/occultistFocusPowers/index';
 import { ALL_PHRENIC_AMPLIFICATIONS } from '@/data/phrenicAmplifications/index';
-import { getDeityByName } from '@/data/deities/index';
+import { ALL_DEITIES, getDeityByName } from '@/data/deities/index';
 import { ALL_NINJA_TRICKS } from '@/data/ninjaTricks/index';
 import { ALL_SLAYER_TALENTS } from '@/data/slayerTalents/index';
 import { ALL_MAGUS_ARCANA } from '@/data/magusArcana/index';
@@ -52,7 +52,7 @@ import {
   ALL_MAGIC_ARMOR,
   ALL_IOUN_STONES,
 } from '@/data/magicItems/index';
-import type { MagicItemDefinition, ItemSlot } from '@/types/magicItems';
+import type { MagicItemDefinition, MagicWeaponDefinition, ItemSlot } from '@/types/magicItems';
 import type { AnimalCompanionEntry, BodyShape } from '@/types/animalCompanions';
 import {
   CORE_RACES,
@@ -211,6 +211,9 @@ export class StaticGameDataConnector implements GameDataConnector {
       case 'phrenicamplifications':
         return ALL_PHRENIC_AMPLIFICATIONS as ClassOptionBase[];
 
+      case 'deities':
+        return ALL_DEITIES.map((d) => ({ ...d, description: d.description ?? '' })) as ClassOptionBase[];
+
       case 'spells': {
         const classNames = filters.classNames ?? [];
         const maxLevel = filters.maxSpellLevel ?? 9;
@@ -272,6 +275,11 @@ export class StaticGameDataConnector implements GameDataConnector {
 
   async getClassChoiceDefinitions(classId: string) {
     return getDefinitionsForClass(classId);
+  }
+
+  async getRacialChoiceDefinitions(_raceName: string) {
+    // Racial choice definitions live in Firestore only — not bundled in static data.
+    return [];
   }
 
   async getSpellTables() {
@@ -342,21 +350,25 @@ export class StaticGameDataConnector implements GameDataConnector {
     return Promise.resolve(this._allMagicItems.filter((item) => item.slot === slot));
   }
 
+  async getMagicWeaponTemplates(): Promise<MagicWeaponDefinition[]> {
+    return Promise.resolve(
+      this._allMagicItems.filter(
+        (item): item is MagicWeaponDefinition => item.category === 'magic_weapon',
+      ),
+    );
+  }
+
   async searchMagicItems(query: string): Promise<MagicItemDefinition[]> {
     if (!query) return [];
     const q = query.toLowerCase();
-    const results = this._allMagicItems.filter((item) =>
-      item.name.toLowerCase().includes(q),
-    );
+    const results = this._allMagicItems.filter((item) => item.name.toLowerCase().includes(q));
     return Promise.resolve(results.slice(0, 50));
   }
 
   async searchFeats(query: string): Promise<FeatDefinition[]> {
     if (!query) return [];
     const q = query.toLowerCase();
-    return Promise.resolve(
-      ALL_FEATS.filter((f) => f.name.toLowerCase().includes(q)).slice(0, 50),
-    );
+    return Promise.resolve(ALL_FEATS.filter((f) => f.name.toLowerCase().includes(q)).slice(0, 50));
   }
 
   // ---- Initiating system (no static data yet — Phase 9 seeds Firestore) ------

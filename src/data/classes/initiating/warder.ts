@@ -2,7 +2,7 @@
 // Source: https://www.d20pfsrd.com/alternative-rule-systems/3rd-party-rules-systems/path-of-war/classes/warder/
 // Scraped: 2026-04-15
 
-import { BABProgression, SaveProgression } from '@/types/base';
+import { BABProgression, BonusType, SaveProgression } from '@/types/base';
 import type { ExpandedClassData } from '../types';
 import type { InitiatingProgressionTable } from '../initiatingProgressionTables';
 
@@ -32,7 +32,7 @@ export const WARDER_PROGRESSION: InitiatingProgressionTable = [
 
 export const WARDER_CLASS: ExpandedClassData = {
   name: 'Warder',
-  category: 'Base',
+  category: 'Path of War',
   maxLevel: 20,
   hitDie: 12,
   skillRanksPerLevel: 4,
@@ -67,12 +67,14 @@ export const WARDER_CLASS: ExpandedClassData = {
       level: 1,
       description:
         "A warder begins her career with knowledge of five martial maneuvers. The disciplines available to her are Broken Blade, Golden Lion, Iron Tortoise, Primal Fury, and either Eternal Guardian or Piercing Thunder. If she does not have the associated skill for a chosen discipline as a class skill, she gains it as a class skill. She readies her maneuvers by going over battle tactics, through weapon drills, or spending time meditating in prayer for 10 minutes. She need not sleep or be well-rested beforehand. At 4th level and every even level thereafter, the warder may exchange one known maneuver for another of any level she qualifies for. Maneuvers are extraordinary abilities, unaffected by spell resistance, and do not provoke attacks of opportunity when initiated. A warder's initiation modifier is Intelligence.",
+      effects: [],
     },
     {
       name: 'Maneuver Recovery',
       level: 1,
       description:
         'For a warder to recover expended maneuvers, she must take stock of her situation to plan for her next movement. By focusing entirely on a defensive position to prepare her next move, she is able to regain maneuvers expended to assist her to victory. By taking a full round action to plan her next move (activating her defensive focus class feature, see below), she recovers a number of expended maneuvers equal to her warder initiation modifier (minimum of 2). Alternately, she may take a brief pause in battle and recover a single maneuver of her choosing by spending a standard action on her turn.',
+      effects: [],
     },
     {
       name: 'Defensive Focus',
@@ -82,12 +84,43 @@ export const WARDER_CLASS: ExpandedClassData = {
       activationMode: 'toggle',
       description:
         'At 1st level, the defensive prowess of the warder is second to none, allowing her to focus her actions purely on defending himself and her allies in ways that cannot be replicated. The warder gains the Combat Reflexes feat as a bonus feat, using her warder initiation modifier in place of her Dexterity modifier to determine the number of additional attacks of opportunity she may make each round. When recovering warder maneuvers as a full round action, the warder sets up a defensive perimeter around herself to defend her allies, increasing her threatened area by 5 feet + 5 feet for every five initiator levels she possesses. Until the beginning of her next turn, she may make attacks of opportunity against any opponent in this threatened area that provokes attacks of opportunity. She may move as part of these attacks of opportunity, provided her total movement before her next turn does not exceed her speed (his movement provokes attacks of opportunity as normal). Additionally, while using defensive focus, the warder adds her warder initiation modifier plus her class level to her CMD for the purposes of defending against enemies trying to use the Acrobatics skill to prevent her from getting attacks of opportunity against them.',
+      effects: [
+        {
+          type: 'special',
+          target: 'special.combat_reflexes_int_mod',
+          value: 0,
+          source: 'Defensive Focus',
+        },
+        {
+          type: 'bonus',
+          bonusType: BonusType.UNTYPED,
+          target: 'cmd',
+          value: 'intMod + warderLevel',
+          source: 'Defensive Focus',
+          activation: { type: 'toggle', active: false },
+        },
+        {
+          type: 'special',
+          target: 'special.defensive_focus_threatened_area',
+          value: 0,
+          source: 'Defensive Focus',
+          activation: { type: 'toggle', active: false },
+        },
+        {
+          type: 'special',
+          target: 'special.defensive_focus_movement_aoo',
+          value: 0,
+          source: 'Defensive Focus',
+          activation: { type: 'toggle', active: false },
+        },
+      ],
     },
     {
       name: 'Aegis',
       level: 1,
       description:
         "At 1st level, the warder's defensive prowess extends to those who choose to stay near to him. Allies who are within 10 ft. of the warder's position gain a +1 morale bonus to Armor Class and to Will saves under the warder's defensive aegis, her presence bolstering and shepherding the defenses of her allies. This bonus improves to +2 at 5th level (+3 at 9th level, +4 at 13th level, and +5 at 17th level). The warder does not receive this bonus, but may receive the benefits of this ability from another warder. If the ally cannot see or hear the warder, then the ally does not gain the benefits of this ability (such as if the warder is concealed or invisible). At 6th level, her aegis' range increases its effective area, growing to a 20 ft. radius. At 12th level, this increases again to 30 ft.",
+      effects: [],
     },
     {
       name: "Armiger's Mark",
@@ -105,18 +138,21 @@ export const WARDER_CLASS: ExpandedClassData = {
         maxFormula: 'floor(warderLevel / 2) + intMod',
         restRecoveryMode: 'full',
       },
+      effects: [],
     },
     {
       name: 'Bonus Feat',
       level: 3,
       description:
         'At 3rd level and every 5th level thereafter (8th, 13th, 18th), a warder receives a bonus combat or teamwork feat. She must meet all prerequisites for these feats.',
+      effects: [],
     },
     {
       name: 'Tactical Acumen',
       level: 4,
       description:
         'At 4th level, the combat training that the warder has received hones her reflexes. Through her knowledge of tactics, training manuals, and lessons in the histories of war, her wits aid her when her agility may be impaired by her heavy armor. The warder may add her warder initiation modifier to her Reflex saves and to her initiative in place of her Dexterity modifier (using the higher of the two bonuses).',
+      effects: [],
     },
     {
       name: 'Extended Defense',
@@ -134,63 +170,113 @@ export const WARDER_CLASS: ExpandedClassData = {
         maxFormula: 'floor((warderLevel - 2) / 3)',
         restRecoveryMode: 'full',
       },
+      effects: [],
     },
     {
       name: 'Clad in Steel',
       level: 6,
       description:
         'Having improved her skill with her armor, the warder is a more capable combatant in it when protecting her allies or cause. The warder may subtract her aegis bonus from her total armor check penalty and increase the maximum Dexterity bonus on her armor by 1 at 6th level, and by 2 at 12th level.',
+      effects: [],
     },
     {
       name: 'Adaptive Tactics',
       level: 7,
+      id: 'adaptive-tactics',
+      shortDescription: 'Full-round action — expend 1 mark to re-ready up to IL maneuvers',
+      activationMode: 'action',
+      activationCost: { resourceId: 'armigers_mark', amount: 1 },
       description:
         "A warrior can attempt to plan for everything, but no plan stands against the heat of battle if there is no room for adaptation. At 7th level, the warder can expend one use of her armiger's mark ability as a full-round action to expend up to her warder initiation modifier in readied maneuvers, then instantly ready an equal amount of maneuvers. The warder may not replace expended maneuvers using this ability; any maneuver she is re-preparing with this ability must be unexpended to be exchanged. She may choose from any of her known maneuvers.",
+      effects: [],
     },
     {
       name: 'Bonus Feat',
       level: 8,
       description: 'The warder receives an additional bonus combat or teamwork feat.',
+      effects: [],
     },
     {
       name: 'Improved Defensive Focus',
       level: 10,
       description:
         'At 10th level, her defensive focus improves further. While her reach is increased by this ability, opponents treat her threatened area as difficult terrain. If a foe tries to move through a space within her reach, the movement through those squares costs double (x2). Additionally, while using her defensive focus to make an attack of opportunity, her movement does not provoke attacks of opportunity.',
+      effects: [],
     },
     {
       name: 'Stalwart',
       level: 12,
       description:
         'At 12th level, a warder can use mental and physical resiliency to avoid certain attacks. If she makes a successful Fortitude or Will saving throw against an attack that has a reduced effect on a successful save, she instead avoids the effect entirely. A helpless warder does not gain the benefit of the stalwart ability.',
+      effects: [],
     },
     {
       name: 'Bonus Feat',
       level: 13,
       description: 'The warder receives an additional bonus combat or teamwork feat.',
+      effects: [],
     },
     {
       name: 'Steel Defense',
       level: 15,
       description:
         "At 15th level, the warder is capable of turning an otherwise lethal blow and continue the fight. When an attack that inflicts hit point damage from a natural attack, melee weapon, or ranged weapon would reduce the warder to 0 or fewer hit points, she can make a Fortitude save (DC the attacker's attack roll) to deflect the attack to her armor or shield (light, heavy, or tower shields only), causing it to suffer the damage in her place (apply item hardness as normal). If this would break the character's armor, it gains the broken condition until it is repaired. The warder cannot use this ability with broken armor or a broken shield. The warder must be wearing armor or a shield to use this ability.",
+      effects: [],
     },
     {
       name: 'Bonus Feat',
       level: 18,
       description: 'The warder receives an additional bonus combat or teamwork feat.',
+      effects: [],
     },
     {
       name: 'Born of Steel',
       level: 19,
       description:
         'At 19th level, the warder is so at home in her armor that it is like a second skin, protecting her with its familiar embrace. When wearing medium or heavy armor, the warder is more resistant to critical hits. When a critical threat is rolled against her, the warder may add her warder initiation modifier to her AC against the critical confirmation roll.',
+      effects: [],
     },
     {
       name: 'Deathless Defenses',
       level: 20,
+      id: 'deathless-defenses',
+      shortDescription:
+        'Immediate action — expend 2 marks to activate; defensive focus + aegis + mind immunity + cannot die from HP damage',
+      activationMode: 'toggle',
+      activationCost: { resourceId: 'armigers_mark', amount: 2 },
+      maintenanceCost: { resourceId: 'armigers_mark', amount: 1, per: 'round' },
       description:
         "At 20th level, the warder can indefinitely hold a position to protect her allies, even if it may cost her her life. The warder must expend two uses of her armiger's mark ability as an immediate action to activate her deathless defenses. While this ability is active, the warder is capable of maintaining her defensive focus as a move action (but recovers no maneuvers unless she spends a full round to recover) but gains the full bonuses of her defensive focus. Additionally, she receives the benefits of her aegis ability as well. She is unable to die from hit point damage while this effect is in use. She may maintain the use of this ability each round at the cost of one use of her armiger's mark ability, or she may end it as a free action. Abilities or effects that don't inflict hit point damage, such as energy drain or ability damage, can still kill the warder. While this effect is in use, she is immune to mind-affecting abilities, as her focus prevents any from tampering with her mind. Once this ability ends, either voluntarily or if the character runs out of uses of armiger's mark (assuming she is not dead), the warder is exhausted and must rest a full 8 hours to recover.",
+      effects: [
+        {
+          type: 'special',
+          target: 'special.deathless_defenses_focus',
+          value: 0,
+          source: 'Deathless Defenses',
+          activation: { type: 'toggle', active: false },
+        },
+        {
+          type: 'immunity',
+          target: 'mind_affecting',
+          value: 0,
+          source: 'Deathless Defenses',
+          activation: { type: 'toggle', active: false },
+        },
+        {
+          type: 'special',
+          target: 'special.deathless_defenses_hp',
+          value: 0,
+          source: 'Deathless Defenses',
+          activation: { type: 'toggle', active: false },
+        },
+        {
+          type: 'special',
+          target: 'special.deathless_defenses_aegis',
+          value: 0,
+          source: 'Deathless Defenses',
+          activation: { type: 'toggle', active: false },
+        },
+      ],
     },
   ],
   spellcasting: {
@@ -216,16 +302,8 @@ export const WARDER_CLASS: ExpandedClassData = {
     // Recovery: full-round recovers initiation modifier (min 2) maneuvers,
     // standard action recovers 1 maneuver. Not a "recover all" mechanic.
     recoveryMechanics: {
-      primary: {
-        type: 'custom',
-        description:
-          'By taking a full-round action (activating defensive focus), the warder recovers a number of expended maneuvers equal to her warder initiation modifier (minimum of 2).',
-      },
-      secondary: {
-        type: 'custom',
-        description:
-          'As a standard action, the warder may recover a single expended maneuver of her choosing.',
-      },
+      primary: { type: 'full_round_modifier_min_2' },
+      secondary: { type: 'standard_one' },
     },
   },
   source: 'Path of War',

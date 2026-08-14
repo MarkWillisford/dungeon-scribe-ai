@@ -10,6 +10,7 @@ const mockUseAppSelector = jest.fn((selector: (s: unknown) => unknown) =>
       character: {
         classes: { classes: [] },
         feats: { feats: [] },
+        flaws: { flaws: [] },
         info: { race: { name: '' } },
         spellcasting: { pools: [], knownSpells: [], spellbooks: [] },
       },
@@ -263,6 +264,7 @@ describe('FeatSlotList - Slot rendering', () => {
           character: {
             classes: { classes: [] },
             feats: { feats: feats },
+            flaws: { flaws: [] },
             info: { race: { name: '' } },
             spellcasting: { pools: [], knownSpells: [], spellbooks: [] },
           },
