@@ -8,6 +8,7 @@ import {
   FlatList,
   ActivityIndicator,
   StyleSheet,
+  Keyboard,
 } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import { GameDataService } from '@/services/GameDataService';
@@ -209,7 +210,8 @@ export function RacePickerSheet({ visible, onSelect, onClose }: RacePickerSheetP
           <FlatList
             data={filtered}
             keyExtractor={(r) => r.name}
-            keyboardShouldPersistTaps="handled"
+            keyboardShouldPersistTaps="always"
+            onScrollBeginDrag={Keyboard.dismiss}
             renderItem={({ item }) => (
               <Pressable
                 onPress={() => handleSelect(item)}
