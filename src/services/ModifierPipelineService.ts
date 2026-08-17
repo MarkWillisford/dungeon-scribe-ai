@@ -149,8 +149,11 @@ export class ModifierPipelineService {
     const effects: Effect[] = [];
 
     // 1. Racial traits
-    for (const trait of character.info.race.traits) {
-      for (const effect of trait.effects) {
+    // Tolerate a race with no traits array. recalculate() runs inside reducers,
+    // where a throw discards the whole Immer draft — including the loading flag
+    // that was being cleared — and leaves the UI stuck mid-operation (#356).
+    for (const trait of character.info.race.traits ?? []) {
+      for (const effect of trait.effects ?? []) {
         effects.push(effect);
       }
     }

@@ -306,6 +306,42 @@ describe('ModifierPipelineService', () => {
     });
   });
 
+  // Regression coverage for #356. recalculate() runs inside Redux reducers, and
+  // Immer discards the entire draft when a recipe throws — so a race document
+  // missing its traits array did not merely lose racial effects, it rolled back
+  // the loading flag too and left the create-character screen stuck forever.
+  //
+  // NOTE: createTestCharacter() passes the module-level mockRace by reference,
+  // so these tests detach info.race with a shallow copy before mutating it.
+  // Mutating it directly corrupts the fixture for every later test in this file.
+  describe('tolerates incomplete race data (#356)', () => {
+    test('does not throw when the race has no traits array', () => {
+      const char = createTestCharacter();
+      char.info.race = { ...char.info.race };
+      delete (char.info.race as { traits?: unknown }).traits;
+      expect(() => ModifierPipelineService.recalculate(char)).not.toThrow();
+    });
+
+    test('does not throw when a racial trait has no effects array', () => {
+      const char = createTestCharacter();
+      char.info.race = {
+        ...char.info.race,
+        traits: [
+          { name: 'Partial Trait', description: 'no effects field' },
+        ] as unknown as typeof char.info.race.traits,
+      };
+      expect(() => ModifierPipelineService.recalculate(char)).not.toThrow();
+    });
+
+    test('a race with no traits still produces valid derived stats', () => {
+      const char = createTestCharacter({ str: 16 });
+      char.info.race = { ...char.info.race };
+      delete (char.info.race as { traits?: unknown }).traits;
+      const result = ModifierPipelineService.recalculate(char);
+      expect(result.abilityScores.str.total).toBe(16);
+    });
+  });
+
   describe('getBreakdown', () => {
     test('returns breakdown for a stat with bonuses', () => {
       const char = createTestCharacter();
