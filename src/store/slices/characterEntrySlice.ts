@@ -235,19 +235,27 @@ const characterEntrySlice = createSlice({
     },
 
     /**
-     * Bind the entry session to the document a save just wrote.
+     * Settle the entry session after a successful save, for both create and
+     * update. Dispatched on every save path so the two behave identically.
      *
-     * A 'new' or 'import' session starts with no originalCharacterId, so
-     * saveCharacter routes it to create(). Without this, the session stayed in
-     * that state after the first save and every later save created another
-     * document — the character silently multiplied on each save (#355).
+     * Binding: a 'new' or 'import' session starts with no originalCharacterId,
+     * so saveCharacter routes it to create(). Without recording the resulting
+     * ID the session stayed in that state, and every later save created another
+     * document — the character silently multiplied on each save (#355). Once it
+     * exists in Firestore the session is no longer a draft, so mode flips to
+     * 'edit' and later saves update in place. Re-binding an already-bound
+     * session to the same ID is a harmless no-op.
      *
-     * Once a character exists in Firestore the session is no longer a draft, so
-     * the mode flips to 'edit' and later saves update in place.
+     * Clean: isDirty is set by 107 reducers but was previously cleared only by
+     * loadCharacter and resetDraft — never by a save. The header therefore kept
+     * showing 'Save*' and navigating back kept warning about unsaved changes
+     * even immediately after a successful save.
      */
     markSaved(state, action: PayloadAction<{ characterId: string }>) {
       state.originalCharacterId = action.payload.characterId;
       state.mode = 'edit';
+      state.isDirty = false;
+      state.saveError = null;
     },
 
     // Applied by the recalculate middleware — do NOT trigger another recalc

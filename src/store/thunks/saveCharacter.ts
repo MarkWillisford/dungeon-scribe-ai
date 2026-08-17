@@ -20,17 +20,24 @@ export const saveCharacter = createAsyncThunk<
 
   try {
     let saved: Character;
+    // The document this save landed in — the existing one when updating, the
+    // newly created one otherwise. create() returns the new Firestore document
+    // ID on info.firebaseId.
+    let savedCharacterId: string | undefined;
+
     if (mode === 'edit' && originalCharacterId) {
       saved = await FirebaseCharacterService.update(originalCharacterId, toSave);
+      savedCharacterId = originalCharacterId;
     } else {
       saved = await FirebaseCharacterService.create(userId, toSave);
-      // Bind the session to the document just created, so a second save updates
-      // it instead of creating another copy (#355). create() returns the new
-      // Firestore document ID on info.firebaseId.
-      const newCharacterId = saved.info?.firebaseId;
-      if (newCharacterId) {
-        dispatch(markSaved({ characterId: newCharacterId }));
-      }
+      savedCharacterId = saved.info?.firebaseId;
+    }
+
+    // Settle the session identically on both paths: bind it to the document
+    // just written so the next save updates rather than copies (#355), and mark
+    // it clean so the UI stops reporting unsaved changes.
+    if (savedCharacterId) {
+      dispatch(markSaved({ characterId: savedCharacterId }));
     }
     dispatch(setSaving(false));
     return saved;
