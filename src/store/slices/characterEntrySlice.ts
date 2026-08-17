@@ -234,6 +234,22 @@ const characterEntrySlice = createSlice({
       state.saveError = action.payload;
     },
 
+    /**
+     * Bind the entry session to the document a save just wrote.
+     *
+     * A 'new' or 'import' session starts with no originalCharacterId, so
+     * saveCharacter routes it to create(). Without this, the session stayed in
+     * that state after the first save and every later save created another
+     * document — the character silently multiplied on each save (#355).
+     *
+     * Once a character exists in Firestore the session is no longer a draft, so
+     * the mode flips to 'edit' and later saves update in place.
+     */
+    markSaved(state, action: PayloadAction<{ characterId: string }>) {
+      state.originalCharacterId = action.payload.characterId;
+      state.mode = 'edit';
+    },
+
     // Applied by the recalculate middleware — do NOT trigger another recalc
     applyComputedStats(state, action: PayloadAction<Character>) {
       state.character = action.payload;
@@ -2060,6 +2076,7 @@ export const {
   markDirty,
   setSaving,
   setSaveError,
+  markSaved,
   applyComputedStats,
   setValidationWarnings,
   acknowledgeWarning,

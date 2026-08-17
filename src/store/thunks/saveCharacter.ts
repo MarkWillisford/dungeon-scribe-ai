@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
 import type { Character } from '@/types/index';
 import { FirebaseCharacterService } from '@/services/FirebaseCharacterService';
-import { setSaving, setSaveError } from '../slices/characterEntrySlice';
+import { setSaving, setSaveError, markSaved } from '../slices/characterEntrySlice';
 
 export const saveCharacter = createAsyncThunk<
   Character,
@@ -24,6 +24,13 @@ export const saveCharacter = createAsyncThunk<
       saved = await FirebaseCharacterService.update(originalCharacterId, toSave);
     } else {
       saved = await FirebaseCharacterService.create(userId, toSave);
+      // Bind the session to the document just created, so a second save updates
+      // it instead of creating another copy (#355). create() returns the new
+      // Firestore document ID on info.firebaseId.
+      const newCharacterId = saved.info?.firebaseId;
+      if (newCharacterId) {
+        dispatch(markSaved({ characterId: newCharacterId }));
+      }
     }
     dispatch(setSaving(false));
     return saved;

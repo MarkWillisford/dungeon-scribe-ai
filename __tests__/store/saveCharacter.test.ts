@@ -1,6 +1,10 @@
 import { saveCharacter } from '@/store/thunks/saveCharacter';
 import { FirebaseCharacterService } from '@/services/FirebaseCharacterService';
-import { setSaving, setSaveError } from '@/store/slices/characterEntrySlice';
+import characterEntryReducer, {
+  setSaving,
+  setSaveError,
+  markSaved,
+} from '@/store/slices/characterEntrySlice';
 import type { Character } from '@/types/index';
 import type { RootState } from '@/store/store';
 
@@ -154,6 +158,73 @@ describe('saveCharacter thunk', () => {
       const { dispatch, getState } = makeThunkAPI(state);
       await saveCharacter()(dispatch, getState, undefined);
       expect(mockCreate).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  // Regression coverage for #355 — saving twice in one session created a second
+  // character instead of updating the first.
+  describe('binding the session to the created document (#355)', () => {
+    const SAVED_WITH_ID = {
+      info: { id: 'char-1', name: 'Saved', firebaseId: 'firestore-doc-1' },
+    } as unknown as Character;
+
+    it('dispatches markSaved with the new Firestore document ID after create', async () => {
+      mockCreate.mockResolvedValueOnce(SAVED_WITH_ID);
+      const state = makeState({ mode: 'new' });
+      const { dispatch, getState } = makeThunkAPI(state);
+      await saveCharacter()(dispatch, getState, undefined);
+      const calls = dispatch.mock.calls.map((c: [{ type: string; payload: unknown }]) => c[0]);
+      const bound = calls.find((c) => c.type === markSaved.type);
+      expect(bound).toBeDefined();
+      expect(bound?.payload).toEqual({ characterId: 'firestore-doc-1' });
+    });
+
+    it('does not dispatch markSaved after an update — the session is already bound', async () => {
+      mockUpdate.mockResolvedValueOnce(SAVED_WITH_ID);
+      const state = makeState({ mode: 'edit', originalCharacterId: 'existing-id' });
+      const { dispatch, getState } = makeThunkAPI(state);
+      await saveCharacter()(dispatch, getState, undefined);
+      const calls = dispatch.mock.calls.map((c: [{ type: string; payload: unknown }]) => c[0]);
+      expect(calls.find((c) => c.type === markSaved.type)).toBeUndefined();
+    });
+
+    it('does not dispatch markSaved when create returns no firebaseId', async () => {
+      mockCreate.mockResolvedValueOnce(SAVED_CHARACTER); // no firebaseId
+      const state = makeState({ mode: 'new' });
+      const { dispatch, getState } = makeThunkAPI(state);
+      await saveCharacter()(dispatch, getState, undefined);
+      const calls = dispatch.mock.calls.map((c: [{ type: string; payload: unknown }]) => c[0]);
+      expect(calls.find((c) => c.type === markSaved.type)).toBeUndefined();
+    });
+
+    // The bug as the user hit it: enter a character, save, keep editing, save
+    // again. Drives the real reducer so the thunk and slice are verified together.
+    it('saves twice in one session without creating a second character', async () => {
+      mockCreate.mockResolvedValue(SAVED_WITH_ID);
+      mockUpdate.mockResolvedValue(SAVED_WITH_ID);
+
+      let entryState = characterEntryReducer(undefined, { type: '@@INIT' });
+      // Plain jest.fn() so the mock stays assignable to ThunkDispatch, matching
+      // the pattern in makeThunkAPI above.
+      const dispatch = jest.fn();
+      dispatch.mockImplementation((action: { type: string }) => {
+        entryState = characterEntryReducer(entryState, action as never);
+        return action;
+      });
+      const getState = () =>
+        ({
+          characterEntry: entryState,
+          auth: { user: { uid: 'user-123' } },
+        }) as unknown as RootState;
+
+      await saveCharacter()(dispatch, getState, undefined);
+      await saveCharacter()(dispatch, getState, undefined);
+
+      expect(mockCreate).toHaveBeenCalledTimes(1);
+      expect(mockUpdate).toHaveBeenCalledTimes(1);
+      expect(mockUpdate.mock.calls[0][0]).toBe('firestore-doc-1');
+      expect(entryState.mode).toBe('edit');
+      expect(entryState.originalCharacterId).toBe('firestore-doc-1');
     });
   });
 
