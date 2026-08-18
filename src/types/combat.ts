@@ -29,8 +29,22 @@ export interface CombatStats {
     base: number; // Base HP from hit dice
     constitution: number;
     favoredClass: number;
-    other: number;
+    other: number; // Effect-granted HP (items, spells) — owned by the pipeline
+    /** Computed maximum HP, or manualMax when the user has overridden it. */
+    max: number;
+    /**
+     * User override of maximum HP. null/undefined means "use the calculated
+     * value" — clearing this field is how the UI reverts to auto.
+     */
+    manualMax?: number | null;
     current: number;
+    /**
+     * True once current HP has been set deliberately (by the user, or by the
+     * pipeline seeding a new character at full health). Without this flag a
+     * character could never be recorded at 0 HP, because the pipeline would
+     * read the 0 as "unset" and snap it back to maximum.
+     */
+    currentInitialized?: boolean;
     temporary: number;
     nonlethal: number;
   };

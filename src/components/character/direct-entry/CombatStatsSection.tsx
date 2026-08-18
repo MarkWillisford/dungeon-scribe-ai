@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { setCombatField } from '@/store/slices/characterEntrySlice';
 import { AutoComputedValue } from '@/components/ui/AutoComputedValue';
 import { ModifierPipelineService } from '@/services/ModifierPipelineService';
+import { HitDiceService } from '@/services/HitDiceService';
 import { BonusType } from '@/types/base';
 
 // ---- Helpers ----
@@ -70,7 +71,7 @@ function NumInput({
 
   // While focused: show the locally buffered text (allows clearing mid-type without committing).
   // While blurred: show the externally controlled value.
-  const displayValue = focused ? localText : (value !== undefined ? String(value) : '');
+  const displayValue = focused ? localText : value !== undefined ? String(value) : '';
 
   return (
     <TextInput
@@ -187,6 +188,20 @@ export function CombatStatsSection() {
   const totalRef = cs.savingThrows.reflex.total;
   const totalWill = cs.savingThrows.will.total;
 
+  // Max HP: the pipeline stores the computed value, but the user can pin an
+  // override on top of it. Showing what they would revert TO is the whole point
+  // of the revert affordance, so compute it from the same helper the pipeline uses.
+  const hpOverridden = cs.hitPoints.manualMax != null;
+  const calculatedMaxHP = HitDiceService.calculatedMax(cs.hitPoints, character.classes.totalLevel);
+  const hpBreakdown = [
+    `${cs.hitPoints.base} from hit dice`,
+    `${fmtSign(cs.hitPoints.constitution)} Con`,
+    cs.hitPoints.favoredClass ? `${fmtSign(cs.hitPoints.favoredClass)} favored class` : null,
+    cs.hitPoints.other ? `${fmtSign(cs.hitPoints.other)} other` : null,
+  ]
+    .filter(Boolean)
+    .join(' ');
+
   const meleeMisc = cs.attackBonuses.miscMods.melee[0]?.value ?? 0;
   const rangedMisc = cs.attackBonuses.miscMods.ranged[0]?.value ?? 0;
   const cmbMisc = cs.combatManeuver.bonus.miscMods[0]?.value ?? 0;
@@ -203,8 +218,8 @@ export function CombatStatsSection() {
         <View style={styles.row}>
           <Text style={styles.fieldLabel}>Max HP</Text>
           <NumInput
-            value={cs.hitPoints.other}
-            onCommit={(n) => set('maxHPOverride', n ?? 0)}
+            value={hpOverridden ? (cs.hitPoints.manualMax ?? calculatedMaxHP) : calculatedMaxHP}
+            onCommit={(n) => set('maxHPOverride', n)}
             width={64}
           />
           <Text style={styles.fieldLabel}>Current</Text>
@@ -213,6 +228,22 @@ export function CombatStatsSection() {
             onCommit={(n) => set('currentHP', n ?? 0)}
             width={64}
           />
+        </View>
+        <View style={styles.row}>
+          {hpOverridden ? (
+            <Pressable
+              onPress={() => set('maxHPOverride', undefined)}
+              accessibilityRole="button"
+              accessibilityLabel="Revert max HP to the calculated value"
+              hitSlop={6}
+            >
+              <Text style={[styles.hpBreakdown, { color: colors.text.accent }]}>
+                {`↺ Revert to calculated (${calculatedMaxHP})`}
+              </Text>
+            </Pressable>
+          ) : (
+            <Text style={[styles.hpBreakdown, { color: colors.text.tertiary }]}>{hpBreakdown}</Text>
+          )}
         </View>
         <View style={styles.row}>
           <Text style={styles.fieldLabel}>Nonlethal</Text>
@@ -425,6 +456,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 10,
     flexWrap: 'wrap',
+  },
+  hpBreakdown: {
+    fontSize: 12,
+    fontStyle: 'italic',
   },
   fieldLabel: {
     fontFamily: 'LibreBaskerville',

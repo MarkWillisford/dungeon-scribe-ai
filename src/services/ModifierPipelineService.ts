@@ -6,6 +6,7 @@ import { FormulaService, type FormulaContext } from './FormulaService';
 import { FeatRegistryService } from './FeatRegistryService';
 import { FlawRegistryService } from './FlawRegistryService';
 import { ResourcePoolService } from './ResourcePoolService';
+import { HitDiceService } from './HitDiceService';
 
 // ---- Resolved Effect (after formula evaluation) ----
 
@@ -618,26 +619,42 @@ export class ModifierPipelineService {
 
   private static applyHitPoints(c: Character, stacked: Map<string, StackedResult>): void {
     const hp = c.combatStats.hitPoints;
+    const totalHD = c.classes.totalLevel;
 
     // Base HP from hit dice
     hp.base = 0;
     for (const cls of c.classes.classes) {
-      hp.base += cls.hitDieResults.reduce((sum, roll) => sum + roll, 0);
+      hp.base += (cls.hitDieResults ?? []).reduce((sum, roll) => sum + roll, 0);
     }
 
-    hp.constitution = c.abilityScores.con.tempModifier * c.classes.totalLevel;
-    hp.other = this.get(stacked, 'hp') + this.get(stacked, 'hp.per_level') * c.classes.totalLevel;
+    // CON applies once per Hit Die, and is recomputed from the CURRENT modifier
+    // every pass. That is what makes a +4 CON belt worth +2 HP per HD the moment
+    // it is equipped, and take it all back when it comes off.
+    hp.constitution = c.abilityScores.con.tempModifier * totalHD;
+    hp.other = this.get(stacked, 'hp') + this.get(stacked, 'hp.per_level') * totalHD;
 
     // Favored class HP
     hp.favoredClass = c.classes.favoredClassBonuses
       .filter((b) => b.bonusType === 'HP')
       .reduce((sum, b) => sum + b.value, 0);
 
-    const maxHP = hp.base + hp.constitution + hp.favoredClass + hp.other;
+    // The 1-HP-per-Hit-Die floor lives in HitDiceService so the UI can show the
+    // same number when offering to revert an override. Applied to the total
+    // rather than per level, which keeps the displayed base / constitution /
+    // other breakdown intact.
+    const floored = HitDiceService.calculatedMax(hp, totalHD);
 
-    // Cap current HP at max
-    if (hp.current > maxHP || hp.current === 0) {
-      hp.current = maxHP;
+    hp.max = hp.manualMax != null ? hp.manualMax : floored;
+
+    if (!hp.currentInitialized) {
+      // A character who has never had current HP set starts at full health.
+      // Once set, 0 is a legitimate value (disabled) and must survive a recalc.
+      if (hp.max > 0) {
+        hp.current = hp.max;
+        hp.currentInitialized = true;
+      }
+    } else if (hp.current > hp.max) {
+      hp.current = hp.max;
     }
   }
 
