@@ -370,6 +370,37 @@ describe('FirestoreGameDataConnector', () => {
   // ---- Class Choice Options ---------------------------------------------------
 
   describe('getClassChoiceOptions', () => {
+    test('throws when the read is denied instead of reporting an empty option list', async () => {
+      // This is the read that actually failed in #360: the Cavalier Order slot
+      // rendered from a definition that loaded fine, then had nothing in it
+      // because 'cavalierorders' was denied. An empty picker and a denied read
+      // must not look the same.
+      const consoleError = jest.spyOn(console, 'error').mockImplementation(() => {});
+      mockGetDocs.mockRejectedValueOnce(new Error('Missing or insufficient permissions.'));
+
+      await expect(connector.getClassChoiceOptions('cavalierorders', {})).rejects.toThrow(
+        /Could not load options from "cavalierorders": Missing or insufficient permissions/,
+      );
+      consoleError.mockRestore();
+    });
+
+    test('still returns an empty list for a collection that is genuinely empty', async () => {
+      mockGetDocs.mockResolvedValueOnce(mockSnap([]) as never);
+      await expect(connector.getClassChoiceOptions('roguetalents', {})).resolves.toEqual([]);
+    });
+
+    test('does not cache a denied read, so a retry actually retries', async () => {
+      const consoleError = jest.spyOn(console, 'error').mockImplementation(() => {});
+      mockGetDocs.mockRejectedValueOnce(new Error('denied'));
+      await expect(connector.getClassChoiceOptions('cavalierorders', {})).rejects.toThrow();
+
+      mockGetDocs.mockResolvedValueOnce(
+        mockSnap([{ id: 'order-of-the-star', name: 'Order of the Star' }]) as never,
+      );
+      await expect(connector.getClassChoiceOptions('cavalierorders', {})).resolves.toHaveLength(1);
+      consoleError.mockRestore();
+    });
+
     test('simple collection (ragepowers) — fetches and caches', async () => {
       mockGetDocs.mockResolvedValueOnce(
         mockSnap([{ id: 'animal-fury', name: 'Animal Fury' }]) as never,
@@ -706,14 +737,20 @@ describe('FirestoreGameDataConnector', () => {
       expect(result).toHaveLength(0);
     });
 
-    test('spells — returns empty array when Firestore throws', async () => {
+    test('spells — throws when Firestore is unavailable', async () => {
+      // Was: "returns empty array when Firestore throws". That contract is what
+      // made a failed read indistinguishable from a class with no options (#360),
+      // so the swallow is gone and the caller surfaces the reason instead.
+      const consoleError = jest.spyOn(console, 'error').mockImplementation(() => {});
       mockGetDocs.mockRejectedValueOnce(new Error('Firestore unavailable'));
 
-      const result = await connector.getClassChoiceOptions('spells', {
-        classNames: ['cleric'],
-        maxSpellLevel: 3,
-      });
-      expect(result).toEqual([]);
+      await expect(
+        connector.getClassChoiceOptions('spells', {
+          classNames: ['cleric'],
+          maxSpellLevel: 3,
+        }),
+      ).rejects.toThrow(/Could not load options from "spells": Firestore unavailable/);
+      consoleError.mockRestore();
     });
 
     test('deities — returns all deities from Firestore', async () => {
