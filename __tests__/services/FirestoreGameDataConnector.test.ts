@@ -233,6 +233,46 @@ describe('FirestoreGameDataConnector', () => {
 
       expect(mockGetDocs).toHaveBeenCalledTimes(1);
     });
+
+    test('returns an empty array when the class genuinely has no definitions', async () => {
+      mockGetDocs.mockResolvedValueOnce(mockSnap([]) as never);
+
+      await expect(connector.getClassChoiceDefinitions('commoner')).resolves.toEqual([]);
+    });
+
+    test('throws when the read fails instead of reporting an empty class', async () => {
+      // Swallowing this made a permission denial indistinguishable from a class
+      // with no choices, which is how #360 went undiagnosed.
+      const consoleError = jest.spyOn(console, 'error').mockImplementation(() => {});
+      mockGetDocs.mockRejectedValueOnce(new Error('Missing or insufficient permissions.'));
+
+      await expect(connector.getClassChoiceDefinitions('cavalier')).rejects.toThrow(
+        /Could not load class choices for "cavalier"/,
+      );
+      consoleError.mockRestore();
+    });
+
+    test('names the underlying reason in the thrown error', async () => {
+      const consoleError = jest.spyOn(console, 'error').mockImplementation(() => {});
+      mockGetDocs.mockRejectedValueOnce(new Error('Missing or insufficient permissions.'));
+
+      await expect(connector.getClassChoiceDefinitions('cavalier')).rejects.toThrow(
+        /Missing or insufficient permissions/,
+      );
+      consoleError.mockRestore();
+    });
+
+    test('does not cache a failed read, so a retry actually retries', async () => {
+      const consoleError = jest.spyOn(console, 'error').mockImplementation(() => {});
+      mockGetDocs.mockRejectedValueOnce(new Error('denied'));
+      await expect(connector.getClassChoiceDefinitions('cavalier')).rejects.toThrow();
+
+      mockGetDocs.mockResolvedValueOnce(
+        mockSnap([{ id: 'cavalier-order', className: 'cavalier' }]) as never,
+      );
+      await expect(connector.getClassChoiceDefinitions('cavalier')).resolves.toHaveLength(1);
+      consoleError.mockRestore();
+    });
   });
 
   describe('getSpellTables', () => {

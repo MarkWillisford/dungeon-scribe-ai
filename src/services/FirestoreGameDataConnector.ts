@@ -526,11 +526,16 @@ export class FirestoreGameDataConnector implements GameDataConnector {
       GameDataCache.set(cacheKey, results);
       return results;
     } catch (e) {
+      // Deliberately NOT swallowed. Returning [] here made a permission denial
+      // and a class with genuinely no choices render identically — an empty
+      // card — which is how "Cavalier cannot select an Order" (#360) stayed
+      // undiagnosed. The caller surfaces this to the user and offers a retry.
+      const reason = e instanceof Error ? e.message : String(e);
       console.error(
         `FirestoreGameDataConnector: failed to fetch class choice definitions for "${classId}":`,
         e,
       );
-      return [];
+      throw new Error(`Could not load class choices for "${classId}": ${reason}`);
     }
   }
 
