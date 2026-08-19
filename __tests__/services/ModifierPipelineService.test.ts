@@ -8,6 +8,7 @@ import type { Character } from '@/types';
 import type { FeatDefinition } from '@/types/feats';
 import type { FlawDefinition } from '@/types/flaws';
 import type { Race } from '@/types/race';
+import type { Buff } from '@/types/buff';
 
 const mockRace: Race = {
   name: 'Human',
@@ -982,7 +983,7 @@ describe('ModifierPipelineService', () => {
 
     // A +4 Constitution belt, expressed the way the app actually models one:
     // an effect the pipeline resolves, not a number written onto the score.
-    function conBelt() {
+    function conBelt(): Buff {
       return {
         id: 'con-belt',
         name: 'Belt of Mighty Constitution +4',

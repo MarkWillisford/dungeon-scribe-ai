@@ -156,6 +156,7 @@ type CombatFieldKey =
   | 'speedClimb';
 
 export function CombatStatsSection() {
+  const { colors } = useTheme();
   const dispatch = useAppDispatch();
   const character = useAppSelector((state) => state.characterEntry.character);
   const cs = character.combatStats;
