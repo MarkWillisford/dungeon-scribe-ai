@@ -67,6 +67,25 @@ describe('uiSlice', () => {
       expect(state.toasts[0].type).toBe('error');
     });
 
+    it('gives every toast a distinct id, even raised back to back', () => {
+      // Ids were Date.now(), so two toasts in the same millisecond collided and
+      // React dropped one of them as a duplicate key.
+      let state = uiReducer(initialState, addToast({ message: 'a', type: 'success' }));
+      state = uiReducer(state, addToast({ message: 'b', type: 'error' }));
+      state = uiReducer(state, addToast({ message: 'c', type: 'info' }));
+
+      const ids = state.toasts.map((t) => t.id);
+      expect(new Set(ids).size).toBe(3);
+    });
+
+    it('carries an optional duration through', () => {
+      const state = uiReducer(
+        initialState,
+        addToast({ message: 'failed', type: 'error', durationMs: 6000 }),
+      );
+      expect(state.toasts[0].durationMs).toBe(6000);
+    });
+
     it('should stack multiple toasts', () => {
       let state = uiReducer(initialState, addToast({ message: 'First', type: 'info' }));
       state = uiReducer(state, addToast({ message: 'Second', type: 'warning' }));
