@@ -1112,6 +1112,71 @@ describe('ModifierPipelineService', () => {
       expect(result.combatStats.hitPoints.current).toBe(0);
     });
 
+    test('raises current HP by the same amount maximum rises', () => {
+      // Editing Constitution or a hit die moved max while current sat still, so
+      // a character quietly drifted further from full every time the build
+      // changed. In Pathfinder both ends move together.
+      const char = rogueAtLevel(3, [8, 5, 4]);
+      const seeded = ModifierPipelineService.recalculate(char);
+      expect(seeded.combatStats.hitPoints.max).toBe(20);
+
+      // Take 8 damage, then put on a +4 Constitution belt (+2 per Hit Die).
+      seeded.combatStats.hitPoints.current = 12;
+      seeded.buffs.push(conBelt());
+      const after = ModifierPipelineService.recalculate(seeded);
+
+      expect(after.combatStats.hitPoints.max).toBe(26);
+      expect(after.combatStats.hitPoints.current).toBe(18);
+    });
+
+    test('lowers current HP by the same amount maximum falls', () => {
+      const char = rogueAtLevel(3, [8, 5, 4]);
+      char.buffs.push(conBelt());
+      const boosted = ModifierPipelineService.recalculate(char);
+      expect(boosted.combatStats.hitPoints.max).toBe(26);
+
+      boosted.combatStats.hitPoints.current = 18;
+      boosted.buffs = boosted.buffs.filter((b) => b.id !== 'con-belt');
+      const removed = ModifierPipelineService.recalculate(boosted);
+
+      expect(removed.combatStats.hitPoints.max).toBe(20);
+      expect(removed.combatStats.hitPoints.current).toBe(12);
+    });
+
+    test('does not heal a wounded character to full when maximum rises', () => {
+      const char = rogueAtLevel(3, [8, 5, 4]);
+      const seeded = ModifierPipelineService.recalculate(char);
+      seeded.combatStats.hitPoints.current = 3;
+      seeded.buffs.push(conBelt());
+
+      const after = ModifierPipelineService.recalculate(seeded);
+
+      expect(after.combatStats.hitPoints.current).toBe(9);
+      expect(after.combatStats.hitPoints.current).toBeLessThan(after.combatStats.hitPoints.max);
+    });
+
+    test('never drives current HP below zero when maximum falls hard', () => {
+      const char = rogueAtLevel(3, [8, 5, 4]);
+      char.buffs.push(conBelt());
+      const boosted = ModifierPipelineService.recalculate(char);
+      boosted.combatStats.hitPoints.current = 1;
+      boosted.buffs = boosted.buffs.filter((b) => b.id !== 'con-belt');
+
+      const removed = ModifierPipelineService.recalculate(boosted);
+
+      expect(removed.combatStats.hitPoints.current).toBe(0);
+    });
+
+    test('leaves current HP alone when maximum does not move', () => {
+      const char = rogueAtLevel(3, [8, 5, 4]);
+      const seeded = ModifierPipelineService.recalculate(char);
+      seeded.combatStats.hitPoints.current = 7;
+
+      const again = ModifierPipelineService.recalculate(seeded);
+
+      expect(again.combatStats.hitPoints.current).toBe(7);
+    });
+
     test('clamps current HP down when maximum falls', () => {
       const char = rogueAtLevel(3, [8, 5, 4]);
       char.combatStats.hitPoints.current = 20;

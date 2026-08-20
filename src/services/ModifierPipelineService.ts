@@ -644,6 +644,7 @@ export class ModifierPipelineService {
     // other breakdown intact.
     const floored = HitDiceService.calculatedMax(hp, totalHD);
 
+    const previousMax = hp.max;
     hp.max = hp.manualMax != null ? hp.manualMax : floored;
 
     if (!hp.currentInitialized) {
@@ -653,8 +654,15 @@ export class ModifierPipelineService {
         hp.current = hp.max;
         hp.currentInitialized = true;
       }
-    } else if (hp.current > hp.max) {
-      hp.current = hp.max;
+    } else {
+      // Gaining maximum HP grants the same amount of current HP, and losing it
+      // takes the same away — a Constitution belt on a wounded character raises
+      // both ends, it does not heal them to full. Without this, editing CON or a
+      // hit die moved max while current sat where it was.
+      if (previousMax > 0 && hp.max !== previousMax) {
+        hp.current += hp.max - previousMax;
+      }
+      hp.current = Math.max(0, Math.min(hp.current, hp.max));
     }
   }
 
