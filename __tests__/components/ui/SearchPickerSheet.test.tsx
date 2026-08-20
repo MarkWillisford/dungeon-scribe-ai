@@ -51,6 +51,18 @@ describe('SearchPickerSheet', () => {
   // behind the class, feat, trait, template and class-choice pickers, so these
   // props govern most of the pickers in the app at once.
   describe('keyboard handling (#358)', () => {
+    it('does not raise the keyboard on open, so the list is tappable immediately', () => {
+      // autoFocus put the keyboard up before the user had asked for it, over a
+      // list they had come to browse.
+      const { getByLabelText } = renderSheet();
+      expect(getByLabelText('Search').props.autoFocus).toBeFalsy();
+    });
+
+    it('dismisses the keyboard on drag as well as on scroll begin', () => {
+      const { getByTestId } = renderSheet();
+      expect(getByTestId('search-picker-results').props.keyboardDismissMode).toBe('on-drag');
+    });
+
     it('keeps taps working while the soft keyboard is open', () => {
       // #252 set this to "handled", which was not enough on Android: the tap
       // could still be consumed before the row's press handler claimed it, so an

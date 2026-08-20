@@ -131,7 +131,6 @@ export function SearchPickerSheet({
             onChangeText={setQuery}
             placeholder={placeholder}
             placeholderTextColor={colors.text.tertiary}
-            autoFocus
             style={[
               styles.searchInput,
               {
@@ -199,6 +198,7 @@ export function SearchPickerSheet({
           }}
           contentContainerStyle={styles.listContent}
           keyboardShouldPersistTaps="always"
+          keyboardDismissMode="on-drag"
           onScrollBeginDrag={Keyboard.dismiss}
           ListEmptyComponent={
             <View style={styles.empty}>
