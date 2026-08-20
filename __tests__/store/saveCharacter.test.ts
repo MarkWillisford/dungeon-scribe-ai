@@ -217,6 +217,10 @@ describe('saveCharacter thunk', () => {
       mockUpdate.mockResolvedValue(SAVED_WITH_ID);
 
       let entryState = characterEntryReducer(undefined, { type: '@@INIT' });
+      // A blank draft has no name, and a nameless character cannot be deleted
+      // through the UI — so the thunk refuses to save one (#382). Name it first;
+      // this test is about session binding, not about naming.
+      entryState = characterEntryReducer(entryState, setName('Kah-Mei'));
       // Plain jest.fn() so the mock stays assignable to ThunkDispatch, matching
       // the pattern in makeThunkAPI above.
       const dispatch = jest.fn();
