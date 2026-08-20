@@ -15,11 +15,12 @@ function makeState(overrides: {
   mode?: 'new' | 'edit' | 'import';
   originalCharacterId?: string | null;
   uid?: string | null;
+  name?: string;
 }): RootState {
-  const { mode = 'new', originalCharacterId = null, uid = 'user-123' } = overrides;
+  const { mode = 'new', originalCharacterId = null, uid = 'user-123', name = 'Test' } = overrides;
   return {
     characterEntry: {
-      character: { info: { id: 'char-1', name: 'Test' } } as unknown as Character,
+      character: { info: { id: 'char-1', name } } as unknown as Character,
       mode,
       originalCharacterId,
       isSaving: false,
@@ -46,6 +47,36 @@ beforeEach(() => {
 });
 
 describe('saveCharacter thunk', () => {
+  describe('unnamed character', () => {
+    it('refuses to save a character with no name', async () => {
+      // The delete confirmation asks the user to type the character's name, so a
+      // nameless document cannot be removed from inside the app at all. Two of
+      // them were created by pressing Save on an untouched blank draft.
+      const state = makeState({ name: '' });
+      const { dispatch, getState } = makeThunkAPI(state);
+      const result = await saveCharacter()(dispatch, getState, undefined);
+
+      expect(result.type).toBe('characterEntry/save/rejected');
+      expect((result as { payload: string }).payload).toMatch(/name/i);
+    });
+
+    it('refuses a name that is only whitespace', async () => {
+      const state = makeState({ name: '   ' });
+      const { dispatch, getState } = makeThunkAPI(state);
+      const result = await saveCharacter()(dispatch, getState, undefined);
+      expect(result.type).toBe('characterEntry/save/rejected');
+    });
+
+    it('writes nothing when the name is missing', async () => {
+      const state = makeState({ name: '' });
+      const { dispatch, getState } = makeThunkAPI(state);
+      await saveCharacter()(dispatch, getState, undefined);
+
+      expect(mockCreate).not.toHaveBeenCalled();
+      expect(mockUpdate).not.toHaveBeenCalled();
+    });
+  });
+
   describe('unauthenticated', () => {
     it('rejects with "Not authenticated" when user is null', async () => {
       const state = makeState({ uid: null });

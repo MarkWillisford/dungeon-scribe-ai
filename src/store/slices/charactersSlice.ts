@@ -185,7 +185,13 @@ const charactersSlice = createSlice({
     builder.addCase(saveCharacter.fulfilled, (state, action) => {
       const character = ModifierPipelineService.recalculate(action.payload);
       const summary: CharacterSummary = {
-        id: character.info.id,
+        // The Firestore document id, which is what getUserCharacters keys the
+        // list on. This used to be character.info.id — a locally generated
+        // char_<timestamp> value — so findIndex below never matched an existing
+        // row and every save appended a phantom duplicate to the list. The
+        // document itself was updated correctly the whole time; only the list
+        // lied about it.
+        id: character.info.firebaseId ?? character.info.id,
         name: character.info.name,
         level: character.classes.totalLevel,
         race: character.info.race.name,

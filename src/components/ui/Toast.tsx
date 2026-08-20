@@ -1,12 +1,5 @@
-import React, { useEffect } from 'react';
-import { Text, StyleSheet } from 'react-native';
-import Animated, {
-  useSharedValue,
-  useAnimatedStyle,
-  withTiming,
-  withDelay,
-  runOnJS,
-} from 'react-native-reanimated';
+import React, { useEffect, useRef, useState } from 'react';
+import { Animated, Text, StyleSheet } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 
 export type ToastType = 'success' | 'error' | 'warning' | 'info';
@@ -19,30 +12,45 @@ interface ToastProps {
   testID?: string;
 }
 
+/**
+ * Uses React Native's own Animated, not Reanimated.
+ *
+ * This was a Reanimated component that faded in from opacity 0. Reanimated 4
+ * needs the react-native-worklets Babel plugin, and this project's
+ * babel.config.js still points at the pre-4 'react-native-reanimated/plugin'
+ * path — so the entrance animation never ran and the toast sat invisible at
+ * opacity 0 forever. Save reported success into a void.
+ *
+ * A confirmation the user cannot see is worse than no confirmation at all, so
+ * this deliberately uses the built-in Animated API, which needs no plugin. It
+ * also starts fully opaque and animates only on the way out: if anything ever
+ * goes wrong with the animation again, the failure mode is a toast that stays
+ * on screen rather than one that never appears.
+ */
 export function Toast({ message, type = 'info', duration = 3000, onDismiss, testID }: ToastProps) {
   const { colors } = useTheme();
-  const translateY = useSharedValue(-100);
-  const opacity = useSharedValue(0);
+  // Lazy state rather than a ref, so the value is created once without being
+  // read during render (react-hooks/refs).
+  const [opacity] = useState(() => new Animated.Value(1));
+  const onDismissRef = useRef(onDismiss);
 
   useEffect(() => {
-    translateY.value = withTiming(0, { duration: 300 });
-    opacity.value = withTiming(1, { duration: 300 });
+    onDismissRef.current = onDismiss;
+  }, [onDismiss]);
 
-    translateY.value = withDelay(
-      duration,
-      withTiming(-100, { duration: 300 }, (finished) => {
-        if (finished) {
-          runOnJS(onDismiss)();
-        }
-      }),
-    );
-    opacity.value = withDelay(duration, withTiming(0, { duration: 300 }));
-  }, [duration, onDismiss, opacity, translateY]);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      Animated.timing(opacity, {
+        toValue: 0,
+        duration: 300,
+        useNativeDriver: true,
+      }).start(({ finished }) => {
+        if (finished) onDismissRef.current();
+      });
+    }, duration);
 
-  const animatedStyle = useAnimatedStyle(() => ({
-    transform: [{ translateY: translateY.value }],
-    opacity: opacity.value,
-  }));
+    return () => clearTimeout(timer);
+  }, [duration, opacity]);
 
   const bgColors: Record<ToastType, string> = {
     success: colors.success.DEFAULT,
@@ -54,7 +62,7 @@ export function Toast({ message, type = 'info', duration = 3000, onDismiss, test
   return (
     <Animated.View
       testID={testID}
-      style={[styles.container, animatedStyle, { backgroundColor: bgColors[type] }]}
+      style={[styles.container, { opacity, backgroundColor: bgColors[type] }]}
       accessibilityRole="alert"
       accessibilityLiveRegion="assertive"
     >
@@ -72,6 +80,7 @@ const styles = StyleSheet.create({
     padding: 14,
     borderRadius: 8,
     zIndex: 1000,
+    elevation: 12,
   },
   message: {
     color: '#FFFFFF',
