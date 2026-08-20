@@ -430,6 +430,11 @@ function FavoredClassBonusSection({ entry }: { entry: ClassEntry }) {
               Alternate Favored Class Bonus
             </Text>
             <FlatList
+              // flexGrow: 0 makes the list size to its content. Without it the
+              // list claims the sheet's full maxHeight, so two short options sat
+              // in 400px of empty space and looked like an empty picker until
+              // the user thought to scroll.
+              style={fcbStyles.modalList}
               data={alternates.filter(
                 (a) =>
                   altPickerLevel === null ||
@@ -437,6 +442,11 @@ function FavoredClassBonusSection({ entry }: { entry: ClassEntry }) {
                   a.minimumClassLevel <= altPickerLevel,
               )}
               keyExtractor={(item) => item.id}
+              ListEmptyComponent={
+                <Text style={[fcbStyles.modalEmpty, { color: colors.text.tertiary }]}>
+                  No alternate favored class bonuses are published for this race and class.
+                </Text>
+              }
               renderItem={({ item }) => {
                 const currentSel =
                   altPickerLevel !== null ? getSelectionForLevel(altPickerLevel) : null;
@@ -596,6 +606,16 @@ const fcbStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 24,
+  },
+  modalList: {
+    flexGrow: 0,
+  },
+  modalEmpty: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 13,
+    fontStyle: 'italic',
+    paddingHorizontal: 16,
+    paddingBottom: 16,
   },
   modalSheet: {
     width: '100%',
