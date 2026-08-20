@@ -628,10 +628,26 @@ export class ModifierPipelineService {
     hp.constitution = c.abilityScores.con.tempModifier * c.classes.totalLevel;
     hp.other = this.get(stacked, 'hp') + this.get(stacked, 'hp.per_level') * c.classes.totalLevel;
 
-    // Favored class HP
-    hp.favoredClass = c.classes.favoredClassBonuses
+    // Favored class HP.
+    //
+    // The selections the UI writes live on each CLASS ENTRY as
+    // FavoredClassBonusSelection ({ level, type: 'hp' }) — that is what
+    // setFavoredClassBonuses populates, and what computeMaxHP,
+    // ResourcePoolService and CharacterValidationService all read. This
+    // function was reading classes.favoredClassBonuses instead, a top-level
+    // aggregate that NOTHING in the app ever writes, so it was permanently
+    // empty and choosing "+1 hit point" did nothing at all.
+    //
+    // The legacy aggregate is still counted, for characters that carry one from
+    // an import. The two are never both populated in practice.
+    const perEntryHP = c.classes.classes.reduce(
+      (sum, cls) => sum + (cls.favoredClassBonuses ?? []).filter((b) => b.type === 'hp').length,
+      0,
+    );
+    const legacyHP = c.classes.favoredClassBonuses
       .filter((b) => b.bonusType === 'HP')
       .reduce((sum, b) => sum + b.value, 0);
+    hp.favoredClass = perEntryHP + legacyHP;
 
     const maxHP = hp.base + hp.constitution + hp.favoredClass + hp.other;
 
