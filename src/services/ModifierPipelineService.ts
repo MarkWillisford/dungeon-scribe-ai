@@ -67,6 +67,14 @@ export class ModifierPipelineService {
   static recalculate(character: Character): Character {
     const c = JSON.parse(JSON.stringify(character)) as Character;
 
+    // JSON.stringify turns Dates into ISO strings and JSON.parse leaves them
+    // that way, so every Date on the character came out of the clone as a
+    // string. That is how saving crashed the character list: the summary
+    // carried a string and CharacterCard called toLocaleDateString on it (#376).
+    // Put the real Date instances back.
+    c.lastUpdated = character.lastUpdated;
+    c.createdAt = character.createdAt;
+
     // Phase 1: Collect all active effects from every source
     const allEffects = this.collectAllEffects(c);
 
