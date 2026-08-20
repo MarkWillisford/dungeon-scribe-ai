@@ -13,6 +13,7 @@ import { useTheme } from '@/hooks/useTheme';
 import { GameDataService } from '@/services/GameDataService';
 import type { ExpandedRaceData, FlexibleAbilityBonus } from '@/data/races';
 import type { AbilityKey } from '@/types/abilities';
+import type { Size } from '@/types/base';
 
 // ---- Types ----
 
@@ -22,6 +23,10 @@ export interface RacePickerResult {
   racialBonuses: Partial<Record<AbilityKey, number>>;
   hasFlexBonus: boolean;
   flexibleAbilityBonuses?: FlexibleAbilityBonus[];
+  /** Base land speed in feet. A Gnome is 20, not the 30 every character defaulted to. */
+  baseSpeed: number;
+  /** Drives AC, attack and CMB/CMD, so it has to travel with the race. */
+  size: Size;
 }
 
 interface RacePickerSheetProps {
@@ -149,6 +154,8 @@ export function RacePickerSheet({ visible, onSelect, onClose }: RacePickerSheetP
       racialBonuses: toRacialBonuses(race.abilityModifiers),
       hasFlexBonus: (race.flexibleAbilityBonuses?.length ?? 0) > 0,
       flexibleAbilityBonuses: race.flexibleAbilityBonuses,
+      baseSpeed: race.speed,
+      size: race.size,
     });
   };
 
