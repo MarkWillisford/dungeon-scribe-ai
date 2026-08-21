@@ -500,7 +500,7 @@ function FavoredClassBonusSection({ entry }: { entry: ClassEntry }) {
                           },
                         ]}
                       >
-                        {item.bonusType ?? 'Alternate bonus'}
+                        {item.shortName}
                       </Text>
                       {!!item.description && (
                         <Text
