@@ -110,17 +110,22 @@ plans/                  Design specs and implementation plans
 - **Animal companion builder** — Full companion stat block with automatic progression tier advancement
 - **Favored class bonuses** — Per-level FCB selection with APG alternate bonuses for all 36 races
 - **Equipment effects pipeline** — Equipped items feed typed bonuses directly into the modifier pipeline
+- **Magic item effect import + presets** — Preset library, feat grants, re-equip flow, custom enchantments
+- **Enter Rissi** — End-to-end validation of a real level-24 multiclass character; all session bugs resolved
 
 ### Now
 
-- **Enter Rissi** — End-to-end validation of a real level-24 multiclass character; ongoing bug triage and fixes
-- **Item effect editor** — Tap any equipped item to add, edit, or remove effects; custom enchantments and homebrew items
+- **Play session initialization** — "Play" button on a saved character seeds the combat tracker with that character's computed stats: HP, AC, saves, attack bonuses, and available combat ability toggles
+- **Play-state persistence** — Combat state (HP, active buffs, spell slots used, resources) persists to Firestore and survives app close; "Resume" or "New Session" on re-entry
+- **Spell slot tracking** — Per-pool, per-level slot use controls on the playsheet; prepared vs. spontaneous caster modes
+- **Resource pool tracking** — Ki, rage, channel energy, bardic performance, lay on hands, and all other class resources with tap-to-decrement and per-encounter reset
+- **Rest and recovery** — Long rest and short rest actions that reset HP, slots, and resource pools and write recovered state back to Firestore
 
 ### Next
 
 - **Quick Build wizard** — Guided step-by-step character creation for new players
-- **Campaign management UI** — DM tools for ruleset management, handouts, and session tracking
 - **Production seeding** — Push all staging collections to the production Firebase project
+- **Campaign management UI** — DM tools for ruleset management, handouts, and session tracking
 
 ### AI Features
 
