@@ -28,7 +28,7 @@ async function main() {
   
   for (const docSnap of snap.docs) {
     const data = docSnap.data();
-    const features: any[] = data.classFeatures ?? [];
+    const features: Record<string, unknown>[] = data.classFeatures ?? [];
     docIds.push(docSnap.id);
     totalFeatures += features.length;
     for (const f of features) {
