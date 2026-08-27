@@ -1239,6 +1239,11 @@ export function ClassEntryCard({ entry, dragHandle }: ClassEntryCardProps) {
         </Pressable>
       )}
 
+      {isBaseClass && entry.isFavoredClass && <FavoredClassBonusSection entry={entry} />}
+
+      {/* Eidolon sub-sheet — rendered above class choices for Summoner entries */}
+      {SUMMONER_CLASS_RE.test(entry.name) && <EidolonSection classEntry={entry} />}
+
       {definitionsError !== null && (
         <ClassChoicesUnavailable
           className={entry.name}
@@ -1246,11 +1251,6 @@ export function ClassEntryCard({ entry, dragHandle }: ClassEntryCardProps) {
           onRetry={() => setDefinitionsAttempt((n) => n + 1)}
         />
       )}
-
-      {isBaseClass && entry.isFavoredClass && <FavoredClassBonusSection entry={entry} />}
-
-      {/* Eidolon sub-sheet — rendered above class choices for Summoner entries */}
-      {SUMMONER_CLASS_RE.test(entry.name) && <EidolonSection classEntry={entry} />}
 
       {/* Class choices */}
       {hasChoices && (
