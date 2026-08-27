@@ -841,11 +841,11 @@ Key facts:
 - [ ] Build companion builder components
 - [ ] Wire companion builder into direct-entry Classes & Templates tab
 
-### Phase 4: Play Session — Combat Wiring — LARGELY COMPLETE (2026-05-23)
+### Phase 4: Play Session — Combat Wiring — COMPLETE, pending integration tests (2026-07-01)
 
 The combat tracker (Phase 2) was built as a standalone system. This phase wires it to the character system so a saved character can actually be played at the table. Full PRD: `docs/prds/phase-4-play-session.md`.
 
-**2372 tests passing across 83 suites** as of 2026-05-22.
+Rissi end-to-end validation gate (Issue #149) closed 2026-07-01. Only remaining item is the integration test suite (Issue #182).
 
 #### 4a. Character → Combat Session Initialization — COMPLETE (PR #184, #192)
 
@@ -888,22 +888,21 @@ The combat tracker (Phase 2) was built as a standalone system. This phase wires 
 
 #### 4f. Remaining
 
-- [ ] **Issue #149** — End-to-end validation: resource pools against Rissi (manual verification gate — must load Rissi on a device connected to staging Firestore and confirm all pool maxes and contribution breakdowns are correct before Phase 4 is considered fully complete)
-- [ ] **Issue #182** — Integration test suite: multi-session independence, buff activation through `recalculate()`, Dying End Turn, rest recovery, navigate-away-and-back state restore (blocked by #149)
+- [x] **Issue #149** — End-to-end validation: resource pools against Rissi — closed 2026-07-01
+- [ ] **Issue #182** — Integration test suite: multi-session independence, buff activation through `recalculate()`, Dying End Turn, rest recovery, navigate-away-and-back state restore
 - [ ] Short rest (per-encounter pool reset + optional HD spend for HP)
 
 ### Phase 4 Verification
 
 | Check                              | Status                                   |
 | ---------------------------------- | ---------------------------------------- |
-| `npm test` — 2372 tests, 83 suites | Passing (2026-05-22)                     |
 | Session auto-save verified         | Yes (PR #185)                            |
 | HP tracker, temp HP, non-lethal    | Verified in code review (PRs #191, #199) |
 | DR/resistance damage resolution    | Verified in code review (PR #200)        |
 | Buff stacking via `recalculate()`  | Verified in code review (PR #198)        |
 | Dying bleed-out and stabilization  | Verified in code review (PR #202)        |
 | Long rest full recovery            | Verified in code review (PR #201)        |
-| Rissi end-to-end on device         | **PENDING — Issue #149**                 |
+| Rissi end-to-end on device         | Closed 2026-07-01 (Issue #149)           |
 | Integration test suite             | **PENDING — Issue #182**                 |
 
 ---
