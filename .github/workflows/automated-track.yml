@@ -21,10 +21,6 @@ name: Automated Track
 #
 # Required secrets:
 #   CLAUDE_CODE_OAUTH_TOKEN — Claude Max plan OAuth token
-#
-# Required files:
-#   .claude/reviewer-rotation.json — { "next": "mark" } or { "next": "doug" }
-#                                    Values must be valid GitHub usernames.
 
 on:
   issues:
