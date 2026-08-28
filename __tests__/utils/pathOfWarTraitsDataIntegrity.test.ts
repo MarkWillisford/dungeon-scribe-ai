@@ -71,6 +71,33 @@ describe('Path of War traits seed data integrity', () => {
     expect(trait?.choices?.some((c) => c.type === 'class_skill')).toBe(true);
   });
 
+  test('agile_dancer expresses both substitutions as special effects', () => {
+    // Neither half of this trait is a numeric bonus, so nothing downstream
+    // would notice if the target or params drifted.
+    const trait = getTraitById('agile_dancer');
+    expect(trait?.effects).toHaveLength(2);
+    expect(trait?.effects.every((e) => e.type === 'special')).toBe(true);
+
+    const skillSwap = trait?.effects.find((e) => e.target === 'skill.acrobatics');
+    expect(skillSwap?.condition?.params).toMatchObject({
+      substituteSkill: 'perform (dance)',
+      forSkill: 'acrobatics',
+    });
+
+    const abilitySwap = trait?.effects.find((e) => e.target === 'skill.perform_dance');
+    expect(abilitySwap?.condition?.params.useHigherOf).toBe('DEX,CHA');
+  });
+
+  test('unorthodox_method names both sides of the discipline swap', () => {
+    const trait = getTraitById('unorthodox_method');
+    expect(trait?.effects[0].target).toBe('initiating.discipline_swap');
+
+    const templates = trait?.choices?.map((c) => c.effectTargetTemplate ?? '') ?? [];
+    expect(templates.some((t) => t.includes('removed_discipline'))).toBe(true);
+    expect(templates.some((t) => t.includes('bonus_discipline'))).toBe(true);
+    expect(trait?.choices?.some((c) => c.type === 'class_skill')).toBe(true);
+  });
+
   test('traits requiring a player choice declare one', () => {
     for (const id of ['combat_training', 'practiced_initiator', 'unorthodox_method']) {
       expect(getTraitById(id)?.choices?.length).toBeGreaterThan(0);

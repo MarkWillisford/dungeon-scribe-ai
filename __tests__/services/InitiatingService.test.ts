@@ -435,6 +435,45 @@ describe('InitiatingService.buildPool', () => {
     expect(pool.maneuverDC.base).toBe(13); // 10 + 3
   });
 
+  it('threads the trait IL options through to the built pool', () => {
+    // Warder 4 / Fighter 10 → base IL 9. Practiced Initiator adds +2 under a
+    // HD 14 cap. Exercised through buildPool because that is where ilOptions
+    // is threaded, and a drop between the layers would not show up in the
+    // computeInitiatorLevel tests above.
+    const contributors = [
+      makeContributor('Warder', 4, 'full'),
+      makeContributor('Fighter', 10, 'half'),
+    ];
+
+    const without = InitiatingService.buildPool(
+      'Warder',
+      MOCK_CLASS_DATA,
+      4,
+      contributors,
+      [],
+      [],
+      MOCK_TABLES,
+      3,
+    );
+    expect(without.effectiveInitiatorLevel).toBe(9);
+    expect(without.maxManeuverLevel).toBe(5); // ceil(9/2)
+
+    const withTrait = InitiatingService.buildPool(
+      'Warder',
+      MOCK_CLASS_DATA,
+      4,
+      contributors,
+      [],
+      [],
+      MOCK_TABLES,
+      3,
+      0,
+      { traitBonus: 2, hitDice: 14 },
+    );
+    expect(withTrait.effectiveInitiatorLevel).toBe(11);
+    expect(withTrait.maxManeuverLevel).toBe(6); // ceil(11/2)
+  });
+
   it('falls back to [0, 0, 0] for unknown progression table key', () => {
     const pool = InitiatingService.buildPool(
       'Unknown',
