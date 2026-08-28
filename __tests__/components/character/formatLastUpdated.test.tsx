@@ -22,6 +22,22 @@ describe('formatLastUpdated', () => {
     expect(formatLastUpdated(date.getTime())).toBe(date.toLocaleDateString());
   });
 
+  it('returns an empty string when toDate itself throws', () => {
+    // Shape-checking the object is not enough: a malformed value can carry a
+    // toDate that throws, which would crash render exactly like #376 did.
+    const hostile = {
+      toDate: () => {
+        throw new Error('not really a Timestamp');
+      },
+    };
+    expect(() => formatLastUpdated(hostile)).not.toThrow();
+    expect(formatLastUpdated(hostile)).toBe('');
+  });
+
+  it('returns an empty string when toDate returns something that is not a Date', () => {
+    expect(formatLastUpdated({ toDate: () => 'nope' as unknown as Date })).toBe('');
+  });
+
   it.each([[undefined], [null], ['not a date'], [{}], [new Date('nonsense')]])(
     'returns an empty string rather than throwing for %p',
     (value) => {

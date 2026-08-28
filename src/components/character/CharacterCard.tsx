@@ -22,10 +22,17 @@ export function formatLastUpdated(value: unknown): string {
   // Firestore Timestamp, which survives some paths unconverted.
   const maybeTimestamp = value as { toDate?: () => Date } | null | undefined;
   if (maybeTimestamp && typeof maybeTimestamp.toDate === 'function') {
-    const converted = maybeTimestamp.toDate();
-    return converted instanceof Date && !isNaN(converted.getTime())
-      ? converted.toLocaleDateString()
-      : '';
+    try {
+      const converted = maybeTimestamp.toDate();
+      return converted instanceof Date && !isNaN(converted.getTime())
+        ? converted.toLocaleDateString()
+        : '';
+    } catch {
+      // A malformed object can carry a toDate that throws rather than returning.
+      // Guarding the shape but not the call would leave the one crash path this
+      // helper exists to close.
+      return '';
+    }
   }
   return '';
 }
