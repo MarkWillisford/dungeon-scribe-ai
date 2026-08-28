@@ -1,5 +1,14 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { View, Text, TextInput, Pressable, Modal, FlatList, StyleSheet } from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  Pressable,
+  Modal,
+  FlatList,
+  StyleSheet,
+  Keyboard,
+} from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import { GameDataService } from '@/services/GameDataService';
 import { type FeatDefinition } from '@/types/feats';
@@ -206,7 +215,8 @@ export function FeatPickerSheet({ visible, title, onSelect, onClose }: FeatPicke
         <FlatList
           data={filtered}
           keyExtractor={(item) => item.key}
-          keyboardShouldPersistTaps="handled"
+          keyboardShouldPersistTaps="always"
+          onScrollBeginDrag={Keyboard.dismiss}
           renderItem={({ item }) => (
             <Pressable
               onPress={() => handleSelect(item)}
