@@ -45,7 +45,10 @@ export function Toast({ message, type = 'info', duration = 3000, onDismiss, test
         duration: 300,
         useNativeDriver: true,
       }).start(({ finished }) => {
-        if (finished) onDismissRef.current();
+        // Optional call: the prop is required by type, but this fires 300ms
+        // later from an animation callback, so a caller that slips an undefined
+        // past the type boundary would throw here rather than at the call site.
+        if (finished) onDismissRef.current?.();
       });
     }, duration);
 
