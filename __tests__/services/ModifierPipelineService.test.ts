@@ -1033,6 +1033,68 @@ describe('ModifierPipelineService', () => {
       expect(result.combatStats.hitPoints.favoredClass).toBe(3);
     });
 
+    test('counts the per-level hp selections the UI actually writes', () => {
+      // setFavoredClassBonuses stores these on the class entry. The pipeline was
+      // reading classes.favoredClassBonuses, a top-level aggregate nothing
+      // writes, so picking "+1 hit point" moved nothing.
+      const char = createTestCharacter();
+      char.classes.classes[0].favoredClassBonuses = [
+        { level: 1, type: 'hp' },
+        { level: 2, type: 'hp' },
+        { level: 3, type: 'skill' },
+      ];
+
+      const result = ModifierPipelineService.recalculate(char);
+
+      expect(result.combatStats.hitPoints.favoredClass).toBe(2);
+    });
+
+    test('sums hp selections across every class entry', () => {
+      const char = createTestCharacter();
+      const base = char.classes.classes[0];
+      char.classes.classes = [
+        { ...base, name: 'Rogue (Unchained)', favoredClassBonuses: [{ level: 1, type: 'hp' }] },
+        { ...base, name: 'Cavalier', favoredClassBonuses: [{ level: 1, type: 'hp' }] },
+      ];
+
+      const result = ModifierPipelineService.recalculate(char);
+
+      expect(result.combatStats.hitPoints.favoredClass).toBe(2);
+    });
+
+    test('ignores skill and alternate selections', () => {
+      const char = createTestCharacter();
+      char.classes.classes[0].favoredClassBonuses = [
+        { level: 1, type: 'skill' },
+        { level: 2, type: 'alternate', optionId: 'rogue-gnome-1' },
+      ];
+
+      const result = ModifierPipelineService.recalculate(char);
+
+      expect(result.combatStats.hitPoints.favoredClass).toBe(0);
+    });
+
+    test('carries the favored class hp through to maximum HP', () => {
+      // A bonus that does not reach max HP has not been applied.
+      const char = createTestCharacter();
+      const before = ModifierPipelineService.recalculate(char);
+      const beforeMax =
+        before.combatStats.hitPoints.base +
+        before.combatStats.hitPoints.constitution +
+        before.combatStats.hitPoints.favoredClass +
+        before.combatStats.hitPoints.other;
+
+      char.classes.classes[0].favoredClassBonuses = [{ level: 1, type: 'hp' }];
+      const after = ModifierPipelineService.recalculate(char);
+      const afterMax =
+        after.combatStats.hitPoints.base +
+        after.combatStats.hitPoints.constitution +
+        after.combatStats.hitPoints.favoredClass +
+        after.combatStats.hitPoints.other;
+
+      expect(afterMax).toBe(beforeMax + 1);
+    });
+
     test('ignores non-HP favored class bonuses', () => {
       const char = createTestCharacter();
       char.classes.favoredClassBonuses = [
