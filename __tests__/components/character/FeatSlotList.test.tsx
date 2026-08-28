@@ -43,7 +43,7 @@ jest.mock('@/utils/characterComputations', () => ({
   // keep the genuine behaviour here rather than stubbing it out.
   selectedArchetypeNames: (cls: { archetype?: string[]; archetypeName?: string }) =>
     cls.archetypeName ? [...(cls.archetype ?? []), cls.archetypeName] : (cls.archetype ?? []),
-  buildReplacedFeaturesByClassId: () => new Map(),
+  buildReplacedFeaturesByClassId: jest.fn(() => new Map()),
 }));
 
 const featPickerProps: Record<string, unknown>[] = [];
@@ -229,6 +229,8 @@ describe('FeatSlotList - Add bonus slot modal', () => {
 describe('FeatSlotList - Slot rendering', () => {
   const computeFeatSlotsMock = jest.requireMock('@/utils/characterComputations')
     .computeFeatSlots as jest.Mock;
+  const buildReplacedMock = jest.requireMock('@/utils/characterComputations')
+    .buildReplacedFeaturesByClassId as jest.Mock;
 
   // Raw computed slot format (source, availableAt, availableAtLevel only)
   const rawLevelSlot = { source: 'level', availableAt: 'Level 1', availableAtLevel: 1 };
@@ -278,6 +280,7 @@ describe('FeatSlotList - Slot rendering', () => {
     mockDispatch.mockClear();
     mockUseAppSelector.mockClear();
     computeFeatSlotsMock.mockReturnValue([]);
+    buildReplacedMock.mockReturnValue(new Map());
   });
 
   it('renders an unassigned slot row with placeholder label', () => {
@@ -335,6 +338,19 @@ describe('FeatSlotList - Slot rendering', () => {
     const allText = getAllText(result.tree);
     expect(allText.some((t) => t === 'CLASS')).toBe(true);
     expect(allText.some((t) => t === 'Fighter 4')).toBe(true);
+  });
+
+  it('threads archetype-replaced features through to computeFeatSlots', () => {
+    // An archetype that replaces "Bonus Feats" has to reach computeFeatSlots as
+    // options.replacedFeaturesByClassId, or the slots it removed keep rendering.
+    const replaced = new Map([['cls-1', new Set(['Bonus Feat'])]]);
+    buildReplacedMock.mockReturnValue(replaced);
+
+    render(<FeatSlotList />);
+
+    expect(computeFeatSlotsMock).toHaveBeenCalled();
+    const options = computeFeatSlotsMock.mock.calls.at(-1)?.[3];
+    expect(options.replacedFeaturesByClassId).toBe(replaced);
   });
 
   it('matches an assigned feat to a class slot by its composite id', () => {

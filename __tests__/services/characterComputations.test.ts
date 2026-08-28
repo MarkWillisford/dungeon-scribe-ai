@@ -277,6 +277,18 @@ describe('computeClassBonusFeatSlots', () => {
     expect(slots[0].allowedFeatTypes).toEqual(['teamwork']);
   });
 
+  it('restricts wizard bonus feats to item creation and metamagic', () => {
+    const slots = computeClassBonusFeatSlots([cls('Wizard', 5)], opts);
+    expect(slots.length).toBeGreaterThan(0);
+    expect(slots[0].allowedFeatTypes).toEqual(['item_creation', 'metamagic']);
+  });
+
+  it('restricts magus bonus feats to combat, item creation and metamagic', () => {
+    const slots = computeClassBonusFeatSlots([cls('Magus', 5)], opts);
+    expect(slots.length).toBeGreaterThan(0);
+    expect(slots[0].allowedFeatTypes).toEqual(['combat', 'item_creation', 'metamagic']);
+  });
+
   it('leaves the restriction unset when the rules are not modelled for that class', () => {
     const slots = computeClassBonusFeatSlots([cls('Sorcerer', 7)], opts);
     expect(slots[0].featureName).toBe('Bloodline Feat');
