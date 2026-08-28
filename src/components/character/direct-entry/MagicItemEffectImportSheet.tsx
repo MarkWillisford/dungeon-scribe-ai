@@ -7,6 +7,7 @@ import {
   FlatList,
   StyleSheet,
   ActivityIndicator,
+  Keyboard,
 } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import { GameDataService } from '@/services/GameDataService';
@@ -136,7 +137,8 @@ export function MagicItemEffectImportSheet({
         <FlatList
           data={results}
           keyExtractor={(item) => item.id}
-          keyboardShouldPersistTaps="handled"
+          keyboardShouldPersistTaps="always"
+          onScrollBeginDrag={Keyboard.dismiss}
           renderItem={({ item }) => (
             <Pressable
               testID={`import-item-${item.id}`}
