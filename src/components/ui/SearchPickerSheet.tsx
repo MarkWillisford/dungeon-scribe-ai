@@ -1,5 +1,14 @@
 import React, { useState, useMemo } from 'react';
-import { View, Text, TextInput, Pressable, Modal, FlatList, StyleSheet } from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  Pressable,
+  Modal,
+  FlatList,
+  StyleSheet,
+  Keyboard,
+} from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 
 export interface SearchItem {
@@ -122,7 +131,6 @@ export function SearchPickerSheet({
             onChangeText={setQuery}
             placeholder={placeholder}
             placeholderTextColor={colors.text.tertiary}
-            autoFocus
             style={[
               styles.searchInput,
               {
@@ -138,6 +146,7 @@ export function SearchPickerSheet({
 
         {/* Results */}
         <FlatList
+          testID="search-picker-results"
           data={flatData}
           keyExtractor={(row, i) =>
             row.type === 'header' ? `header-${row.label}-${i}` : row.item.key
@@ -188,7 +197,9 @@ export function SearchPickerSheet({
             );
           }}
           contentContainerStyle={styles.listContent}
-          keyboardShouldPersistTaps="handled"
+          keyboardShouldPersistTaps="always"
+          keyboardDismissMode="on-drag"
+          onScrollBeginDrag={Keyboard.dismiss}
           ListEmptyComponent={
             <View style={styles.empty}>
               <Text style={[styles.emptyText, { color: colors.text.tertiary }]}>

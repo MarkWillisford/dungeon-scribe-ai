@@ -467,7 +467,12 @@ export class ModifierPipelineService {
     for (const ab of abilities) {
       const score = c.abilityScores[ab];
       const result = stacked.get(`ability.${ab}`);
-      score.total = score.base + score.racial + score.inherent + (result?.total ?? 0);
+      // levelIncrements is the count of +1s allocated here from the every-4-HD
+      // slots. The UI has always shown it as its own "Level +1s" row, but the
+      // total left it out, so a level 20 character was quietly short up to five
+      // points of ability score — and every stat derived from them.
+      score.total =
+        score.base + score.racial + score.inherent + score.levelIncrements + (result?.total ?? 0);
       score.tempTotal = Math.max(0, score.total - score.damage - score.drain);
       score.modifier = Math.floor((score.total - 10) / 2);
       score.tempModifier = Math.floor((score.tempTotal - 10) / 2);
