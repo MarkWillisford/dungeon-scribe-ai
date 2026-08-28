@@ -1413,6 +1413,44 @@ describe('charactersSlice', () => {
       expect(state.error).toBe('boom');
     });
 
+    it('keeps a feat removed when recalculate throws', () => {
+      const withFeat: Character = {
+        ...mockCharacter,
+        feats: { feats: [mockFeat], totalFeats: 1, bonusFeats: 0 },
+      };
+      const withActive = charactersReducer(initialState, setActiveCharacter(withFeat));
+      mockRecalculate.mockImplementationOnce(() => {
+        throw new Error('boom');
+      });
+      const state = charactersReducer(withActive, removeFeat('power-attack'));
+      expect(state.activeCharacter?.feats.feats).toHaveLength(0);
+      expect(state.error).toBe('boom');
+    });
+
+    it('keeps a feat toggled when recalculate throws', () => {
+      const withFeat: Character = {
+        ...mockCharacter,
+        feats: { feats: [{ ...mockFeat, active: true }], totalFeats: 1, bonusFeats: 0 },
+      };
+      const withActive = charactersReducer(initialState, setActiveCharacter(withFeat));
+      mockRecalculate.mockImplementationOnce(() => {
+        throw new Error('boom');
+      });
+      const state = charactersReducer(withActive, toggleFeat('power-attack'));
+      expect(state.activeCharacter?.feats.feats[0].active).toBe(false);
+      expect(state.error).toBe('boom');
+    });
+
+    it('leaves the character un-recalculated but intact on recalculateStats', () => {
+      const withActive = charactersReducer(initialState, setActiveCharacter(mockCharacter));
+      mockRecalculate.mockImplementationOnce(() => {
+        throw new Error('boom');
+      });
+      const state = charactersReducer(withActive, recalculateStats());
+      expect(state.activeCharacter).toEqual(withActive.activeCharacter);
+      expect(state.error).toBe('boom');
+    });
+
     it('uses a fallback message when the pipeline throws a non-Error', () => {
       mockRecalculate.mockImplementationOnce(() => {
         throw 'string failure';
