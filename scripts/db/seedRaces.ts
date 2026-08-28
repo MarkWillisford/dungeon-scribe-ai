@@ -20,7 +20,7 @@ import * as admin from 'firebase-admin';
 import { ALL_EXPANDED_RACES } from '../../src/data/races/index';
 import type { ExpandedRaceData } from '../../src/data/races/types';
 import { normalizeSource } from '../../src/utils/normalizeSource';
-import { sleep, chunkArray } from './seedUtils';
+import { sleep, chunkArray, raceDocId } from './seedUtils';
 
 const DRY_RUN = process.argv.includes('--dry-run');
 const PROJECT_ID = process.env.FIREBASE_PROJECT_ID ?? 'dungeon-scribe-ai-stagin-b4fb5';
@@ -44,14 +44,6 @@ if (!admin.apps.length) {
 
 const db = admin.firestore();
 db.settings({ ignoreUndefinedProperties: true });
-
-/** Derive a stable Firestore document ID from race name. */
-function raceDocId(name: string): string {
-  return name
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-|-$/g, '');
-}
 
 async function seedRaces(races: ExpandedRaceData[]): Promise<void> {
   console.log(`\nSeeding ${races.length} races to project: ${PROJECT_ID}`);
