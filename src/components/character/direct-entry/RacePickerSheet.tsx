@@ -8,6 +8,7 @@ import {
   FlatList,
   ActivityIndicator,
   StyleSheet,
+  Keyboard,
 } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import { GameDataService } from '@/services/GameDataService';
@@ -189,7 +190,6 @@ export function RacePickerSheet({ visible, onSelect, onClose }: RacePickerSheetP
             onChangeText={setQuery}
             placeholder="Search races..."
             placeholderTextColor={colors.text.tertiary}
-            autoFocus
             style={[
               styles.searchInput,
               {
@@ -216,7 +216,9 @@ export function RacePickerSheet({ visible, onSelect, onClose }: RacePickerSheetP
           <FlatList
             data={filtered}
             keyExtractor={(r) => r.name}
-            keyboardShouldPersistTaps="handled"
+            keyboardShouldPersistTaps="always"
+            keyboardDismissMode="on-drag"
+            onScrollBeginDrag={Keyboard.dismiss}
             renderItem={({ item }) => (
               <Pressable
                 onPress={() => handleSelect(item)}
