@@ -28,9 +28,16 @@ export class HitDiceService {
     return Math.floor(rng() * hitDieSize) + 1;
   }
 
-  /** The value a given source produces for a die of this size. */
+  /**
+   * The value a given source produces for a die of this size.
+   *
+   * `manual` is excluded by type: a manual value carries no rule of its own —
+   * the caller already has the number the user typed, so there is nothing for
+   * this to derive. Returning an average for it would silently invent a value
+   * the user never entered.
+   */
   static valueForSource(
-    source: HitDieSource,
+    source: Exclude<HitDieSource, 'manual'>,
     hitDieSize: number,
     rng: () => number = Math.random,
   ): number {
@@ -41,9 +48,6 @@ export class HitDiceService {
         return this.averageValue(hitDieSize);
       case 'rolled':
         return this.roll(hitDieSize, rng);
-      case 'manual':
-        // A manual value carries no rule of its own — the caller supplies it.
-        return this.averageValue(hitDieSize);
     }
   }
 
@@ -70,7 +74,7 @@ export class HitDiceService {
    * default than rolling — it is reproducible, and a user who wanted a roll can
    * ask for one, whereas a user who did NOT want one cannot un-see it.
    */
-  static defaultSourceFor(isFirstCharacterLevel: boolean): HitDieSource {
+  static defaultSourceFor(isFirstCharacterLevel: boolean): Exclude<HitDieSource, 'manual'> {
     return isFirstCharacterLevel ? 'max' : 'average';
   }
 

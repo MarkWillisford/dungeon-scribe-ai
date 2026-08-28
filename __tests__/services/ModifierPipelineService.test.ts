@@ -1094,6 +1094,18 @@ describe('ModifierPipelineService', () => {
       expect(result.combatStats.hitPoints.currentInitialized).toBe(true);
     });
 
+    test('leaves a character with no levels un-seeded', () => {
+      // calculatedMax special-cases totalHD === 0, so max stays 0 and the
+      // seeding branch must not fire. Otherwise a half-built character would
+      // be marked initialized at 0 HP, and the real seed would never happen
+      // once levels were added.
+      const char = rogueAtLevel(0, []);
+      const result = ModifierPipelineService.recalculate(char);
+      expect(result.combatStats.hitPoints.max).toBe(0);
+      expect(result.combatStats.hitPoints.current).toBe(0);
+      expect(result.combatStats.hitPoints.currentInitialized).toBe(false);
+    });
+
     test('keeps a deliberately entered current HP below maximum', () => {
       const char = rogueAtLevel(3, [8, 5, 4]);
       char.combatStats.hitPoints.current = 7;
