@@ -176,9 +176,11 @@ describe('saveCharacter thunk', () => {
       const { dispatch, getState } = makeThunkAPI(state);
       await saveCharacter()(dispatch, getState, undefined);
       const calls = dispatch.mock.calls.map((c: [{ type: string; payload: unknown }]) => c[0]);
-      const bound = calls.find((c) => c.type === markSaved.type);
-      expect(bound).toBeDefined();
-      expect(bound?.payload).toEqual({ characterId: 'firestore-doc-1' });
+      // Exactly once: a second markSaved would re-bind the session mid-save and
+      // is the shape of bug #355 reappearing.
+      const bound = calls.filter((c) => c.type === markSaved.type);
+      expect(bound).toHaveLength(1);
+      expect(bound[0].payload).toEqual({ characterId: 'firestore-doc-1' });
     });
 
     it('dispatches markSaved with the existing ID after an update, so both paths settle alike', async () => {
@@ -187,9 +189,9 @@ describe('saveCharacter thunk', () => {
       const { dispatch, getState } = makeThunkAPI(state);
       await saveCharacter()(dispatch, getState, undefined);
       const calls = dispatch.mock.calls.map((c: [{ type: string; payload: unknown }]) => c[0]);
-      const bound = calls.find((c) => c.type === markSaved.type);
-      expect(bound).toBeDefined();
-      expect(bound?.payload).toEqual({ characterId: 'existing-id' });
+      const bound = calls.filter((c) => c.type === markSaved.type);
+      expect(bound).toHaveLength(1);
+      expect(bound[0].payload).toEqual({ characterId: 'existing-id' });
     });
 
     it('does not dispatch markSaved when a save fails', async () => {
