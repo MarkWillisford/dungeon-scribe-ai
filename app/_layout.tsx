@@ -12,6 +12,7 @@ import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { fontAssets } from '@/theme/fonts';
 import { initializeFeatRegistry } from '@/data/feats';
 import { DiceFAB } from '@/components/dice/DiceFAB';
+import { ToastHost } from '@/components/ui/ToastHost';
 
 SplashScreen.preventAutoHideAsync();
 initializeFeatRegistry?.();
@@ -68,6 +69,8 @@ function RootNavigation() {
     <>
       <Stack screenOptions={{ headerShown: false }} />
       <DiceFABWrapper />
+      {/* Above the navigator, so a toast survives the screen that raised it. */}
+      <ToastHost />
     </>
   );
 }
