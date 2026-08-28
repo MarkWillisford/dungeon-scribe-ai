@@ -448,6 +448,67 @@ describe('ModifierPipelineService', () => {
     });
   });
 
+  describe('recalculate — level increment slots', () => {
+    test('counts allocated +1s toward the ability total', () => {
+      // The UI showed a "Level +1s" row all along; the total ignored it, so
+      // CHA 13 base +2 racial +4 template +4 increments displayed as 19, not 23.
+      const char = createTestCharacter({ cha: 13 });
+      char.abilityScores.cha.racial = 2;
+      char.abilityScores.cha.levelIncrements = 4;
+
+      const result = ModifierPipelineService.recalculate(char);
+
+      expect(result.abilityScores.cha.total).toBe(19);
+    });
+
+    test('adds increments on top of pipeline bonuses rather than instead of them', () => {
+      const char = createTestCharacter({ cha: 13 });
+      char.abilityScores.cha.racial = 2;
+      char.abilityScores.cha.levelIncrements = 4;
+      char.appliedTemplates = [
+        {
+          templateId: 'paladin-creature',
+          name: 'Paladin Creature',
+          abilityScoreChanges: [{ ability: 'CHA', change: 4 }],
+          appliedAs: 'cr',
+          acquisitionType: 'acquired',
+          paidTiers: [],
+          sourceId: 'paladin-creature',
+          sourceRev: 0,
+        },
+      ];
+
+      const result = ModifierPipelineService.recalculate(char);
+
+      // 13 base + 2 racial + 4 increments + 4 template
+      expect(result.abilityScores.cha.total).toBe(23);
+      expect(result.abilityScores.cha.modifier).toBe(6);
+    });
+
+    test('leaves a score alone when no increments are allocated', () => {
+      const char = createTestCharacter({ cha: 13 });
+      char.abilityScores.cha.levelIncrements = 0;
+
+      const result = ModifierPipelineService.recalculate(char);
+
+      expect(result.abilityScores.cha.total).toBe(13);
+    });
+
+    test('carries increments through to the stats derived from the score', () => {
+      // An increment that does not reach AC is not really applied.
+      const char = createTestCharacter({ dex: 14 });
+      const before = ModifierPipelineService.recalculate(char);
+
+      char.abilityScores.dex.levelIncrements = 2;
+      const after = ModifierPipelineService.recalculate(char);
+
+      expect(after.abilityScores.dex.total).toBe(16);
+      expect(after.combatStats.armorClass.dexterity).toBe(
+        before.combatStats.armorClass.dexterity + 1,
+      );
+    });
+  });
+
   describe('BAB progressions', () => {
     test('Rogue (medium BAB) has lower BAB than Fighter (full BAB) at level 1', () => {
       const fighter = createTestCharacter({ className: 'Fighter' });
