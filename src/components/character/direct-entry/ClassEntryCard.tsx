@@ -512,7 +512,14 @@ function FavoredClassBonusSection({ entry }: { entry: ClassEntry }) {
                       )}
                     </View>
                     {isSelected && (
-                      <Text style={[fcbStyles.modalCheckmark, { color: fantasy.gold }]}>✓</Text>
+                      <Text
+                        style={[
+                          fcbStyles.modalCheckmark,
+                          { color: isDark ? fantasy.gold : fantasy.darkWood },
+                        ]}
+                      >
+                        ✓
+                      </Text>
                     )}
                   </Pressable>
                 );
