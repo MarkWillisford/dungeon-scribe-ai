@@ -271,6 +271,20 @@ describe('FirestoreGameDataConnector', () => {
         mockSnap([{ id: 'cavalier-order', className: 'cavalier' }]) as never,
       );
       await expect(connector.getClassChoiceDefinitions('cavalier')).resolves.toHaveLength(1);
+      // Two reads, not one served from cache — the point of not caching failures.
+      expect(mockGetDocs).toHaveBeenCalledTimes(2);
+      consoleError.mockRestore();
+    });
+
+    test('stringifies a non-Error rejection reason', async () => {
+      // Firestore rejects with an Error today, but the connector falls back to
+      // String(e) and nothing tested that branch.
+      const consoleError = jest.spyOn(console, 'error').mockImplementation(() => {});
+      mockGetDocs.mockRejectedValueOnce('access denied' as never);
+
+      await expect(connector.getClassChoiceDefinitions('cavalier')).rejects.toThrow(
+        /Could not load class choices for "cavalier": access denied/,
+      );
       consoleError.mockRestore();
     });
   });
