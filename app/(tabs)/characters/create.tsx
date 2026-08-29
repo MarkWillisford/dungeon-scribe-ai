@@ -288,25 +288,32 @@ export default function CreateCharacterScreen() {
       if (ranks > 0) allocatedSkills[key] = ranks;
     }
 
-    const result = await dispatch(
-      createCharacter({
-        userId,
-        data: {
-          name: name.trim(),
-          race,
-          selectedClass,
-          abilityScoreMethod: abilityMethod,
-          abilityScores: scores,
-          alignment,
-          skillRanks: Object.keys(allocatedSkills).length > 0 ? allocatedSkills : undefined,
-        },
-      }),
-    );
+    // Anything thrown here — including from a reducer, which Redux re-throws
+    // through dispatch — must surface as an error. Without this the screen just
+    // sits on "Creating..." forever with no way forward (#356).
+    try {
+      const result = await dispatch(
+        createCharacter({
+          userId,
+          data: {
+            name: name.trim(),
+            race,
+            selectedClass,
+            abilityScoreMethod: abilityMethod,
+            abilityScores: scores,
+            alignment,
+            skillRanks: Object.keys(allocatedSkills).length > 0 ? allocatedSkills : undefined,
+          },
+        }),
+      );
 
-    if (createCharacter.fulfilled.match(result)) {
-      router.replace('/(tabs)/characters');
-    } else {
-      setError((result.payload as string) || 'Failed to create character');
+      if (createCharacter.fulfilled.match(result)) {
+        router.replace('/(tabs)/characters');
+      } else {
+        setError((result.payload as string) || 'Failed to create character');
+      }
+    } catch (e) {
+      setError(e instanceof Error ? e.message : 'Failed to create character');
     }
   };
 
