@@ -18,6 +18,14 @@ jest.mock('react-native', () => {
       flatten: (style: any) => (Array.isArray(style) ? Object.assign({}, ...style) : style),
     },
     Dimensions: { get: () => ({ width: 375, height: 812 }) },
+    // Search pickers pass Keyboard.dismiss to onScrollBeginDrag, so the prop is
+    // evaluated at render time — without this the whole sheet throws and renders
+    // nothing, which surfaces as every content assertion failing.
+    Keyboard: {
+      dismiss: jest.fn(),
+      addListener: jest.fn(() => ({ remove: jest.fn() })),
+      removeAllListeners: jest.fn(),
+    },
     View: mockComponent('View'),
     Text: mockComponent('Text'),
     SafeAreaView: mockComponent('SafeAreaView'),
