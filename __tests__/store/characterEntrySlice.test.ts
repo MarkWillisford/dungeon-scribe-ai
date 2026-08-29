@@ -4,6 +4,7 @@ import reducer, {
   resetDraft,
   setActiveTab,
   markDirty,
+  markSaved,
   setValidationWarnings,
   acknowledgeWarning,
   clearValidation,
@@ -4182,6 +4183,63 @@ describe('characterEntrySlice — flaws', () => {
       let state = reducer(makeInitialState(), addFlaw(makeFlaw('flaw-1')));
       state = reducer(state, removeFlaw('does-not-exist'));
       expect(state.character.flaws.flaws).toHaveLength(1);
+    });
+  });
+
+  // Regression coverage for #355 — a saved character must stop behaving like a
+  // draft, or every later save writes another copy.
+  describe('markSaved', () => {
+    it('records the Firestore document ID the save wrote', () => {
+      const state = reducer(makeInitialState(), markSaved({ characterId: 'firestore-doc-1' }));
+      expect(state.originalCharacterId).toBe('firestore-doc-1');
+    });
+
+    it("flips a new session to 'edit' so later saves update in place", () => {
+      const initial = makeInitialState();
+      expect(initial.mode).toBe('new');
+      const state = reducer(initial, markSaved({ characterId: 'firestore-doc-1' }));
+      expect(state.mode).toBe('edit');
+    });
+
+    it('rebinds an imported session to the created document', () => {
+      let state = reducer(
+        makeInitialState(),
+        loadCharacter({ character: makeInitialState().character, mode: 'import' }),
+      );
+      expect(state.originalCharacterId).toBeNull();
+      state = reducer(state, markSaved({ characterId: 'firestore-doc-2' }));
+      expect(state.mode).toBe('edit');
+      expect(state.originalCharacterId).toBe('firestore-doc-2');
+    });
+
+    it('marks the session clean so the UI stops reporting unsaved changes', () => {
+      let state = reducer(makeInitialState(), markDirty());
+      expect(state.isDirty).toBe(true);
+      state = reducer(state, markSaved({ characterId: 'firestore-doc-1' }));
+      expect(state.isDirty).toBe(false);
+    });
+
+    it('clears a stale saveError from an earlier failed attempt', () => {
+      let state = reducer(makeInitialState(), setSaveError('Network error'));
+      expect(state.saveError).toBe('Network error');
+      state = reducer(state, markSaved({ characterId: 'firestore-doc-1' }));
+      expect(state.saveError).toBeNull();
+    });
+
+    it('is idempotent — re-binding an already-bound session changes nothing', () => {
+      let state = reducer(makeInitialState(), markSaved({ characterId: 'firestore-doc-1' }));
+      const first = { ...state };
+      state = reducer(state, markSaved({ characterId: 'firestore-doc-1' }));
+      expect(state.originalCharacterId).toBe(first.originalCharacterId);
+      expect(state.mode).toBe(first.mode);
+      expect(state.isDirty).toBe(first.isDirty);
+    });
+
+    it('resetDraft clears the binding so a new draft does not overwrite it', () => {
+      let state = reducer(makeInitialState(), markSaved({ characterId: 'firestore-doc-1' }));
+      state = reducer(state, resetDraft());
+      expect(state.originalCharacterId).toBeNull();
+      expect(state.mode).toBe('new');
     });
   });
 });
