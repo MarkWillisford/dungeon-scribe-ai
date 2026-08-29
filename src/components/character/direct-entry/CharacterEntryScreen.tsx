@@ -22,6 +22,7 @@ import {
   type TabStatus,
 } from '@/store/slices/characterEntrySlice';
 import { saveCharacter } from '@/store/thunks/saveCharacter';
+import { addToast } from '@/store/slices/uiSlice';
 import { CharacterValidationService } from '@/services/CharacterValidationService';
 import { selectClassDataMap } from '@/store/slices/gameDataSlice';
 import { PRESET_PF1E_STANDARD } from '@/config/rulesetPresets';
@@ -142,6 +143,7 @@ export function CharacterEntryScreen() {
   const lastValidatedAt = useAppSelector((state) => state.characterEntry.lastValidatedAt);
   const isDirty = useAppSelector((state) => state.characterEntry.isDirty);
   const isSaving = useAppSelector((state) => state.characterEntry.isSaving);
+  const mode = useAppSelector((state) => state.characterEntry.mode);
   const ruleset = useAppSelector((state) => state.ruleset.activeRuleset ?? PRESET_PF1E_STANDARD);
   const classDataMap = useAppSelector(selectClassDataMap);
   const tabStatus = useTabStatus();
@@ -179,14 +181,35 @@ export function CharacterEntryScreen() {
   }, [router]);
 
   const handleSave = useCallback(async () => {
+    // Captured before the save: a successful save can settle the session, and
+    // the message should describe the action the user actually took.
+    const name = character.info.name?.trim() || 'Character';
+    const wasEdit = mode === 'edit';
     try {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       await (dispatch(saveCharacter() as any) as any).unwrap();
+      dispatch(
+        addToast({
+          message: wasEdit ? `${name} updated` : `${name} created`,
+          type: 'success',
+        }),
+      );
       navigateAway();
-    } catch {
-      // setSaveError was already dispatched by the thunk
+    } catch (err) {
+      // The thunk stores this on state.characterEntry.saveError, which nothing
+      // renders — so without this the user sees a Save button that appears to
+      // do nothing at all (#368).
+      const reason = err instanceof Error ? err.message : String(err);
+      dispatch(
+        addToast({
+          message: `Could not save ${name} — ${reason}`,
+          type: 'error',
+          // Longer than the default: a failure needs reading, not glimpsing.
+          durationMs: 6000,
+        }),
+      );
     }
-  }, [dispatch, navigateAway]);
+  }, [dispatch, navigateAway, character.info.name, mode]);
 
   const handleBack = useCallback(() => {
     if (!isDirty) {

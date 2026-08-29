@@ -29,6 +29,7 @@ let mockWarnings: { section: string; isAcknowledged: boolean }[] = [];
 let mockLastValidatedAt: number | null = null;
 let mockIsDirty = false;
 let mockIsSaving = false;
+let mockMode: 'new' | 'edit' = 'new';
 let mockFlawsEnabled = false;
 
 jest.mock('@/store/hooks', () => ({
@@ -52,6 +53,7 @@ jest.mock('@/store/hooks', () => ({
         lastValidatedAt: mockLastValidatedAt,
         isDirty: mockIsDirty,
         isSaving: mockIsSaving,
+        mode: mockMode,
       },
       ruleset: {
         activeRuleset: mockFlawsEnabled
@@ -191,6 +193,7 @@ beforeEach(() => {
   mockLastValidatedAt = null;
   mockIsDirty = false;
   mockIsSaving = false;
+  mockMode = 'new';
   mockFlawsEnabled = false;
 });
 
@@ -217,6 +220,90 @@ describe('CharacterEntryScreen — handleSave', () => {
     const { onSave } = headerNode(tree).props as { onSave: () => Promise<void> };
     await onSave();
     expect(mockBack).not.toHaveBeenCalled();
+  });
+
+  it('confirms a new character was created, naming it', async () => {
+    // Without this the Save button looked like it did nothing — the screen just
+    // closed — which is what let the duplicate-save bug go unnoticed (#368).
+    mockCharacterName = 'Kah-Mei';
+    const { tree } = render(<CharacterEntryScreen />);
+    const { onSave } = headerNode(tree).props as { onSave: () => Promise<void> };
+    await onSave();
+
+    expect(mockDispatch).toHaveBeenCalledWith(
+      expect.objectContaining({
+        type: 'ui/addToast',
+        payload: expect.objectContaining({ message: 'Kah-Mei created', type: 'success' }),
+      }),
+    );
+  });
+
+  it('says updated, not created, when editing an existing character', async () => {
+    mockCharacterName = 'Kah-Mei';
+    mockMode = 'edit';
+    const { tree } = render(<CharacterEntryScreen />);
+    const { onSave } = headerNode(tree).props as { onSave: () => Promise<void> };
+    await onSave();
+
+    expect(mockDispatch).toHaveBeenCalledWith(
+      expect.objectContaining({
+        type: 'ui/addToast',
+        payload: expect.objectContaining({ message: 'Kah-Mei updated' }),
+      }),
+    );
+  });
+
+  it('falls back to a generic name when the character is unnamed', async () => {
+    mockCharacterName = '   ';
+    const { tree } = render(<CharacterEntryScreen />);
+    const { onSave } = headerNode(tree).props as { onSave: () => Promise<void> };
+    await onSave();
+
+    expect(mockDispatch).toHaveBeenCalledWith(
+      expect.objectContaining({
+        type: 'ui/addToast',
+        payload: expect.objectContaining({ message: 'Character created' }),
+      }),
+    );
+  });
+
+  it('surfaces the reason when a save fails', async () => {
+    mockCharacterName = 'Kah-Mei';
+    mockUnwrap.mockRejectedValueOnce(new Error('Missing or insufficient permissions.'));
+    const { tree } = render(<CharacterEntryScreen />);
+    const { onSave } = headerNode(tree).props as { onSave: () => Promise<void> };
+    await onSave();
+
+    expect(mockDispatch).toHaveBeenCalledWith(
+      expect.objectContaining({
+        type: 'ui/addToast',
+        payload: expect.objectContaining({
+          message: 'Could not save Kah-Mei — Missing or insufficient permissions.',
+          type: 'error',
+        }),
+      }),
+    );
+  });
+
+  it('leaves a failed save on screen so the error can be read', async () => {
+    mockUnwrap.mockRejectedValueOnce(new Error('offline'));
+    const { tree } = render(<CharacterEntryScreen />);
+    const { onSave } = headerNode(tree).props as { onSave: () => Promise<void> };
+    await onSave();
+
+    expect(mockBack).not.toHaveBeenCalled();
+  });
+
+  it('does not claim success when the save failed', async () => {
+    mockUnwrap.mockRejectedValueOnce(new Error('offline'));
+    const { tree } = render(<CharacterEntryScreen />);
+    const { onSave } = headerNode(tree).props as { onSave: () => Promise<void> };
+    await onSave();
+
+    const successToasts = mockDispatch.mock.calls.filter(
+      ([a]) => a?.type === 'ui/addToast' && a?.payload?.type === 'success',
+    );
+    expect(successToasts).toHaveLength(0);
   });
 
   it('passes a no-op as onSave when isSaving is true', async () => {

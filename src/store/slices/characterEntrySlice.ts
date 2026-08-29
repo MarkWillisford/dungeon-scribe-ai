@@ -1,5 +1,5 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
-import { Alignment, BonusType } from '@/types/base';
+import { Alignment, BonusType, Size } from '@/types/base';
 import { ClassChoice } from '@/types/classes';
 import type {
   CompanionInstance,
@@ -304,13 +304,27 @@ const characterEntrySlice = createSlice({
         racialBonuses: Partial<Record<AbilityKey, number>>;
         hasFlexBonus?: boolean;
         flexibleAbilityBonuses?: FlexibleAbilityBonus[];
+        baseSpeed?: number;
+        size?: Size;
       }>,
     ) {
       state.character.info.race = {
         ...state.character.info.race,
         name: action.payload.raceName,
         abilityModifiers: action.payload.racialBonuses as Record<string, number>,
+        // Speed and size were never carried across, so every character kept the
+        // placeholder race's Medium/30 however small and slow the race actually
+        // was — a Gnome walked 30 feet and was Medium for AC, attack and CMD.
+        ...(action.payload.baseSpeed !== undefined ? { baseSpeed: action.payload.baseSpeed } : {}),
+        ...(action.payload.size !== undefined ? { sizeMod: action.payload.size } : {}),
       };
+      if (action.payload.size !== undefined) {
+        // The pipeline reads info.size, not race.sizeMod, for AC/attack/CMB/CMD.
+        state.character.info.size = action.payload.size;
+      }
+      if (action.payload.baseSpeed !== undefined) {
+        state.character.combatStats.movement.base = action.payload.baseSpeed;
+      }
       const bonuses = action.payload.flexibleAbilityBonuses ?? [];
       state.character.info.racialFlexBonuses = bonuses.length > 0 ? bonuses : undefined;
       state.character.info.racialFlexChoices = bonuses.length > 0 ? [] : undefined;

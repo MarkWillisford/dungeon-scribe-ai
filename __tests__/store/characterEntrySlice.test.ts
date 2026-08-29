@@ -1,4 +1,4 @@
-import { BonusType } from '@/types/base';
+import { BonusType, Size } from '@/types/base';
 import reducer, {
   loadCharacter,
   resetDraft,
@@ -509,6 +509,76 @@ describe('characterEntrySlice — identity', () => {
       expect(state.character.abilityScores.int.racial).toBe(2);
       expect(state.character.abilityScores.con.racial).toBe(-2);
       expect(state.isDirty).toBe(true);
+    });
+
+    it('records the race base speed rather than leaving the 30ft placeholder', () => {
+      // A Gnome walked 30 feet because the picker never sent a speed and setRace
+      // spread the placeholder race forward.
+      const state = reducer(
+        makeInitialState(),
+        setRace({
+          raceId: 'gnome',
+          raceName: 'Gnome',
+          racialBonuses: { con: 2, cha: 2, str: -2 },
+          baseSpeed: 20,
+          size: Size.Small,
+        }),
+      );
+      expect(state.character.info.race.baseSpeed).toBe(20);
+      expect(state.character.combatStats.movement.base).toBe(20);
+    });
+
+    it('records the race size on info.size, which drives AC, attack and CMD', () => {
+      const state = reducer(
+        makeInitialState(),
+        setRace({
+          raceId: 'gnome',
+          raceName: 'Gnome',
+          racialBonuses: {},
+          baseSpeed: 20,
+          size: Size.Small,
+        }),
+      );
+      expect(state.character.info.size).toBe(Size.Small);
+      expect(state.character.info.race.sizeMod).toBe(Size.Small);
+    });
+
+    it('updates speed and size when the race changes again', () => {
+      let state = reducer(
+        makeInitialState(),
+        setRace({
+          raceId: 'gnome',
+          raceName: 'Gnome',
+          racialBonuses: {},
+          baseSpeed: 20,
+          size: Size.Small,
+        }),
+      );
+      state = reducer(
+        state,
+        setRace({
+          raceId: 'human',
+          raceName: 'Human',
+          racialBonuses: {},
+          baseSpeed: 30,
+          size: Size.Medium,
+        }),
+      );
+      expect(state.character.combatStats.movement.base).toBe(30);
+      expect(state.character.info.size).toBe(Size.Medium);
+    });
+
+    it('leaves speed and size alone when the caller omits them', () => {
+      // Older callers pass neither; they must not blank out what is there.
+      const before = makeInitialState();
+      const state = reducer(
+        before,
+        setRace({ raceId: 'elf', raceName: 'Elf', racialBonuses: { dex: 2 } }),
+      );
+      expect(state.character.info.size).toBe(before.character.info.size);
+      expect(state.character.combatStats.movement.base).toBe(
+        before.character.combatStats.movement.base,
+      );
     });
 
     it('clears old racial bonuses when race changes', () => {
