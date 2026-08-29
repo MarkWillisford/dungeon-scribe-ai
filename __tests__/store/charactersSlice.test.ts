@@ -1324,6 +1324,29 @@ describe('charactersSlice', () => {
       });
       expect(state.characters[0].portrait).toBeUndefined();
     });
+
+    it('leaves lastUpdated on the summary as a usable Date', () => {
+      // Runs the REAL pipeline for this case. The suite-wide mock is an identity
+      // function, so with it in place this test could never see the bug: it was
+      // recalculate's JSON clone that turned the Date into an ISO string, after
+      // which CharacterCard called toLocaleDateString on a string and took down
+      // the whole list (#376).
+      const real = jest.requireActual('@/services/ModifierPipelineService')
+        .ModifierPipelineService as { recalculate: (c: Character) => Character };
+      // Called through `real` so the static method keeps its `this`.
+      (ModifierPipelineService.recalculate as jest.Mock).mockImplementationOnce((c: Character) =>
+        real.recalculate(c),
+      );
+
+      const state = charactersReducer(initialState, {
+        type: 'characterEntry/save/fulfilled',
+        payload: { ...mockCharacter, lastUpdated: new Date('2026-08-19T12:00:00.000Z') },
+      });
+
+      const summary = state.characters[0];
+      expect(summary.lastUpdated).toBeInstanceOf(Date);
+      expect(() => summary.lastUpdated.toLocaleDateString()).not.toThrow();
+    });
   });
 
   // Regression coverage for #356 — the create-character button stuck on

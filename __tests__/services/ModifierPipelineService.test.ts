@@ -368,6 +368,45 @@ describe('ModifierPipelineService', () => {
     });
   });
 
+  describe('recalculate — Date preservation', () => {
+    test('keeps lastUpdated a Date across the clone', () => {
+      // The JSON round-trip in recalculate turned Dates into ISO strings, which
+      // is how saving crashed the character list (#376).
+      const char = createTestCharacter();
+      char.lastUpdated = new Date('2026-08-19T12:00:00.000Z');
+
+      const result = ModifierPipelineService.recalculate(char);
+
+      expect(result.lastUpdated).toBeInstanceOf(Date);
+      expect(result.lastUpdated.toISOString()).toBe('2026-08-19T12:00:00.000Z');
+    });
+
+    test('keeps createdAt a Date across the clone', () => {
+      const char = createTestCharacter();
+      char.createdAt = new Date('2026-01-02T03:04:05.000Z');
+
+      const result = ModifierPipelineService.recalculate(char);
+
+      expect(result.createdAt).toBeInstanceOf(Date);
+    });
+
+    test('leaves the value callable as a Date, which is what the list needs', () => {
+      const char = createTestCharacter();
+      char.lastUpdated = new Date('2026-08-19T12:00:00.000Z');
+
+      const result = ModifierPipelineService.recalculate(char);
+
+      expect(() => result.lastUpdated.toLocaleDateString()).not.toThrow();
+    });
+
+    test('tolerates an absent createdAt', () => {
+      const char = createTestCharacter();
+      delete char.createdAt;
+
+      expect(() => ModifierPipelineService.recalculate(char)).not.toThrow();
+    });
+  });
+
   describe('stacking rules', () => {
     test('dodge bonuses stack', () => {
       const char = createTestCharacter({ dex: 14 });
