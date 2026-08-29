@@ -1348,4 +1348,142 @@ describe('charactersSlice', () => {
       expect(() => summary.lastUpdated.toLocaleDateString()).not.toThrow();
     });
   });
+
+  // Regression coverage for #356 — the create-character button stuck on
+  // "Creating..." forever with no way to proceed.
+  //
+  // recalculate() is called from inside reducers. Immer discards the ENTIRE
+  // draft when a recipe throws, so a failure in the modifier pipeline also
+  // rolled back the `loading = false` set earlier in the same reducer, leaving
+  // the UI mid-operation permanently. recalculateSafely() must contain the
+  // throw so the rest of the reducer's work survives.
+  describe('a failing modifier pipeline never strands the loading flag (#356)', () => {
+    const mockRecalculate = ModifierPipelineService.recalculate as jest.Mock;
+
+    afterEach(() => {
+      mockRecalculate.mockImplementation((char) => char);
+    });
+
+    it('clears loading on createCharacter fulfilled even when recalculate throws', () => {
+      mockRecalculate.mockImplementationOnce(() => {
+        throw new Error('race.traits is not iterable');
+      });
+      const state = charactersReducer(
+        { ...initialState, loading: true },
+        { type: 'characters/createCharacter/fulfilled', payload: mockCharacter },
+      );
+      expect(state.loading).toBe(false);
+    });
+
+    it('reports why the pipeline failed instead of failing silently', () => {
+      mockRecalculate.mockImplementationOnce(() => {
+        throw new Error('race.traits is not iterable');
+      });
+      const state = charactersReducer(
+        { ...initialState, loading: true },
+        { type: 'characters/createCharacter/fulfilled', payload: mockCharacter },
+      );
+      expect(state.error).toBe('race.traits is not iterable');
+    });
+
+    it('still records the character that was created', () => {
+      mockRecalculate.mockImplementationOnce(() => {
+        throw new Error('boom');
+      });
+      const state = charactersReducer(
+        { ...initialState, loading: true },
+        { type: 'characters/createCharacter/fulfilled', payload: mockCharacter },
+      );
+      expect(state.characters).toHaveLength(1);
+      expect(state.characters[0].id).toBe('char-1');
+      expect(state.activeCharacter).not.toBeNull();
+    });
+
+    it('clears loading on fetchCharacter fulfilled even when recalculate throws', () => {
+      mockRecalculate.mockImplementationOnce(() => {
+        throw new Error('boom');
+      });
+      const state = charactersReducer(
+        { ...initialState, loading: true },
+        { type: 'characters/fetchCharacter/fulfilled', payload: mockCharacter },
+      );
+      expect(state.loading).toBe(false);
+      expect(state.error).toBe('boom');
+    });
+
+    it('still upserts the summary on saveCharacter fulfilled when recalculate throws', () => {
+      mockRecalculate.mockImplementationOnce(() => {
+        throw new Error('boom');
+      });
+      const state = charactersReducer(initialState, {
+        type: 'characterEntry/save/fulfilled',
+        payload: mockCharacter,
+      });
+      expect(state.characters).toHaveLength(1);
+      expect(state.error).toBe('boom');
+    });
+
+    it('keeps a feat that was added when recalculate throws', () => {
+      mockRecalculate.mockImplementationOnce(() => {
+        throw new Error('boom');
+      });
+      const withActive = charactersReducer(initialState, setActiveCharacter(mockCharacter));
+      const state = charactersReducer(
+        withActive,
+        addFeat({ featId: 'dodge', name: 'Dodge', active: true } as CharacterFeat),
+      );
+      expect(state.activeCharacter?.feats.feats.some((f) => f.featId === 'dodge')).toBe(true);
+      expect(state.error).toBe('boom');
+    });
+
+    it('keeps a feat removed when recalculate throws', () => {
+      const withFeat: Character = {
+        ...mockCharacter,
+        feats: { feats: [mockFeat], totalFeats: 1, bonusFeats: 0 },
+      };
+      const withActive = charactersReducer(initialState, setActiveCharacter(withFeat));
+      mockRecalculate.mockImplementationOnce(() => {
+        throw new Error('boom');
+      });
+      const state = charactersReducer(withActive, removeFeat('power-attack'));
+      expect(state.activeCharacter?.feats.feats).toHaveLength(0);
+      expect(state.error).toBe('boom');
+    });
+
+    it('keeps a feat toggled when recalculate throws', () => {
+      const withFeat: Character = {
+        ...mockCharacter,
+        feats: { feats: [{ ...mockFeat, active: true }], totalFeats: 1, bonusFeats: 0 },
+      };
+      const withActive = charactersReducer(initialState, setActiveCharacter(withFeat));
+      mockRecalculate.mockImplementationOnce(() => {
+        throw new Error('boom');
+      });
+      const state = charactersReducer(withActive, toggleFeat('power-attack'));
+      expect(state.activeCharacter?.feats.feats[0].active).toBe(false);
+      expect(state.error).toBe('boom');
+    });
+
+    it('leaves the character un-recalculated but intact on recalculateStats', () => {
+      const withActive = charactersReducer(initialState, setActiveCharacter(mockCharacter));
+      mockRecalculate.mockImplementationOnce(() => {
+        throw new Error('boom');
+      });
+      const state = charactersReducer(withActive, recalculateStats());
+      expect(state.activeCharacter).toEqual(withActive.activeCharacter);
+      expect(state.error).toBe('boom');
+    });
+
+    it('uses a fallback message when the pipeline throws a non-Error', () => {
+      mockRecalculate.mockImplementationOnce(() => {
+        throw 'string failure';
+      });
+      const state = charactersReducer(
+        { ...initialState, loading: true },
+        { type: 'characters/createCharacter/fulfilled', payload: mockCharacter },
+      );
+      expect(state.loading).toBe(false);
+      expect(state.error).toBe('Failed to compute derived stats');
+    });
+  });
 });
