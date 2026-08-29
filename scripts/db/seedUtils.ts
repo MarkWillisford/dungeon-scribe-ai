@@ -26,6 +26,20 @@ export function chunkArray<T>(arr: T[], size: number): T[][] {
 }
 
 /**
+ * Derive a stable Firestore document ID from a race name.
+ *
+ * Shared by seedRaces (which writes) and auditRaceDocs (which checks what was
+ * written). Keep it in one place: if the two derivations ever drift, the audit
+ * silently reports every race as an orphan.
+ */
+export function raceDocId(name: string): string {
+  return name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
+}
+
+/**
  * Synchronous sleep for use in non-async contexts (e.g. seedAll.ts spawnSync loops).
  * Uses Atomics.wait on a shared buffer — works in Node.js main thread.
  */

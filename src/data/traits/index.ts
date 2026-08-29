@@ -38,6 +38,7 @@ import { FAITHS_GOLARION_TRAITS } from './faithsGolarionTraits';
 import { PATHS_RIGHTEOUS_TRAITS } from './pathsRighteousTraits';
 import { ADV_ARMORY_SOCIETY_TRAITS } from './advArmorySocietyTraits';
 import { UC_DRAWBACK_TRAITS } from './ucDrawbackTraits';
+import { PATH_OF_WAR_TRAITS } from './pathOfWar';
 
 export { APG_TRAITS } from './core';
 export { UC_TRAITS } from './ultimateCampaign';
@@ -74,6 +75,7 @@ export { FAITHS_GOLARION_TRAITS } from './faithsGolarionTraits';
 export { PATHS_RIGHTEOUS_TRAITS } from './pathsRighteousTraits';
 export { ADV_ARMORY_SOCIETY_TRAITS } from './advArmorySocietyTraits';
 export { UC_DRAWBACK_TRAITS } from './ucDrawbackTraits';
+export { PATH_OF_WAR_TRAITS } from './pathOfWar';
 
 export const ALL_TRAITS: TraitDefinition[] = [
   ...APG_TRAITS,
@@ -112,6 +114,7 @@ export const ALL_TRAITS: TraitDefinition[] = [
   ...PATHS_RIGHTEOUS_TRAITS,
   ...ADV_ARMORY_SOCIETY_TRAITS,
   ...UC_DRAWBACK_TRAITS,
+  ...PATH_OF_WAR_TRAITS,
 ];
 
 export function getTraitById(id: string): TraitDefinition | undefined {
