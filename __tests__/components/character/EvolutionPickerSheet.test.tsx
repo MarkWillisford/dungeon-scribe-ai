@@ -123,12 +123,26 @@ describe('EvolutionPickerSheet', () => {
       expect(findPlaceholder(tree)).toBe(true);
     });
 
-    it('FlatList has keyboardShouldPersistTaps="handled" so taps register while keyboard is open', () => {
-      // Regression test for issue #252: tapping a result while the search keyboard is
-      // open should select the item, not just dismiss the keyboard.
+    it('FlatList has keyboardShouldPersistTaps="always" so taps register while keyboard is open', () => {
+      // Regression test for issues #252 and #358: tapping a result while the search
+      // keyboard is open should select the item, not just dismiss the keyboard.
+      //
+      // #252 set this to "handled", but that was not enough on Android — with
+      // "handled" the tap can still be consumed before the row's press handler
+      // claims it, and the item could only be chosen after dismissing the keyboard
+      // with the Enter key (#358). "always" passes the tap through unconditionally.
       const { getByTestId } = render(<EvolutionPickerSheet {...BASE_PROPS} />);
       const flatList = getByTestId('evolution-list');
-      expect(flatList.props.keyboardShouldPersistTaps).toBe('handled');
+      expect(flatList.props.keyboardShouldPersistTaps).toBe('always');
+    });
+
+    it('FlatList dismisses the keyboard when the list is scrolled', () => {
+      // "always" removes the tap-to-dismiss affordance, so scrolling has to
+      // provide it instead — otherwise the keyboard can never be put away by
+      // gesture (#358).
+      const { getByTestId } = render(<EvolutionPickerSheet {...BASE_PROPS} />);
+      const flatList = getByTestId('evolution-list');
+      expect(typeof flatList.props.onScrollBeginDrag).toBe('function');
     });
   });
 

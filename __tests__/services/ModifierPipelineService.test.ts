@@ -484,6 +484,67 @@ describe('ModifierPipelineService', () => {
     });
   });
 
+  describe('recalculate — level increment slots', () => {
+    test('counts allocated +1s toward the ability total', () => {
+      // The UI showed a "Level +1s" row all along; the total ignored it, so
+      // CHA 13 base +2 racial +4 template +4 increments displayed as 19, not 23.
+      const char = createTestCharacter({ cha: 13 });
+      char.abilityScores.cha.racial = 2;
+      char.abilityScores.cha.levelIncrements = 4;
+
+      const result = ModifierPipelineService.recalculate(char);
+
+      expect(result.abilityScores.cha.total).toBe(19);
+    });
+
+    test('adds increments on top of pipeline bonuses rather than instead of them', () => {
+      const char = createTestCharacter({ cha: 13 });
+      char.abilityScores.cha.racial = 2;
+      char.abilityScores.cha.levelIncrements = 4;
+      char.appliedTemplates = [
+        {
+          templateId: 'paladin-creature',
+          name: 'Paladin Creature',
+          abilityScoreChanges: [{ ability: 'CHA', change: 4 }],
+          appliedAs: 'cr',
+          acquisitionType: 'acquired',
+          paidTiers: [],
+          sourceId: 'paladin-creature',
+          sourceRev: 0,
+        },
+      ];
+
+      const result = ModifierPipelineService.recalculate(char);
+
+      // 13 base + 2 racial + 4 increments + 4 template
+      expect(result.abilityScores.cha.total).toBe(23);
+      expect(result.abilityScores.cha.modifier).toBe(6);
+    });
+
+    test('leaves a score alone when no increments are allocated', () => {
+      const char = createTestCharacter({ cha: 13 });
+      char.abilityScores.cha.levelIncrements = 0;
+
+      const result = ModifierPipelineService.recalculate(char);
+
+      expect(result.abilityScores.cha.total).toBe(13);
+    });
+
+    test('carries increments through to the stats derived from the score', () => {
+      // An increment that does not reach AC is not really applied.
+      const char = createTestCharacter({ dex: 14 });
+      const before = ModifierPipelineService.recalculate(char);
+
+      char.abilityScores.dex.levelIncrements = 2;
+      const after = ModifierPipelineService.recalculate(char);
+
+      expect(after.abilityScores.dex.total).toBe(16);
+      expect(after.combatStats.armorClass.dexterity).toBe(
+        before.combatStats.armorClass.dexterity + 1,
+      );
+    });
+  });
+
   describe('BAB progressions', () => {
     test('Rogue (medium BAB) has lower BAB than Fighter (full BAB) at level 1', () => {
       const fighter = createTestCharacter({ className: 'Fighter' });
@@ -1006,6 +1067,68 @@ describe('ModifierPipelineService', () => {
       char.classes.favoredClassBonuses = [{ className: 'Fighter', bonusType: 'HP', value: 3 }];
       const result = ModifierPipelineService.recalculate(char);
       expect(result.combatStats.hitPoints.favoredClass).toBe(3);
+    });
+
+    test('counts the per-level hp selections the UI actually writes', () => {
+      // setFavoredClassBonuses stores these on the class entry. The pipeline was
+      // reading classes.favoredClassBonuses, a top-level aggregate nothing
+      // writes, so picking "+1 hit point" moved nothing.
+      const char = createTestCharacter();
+      char.classes.classes[0].favoredClassBonuses = [
+        { level: 1, type: 'hp' },
+        { level: 2, type: 'hp' },
+        { level: 3, type: 'skill' },
+      ];
+
+      const result = ModifierPipelineService.recalculate(char);
+
+      expect(result.combatStats.hitPoints.favoredClass).toBe(2);
+    });
+
+    test('sums hp selections across every class entry', () => {
+      const char = createTestCharacter();
+      const base = char.classes.classes[0];
+      char.classes.classes = [
+        { ...base, name: 'Rogue (Unchained)', favoredClassBonuses: [{ level: 1, type: 'hp' }] },
+        { ...base, name: 'Cavalier', favoredClassBonuses: [{ level: 1, type: 'hp' }] },
+      ];
+
+      const result = ModifierPipelineService.recalculate(char);
+
+      expect(result.combatStats.hitPoints.favoredClass).toBe(2);
+    });
+
+    test('ignores skill and alternate selections', () => {
+      const char = createTestCharacter();
+      char.classes.classes[0].favoredClassBonuses = [
+        { level: 1, type: 'skill' },
+        { level: 2, type: 'alternate', optionId: 'rogue-gnome-1' },
+      ];
+
+      const result = ModifierPipelineService.recalculate(char);
+
+      expect(result.combatStats.hitPoints.favoredClass).toBe(0);
+    });
+
+    test('carries the favored class hp through to maximum HP', () => {
+      // A bonus that does not reach max HP has not been applied.
+      const char = createTestCharacter();
+      const before = ModifierPipelineService.recalculate(char);
+      const beforeMax =
+        before.combatStats.hitPoints.base +
+        before.combatStats.hitPoints.constitution +
+        before.combatStats.hitPoints.favoredClass +
+        before.combatStats.hitPoints.other;
+
+      char.classes.classes[0].favoredClassBonuses = [{ level: 1, type: 'hp' }];
+      const after = ModifierPipelineService.recalculate(char);
+      const afterMax =
+        after.combatStats.hitPoints.base +
+        after.combatStats.hitPoints.constitution +
+        after.combatStats.hitPoints.favoredClass +
+        after.combatStats.hitPoints.other;
+
+      expect(afterMax).toBe(beforeMax + 1);
     });
 
     test('ignores non-HP favored class bonuses', () => {

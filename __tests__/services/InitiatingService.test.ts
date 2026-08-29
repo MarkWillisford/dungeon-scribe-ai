@@ -177,6 +177,74 @@ describe('InitiatingService.computeInitiatorLevel', () => {
     ];
     expect(InitiatingService.computeInitiatorLevel(contributors)).toBe(10);
   });
+
+  // Practiced Initiator (Path of War: Expanded) — +2 trait bonus to IL in one
+  // initiating class, capped so it never raises IL above the character's HD.
+  describe('Practiced Initiator trait bonus', () => {
+    it('adds the full bonus when HD leaves room', () => {
+      // Warder 4 / Fighter 10 → base IL 9, HD 14 → 9 + 2 = 11, well under HD
+      const contributors = [
+        makeContributor('Warder', 4, 'full'),
+        makeContributor('Fighter', 10, 'half'),
+      ];
+      expect(
+        InitiatingService.computeInitiatorLevel(contributors, { traitBonus: 2, hitDice: 14 }),
+      ).toBe(11);
+    });
+
+    it('caps the bonus at the character HD rather than dropping it', () => {
+      // Warblade 10, HD 10 → base IL 10 already equals HD, bonus cannot apply
+      expect(
+        InitiatingService.computeInitiatorLevel([makeContributor('Warblade', 10, 'full')], {
+          traitBonus: 2,
+          hitDice: 10,
+        }),
+      ).toBe(10);
+    });
+
+    it('applies a partial bonus when the full bonus would overshoot HD', () => {
+      // Warder 8 / Fighter 2 → base IL 9, HD 10 → raised to 10, not 11
+      const contributors = [
+        makeContributor('Warder', 8, 'full'),
+        makeContributor('Fighter', 2, 'half'),
+      ];
+      expect(
+        InitiatingService.computeInitiatorLevel(contributors, { traitBonus: 2, hitDice: 10 }),
+      ).toBe(10);
+    });
+
+    it('never lowers IL when base already exceeds HD', () => {
+      // Defensive: half-progression rounding can put base IL above HD in odd
+      // multiclass splits. The trait must not become a penalty.
+      const contributors = [makeContributor('Warblade', 12, 'full')];
+      expect(
+        InitiatingService.computeInitiatorLevel(contributors, { traitBonus: 2, hitDice: 8 }),
+      ).toBe(12);
+    });
+
+    it('does not apply to a character with no initiating class', () => {
+      const contributors = [makeContributor('Fighter', 10, 'half')];
+      expect(
+        InitiatingService.computeInitiatorLevel(contributors, { traitBonus: 2, hitDice: 10 }),
+      ).toBe(0);
+    });
+
+    it('is uncapped when no HD is supplied', () => {
+      expect(
+        InitiatingService.computeInitiatorLevel([makeContributor('Warblade', 10, 'full')], {
+          traitBonus: 2,
+        }),
+      ).toBe(12);
+    });
+
+    it('leaves IL unchanged when no trait bonus is supplied', () => {
+      expect(
+        InitiatingService.computeInitiatorLevel([makeContributor('Warblade', 10, 'full')], {
+          hitDice: 20,
+        }),
+      ).toBe(10);
+    });
+  });
 });
 
 // ---- maxManeuverLevel ----
@@ -365,6 +433,45 @@ describe('InitiatingService.buildPool', () => {
     expect(pool.accessibleDisciplines).toEqual(['iron-heart', 'diamond-mind', 'tiger-claw']);
     expect(pool.maneuverDC.abilityMod).toBe(3);
     expect(pool.maneuverDC.base).toBe(13); // 10 + 3
+  });
+
+  it('threads the trait IL options through to the built pool', () => {
+    // Warder 4 / Fighter 10 → base IL 9. Practiced Initiator adds +2 under a
+    // HD 14 cap. Exercised through buildPool because that is where ilOptions
+    // is threaded, and a drop between the layers would not show up in the
+    // computeInitiatorLevel tests above.
+    const contributors = [
+      makeContributor('Warder', 4, 'full'),
+      makeContributor('Fighter', 10, 'half'),
+    ];
+
+    const without = InitiatingService.buildPool(
+      'Warder',
+      MOCK_CLASS_DATA,
+      4,
+      contributors,
+      [],
+      [],
+      MOCK_TABLES,
+      3,
+    );
+    expect(without.effectiveInitiatorLevel).toBe(9);
+    expect(without.maxManeuverLevel).toBe(5); // ceil(9/2)
+
+    const withTrait = InitiatingService.buildPool(
+      'Warder',
+      MOCK_CLASS_DATA,
+      4,
+      contributors,
+      [],
+      [],
+      MOCK_TABLES,
+      3,
+      0,
+      { traitBonus: 2, hitDice: 14 },
+    );
+    expect(withTrait.effectiveInitiatorLevel).toBe(11);
+    expect(withTrait.maxManeuverLevel).toBe(6); // ceil(11/2)
   });
 
   it('falls back to [0, 0, 0] for unknown progression table key', () => {
