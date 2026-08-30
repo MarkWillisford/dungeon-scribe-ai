@@ -4,6 +4,7 @@ import reducer, {
   resetDraft,
   setActiveTab,
   markDirty,
+  markSaved,
   setValidationWarnings,
   acknowledgeWarning,
   clearValidation,
@@ -2030,6 +2031,87 @@ describe('characterEntrySlice — feats', () => {
       );
       expect(state.character.feats.feats).toHaveLength(1);
       expect(state.character.feats.feats[0].featId).toBe('feat-x');
+    });
+
+    it('stores the source label when one is supplied', () => {
+      const state = reducer(
+        makeInitialState(),
+        assignFeat({
+          slotId: 'class:cls-1:bonus-feat:4',
+          featId: 'feat-x',
+          featName: 'X',
+          sourceLabel: 'Fighter 4',
+        }),
+      );
+      expect(state.character.feats.feats[0].sourceLabel).toBe('Fighter 4');
+    });
+  });
+
+  describe('assignFeat — class-granted slots', () => {
+    it('records the class level as grantedAtLevel when no level order exists', () => {
+      let state = reducer(makeInitialState(), addClass(makeClass('cls-1', { level: 4 })));
+      state = reducer(
+        state,
+        assignFeat({ slotId: 'class:cls-1:bonus-feat:4', featId: 'feat-x', featName: 'X' }),
+      );
+      const feat = state.character.feats.feats.find((f) => f.featId === 'feat-x');
+      expect(feat?.grantedAtLevel).toBe(4);
+    });
+
+    it('resolves grantedAtLevel to the character level via the level order', () => {
+      // Built up as Wizard 1, Fighter 1, Wizard 2, Fighter 2 — so the Fighter's
+      // 2nd class level is the character's 4th level.
+      let state = reducer(makeInitialState(), addClass(makeClass('cls-wiz', { name: 'Wizard' })));
+      state = reducer(state, addClass(makeClass('cls-fighter')));
+      state = reducer(state, initLevelOrder());
+      state = reducer(state, updateClassLevel({ id: 'cls-wiz', level: 2 }));
+      state = reducer(state, updateClassLevel({ id: 'cls-fighter', level: 2 }));
+      expect(state.character.classes.levelOrder).toEqual([
+        'cls-wiz',
+        'cls-fighter',
+        'cls-wiz',
+        'cls-fighter',
+      ]);
+
+      state = reducer(
+        state,
+        assignFeat({ slotId: 'class:cls-fighter:bonus-feat:2', featId: 'feat-x', featName: 'X' }),
+      );
+      const feat = state.character.feats.feats.find((f) => f.featId === 'feat-x');
+      expect(feat?.grantedAtLevel).toBe(4);
+    });
+  });
+
+  describe('class-granted slot pruning', () => {
+    function withAssignedClassFeat(classLevel: number, slotLevel: number) {
+      let state = reducer(makeInitialState(), addClass(makeClass('cls-1', { level: classLevel })));
+      state = reducer(
+        state,
+        assignFeat({
+          slotId: `class:cls-1:bonus-feat:${slotLevel}`,
+          featId: 'feat-x',
+          featName: 'X',
+        }),
+      );
+      return state;
+    }
+
+    it('keeps a class feat whose class is still high enough level', () => {
+      let state = withAssignedClassFeat(6, 4);
+      state = reducer(state, syncFeatSlots());
+      expect(state.character.feats.feats.some((f) => f.featId === 'feat-x')).toBe(true);
+    });
+
+    it('drops a class feat once the class level falls below the granting level', () => {
+      let state = withAssignedClassFeat(6, 4);
+      state = reducer(state, updateClassLevel({ id: 'cls-1', level: 2 }));
+      expect(state.character.feats.feats.some((f) => f.featId === 'feat-x')).toBe(false);
+    });
+
+    it('drops a class feat when its class is removed', () => {
+      let state = withAssignedClassFeat(6, 4);
+      state = reducer(state, removeClass('cls-1'));
+      expect(state.character.feats.feats.some((f) => f.featId === 'feat-x')).toBe(false);
     });
   });
 
@@ -4101,6 +4183,63 @@ describe('characterEntrySlice — flaws', () => {
       let state = reducer(makeInitialState(), addFlaw(makeFlaw('flaw-1')));
       state = reducer(state, removeFlaw('does-not-exist'));
       expect(state.character.flaws.flaws).toHaveLength(1);
+    });
+  });
+
+  // Regression coverage for #355 — a saved character must stop behaving like a
+  // draft, or every later save writes another copy.
+  describe('markSaved', () => {
+    it('records the Firestore document ID the save wrote', () => {
+      const state = reducer(makeInitialState(), markSaved({ characterId: 'firestore-doc-1' }));
+      expect(state.originalCharacterId).toBe('firestore-doc-1');
+    });
+
+    it("flips a new session to 'edit' so later saves update in place", () => {
+      const initial = makeInitialState();
+      expect(initial.mode).toBe('new');
+      const state = reducer(initial, markSaved({ characterId: 'firestore-doc-1' }));
+      expect(state.mode).toBe('edit');
+    });
+
+    it('rebinds an imported session to the created document', () => {
+      let state = reducer(
+        makeInitialState(),
+        loadCharacter({ character: makeInitialState().character, mode: 'import' }),
+      );
+      expect(state.originalCharacterId).toBeNull();
+      state = reducer(state, markSaved({ characterId: 'firestore-doc-2' }));
+      expect(state.mode).toBe('edit');
+      expect(state.originalCharacterId).toBe('firestore-doc-2');
+    });
+
+    it('marks the session clean so the UI stops reporting unsaved changes', () => {
+      let state = reducer(makeInitialState(), markDirty());
+      expect(state.isDirty).toBe(true);
+      state = reducer(state, markSaved({ characterId: 'firestore-doc-1' }));
+      expect(state.isDirty).toBe(false);
+    });
+
+    it('clears a stale saveError from an earlier failed attempt', () => {
+      let state = reducer(makeInitialState(), setSaveError('Network error'));
+      expect(state.saveError).toBe('Network error');
+      state = reducer(state, markSaved({ characterId: 'firestore-doc-1' }));
+      expect(state.saveError).toBeNull();
+    });
+
+    it('is idempotent — re-binding an already-bound session changes nothing', () => {
+      let state = reducer(makeInitialState(), markSaved({ characterId: 'firestore-doc-1' }));
+      const first = { ...state };
+      state = reducer(state, markSaved({ characterId: 'firestore-doc-1' }));
+      expect(state.originalCharacterId).toBe(first.originalCharacterId);
+      expect(state.mode).toBe(first.mode);
+      expect(state.isDirty).toBe(first.isDirty);
+    });
+
+    it('resetDraft clears the binding so a new draft does not overwrite it', () => {
+      let state = reducer(makeInitialState(), markSaved({ characterId: 'firestore-doc-1' }));
+      state = reducer(state, resetDraft());
+      expect(state.originalCharacterId).toBeNull();
+      expect(state.mode).toBe('new');
     });
   });
 });

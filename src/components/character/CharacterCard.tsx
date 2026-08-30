@@ -3,6 +3,40 @@ import { View, Text, Pressable, StyleSheet } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import type { CharacterSummary } from '@/types/character';
 
+/**
+ * Render a last-updated value that may not be a Date.
+ *
+ * The value has arrived as an ISO string (a JSON round-trip somewhere upstream)
+ * and as a Firestore Timestamp, and calling toLocaleDateString on either threw
+ * inside render — which the ErrorBoundary turned into an unescapable "Try
+ * again" loop (#376). A date on a card is not worth crashing the list for.
+ */
+export function formatLastUpdated(value: unknown): string {
+  if (value instanceof Date) {
+    return isNaN(value.getTime()) ? '' : value.toLocaleDateString();
+  }
+  if (typeof value === 'string' || typeof value === 'number') {
+    const parsed = new Date(value);
+    return isNaN(parsed.getTime()) ? '' : parsed.toLocaleDateString();
+  }
+  // Firestore Timestamp, which survives some paths unconverted.
+  const maybeTimestamp = value as { toDate?: () => Date } | null | undefined;
+  if (maybeTimestamp && typeof maybeTimestamp.toDate === 'function') {
+    try {
+      const converted = maybeTimestamp.toDate();
+      return converted instanceof Date && !isNaN(converted.getTime())
+        ? converted.toLocaleDateString()
+        : '';
+    } catch {
+      // A malformed object can carry a toDate that throws rather than returning.
+      // Guarding the shape but not the call would leave the one crash path this
+      // helper exists to close.
+      return '';
+    }
+  }
+  return '';
+}
+
 interface CharacterCardProps {
   character: CharacterSummary;
   onPress: (id: string) => void;
@@ -13,7 +47,7 @@ interface CharacterCardProps {
 export function CharacterCard({ character, onPress, onDelete, testID }: CharacterCardProps) {
   const { colors, fantasy, shadows, isDark } = useTheme();
 
-  const formattedDate = character.lastUpdated.toLocaleDateString();
+  const formattedDate = formatLastUpdated(character.lastUpdated);
 
   return (
     <Pressable

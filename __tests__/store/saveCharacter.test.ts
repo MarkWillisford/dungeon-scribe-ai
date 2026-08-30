@@ -1,6 +1,12 @@
 import { saveCharacter } from '@/store/thunks/saveCharacter';
 import { FirebaseCharacterService } from '@/services/FirebaseCharacterService';
-import { setSaving, setSaveError } from '@/store/slices/characterEntrySlice';
+import characterEntryReducer, {
+  setSaving,
+  setSaveError,
+  markSaved,
+  loadCharacter,
+  setName,
+} from '@/store/slices/characterEntrySlice';
 import type { Character } from '@/types/index';
 import type { RootState } from '@/store/store';
 
@@ -185,6 +191,156 @@ describe('saveCharacter thunk', () => {
       const { dispatch, getState } = makeThunkAPI(state);
       await saveCharacter()(dispatch, getState, undefined);
       expect(mockCreate).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  // Regression coverage for #355 — saving twice in one session created a second
+  // character instead of updating the first.
+  describe('binding the session to the created document (#355)', () => {
+    const SAVED_WITH_ID = {
+      info: { id: 'char-1', name: 'Saved', firebaseId: 'firestore-doc-1' },
+    } as unknown as Character;
+
+    it('dispatches markSaved with the new Firestore document ID after create', async () => {
+      mockCreate.mockResolvedValueOnce(SAVED_WITH_ID);
+      const state = makeState({ mode: 'new' });
+      const { dispatch, getState } = makeThunkAPI(state);
+      await saveCharacter()(dispatch, getState, undefined);
+      const calls = dispatch.mock.calls.map((c: [{ type: string; payload: unknown }]) => c[0]);
+      // Exactly once: a second markSaved would re-bind the session mid-save and
+      // is the shape of bug #355 reappearing.
+      const bound = calls.filter((c) => c.type === markSaved.type);
+      expect(bound).toHaveLength(1);
+      expect(bound[0].payload).toEqual({ characterId: 'firestore-doc-1' });
+    });
+
+    it('dispatches markSaved with the existing ID after an update, so both paths settle alike', async () => {
+      mockUpdate.mockResolvedValueOnce(SAVED_WITH_ID);
+      const state = makeState({ mode: 'edit', originalCharacterId: 'existing-id' });
+      const { dispatch, getState } = makeThunkAPI(state);
+      await saveCharacter()(dispatch, getState, undefined);
+      const calls = dispatch.mock.calls.map((c: [{ type: string; payload: unknown }]) => c[0]);
+      const bound = calls.filter((c) => c.type === markSaved.type);
+      expect(bound).toHaveLength(1);
+      expect(bound[0].payload).toEqual({ characterId: 'existing-id' });
+    });
+
+    it('does not dispatch markSaved when a save fails', async () => {
+      mockCreate.mockRejectedValueOnce(new Error('Network error'));
+      const state = makeState({ mode: 'new' });
+      const { dispatch, getState } = makeThunkAPI(state);
+      await saveCharacter()(dispatch, getState, undefined);
+      const calls = dispatch.mock.calls.map((c: [{ type: string; payload: unknown }]) => c[0]);
+      expect(calls.find((c) => c.type === markSaved.type)).toBeUndefined();
+    });
+
+    it('does not dispatch markSaved when create returns no firebaseId', async () => {
+      mockCreate.mockResolvedValueOnce(SAVED_CHARACTER); // no firebaseId
+      const state = makeState({ mode: 'new' });
+      const { dispatch, getState } = makeThunkAPI(state);
+      await saveCharacter()(dispatch, getState, undefined);
+      const calls = dispatch.mock.calls.map((c: [{ type: string; payload: unknown }]) => c[0]);
+      expect(calls.find((c) => c.type === markSaved.type)).toBeUndefined();
+    });
+
+    // The bug as the user hit it: enter a character, save, keep editing, save
+    // again. Drives the real reducer so the thunk and slice are verified together.
+    it('saves twice in one session without creating a second character', async () => {
+      mockCreate.mockResolvedValue(SAVED_WITH_ID);
+      mockUpdate.mockResolvedValue(SAVED_WITH_ID);
+
+      let entryState = characterEntryReducer(undefined, { type: '@@INIT' });
+      // A blank draft has no name, and a nameless character cannot be deleted
+      // through the UI — so the thunk refuses to save one (#382). Name it first;
+      // this test is about session binding, not about naming.
+      entryState = characterEntryReducer(entryState, setName('Kah-Mei'));
+      // Plain jest.fn() so the mock stays assignable to ThunkDispatch, matching
+      // the pattern in makeThunkAPI above.
+      const dispatch = jest.fn();
+      dispatch.mockImplementation((action: { type: string }) => {
+        entryState = characterEntryReducer(entryState, action as never);
+        return action;
+      });
+      const getState = () =>
+        ({
+          characterEntry: entryState,
+          auth: { user: { uid: 'user-123' } },
+        }) as unknown as RootState;
+
+      await saveCharacter()(dispatch, getState, undefined);
+      await saveCharacter()(dispatch, getState, undefined);
+
+      expect(mockCreate).toHaveBeenCalledTimes(1);
+      expect(mockUpdate).toHaveBeenCalledTimes(1);
+      expect(mockUpdate.mock.calls[0][0]).toBe('firestore-doc-1');
+      expect(entryState.mode).toBe('edit');
+      expect(entryState.originalCharacterId).toBe('firestore-doc-1');
+    });
+
+    // Both paths must leave the session in the same settled state, or the UI
+    // reports unsaved changes differently depending on how the character was
+    // saved. Drives the real reducer through an edit-then-save cycle.
+    it.each([
+      ['create', 'new' as const, null],
+      ['update', 'edit' as const, 'existing-id'],
+    ])('leaves the session clean after a successful %s', async (_label, mode, originalId) => {
+      mockCreate.mockResolvedValue(SAVED_WITH_ID);
+      mockUpdate.mockResolvedValue(SAVED_WITH_ID);
+
+      let entryState = characterEntryReducer(undefined, { type: '@@INIT' });
+      entryState = characterEntryReducer(
+        entryState,
+        loadCharacter({
+          character: entryState.character,
+          mode,
+          characterId: originalId ?? undefined,
+        }),
+      );
+      // An edit makes the session dirty, exactly as typing in the UI would.
+      entryState = characterEntryReducer(entryState, setName('Kah-Mei'));
+      expect(entryState.isDirty).toBe(true);
+
+      const dispatch = jest.fn();
+      dispatch.mockImplementation((action: { type: string }) => {
+        entryState = characterEntryReducer(entryState, action as never);
+        return action;
+      });
+      const getState = () =>
+        ({
+          characterEntry: entryState,
+          auth: { user: { uid: 'user-123' } },
+        }) as unknown as RootState;
+
+      await saveCharacter()(dispatch, getState, undefined);
+
+      expect(entryState.isDirty).toBe(false);
+      expect(entryState.mode).toBe('edit');
+      expect(entryState.originalCharacterId).toBeTruthy();
+    });
+
+    it('leaves the session dirty when the save fails', async () => {
+      mockCreate.mockRejectedValueOnce(new Error('Network error'));
+
+      let entryState = characterEntryReducer(undefined, { type: '@@INIT' });
+      entryState = characterEntryReducer(entryState, setName('Kah-Mei'));
+      expect(entryState.isDirty).toBe(true);
+
+      const dispatch = jest.fn();
+      dispatch.mockImplementation((action: { type: string }) => {
+        entryState = characterEntryReducer(entryState, action as never);
+        return action;
+      });
+      const getState = () =>
+        ({
+          characterEntry: entryState,
+          auth: { user: { uid: 'user-123' } },
+        }) as unknown as RootState;
+
+      await saveCharacter()(dispatch, getState, undefined);
+
+      expect(entryState.isDirty).toBe(true);
+      expect(entryState.saveError).toBe('Network error');
+      expect(entryState.originalCharacterId).toBeNull();
     });
   });
 

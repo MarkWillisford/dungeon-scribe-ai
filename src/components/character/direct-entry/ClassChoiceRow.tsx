@@ -193,6 +193,10 @@ export function ClassChoiceRow({
   const [companionPickerOpen, setCompanionPickerOpen] = useState(false);
   const [companionPickerIsMount, setCompanionPickerIsMount] = useState(false);
   const [rawPickerItems, setRawPickerItems] = useState<SearchItem[]>([]);
+  // null = no failure. A string is why the option list could not be read, which
+  // the row shows instead of silently rendering itself unselectable (#360).
+  const [itemsError, setItemsError] = useState<string | null>(null);
+  const [itemsAttempt, setItemsAttempt] = useState(0);
 
   const draftClass = useAppSelector((state) =>
     state.characterEntry.character.classes.classes.find((c) => c.id === classId),
@@ -265,9 +269,16 @@ export function ClassChoiceRow({
           eslByPoolId,
         )
           .then((items) => {
-            if (!stale) setRawPickerItems(items);
+            if (stale) return;
+            setRawPickerItems(items);
+            setItemsError(null);
           })
-          .catch((e) => console.error('Failed to build castable spell items:', e));
+          .catch((e) => {
+            if (stale) return;
+            console.error('Failed to build castable spell items:', e);
+            setRawPickerItems([]);
+            setItemsError(e instanceof Error ? e.message : String(e));
+          });
         return () => {
           stale = true;
         };
@@ -286,12 +297,21 @@ export function ClassChoiceRow({
 
       GameDataService.getClassChoiceItems(definition.collectionName, resolvedFilter)
         .then((items) => {
-          if (!stale) setRawPickerItems(items);
+          if (stale) return;
+          setRawPickerItems(items);
+          setItemsError(null);
         })
-        .catch((e) => console.error('Failed to load class choice items:', e));
+        .catch((e) => {
+          if (stale) return;
+          console.error('Failed to load class choice items:', e);
+          setRawPickerItems([]);
+          setItemsError(e instanceof Error ? e.message : String(e));
+        });
     } else {
       Promise.resolve(buildInlineItems(definition)).then((items) => {
-        if (!stale) setRawPickerItems(items);
+        if (stale) return;
+        setRawPickerItems(items);
+        setItemsError(null);
       });
     }
     return () => {
@@ -307,6 +327,7 @@ export function ClassChoiceRow({
     knownSpells,
     spellbooks,
     eslByPoolId,
+    itemsAttempt,
   ]);
 
   const pickerItems = useMemo(
@@ -441,6 +462,22 @@ export function ClassChoiceRow({
           )}
         </View>
       </Pressable>
+
+      {itemsError !== null && (
+        <View style={styles.optionsError}>
+          <Text style={[styles.optionsErrorText, { color: colors.accent.DEFAULT }]}>
+            {`${featureLabel} options could not be loaded — ${itemsError}`}
+          </Text>
+          <Pressable
+            onPress={() => setItemsAttempt((n) => n + 1)}
+            hitSlop={6}
+            accessibilityRole="button"
+            accessibilityLabel={`Retry loading ${featureLabel} options`}
+          >
+            <Text style={[styles.optionsErrorRetry, { color: colors.text.primary }]}>↺ Retry</Text>
+          </Pressable>
+        </View>
+      )}
 
       <SearchPickerSheet
         visible={pickerOpen}
@@ -629,6 +666,18 @@ const mountStyles = StyleSheet.create({
 });
 
 const styles = StyleSheet.create({
+  optionsError: {
+    paddingHorizontal: 4,
+    paddingBottom: 6,
+    gap: 2,
+  },
+  optionsErrorText: {
+    fontSize: 11,
+  },
+  optionsErrorRetry: {
+    fontSize: 12,
+    alignSelf: 'flex-start',
+  },
   row: {
     flexDirection: 'row',
     alignItems: 'center',
