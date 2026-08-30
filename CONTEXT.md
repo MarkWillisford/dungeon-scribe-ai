@@ -165,3 +165,76 @@ Author controls the loop pace: putting the PR back to draft pauses the reviewer.
 | **Execution** | GitHub-hosted runner        | Local Sandcastle               |
 | **Scope**     | Well-scoped, self-contained | Complex, iterative, or planned |
 | **Origin**    | Bug reports                 | PRD issues or escalated bugs   |
+
+---
+
+## Character Domain Language
+
+> Everything above describes the **workflow system**. This section describes the
+> **Pathfinder character model** — a separate context that happens to share the
+> repo. If it grows much further it should move to its own `CONTEXT.md` behind a
+> `CONTEXT-MAP.md`.
+
+### Language
+
+**Class Feature**:
+An ability a class grants at a given level.
+_Avoid_: class ability, class perk
+
+**Effect**:
+A machine-readable statement of what a Class Feature does to a derived stat.
+_Avoid_: modifier, bonus (a bonus is one **kind** of Effect)
+
+**Effects Status**:
+Whether a Class Feature's mechanics have been expressed as **Effects** yet —
+`modelled`, `none` (genuinely nothing to apply), or `unmodelled` (owed work).
+_Avoid_: implemented, wired
+
+**Verification Status**:
+Whether a Class Feature's _prose_ has been checked against its source book.
+Orthogonal to **Effects Status**.
+_Avoid_: validated, confirmed
+
+**Archetype**:
+A named variant of a class that trades listed Class Features for its own.
+_Avoid_: subclass, specialization, variant
+
+**Feature Replacement**:
+A structured reference naming the Class Feature an **Archetype** trades away and,
+where the trade is partial, the levels it applies to.
+_Avoid_: replacedFeatures string, swap
+
+**Feature Instance**:
+A Class Feature at one specific level. Two **Archetypes** conflict only when they
+claim the same Feature Instance, not merely the same Class Feature.
+_Avoid_: feature slot
+
+**First Conflicting Level**:
+The lowest class level at which two **Archetypes** claim the same **Feature
+Instance**. Below it the combination is legal; reaching it is what makes a
+character illegal, so it is the level-up that is refused, not the selection.
+_Avoid_: incompatible, conflicting archetypes (without a level)
+
+### Relationships
+
+- A **Class Feature** carries zero or more **Effects**
+- A **Class Feature** has exactly one **Effects Status** and one **Verification Status**
+- An **Archetype** replaces named **Class Features** and contributes its own
+- A class entry may carry more than one **Archetype**, if none replace the same **Class Feature**
+
+### Flagged ambiguities
+
+- **"verified" vs "modelled"** — used interchangeably; resolved as two independent
+  axes. A Class Feature can be `verified` prose with `unmodelled` mechanics, which
+  is the state of ~1,112 features whose description promises a numeric bonus their
+  **Effects** do not deliver.
+- **`effects: []` was overloaded** — it meant both "nothing to apply" and "not built
+  yet." Resolved: **Effects Status** carries that distinction; an empty array alone
+  no longer implies either.
+- **Archetype cardinality** — `ClassEntry` carried both `archetype?: string[]` and
+  `archetypeId`/`archetypeName`. Resolved: a single `archetypes: {id, name}[]`. The
+  plural field was never written, which silently gave Sacred Huntsmaster Inquisitors
+  and Mad Dog Barbarians an animal-companion effective level of 0.
+- **"replaces the same feature"** — read as same Class Feature name; resolved as same
+  **Feature Instance**. `'Arcanist Exploits (3rd, 11th)'` and `'Arcanist Exploits (7th)'`
+  touch one Class Feature but different Feature Instances, and are compatible.
