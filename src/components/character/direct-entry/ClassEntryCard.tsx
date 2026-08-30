@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
-import { View, Text, TextInput, Pressable, Modal, FlatList, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Pressable, Modal, ScrollView, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useTheme } from '@/hooks/useTheme';
 import { InlinePicker } from '@/components/ui/InlinePicker';
@@ -221,6 +221,15 @@ function FavoredClassBonusSection({ entry }: { entry: ClassEntry }) {
     [dispatch, entry.id, entry.name, selections],
   );
 
+  const visibleAlternates = useMemo(
+    () =>
+      alternates.filter(
+        (a) =>
+          altPickerLevel === null || !a.minimumClassLevel || a.minimumClassLevel <= altPickerLevel,
+      ),
+    [alternates, altPickerLevel],
+  );
+
   // The level currently open in the alt picker modal (null = closed)
   // altPickerLevel is already declared above as useState<number | null>(null)
 
@@ -430,15 +439,22 @@ function FavoredClassBonusSection({ entry }: { entry: ClassEntry }) {
             >
               Alternate Favored Class Bonus
             </Text>
-            <FlatList
-              data={alternates.filter(
-                (a) =>
-                  altPickerLevel === null ||
-                  !a.minimumClassLevel ||
-                  a.minimumClassLevel <= altPickerLevel,
+            {/* Rendered with map() inside a shrink-wrapping ScrollView rather than
+                a FlatList. There are only ever a handful of alternates for a
+                given race and class — two, for a Gnome rogue — and a FlatList
+                inside a fixed-maxHeight modal sizes itself to the container
+                rather than its content, which left the options adrift in a
+                mostly-empty sheet. Nothing here needs virtualisation. */}
+            <ScrollView
+              style={fcbStyles.modalList}
+              contentContainerStyle={fcbStyles.modalListContent}
+            >
+              {visibleAlternates.length === 0 && (
+                <Text style={[fcbStyles.modalEmpty, { color: colors.text.tertiary }]}>
+                  No alternate favored class bonuses are published for this race and class.
+                </Text>
               )}
-              keyExtractor={(item) => item.id}
-              renderItem={({ item }) => {
+              {visibleAlternates.map((item) => {
                 const currentSel =
                   altPickerLevel !== null ? getSelectionForLevel(altPickerLevel) : null;
                 const isSelected =
@@ -446,6 +462,7 @@ function FavoredClassBonusSection({ entry }: { entry: ClassEntry }) {
                   (currentSel as { type: 'alternate'; optionId: string }).optionId === item.id;
                 return (
                   <Pressable
+                    key={item.id}
                     onPress={() => {
                       if (altPickerLevel !== null) {
                         setLevelSelection(altPickerLevel, {
@@ -470,27 +487,31 @@ function FavoredClassBonusSection({ entry }: { entry: ClassEntry }) {
                     accessibilityRole="menuitem"
                     accessibilityState={{ selected: isSelected }}
                   >
-                    <Text
-                      style={[
-                        fcbStyles.modalOptionText,
-                        {
-                          color: isSelected
-                            ? isDark
-                              ? fantasy.gold
-                              : fantasy.darkWood
-                            : colors.text.primary,
-                          fontWeight: isSelected ? '700' : '400',
-                        },
-                      ]}
-                    >
-                      {item.shortName}
-                    </Text>
-                    <Text
-                      style={[fcbStyles.modalOptionDesc, { color: colors.text.tertiary }]}
-                      numberOfLines={2}
-                    >
-                      {item.description}
-                    </Text>
+                    <View style={fcbStyles.modalOptionBody}>
+                      <Text
+                        style={[
+                          fcbStyles.modalOptionText,
+                          {
+                            color: isSelected
+                              ? isDark
+                                ? fantasy.gold
+                                : fantasy.darkWood
+                              : colors.text.primary,
+                            fontWeight: isSelected ? '700' : '400',
+                          },
+                        ]}
+                      >
+                        {item.shortName}
+                      </Text>
+                      {!!item.description && (
+                        <Text
+                          style={[fcbStyles.modalOptionDesc, { color: colors.text.tertiary }]}
+                          numberOfLines={3}
+                        >
+                          {item.description}
+                        </Text>
+                      )}
+                    </View>
                     {isSelected && (
                       <Text
                         style={[
@@ -503,8 +524,8 @@ function FavoredClassBonusSection({ entry }: { entry: ClassEntry }) {
                     )}
                   </Pressable>
                 );
-              }}
-            />
+              })}
+            </ScrollView>
           </View>
         </Pressable>
       </Modal>
@@ -597,6 +618,22 @@ const fcbStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 24,
+  },
+  modalList: {
+    flexGrow: 0,
+  },
+  modalListContent: {
+    flexGrow: 0,
+  },
+  modalOptionBody: {
+    flex: 1,
+  },
+  modalEmpty: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 13,
+    fontStyle: 'italic',
+    paddingHorizontal: 16,
+    paddingBottom: 16,
   },
   modalSheet: {
     width: '100%',
