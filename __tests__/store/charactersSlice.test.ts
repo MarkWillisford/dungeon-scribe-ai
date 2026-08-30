@@ -1317,6 +1317,46 @@ describe('charactersSlice', () => {
       expect(state.characters[0].portrait).toBe('https://example.com/portrait.jpg');
     });
 
+    it('replaces the existing list row instead of appending a duplicate', () => {
+      // The summary was keyed on character.info.id — a local char_<ts> value —
+      // while the list rows come from getUserCharacters keyed on the Firestore
+      // document id. findIndex never matched, so every save appended a phantom
+      // copy and it looked as though saving duplicated the character.
+      const withRow = {
+        ...initialState,
+        characters: [{ ...mockCharacterSummary, id: 'firestore-doc-1', name: 'Kah-Mei 2.0' }],
+      };
+
+      const state = charactersReducer(withRow, {
+        type: 'characterEntry/save/fulfilled',
+        payload: {
+          ...mockCharacter,
+          info: { ...mockCharacter.info, name: 'Kah-Mei 2.5', firebaseId: 'firestore-doc-1' },
+        },
+      });
+
+      expect(state.characters).toHaveLength(1);
+      expect(state.characters[0].name).toBe('Kah-Mei 2.5');
+      expect(state.characters[0].id).toBe('firestore-doc-1');
+    });
+
+    it('appends a row for a character the list has not seen', () => {
+      const state = charactersReducer(initialState, {
+        type: 'characterEntry/save/fulfilled',
+        payload: { ...mockCharacter, info: { ...mockCharacter.info, firebaseId: 'brand-new-doc' } },
+      });
+      expect(state.characters).toHaveLength(1);
+      expect(state.characters[0].id).toBe('brand-new-doc');
+    });
+
+    it('falls back to the local id when no Firestore id is present', () => {
+      const state = charactersReducer(initialState, {
+        type: 'characterEntry/save/fulfilled',
+        payload: mockCharacter,
+      });
+      expect(state.characters[0].id).toBe(mockCharacter.info.id);
+    });
+
     it('omits portrait from the summary when the character has none', () => {
       const state = charactersReducer(initialState, {
         type: 'characterEntry/save/fulfilled',
