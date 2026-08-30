@@ -4,6 +4,7 @@ import { useRouter } from 'expo-router';
 import { useTheme } from '@/hooks/useTheme';
 import { InlinePicker } from '@/components/ui/InlinePicker';
 import { ClassChoiceRow } from './ClassChoiceRow';
+import { ClassChoicesUnavailable } from './ClassChoicesUnavailable';
 import { CompanionCard } from './CompanionCard';
 import { CompanionPickerSheet } from './CompanionPickerSheet';
 import { shallowEqual } from 'react-redux';
@@ -979,6 +980,10 @@ export function ClassEntryCard({ entry, dragHandle }: ClassEntryCardProps) {
   const [splitOpen, setSplitOpen] = useState(false);
   const [splitFirstRun, setSplitFirstRun] = useState(1);
   const [definitions, setDefinitions] = useState<ClassChoiceDefinition[]>([]);
+  // null = loaded (or still loading) without incident. A string is the reason the
+  // read failed, which the card surfaces rather than rendering an empty section.
+  const [definitionsError, setDefinitionsError] = useState<string | null>(null);
+  const [definitionsAttempt, setDefinitionsAttempt] = useState(0);
   const [archetypeLoadedClass, setArchetypeLoadedClass] = useState<string | null>(null);
   const [archetypeExists, setArchetypeExists] = useState(false);
   const hasArchetypes = archetypeLoadedClass === entry.name ? archetypeExists : null;
@@ -1001,10 +1006,19 @@ export function ClassEntryCard({ entry, dragHandle }: ClassEntryCardProps) {
   const isBaseClass = (classData?.maxLevel ?? 20) === 20;
 
   useEffect(() => {
-    GameDataService.getClassChoiceDefinitions(entry.name)
-      .then(setDefinitions)
-      .catch((e) => console.error('Failed to load class choice definitions:', e));
     let cancelled = false;
+    GameDataService.getClassChoiceDefinitions(entry.name)
+      .then((defs) => {
+        if (cancelled) return;
+        setDefinitions(defs);
+        setDefinitionsError(null);
+      })
+      .catch((e) => {
+        if (cancelled) return;
+        console.error('Failed to load class choice definitions:', e);
+        setDefinitions([]);
+        setDefinitionsError(e instanceof Error ? e.message : String(e));
+      });
     GameDataService.getArchetypesByClass(entry.name)
       .then((archetypes) => {
         if (!cancelled) {
@@ -1021,7 +1035,7 @@ export function ClassEntryCard({ entry, dragHandle }: ClassEntryCardProps) {
     return () => {
       cancelled = true;
     };
-  }, [entry.name]);
+  }, [entry.name, definitionsAttempt]);
 
   const allSlots = definitions.flatMap((def) => deriveChoiceSlots(def, entry.level));
   const hasChoices = allSlots.length > 0;
@@ -1266,6 +1280,14 @@ export function ClassEntryCard({ entry, dragHandle }: ClassEntryCardProps) {
 
       {/* Eidolon sub-sheet — rendered above class choices for Summoner entries */}
       {SUMMONER_CLASS_RE.test(entry.name) && <EidolonSection classEntry={entry} />}
+
+      {definitionsError !== null && (
+        <ClassChoicesUnavailable
+          className={entry.name}
+          message={definitionsError}
+          onRetry={() => setDefinitionsAttempt((n) => n + 1)}
+        />
+      )}
 
       {/* Class choices */}
       {hasChoices && (

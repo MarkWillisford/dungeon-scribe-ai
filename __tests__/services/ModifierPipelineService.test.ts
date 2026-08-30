@@ -306,6 +306,42 @@ describe('ModifierPipelineService', () => {
     });
   });
 
+  // Regression coverage for #356. recalculate() runs inside Redux reducers, and
+  // Immer discards the entire draft when a recipe throws — so a race document
+  // missing its traits array did not merely lose racial effects, it rolled back
+  // the loading flag too and left the create-character screen stuck forever.
+  //
+  // NOTE: createTestCharacter() passes the module-level mockRace by reference,
+  // so these tests detach info.race with a shallow copy before mutating it.
+  // Mutating it directly corrupts the fixture for every later test in this file.
+  describe('tolerates incomplete race data (#356)', () => {
+    test('does not throw when the race has no traits array', () => {
+      const char = createTestCharacter();
+      char.info.race = { ...char.info.race };
+      delete (char.info.race as { traits?: unknown }).traits;
+      expect(() => ModifierPipelineService.recalculate(char)).not.toThrow();
+    });
+
+    test('does not throw when a racial trait has no effects array', () => {
+      const char = createTestCharacter();
+      char.info.race = {
+        ...char.info.race,
+        traits: [
+          { name: 'Partial Trait', description: 'no effects field' },
+        ] as unknown as typeof char.info.race.traits,
+      };
+      expect(() => ModifierPipelineService.recalculate(char)).not.toThrow();
+    });
+
+    test('a race with no traits still produces valid derived stats', () => {
+      const char = createTestCharacter({ str: 16 });
+      char.info.race = { ...char.info.race };
+      delete (char.info.race as { traits?: unknown }).traits;
+      const result = ModifierPipelineService.recalculate(char);
+      expect(result.abilityScores.str.total).toBe(16);
+    });
+  });
+
   describe('getBreakdown', () => {
     test('returns breakdown for a stat with bonuses', () => {
       const char = createTestCharacter();
@@ -329,6 +365,45 @@ describe('ModifierPipelineService', () => {
       const breakdown = ModifierPipelineService.getBreakdown(char, 'speed.fly');
       expect(breakdown.total).toBe(0);
       expect(breakdown.bonuses).toHaveLength(0);
+    });
+  });
+
+  describe('recalculate — Date preservation', () => {
+    test('keeps lastUpdated a Date across the clone', () => {
+      // The JSON round-trip in recalculate turned Dates into ISO strings, which
+      // is how saving crashed the character list (#376).
+      const char = createTestCharacter();
+      char.lastUpdated = new Date('2026-08-19T12:00:00.000Z');
+
+      const result = ModifierPipelineService.recalculate(char);
+
+      expect(result.lastUpdated).toBeInstanceOf(Date);
+      expect(result.lastUpdated.toISOString()).toBe('2026-08-19T12:00:00.000Z');
+    });
+
+    test('keeps createdAt a Date across the clone', () => {
+      const char = createTestCharacter();
+      char.createdAt = new Date('2026-01-02T03:04:05.000Z');
+
+      const result = ModifierPipelineService.recalculate(char);
+
+      expect(result.createdAt).toBeInstanceOf(Date);
+    });
+
+    test('leaves the value callable as a Date, which is what the list needs', () => {
+      const char = createTestCharacter();
+      char.lastUpdated = new Date('2026-08-19T12:00:00.000Z');
+
+      const result = ModifierPipelineService.recalculate(char);
+
+      expect(() => result.lastUpdated.toLocaleDateString()).not.toThrow();
+    });
+
+    test('tolerates an absent createdAt', () => {
+      const char = createTestCharacter();
+      delete char.createdAt;
+
+      expect(() => ModifierPipelineService.recalculate(char)).not.toThrow();
     });
   });
 
