@@ -130,6 +130,20 @@ All four are tested.
 
 Prior art: the existing modifier pipeline suite covers stacking rules and equipment effect collection in the same style, and the Path of War trait data-integrity suite is the model for asserting seeded data shape.
 
+## Sequencing and Dependencies
+
+The work slices into parallel tracks, but four orderings are not preferences — breaking them ships a character sheet that is wrong in a new way. Any issue breakdown must preserve them.
+
+**Condition evaluation lands before any conditional Effect is authored.** Today an Effect's condition is discarded, so a conditional Effect applies unconditionally. Seeding the 434 conditional features first would grant every one of those bonuses in circumstances the rules forbid — a regression, where the current state is merely an omission.
+
+**Breakdown provenance lands before generated Effects are applied.** ADR 0007 accepts machine-generated rules data reaching a character sheet specifically because the contribution is visibly labelled unverified. Without that label the trade-off the ADR makes does not hold, and generated Effects must not be applied.
+
+**Feature Replacement migration lands before seed-time validation is enforced.** 102 of 515 distinct replacement references do not resolve today. Turning on the referential guard first would fail the seed outright rather than surface the bad data.
+
+**The archetype field consolidation lands before multi-archetype selection.** Selection writes to the consolidated list; building the UI against the old singular pair would need redoing, and the companion-service fix rides on the same migration.
+
+Everything else is genuinely parallel. In particular the 428 flat, unconditional Effects depend on none of the above and can be generated and seeded immediately — they are the fastest path to a correct sheet for most characters, and they exercise the generator before the harder shapes reach it.
+
 ## Out of Scope
 
 - The errata and update-notification flow that would let a player pull catalog changes into snapshotted prose. ADR 0005 removes the need for it for mechanics; prose updates remain a separate future concern, as issue #213 already noted.
