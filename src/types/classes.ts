@@ -4,6 +4,15 @@ import type { SpellcastingAdvancement } from './spells';
 import type { BroodmasterState } from './eidolon';
 import type { ResourcePoolDefinition } from './resources';
 
+/**
+ * How a level's hit die value was arrived at.
+ *   max     — maximum die result; standard for the first character level
+ *   average — Pathfinder's half-die-rounded-up convention (d8 → 5)
+ *   rolled  — a die actually rolled in the app
+ *   manual  — typed in by the user, or imported from elsewhere
+ */
+export type HitDieSource = 'max' | 'average' | 'rolled' | 'manual';
+
 export type FavoredClassBonusSelection =
   | { level: number; type: 'hp' }
   | { level: number; type: 'skill' }
@@ -26,7 +35,10 @@ export interface ClassEntry {
   archetype?: string[];
   level: number;
   hitDieSize: number; // d6, d8, d10, etc.
+  /** Die result per class level, before CON. Index i is this class's level i+1. */
   hitDieResults: number[];
+  /** How each hitDieResults entry was determined. Aligned by index. */
+  hitDieSources?: HitDieSource[];
   skillRanks: number; // Skill ranks per level
   classSkills: string[];
   babProgression: BABProgression;

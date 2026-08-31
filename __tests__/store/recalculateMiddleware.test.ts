@@ -106,4 +106,53 @@ describe('recalculateMiddleware', () => {
 
     expect(mockRecalculate).not.toHaveBeenCalled();
   });
+
+  describe('when the pipeline throws', () => {
+    let consoleError: jest.SpyInstance;
+
+    beforeEach(() => {
+      consoleError = jest.spyOn(console, 'error').mockImplementation(() => {});
+      mockRecalculate.mockImplementation(() => {
+        throw new Error('modifier pipeline exploded');
+      });
+    });
+
+    afterEach(() => consoleError.mockRestore());
+
+    it('does not let the throw escape dispatch', () => {
+      // An escaping throw takes down the calling screen's handler, which is how
+      // the guided flow's "Creating..." button ended up permanently stuck (#356).
+      const store = makeStore(mockCharacter);
+      const { dispatch } = makeChain(store);
+
+      expect(() => dispatch({ type: 'characterEntry/setRace', payload: {} })).not.toThrow();
+    });
+
+    it('keeps the previous derived stats rather than dispatching a partial update', () => {
+      const store = makeStore(mockCharacter);
+      const { dispatch } = makeChain(store);
+
+      dispatch({ type: 'characterEntry/setRace', payload: {} });
+
+      expect(store.dispatch).not.toHaveBeenCalled();
+    });
+
+    it('reports the failure so the cause is not silent', () => {
+      const store = makeStore(mockCharacter);
+      const { dispatch } = makeChain(store);
+
+      dispatch({ type: 'characterEntry/setRace', payload: {} });
+
+      expect(consoleError).toHaveBeenCalled();
+    });
+
+    it('still passes the action down the chain', () => {
+      const store = makeStore(mockCharacter);
+      const { next, dispatch } = makeChain(store);
+      next.mockReturnValue('result');
+
+      expect(dispatch({ type: 'characterEntry/setRace', payload: {} })).toBe('result');
+      expect(next).toHaveBeenCalled();
+    });
+  });
 });

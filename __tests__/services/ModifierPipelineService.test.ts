@@ -8,6 +8,7 @@ import type { Character } from '@/types';
 import type { FeatDefinition } from '@/types/feats';
 import type { FlawDefinition } from '@/types/flaws';
 import type { Race } from '@/types/race';
+import type { Buff } from '@/types/buff';
 
 const mockRace: Race = {
   name: 'Human',
@@ -1097,6 +1098,246 @@ describe('ModifierPipelineService', () => {
       expect(breakdown.bonuses.some((b) => b.source === 'Indomitable Will')).toBe(true);
       expect(breakdown.bonuses.find((b) => b.source === 'Indomitable Will')?.stacked).toBe(true);
       expect(breakdown.bonuses.find((b) => b.source === 'Heroism')?.stacked).toBe(false);
+    });
+  });
+
+  describe('recalculate — maximum hit points', () => {
+    function rogueAtLevel(level: number, dice: number[]): Character {
+      const char = createTestCharacter({ con: 12, className: 'Rogue' });
+      char.classes.classes = [
+        {
+          ...char.classes.classes[0],
+          name: 'Rogue',
+          level,
+          hitDieSize: 8,
+          hitDieResults: dice,
+        },
+      ];
+      char.classes.totalLevel = level;
+      return char;
+    }
+
+    // A +4 Constitution belt, expressed the way the app actually models one:
+    // an effect the pipeline resolves, not a number written onto the score.
+    function conBelt(): Buff {
+      return {
+        id: 'con-belt',
+        name: 'Belt of Mighty Constitution +4',
+        source: 'Item',
+        bonusType: BonusType.ENHANCEMENT,
+        duration: 0,
+        durationType: 'permanent' as const,
+        isActive: true,
+        effects: [
+          {
+            type: 'bonus' as const,
+            bonusType: BonusType.ENHANCEMENT,
+            target: 'ability.con',
+            value: 4,
+            source: 'Belt of Mighty Constitution +4',
+          },
+        ],
+      };
+    }
+
+    test('sums the per-level hit die values into base HP', () => {
+      const char = rogueAtLevel(3, [8, 5, 4]);
+      const result = ModifierPipelineService.recalculate(char);
+      expect(result.combatStats.hitPoints.base).toBe(17);
+    });
+
+    test('applies the Constitution modifier once per Hit Die', () => {
+      // CON 12 → +1, three levels → +3.
+      const char = rogueAtLevel(3, [8, 5, 4]);
+      const result = ModifierPipelineService.recalculate(char);
+      expect(result.combatStats.hitPoints.constitution).toBe(3);
+      expect(result.combatStats.hitPoints.max).toBe(20);
+    });
+
+    test('raises max HP retroactively when the Constitution modifier goes up', () => {
+      // Doug's worked example: 20 HP at CON 12, then a +4 CON belt takes the
+      // modifier from +1 to +3, worth another 2 HP on each of 3 Hit Dice.
+      const char = rogueAtLevel(3, [8, 5, 4]);
+      const before = ModifierPipelineService.recalculate(char);
+      expect(before.combatStats.hitPoints.max).toBe(20);
+
+      before.buffs.push(conBelt());
+      const after = ModifierPipelineService.recalculate(before);
+
+      expect(after.abilityScores.con.tempModifier).toBe(3);
+      expect(after.combatStats.hitPoints.constitution).toBe(9);
+      expect(after.combatStats.hitPoints.max).toBe(26);
+    });
+
+    test('gives back the HP when the Constitution boost is removed', () => {
+      const char = rogueAtLevel(3, [8, 5, 4]);
+      char.buffs.push(conBelt());
+      const boosted = ModifierPipelineService.recalculate(char);
+      expect(boosted.combatStats.hitPoints.max).toBe(26);
+
+      boosted.buffs = boosted.buffs.filter((b) => b.id !== 'con-belt');
+      const removed = ModifierPipelineService.recalculate(boosted);
+      expect(removed.combatStats.hitPoints.max).toBe(20);
+    });
+
+    test('never falls below one HP per Hit Die', () => {
+      const char = rogueAtLevel(4, [1, 1, 1, 1]);
+      char.abilityScores.con.base = 4; // -3 modifier
+      const result = ModifierPipelineService.recalculate(char);
+      expect(result.combatStats.hitPoints.max).toBe(4);
+    });
+
+    test('honours a manual max HP override', () => {
+      const char = rogueAtLevel(3, [8, 5, 4]);
+      char.combatStats.hitPoints.manualMax = 99;
+      const result = ModifierPipelineService.recalculate(char);
+      expect(result.combatStats.hitPoints.max).toBe(99);
+    });
+
+    test('an override does not erase the calculated components', () => {
+      // The user has to be able to see what they would revert to.
+      const char = rogueAtLevel(3, [8, 5, 4]);
+      char.combatStats.hitPoints.manualMax = 99;
+      const result = ModifierPipelineService.recalculate(char);
+      expect(result.combatStats.hitPoints.base).toBe(17);
+      expect(result.combatStats.hitPoints.constitution).toBe(3);
+    });
+
+    test('clearing the override returns to the calculated value', () => {
+      const char = rogueAtLevel(3, [8, 5, 4]);
+      char.combatStats.hitPoints.manualMax = 99;
+      const overridden = ModifierPipelineService.recalculate(char);
+      expect(overridden.combatStats.hitPoints.max).toBe(99);
+
+      overridden.combatStats.hitPoints.manualMax = null;
+      const reverted = ModifierPipelineService.recalculate(overridden);
+      expect(reverted.combatStats.hitPoints.max).toBe(20);
+    });
+
+    test('does not overwrite hitPoints.other, which effects own', () => {
+      // The Max HP box used to write here, and the pipeline reset it every pass.
+      const char = rogueAtLevel(3, [8, 5, 4]);
+      char.combatStats.hitPoints.other = 42;
+      const result = ModifierPipelineService.recalculate(char);
+      expect(result.combatStats.hitPoints.other).toBe(0);
+      expect(result.combatStats.hitPoints.max).toBe(20);
+    });
+
+    test('seeds a fresh character at full health', () => {
+      const char = rogueAtLevel(3, [8, 5, 4]);
+      const result = ModifierPipelineService.recalculate(char);
+      expect(result.combatStats.hitPoints.current).toBe(20);
+      expect(result.combatStats.hitPoints.currentInitialized).toBe(true);
+    });
+
+    test('leaves a character with no levels un-seeded', () => {
+      // calculatedMax special-cases totalHD === 0, so max stays 0 and the
+      // seeding branch must not fire. Otherwise a half-built character would
+      // be marked initialized at 0 HP, and the real seed would never happen
+      // once levels were added.
+      const char = rogueAtLevel(0, []);
+      const result = ModifierPipelineService.recalculate(char);
+      expect(result.combatStats.hitPoints.max).toBe(0);
+      expect(result.combatStats.hitPoints.current).toBe(0);
+      expect(result.combatStats.hitPoints.currentInitialized).toBe(false);
+    });
+
+    test('keeps a deliberately entered current HP below maximum', () => {
+      const char = rogueAtLevel(3, [8, 5, 4]);
+      char.combatStats.hitPoints.current = 7;
+      char.combatStats.hitPoints.currentInitialized = true;
+      const result = ModifierPipelineService.recalculate(char);
+      expect(result.combatStats.hitPoints.current).toBe(7);
+    });
+
+    test('keeps a character recorded at 0 current HP', () => {
+      // The old rule read 0 as "unset" and snapped the character back to full,
+      // which made a downed character impossible to record.
+      const char = rogueAtLevel(3, [8, 5, 4]);
+      char.combatStats.hitPoints.current = 0;
+      char.combatStats.hitPoints.currentInitialized = true;
+      const result = ModifierPipelineService.recalculate(char);
+      expect(result.combatStats.hitPoints.current).toBe(0);
+    });
+
+    test('raises current HP by the same amount maximum rises', () => {
+      // Editing Constitution or a hit die moved max while current sat still, so
+      // a character quietly drifted further from full every time the build
+      // changed. In Pathfinder both ends move together.
+      const char = rogueAtLevel(3, [8, 5, 4]);
+      const seeded = ModifierPipelineService.recalculate(char);
+      expect(seeded.combatStats.hitPoints.max).toBe(20);
+
+      // Take 8 damage, then put on a +4 Constitution belt (+2 per Hit Die).
+      seeded.combatStats.hitPoints.current = 12;
+      seeded.buffs.push(conBelt());
+      const after = ModifierPipelineService.recalculate(seeded);
+
+      expect(after.combatStats.hitPoints.max).toBe(26);
+      expect(after.combatStats.hitPoints.current).toBe(18);
+    });
+
+    test('lowers current HP by the same amount maximum falls', () => {
+      const char = rogueAtLevel(3, [8, 5, 4]);
+      char.buffs.push(conBelt());
+      const boosted = ModifierPipelineService.recalculate(char);
+      expect(boosted.combatStats.hitPoints.max).toBe(26);
+
+      boosted.combatStats.hitPoints.current = 18;
+      boosted.buffs = boosted.buffs.filter((b) => b.id !== 'con-belt');
+      const removed = ModifierPipelineService.recalculate(boosted);
+
+      expect(removed.combatStats.hitPoints.max).toBe(20);
+      expect(removed.combatStats.hitPoints.current).toBe(12);
+    });
+
+    test('does not heal a wounded character to full when maximum rises', () => {
+      const char = rogueAtLevel(3, [8, 5, 4]);
+      const seeded = ModifierPipelineService.recalculate(char);
+      seeded.combatStats.hitPoints.current = 3;
+      seeded.buffs.push(conBelt());
+
+      const after = ModifierPipelineService.recalculate(seeded);
+
+      expect(after.combatStats.hitPoints.current).toBe(9);
+      expect(after.combatStats.hitPoints.current).toBeLessThan(after.combatStats.hitPoints.max);
+    });
+
+    test('never drives current HP below zero when maximum falls hard', () => {
+      const char = rogueAtLevel(3, [8, 5, 4]);
+      char.buffs.push(conBelt());
+      const boosted = ModifierPipelineService.recalculate(char);
+      boosted.combatStats.hitPoints.current = 1;
+      boosted.buffs = boosted.buffs.filter((b) => b.id !== 'con-belt');
+
+      const removed = ModifierPipelineService.recalculate(boosted);
+
+      expect(removed.combatStats.hitPoints.current).toBe(0);
+    });
+
+    test('leaves current HP alone when maximum does not move', () => {
+      const char = rogueAtLevel(3, [8, 5, 4]);
+      const seeded = ModifierPipelineService.recalculate(char);
+      seeded.combatStats.hitPoints.current = 7;
+
+      const again = ModifierPipelineService.recalculate(seeded);
+
+      expect(again.combatStats.hitPoints.current).toBe(7);
+    });
+
+    test('clamps current HP down when maximum falls', () => {
+      const char = rogueAtLevel(3, [8, 5, 4]);
+      char.combatStats.hitPoints.current = 20;
+      char.combatStats.hitPoints.currentInitialized = true;
+      char.combatStats.hitPoints.manualMax = 12;
+      const result = ModifierPipelineService.recalculate(char);
+      expect(result.combatStats.hitPoints.current).toBe(12);
+    });
+
+    test('tolerates a class entry with no hitDieResults array', () => {
+      const char = rogueAtLevel(3, [8, 5, 4]);
+      delete (char.classes.classes[0] as { hitDieResults?: number[] }).hitDieResults;
+      expect(() => ModifierPipelineService.recalculate(char)).not.toThrow();
     });
   });
 

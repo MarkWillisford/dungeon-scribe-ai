@@ -3,6 +3,7 @@ import { View, Text, TextInput, Pressable, Modal, ScrollView, StyleSheet } from 
 import { useRouter } from 'expo-router';
 import { useTheme } from '@/hooks/useTheme';
 import { InlinePicker } from '@/components/ui/InlinePicker';
+import { HitDiceSection } from './HitDiceSection';
 import { ClassChoiceRow } from './ClassChoiceRow';
 import { ClassChoicesUnavailable } from './ClassChoicesUnavailable';
 import { CompanionCard } from './CompanionCard';
@@ -1275,6 +1276,8 @@ export function ClassEntryCard({ entry, dragHandle }: ClassEntryCardProps) {
           <Text style={[styles.fieldLabel, { color: colors.text.secondary }]}>Favored class</Text>
         </Pressable>
       )}
+
+      <HitDiceSection entry={entry} />
 
       {isBaseClass && entry.isFavoredClass && <FavoredClassBonusSection entry={entry} />}
 
