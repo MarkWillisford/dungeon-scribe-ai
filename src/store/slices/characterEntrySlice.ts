@@ -1,5 +1,5 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
-import { Alignment, BonusType } from '@/types/base';
+import { Alignment, BonusType, Size } from '@/types/base';
 import { ClassChoice } from '@/types/classes';
 import type {
   CompanionInstance,
@@ -12,7 +12,11 @@ import type { AppliedTemplate } from '@/types/templates';
 import type { TemplateDefinition } from '@/data/templates/types';
 import { resolveTemplateChoice as resolveTemplateChoicePure } from '@/services/TemplateChoiceService';
 import type { CharacterMagicItem, ItemSlot } from '@/types/magicItems';
-import { computeFeatSlots } from '@/utils/characterComputations';
+import {
+  characterLevelForClassLevel,
+  computeFeatSlots,
+  parseClassFeatSlotId,
+} from '@/utils/characterComputations';
 import type { AbilityKey } from '@/types/abilities';
 import type { FlexibleAbilityBonus } from '@/data/races/types';
 import type { RacialChoice } from '@/types/racialChoices';
@@ -70,9 +74,22 @@ export interface EntryValidationWarning {
 
 // ---- Feat slot helpers ----
 
-// Canonical source string format: "{source}_{level}" e.g. "level_3", "racial_1"
+// Canonical source string format: "{source}_{level}" e.g. "level_3", "racial_1".
+// Class-granted slots are the exception — they carry their own composite id
+// ("class:{classId}:{featureSlug}:{classLevel}") because a level alone can't
+// distinguish Fighter 4 from Wizard 4.
 function makeFeatSource(source: 'racial' | 'level' | 'bonus' | 'mythic', level: number): string {
   return `${source}_${level}`;
+}
+
+// Class slots are computed on read from Firestore-backed class data, which the
+// slice has no access to. It can still tell when one has gone stale: the class
+// entry was deleted, or its level dropped below the level that granted it.
+function isClassFeatSlotStillGranted(character: Character, slotId: string): boolean {
+  const parsed = parseClassFeatSlotId(slotId);
+  if (!parsed) return false;
+  const cls = character.classes.classes.find((c) => (c.id ?? c.name) === parsed.classId);
+  return !!cls && cls.level >= parsed.classLevel;
 }
 
 function syncFeatSlotsFromClasses(character: Character): void {
@@ -87,6 +104,9 @@ function syncFeatSlotsFromClasses(character: Character): void {
   const existingKeys = new Set(character.feats.feats.map((f) => f.source));
 
   for (const slot of generated) {
+    // Class-granted slots are computed on read from Firestore class data the
+    // slice can't see, so they're never generated here and need no placeholder.
+    if (slot.source === 'class') continue;
     const isFlawSlot = slot.id.startsWith('flaw-feat-');
     const key = isFlawSlot ? slot.id : makeFeatSource(slot.source, slot.availableAtLevel);
     if (existingKeys.has(key)) continue;
@@ -103,15 +123,21 @@ function syncFeatSlotsFromClasses(character: Character): void {
   }
   // Slots are computed on read — we just need to ensure assigned feats stay in sync.
   // Remove feat entries whose slots no longer exist
-  const validKeys = new Set(
-    generated.map((s) =>
+  // Class slots are excluded: their feats key off the composite class slot id
+  // and are validated by isClassFeatSlotStillGranted below, not by this set.
+  const validKeys = new Set<string>();
+  for (const s of generated) {
+    if (s.source === 'class') continue;
+    validKeys.add(
       s.id.startsWith('flaw-feat-') ? s.id : makeFeatSource(s.source, s.availableAtLevel),
-    ),
-  );
+    );
+  }
   character.feats.feats = character.feats.feats.filter((f) => {
     if (!f.featId) return false; // Remove empty placeholders
+    if (f.source.startsWith('bonus_')) return true; // Keep bonus feats regardless
+    if (f.source.startsWith('class:')) return isClassFeatSlotStillGranted(character, f.source);
     // f.source is already the full key e.g. "level_3" — compare directly
-    return validKeys.has(f.source) || f.source.startsWith('bonus_'); // Keep bonus feats regardless
+    return validKeys.has(f.source);
   });
 }
 
@@ -243,6 +269,30 @@ const characterEntrySlice = createSlice({
       state.saveError = action.payload;
     },
 
+    /**
+     * Settle the entry session after a successful save, for both create and
+     * update. Dispatched on every save path so the two behave identically.
+     *
+     * Binding: a 'new' or 'import' session starts with no originalCharacterId,
+     * so saveCharacter routes it to create(). Without recording the resulting
+     * ID the session stayed in that state, and every later save created another
+     * document — the character silently multiplied on each save (#355). Once it
+     * exists in Firestore the session is no longer a draft, so mode flips to
+     * 'edit' and later saves update in place. Re-binding an already-bound
+     * session to the same ID is a harmless no-op.
+     *
+     * Clean: isDirty is set by 107 reducers but was previously cleared only by
+     * loadCharacter and resetDraft — never by a save. The header therefore kept
+     * showing 'Save*' and navigating back kept warning about unsaved changes
+     * even immediately after a successful save.
+     */
+    markSaved(state, action: PayloadAction<{ characterId: string }>) {
+      state.originalCharacterId = action.payload.characterId;
+      state.mode = 'edit';
+      state.isDirty = false;
+      state.saveError = null;
+    },
+
     // Applied by the recalculate middleware — do NOT trigger another recalc
     applyComputedStats(state, action: PayloadAction<Character>) {
       state.character = action.payload;
@@ -287,13 +337,27 @@ const characterEntrySlice = createSlice({
         racialBonuses: Partial<Record<AbilityKey, number>>;
         hasFlexBonus?: boolean;
         flexibleAbilityBonuses?: FlexibleAbilityBonus[];
+        baseSpeed?: number;
+        size?: Size;
       }>,
     ) {
       state.character.info.race = {
         ...state.character.info.race,
         name: action.payload.raceName,
         abilityModifiers: action.payload.racialBonuses as Record<string, number>,
+        // Speed and size were never carried across, so every character kept the
+        // placeholder race's Medium/30 however small and slow the race actually
+        // was — a Gnome walked 30 feet and was Medium for AC, attack and CMD.
+        ...(action.payload.baseSpeed !== undefined ? { baseSpeed: action.payload.baseSpeed } : {}),
+        ...(action.payload.size !== undefined ? { sizeMod: action.payload.size } : {}),
       };
+      if (action.payload.size !== undefined) {
+        // The pipeline reads info.size, not race.sizeMod, for AC/attack/CMB/CMD.
+        state.character.info.size = action.payload.size;
+      }
+      if (action.payload.baseSpeed !== undefined) {
+        state.character.combatStats.movement.base = action.payload.baseSpeed;
+      }
       const bonuses = action.payload.flexibleAbilityBonuses ?? [];
       state.character.info.racialFlexBonuses = bonuses.length > 0 ? bonuses : undefined;
       state.character.info.racialFlexChoices = bonuses.length > 0 ? [] : undefined;
@@ -1665,27 +1729,40 @@ const characterEntrySlice = createSlice({
     },
 
     removeFeatSlot(state, action: PayloadAction<string>) {
-      // action.payload is the slot id (= source_level key)
+      // action.payload is the slot id, which is exactly what f.source stores
       state.character.feats.feats = state.character.feats.feats.filter(
-        (f) =>
-          makeFeatSource(
-            f.source.split('_')[0] as 'racial' | 'level' | 'bonus' | 'mythic',
-            f.grantedAtLevel,
-          ) !== action.payload,
+        (f) => f.source !== action.payload,
       );
       state.isDirty = true;
     },
 
-    assignFeat(state, action: PayloadAction<{ slotId: string; featId: string; featName: string }>) {
-      // slotId format: "{source}_{level}" e.g. "level_3"
-      const [sourceStr, levelStr] = action.payload.slotId.split('_');
-      const grantedAtLevel = parseInt(levelStr, 10);
-      const existing = state.character.feats.feats.find(
-        (f) => f.source === sourceStr + '_' + grantedAtLevel,
-      );
+    assignFeat(
+      state,
+      action: PayloadAction<{
+        slotId: string;
+        featId: string;
+        featName: string;
+        sourceLabel?: string;
+      }>,
+    ) {
+      // slotId is "{source}_{level}" ("level_3"), or the composite class key
+      // "class:{classId}:{featureSlug}:{classLevel}".
+      const slotId = action.payload.slotId;
+      const classSlot = parseClassFeatSlotId(slotId);
+      // grantedAtLevel is a character level everywhere it's consumed, so a
+      // class slot resolves its class level through the level order.
+      const grantedAtLevel = classSlot
+        ? (characterLevelForClassLevel(
+            classSlot.classId,
+            classSlot.classLevel,
+            state.character.classes.levelOrder,
+          ) ?? classSlot.classLevel)
+        : parseInt(slotId.split('_').pop() ?? '', 10);
+      const existing = state.character.feats.feats.find((f) => f.source === slotId);
       if (existing) {
         existing.featId = action.payload.featId;
         existing.name = action.payload.featName;
+        if (action.payload.sourceLabel) existing.sourceLabel = action.payload.sourceLabel;
       } else {
         state.character.feats.feats.push({
           featId: action.payload.featId,
@@ -1694,6 +1771,7 @@ const characterEntrySlice = createSlice({
           grantedAtLevel,
           active: true,
           choices: {},
+          ...(action.payload.sourceLabel ? { sourceLabel: action.payload.sourceLabel } : {}),
         });
       }
       state.isDirty = true;
@@ -2122,6 +2200,7 @@ export const {
   markDirty,
   setSaving,
   setSaveError,
+  markSaved,
   applyComputedStats,
   setValidationWarnings,
   acknowledgeWarning,

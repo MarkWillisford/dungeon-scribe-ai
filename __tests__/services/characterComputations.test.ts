@@ -13,6 +13,13 @@ import {
   computeECL,
   computeMaxHP,
   computeFeatSlots,
+  computeClassBonusFeatSlots,
+  selectedArchetypeNames,
+  buildReplacedFeaturesByClassId,
+  parseFeatGrantingFeatureName,
+  makeClassFeatSlotId,
+  parseClassFeatSlotId,
+  characterLevelForClassLevel,
   computeFCBAlternateAccumulation,
   type ClassDataMap,
 } from '@/utils/characterComputations';
@@ -189,6 +196,277 @@ describe('computeFeatSlots', () => {
   it('does not add a racial feat for non-Human races', () => {
     const slots = computeFeatSlots([cls('Fighter', 1)], 'Elf', []);
     expect(slots.filter((s) => s.source === 'racial')).toHaveLength(0);
+  });
+
+  it('omits class-granted slots when no class data is supplied', () => {
+    const slots = computeFeatSlots([cls('Fighter', 6)], 'Elf', []);
+    expect(slots.filter((s) => s.source === 'class')).toHaveLength(0);
+  });
+
+  it('includes class-granted slots when class data is supplied', () => {
+    const slots = computeFeatSlots([cls('Fighter', 6)], 'Elf', [], {
+      classDataMap: TEST_CLASS_MAP,
+    });
+    expect(slots.filter((s) => s.source === 'class').map((s) => s.classLevel)).toEqual([
+      1, 2, 4, 6,
+    ]);
+  });
+});
+
+// ---- parseFeatGrantingFeatureName ----
+
+describe('parseFeatGrantingFeatureName', () => {
+  it('recognizes feat-granting feature names', () => {
+    expect(parseFeatGrantingFeatureName('Bonus Feat')).toEqual({
+      base: 'bonus feat',
+      levels: null,
+    });
+    expect(parseFeatGrantingFeatureName('Combat Style Feat')).toEqual({
+      base: 'combat style feat',
+      levels: null,
+    });
+  });
+
+  it('singularizes plural feature names so they match their singular form', () => {
+    expect(parseFeatGrantingFeatureName('Bonus Feats')?.base).toBe('bonus feat');
+  });
+
+  it('extracts an ordinal level list from a parenthetical', () => {
+    expect(parseFeatGrantingFeatureName('Bonus Feats (4th, 8th, 12th)')).toEqual({
+      base: 'bonus feat',
+      levels: [4, 8, 12],
+    });
+  });
+
+  it('treats a descriptive parenthetical as no level restriction', () => {
+    expect(parseFeatGrantingFeatureName('Bonus Feats (Zen Archer)')).toEqual({
+      base: 'bonus feat',
+      levels: null,
+    });
+  });
+
+  it('rejects features that are not feat grants', () => {
+    expect(parseFeatGrantingFeatureName('Armor Training 1')).toBeNull();
+    expect(parseFeatGrantingFeatureName('Feathered Companion')).toBeNull();
+  });
+});
+
+// ---- computeClassBonusFeatSlots ----
+
+describe('computeClassBonusFeatSlots', () => {
+  const opts = { classDataMap: TEST_CLASS_MAP };
+
+  it('generates a slot per bonus feat level up to the class level', () => {
+    const slots = computeClassBonusFeatSlots([cls('Fighter', 5)], opts);
+    expect(slots.map((s) => s.classLevel)).toEqual([1, 2, 4]);
+  });
+
+  it('labels each slot with the granting class and class level', () => {
+    const slots = computeClassBonusFeatSlots([cls('Fighter', 2)], opts);
+    expect(slots.map((s) => s.sourceLabel)).toEqual(['Fighter 1', 'Fighter 2']);
+  });
+
+  it('restricts fighter bonus feats to combat feats', () => {
+    const slots = computeClassBonusFeatSlots([cls('Fighter', 1)], opts);
+    expect(slots[0].allowedFeatTypes).toEqual(['combat']);
+  });
+
+  it('restricts teamwork feat grants to teamwork feats', () => {
+    const slots = computeClassBonusFeatSlots([cls('Inquisitor', 3)], opts);
+    expect(slots[0].featureName).toBe('Teamwork Feat');
+    expect(slots[0].allowedFeatTypes).toEqual(['teamwork']);
+  });
+
+  it('restricts wizard bonus feats to item creation and metamagic', () => {
+    const slots = computeClassBonusFeatSlots([cls('Wizard', 5)], opts);
+    expect(slots.length).toBeGreaterThan(0);
+    expect(slots[0].allowedFeatTypes).toEqual(['item_creation', 'metamagic']);
+  });
+
+  it('restricts magus bonus feats to combat, item creation and metamagic', () => {
+    const slots = computeClassBonusFeatSlots([cls('Magus', 5)], opts);
+    expect(slots.length).toBeGreaterThan(0);
+    expect(slots[0].allowedFeatTypes).toEqual(['combat', 'item_creation', 'metamagic']);
+  });
+
+  it('leaves the restriction unset when the rules are not modelled for that class', () => {
+    const slots = computeClassBonusFeatSlots([cls('Sorcerer', 7)], opts);
+    expect(slots[0].featureName).toBe('Bloodline Feat');
+    expect(slots[0].allowedFeatTypes).toBeUndefined();
+  });
+
+  it('generates no slots for classes that grant no bonus feats', () => {
+    expect(computeClassBonusFeatSlots([cls('Rogue', 20)], opts)).toHaveLength(0);
+  });
+
+  it('ignores classes missing from the class data map', () => {
+    expect(computeClassBonusFeatSlots([cls('Fighter', 5)], { classDataMap: new Map() })).toEqual(
+      [],
+    );
+  });
+
+  it('keeps slot ids distinct across two classes at the same class level', () => {
+    const slots = computeClassBonusFeatSlots([cls('Fighter', 1), cls('Warlord', 1)], opts);
+    const ids = slots.map((s) => s.id);
+    expect(new Set(ids).size).toBe(ids.length);
+  });
+
+  describe('placement', () => {
+    it('falls back to the class level when no level order is recorded', () => {
+      const slots = computeClassBonusFeatSlots([cls('Fighter', 2)], opts);
+      expect(slots.map((s) => s.availableAtLevel)).toEqual([1, 2]);
+    });
+
+    it('places slots at the character level the class level was taken at', () => {
+      // Wizard 1, Fighter 1, Wizard 2, Fighter 2 → Fighter 2 is character level 4
+      const levelOrder = ['class-wizard', 'class-fighter', 'class-wizard', 'class-fighter'];
+      const slots = computeClassBonusFeatSlots([cls('Fighter', 2)], { ...opts, levelOrder });
+      expect(slots.map((s) => s.availableAtLevel)).toEqual([2, 4]);
+    });
+  });
+
+  describe('archetypes', () => {
+    it('removes only the levels an archetype names', () => {
+      const replacedFeaturesByClassId = new Map([
+        ['class-fighter', ['Bonus Feats (4th, 8th, 12th, 16th, 20th)']],
+      ]);
+      const slots = computeClassBonusFeatSlots([cls('Fighter', 8)], {
+        ...opts,
+        replacedFeaturesByClassId,
+      });
+      expect(slots.map((s) => s.classLevel)).toEqual([1, 2, 6]);
+    });
+
+    it('removes every grant when the archetype names no levels', () => {
+      const replacedFeaturesByClassId = new Map([['class-fighter', ['Bonus Feats']]]);
+      const slots = computeClassBonusFeatSlots([cls('Fighter', 8)], {
+        ...opts,
+        replacedFeaturesByClassId,
+      });
+      expect(slots).toHaveLength(0);
+    });
+
+    it('ignores replaced features that are not feat grants', () => {
+      const replacedFeaturesByClassId = new Map([
+        ['class-fighter', ['Bravery', 'Armor Training 1']],
+      ]);
+      const slots = computeClassBonusFeatSlots([cls('Fighter', 4)], {
+        ...opts,
+        replacedFeaturesByClassId,
+      });
+      expect(slots.map((s) => s.classLevel)).toEqual([1, 2, 4]);
+    });
+  });
+});
+
+// ---- archetype selection ----
+//
+// The character editor writes `archetypeName`; the legacy `archetype` array
+// only appears on older persisted characters. Reading only the array silently
+// disabled archetype-aware slot removal, so both are covered here.
+
+describe('selectedArchetypeNames', () => {
+  it('reads the name the editor writes', () => {
+    expect(selectedArchetypeNames({ archetypeName: 'Myrmidon' })).toEqual(['Myrmidon']);
+  });
+
+  it('reads the legacy array', () => {
+    expect(selectedArchetypeNames({ archetype: ['Zen Archer'] })).toEqual(['Zen Archer']);
+  });
+
+  it('combines both when both are present', () => {
+    expect(selectedArchetypeNames({ archetype: ['Zen Archer'], archetypeName: 'Sohei' })).toEqual([
+      'Zen Archer',
+      'Sohei',
+    ]);
+  });
+
+  it('returns nothing when no archetype is selected', () => {
+    expect(selectedArchetypeNames({})).toEqual([]);
+  });
+});
+
+describe('buildReplacedFeaturesByClassId', () => {
+  const archetypes = new Map([
+    [
+      'Fighter',
+      [
+        { name: 'Myrmidon', replacedFeatures: ['Bonus Feats (2nd)', 'Bravery'] },
+        { name: 'Unbreakable', replacedFeatures: ['Bonus Feats (1st)'] },
+      ],
+    ],
+  ]);
+
+  it('collects the features the selected archetype trades away', () => {
+    const classes = [cls('Fighter', 4)];
+    classes[0].archetypeName = 'Myrmidon';
+    expect(buildReplacedFeaturesByClassId(classes, archetypes).get('class-fighter')).toEqual([
+      'Bonus Feats (2nd)',
+      'Bravery',
+    ]);
+  });
+
+  it('ignores archetypes the class has not selected', () => {
+    const classes = [cls('Fighter', 4)];
+    classes[0].archetypeName = 'Myrmidon';
+    const replaced = buildReplacedFeaturesByClassId(classes, archetypes).get('class-fighter');
+    expect(replaced).not.toContain('Bonus Feats (1st)');
+  });
+
+  it('omits classes with no archetype selected', () => {
+    expect(buildReplacedFeaturesByClassId([cls('Fighter', 4)], archetypes).size).toBe(0);
+  });
+
+  it('omits classes whose archetype data has not loaded yet', () => {
+    const classes = [cls('Fighter', 4)];
+    classes[0].archetypeName = 'Myrmidon';
+    expect(buildReplacedFeaturesByClassId(classes, new Map()).size).toBe(0);
+  });
+
+  it('feeds through to slot computation so the traded grant disappears', () => {
+    const classes = [cls('Fighter', 4)];
+    classes[0].archetypeName = 'Myrmidon';
+    const slots = computeClassBonusFeatSlots(classes, {
+      classDataMap: TEST_CLASS_MAP,
+      replacedFeaturesByClassId: buildReplacedFeaturesByClassId(classes, archetypes),
+    });
+    expect(slots.map((s) => s.classLevel)).toEqual([1, 4]);
+  });
+});
+
+// ---- class feat slot ids ----
+
+describe('class feat slot ids', () => {
+  it('round-trips the class id and class level', () => {
+    const id = makeClassFeatSlotId('class-fighter', 'bonus feat', 4);
+    expect(parseClassFeatSlotId(id)).toEqual({ classId: 'class-fighter', classLevel: 4 });
+  });
+
+  it('returns null for non-class slot ids', () => {
+    expect(parseClassFeatSlotId('level_3')).toBeNull();
+    expect(parseClassFeatSlotId('bonus_0')).toBeNull();
+  });
+});
+
+// ---- characterLevelForClassLevel ----
+
+describe('characterLevelForClassLevel', () => {
+  const levelOrder = ['a', 'b', 'a', 'a', 'b'];
+
+  it('returns the character level the nth class level was taken at', () => {
+    expect(characterLevelForClassLevel('a', 1, levelOrder)).toBe(1);
+    expect(characterLevelForClassLevel('a', 3, levelOrder)).toBe(4);
+    expect(characterLevelForClassLevel('b', 2, levelOrder)).toBe(5);
+  });
+
+  it('returns null when the class level is not in the order', () => {
+    expect(characterLevelForClassLevel('a', 4, levelOrder)).toBeNull();
+    expect(characterLevelForClassLevel('c', 1, levelOrder)).toBeNull();
+  });
+
+  it('returns null when no level order is recorded', () => {
+    expect(characterLevelForClassLevel('a', 1, undefined)).toBeNull();
+    expect(characterLevelForClassLevel('a', 1, [])).toBeNull();
   });
 });
 
@@ -454,6 +732,15 @@ describe('computeFeatSlots', () => {
   it('empty flaws array produces no bonus slots', () => {
     const slots = computeFeatSlots([cls('Fighter', 1)], 'Dwarf', []);
     expect(slots.filter((s) => s.source === 'bonus')).toHaveLength(0);
+  });
+
+  it('orders same-level slots level → racial → class → flaw bonus', () => {
+    const flaws: CharacterFlaw[] = [{ flawId: 'flaw-1', name: 'Cowardly' }];
+    const slots = computeFeatSlots([cls('Fighter', 1)], 'Human', flaws, {
+      classDataMap: TEST_CLASS_MAP,
+    });
+    const atLevel1 = slots.filter((s) => s.availableAtLevel === 1).map((s) => s.source);
+    expect(atLevel1).toEqual(['level', 'racial', 'class', 'bonus']);
   });
 
   it('elven noble gets a racial bonus feat slot at level 1', () => {

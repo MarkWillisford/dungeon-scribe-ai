@@ -8,6 +8,7 @@ import {
   SectionList,
   ActivityIndicator,
   StyleSheet,
+  Keyboard,
 } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import { GameDataService } from '@/services/GameDataService';
@@ -452,7 +453,8 @@ export function EquipmentPickerSheet({
           <SectionList
             sections={sections}
             keyExtractor={(item) => item.definitionId}
-            keyboardShouldPersistTaps="handled"
+            keyboardShouldPersistTaps="always"
+            onScrollBeginDrag={Keyboard.dismiss}
             renderSectionHeader={({ section }) =>
               sections.length > 1 ? (
                 <View

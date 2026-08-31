@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent } from '../../helpers/testUtils';
+import { render, fireEvent, getAllText } from '../../helpers/testUtils';
 import { RaceSelector } from '@/components/character/RaceSelector';
 import { CORE_RACES } from '@/data/races';
 
@@ -10,6 +10,50 @@ describe('RaceSelector', () => {
     for (const raceName of expectedRaces) {
       expect(getByText(raceName)).toBeTruthy();
     }
+  });
+
+  describe('filtering', () => {
+    // 65 races are seeded; scrolling the whole list to find one was the
+    // complaint behind #363.
+    function filterTo(query: string) {
+      const rendered = render(<RaceSelector selectedRace={null} onSelectRace={() => {}} />);
+      fireEvent.changeText(rendered.getByTestId('race-filter'), query);
+      return rendered.rerender();
+    }
+
+    test('narrows the list to matching races', () => {
+      const tree = filterTo('dwarf');
+      const text = getAllText(tree);
+      expect(text.some((t) => t === 'Dwarf')).toBe(true);
+      expect(text.some((t) => t === 'Elf')).toBe(false);
+    });
+
+    test('matches case-insensitively and on partial names', () => {
+      const text = getAllText(filterTo('HALF'));
+      expect(text.some((t) => t === 'Half-Elf')).toBe(true);
+      expect(text.some((t) => t === 'Half-Orc')).toBe(true);
+      expect(text.some((t) => t === 'Gnome')).toBe(false);
+    });
+
+    test('drops section headers that no longer have races under them', () => {
+      const text = getAllText(filterTo('dwarf'));
+      expect(text.some((t) => t.includes('Featured Races'))).toBe(false);
+    });
+
+    test('says so when nothing matches, rather than showing an empty list', () => {
+      const text = getAllText(filterTo('zzzz'));
+      expect(text.some((t) => t.includes('No race matches'))).toBe(true);
+    });
+
+    test('restores the full list when the filter is cleared', () => {
+      const rendered = render(<RaceSelector selectedRace={null} onSelectRace={() => {}} />);
+      fireEvent.changeText(rendered.getByTestId('race-filter'), 'dwarf');
+      rendered.rerender();
+      fireEvent.changeText(rendered.getByTestId('race-filter'), '');
+      const text = getAllText(rendered.rerender());
+      expect(text.some((t) => t === 'Elf')).toBe(true);
+      expect(text.some((t) => t === 'Dwarf')).toBe(true);
+    });
   });
 
   test('should call onSelectRace when a race is pressed', () => {

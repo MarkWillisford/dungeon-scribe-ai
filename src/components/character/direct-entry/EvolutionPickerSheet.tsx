@@ -6,7 +6,16 @@
 // transitions the sheet to a metadata-picker step before dispatching.
 
 import React, { useMemo, useState } from 'react';
-import { View, Text, TextInput, Pressable, Modal, FlatList, StyleSheet } from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  Pressable,
+  Modal,
+  FlatList,
+  StyleSheet,
+  Keyboard,
+} from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import { InlinePicker, type PickerOption } from '@/components/ui/InlinePicker';
 import { useAppDispatch } from '@/store/hooks';
@@ -207,7 +216,8 @@ export function EvolutionPickerSheet({
             <FlatList
               data={[1, 2, 3, 4] as const}
               keyExtractor={(c) => `cost-${c}`}
-              keyboardShouldPersistTaps="handled"
+              keyboardShouldPersistTaps="always"
+              onScrollBeginDrag={Keyboard.dismiss}
               testID="evolution-list"
               renderItem={({ item: cost }) => {
                 const list = groupedByCost[cost];

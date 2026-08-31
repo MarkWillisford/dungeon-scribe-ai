@@ -68,6 +68,14 @@ export class ModifierPipelineService {
   static recalculate(character: Character): Character {
     const c = JSON.parse(JSON.stringify(character)) as Character;
 
+    // JSON.stringify turns Dates into ISO strings and JSON.parse leaves them
+    // that way, so every Date on the character came out of the clone as a
+    // string. That is how saving crashed the character list: the summary
+    // carried a string and CharacterCard called toLocaleDateString on it (#376).
+    // Put the real Date instances back.
+    c.lastUpdated = character.lastUpdated;
+    c.createdAt = character.createdAt;
+
     // Phase 1: Collect all active effects from every source
     const allEffects = this.collectAllEffects(c);
 
@@ -150,8 +158,11 @@ export class ModifierPipelineService {
     const effects: Effect[] = [];
 
     // 1. Racial traits
-    for (const trait of character.info.race.traits) {
-      for (const effect of trait.effects) {
+    // Tolerate a race with no traits array. recalculate() runs inside reducers,
+    // where a throw discards the whole Immer draft — including the loading flag
+    // that was being cleared — and leaves the UI stuck mid-operation (#356).
+    for (const trait of character.info.race.traits ?? []) {
+      for (const effect of trait.effects ?? []) {
         effects.push(effect);
       }
     }
@@ -468,7 +479,12 @@ export class ModifierPipelineService {
     for (const ab of abilities) {
       const score = c.abilityScores[ab];
       const result = stacked.get(`ability.${ab}`);
-      score.total = score.base + score.racial + score.inherent + (result?.total ?? 0);
+      // levelIncrements is the count of +1s allocated here from the every-4-HD
+      // slots. The UI has always shown it as its own "Level +1s" row, but the
+      // total left it out, so a level 20 character was quietly short up to five
+      // points of ability score — and every stat derived from them.
+      score.total =
+        score.base + score.racial + score.inherent + score.levelIncrements + (result?.total ?? 0);
       score.tempTotal = Math.max(0, score.total - score.damage - score.drain);
       score.modifier = Math.floor((score.total - 10) / 2);
       score.tempModifier = Math.floor((score.tempTotal - 10) / 2);
@@ -633,10 +649,26 @@ export class ModifierPipelineService {
     hp.constitution = c.abilityScores.con.tempModifier * totalHD;
     hp.other = this.get(stacked, 'hp') + this.get(stacked, 'hp.per_level') * totalHD;
 
-    // Favored class HP
-    hp.favoredClass = c.classes.favoredClassBonuses
+    // Favored class HP.
+    //
+    // The selections the UI writes live on each CLASS ENTRY as
+    // FavoredClassBonusSelection ({ level, type: 'hp' }) — that is what
+    // setFavoredClassBonuses populates, and what computeMaxHP,
+    // ResourcePoolService and CharacterValidationService all read. This
+    // function was reading classes.favoredClassBonuses instead, a top-level
+    // aggregate that NOTHING in the app ever writes, so it was permanently
+    // empty and choosing "+1 hit point" did nothing at all.
+    //
+    // The legacy aggregate is still counted, for characters that carry one from
+    // an import. The two are never both populated in practice.
+    const perEntryHP = c.classes.classes.reduce(
+      (sum, cls) => sum + (cls.favoredClassBonuses ?? []).filter((b) => b.type === 'hp').length,
+      0,
+    );
+    const legacyHP = c.classes.favoredClassBonuses
       .filter((b) => b.bonusType === 'HP')
       .reduce((sum, b) => sum + b.value, 0);
+    hp.favoredClass = perEntryHP + legacyHP;
 
     // The 1-HP-per-Hit-Die floor lives in HitDiceService so the UI can show the
     // same number when offering to revert an override. Applied to the total

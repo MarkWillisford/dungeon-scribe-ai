@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { View, Text, Pressable, StyleSheet, ScrollView } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
+import { ListFilterInput } from '@/components/ui/ListFilterInput';
 import { FantasyDivider } from '@/components/ui/FantasyDivider';
 import { GameDataService } from '@/services/GameDataService';
 import type { ClassData } from '@/data/classes';
@@ -14,6 +15,7 @@ interface ClassSelectorProps {
 export function ClassSelector({ selectedClass, onSelectClass, testID }: ClassSelectorProps) {
   const { colors, fantasy, isDark } = useTheme();
   const [expandedClass, setExpandedClass] = useState<string | null>(selectedClass);
+  const [filter, setFilter] = useState('');
   // Sync initializer ensures first render has real data (no flicker).
   // Phase B: replace with useState([]) once getCoreClasses is a true async Firestore call.
   const [coreClasses, setCoreClasses] = useState<ClassData[]>(() =>
@@ -25,6 +27,12 @@ export function ClassSelector({ selectedClass, onSelectClass, testID }: ClassSel
       .then(setCoreClasses)
       .catch((e) => console.error('Failed to load core classes:', e));
   }, []);
+
+  const visibleClasses = useMemo(() => {
+    const q = filter.trim().toLowerCase();
+    if (!q) return coreClasses;
+    return coreClasses.filter((cls) => cls.name.toLowerCase().includes(q));
+  }, [coreClasses, filter]);
 
   const handleClassPress = (cls: ClassData) => {
     setExpandedClass(cls.name === expandedClass ? null : cls.name);
@@ -41,8 +49,23 @@ export function ClassSelector({ selectedClass, onSelectClass, testID }: ClassSel
 
   return (
     <View testID={testID}>
-      <ScrollView>
-        {coreClasses.map((cls) => {
+      <ListFilterInput
+        value={filter}
+        onChangeText={setFilter}
+        placeholder="Filter classes..."
+        resultCount={visibleClasses.length}
+        testID="class-filter"
+        accessibilityLabel="Filter classes by name"
+      />
+      {/* handled: a tap on a class registers on the first press with the
+          keyboard open, rather than being eaten by the dismiss gesture (#358). */}
+      <ScrollView keyboardShouldPersistTaps="handled">
+        {visibleClasses.length === 0 && (
+          <Text style={[styles.noMatches, { color: colors.text.tertiary }]}>
+            {`No class matches "${filter.trim()}"`}
+          </Text>
+        )}
+        {visibleClasses.map((cls) => {
           const isSelected = selectedClass === cls.name;
           const isExpanded = expandedClass === cls.name;
           const level1Features = cls.classFeatures.filter((f) => f.level === 1);
@@ -140,6 +163,13 @@ export function ClassSelector({ selectedClass, onSelectClass, testID }: ClassSel
 }
 
 const styles = StyleSheet.create({
+  noMatches: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 14,
+    fontStyle: 'italic',
+    textAlign: 'center',
+    paddingVertical: 24,
+  },
   classItem: {
     borderWidth: 1,
     borderRadius: 8,
