@@ -9,7 +9,7 @@ name: AI Reviewer
 # condition short-circuits before any work is done.
 #
 # Required secrets:
-#   ANTHROPIC_API_KEY — Claude API key
+#   CLAUDE_CODE_OAUTH_TOKEN — Claude Max plan OAuth token
 #
 # Required files:
 #   .github/prompts/ai-reviewer.md       — review criteria (read by the agent)
@@ -65,7 +65,7 @@ jobs:
       - name: Run AI reviewer
         uses: anthropics/claude-code-action@v1
         with:
-          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
           direct_prompt: |
             Review pull request #${{ github.event.pull_request.number }} on ${{ github.repository }}.

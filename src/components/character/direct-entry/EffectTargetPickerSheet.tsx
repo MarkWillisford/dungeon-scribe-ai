@@ -1,5 +1,14 @@
 import React, { useState, useMemo } from 'react';
-import { View, Text, TextInput, Pressable, SectionList, FlatList, StyleSheet } from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  Pressable,
+  SectionList,
+  FlatList,
+  StyleSheet,
+  Keyboard,
+} from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import type { Character } from '@/types';
 import type { EffectTarget } from '@/types/base';
@@ -311,7 +320,8 @@ export function EffectTargetPickerSheet({
         <FlatList
           data={flatFiltered}
           keyExtractor={(item) => item.target}
-          keyboardShouldPersistTaps="handled"
+          keyboardShouldPersistTaps="always"
+          onScrollBeginDrag={Keyboard.dismiss}
           renderItem={renderItem}
           contentContainerStyle={styles.listContent}
           ListEmptyComponent={
@@ -326,7 +336,8 @@ export function EffectTargetPickerSheet({
         <SectionList
           sections={allSections}
           keyExtractor={(item) => item.target}
-          keyboardShouldPersistTaps="handled"
+          keyboardShouldPersistTaps="always"
+          onScrollBeginDrag={Keyboard.dismiss}
           renderSectionHeader={({ section }) => (
             <View
               style={[

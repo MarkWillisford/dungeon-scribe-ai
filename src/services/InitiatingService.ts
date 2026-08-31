@@ -16,8 +16,20 @@ export class InitiatingService {
    * Full contributors (the pool's own initiating class) count at ×1.
    * Half contributors (other classes, including other initiating classes) count at ×floor/2.
    * IL is guaranteed >= 1 as long as any full contributor has at least 1 level.
+   *
+   * `traitBonus` carries trait bonuses to IL for this pool — currently only the
+   * Path of War trait Practiced Initiator (+2). Per that trait, the bonus may
+   * not raise IL above the character's Hit Dice, so `hitDice` caps the result.
+   * The cap is partial: a character whose base IL is already at or above their
+   * HD gains nothing, and one who would overshoot is raised only up to HD.
+   *
+   * The bonus requires an initiating class ("pick an initiating class"), so it
+   * is not applied when there is no full contributor and IL is 0.
    */
-  static computeInitiatorLevel(contributors: InitiatingContributor[]): number {
+  static computeInitiatorLevel(
+    contributors: InitiatingContributor[],
+    options?: { traitBonus?: number; hitDice?: number },
+  ): number {
     let fullTotal = 0;
     let halfTotal = 0;
     let hasFullInitiator = false;
@@ -35,7 +47,15 @@ export class InitiatingService {
 
     if (!hasFullInitiator) return 0;
     // "all other class levels / 2" in the formula means sum first, then floor
-    return Math.max(1, fullTotal + Math.floor(halfTotal / 2));
+    const base = Math.max(1, fullTotal + Math.floor(halfTotal / 2));
+
+    const traitBonus = options?.traitBonus ?? 0;
+    if (traitBonus <= 0) return base;
+
+    const boosted = base + traitBonus;
+    const hitDice = options?.hitDice;
+    if (hitDice === undefined) return boosted;
+    return Math.max(base, Math.min(boosted, hitDice));
   }
 
   /**
@@ -131,10 +151,15 @@ export class InitiatingService {
     tables: Record<string, InitiatingProgressionTable>,
     abilityMod: number,
     miscDCBonus = 0,
+    ilOptions?: { traitBonus?: number; hitDice?: number },
   ): InitiatingPool {
-    const il = this.computeInitiatorLevel(contributors);
+    const il = this.computeInitiatorLevel(contributors, ilOptions);
     const maxLevel = this.maxManeuverLevel(il);
-    const progression = this.getProgressionAtLevel(tables, classData.progressionTableKey, classLevel);
+    const progression = this.getProgressionAtLevel(
+      tables,
+      classData.progressionTableKey,
+      classLevel,
+    );
     const [maneuversKnown, maneuversReadied, stancesKnown] = progression ?? [0, 0, 0];
 
     return {
@@ -190,7 +215,10 @@ export class InitiatingService {
       ],
       bonusDisciplines: [
         ...pool.bonusDisciplines.filter((b) => !b.source.startsWith(traditionPrefix)),
-        { disciplineId: tradition.favoredDisciplineId, source: `Martial Tradition: ${tradition.name}` },
+        {
+          disciplineId: tradition.favoredDisciplineId,
+          source: `Martial Tradition: ${tradition.name}`,
+        },
       ],
     };
   }
