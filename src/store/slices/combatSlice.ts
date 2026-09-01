@@ -400,10 +400,25 @@ const combatSlice = createSlice({
 
     // ---- Session initialisation ----
 
-    initNewSession(state, action: PayloadAction<{ maxHP: number; pools?: ResourcePool[] }>) {
-      state.currentHP = action.payload.maxHP;
+    initNewSession(
+      state,
+      action: PayloadAction<{
+        maxHP: number;
+        /**
+         * Current HP carried in from the character sheet. Omitted means "start
+         * at full health" — the behaviour for a character that has never been
+         * played. Temporary HP is never carried in: it expires with whatever
+         * granted it.
+         */
+        currentHP?: number;
+        /** Nonlethal damage carried in from the character sheet. */
+        nonlethalDamage?: number;
+        pools?: ResourcePool[];
+      }>,
+    ) {
+      state.currentHP = action.payload.currentHP ?? action.payload.maxHP;
       state.tempHP = 0;
-      state.nonlethalDamage = 0;
+      state.nonlethalDamage = action.payload.nonlethalDamage ?? 0;
       state.isStaggered = false;
       state.staggeredAutoApplied = false;
       state.isDying = false;
