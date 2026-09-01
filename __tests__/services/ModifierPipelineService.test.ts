@@ -1341,6 +1341,35 @@ describe('ModifierPipelineService', () => {
     });
   });
 
+  describe('recalculate — current hit points survive a recalculate', () => {
+    // Once a session writes its result back to the character, the pipeline must
+    // treat that number as authoritative. Reseeding it from max would silently
+    // heal a wounded character on the next recalculate (#400).
+    it('leaves a deliberately set current HP alone', () => {
+      const char = createTestCharacter({ con: 12 });
+      char.combatStats.hitPoints.currentInitialized = true;
+      char.combatStats.hitPoints.current = 12;
+      char.combatStats.hitPoints.manualMax = 40;
+
+      const result = ModifierPipelineService.recalculate(char);
+
+      expect(result.combatStats.hitPoints.max).toBe(40);
+      expect(result.combatStats.hitPoints.current).toBe(12);
+    });
+
+    it('still seeds a character that has never had current HP set', () => {
+      const char = createTestCharacter({ con: 12 });
+      char.combatStats.hitPoints.currentInitialized = false;
+      char.combatStats.hitPoints.current = 0;
+      char.combatStats.hitPoints.manualMax = 40;
+
+      const result = ModifierPipelineService.recalculate(char);
+
+      expect(result.combatStats.hitPoints.current).toBe(40);
+      expect(result.combatStats.hitPoints.currentInitialized).toBe(true);
+    });
+  });
+
   describe('recalculate — favored class HP bonus', () => {
     test('includes HP favored class bonus in hitPoints.favoredClass', () => {
       const char = createTestCharacter();
