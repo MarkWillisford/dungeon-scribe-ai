@@ -317,6 +317,7 @@ export default function CombatTrackerScreen() {
       // up where the sheet left off rather than assuming full health.
       const charCurrentHP = hp.current;
       const charNonlethal = hp.nonlethal;
+      const charTempHP = hp.temporary;
       showAlert(
         'New Session',
         'This will reset your buffs, spell slots, and resource pools. Hit points carry over from the character sheet.',
@@ -333,7 +334,7 @@ export default function CombatTrackerScreen() {
                   await PlaySessionService.create(userId, characterId, {
                     currentHP: charCurrentHP,
                     nonlethalDamage: charNonlethal,
-                    tempHP: 0,
+                    tempHP: charTempHP,
                     activeBuffs: [],
                     combatAbilities: {
                       activeToggles: {},
@@ -351,6 +352,7 @@ export default function CombatTrackerScreen() {
                     maxHP: charMaxHP,
                     currentHP: charCurrentHP,
                     nonlethalDamage: charNonlethal,
+                    tempHP: charTempHP,
                     pools,
                   }),
                 );
@@ -397,8 +399,11 @@ export default function CombatTrackerScreen() {
 
     // The session owns hit points while it runs; the character document owns
     // them between sessions. Write the result back before tearing the session
-    // down, or every point of damage taken in play is discarded. Temporary HP
-    // is deliberately not persisted — it expires with whatever granted it.
+    // down, or every point of damage taken in play is discarded.
+    //
+    // Temporary HP persists too. It lasts as long as the effect that granted it
+    // — false life runs for hours — so ending a session must not spend it. It is
+    // depleted by damage, cleared by a long rest, or cleared deliberately.
     const writeBackId = character?.info.firebaseId ?? character?.info.id;
     if (character && writeBackId && currentHP !== null) {
       try {
@@ -412,6 +417,7 @@ export default function CombatTrackerScreen() {
                   ...character.combatStats.hitPoints,
                   current: currentHP,
                   nonlethal: nonlethalDamage,
+                  temporary: tempHP,
                   // Tell the pipeline this value was set deliberately, so a
                   // later recalculate leaves it alone instead of snapping to max.
                   currentInitialized: true,
@@ -440,7 +446,7 @@ export default function CombatTrackerScreen() {
     sessionInitRef.current = false;
     setSessionCheckDone(true);
     sessionInitRef.current = false;
-  }, [dispatch, userId, sessionCharacterId, character, currentHP, nonlethalDamage]);
+  }, [dispatch, userId, sessionCharacterId, character, currentHP, nonlethalDamage, tempHP]);
 
   const handleLongRest = useCallback(() => {
     if (!character || currentHP === null) return;

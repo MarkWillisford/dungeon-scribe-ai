@@ -407,17 +407,24 @@ const combatSlice = createSlice({
         /**
          * Current HP carried in from the character sheet. Omitted means "start
          * at full health" — the behaviour for a character that has never been
-         * played. Temporary HP is never carried in: it expires with whatever
-         * granted it.
+         * played.
          */
         currentHP?: number;
         /** Nonlethal damage carried in from the character sheet. */
         nonlethalDamage?: number;
+        /**
+         * Temporary HP carried in from the character sheet. Temporary HP lasts
+         * as long as the effect that granted it — false life runs for hours —
+         * so it survives the end of a session like any other hit point total.
+         * Nothing expires it on a timer yet; it is spent by damage, cleared by
+         * a long rest, or cleared deliberately.
+         */
+        tempHP?: number;
         pools?: ResourcePool[];
       }>,
     ) {
       state.currentHP = action.payload.currentHP ?? action.payload.maxHP;
-      state.tempHP = 0;
+      state.tempHP = action.payload.tempHP ?? 0;
       state.nonlethalDamage = action.payload.nonlethalDamage ?? 0;
       state.isStaggered = false;
       state.staggeredAutoApplied = false;

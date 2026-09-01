@@ -226,9 +226,21 @@ describe('Play screen — ending a session', () => {
     expect(arg.data.combatStats.hitPoints.currentInitialized).toBe(true);
   });
 
-  it('does not persist temporary hit points — they expire with their source', async () => {
+  it('persists temporary hit points — they last as long as their source', async () => {
     mockCharacter = characterWith({ max: 40, manualMax: 40, current: 40, temporary: 0 });
     mockCombat = inSession({ currentHP: 12, tempHP: 9 });
+
+    const { getByLabelText } = render(React.createElement(PlayScreen));
+    fireEvent.press(getByLabelText('End combat'));
+    await flushPromises();
+
+    const arg = mockUpdateCharacter.mock.calls[0][0] as { data: Character };
+    expect(arg.data.combatStats.hitPoints.temporary).toBe(9);
+  });
+
+  it('persists temporary hit points already spent down to zero', async () => {
+    mockCharacter = characterWith({ max: 40, manualMax: 40, current: 40, temporary: 9 });
+    mockCombat = inSession({ currentHP: 12, tempHP: 0 });
 
     const { getByLabelText } = render(React.createElement(PlayScreen));
     fireEvent.press(getByLabelText('End combat'));

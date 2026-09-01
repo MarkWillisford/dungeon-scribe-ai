@@ -570,7 +570,14 @@ describe('initNewSession', () => {
     expect(state.currentHP).toBe(0);
   });
 
-  it('never carries temporary HP in — it expires with its source', () => {
+  it('carries temporary HP in from the character sheet when supplied', () => {
+    // Temporary HP lasts as long as the effect that granted it, so a session
+    // boundary does not spend it.
+    const state = combatReducer(undefined, initNewSession({ maxHP: 40, currentHP: 12, tempHP: 9 }));
+    expect(state.tempHP).toBe(9);
+  });
+
+  it('starts with no temporary HP when the sheet has none', () => {
     let state = combatReducer(undefined, initHP(40));
     state = combatReducer(state, addTempHP(10));
     state = combatReducer(state, initNewSession({ maxHP: 40, currentHP: 12 }));
