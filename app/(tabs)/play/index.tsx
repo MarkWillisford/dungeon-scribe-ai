@@ -63,12 +63,13 @@ import { DiceRoller } from '@/components/dice/DiceRoller';
 import { DamageInputPanel } from '@/components/combat/DamageInputPanel';
 import { DamageResolutionService } from '@services/DamageResolutionService';
 
-type CombatTab = 'playsheet' | 'buffs' | 'spells' | 'dice' | 'log';
+type CombatTab = 'playsheet' | 'buffs' | 'actions' | 'spells' | 'dice' | 'log';
 type PlayView = 'loading' | 'picker' | 'tracker';
 
 const TAB_LABELS: { key: CombatTab; label: string }[] = [
   { key: 'playsheet', label: 'Playsheet' },
   { key: 'buffs', label: 'Buffs' },
+  { key: 'actions', label: 'Actions' },
   { key: 'spells', label: 'Spells' },
   { key: 'dice', label: 'Dice' },
   { key: 'log', label: 'Log' },
@@ -644,8 +645,17 @@ export default function CombatTrackerScreen() {
             testID="buffs-panel"
           />
 
-          <View style={styles.sectionSpacer} />
+          <View style={styles.spacerLarge} />
+        </ScrollView>
+      )}
 
+      {activeTab === 'actions' && (
+        <ScrollView
+          style={styles.tabContent}
+          contentContainerStyle={styles.tabContentInner}
+          showsVerticalScrollIndicator={false}
+          keyboardShouldPersistTaps="handled"
+        >
           <CombatAbilityToggles
             abilities={combatAbilities}
             character={character}
@@ -653,7 +663,6 @@ export default function CombatTrackerScreen() {
             onToggle={handleToggleCombatAbility}
             testID="combat-ability-toggles"
           />
-
           <View style={styles.spacerLarge} />
         </ScrollView>
       )}
