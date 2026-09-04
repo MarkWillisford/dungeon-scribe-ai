@@ -282,6 +282,57 @@ export const BLOODRAGER_KNOWN: SpellProgressionTable = [
   [6, 6, 6, 5], // 20
 ];
 
+// ─── HOMEBREW TABLES ─────────────────────────────────────────────────────────
+
+// Mord-Sith stolen spell storage (max storable slots, not per-day generation).
+// 0th level is always unlimited (null). Values represent maximum stored slots per spell level.
+export const MORD_SITH_SPELL_SLOTS: SpellProgressionTable = [
+  [null, 3, null, null, null, null, null, null, null, null], // 1
+  [null, 4, null, null, null, null, null, null, null, null], // 2
+  [null, 5, 3, null, null, null, null, null, null, null], // 3
+  [null, 6, 4, null, null, null, null, null, null, null], // 4
+  [null, 6, 5, 3, null, null, null, null, null, null], // 5
+  [null, 6, 6, 4, null, null, null, null, null, null], // 6
+  [null, 6, 6, 5, 3, null, null, null, null, null], // 7
+  [null, 6, 6, 6, 4, null, null, null, null, null], // 8
+  [null, 6, 6, 6, 5, 3, null, null, null, null], // 9
+  [null, 6, 6, 6, 6, 4, null, null, null, null], // 10
+  [null, 6, 6, 6, 6, 5, 3, null, null, null], // 11
+  [null, 6, 6, 6, 6, 6, 4, null, null, null], // 12
+  [null, 6, 6, 6, 6, 6, 5, 3, null, null], // 13
+  [null, 6, 6, 6, 6, 6, 6, 4, null, null], // 14
+  [null, 6, 6, 6, 6, 6, 6, 5, 3, null], // 15
+  [null, 6, 6, 6, 6, 6, 6, 6, 4, null], // 16
+  [null, 6, 6, 6, 6, 6, 6, 6, 5, 3], // 17
+  [null, 6, 6, 6, 6, 6, 6, 6, 6, 4], // 18
+  [null, 6, 6, 6, 6, 6, 6, 6, 6, 5], // 19
+  [null, 6, 6, 6, 6, 6, 6, 6, 6, 6], // 20
+];
+
+// Mord-Sith spells known (stolen spells retained in memory).
+export const MORD_SITH_SPELLS_KNOWN: SpellProgressionTable = [
+  [3, 1, null, null, null, null, null, null, null, null], // 1
+  [3, 2, null, null, null, null, null, null, null, null], // 2
+  [4, 2, 1, null, null, null, null, null, null, null], // 3
+  [4, 3, 1, null, null, null, null, null, null, null], // 4
+  [5, 3, 2, null, null, null, null, null, null, null], // 5
+  [5, 3, 2, 1, null, null, null, null, null, null], // 6
+  [6, 4, 3, 1, null, null, null, null, null, null], // 7
+  [6, 4, 3, 2, null, null, null, null, null, null], // 8
+  [6, 4, 3, 2, 1, null, null, null, null, null], // 9
+  [6, 5, 4, 3, 1, null, null, null, null, null], // 10
+  [6, 5, 4, 3, 2, null, null, null, null, null], // 11
+  [6, 5, 4, 3, 2, 1, null, null, null, null], // 12
+  [6, 6, 5, 4, 3, 1, null, null, null, null], // 13
+  [6, 6, 5, 4, 3, 2, null, null, null, null], // 14
+  [6, 6, 5, 4, 4, 2, 1, null, null, null], // 15
+  [6, 6, 6, 5, 4, 3, 2, null, null, null], // 16
+  [6, 6, 6, 5, 5, 3, 2, 1, null, null], // 17
+  [6, 6, 6, 5, 5, 4, 3, 2, null, null], // 18
+  [6, 6, 6, 6, 5, 4, 3, 2, 1, null], // 19
+  [6, 6, 6, 6, 6, 5, 4, 3, 2, 1], // 20
+];
+
 // ─── TABLE REGISTRY ──────────────────────────────────────────────────────────
 // Lookup maps for referencing tables by key from class entries
 
@@ -294,10 +345,12 @@ export const SPELL_TABLES: Record<string, SpellProgressionTable> = {
   FOUR_LEVEL_PREPARED_PER_DAY,
   ARCANIST_PER_DAY,
   BLOODRAGER_PER_DAY,
+  MORD_SITH_SPELL_SLOTS,
 };
 
 export const SPELLS_KNOWN_TABLES: Record<string, SpellProgressionTable> = {
   FULL_9_SPONTANEOUS_KNOWN,
   SIX_LEVEL_SPONTANEOUS_KNOWN,
   BLOODRAGER_KNOWN,
+  MORD_SITH_SPELLS_KNOWN,
 };

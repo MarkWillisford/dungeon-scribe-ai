@@ -110,16 +110,18 @@ export function resolveFilterTokens(
   return resolved;
 }
 
-function buildInlineItems(definition: ClassChoiceDefinition): SearchItem[] {
+function buildInlineItems(definition: ClassChoiceDefinition, takenAtLevel: number): SearchItem[] {
   if (!definition.optionGroups) return [];
-  return definition.optionGroups.flatMap((group) =>
-    group.options.map((opt) => ({
-      key: opt.id,
-      label: opt.name,
-      subLabel: opt.description?.slice(0, 80),
-      category: group.name || undefined,
-    })),
-  );
+  return definition.optionGroups
+    .filter((group) => group.minClassLevel === undefined || group.minClassLevel <= takenAtLevel)
+    .flatMap((group) =>
+      group.options.map((opt) => ({
+        key: opt.id,
+        label: opt.name,
+        subLabel: opt.description?.slice(0, 80),
+        category: group.name || undefined,
+      })),
+    );
 }
 
 // Filters picker items to exclude IDs already selected in sibling slots for the
@@ -308,7 +310,7 @@ export function ClassChoiceRow({
           setItemsError(e instanceof Error ? e.message : String(e));
         });
     } else {
-      Promise.resolve(buildInlineItems(definition)).then((items) => {
+      Promise.resolve(buildInlineItems(definition, takenAtLevel)).then((items) => {
         if (stale) return;
         setRawPickerItems(items);
         setItemsError(null);

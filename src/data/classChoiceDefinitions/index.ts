@@ -63,6 +63,7 @@ import {
   ambushHunterDefinitions,
   hiddenBladePowDefinitions,
 } from './initiatingArchetypes';
+import { mordSithDefinitions } from './mordSith';
 
 export {
   fighterDefinitions,
@@ -133,6 +134,8 @@ export {
   knightDiscipleDefinitions,
   ambushHunterDefinitions,
   hiddenBladePowDefinitions,
+  // Homebrew
+  mordSithDefinitions,
 };
 
 export const ALL_CLASS_CHOICE_DEFINITIONS: ClassChoiceDefinition[] = [
@@ -204,6 +207,8 @@ export const ALL_CLASS_CHOICE_DEFINITIONS: ClassChoiceDefinition[] = [
   ...knightDiscipleDefinitions,
   ...ambushHunterDefinitions,
   ...hiddenBladePowDefinitions,
+  // Homebrew
+  ...mordSithDefinitions,
 ];
 
 export const getDefinitionById = (id: string): ClassChoiceDefinition | undefined =>
