@@ -3,6 +3,7 @@
   "compilerOptions": {
     "strict": true,
     "ignoreDeprecations": "6.0",
+    "rootDir": ".",
     "paths": {
       "@/*": ["./src/*"],
       "@components/*": ["./src/components/*"],
