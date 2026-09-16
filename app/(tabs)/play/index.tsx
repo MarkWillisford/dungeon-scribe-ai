@@ -42,6 +42,7 @@ import {
 import { CombatService } from '@services/CombatService';
 import { FormulaService } from '@services/FormulaService';
 import { PlaySessionService } from '@services/PlaySessionService';
+import { updateCharacter } from '@store/slices/charactersSlice';
 import { endTurn, startTurn } from '@store/thunks/turnThunks';
 import { toggleCondition } from '@store/thunks/conditionThunks';
 import { RollRecord, Buff, SavedBuff } from '@/types/buff';
@@ -246,11 +247,10 @@ export default function CombatTrackerScreen() {
   }, [pendingStabilizationPrompt, dispatch]);
 
   // Computed values used in tracker
-  const maxHP = useMemo(() => {
-    if (!character) return 0;
-    const hp = character.combatStats.hitPoints;
-    return hp.base + hp.constitution + hp.favoredClass + hp.other;
-  }, [character]);
+  // hitPoints.max already carries the manual override when the user has set one
+  // — the pipeline writes manualMax into max. Summing the parts here would
+  // silently discard that override and show a different maximum than the sheet.
+  const maxHP = useMemo(() => character?.combatStats.hitPoints.max ?? 0, [character]);
 
   const totals: BuffedTotals | null = useMemo(() => {
     if (!character) return null;
@@ -312,41 +312,58 @@ export default function CombatTrackerScreen() {
   const handleNewSession = useCallback(
     (characterId: string) => {
       const hp = character!.combatStats.hitPoints;
-      const charMaxHP = hp.base + hp.constitution + hp.favoredClass + hp.other;
-      showAlert('New Session', 'This will reset your current HP, buffs, and spell slots.', [
-        { text: 'Cancel', style: 'cancel' },
-        {
-          text: 'Start New Session',
-          style: 'destructive',
-          onPress: async () => {
-            const pools = character!.resources;
-            const initialResourcePools = Object.fromEntries(pools.map((p) => [p.id, p.max]));
-            try {
-              if (userId) {
-                await PlaySessionService.create(userId, characterId, {
-                  currentHP: charMaxHP,
-                  nonlethalDamage: 0,
-                  tempHP: 0,
-                  activeBuffs: [],
-                  combatAbilities: {
-                    activeToggles: {},
-                    twoWeaponFighting: false,
-                    twoWeaponFightingLightOffhand: false,
-                  },
-                  spellSlotsUsed: {},
-                  preparedSpellsCast: {},
-                  resourcePools: initialResourcePools,
-                  round: 0,
-                });
+      const charMaxHP = hp.max;
+      // The character document owns HP between sessions, so a new session picks
+      // up where the sheet left off rather than assuming full health.
+      const charCurrentHP = hp.current;
+      const charNonlethal = hp.nonlethal;
+      const charTempHP = hp.temporary;
+      showAlert(
+        'New Session',
+        'This will reset your buffs, spell slots, and resource pools. Hit points carry over from the character sheet.',
+        [
+          { text: 'Cancel', style: 'cancel' },
+          {
+            text: 'Start New Session',
+            style: 'destructive',
+            onPress: async () => {
+              const pools = character!.resources;
+              const initialResourcePools = Object.fromEntries(pools.map((p) => [p.id, p.max]));
+              try {
+                if (userId) {
+                  await PlaySessionService.create(userId, characterId, {
+                    currentHP: charCurrentHP,
+                    nonlethalDamage: charNonlethal,
+                    tempHP: charTempHP,
+                    activeBuffs: [],
+                    combatAbilities: {
+                      activeToggles: {},
+                      twoWeaponFighting: false,
+                      twoWeaponFightingLightOffhand: false,
+                    },
+                    spellSlotsUsed: {},
+                    preparedSpellsCast: {},
+                    resourcePools: initialResourcePools,
+                    round: 0,
+                  });
+                }
+                dispatch(
+                  initNewSession({
+                    maxHP: charMaxHP,
+                    currentHP: charCurrentHP,
+                    nonlethalDamage: charNonlethal,
+                    tempHP: charTempHP,
+                    pools,
+                  }),
+                );
+                setSessionCharacterId(characterId);
+              } catch (err) {
+                showAlert('Error', 'Failed to start session. Please try again.');
               }
-              dispatch(initNewSession({ maxHP: charMaxHP, pools }));
-              setSessionCharacterId(characterId);
-            } catch (err) {
-              showAlert('Error', 'Failed to start session. Please try again.');
-            }
+            },
           },
-        },
-      ]);
+        ],
+      );
     },
     [character, dispatch, userId],
   );
@@ -379,6 +396,45 @@ export default function CombatTrackerScreen() {
 
   const handleEndCombat = useCallback(async () => {
     PlaySessionService.cancelPendingUpdate();
+
+    // The session owns hit points while it runs; the character document owns
+    // them between sessions. Write the result back before tearing the session
+    // down, or every point of damage taken in play is discarded.
+    //
+    // Temporary HP persists too. It lasts as long as the effect that granted it
+    // — false life runs for hours — so ending a session must not spend it. It is
+    // depleted by damage, cleared by a long rest, or cleared deliberately.
+    const writeBackId = character?.info.firebaseId ?? character?.info.id;
+    if (character && writeBackId && currentHP !== null) {
+      try {
+        await dispatch(
+          updateCharacter({
+            characterId: writeBackId,
+            data: {
+              combatStats: {
+                ...character.combatStats,
+                hitPoints: {
+                  ...character.combatStats.hitPoints,
+                  current: currentHP,
+                  nonlethal: nonlethalDamage,
+                  temporary: tempHP,
+                  // Tell the pipeline this value was set deliberately, so a
+                  // later recalculate leaves it alone instead of snapping to max.
+                  currentInitialized: true,
+                },
+              },
+            },
+          }),
+        ).unwrap();
+      } catch (error) {
+        console.error('Failed to save session hit points to the character', error);
+        showAlert(
+          'Hit Points Not Saved',
+          'The session ended, but its hit points could not be saved to the character sheet.',
+        );
+      }
+    }
+
     if (userId && sessionCharacterId) {
       PlaySessionService.delete(userId, sessionCharacterId).catch((error) => {
         console.error('Failed to end play session', error);
@@ -390,7 +446,7 @@ export default function CombatTrackerScreen() {
     sessionInitRef.current = false;
     setSessionCheckDone(true);
     sessionInitRef.current = false;
-  }, [dispatch, userId, sessionCharacterId]);
+  }, [dispatch, userId, sessionCharacterId, character, currentHP, nonlethalDamage, tempHP]);
 
   const handleLongRest = useCallback(() => {
     if (!character || currentHP === null) return;

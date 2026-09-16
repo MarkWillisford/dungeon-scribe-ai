@@ -552,6 +552,38 @@ describe('initNewSession', () => {
     expect(state.nonlethalDamage).toBe(0);
   });
 
+  it('carries current HP in from the character sheet when one is supplied', () => {
+    const state = combatReducer(undefined, initNewSession({ maxHP: 40, currentHP: 12 }));
+    expect(state.currentHP).toBe(12);
+  });
+
+  it('carries nonlethal damage in from the character sheet when supplied', () => {
+    const state = combatReducer(
+      undefined,
+      initNewSession({ maxHP: 40, currentHP: 12, nonlethalDamage: 5 }),
+    );
+    expect(state.nonlethalDamage).toBe(5);
+  });
+
+  it('starts a character at 0 HP rather than treating 0 as unset', () => {
+    const state = combatReducer(undefined, initNewSession({ maxHP: 40, currentHP: 0 }));
+    expect(state.currentHP).toBe(0);
+  });
+
+  it('carries temporary HP in from the character sheet when supplied', () => {
+    // Temporary HP lasts as long as the effect that granted it, so a session
+    // boundary does not spend it.
+    const state = combatReducer(undefined, initNewSession({ maxHP: 40, currentHP: 12, tempHP: 9 }));
+    expect(state.tempHP).toBe(9);
+  });
+
+  it('starts with no temporary HP when the sheet has none', () => {
+    let state = combatReducer(undefined, initHP(40));
+    state = combatReducer(state, addTempHP(10));
+    state = combatReducer(state, initNewSession({ maxHP: 40, currentHP: 12 }));
+    expect(state.tempHP).toBe(0);
+  });
+
   it('clears active buffs and resets combat abilities', () => {
     let state = combatReducer(undefined, addBuff(makeBuff()));
     state = combatReducer(state, toggleCombatAbility('power_attack'));
