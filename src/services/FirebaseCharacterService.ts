@@ -352,6 +352,11 @@ export class FirebaseCharacterService {
   private static deserializeFromFirestore(data: Record<string, unknown>): Character {
     const character = data as unknown as Character;
 
+    // Strip Firestore-internal fields that are not part of the Character schema.
+    // updatedAt is written by serverTimestamp() and returns as a Firestore Timestamp
+    // object, which is not serializable and not a Character field.
+    delete (character as unknown as Record<string, unknown>).updatedAt;
+
     // Convert timestamp fields back to Date — handles string (from JSON), Firestore Timestamp, and Date
     if (data.lastUpdated && typeof data.lastUpdated === 'string') {
       character.lastUpdated = new Date(data.lastUpdated);
@@ -385,7 +390,13 @@ export class FirebaseCharacterService {
     character.equipment ??= CharacterService.createDefaultEquipment();
     character.equipment.equippedSlots ??= {};
     for (const companion of character.companions) {
-      companion.equipment ??= { armor: [], weapons: [], magicItems: [], gear: [], equippedSlots: {} };
+      companion.equipment ??= {
+        armor: [],
+        weapons: [],
+        magicItems: [],
+        gear: [],
+        equippedSlots: {},
+      };
       companion.equipment.equippedSlots ??= {};
     }
 

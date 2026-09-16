@@ -25,6 +25,7 @@ export { PRESTIGE_CLASSES_POPULAR } from './prestigeClassesPopular';
 export { INITIATING_CLASSES } from './initiatingClasses';
 export { INITIATING_PRESTIGE_CLASSES } from './initiatingPrestigeClasses';
 export { INITIATING_TABLES } from './initiatingProgressionTables';
+export { HOMEBREW_CLASSES } from './homebrewClasses';
 
 export {
   SPELL_TABLES,
@@ -40,6 +41,8 @@ export {
   FULL_9_SPONTANEOUS_KNOWN,
   SIX_LEVEL_SPONTANEOUS_KNOWN,
   BLOODRAGER_KNOWN,
+  MORD_SITH_SPELL_SLOTS,
+  MORD_SITH_SPELLS_KNOWN,
 } from './spellProgressionTables';
 
 import { ExpandedClassData, isPrestigeCategory } from './types';
@@ -54,6 +57,7 @@ import { PRESTIGE_CLASSES_APG } from './prestigeClassesAPG';
 import { PRESTIGE_CLASSES_POPULAR } from './prestigeClassesPopular';
 import { INITIATING_CLASSES } from './initiatingClasses';
 import { INITIATING_PRESTIGE_CLASSES } from './initiatingPrestigeClasses';
+import { HOMEBREW_CLASSES } from './homebrewClasses';
 
 export const ALL_EXPANDED_CLASSES: ExpandedClassData[] = [
   ...CORE_CLASSES_EXPANDED,
@@ -67,6 +71,7 @@ export const ALL_EXPANDED_CLASSES: ExpandedClassData[] = [
   ...PRESTIGE_CLASSES_POPULAR,
   ...INITIATING_CLASSES,
   ...INITIATING_PRESTIGE_CLASSES,
+  ...HOMEBREW_CLASSES,
 ];
 
 export function getClassByName(name: string): ExpandedClassData | undefined {

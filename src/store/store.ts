@@ -34,6 +34,7 @@ export const store = configureStore({
           'characters/updateCharacter/fulfilled',
           // Character entry actions carry full Character objects which contain Date fields.
           'characterEntry/loadCharacter',
+          'characterEntry/loadById/fulfilled',
           'characterEntry/applyComputedStats',
           'characterEntry/save/fulfilled',
         ],
