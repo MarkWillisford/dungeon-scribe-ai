@@ -249,6 +249,8 @@ export function ClassFeatureGapsSection({ entry }: ClassFeatureGapsSectionProps)
 
   const entryId = entry.id ?? entry.name;
 
+  const featureKey = entry.classFeatures?.map((f) => f.id ?? f.name).join(',') ?? '';
+
   useEffect(() => {
     let cancelled = false;
     GameDataService.getClassByName(entry.name)
@@ -266,7 +268,7 @@ export function ClassFeatureGapsSection({ entry }: ClassFeatureGapsSectionProps)
     return () => {
       cancelled = true;
     };
-  }, [entry.name, entry.classFeatures]);
+  }, [entry.name, featureKey]); // eslint-disable-line react-hooks/exhaustive-deps -- featureKey is a stable string derived from entry.classFeatures; using the array reference directly would re-fire on every Redux dispatch
 
   if (unmodelledFeatures.length === 0) return null;
 
