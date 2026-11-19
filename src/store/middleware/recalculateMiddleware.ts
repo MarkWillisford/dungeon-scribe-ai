@@ -42,9 +42,21 @@ export const recalculateMiddleware: Middleware = (store) => (next) => (action) =
   ) {
     const character = store.getState().characterEntry.character;
     if (character) {
-      const recalculated = ModifierPipelineService.recalculate(character);
-      if (recalculated !== character) {
-        store.dispatch({ type: 'characterEntry/applyComputedStats', payload: recalculated });
+      try {
+        const recalculated = ModifierPipelineService.recalculate(character);
+        if (recalculated !== character) {
+          store.dispatch({ type: 'characterEntry/applyComputedStats', payload: recalculated });
+        }
+      } catch (err) {
+        // A throw here would propagate out of dispatch and take the calling
+        // screen's handler down with it — the same failure mode that stranded
+        // the guided flow's "Creating..." button (#356). Keep the last good
+        // derived stats and let the user carry on editing; the entry is still
+        // saveable, it is only the computed layer that is stale.
+        console.error(
+          '[recalculateMiddleware] recalculation failed, keeping previous derived stats:',
+          err,
+        );
       }
     }
   }

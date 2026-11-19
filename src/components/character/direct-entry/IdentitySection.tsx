@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, Pressable, StyleSheet } from 'react-native';
 import type { FlexibleAbilityBonus } from '@/data/races';
 import { useTheme } from '@/hooks/useTheme';
@@ -6,6 +6,9 @@ import { OrnatePanel } from '@/components/ui/OrnatePanel';
 import { FantasyTextInput } from '@/components/ui/FantasyTextInput';
 import { FantasyDivider } from '@/components/ui/FantasyDivider';
 import { InlinePicker } from '@/components/ui/InlinePicker';
+import { PickerField } from '@/components/ui/PickerField';
+import { SearchPickerSheet, type SearchItem } from '@/components/ui/SearchPickerSheet';
+import { GameDataService } from '@/services/GameDataService';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import {
   setName,
@@ -179,12 +182,35 @@ function FlexGroupUI({ bonuses, choices, onChoiceChange }: FlexGroupUIProps) {
 }
 
 export function IdentitySection() {
-  const { colors, fantasy, isDark } = useTheme();
+  const { colors } = useTheme();
   const dispatch = useAppDispatch();
   const character = useAppSelector((state) => state.characterEntry.character);
   const activeRuleset = useAppSelector((state) => state.ruleset.activeRuleset);
   const [rulesetOpen, setRulesetOpen] = useState(false);
   const [racePickerOpen, setRacePickerOpen] = useState(false);
+  const [deityPickerOpen, setDeityPickerOpen] = useState(false);
+  const [deityItems, setDeityItems] = useState<SearchItem[]>([]);
+  const [deityError, setDeityError] = useState<string | null>(null);
+
+  // 271 deities are seeded, so the list is fetched once on mount rather than
+  // when the sheet opens — opening onto an empty list reads as "none exist".
+  useEffect(() => {
+    let cancelled = false;
+    GameDataService.getClassChoiceItems('deities', {})
+      .then((items) => {
+        if (cancelled) return;
+        setDeityItems(items);
+        setDeityError(null);
+      })
+      .catch((e) => {
+        if (cancelled) return;
+        // Custom entry still works, so a failed load costs the list, not the field.
+        setDeityError(e instanceof Error ? e.message : String(e));
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -205,32 +231,16 @@ export function IdentitySection() {
           testID="identity-player"
         />
 
-        {/* Race picker */}
-        <Pressable
+        {/* Race picker — required, because race drives ability mods, size,
+            speed, senses and racial traits across the whole sheet. */}
+        <PickerField
+          label="Race"
+          value={character.info.race.name}
+          placeholder="Tap to select race..."
           onPress={() => setRacePickerOpen(true)}
-          style={[styles.raceRow, styles.raceButton]}
-          accessibilityRole="button"
-          accessibilityLabel={`Race: ${character.info.race.name || 'None selected'}. Tap to change.`}
+          required
           testID="identity-race"
-        >
-          <Text style={[styles.raceLabel, { color: colors.text.secondary }]}>Race</Text>
-          <Text
-            style={[
-              styles.raceValue,
-              {
-                color: character.info.race.name
-                  ? isDark
-                    ? fantasy.gold
-                    : fantasy.darkWood
-                  : colors.text.tertiary,
-              },
-            ]}
-            numberOfLines={1}
-          >
-            {character.info.race.name || 'Tap to select race...'}
-          </Text>
-          <Text style={[styles.searchIcon, { color: colors.text.tertiary }]}>🔍</Text>
-        </Pressable>
+        />
 
         {/* Simple +2-to-any picker — shown only for single-choice flex races like Human */}
         {character.info.racialFlexBonuses?.length === 1 &&
@@ -283,31 +293,48 @@ export function IdentitySection() {
           testID="identity-alignment"
         />
 
-        <Pressable
+        <PickerField
+          label="Ruleset"
+          value={activeRuleset.name}
           onPress={() => setRulesetOpen(true)}
-          style={styles.rulesetRow}
-          accessibilityRole="button"
-          accessibilityLabel={`Ruleset: ${activeRuleset.name}. Tap to change.`}
+          affordance="chevron"
           testID="identity-ruleset"
-        >
-          <Text style={[styles.rulesetLabel, { color: colors.text.secondary }]}>Ruleset</Text>
-          <Text
-            style={[styles.rulesetValue, { color: isDark ? fantasy.gold : fantasy.darkWood }]}
-            numberOfLines={1}
-          >
-            {activeRuleset.name}
-          </Text>
-          <Text style={[styles.rulesetChevron, { color: colors.text.tertiary }]}>›</Text>
-        </Pressable>
+        />
 
         <RulesetSettingsSheet visible={rulesetOpen} onClose={() => setRulesetOpen(false)} />
 
-        <FantasyTextInput
+        {/* Deity — the same searchable control the Sentinel class choice uses,
+            over the same seeded collection. Custom entry is kept so homebrew
+            deities remain possible, as they were with the old free-text field. */}
+        <PickerField
           label="Deity"
           value={character.info.deity}
-          onChangeText={(v) => dispatch(setDeity(v))}
-          autoCapitalize="words"
+          placeholder="Tap to select deity..."
+          onPress={() => setDeityPickerOpen(true)}
           testID="identity-deity"
+        />
+        {deityError !== null && (
+          <Text style={[styles.deityError, { color: colors.warning.DEFAULT }]}>
+            {`Deity list unavailable — ${deityError}. You can still type a name.`}
+          </Text>
+        )}
+
+        <SearchPickerSheet
+          visible={deityPickerOpen}
+          title="Deity"
+          items={deityItems}
+          onSelect={(item) => {
+            dispatch(setDeity(item.label));
+            setDeityPickerOpen(false);
+          }}
+          onClose={() => setDeityPickerOpen(false)}
+          placeholder="Search deities..."
+          allowCustom
+          onAddCustom={(name) => {
+            dispatch(setDeity(name));
+            setDeityPickerOpen(false);
+          }}
+          testID="deity-picker"
         />
 
         <View style={styles.twoCol}>
@@ -406,32 +433,14 @@ export function IdentitySection() {
 }
 
 const styles = StyleSheet.create({
+  deityError: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 12,
+    marginTop: -8,
+    marginBottom: 12,
+  },
   container: {
     gap: 0,
-  },
-  raceRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  raceButton: {
-    paddingVertical: 10,
-    gap: 8,
-  },
-  raceLabel: {
-    fontFamily: 'LibreBaskerville',
-    fontSize: 13,
-    width: 90,
-    flexShrink: 0,
-  },
-  raceValue: {
-    flex: 1,
-    fontFamily: 'LibreBaskerville',
-    fontSize: 14,
-    fontWeight: '600',
-  },
-  searchIcon: {
-    fontSize: 18,
-    marginLeft: 4,
   },
   twoCol: {
     flexDirection: 'row',
@@ -451,28 +460,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 10,
     minHeight: 120,
-  },
-  rulesetRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: 10,
-    gap: 8,
-  },
-  rulesetLabel: {
-    fontFamily: 'LibreBaskerville',
-    fontSize: 13,
-    width: 90,
-    flexShrink: 0,
-  },
-  rulesetValue: {
-    flex: 1,
-    fontFamily: 'LibreBaskerville',
-    fontSize: 14,
-    fontWeight: '600',
-  },
-  rulesetChevron: {
-    fontSize: 18,
-    fontWeight: '600',
   },
 });
 

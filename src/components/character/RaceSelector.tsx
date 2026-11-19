@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { View, Text, Pressable, StyleSheet, ScrollView } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
+import { ListFilterInput } from '@/components/ui/ListFilterInput';
 import { OrnatePanel } from '@/components/ui/OrnatePanel';
 import { FantasyDivider } from '@/components/ui/FantasyDivider';
 import { GameDataService, type RaceGroups } from '@/services/GameDataService';
@@ -44,6 +45,7 @@ export function RaceSelector({
 }: RaceSelectorProps) {
   const { colors, fantasy, isDark } = useTheme();
   const [expandedRace, setExpandedRace] = useState<string | null>(selectedRace?.name ?? null);
+  const [filter, setFilter] = useState('');
   // Sync initializer ensures first render has real data (no flicker; tests work without async effects).
   // Phase B: switch to empty initial state + useEffect when data comes from Firestore.
   const [raceGroups, setRaceGroups] = useState<RaceGroups>(() =>
@@ -56,13 +58,26 @@ export function RaceSelector({
       .catch((e) => console.error('Failed to load race groups:', e));
   }, []);
 
-  const raceSections = useMemo(
-    () => [
+  const raceSections = useMemo(() => {
+    const sections = [
       { title: 'Core Races', data: raceGroups.core },
       { title: 'Featured Races', data: raceGroups.featured },
       { title: 'Uncommon Races', data: raceGroups.uncommon },
-    ],
-    [raceGroups],
+    ];
+    const q = filter.trim().toLowerCase();
+    if (!q) return sections;
+    // Empty sections are dropped so the headers do not survive their contents.
+    return sections
+      .map((section) => ({
+        ...section,
+        data: section.data.filter((race) => race.name.toLowerCase().includes(q)),
+      }))
+      .filter((section) => section.data.length > 0);
+  }, [raceGroups, filter]);
+
+  const matchCount = useMemo(
+    () => raceSections.reduce((sum, section) => sum + section.data.length, 0),
+    [raceSections],
   );
 
   const isFlexibleRace =
@@ -183,7 +198,22 @@ export function RaceSelector({
 
   return (
     <View testID={testID}>
-      <ScrollView>
+      <ListFilterInput
+        value={filter}
+        onChangeText={setFilter}
+        placeholder="Filter races..."
+        resultCount={matchCount}
+        testID="race-filter"
+        accessibilityLabel="Filter races by name"
+      />
+      {/* handled: a tap on a race registers on the first press with the
+          keyboard open, rather than being eaten by the dismiss gesture (#358). */}
+      <ScrollView keyboardShouldPersistTaps="handled">
+        {matchCount === 0 && (
+          <Text style={[styles.noMatches, { color: colors.text.tertiary }]}>
+            {`No race matches "${filter.trim()}"`}
+          </Text>
+        )}
         {raceSections.map((section) => (
           <View key={section.title}>
             <Text
@@ -387,6 +417,13 @@ export function RaceSelector({
 }
 
 const styles = StyleSheet.create({
+  noMatches: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 14,
+    fontStyle: 'italic',
+    textAlign: 'center',
+    paddingVertical: 24,
+  },
   raceItem: {
     borderWidth: 1,
     borderRadius: 8,

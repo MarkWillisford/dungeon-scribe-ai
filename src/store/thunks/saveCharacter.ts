@@ -13,6 +13,14 @@ export const saveCharacter = createAsyncThunk<
   const userId = getState().auth.user?.uid;
   if (!userId) return rejectWithValue('Not authenticated');
 
+  // A character with no name cannot be deleted through the UI, which asks the
+  // user to type the name to confirm. Saving a blank draft therefore creates a
+  // document that can never be removed from inside the app, so refuse it here
+  // rather than leave the user to discover that afterwards.
+  if (!character.info.name?.trim()) {
+    return rejectWithValue('Give the character a name before saving.');
+  }
+
   dispatch(setSaving(true));
   dispatch(setSaveError(null));
 

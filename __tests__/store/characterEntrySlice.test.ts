@@ -64,6 +64,8 @@ import reducer, {
   setTemplateAcquiredAtECL,
   resolveTemplateChoice,
   setCombatField,
+  setClassHitDie,
+  setClassHitDiceAll,
   setSkillEntry,
   removeSkillEntry,
   addTrait,
@@ -1889,6 +1891,185 @@ describe('characterEntrySlice — combat', () => {
     it('can set speedLand', () => {
       const state = reducer(makeInitialState(), setCombatField({ field: 'speedLand', value: 20 }));
       expect(state.character.combatStats.movement.base).toBe(20);
+    });
+
+    it('marks currentHP as deliberately set, so a recalc cannot reset it', () => {
+      const state = reducer(makeInitialState(), setCombatField({ field: 'currentHP', value: 0 }));
+      expect(state.character.combatStats.hitPoints.current).toBe(0);
+      expect(state.character.combatStats.hitPoints.currentInitialized).toBe(true);
+    });
+
+    it('stores maxHPOverride as an override rather than writing to hitPoints.other', () => {
+      // hitPoints.other belongs to the effect pipeline, which overwrote the
+      // user's Max HP entry on the next recalculation (#357).
+      const state = reducer(
+        makeInitialState(),
+        setCombatField({ field: 'maxHPOverride', value: 137 }),
+      );
+      expect(state.character.combatStats.hitPoints.manualMax).toBe(137);
+      expect(state.character.combatStats.hitPoints.other).toBe(0);
+    });
+
+    it('clears the max HP override when given no value', () => {
+      let state = reducer(
+        makeInitialState(),
+        setCombatField({ field: 'maxHPOverride', value: 137 }),
+      );
+      state = reducer(state, setCombatField({ field: 'maxHPOverride', value: undefined }));
+      expect(state.character.combatStats.hitPoints.manualMax).toBeNull();
+    });
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Per-level hit points
+// ---------------------------------------------------------------------------
+
+describe('characterEntrySlice — hit dice', () => {
+  it('populates hit dice when a class is added', () => {
+    const state = reducer(
+      makeInitialState(),
+      addClass(makeClass('cls-1', { name: 'Rogue', level: 4, hitDieSize: 8, hitDieResults: [] })),
+    );
+    const cls = state.character.classes.classes[0];
+    // First character level maxes, the rest average (d8 → 5).
+    expect(cls.hitDieResults).toEqual([8, 5, 5, 5]);
+  });
+
+  it('extends hit dice when the class level goes up', () => {
+    let state = reducer(
+      makeInitialState(),
+      addClass(makeClass('cls-1', { name: 'Rogue', level: 2, hitDieSize: 8, hitDieResults: [] })),
+    );
+    state = reducer(state, updateClassLevel({ id: 'cls-1', level: 4 }));
+    expect(state.character.classes.classes[0].hitDieResults).toEqual([8, 5, 5, 5]);
+  });
+
+  it('truncates hit dice when the class level goes down', () => {
+    let state = reducer(
+      makeInitialState(),
+      addClass(makeClass('cls-1', { name: 'Rogue', level: 4, hitDieSize: 8, hitDieResults: [] })),
+    );
+    state = reducer(state, updateClassLevel({ id: 'cls-1', level: 2 }));
+    expect(state.character.classes.classes[0].hitDieResults).toEqual([8, 5]);
+  });
+
+  it('backfills hit dice for a character saved before per-level HP existed', () => {
+    const blank = makeInitialState();
+    const character = {
+      ...blank.character,
+      classes: {
+        ...blank.character.classes,
+        classes: [
+          makeClass('cls-1', { name: 'Rogue', level: 3, hitDieSize: 8, hitDieResults: [] }),
+        ],
+        totalLevel: 3,
+      },
+    };
+    const state = reducer(blank, loadCharacter({ character, mode: 'edit', characterId: 'abc' }));
+    expect(state.character.classes.classes[0].hitDieResults).toEqual([8, 5, 5]);
+  });
+
+  describe('setClassHitDie', () => {
+    it('sets one level and records how it was chosen', () => {
+      let state = reducer(
+        makeInitialState(),
+        addClass(makeClass('cls-1', { name: 'Rogue', level: 3, hitDieSize: 8, hitDieResults: [] })),
+      );
+      state = reducer(
+        state,
+        setClassHitDie({ id: 'cls-1', levelIndex: 1, value: 7, source: 'rolled' }),
+      );
+      const cls = state.character.classes.classes[0];
+      expect(cls.hitDieResults).toEqual([8, 7, 5]);
+      expect(cls.hitDieSources?.[1]).toBe('rolled');
+      expect(state.isDirty).toBe(true);
+    });
+
+    it('clamps a value to the die size', () => {
+      let state = reducer(
+        makeInitialState(),
+        addClass(makeClass('cls-1', { name: 'Rogue', level: 2, hitDieSize: 8, hitDieResults: [] })),
+      );
+      state = reducer(
+        state,
+        setClassHitDie({ id: 'cls-1', levelIndex: 1, value: 99, source: 'manual' }),
+      );
+      expect(state.character.classes.classes[0].hitDieResults[1]).toBe(8);
+    });
+
+    it('clamps a value to a minimum of 1', () => {
+      let state = reducer(
+        makeInitialState(),
+        addClass(makeClass('cls-1', { name: 'Rogue', level: 2, hitDieSize: 8, hitDieResults: [] })),
+      );
+      state = reducer(
+        state,
+        setClassHitDie({ id: 'cls-1', levelIndex: 1, value: 0, source: 'manual' }),
+      );
+      expect(state.character.classes.classes[0].hitDieResults[1]).toBe(1);
+    });
+
+    it('ignores a level index the class does not have', () => {
+      let state = reducer(
+        makeInitialState(),
+        addClass(makeClass('cls-1', { name: 'Rogue', level: 2, hitDieSize: 8, hitDieResults: [] })),
+      );
+      state = reducer(
+        state,
+        setClassHitDie({ id: 'cls-1', levelIndex: 9, value: 8, source: 'manual' }),
+      );
+      expect(state.character.classes.classes[0].hitDieResults).toHaveLength(2);
+    });
+
+    it('is a no-op for an unknown class id', () => {
+      let state = reducer(
+        makeInitialState(),
+        addClass(makeClass('cls-1', { name: 'Rogue', level: 2, hitDieSize: 8, hitDieResults: [] })),
+      );
+      const before = [...state.character.classes.classes[0].hitDieResults];
+      state = reducer(
+        state,
+        setClassHitDie({ id: 'nope', levelIndex: 0, value: 3, source: 'manual' }),
+      );
+      expect(state.character.classes.classes[0].hitDieResults).toEqual(before);
+    });
+  });
+
+  describe('setClassHitDiceAll', () => {
+    it('replaces every level at once', () => {
+      let state = reducer(
+        makeInitialState(),
+        addClass(makeClass('cls-1', { name: 'Rogue', level: 3, hitDieSize: 8, hitDieResults: [] })),
+      );
+      state = reducer(
+        state,
+        setClassHitDiceAll({ id: 'cls-1', values: [5, 5, 5], source: 'average' }),
+      );
+      const cls = state.character.classes.classes[0];
+      expect(cls.hitDieResults).toEqual([5, 5, 5]);
+      expect(cls.hitDieSources).toEqual(['average', 'average', 'average']);
+    });
+
+    it('leaves the class fully populated when given too few values', () => {
+      let state = reducer(
+        makeInitialState(),
+        addClass(makeClass('cls-1', { name: 'Rogue', level: 3, hitDieSize: 8, hitDieResults: [] })),
+      );
+      state = reducer(state, setClassHitDiceAll({ id: 'cls-1', values: [6], source: 'rolled' }));
+      expect(state.character.classes.classes[0].hitDieResults).toHaveLength(3);
+    });
+
+    it('discards values beyond the class level', () => {
+      let state = reducer(
+        makeInitialState(),
+        addClass(makeClass('cls-1', { name: 'Rogue', level: 2, hitDieSize: 8, hitDieResults: [] })),
+      );
+      state = reducer(
+        state,
+        setClassHitDiceAll({ id: 'cls-1', values: [6, 6, 6, 6], source: 'rolled' }),
+      );
+      expect(state.character.classes.classes[0].hitDieResults).toEqual([6, 6]);
     });
   });
 });

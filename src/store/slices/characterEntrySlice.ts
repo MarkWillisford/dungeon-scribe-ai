@@ -23,7 +23,12 @@ import type { RacialChoice } from '@/types/racialChoices';
 import type { Character, ManualAbilityBonus } from '@/types';
 import type { LevelIncrementSlot } from '@/types/character';
 import type { CharacterFeat, Feats } from '@/types/feats';
-import type { ClassEntry, CharacterClasses, FavoredClassBonusSelection } from '@/types/classes';
+import type {
+  ClassEntry,
+  CharacterClasses,
+  FavoredClassBonusSelection,
+  HitDieSource,
+} from '@/types/classes';
 import type { CharacterTrait } from '@/types/traits';
 import type { CharacterFlaw } from '@/types/flaws';
 import type { SpellcastingAdvancement, SpellcastingPool } from '@/types/spells';
@@ -38,6 +43,7 @@ import type {
 import { CharacterService } from '@/services/CharacterService';
 import { computeCompanionEffectiveLevel } from '@/services/CompanionService';
 import { ModifierPipelineService } from '@/services/ModifierPipelineService';
+import { HitDiceService } from '@/services/HitDiceService';
 
 // ---- Supporting types ----
 
@@ -222,6 +228,9 @@ const characterEntrySlice = createSlice({
       action: PayloadAction<{ character: Character; mode: EntryMode; characterId?: string }>,
     ) {
       state.character = action.payload.character;
+      // Characters saved before per-level HP entry existed carry empty
+      // hitDieResults. Backfill them so max HP is not silently zero.
+      HitDiceService.sync(state.character);
       state.mode = action.payload.mode;
       state.originalCharacterId = action.payload.characterId ?? null;
       state.activeTab = 'identity';
@@ -574,6 +583,7 @@ const characterEntrySlice = createSlice({
       }
       syncFeatSlotsFromClasses(state.character);
       syncLevelIncrementSlots(state.character);
+      HitDiceService.sync(state.character);
       state.isDirty = true;
     },
 
@@ -713,6 +723,51 @@ const characterEntrySlice = createSlice({
 
       syncFeatSlotsFromClasses(state.character);
       syncLevelIncrementSlots(state.character);
+      HitDiceService.sync(state.character);
+      state.isDirty = true;
+    },
+
+    /**
+     * Set one level's hit die value. `source` records how the value was
+     * arrived at so the UI can label it, and so a re-roll knows what it is
+     * replacing. Rolling happens in the caller — reducers stay pure.
+     */
+    setClassHitDie(
+      state,
+      action: PayloadAction<{
+        id: string;
+        levelIndex: number;
+        value: number;
+        source: HitDieSource;
+      }>,
+    ) {
+      const { id, levelIndex, value, source } = action.payload;
+      const cls = state.character.classes.classes.find((c) => (c.id ?? c.name) === id);
+      if (!cls) return;
+      if (levelIndex < 0 || levelIndex >= cls.level) return;
+
+      HitDiceService.sync(state.character);
+      const clamped = Math.max(1, Math.min(cls.hitDieSize, Math.floor(value)));
+      cls.hitDieResults[levelIndex] = clamped;
+      (cls.hitDieSources ??= [])[levelIndex] = source;
+      state.isDirty = true;
+    },
+
+    /** Replace every level of one class entry at once (roll all / average all). */
+    setClassHitDiceAll(
+      state,
+      action: PayloadAction<{ id: string; values: number[]; source: HitDieSource }>,
+    ) {
+      const { id, values, source } = action.payload;
+      const cls = state.character.classes.classes.find((c) => (c.id ?? c.name) === id);
+      if (!cls) return;
+
+      cls.hitDieResults = values
+        .slice(0, cls.level)
+        .map((v) => Math.max(1, Math.min(cls.hitDieSize, Math.floor(v))));
+      cls.hitDieSources = cls.hitDieResults.map(() => source);
+      // A short values array still has to leave the class fully populated.
+      HitDiceService.sync(state.character);
       state.isDirty = true;
     },
 
@@ -1517,6 +1572,9 @@ const characterEntrySlice = createSlice({
       switch (field) {
         case 'currentHP':
           cs.hitPoints.current = value ?? 0;
+          // Mark it deliberate, so a recalc cannot mistake a genuine 0 HP for
+          // "never set" and snap the character back to full health.
+          cs.hitPoints.currentInitialized = true;
           break;
         case 'nonlethalDamage':
           cs.hitPoints.nonlethal = value ?? 0;
@@ -1525,7 +1583,11 @@ const characterEntrySlice = createSlice({
           cs.hitPoints.temporary = value ?? 0;
           break;
         case 'maxHPOverride':
-          cs.hitPoints.other = value ?? 0;
+          // undefined clears the override — that is how the UI reverts to the
+          // calculated value. Writing to hitPoints.other instead (as this once
+          // did) was futile: the pipeline owns that field and overwrote the
+          // user's entry on the very next recalculation.
+          cs.hitPoints.manualMax = value ?? null;
           break;
         case 'acMiscBonus':
           cs.armorClass.misc = value ?? 0;
@@ -2170,6 +2232,8 @@ export const {
   addClass,
   removeClass,
   updateClassLevel,
+  setClassHitDie,
+  setClassHitDiceAll,
   updateClassArchetype,
   updateClassSpellcastingAdvancement,
   upsertClassChoice,
