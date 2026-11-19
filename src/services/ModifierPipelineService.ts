@@ -266,6 +266,17 @@ export class ModifierPipelineService {
       });
     }
 
+    // 10. Player-entered bonuses for unmodelled class features (ADR 0005)
+    for (const b of character.manualFeatureBonuses ?? []) {
+      effects.push({
+        type: 'bonus',
+        bonusType: b.bonusType,
+        target: b.target,
+        value: b.value,
+        source: b.featureName,
+      });
+    }
+
     return effects;
   }
 

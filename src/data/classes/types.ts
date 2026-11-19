@@ -32,6 +32,14 @@ export function isPrestigeCategory(category: ClassCategory): boolean {
   return PRESTIGE_CATEGORIES.includes(category);
 }
 
+/**
+ * Whether the catalog entry for this feature carries modelled effects.
+ *   modelled    — effects[] is populated and covers this feature's numeric bonuses
+ *   none        — this feature grants no numeric bonuses (passive narrative text, etc.)
+ *   unmodelled  — description promises a numeric bonus but effects[] is empty
+ */
+export type EffectsStatus = 'modelled' | 'none' | 'unmodelled';
+
 export interface ClassFeatureData {
   name: string;
   level: number;
@@ -48,6 +56,7 @@ export interface ClassFeatureData {
   activationCost?: { resourceId: string; amount: number };
   // Uses consumed per round to sustain this feature.
   maintenanceCost?: { resourceId: string; amount: number; per: 'round' };
+  effectsStatus?: EffectsStatus;
 }
 
 export interface PrestigePrerequisites {

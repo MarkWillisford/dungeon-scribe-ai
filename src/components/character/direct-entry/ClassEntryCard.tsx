@@ -40,6 +40,7 @@ import { ArchetypePickerSheet } from './ArchetypePickerSheet';
 import type { AnimalCompanionEntry } from '@/types/animalCompanions';
 import { makeCompanionInstanceId } from '@/utils/companionUtils';
 import { EidolonSection } from './EidolonSection';
+import { ClassFeatureGapsSection } from './ClassFeatureGapsSection';
 
 // Matches "Summoner", "Summoner (Unchained)", "Summoner (APG)", etc.
 const SUMMONER_CLASS_RE = /^summoner(?:\s|$|\()/i;
@@ -1339,6 +1340,8 @@ export function ClassEntryCard({ entry, dragHandle }: ClassEntryCardProps) {
 
       <CompanionStackingRow entry={entry} />
       <CompanionSection entry={entry} />
+
+      <ClassFeatureGapsSection entry={entry} />
 
       {/* Prereq status */}
       <View style={[styles.prereqRow, { borderTopColor: colors.border.DEFAULT }]}>

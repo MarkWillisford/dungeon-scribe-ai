@@ -1449,4 +1449,75 @@ describe('ModifierPipelineService', () => {
       expect(result.combatStats.hitPoints.favoredClass).toBe(0);
     });
   });
+
+  describe('manualFeatureBonuses', () => {
+    test('a manual feature bonus reaches the derived stat', () => {
+      const char = createTestCharacter();
+      const before = ModifierPipelineService.recalculate(char);
+      const baseWill = before.combatStats.savingThrows.will.total;
+
+      char.manualFeatureBonuses = [
+        {
+          classEntryId: 'fighter',
+          featureName: 'Bravery',
+          bonusType: BonusType.MORALE,
+          target: 'save.will',
+          value: 2,
+        },
+      ];
+
+      const after = ModifierPipelineService.recalculate(char);
+      expect(after.combatStats.savingThrows.will.total).toBe(baseWill + 2);
+    });
+
+    test('manual feature bonus appears in the breakdown with feature name as source', () => {
+      const char = createTestCharacter();
+      char.manualFeatureBonuses = [
+        {
+          classEntryId: 'fighter',
+          featureName: 'Bravery',
+          bonusType: BonusType.MORALE,
+          target: 'save.will',
+          value: 2,
+        },
+      ];
+
+      const breakdown = ModifierPipelineService.getBreakdown(char, 'save.will');
+      const contribution = breakdown.bonuses.find((b) => b.source === 'Bravery');
+      expect(contribution).toBeDefined();
+      expect(contribution?.value).toBe(2);
+    });
+
+    test('two manual feature bonuses of different types both contribute', () => {
+      const char = createTestCharacter();
+      const before = ModifierPipelineService.recalculate(char);
+      const baseInit = before.combatStats.initiative.total;
+
+      char.manualFeatureBonuses = [
+        {
+          classEntryId: 'fighter',
+          featureName: 'Combat Expertise',
+          bonusType: BonusType.INSIGHT,
+          target: 'initiative',
+          value: 1,
+        },
+        {
+          classEntryId: 'fighter',
+          featureName: 'Weapon Training',
+          bonusType: BonusType.MORALE,
+          target: 'initiative',
+          value: 2,
+        },
+      ];
+
+      const after = ModifierPipelineService.recalculate(char);
+      expect(after.combatStats.initiative.total).toBe(baseInit + 3);
+    });
+
+    test('character with no manualFeatureBonuses field recalculates without error', () => {
+      const char = createTestCharacter();
+      delete (char as Partial<typeof char>).manualFeatureBonuses;
+      expect(() => ModifierPipelineService.recalculate(char)).not.toThrow();
+    });
+  });
 });
