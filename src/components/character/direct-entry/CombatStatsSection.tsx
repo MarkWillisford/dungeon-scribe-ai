@@ -338,7 +338,11 @@ export function CombatStatsSection() {
             </Text>
             {getSaveBonusRows(saveBreakdowns.all, saveBreakdowns.ref).map((row) => (
               <View key={row.type} style={styles.miscRow}>
-                <Text style={styles.miscLabel}>{row.label}</Text>
+                <Text style={styles.miscLabel}>
+                  {row.label}
+                  {row.conditional ? ' (cond.)' : ''}
+                  {row.unverified ? ' (unverified)' : ''}
+                </Text>
                 <AutoComputedValue value={fmtSign(row.value)} />
               </View>
             ))}
@@ -360,7 +364,11 @@ export function CombatStatsSection() {
             </Text>
             {getSaveBonusRows(saveBreakdowns.all, saveBreakdowns.will).map((row) => (
               <View key={row.type} style={styles.miscRow}>
-                <Text style={styles.miscLabel}>{row.label}</Text>
+                <Text style={styles.miscLabel}>
+                  {row.label}
+                  {row.conditional ? ' (cond.)' : ''}
+                  {row.unverified ? ' (unverified)' : ''}
+                </Text>
                 <AutoComputedValue value={fmtSign(row.value)} />
               </View>
             ))}
