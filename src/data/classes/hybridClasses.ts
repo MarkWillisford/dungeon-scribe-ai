@@ -1,7 +1,7 @@
 // Hybrid Classes — Advanced Class Guide (ACG)
 // Each hybrid class blends two parent classes.
 
-import { BABProgression, SaveProgression } from '@/types/base';
+import { BABProgression, BonusType, SaveProgression } from '@/types/base';
 import { ExpandedClassData } from './types';
 
 export const HYBRID_CLASSES_EXPANDED: ExpandedClassData[] = [
@@ -1675,7 +1675,20 @@ export const HYBRID_CLASSES_EXPANDED: ExpandedClassData[] = [
         level: 3,
         description:
           'At 3rd level, a swashbuckler gains a +1 dodge bonus to AC while wearing light or no armor. Anything that causes her to lose her Dexterity bonus also causes her to lose this bonus. This bonus increases by 1 for every 4 levels beyond 3rd, to a maximum of +5 at 19th level.',
-        effects: [],
+        effects: [
+          {
+            type: 'bonus',
+            bonusType: BonusType.DODGE,
+            target: 'ac.dodge',
+            value: 1,
+            source: 'Nimble',
+            condition: {
+              type: 'armor_type',
+              params: { maxArmor: 'light' },
+              description: 'While wearing light or no armor',
+            },
+          },
+        ],
       },
       {
         name: 'Deeds',
