@@ -14,6 +14,7 @@ import {
   removeClass,
   updateClassLevel,
   updateClassArchetype,
+  addClassArchetype,
   updateClassSpellcastingAdvancement,
   toggleClassPrereqOverride,
   toggleFavoredClass,
@@ -61,7 +62,8 @@ function isMutuallyExcludedFilled(featureName: string, classChoices: ClassChoice
 // class choice (Beastmaster gets 1 + INT mod). Detected here so the
 // "+ Add Companion" button appears only for these.
 function classSupportsMultipleCompanions(entry: ClassEntry): boolean {
-  return entry.name === 'Ranger' && entry.archetypeName === 'Beastmaster';
+  const archetypeName = entry.archetypes?.[0]?.name ?? entry.archetypeName;
+  return entry.name === 'Ranger' && archetypeName === 'Beastmaster';
 }
 
 // ---- Source badge ----
@@ -1151,10 +1153,17 @@ export function ClassEntryCard({ entry, dragHandle }: ClassEntryCardProps) {
             <Text
               style={[
                 styles.archetypePlaceholder,
-                { color: entry.archetypeName ? colors.text.primary : colors.text.tertiary },
+                {
+                  color:
+                    (entry.archetypes?.[0]?.name ?? entry.archetypeName)
+                      ? colors.text.primary
+                      : colors.text.tertiary,
+                },
               ]}
             >
-              {hasArchetypes === null ? '…' : (entry.archetypeName ?? 'none 🔍')}
+              {hasArchetypes === null
+                ? '…'
+                : (entry.archetypes?.[0]?.name ?? entry.archetypeName) || 'none 🔍'}
             </Text>
           </Pressable>
         )}
@@ -1231,10 +1240,26 @@ export function ClassEntryCard({ entry, dragHandle }: ClassEntryCardProps) {
         visible={archetypePickerOpen}
         title={`${entry.name} — Choose Archetype`}
         className={entry.name}
-        onSelect={({ archetypeId, archetypeName }) => {
-          dispatch(
-            updateClassArchetype({ id: entry.id ?? entry.name, archetypeId, archetypeName }),
-          );
+        onSelect={({ archetypeId, archetypeName, archetypeData }) => {
+          if (archetypeData && archetypeId) {
+            const baseFeatures = classData?.classFeatures ?? [];
+            dispatch(
+              addClassArchetype({
+                classId: entry.id ?? entry.name,
+                archetypeId,
+                archetype: archetypeData,
+                baseFeatures,
+              }),
+            );
+          } else {
+            dispatch(
+              updateClassArchetype({
+                id: entry.id ?? entry.name,
+                archetypeId: undefined,
+                archetypeName: undefined,
+              }),
+            );
+          }
           setArchetypePickerOpen(false);
         }}
         onClose={() => setArchetypePickerOpen(false)}

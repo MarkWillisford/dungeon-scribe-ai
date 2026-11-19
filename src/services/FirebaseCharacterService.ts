@@ -99,7 +99,7 @@ export class FirebaseCharacterService {
     }
 
     const data = docSnap.data();
-    const character = this.deserializeFromFirestore(data);
+    const character = this.coerceLegacyArchetypes(this.deserializeFromFirestore(data));
     let enriched = character;
     try {
       enriched = await this.mergeClassFeatureResourcePools(character);
@@ -124,6 +124,69 @@ export class FirebaseCharacterService {
         ...enriched.info,
         firebaseId: docSnap.id,
       },
+    };
+  }
+
+  /**
+   * Coerces legacy archetype fields on each ClassEntry to the new `archetypes`
+   * array shape introduced in the archetype resolver slice.
+   *
+   * - `archetypeId`/`archetypeName` scalars → single-element `archetypes` array
+   *   with empty replacedFeatures/modifiedFeatures (the resolver will correct on
+   *   the next archetype interaction)
+   * - `archetype: string[]` IDs → entries mapped to `archetypes` array by name
+   *
+   * Skips entries that already carry an `archetypes` array.
+   */
+  private static coerceLegacyArchetypes(character: Character): Character {
+    const needsCoercion = character.classes.classes.some(
+      (cls) =>
+        cls.archetypes === undefined &&
+        (cls.archetypeId !== undefined ||
+          cls.archetypeName !== undefined ||
+          (cls.archetype !== undefined && cls.archetype.length > 0)),
+    );
+    if (!needsCoercion) return character;
+
+    const enriched = character.classes.classes.map((cls) => {
+      if (cls.archetypes !== undefined) return cls;
+
+      if (cls.archetypeId !== undefined || cls.archetypeName !== undefined) {
+        return {
+          ...cls,
+          archetypes: [
+            {
+              id: cls.archetypeId ?? cls.archetypeName ?? '',
+              name: cls.archetypeName ?? cls.archetypeId ?? '',
+              replacedFeatures: [] as string[],
+              modifiedFeatures: [] as string[],
+            },
+          ],
+        };
+      }
+
+      if (cls.archetype !== undefined && cls.archetype.length > 0) {
+        return {
+          ...cls,
+          // Backfill deprecated scalars so consumers like EidolonPoolService
+          // that read archetypeId directly are not broken by the coercion.
+          archetypeId: cls.archetypeId ?? cls.archetype[0],
+          archetypeName: cls.archetypeName ?? cls.archetype[0],
+          archetypes: cls.archetype.map((name) => ({
+            id: name,
+            name,
+            replacedFeatures: [] as string[],
+            modifiedFeatures: [] as string[],
+          })),
+        };
+      }
+
+      return cls;
+    });
+
+    return {
+      ...character,
+      classes: { ...character.classes, classes: enriched },
     };
   }
 
@@ -187,8 +250,14 @@ export class FirebaseCharacterService {
         ...f,
         effects: f.effects ?? [],
       }));
+      // Features intentionally removed by an applied archetype must not be
+      // re-injected from the class doc — that would undo the archetype on load.
+      const archetypeReplacedNames = new Set(
+        (cls.archetypes ?? []).flatMap((a) => a.replacedFeatures),
+      );
       const missingFeatures = (firestoreFeatures ?? [])
         .filter((f) => f.level <= cls.level)
+        .filter((f) => !archetypeReplacedNames.has(f.name))
         .filter(
           (f) =>
             !normalizedStored.some(
@@ -385,7 +454,13 @@ export class FirebaseCharacterService {
     character.equipment ??= CharacterService.createDefaultEquipment();
     character.equipment.equippedSlots ??= {};
     for (const companion of character.companions) {
-      companion.equipment ??= { armor: [], weapons: [], magicItems: [], gear: [], equippedSlots: {} };
+      companion.equipment ??= {
+        armor: [],
+        weapons: [],
+        magicItems: [],
+        gear: [],
+        equippedSlots: {},
+      };
       companion.equipment.equippedSlots ??= {};
     }
 

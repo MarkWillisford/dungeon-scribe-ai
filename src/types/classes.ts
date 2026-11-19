@@ -32,7 +32,7 @@ export interface CharacterClasses {
 
 export interface ClassEntry {
   name: string;
-  archetype?: string[];
+  /** @deprecated use archetypes */ archetype?: string[];
   level: number;
   hitDieSize: number; // d6, d8, d10, etc.
   /** Die result per class level, before CON. Index i is this class's level i+1. */
@@ -64,14 +64,22 @@ export interface ClassEntry {
   isCustom?: boolean;
   sourceNotes?: string; // e.g. "Ported from Complete Divine p.52, modified for Milani"
 
+  /** Applied archetypes with merged feature metadata. Replaces the deprecated scalar fields. */
+  archetypes?: Array<{
+    id: string;
+    name: string;
+    replacedFeatures: string[];
+    modifiedFeatures: string[];
+  }>;
+
   // Editor metadata — not used by the game engine
   id?: string; // stable local UUID for React keys and action targeting
   prereqOverride?: boolean; // DM override — suppress prereq warnings for this class
   isFavoredClass?: boolean;
   splitGroup?: string; // Shared UUID linking sibling cards that represent one class taken in multiple runs
   spellcastingAdvancement?: SpellcastingAdvancement;
-  archetypeId?: string;
-  archetypeName?: string;
+  /** @deprecated use archetypes */ archetypeId?: string;
+  /** @deprecated use archetypes */ archetypeName?: string;
   favoredClassBonuses?: FavoredClassBonusSelection[];
   summonerBroodmaster?: BroodmasterState;
   // Companion stacking: this class's levels add to the effective progression
