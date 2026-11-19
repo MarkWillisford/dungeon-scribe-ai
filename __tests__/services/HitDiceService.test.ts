@@ -1,5 +1,7 @@
 import { HitDiceService } from '@services/HitDiceService';
 import { CharacterService } from '@services/CharacterService';
+import { GameDataService } from '@services/GameDataService';
+import { StaticGameDataConnector } from '@services/StaticGameDataConnector';
 import { Size, Alignment, BABProgression, SaveProgression } from '@/types/base';
 import { AbilityScoreMethod } from '@/types/character';
 import type { Character } from '@/types';
@@ -33,8 +35,8 @@ function makeClassEntry(overrides: Partial<ClassEntry> & { name: string }): Clas
   };
 }
 
-function makeCharacter(classes: ClassEntry[], levelOrder?: string[]): Character {
-  const character = CharacterService.createDefaultCharacter({
+async function makeCharacter(classes: ClassEntry[], levelOrder?: string[]): Promise<Character> {
+  const character = await CharacterService.createDefaultCharacter({
     name: 'Test',
     race: mockRace,
     selectedClass: 'Rogue',
@@ -49,6 +51,10 @@ function makeCharacter(classes: ClassEntry[], levelOrder?: string[]): Character 
 }
 
 describe('HitDiceService', () => {
+  beforeEach(() => {
+    GameDataService.setConnector(new StaticGameDataConnector());
+  });
+
   describe('averageValue', () => {
     // Pathfinder's convention is half the die rounded up, not the true mean.
     it.each([
@@ -80,26 +86,26 @@ describe('HitDiceService', () => {
   });
 
   describe('firstLevelClassId', () => {
-    it('prefers levelOrder over card order', () => {
+    it('prefers levelOrder over card order', async () => {
       const rogue = makeClassEntry({ name: 'Rogue', id: 'rogue-1' });
       const cavalier = makeClassEntry({ name: 'Cavalier', id: 'cav-1' });
       // Cards are ordered cavalier-first, but the character took rogue first.
-      const character = makeCharacter([cavalier, rogue], ['rogue-1', 'cav-1']);
+      const character = await makeCharacter([cavalier, rogue], ['rogue-1', 'cav-1']);
       expect(HitDiceService.firstLevelClassId(character.classes)).toBe('rogue-1');
     });
 
-    it('falls back to the first class entry when levelOrder is absent', () => {
+    it('falls back to the first class entry when levelOrder is absent', async () => {
       const rogue = makeClassEntry({ name: 'Rogue', id: 'rogue-1' });
       const cavalier = makeClassEntry({ name: 'Cavalier', id: 'cav-1' });
-      const character = makeCharacter([rogue, cavalier]);
+      const character = await makeCharacter([rogue, cavalier]);
       expect(HitDiceService.firstLevelClassId(character.classes)).toBe('rogue-1');
     });
   });
 
   describe('sync', () => {
-    it('maxes the first character level and averages the rest', () => {
+    it('maxes the first character level and averages the rest', async () => {
       const rogue = makeClassEntry({ name: 'Rogue', id: 'rogue-1', level: 4, hitDieSize: 8 });
-      const character = makeCharacter([rogue]);
+      const character = await makeCharacter([rogue]);
 
       HitDiceService.sync(character);
 
@@ -107,10 +113,13 @@ describe('HitDiceService', () => {
       expect(rogue.hitDieSources).toEqual(['max', 'average', 'average', 'average']);
     });
 
-    it('maxes only the class holding character level 1 in a multiclass build', () => {
+    it('maxes only the class holding character level 1 in a multiclass build', async () => {
       const rogue = makeClassEntry({ name: 'Rogue', id: 'rogue-1', level: 2, hitDieSize: 8 });
       const cavalier = makeClassEntry({ name: 'Cavalier', id: 'cav-1', level: 2, hitDieSize: 10 });
-      const character = makeCharacter([rogue, cavalier], ['rogue-1', 'rogue-1', 'cav-1', 'cav-1']);
+      const character = await makeCharacter(
+        [rogue, cavalier],
+        ['rogue-1', 'rogue-1', 'cav-1', 'cav-1'],
+      );
 
       HitDiceService.sync(character);
 
@@ -119,11 +128,11 @@ describe('HitDiceService', () => {
       expect(cavalier.hitDieResults).toEqual([6, 6]);
     });
 
-    it('backfills a legacy character whose hitDieResults were never populated', () => {
+    it('backfills a legacy character whose hitDieResults were never populated', async () => {
       // Every code path that created a class entry left this empty, so saved
       // characters compute 0 base HP until they are backfilled.
       const rogue = makeClassEntry({ name: 'Rogue', id: 'rogue-1', level: 3, hitDieSize: 8 });
-      const character = makeCharacter([rogue]);
+      const character = await makeCharacter([rogue]);
       expect(rogue.hitDieResults).toEqual([]);
 
       HitDiceService.sync(character);
@@ -131,7 +140,7 @@ describe('HitDiceService', () => {
       expect(HitDiceService.totalFromDice(character.classes)).toBe(18);
     });
 
-    it('preserves established values when another class gains a level', () => {
+    it('preserves established values when another class gains a level', async () => {
       const rogue = makeClassEntry({
         name: 'Rogue',
         id: 'rogue-1',
@@ -140,7 +149,7 @@ describe('HitDiceService', () => {
         hitDieResults: [8, 3],
         hitDieSources: ['max', 'rolled'],
       });
-      const character = makeCharacter([rogue]);
+      const character = await makeCharacter([rogue]);
 
       rogue.level = 4;
       HitDiceService.sync(character);
@@ -149,7 +158,7 @@ describe('HitDiceService', () => {
       expect(rogue.hitDieSources).toEqual(['max', 'rolled', 'average', 'average']);
     });
 
-    it('truncates when a class loses levels', () => {
+    it('truncates when a class loses levels', async () => {
       const rogue = makeClassEntry({
         name: 'Rogue',
         id: 'rogue-1',
@@ -158,7 +167,7 @@ describe('HitDiceService', () => {
         hitDieResults: [8, 5, 7, 2],
         hitDieSources: ['max', 'average', 'rolled', 'rolled'],
       });
-      const character = makeCharacter([rogue]);
+      const character = await makeCharacter([rogue]);
 
       rogue.level = 2;
       HitDiceService.sync(character);
@@ -167,7 +176,7 @@ describe('HitDiceService', () => {
       expect(rogue.hitDieSources).toEqual(['max', 'average']);
     });
 
-    it('labels pre-existing values without a recorded source as manual', () => {
+    it('labels pre-existing values without a recorded source as manual', async () => {
       const rogue = makeClassEntry({
         name: 'Rogue',
         id: 'rogue-1',
@@ -175,7 +184,7 @@ describe('HitDiceService', () => {
         hitDieSize: 8,
         hitDieResults: [8, 6],
       });
-      const character = makeCharacter([rogue]);
+      const character = await makeCharacter([rogue]);
 
       HitDiceService.sync(character);
 
@@ -183,9 +192,9 @@ describe('HitDiceService', () => {
       expect(rogue.hitDieSources).toEqual(['manual', 'manual']);
     });
 
-    it('is idempotent', () => {
+    it('is idempotent', async () => {
       const rogue = makeClassEntry({ name: 'Rogue', id: 'rogue-1', level: 3, hitDieSize: 8 });
-      const character = makeCharacter([rogue]);
+      const character = await makeCharacter([rogue]);
 
       HitDiceService.sync(character);
       const first = [...rogue.hitDieResults];

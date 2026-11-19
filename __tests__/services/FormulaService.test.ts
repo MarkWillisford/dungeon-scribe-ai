@@ -1,5 +1,7 @@
 import { FormulaService, type FormulaContext } from '@services/FormulaService';
 import { CharacterService } from '@services/CharacterService';
+import { GameDataService } from '@services/GameDataService';
+import { StaticGameDataConnector } from '@services/StaticGameDataConnector';
 import { Size, Alignment } from '@/types/base';
 import { AbilityScoreMethod } from '@/types/character';
 import type { Character } from '@/types';
@@ -152,7 +154,7 @@ describe('FormulaService', () => {
   });
 
   describe('buildContext', () => {
-    function makeCharacter(className: string): Character {
+    async function makeCharacter(className: string): Promise<Character> {
       return CharacterService.createDefaultCharacter({
         name: 'Test',
         race: mockRace,
@@ -163,14 +165,18 @@ describe('FormulaService', () => {
       });
     }
 
-    test('injects classLevel variable for a single-class character', () => {
-      const char = makeCharacter('Barbarian');
+    beforeEach(() => {
+      GameDataService.setConnector(new StaticGameDataConnector());
+    });
+
+    test('injects classLevel variable for a single-class character', async () => {
+      const char = await makeCharacter('Barbarian');
       const ctx = FormulaService.buildContext(char);
       expect(ctx.barbarianLevel).toBe(char.classes.classes[0].level);
     });
 
-    test('injects classLevel variables for a multiclass character', () => {
-      const char = makeCharacter('Barbarian');
+    test('injects classLevel variables for a multiclass character', async () => {
+      const char = await makeCharacter('Barbarian');
       char.classes.classes.push({
         name: 'Cleric',
         level: 3,
@@ -192,14 +198,14 @@ describe('FormulaService', () => {
       expect(ctx.level).toBe(char.classes.totalLevel);
     });
 
-    test('camelCases multi-word class names', () => {
-      const char = makeCharacter('Holy Vindicator');
+    test('camelCases multi-word class names', async () => {
+      const char = await makeCharacter('Holy Vindicator');
       const ctx = FormulaService.buildContext(char);
       expect(ctx.holyVindicatorLevel).toBeDefined();
     });
 
-    test('total level is correct for a multiclass character', () => {
-      const char = makeCharacter('Fighter');
+    test('total level is correct for a multiclass character', async () => {
+      const char = await makeCharacter('Fighter');
       char.classes.classes[0].level = 4;
       char.classes.classes.push({
         name: 'Wizard',

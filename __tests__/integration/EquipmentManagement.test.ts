@@ -15,7 +15,7 @@ import { AbilityScoreMethod } from '@/types/character';
  * together with CharacterService -- no mocking of business logic services.
  */
 
-const createTestCharacter = (): Character => {
+const createTestCharacter = async (): Promise<Character> => {
   return CharacterService.createDefaultCharacter({
     name: 'Equipment Test Character',
     race: {
@@ -45,7 +45,7 @@ describe('Equipment Management Integration', () => {
 
   beforeEach(async () => {
     await EquipmentDatabaseService.initialize();
-    character = createTestCharacter();
+    character = await createTestCharacter();
   });
 
   // -----------------------------------------------------------------------

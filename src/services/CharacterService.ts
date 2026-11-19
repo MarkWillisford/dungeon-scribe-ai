@@ -4,10 +4,10 @@ import { Skill } from '@/types/skills';
 import { EncumbranceVariant } from '@/types/equipment';
 import { AbilityScores } from '@/types/abilities';
 import { Race } from '@/types/race';
-import { Alignment, BABProgression, SaveProgression, Size } from '@/types/base';
+import { Alignment, Size } from '@/types/base';
 import { ClassFeature } from '@/types/classes';
 import { AbilityScoreService } from '@services/AbilityScoreService';
-import { getClassByName } from '@data/classes/index';
+import { GameDataService } from '@services/GameDataService';
 import { PRESET_PF1E_STANDARD } from '@config/rulesetPresets';
 
 const PLACEHOLDER_RACE: Race = {
@@ -27,7 +27,29 @@ export class CharacterService {
   /**
    * Creates a default character from creation parameters
    */
-  static createDefaultCharacter(params: CreateCharacterParams): Character {
+  static async createDefaultCharacter(params: CreateCharacterParams): Promise<Character> {
+    const classData = await GameDataService.getClassByName(params.selectedClass);
+    if (!classData) {
+      throw new Error(`Class not found: "${params.selectedClass}"`);
+    }
+
+    const level1Features = classData.classFeatures
+      .filter((feature) => feature.level === 1)
+      .map(
+        (feature): ClassFeature => ({
+          name: feature.name,
+          description: feature.description ?? '',
+          level: feature.level,
+          id: feature.id,
+          shortDescription: feature.shortDescription,
+          activationMode: feature.activationMode,
+          resourcePool: feature.resourcePool,
+          effects: feature.effects ?? [],
+          activationCost: feature.activationCost,
+          maintenanceCost: feature.maintenanceCost,
+        }),
+      );
+
     const character: Character = {
       info: {
         id: this.generateCharacterId(),
@@ -60,15 +82,15 @@ export class CharacterService {
           {
             name: params.selectedClass,
             level: 1,
-            hitDieSize: this.getClassHitDie(params.selectedClass),
-            hitDieResults: [this.getClassHitDie(params.selectedClass)], // Max HP at level 1
-            skillRanks: this.getClassSkillRanks(params.selectedClass),
-            classSkills: this.getClassSkills(params.selectedClass),
-            babProgression: this.getClassBABProgression(params.selectedClass),
-            fortProgression: this.getClassFortProgression(params.selectedClass),
-            refProgression: this.getClassRefProgression(params.selectedClass),
-            willProgression: this.getClassWillProgression(params.selectedClass),
-            classFeatures: this.getLevel1ClassFeatures(params.selectedClass),
+            hitDieSize: classData.hitDie,
+            hitDieResults: [classData.hitDie],
+            skillRanks: classData.skillRanksPerLevel,
+            classSkills: classData.classSkills,
+            babProgression: classData.babProgression,
+            fortProgression: classData.saves.fortitude,
+            refProgression: classData.saves.reflex,
+            willProgression: classData.saves.will,
+            classFeatures: level1Features,
           },
         ],
         totalLevel: 1,
@@ -680,85 +702,5 @@ export class CharacterService {
       maxDexBonus: 99,
       spellFailure: 0,
     };
-  }
-
-  private static getClassHitDie(className: string): number {
-    const classData = getClassByName(className);
-    if (classData) {
-      return classData.hitDie;
-    }
-    // Fallback for unknown classes
-    return 8;
-  }
-
-  private static getClassSkillRanks(className: string): number {
-    const classData = getClassByName(className);
-    if (classData) {
-      return classData.skillRanksPerLevel;
-    }
-    return 2;
-  }
-
-  private static getClassSkills(className: string): string[] {
-    const classData = getClassByName(className);
-    if (classData) {
-      return classData.classSkills;
-    }
-    return [];
-  }
-
-  private static getClassBABProgression(className: string): BABProgression {
-    const classData = getClassByName(className);
-    if (classData) {
-      return classData.babProgression;
-    }
-    return BABProgression.Medium;
-  }
-
-  private static getClassFortProgression(className: string): SaveProgression {
-    const classData = getClassByName(className);
-    if (classData) {
-      return classData.saves.fortitude;
-    }
-    return SaveProgression.Poor;
-  }
-
-  private static getClassRefProgression(className: string): SaveProgression {
-    const classData = getClassByName(className);
-    if (classData) {
-      return classData.saves.reflex;
-    }
-    return SaveProgression.Poor;
-  }
-
-  private static getClassWillProgression(className: string): SaveProgression {
-    const classData = getClassByName(className);
-    if (classData) {
-      return classData.saves.will;
-    }
-    return SaveProgression.Poor;
-  }
-
-  private static getLevel1ClassFeatures(className: string): ClassFeature[] {
-    const classData = getClassByName(className);
-    if (classData) {
-      return classData.classFeatures
-        .filter((feature) => feature.level === 1)
-        .map(
-          (feature): ClassFeature => ({
-            name: feature.name,
-            description: feature.description ?? '',
-            level: feature.level,
-            id: feature.id,
-            shortDescription: feature.shortDescription,
-            activationMode: feature.activationMode,
-            resourcePool: feature.resourcePool,
-            effects: feature.effects ?? [],
-            activationCost: feature.activationCost,
-            maintenanceCost: feature.maintenanceCost,
-          }),
-        );
-    }
-    return [];
   }
 }

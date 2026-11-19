@@ -21,7 +21,7 @@ const mockRace: Race = {
   bonusLanguages: ['Any'],
 };
 
-function createTestCharacter(
+async function createTestCharacter(
   overrides?: Partial<{
     str: number;
     dex: number;
@@ -31,8 +31,8 @@ function createTestCharacter(
     cha: number;
     className: string;
   }>,
-): Character {
-  const char = CharacterService.createDefaultCharacter({
+): Promise<Character> {
+  const char = await CharacterService.createDefaultCharacter({
     name: 'Test Fighter',
     race: mockRace,
     selectedClass: overrides?.className ?? 'Fighter',
@@ -72,7 +72,7 @@ describe('PrerequisiteService', () => {
 
   describe('checkPrerequisites', () => {
     test('feat with no prerequisites is always met', async () => {
-      const char = createTestCharacter();
+      const char = await createTestCharacter();
       const feat = makeFeat([]);
       const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(true);
@@ -81,14 +81,14 @@ describe('PrerequisiteService', () => {
     });
 
     test('ability score prerequisite met', async () => {
-      const char = createTestCharacter({ str: 16 });
+      const char = await createTestCharacter({ str: 16 });
       const feat = makeFeat([{ type: 'ability_score', ability: 'STR', minimum: 13 }]);
       const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(true);
     });
 
     test('ability score prerequisite not met', async () => {
-      const char = createTestCharacter({ str: 10 });
+      const char = await createTestCharacter({ str: 10 });
       const feat = makeFeat([{ type: 'ability_score', ability: 'STR', minimum: 13 }]);
       const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(false);
@@ -98,35 +98,35 @@ describe('PrerequisiteService', () => {
     });
 
     test('BAB prerequisite met for level 1 fighter', async () => {
-      const char = createTestCharacter();
+      const char = await createTestCharacter();
       const feat = makeFeat([{ type: 'bab', minimum: 1 }]);
       const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(true);
     });
 
     test('BAB prerequisite not met', async () => {
-      const char = createTestCharacter();
+      const char = await createTestCharacter();
       const feat = makeFeat([{ type: 'bab', minimum: 6 }]);
       const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(false);
     });
 
     test('level prerequisite met', async () => {
-      const char = createTestCharacter();
+      const char = await createTestCharacter();
       const feat = makeFeat([{ type: 'level', minimum: 1 }]);
       const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(true);
     });
 
     test('level prerequisite not met', async () => {
-      const char = createTestCharacter();
+      const char = await createTestCharacter();
       const feat = makeFeat([{ type: 'level', minimum: 5 }]);
       const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(false);
     });
 
     test('feat prerequisite met when character has feat', async () => {
-      const char = createTestCharacter();
+      const char = await createTestCharacter();
       char.feats.feats.push({
         featId: 'power_attack',
         name: 'Power Attack',
@@ -141,14 +141,14 @@ describe('PrerequisiteService', () => {
     });
 
     test('feat prerequisite not met when character lacks feat', async () => {
-      const char = createTestCharacter();
+      const char = await createTestCharacter();
       const feat = makeFeat([{ type: 'feat', featId: 'power_attack' }]);
       const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(false);
     });
 
     test('feat prerequisite with choiceRequirement met when choice matches', async () => {
-      const char = createTestCharacter();
+      const char = await createTestCharacter();
       char.feats.feats.push({
         featId: 'weapon_focus',
         name: 'Weapon Focus',
@@ -169,7 +169,7 @@ describe('PrerequisiteService', () => {
     });
 
     test('feat prerequisite with choiceRequirement not met when choice is wrong weapon', async () => {
-      const char = createTestCharacter();
+      const char = await createTestCharacter();
       char.feats.feats.push({
         featId: 'weapon_focus',
         name: 'Weapon Focus',
@@ -192,7 +192,7 @@ describe('PrerequisiteService', () => {
     });
 
     test('feat prerequisite with choiceRequirement not met when character lacks the feat entirely', async () => {
-      const char = createTestCharacter();
+      const char = await createTestCharacter();
       const feat = makeFeat([
         {
           type: 'feat',
@@ -205,7 +205,7 @@ describe('PrerequisiteService', () => {
     });
 
     test('feat prerequisite with choiceRequirement met when character has the feat twice with different choices', async () => {
-      const char = createTestCharacter();
+      const char = await createTestCharacter();
       char.feats.feats.push({
         featId: 'weapon_focus',
         name: 'Weapon Focus',
@@ -249,7 +249,7 @@ describe('PrerequisiteService', () => {
       };
 
       test('met when prereq feat has the same choice as the instance', async () => {
-        const char = createTestCharacter();
+        const char = await createTestCharacter();
         char.feats.feats.push(weaponFocusLongsword);
         const instance = {
           ...weaponFocusLongsword,
@@ -261,7 +261,7 @@ describe('PrerequisiteService', () => {
       });
 
       test('not met when prereq feat has a different choice', async () => {
-        const char = createTestCharacter();
+        const char = await createTestCharacter();
         char.feats.feats.push(weaponFocusLongsword);
         const instance = {
           ...weaponFocusLongsword,
@@ -275,7 +275,7 @@ describe('PrerequisiteService', () => {
       });
 
       test('not met when character lacks the prereq feat entirely', async () => {
-        const char = createTestCharacter();
+        const char = await createTestCharacter();
         const instance = {
           ...weaponFocusLongsword,
           featId: 'weapon_specialization',
@@ -286,7 +286,7 @@ describe('PrerequisiteService', () => {
       });
 
       test('falls back to "has feat at all" when no instance provided (browsing mode)', async () => {
-        const char = createTestCharacter();
+        const char = await createTestCharacter();
         char.feats.feats.push(weaponFocusLongsword);
         // No characterFeatInstance — getAvailableFeats pattern
         const result = await PrerequisiteService.checkPrerequisites(char, weaponSpecDef);
@@ -294,7 +294,7 @@ describe('PrerequisiteService', () => {
       });
 
       test('reason includes resolved choice when instance provided', async () => {
-        const char = createTestCharacter();
+        const char = await createTestCharacter();
         const instance = {
           ...weaponFocusLongsword,
           featId: 'weapon_specialization',
@@ -305,35 +305,35 @@ describe('PrerequisiteService', () => {
       });
 
       test('reason includes generic "same weapon" when no instance provided', async () => {
-        const char = createTestCharacter();
+        const char = await createTestCharacter();
         const result = await PrerequisiteService.checkPrerequisites(char, weaponSpecDef);
         expect(result.reasons[0]).toContain('same weapon');
       });
     });
 
     test('race prerequisite met', async () => {
-      const char = createTestCharacter();
+      const char = await createTestCharacter();
       const feat = makeFeat([{ type: 'race', raceName: 'Human' }]);
       const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(true);
     });
 
     test('race prerequisite not met', async () => {
-      const char = createTestCharacter();
+      const char = await createTestCharacter();
       const feat = makeFeat([{ type: 'race', raceName: 'Elf' }]);
       const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(false);
     });
 
     test('special prerequisite is always met', async () => {
-      const char = createTestCharacter();
+      const char = await createTestCharacter();
       const feat = makeFeat([{ type: 'special', description: 'Must have a familiar' }]);
       const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(true);
     });
 
     test('multiple prerequisites all met', async () => {
-      const char = createTestCharacter({ str: 16, dex: 14 });
+      const char = await createTestCharacter({ str: 16, dex: 14 });
       const feat = makeFeat([
         { type: 'ability_score', ability: 'STR', minimum: 13 },
         { type: 'bab', minimum: 1 },
@@ -343,7 +343,7 @@ describe('PrerequisiteService', () => {
     });
 
     test('multiple prerequisites partially met', async () => {
-      const char = createTestCharacter({ str: 16 });
+      const char = await createTestCharacter({ str: 16 });
       const feat = makeFeat([
         { type: 'ability_score', ability: 'STR', minimum: 13 },
         { type: 'bab', minimum: 6 },
@@ -354,21 +354,21 @@ describe('PrerequisiteService', () => {
     });
 
     test('ability_score with invalid ability key returns false', async () => {
-      const char = createTestCharacter();
+      const char = await createTestCharacter();
       const feat = makeFeat([{ type: 'ability_score', ability: 'LCK' as 'STR', minimum: 10 }]);
       const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(false);
     });
 
     test('level prerequisite with class met', async () => {
-      const char = createTestCharacter({ className: 'Fighter' });
+      const char = await createTestCharacter({ className: 'Fighter' });
       const feat = makeFeat([{ type: 'level', minimum: 1, class: 'Fighter' }]);
       const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(true);
     });
 
     test('level prerequisite with class not met when wrong class', async () => {
-      const char = createTestCharacter({ className: 'Fighter' });
+      const char = await createTestCharacter({ className: 'Fighter' });
       const feat = makeFeat([{ type: 'level', minimum: 1, class: 'Wizard' }]);
       const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(false);
@@ -376,7 +376,7 @@ describe('PrerequisiteService', () => {
     });
 
     test('skill prerequisite met', async () => {
-      const char = createTestCharacter();
+      const char = await createTestCharacter();
       char.skills.acrobatics.ranks = 5;
       const feat = makeFeat([{ type: 'skill', skillId: 'acrobatics', ranks: 5 }]);
       const result = await PrerequisiteService.checkPrerequisites(char, feat);
@@ -384,7 +384,7 @@ describe('PrerequisiteService', () => {
     });
 
     test('skill prerequisite not met', async () => {
-      const char = createTestCharacter();
+      const char = await createTestCharacter();
       char.skills.acrobatics.ranks = 2;
       const feat = makeFeat([{ type: 'skill', skillId: 'acrobatics', ranks: 5 }]);
       const result = await PrerequisiteService.checkPrerequisites(char, feat);
@@ -393,14 +393,14 @@ describe('PrerequisiteService', () => {
     });
 
     test('skill prerequisite not met when skillId does not exist', async () => {
-      const char = createTestCharacter();
+      const char = await createTestCharacter();
       const feat = makeFeat([{ type: 'skill', skillId: 'nonexistent_skill', ranks: 1 }]);
       const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(false);
     });
 
     test('class_feature prerequisite met', async () => {
-      const char = createTestCharacter({ className: 'Fighter' });
+      const char = await createTestCharacter({ className: 'Fighter' });
       char.classes.classes[0].classFeatures.push({
         name: 'Bravery',
         description: 'Will save bonus',
@@ -413,7 +413,7 @@ describe('PrerequisiteService', () => {
     });
 
     test('class_feature prerequisite not met', async () => {
-      const char = createTestCharacter({ className: 'Fighter' });
+      const char = await createTestCharacter({ className: 'Fighter' });
       const feat = makeFeat([{ type: 'class_feature', featureName: 'Sneak Attack' }]);
       const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(false);
@@ -421,14 +421,14 @@ describe('PrerequisiteService', () => {
     });
 
     test('proficiency prerequisite met (Fighter has Martial weapons)', async () => {
-      const char = createTestCharacter({ className: 'Fighter' });
+      const char = await createTestCharacter({ className: 'Fighter' });
       const feat = makeFeat([{ type: 'proficiency', proficiency: 'Martial weapons' }]);
       const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(true);
     });
 
     test('proficiency prerequisite not met', async () => {
-      const char = createTestCharacter({ className: 'Fighter' });
+      const char = await createTestCharacter({ className: 'Fighter' });
       const feat = makeFeat([{ type: 'proficiency', proficiency: 'Exotic weapons' }]);
       const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(false);
@@ -436,7 +436,7 @@ describe('PrerequisiteService', () => {
     });
 
     test('caster_level prerequisite met', async () => {
-      const char = createTestCharacter();
+      const char = await createTestCharacter();
       const pool: SpellcastingPool = {
         baseClass: 'wizard',
         castingType: 'arcane',
@@ -457,7 +457,7 @@ describe('PrerequisiteService', () => {
     });
 
     test('caster_level prerequisite not met', async () => {
-      const char = createTestCharacter();
+      const char = await createTestCharacter();
       const feat = makeFeat([{ type: 'caster_level', minimum: 5 }]);
       const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(false);
@@ -465,7 +465,7 @@ describe('PrerequisiteService', () => {
     });
 
     test('mythic_tier prerequisite met', async () => {
-      const char = createTestCharacter();
+      const char = await createTestCharacter();
       char.mythic = {
         tier: 3,
         path: 'archmage',
@@ -479,7 +479,7 @@ describe('PrerequisiteService', () => {
     });
 
     test('mythic_tier prerequisite not met (no mythic)', async () => {
-      const char = createTestCharacter();
+      const char = await createTestCharacter();
       const feat = makeFeat([{ type: 'mythic_tier', minimum: 1 }]);
       const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(false);
@@ -513,14 +513,14 @@ describe('PrerequisiteService', () => {
     };
 
     test('returns feats the character qualifies for', async () => {
-      const char = createTestCharacter();
+      const char = await createTestCharacter();
       const available = await PrerequisiteService.getAvailableFeats(char, [simpleFeat, hardFeat]);
       expect(available).toContainEqual(simpleFeat);
       expect(available).not.toContainEqual(hardFeat);
     });
 
     test('excludes already-taken feats', async () => {
-      const char = createTestCharacter();
+      const char = await createTestCharacter();
       char.feats.feats.push({
         featId: 'simple_feat',
         name: 'Simple Feat',
@@ -546,7 +546,7 @@ describe('PrerequisiteService', () => {
         activationMode: 'passive',
         choices: [{ type: 'weapon', label: 'Weapon', affectsEffects: true }],
       };
-      const char = createTestCharacter();
+      const char = await createTestCharacter();
       char.feats.feats.push({
         featId: 'weapon_focus',
         name: 'Weapon Focus',
@@ -561,8 +561,8 @@ describe('PrerequisiteService', () => {
   });
 
   describe('evolution prerequisite', () => {
-    function charWithEidolon(evolutionIds: string[]): Character {
-      const char = createTestCharacter();
+    async function charWithEidolon(evolutionIds: string[]): Promise<Character> {
+      const char = await createTestCharacter();
       char.eidolons = [
         {
           id: 'eid-1',
@@ -580,21 +580,21 @@ describe('PrerequisiteService', () => {
     }
 
     test('evolution prereq is met when the character has an eidolon with that evolution', async () => {
-      const char = charWithEidolon(['evolution-bite', 'evolution-claws']);
+      const char = await charWithEidolon(['evolution-bite', 'evolution-claws']);
       const feat = makeFeat([{ type: 'evolution', evolutionId: 'evolution-bite' }]);
       const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(true);
     });
 
     test('evolution prereq fails when the character has no eidolons', async () => {
-      const char = createTestCharacter();
+      const char = await createTestCharacter();
       const feat = makeFeat([{ type: 'evolution', evolutionId: 'evolution-bite' }]);
       const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(false);
     });
 
     test('evolution prereq fails when eidolon lacks the specific evolution', async () => {
-      const char = charWithEidolon(['evolution-claws']);
+      const char = await charWithEidolon(['evolution-claws']);
       const feat = makeFeat([{ type: 'evolution', evolutionId: 'evolution-bite' }]);
       const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(false);
@@ -602,8 +602,8 @@ describe('PrerequisiteService', () => {
   });
 
   describe('initiator_level prerequisite', () => {
-    function charWithIL(effectiveInitiatorLevel: number): Character {
-      const char = createTestCharacter();
+    async function charWithIL(effectiveInitiatorLevel: number): Promise<Character> {
+      const char = await createTestCharacter();
       (char as unknown as Record<string, unknown>).initiating = {
         pools: [{ effectiveInitiatorLevel }],
         knownManeuvers: [],
@@ -612,21 +612,21 @@ describe('PrerequisiteService', () => {
     }
 
     test('initiator_level met when highest pool IL >= minimum', async () => {
-      const char = charWithIL(6);
+      const char = await charWithIL(6);
       const feat = makeFeat([{ type: 'initiator_level', minimum: 6 }]);
       const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(true);
     });
 
     test('initiator_level not met when highest pool IL < minimum', async () => {
-      const char = charWithIL(4);
+      const char = await charWithIL(4);
       const feat = makeFeat([{ type: 'initiator_level', minimum: 6 }]);
       const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(false);
     });
 
     test('initiator_level not met when no initiating pools', async () => {
-      const char = createTestCharacter();
+      const char = await createTestCharacter();
       const feat = makeFeat([{ type: 'initiator_level', minimum: 1 }]);
       const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(false);
@@ -634,8 +634,8 @@ describe('PrerequisiteService', () => {
   });
 
   describe('maneuver_known prerequisite', () => {
-    function charWithManeuver(maneuverId: string): Character {
-      const char = createTestCharacter();
+    async function charWithManeuver(maneuverId: string): Promise<Character> {
+      const char = await createTestCharacter();
       (char as unknown as Record<string, unknown>).initiating = {
         pools: [],
         knownManeuvers: [{ maneuverId }],
@@ -644,21 +644,21 @@ describe('PrerequisiteService', () => {
     }
 
     test('maneuver_known met when character has the maneuver', async () => {
-      const char = charWithManeuver('steel-wind-strike');
+      const char = await charWithManeuver('steel-wind-strike');
       const feat = makeFeat([{ type: 'maneuver_known', maneuverId: 'steel-wind-strike' }]);
       const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(true);
     });
 
     test('maneuver_known not met when character lacks the maneuver', async () => {
-      const char = charWithManeuver('lightning-throw');
+      const char = await charWithManeuver('lightning-throw');
       const feat = makeFeat([{ type: 'maneuver_known', maneuverId: 'steel-wind-strike' }]);
       const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(false);
     });
 
     test('maneuver_known not met when no initiating data', async () => {
-      const char = createTestCharacter();
+      const char = await createTestCharacter();
       const feat = makeFeat([{ type: 'maneuver_known', maneuverId: 'steel-wind-strike' }]);
       const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(false);
@@ -666,8 +666,8 @@ describe('PrerequisiteService', () => {
   });
 
   describe('discipline_access prerequisite', () => {
-    function charWithDiscipline(disciplineId: string): Character {
-      const char = createTestCharacter();
+    async function charWithDiscipline(disciplineId: string): Promise<Character> {
+      const char = await createTestCharacter();
       (char as unknown as Record<string, unknown>).initiating = {
         pools: [
           {
@@ -684,21 +684,21 @@ describe('PrerequisiteService', () => {
     }
 
     test('discipline_access met when character pool has the discipline', async () => {
-      const char = charWithDiscipline('scarlet-throne');
+      const char = await charWithDiscipline('scarlet-throne');
       const feat = makeFeat([{ type: 'discipline_access', disciplineId: 'scarlet-throne' }]);
       const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(true);
     });
 
     test('discipline_access not met when pool lacks the discipline', async () => {
-      const char = charWithDiscipline('iron-tortoise');
+      const char = await charWithDiscipline('iron-tortoise');
       const feat = makeFeat([{ type: 'discipline_access', disciplineId: 'scarlet-throne' }]);
       const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(false);
     });
 
     test('discipline_access skips snapshot pools without accessibleDisciplines', async () => {
-      const char = createTestCharacter();
+      const char = await createTestCharacter();
       (char as unknown as Record<string, unknown>).initiating = {
         pools: [{ effectiveInitiatorLevel: 5, baseClass: 'Warlord' }],
         knownManeuvers: [],
@@ -709,7 +709,7 @@ describe('PrerequisiteService', () => {
     });
 
     test('discipline_access not met when no initiating data', async () => {
-      const char = createTestCharacter();
+      const char = await createTestCharacter();
       const feat = makeFeat([{ type: 'discipline_access', disciplineId: 'scarlet-throne' }]);
       const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(false);

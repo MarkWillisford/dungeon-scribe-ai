@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, ScrollView, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
@@ -15,7 +15,8 @@ import { Alignment } from '@/types/base';
 import { AbilityScoreMethod } from '@/types/character';
 import { AbilityScoreService } from '@/services/AbilityScoreService';
 import { type ExpandedRaceData } from '@/data/races';
-import { getClassByName } from '@/data/classes';
+import { GameDataService } from '@/services/GameDataService';
+import type { ExpandedClassData } from '@/data/classes/types';
 import type { Race } from '@/types/race';
 
 type AbilityKey = 'str' | 'dex' | 'con' | 'int' | 'wis' | 'cha';
@@ -193,10 +194,24 @@ export default function CreateCharacterScreen() {
   const [selectedRaceData, setSelectedRaceData] = useState<ExpandedRaceData | null>(null);
   const [flexibleAbilityChoices, setFlexibleAbilityChoices] = useState<string[]>([]);
   const [selectedClass, setSelectedClass] = useState<string | null>(null);
+  const [selectedClassData, setSelectedClassData] = useState<ExpandedClassData | null>(null);
   const [abilityMethod, setAbilityMethod] = useState(AbilityScoreMethod.PointBuy);
   const [scores, setScores] = useState({ str: 10, dex: 10, con: 10, int: 10, wis: 10, cha: 10 });
   const [pointBuyTotal] = useState(20);
   const [skillRanks, setSkillRanks] = useState<Record<string, number>>({});
+
+  useEffect(() => {
+    let cancelled = false;
+    const fetch = selectedClass
+      ? GameDataService.getClassByName(selectedClass)
+      : Promise.resolve(null);
+    void fetch.then((data) => {
+      if (!cancelled) setSelectedClassData(data);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [selectedClass]);
 
   const step = STEPS[stepIndex];
 
@@ -229,10 +244,11 @@ export default function CreateCharacterScreen() {
       ? (raceDataToRace(selectedRaceData, flexibleAbilityChoices).abilityModifiers.int ?? 0)
       : 0);
   const intMod = Math.floor((intScore - 10) / 2);
-  const classData = selectedClass ? getClassByName(selectedClass) : null;
-  const totalSkillRanks = Math.max(1, (classData?.skillRanksPerLevel ?? 2) + intMod);
+  const totalSkillRanks = Math.max(1, (selectedClassData?.skillRanksPerLevel ?? 2) + intMod);
   const ranksSpent = Object.values(skillRanks).reduce((sum, r) => sum + r, 0);
-  const classSkillKeys = classData ? getClassSkillKeys(classData.classSkills) : new Set<string>();
+  const classSkillKeys = selectedClassData
+    ? getClassSkillKeys(selectedClassData.classSkills)
+    : new Set<string>();
 
   const canAdvance = (): boolean => {
     switch (step) {
@@ -429,8 +445,8 @@ export default function CreateCharacterScreen() {
             {ranksSpent} / {totalSkillRanks} ranks used
           </Text>
           <Text style={[styles.skillBudgetDetail, { color: colors.text.tertiary }]}>
-            {classData?.skillRanksPerLevel ?? 2} (class) + {intMod} (INT) = {totalSkillRanks} per
-            level
+            {selectedClassData?.skillRanksPerLevel ?? 2} (class) + {intMod} (INT) ={' '}
+            {totalSkillRanks} per level
           </Text>
         </View>
 

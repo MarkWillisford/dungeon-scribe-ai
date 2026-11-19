@@ -71,7 +71,7 @@ export const createCharacter = createAsyncThunk<
   { userId: string; data: CreateCharacterParams }
 >('characters/createCharacter', async (params, { rejectWithValue }) => {
   try {
-    const character = CharacterService.createDefaultCharacter(params.data);
+    const character = await CharacterService.createDefaultCharacter(params.data);
     return await FirebaseCharacterService.create(params.userId, character);
   } catch (error) {
     return rejectWithValue(error instanceof Error ? error.message : 'Failed to create character');

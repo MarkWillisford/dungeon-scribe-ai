@@ -9,7 +9,7 @@ import { CharacterService } from '@services/CharacterService';
 import { AbilityScoreMethod } from '@/types/character';
 
 // Use CharacterService to create a proper mock character
-const createMockCharacter = (): Character => {
+const createMockCharacter = async (): Promise<Character> => {
   return CharacterService.createDefaultCharacter({
     name: 'Test Character',
     race: {
@@ -38,7 +38,7 @@ describe('EquipmentService', () => {
   let mockCharacter: Character;
 
   beforeEach(async () => {
-    mockCharacter = createMockCharacter();
+    mockCharacter = await createMockCharacter();
     await EquipmentDatabaseService.initialize();
   });
 
