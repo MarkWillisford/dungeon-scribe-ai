@@ -94,6 +94,8 @@ import reducer, {
   applyComputedStats,
   addOtherBonus,
   removeOtherBonus,
+  setManualFeatureBonus,
+  clearManualFeatureBonus,
   setNotes,
   setCompanionHDAbilityIncrease,
   addEidolon,
@@ -4421,6 +4423,119 @@ describe('characterEntrySlice — flaws', () => {
       state = reducer(state, resetDraft());
       expect(state.originalCharacterId).toBeNull();
       expect(state.mode).toBe('new');
+    });
+  });
+
+  describe('setManualFeatureBonus / clearManualFeatureBonus', () => {
+    it('setManualFeatureBonus stores a new bonus', () => {
+      let state = reducer(undefined, { type: '@@INIT' });
+      state = reducer(
+        state,
+        setManualFeatureBonus({
+          classEntryId: 'fighter',
+          featureName: 'Bravery',
+          bonusType: BonusType.MORALE,
+          target: 'save.will',
+          value: 2,
+        }),
+      );
+      const bonus = state.character.manualFeatureBonuses?.[0];
+      expect(bonus?.featureName).toBe('Bravery');
+      expect(bonus?.bonusType).toBe(BonusType.MORALE);
+      expect(bonus?.target).toBe('save.will');
+      expect(bonus?.value).toBe(2);
+      expect(state.isDirty).toBe(true);
+    });
+
+    it('setManualFeatureBonus updates an existing bonus for the same feature', () => {
+      let state = reducer(undefined, { type: '@@INIT' });
+      state = reducer(
+        state,
+        setManualFeatureBonus({
+          classEntryId: 'fighter',
+          featureName: 'Bravery',
+          bonusType: BonusType.MORALE,
+          target: 'save.will',
+          value: 2,
+        }),
+      );
+      state = reducer(
+        state,
+        setManualFeatureBonus({
+          classEntryId: 'fighter',
+          featureName: 'Bravery',
+          bonusType: BonusType.SACRED,
+          target: 'save.will',
+          value: 4,
+        }),
+      );
+      expect(state.character.manualFeatureBonuses?.length).toBe(1);
+      expect(state.character.manualFeatureBonuses?.[0].bonusType).toBe(BonusType.SACRED);
+      expect(state.character.manualFeatureBonuses?.[0].value).toBe(4);
+    });
+
+    it('setManualFeatureBonus keeps bonuses for different features separate', () => {
+      let state = reducer(undefined, { type: '@@INIT' });
+      state = reducer(
+        state,
+        setManualFeatureBonus({
+          classEntryId: 'fighter',
+          featureName: 'Bravery',
+          bonusType: BonusType.MORALE,
+          target: 'save.will',
+          value: 2,
+        }),
+      );
+      state = reducer(
+        state,
+        setManualFeatureBonus({
+          classEntryId: 'fighter',
+          featureName: 'Weapon Training',
+          bonusType: BonusType.UNTYPED,
+          target: 'attack.melee',
+          value: 1,
+        }),
+      );
+      expect(state.character.manualFeatureBonuses?.length).toBe(2);
+    });
+
+    it('clearManualFeatureBonus removes the bonus for a specific feature', () => {
+      let state = reducer(undefined, { type: '@@INIT' });
+      state = reducer(
+        state,
+        setManualFeatureBonus({
+          classEntryId: 'fighter',
+          featureName: 'Bravery',
+          bonusType: BonusType.MORALE,
+          target: 'save.will',
+          value: 2,
+        }),
+      );
+      state = reducer(
+        state,
+        setManualFeatureBonus({
+          classEntryId: 'fighter',
+          featureName: 'Weapon Training',
+          bonusType: BonusType.UNTYPED,
+          target: 'attack.melee',
+          value: 1,
+        }),
+      );
+      state = reducer(
+        state,
+        clearManualFeatureBonus({ classEntryId: 'fighter', featureName: 'Bravery' }),
+      );
+      expect(state.character.manualFeatureBonuses?.length).toBe(1);
+      expect(state.character.manualFeatureBonuses?.[0].featureName).toBe('Weapon Training');
+      expect(state.isDirty).toBe(true);
+    });
+
+    it('clearManualFeatureBonus is a no-op when no bonus exists', () => {
+      const state = reducer(
+        undefined,
+        clearManualFeatureBonus({ classEntryId: 'fighter', featureName: 'Nonexistent' }),
+      );
+      expect(state.character.manualFeatureBonuses).toBeUndefined();
     });
   });
 });

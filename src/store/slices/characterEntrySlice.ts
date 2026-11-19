@@ -20,7 +20,7 @@ import {
 import type { AbilityKey } from '@/types/abilities';
 import type { FlexibleAbilityBonus } from '@/data/races/types';
 import type { RacialChoice } from '@/types/racialChoices';
-import type { Character, ManualAbilityBonus } from '@/types';
+import type { Character, ManualAbilityBonus, ManualFeatureBonus } from '@/types';
 import type { LevelIncrementSlot } from '@/types/character';
 import type { CharacterFeat, Feats } from '@/types/feats';
 import type {
@@ -536,6 +536,36 @@ const characterEntrySlice = createSlice({
         value: action.payload.value,
         source: action.payload.source,
       };
+      state.isDirty = true;
+    },
+
+    setManualFeatureBonus(state, action: PayloadAction<ManualFeatureBonus>) {
+      if (!state.character.manualFeatureBonuses) state.character.manualFeatureBonuses = [];
+      const idx = state.character.manualFeatureBonuses.findIndex(
+        (b) =>
+          b.classEntryId === action.payload.classEntryId &&
+          b.featureName === action.payload.featureName,
+      );
+      if (idx >= 0) {
+        state.character.manualFeatureBonuses[idx] = action.payload;
+      } else {
+        state.character.manualFeatureBonuses.push(action.payload);
+      }
+      state.isDirty = true;
+    },
+
+    clearManualFeatureBonus(
+      state,
+      action: PayloadAction<{ classEntryId: string; featureName: string }>,
+    ) {
+      if (!state.character.manualFeatureBonuses) return;
+      state.character.manualFeatureBonuses = state.character.manualFeatureBonuses.filter(
+        (b) =>
+          !(
+            b.classEntryId === action.payload.classEntryId &&
+            b.featureName === action.payload.featureName
+          ),
+      );
       state.isDirty = true;
     },
 
@@ -2227,6 +2257,8 @@ export const {
   addOtherBonus,
   removeOtherBonus,
   updateOtherBonus,
+  setManualFeatureBonus,
+  clearManualFeatureBonus,
   setLevelIncrementAbility,
   setLevelIncrementSlots,
   addClass,

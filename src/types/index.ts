@@ -8,7 +8,7 @@ import {
   EditorEquipmentItem,
 } from './character';
 import { AbilityScores, AbilityKey } from './abilities';
-import { BonusType } from './base';
+import { BonusType, type EffectTarget } from './base';
 import { CharacterClasses } from './classes';
 import { CombatStats } from './combat';
 import { Skills } from './skills';
@@ -32,6 +32,14 @@ export interface ManualAbilityBonus {
   bonusType: BonusType;
   value: number;
   source?: string;
+}
+
+export interface ManualFeatureBonus {
+  classEntryId: string;
+  featureName: string;
+  bonusType: BonusType;
+  target: EffectTarget;
+  value: number;
 }
 
 export interface Character {
@@ -93,6 +101,11 @@ export interface Character {
   // Editor metadata — user-entered typed bonuses for ability scores (morale, sacred, etc.)
   // Stored here so the pipeline can pick them up as effects without overwriting computed bonuses.
   manualAbilityBonuses?: ManualAbilityBonus[];
+
+  // Player-entered bonuses for class features whose catalog entry is unmodelled.
+  // Attributed to the feature name in stat breakdowns. Never stores effectsStatus —
+  // that lives on the catalog only (ADR 0005).
+  manualFeatureBonuses?: ManualFeatureBonus[];
 
   // Version tracking
   schemaVersion: string;
