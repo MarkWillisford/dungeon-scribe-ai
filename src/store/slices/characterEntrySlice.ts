@@ -559,6 +559,7 @@ const characterEntrySlice = createSlice({
       action: PayloadAction<{ classEntryId: string; featureName: string }>,
     ) {
       if (!state.character.manualFeatureBonuses) return;
+      const prevLength = state.character.manualFeatureBonuses.length;
       state.character.manualFeatureBonuses = state.character.manualFeatureBonuses.filter(
         (b) =>
           !(
@@ -566,7 +567,9 @@ const characterEntrySlice = createSlice({
             b.featureName === action.payload.featureName
           ),
       );
-      state.isDirty = true;
+      if (state.character.manualFeatureBonuses.length < prevLength) {
+        state.isDirty = true;
+      }
     },
 
     setLevelIncrementAbility(
