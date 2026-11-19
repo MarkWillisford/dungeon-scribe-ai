@@ -47,7 +47,10 @@ function getSaveBonusRows(
     const existing = byType.get(b.type) ?? { total: 0, unverified: false, conditional: false };
     byType.set(b.type, {
       total: existing.total + b.value,
-      unverified: existing.unverified || b.verificationStatus === 'needs_review',
+      unverified:
+        existing.unverified ||
+        b.verificationStatus === 'needs_review' ||
+        b.verificationStatus === 'stub',
       conditional: existing.conditional || b.conditional,
     });
   }
