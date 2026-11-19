@@ -189,7 +189,10 @@ export class ModifierPipelineService {
     for (const cls of character.classes.classes) {
       for (const feature of cls.classFeatures) {
         for (const effect of feature.effects) {
-          effects.push({ ...effect, verificationStatus: feature.verificationStatus });
+          effects.push({
+            ...effect,
+            verificationStatus: effect.verificationStatus ?? feature.verificationStatus,
+          });
         }
       }
     }
@@ -226,7 +229,7 @@ export class ModifierPipelineService {
           target,
           source,
           activation,
-          verificationStatus: featDef.verificationStatus,
+          verificationStatus: effect.verificationStatus ?? featDef.verificationStatus,
         });
       }
     }
