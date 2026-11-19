@@ -1450,7 +1450,7 @@ describe('ModifierPipelineService', () => {
     });
   });
 
-  describe('getBreakdown — verificationStatus and conditionality', () => {
+  describe('getBreakdown: verificationStatus and conditionality', () => {
     test('class feature with needs_review stamps verificationStatus on breakdown entry', () => {
       const char = createTestCharacter();
       char.classes.classes[0].classFeatures.push({
