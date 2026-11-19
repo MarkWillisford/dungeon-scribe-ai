@@ -88,6 +88,18 @@ function UnmodelledFeatureRow({ classEntryId, feature, existing }: UnmodelledFea
   const [rawValue, setRawValue] = useState<string>(existing ? String(existing.value) : '');
   const [expanded, setExpanded] = useState(!!existing);
 
+  useEffect(() => {
+    if (existing) {
+      setBonusType(existing.bonusType as BonusType); // eslint-disable-line react-hooks/set-state-in-effect -- syncing controlled editor fields from prop when Redux state updates after mount
+      setTarget(existing.target as EffectTarget);
+      setRawValue(String(existing.value));
+    } else {
+      setBonusType(BonusType.UNTYPED);
+      setTarget('ability.str' as EffectTarget);
+      setRawValue('');
+    }
+  }, [existing]);
+
   const hasEntry = !!existing;
 
   const handleApply = () => {
