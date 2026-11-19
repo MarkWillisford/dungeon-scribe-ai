@@ -1,7 +1,8 @@
 import React from 'react';
-import { render, fireEvent, type RenderedNode } from '../../helpers/testUtils';
+import { render, fireEvent, setHookStateAt, type RenderedNode } from '../../helpers/testUtils';
 import { RISSI_FIXTURE } from '@/data/fixtures/rissi';
 import type { Character } from '@/types';
+import type { CharacterSummary } from '@/types/character';
 
 const flushPromises = () => new Promise((resolve) => setImmediate(resolve));
 
@@ -11,13 +12,14 @@ const mockDispatch = jest.fn();
 const mockUnwrap = jest.fn().mockResolvedValue(undefined);
 
 let mockCharacter: Character | null = null;
+let mockCharacters: CharacterSummary[] = [];
 let mockCombat: Record<string, unknown> = {};
 
 jest.mock('@/store/hooks', () => ({
   useAppDispatch: () => mockDispatch,
   useAppSelector: (selector: (s: unknown) => unknown) =>
     selector({
-      characters: { activeCharacter: mockCharacter, characters: [] },
+      characters: { activeCharacter: mockCharacter, characters: mockCharacters },
       auth: { user: { uid: 'user-1' } },
       combat: mockCombat,
     }),
@@ -41,6 +43,7 @@ jest.mock('@/hooks/useTheme', () => ({
       text: { primary: '#fff', secondary: '#aaa', tertiary: '#666', accent: '#FFD700' },
       accent: { DEFAULT: '#8B0000' },
       error: { DEFAULT: '#B00' },
+      primary: { DEFAULT: '#6B21A8' },
     },
     fantasy: { gold: '#FFD700', bronze: '#CD7F32', darkWood: '#3b2b1a' },
   }),
@@ -164,6 +167,7 @@ function hpTracker(tree: RenderedNode) {
 
 beforeEach(() => {
   jest.clearAllMocks();
+  mockCharacters = [];
   mockDispatch.mockImplementation(() => ({ unwrap: mockUnwrap }));
   mockUnwrap.mockResolvedValue(undefined);
 });
@@ -262,5 +266,101 @@ describe('Play screen — ending a session', () => {
 
     expect(mockShowAlert).toHaveBeenCalledWith('Hit Points Not Saved', expect.any(String));
     errorSpy.mockRestore();
+  });
+});
+
+// ----------------------------------------------------------------
+
+describe('Play screen — starting a new session', () => {
+  // Sets up the picker view by forcing sessionCheckDone=true (hook slot 2).
+  // Slot index: useMemo(th)=0, useState(activeTab)=1, useState(sessionCheckDone)=2.
+  // useEffect is a no-op in the test renderer and does not consume a slot.
+  const SESSION_CHECK_DONE_SLOT = 2;
+
+  function notInSession(): Record<string, unknown> {
+    return {
+      currentHP: null,
+      tempHP: 0,
+      nonlethalDamage: 0,
+      activeBuffs: [],
+      combatAbilities: {
+        activeToggles: {},
+        twoWeaponFighting: false,
+        twoWeaponFightingLightOffhand: false,
+      },
+      isStaggered: false,
+      staggeredAutoApplied: false,
+      isDying: false,
+      dyingAutoApplied: false,
+      isStabilized: false,
+      pendingStabilizationPrompt: false,
+      round: 0,
+      rollLog: [],
+      buffLibrary: [],
+      resourcePools: {},
+      preparedSpellsCast: {},
+      spellSlotsUsed: {},
+    };
+  }
+
+  it('seeds the new session with the character sheet current HP, not max HP', async () => {
+    // Character is at 12/40 from the previous session — the bug would start at 40/40.
+    mockCharacter = characterWith({
+      max: 40,
+      manualMax: 40,
+      current: 12,
+      nonlethal: 0,
+      temporary: 0,
+    });
+    mockCharacters = [
+      {
+        id: 'fixture-rissi',
+        name: 'Rissi',
+        level: 11,
+        race: 'Human',
+        classes: 'Cleric 11',
+        lastUpdated: new Date(),
+      },
+    ];
+    mockCombat = notInSession();
+
+    const { rerender } = render(React.createElement(PlayScreen));
+
+    // Force the session-check-done flag so the picker renders rather than
+    // the loading spinner (effects are no-ops in this test renderer).
+    setHookStateAt(SESSION_CHECK_DONE_SLOT, true);
+    const updatedTree = rerender();
+
+    // PlayScreen returns <SessionPicker onNewSession={handleNewSession} .../>.
+    // The renderer preserves the props on the SessionPicker node even if the
+    // child component itself throws during rendering (e.g. missing theme key).
+    // We call onNewSession directly rather than locating a UI button, which
+    // avoids depending on the picker's internal rendering behaviour.
+    expect(updatedTree.type).toBe('SessionPicker');
+    const { onNewSession } = updatedTree.props as { onNewSession: (id: string) => void };
+    onNewSession('fixture-rissi');
+
+    // showAlert is called; extract the "Start New Session" button's onPress.
+    expect(mockShowAlert).toHaveBeenCalledWith(
+      'New Session',
+      expect.any(String),
+      expect.any(Array),
+    );
+    const alertButtons = mockShowAlert.mock.calls[0][2] as Array<{
+      text: string;
+      onPress?: () => Promise<void>;
+    }>;
+    const startBtn = alertButtons.find((b) => b.text === 'Start New Session');
+    expect(startBtn).toBeDefined();
+    await startBtn!.onPress!();
+    await flushPromises();
+
+    // The dispatch must carry currentHP=12 from the character sheet, not 40 (maxHP).
+    expect(mockDispatch).toHaveBeenCalledWith(
+      expect.objectContaining({
+        type: 'combat/initNewSession',
+        payload: expect.objectContaining({ currentHP: 12, maxHP: 40 }),
+      }),
+    );
   });
 });
