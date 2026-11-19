@@ -1,5 +1,5 @@
 import type { Character } from '@/types';
-import { BonusType, type Bonus, type Effect } from '@/types/base';
+import { BonusType, type Bonus, type Effect, type VerificationStatus } from '@/types/base';
 import type { AbilityScores } from '@/types/abilities';
 import { Size, SaveProgression } from '@/types/base';
 import { FormulaService, type FormulaContext } from './FormulaService';
@@ -15,13 +15,22 @@ export interface ResolvedEffect {
   bonusType: BonusType;
   value: number;
   source: string;
+  verificationStatus?: VerificationStatus;
+  conditional: boolean;
 }
 
 // ---- Stat Breakdown (for UI tooltips) ----
 
 export interface StatBreakdown {
   base: number;
-  bonuses: { type: BonusType; value: number; source: string; stacked: boolean }[];
+  bonuses: {
+    type: BonusType;
+    value: number;
+    source: string;
+    stacked: boolean;
+    verificationStatus?: VerificationStatus;
+    conditional: boolean;
+  }[];
   total: number;
 }
 
@@ -131,7 +140,14 @@ export class ModifierPipelineService {
       if (bonusType === BonusType.DODGE || bonusType === BonusType.UNTYPED) {
         for (const e of effects) {
           total += e.value;
-          bonuses.push({ type: bonusType, value: e.value, source: e.source, stacked: true });
+          bonuses.push({
+            type: bonusType,
+            value: e.value,
+            source: e.source,
+            stacked: true,
+            verificationStatus: e.verificationStatus,
+            conditional: e.conditional,
+          });
         }
       } else {
         const best = effects.reduce((max, e) => (e.value > max.value ? e : max), effects[0]);
@@ -142,6 +158,8 @@ export class ModifierPipelineService {
             value: e.value,
             source: e.source,
             stacked: e === best,
+            verificationStatus: e.verificationStatus,
+            conditional: e.conditional,
           });
         }
       }
@@ -171,7 +189,10 @@ export class ModifierPipelineService {
     for (const cls of character.classes.classes) {
       for (const feature of cls.classFeatures) {
         for (const effect of feature.effects) {
-          effects.push(effect);
+          effects.push({
+            ...effect,
+            verificationStatus: effect.verificationStatus ?? feature.verificationStatus,
+          });
         }
       }
     }
@@ -203,7 +224,13 @@ export class ModifierPipelineService {
         const activation = effect.activation
           ? { ...effect.activation, active: charFeat.active }
           : undefined;
-        effects.push({ ...effect, target, source, activation });
+        effects.push({
+          ...effect,
+          target,
+          source,
+          activation,
+          verificationStatus: effect.verificationStatus ?? featDef.verificationStatus,
+        });
       }
     }
 
@@ -405,11 +432,14 @@ export class ModifierPipelineService {
 
       try {
         const value = FormulaService.resolveValue(effect.value, context);
+        const conditional = effect.condition !== undefined && effect.condition.type !== 'always';
         resolved.push({
           target: effect.target,
           bonusType: (effect.bonusType as BonusType) ?? BonusType.UNTYPED,
           value,
           source: effect.source,
+          verificationStatus: effect.verificationStatus,
+          conditional,
         });
       } catch {
         // Skip effects with invalid formulas rather than crashing

@@ -1,4 +1,4 @@
-import { BABProgression, SaveProgression, Effect } from './base';
+import { BABProgression, SaveProgression, Effect, type VerificationStatus } from './base';
 import { FeatPrerequisite } from './feats';
 import type { SpellcastingAdvancement } from './spells';
 import type { BroodmasterState } from './eidolon';
@@ -109,6 +109,7 @@ export interface ClassFeature {
   resourcePool?: ResourcePoolDefinition;
   activationCost?: { resourceId: string; amount: number };
   maintenanceCost?: { resourceId: string; amount: number; per: 'round' };
+  verificationStatus?: VerificationStatus;
 }
 
 export interface FavoredClassBonus {

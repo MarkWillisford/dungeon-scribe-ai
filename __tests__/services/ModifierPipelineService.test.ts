@@ -1449,4 +1449,168 @@ describe('ModifierPipelineService', () => {
       expect(result.combatStats.hitPoints.favoredClass).toBe(0);
     });
   });
+
+  describe('getBreakdown: verificationStatus and conditionality', () => {
+    test('class feature with needs_review stamps verificationStatus on breakdown entry', () => {
+      const char = createTestCharacter();
+      char.classes.classes[0].classFeatures.push({
+        name: 'Unreviewed Feature',
+        description: 'A machine-generated class feature',
+        level: 1,
+        verificationStatus: 'needs_review',
+        effects: [
+          {
+            type: 'bonus',
+            target: 'save.will',
+            value: 2,
+            bonusType: BonusType.UNTYPED,
+            source: 'Unreviewed Feature',
+          },
+        ],
+      });
+
+      const breakdown = ModifierPipelineService.getBreakdown(char, 'save.will');
+      const entry = breakdown.bonuses.find((b) => b.source === 'Unreviewed Feature');
+      expect(entry).toBeDefined();
+      expect(entry?.verificationStatus).toBe('needs_review');
+    });
+
+    test('class feature with verified status has verificationStatus: verified on breakdown entry', () => {
+      const char = createTestCharacter();
+      char.classes.classes[0].classFeatures.push({
+        name: 'Verified Feature',
+        description: 'A human-reviewed class feature',
+        level: 1,
+        verificationStatus: 'verified',
+        effects: [
+          {
+            type: 'bonus',
+            target: 'save.will',
+            value: 1,
+            bonusType: BonusType.UNTYPED,
+            source: 'Verified Feature',
+          },
+        ],
+      });
+
+      const breakdown = ModifierPipelineService.getBreakdown(char, 'save.will');
+      const entry = breakdown.bonuses.find((b) => b.source === 'Verified Feature');
+      expect(entry).toBeDefined();
+      expect(entry?.verificationStatus).toBe('verified');
+    });
+
+    test('class feature without verificationStatus has undefined verificationStatus on breakdown entry', () => {
+      const char = createTestCharacter();
+      char.classes.classes[0].classFeatures.push({
+        name: 'Legacy Feature',
+        description: 'No verificationStatus set',
+        level: 1,
+        effects: [
+          {
+            type: 'bonus',
+            target: 'save.will',
+            value: 1,
+            bonusType: BonusType.UNTYPED,
+            source: 'Legacy Feature',
+          },
+        ],
+      });
+
+      const breakdown = ModifierPipelineService.getBreakdown(char, 'save.will');
+      const entry = breakdown.bonuses.find((b) => b.source === 'Legacy Feature');
+      expect(entry).toBeDefined();
+      expect(entry?.verificationStatus).toBeUndefined();
+    });
+
+    test('effect with a non-always condition has conditional: true', () => {
+      const char = createTestCharacter();
+      char.classes.classes[0].classFeatures.push({
+        name: 'Flanking Feature',
+        description: 'Bonus when flanking',
+        level: 1,
+        effects: [
+          {
+            type: 'bonus',
+            target: 'attack.melee',
+            value: 2,
+            bonusType: BonusType.UNTYPED,
+            source: 'Flanking Feature',
+            condition: {
+              type: 'custom',
+              params: {},
+              description: 'when flanking',
+            },
+          },
+        ],
+      });
+
+      const breakdown = ModifierPipelineService.getBreakdown(char, 'attack.melee');
+      const entry = breakdown.bonuses.find((b) => b.source === 'Flanking Feature');
+      expect(entry).toBeDefined();
+      expect(entry?.conditional).toBe(true);
+    });
+
+    test('effect without a condition has conditional: false', () => {
+      const char = createTestCharacter();
+      char.classes.classes[0].classFeatures.push({
+        name: 'Always On Feature',
+        description: 'Always active',
+        level: 1,
+        effects: [
+          {
+            type: 'bonus',
+            target: 'attack.melee',
+            value: 1,
+            bonusType: BonusType.ENHANCEMENT,
+            source: 'Always On Feature',
+          },
+        ],
+      });
+
+      const breakdown = ModifierPipelineService.getBreakdown(char, 'attack.melee');
+      const entry = breakdown.bonuses.find((b) => b.source === 'Always On Feature');
+      expect(entry).toBeDefined();
+      expect(entry?.conditional).toBe(false);
+    });
+
+    test('feat verificationStatus is stamped onto breakdown entry', () => {
+      const char = createTestCharacter();
+      char.feats.feats.push({
+        featId: 'lightning_reflexes',
+        name: 'Lightning Reflexes',
+        source: 'level_1',
+        grantedAtLevel: 1,
+        active: true,
+        choices: {},
+      });
+
+      const breakdown = ModifierPipelineService.getBreakdown(char, 'save.reflex');
+      const entry = breakdown.bonuses.find((b) => b.source === 'Lightning Reflexes');
+      expect(entry).toBeDefined();
+      expect(entry?.verificationStatus).toBe('needs_review');
+    });
+
+    test('racial trait effect has undefined verificationStatus (unchanged behaviour)', () => {
+      const char = createTestCharacter();
+      char.info.race.traits.push({
+        name: 'Stonecunning',
+        description: 'Racial perception bonus',
+        effects: [
+          {
+            type: 'bonus',
+            target: 'skill.perception',
+            value: 2,
+            bonusType: BonusType.RACIAL,
+            source: 'Stonecunning',
+          },
+        ],
+      });
+
+      const breakdown = ModifierPipelineService.getBreakdown(char, 'skill.perception');
+      const entry = breakdown.bonuses.find((b) => b.source === 'Stonecunning');
+      expect(entry).toBeDefined();
+      expect(entry?.verificationStatus).toBeUndefined();
+      expect(entry?.conditional).toBe(false);
+    });
+  });
 });

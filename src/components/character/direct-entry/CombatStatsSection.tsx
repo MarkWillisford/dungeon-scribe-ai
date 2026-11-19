@@ -27,24 +27,41 @@ const BONUS_TYPE_LABELS: Partial<Record<BonusType, string>> = {
   [BonusType.DODGE]: 'Dodge',
 };
 
-function getSaveBonusRows(
+interface SaveBonusRow {
+  type: BonusType;
+  label: string;
+  value: number;
+  unverified: boolean;
+  conditional: boolean;
+}
+
+export function getSaveBonusRows(
   allSaveBreakdown: ReturnType<typeof ModifierPipelineService.getBreakdown>,
   specificBreakdown: ReturnType<typeof ModifierPipelineService.getBreakdown>,
-): { type: BonusType; label: string; value: number }[] {
+): SaveBonusRow[] {
   // Merge contributions from save.all and save-specific target, take max per type
-  const byType = new Map<BonusType, number>();
+  const byType = new Map<BonusType, { total: number; unverified: boolean; conditional: boolean }>();
   for (const b of [...allSaveBreakdown.bonuses, ...specificBreakdown.bonuses]) {
     if (!b.stacked) continue;
     if (b.type === BonusType.UNTYPED) continue; // untyped shows in the misc field
-    const existing = byType.get(b.type) ?? 0;
-    byType.set(b.type, existing + b.value);
+    const existing = byType.get(b.type) ?? { total: 0, unverified: false, conditional: false };
+    byType.set(b.type, {
+      total: existing.total + b.value,
+      unverified:
+        existing.unverified ||
+        b.verificationStatus === 'needs_review' ||
+        b.verificationStatus === 'stub',
+      conditional: existing.conditional || b.conditional,
+    });
   }
   return Array.from(byType.entries())
-    .filter(([, v]) => v !== 0)
-    .map(([bt, value]) => ({
+    .filter(([, v]) => v.total !== 0)
+    .map(([bt, { total, unverified, conditional }]) => ({
       type: bt,
       label: BONUS_TYPE_LABELS[bt] ?? bt,
-      value,
+      value: total,
+      unverified,
+      conditional,
     }));
 }
 
@@ -298,7 +315,11 @@ export function CombatStatsSection() {
             </Text>
             {getSaveBonusRows(saveBreakdowns.all, saveBreakdowns.fort).map((row) => (
               <View key={row.type} style={styles.miscRow}>
-                <Text style={styles.miscLabel}>{row.label}</Text>
+                <Text style={styles.miscLabel}>
+                  {row.label}
+                  {row.conditional ? ' (cond.)' : ''}
+                  {row.unverified ? ' (unverified)' : ''}
+                </Text>
                 <AutoComputedValue value={fmtSign(row.value)} />
               </View>
             ))}
@@ -320,7 +341,11 @@ export function CombatStatsSection() {
             </Text>
             {getSaveBonusRows(saveBreakdowns.all, saveBreakdowns.ref).map((row) => (
               <View key={row.type} style={styles.miscRow}>
-                <Text style={styles.miscLabel}>{row.label}</Text>
+                <Text style={styles.miscLabel}>
+                  {row.label}
+                  {row.conditional ? ' (cond.)' : ''}
+                  {row.unverified ? ' (unverified)' : ''}
+                </Text>
                 <AutoComputedValue value={fmtSign(row.value)} />
               </View>
             ))}
@@ -342,7 +367,11 @@ export function CombatStatsSection() {
             </Text>
             {getSaveBonusRows(saveBreakdowns.all, saveBreakdowns.will).map((row) => (
               <View key={row.type} style={styles.miscRow}>
-                <Text style={styles.miscLabel}>{row.label}</Text>
+                <Text style={styles.miscLabel}>
+                  {row.label}
+                  {row.conditional ? ' (cond.)' : ''}
+                  {row.unverified ? ' (unverified)' : ''}
+                </Text>
                 <AutoComputedValue value={fmtSign(row.value)} />
               </View>
             ))}
