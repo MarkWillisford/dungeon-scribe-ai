@@ -30,6 +30,7 @@ import reducer, {
   removeClass,
   updateClassLevel,
   updateClassArchetype,
+  addClassArchetype,
   updateClassSpellcastingAdvancement,
   upsertClassChoice,
   toggleClassPrereqOverride,
@@ -1128,6 +1129,191 @@ describe('characterEntrySlice — classes', () => {
       let state = reducer(makeInitialState(), addClass(makeClass('cls-1')));
       state = reducer(state, updateClassArchetype({ id: 'does-not-exist', archetypeId: 'arch-1' }));
       expect(state.character.classes.classes[0].archetypeId).toBeUndefined();
+    });
+  });
+
+  describe('addClassArchetype', () => {
+    function makeCavalierBase() {
+      return makeClass('cls-1', {
+        name: 'Cavalier',
+        classFeatures: [
+          { name: 'Mount', level: 1, description: 'You have a mount.', effects: [] },
+          { name: 'Order', level: 1, description: 'You belong to an order.', effects: [] },
+          {
+            name: 'Tactician',
+            level: 1,
+            description: 'You can share teamwork feats.',
+            effects: [],
+          },
+        ],
+      });
+    }
+
+    function makeDaringChampionArchetype() {
+      return {
+        name: 'Daring Champion',
+        className: 'Cavalier',
+        description: 'A swashbuckling cavalier.',
+        replacedFeatures: ['Tactician'],
+        modifiedFeatures: ['Mount'],
+        newFeatures: [
+          { name: 'Panache', level: 1, description: 'Pool of panache points.', effects: [] },
+          {
+            name: 'Precise Strike',
+            level: 3,
+            description: 'You deal extra precision damage.',
+            effects: [{ type: 'flat', stat: 'ac', value: 1, bonusType: 'dodge' }] as never[],
+          },
+        ],
+        source: 'Advanced Class Guide',
+      };
+    }
+
+    function makeBaseFeatures() {
+      return [
+        { name: 'Mount', level: 1, description: 'You have a mount.' },
+        { name: 'Order', level: 1, description: 'You belong to an order.' },
+        { name: 'Tactician', level: 1, description: 'You can share teamwork feats.' },
+      ];
+    }
+
+    it('merges archetype features into cls.classFeatures', () => {
+      let state = reducer(makeInitialState(), addClass(makeCavalierBase()));
+      state = reducer(
+        state,
+        addClassArchetype({
+          classId: 'cls-1',
+          archetypeId: 'cavalier-daring-champion',
+          archetype: makeDaringChampionArchetype(),
+          baseFeatures: makeBaseFeatures(),
+        }),
+      );
+      const names = state.character.classes.classes[0].classFeatures.map((f) => f.name);
+      expect(names).toContain('Panache');
+      expect(names).toContain('Precise Strike');
+    });
+
+    it('removes features listed in replacedFeatures', () => {
+      let state = reducer(makeInitialState(), addClass(makeCavalierBase()));
+      state = reducer(
+        state,
+        addClassArchetype({
+          classId: 'cls-1',
+          archetypeId: 'cavalier-daring-champion',
+          archetype: makeDaringChampionArchetype(),
+          baseFeatures: makeBaseFeatures(),
+        }),
+      );
+      const names = state.character.classes.classes[0].classFeatures.map((f) => f.name);
+      expect(names).not.toContain('Tactician');
+    });
+
+    it('leaves modifiedFeatures in the list', () => {
+      let state = reducer(makeInitialState(), addClass(makeCavalierBase()));
+      state = reducer(
+        state,
+        addClassArchetype({
+          classId: 'cls-1',
+          archetypeId: 'cavalier-daring-champion',
+          archetype: makeDaringChampionArchetype(),
+          baseFeatures: makeBaseFeatures(),
+        }),
+      );
+      const names = state.character.classes.classes[0].classFeatures.map((f) => f.name);
+      expect(names).toContain('Mount');
+    });
+
+    it('populates cls.archetypes with the applied archetype entry', () => {
+      let state = reducer(makeInitialState(), addClass(makeCavalierBase()));
+      state = reducer(
+        state,
+        addClassArchetype({
+          classId: 'cls-1',
+          archetypeId: 'cavalier-daring-champion',
+          archetype: makeDaringChampionArchetype(),
+          baseFeatures: makeBaseFeatures(),
+        }),
+      );
+      const archetypes = state.character.classes.classes[0].archetypes;
+      expect(archetypes).toHaveLength(1);
+      expect(archetypes![0].id).toBe('cavalier-daring-champion');
+      expect(archetypes![0].name).toBe('Daring Champion');
+      expect(archetypes![0].replacedFeatures).toEqual(['Tactician']);
+      expect(archetypes![0].modifiedFeatures).toEqual(['Mount']);
+    });
+
+    it('keeps deprecated archetypeId and archetypeName in sync', () => {
+      let state = reducer(makeInitialState(), addClass(makeCavalierBase()));
+      state = reducer(
+        state,
+        addClassArchetype({
+          classId: 'cls-1',
+          archetypeId: 'cavalier-daring-champion',
+          archetype: makeDaringChampionArchetype(),
+          baseFeatures: makeBaseFeatures(),
+        }),
+      );
+      const cls = state.character.classes.classes[0];
+      expect(cls.archetypeId).toBe('cavalier-daring-champion');
+      expect(cls.archetypeName).toBe('Daring Champion');
+    });
+
+    it('marks isDirty', () => {
+      let state = reducer(makeInitialState(), addClass(makeCavalierBase()));
+      state = reducer(
+        state,
+        addClassArchetype({
+          classId: 'cls-1',
+          archetypeId: 'cavalier-daring-champion',
+          archetype: makeDaringChampionArchetype(),
+          baseFeatures: makeBaseFeatures(),
+        }),
+      );
+      expect(state.isDirty).toBe(true);
+    });
+
+    it('is a no-op when classId is not found', () => {
+      let state = reducer(makeInitialState(), addClass(makeCavalierBase()));
+      const before = state.character.classes.classes[0].classFeatures.length;
+      state = reducer(
+        state,
+        addClassArchetype({
+          classId: 'does-not-exist',
+          archetypeId: 'cavalier-daring-champion',
+          archetype: makeDaringChampionArchetype(),
+          baseFeatures: makeBaseFeatures(),
+        }),
+      );
+      expect(state.character.classes.classes[0].classFeatures).toHaveLength(before);
+    });
+  });
+
+  describe('updateClassArchetype clears archetypes array when both fields are undefined', () => {
+    it('clears cls.archetypes when archetypeId and archetypeName are both undefined', () => {
+      let state = reducer(makeInitialState(), addClass(makeClass('cls-1')));
+      // Seed archetypes manually via addClassArchetype first to avoid frozen-object issues
+      state = reducer(
+        state,
+        addClassArchetype({
+          classId: 'cls-1',
+          archetypeId: 'arch-1',
+          archetype: {
+            name: 'Lore Warden',
+            className: 'Fighter',
+            description: '',
+            replacedFeatures: [],
+            modifiedFeatures: [],
+            newFeatures: [],
+            source: 'APG',
+          },
+          baseFeatures: [],
+        }),
+      );
+      state = reducer(
+        state,
+        updateClassArchetype({ id: 'cls-1', archetypeId: undefined, archetypeName: undefined }),
+      );
+      expect(state.character.classes.classes[0].archetypes).toEqual([]);
     });
   });
 

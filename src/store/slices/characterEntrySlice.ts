@@ -44,6 +44,8 @@ import { CharacterService } from '@/services/CharacterService';
 import { computeCompanionEffectiveLevel } from '@/services/CompanionService';
 import { ModifierPipelineService } from '@/services/ModifierPipelineService';
 import { HitDiceService } from '@/services/HitDiceService';
+import { resolveArchetype } from '@/services/ArchetypeResolver';
+import type { ArchetypeData, ClassFeatureData } from '@/data/classes/types';
 
 // ---- Supporting types ----
 
@@ -781,8 +783,54 @@ const characterEntrySlice = createSlice({
       if (cls) {
         cls.archetypeId = action.payload.archetypeId;
         cls.archetypeName = action.payload.archetypeName;
+        // Clear the new archetypes array whenever the deprecated fields are cleared.
+        if (!action.payload.archetypeId && !action.payload.archetypeName) {
+          cls.archetypes = [];
+        }
         state.isDirty = true;
       }
+    },
+
+    addClassArchetype(
+      state,
+      action: PayloadAction<{
+        classId: string;
+        archetypeId: string;
+        archetype: ArchetypeData;
+        baseFeatures: ClassFeatureData[];
+      }>,
+    ) {
+      const { classId, archetypeId, archetype, baseFeatures } = action.payload;
+      const cls = state.character.classes.classes.find((c) => (c.id ?? c.name) === classId);
+      if (!cls) return;
+
+      const baseAsFeatures = baseFeatures.map((f) => ({
+        id: f.id,
+        name: f.name,
+        description: f.description,
+        shortDescription: f.shortDescription,
+        activationMode: f.activationMode,
+        level: f.level,
+        effects: f.effects ?? [],
+        resourcePool: f.resourcePool,
+        activationCost: f.activationCost,
+        maintenanceCost: f.maintenanceCost,
+      }));
+
+      const resolution = resolveArchetype(baseAsFeatures, archetype);
+      cls.classFeatures = resolution.features;
+      cls.archetypes = [
+        {
+          id: archetypeId,
+          name: archetype.name,
+          replacedFeatures: archetype.replacedFeatures,
+          modifiedFeatures: archetype.modifiedFeatures,
+        },
+      ];
+      // Keep deprecated fields in sync for backward compat consumers.
+      cls.archetypeId = archetypeId;
+      cls.archetypeName = archetype.name;
+      state.isDirty = true;
     },
 
     updateClassSpellcastingAdvancement(
@@ -2235,6 +2283,7 @@ export const {
   setClassHitDie,
   setClassHitDiceAll,
   updateClassArchetype,
+  addClassArchetype,
   updateClassSpellcastingAdvancement,
   upsertClassChoice,
   toggleClassPrereqOverride,

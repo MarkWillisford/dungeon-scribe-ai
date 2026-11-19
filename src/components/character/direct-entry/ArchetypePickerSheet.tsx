@@ -35,6 +35,7 @@ interface ArchetypeItem {
   source: string;
   description?: string;
   isNone?: boolean;
+  archetypeData?: ArchetypeData;
 }
 
 const NONE_ITEM: ArchetypeItem = {
@@ -58,6 +59,7 @@ function buildItems(archetypes: ArchetypeData[], className: string): ArchetypeIt
     label: a.name,
     source: sourceLabel(a.source),
     description: a.description?.slice(0, 120),
+    archetypeData: a,
   }));
   items.sort((a, b) => a.label.localeCompare(b.label));
   return [NONE_ITEM, ...items];
@@ -68,6 +70,7 @@ function buildItems(archetypes: ArchetypeData[], className: string): ArchetypeIt
 export interface ArchetypePickerResult {
   archetypeId: string | undefined;
   archetypeName: string | undefined;
+  archetypeData: ArchetypeData | undefined;
 }
 
 interface ArchetypePickerSheetProps {
@@ -140,6 +143,7 @@ export function ArchetypePickerSheet({
     onSelect({
       archetypeId: item.isNone ? undefined : item.key,
       archetypeName: item.isNone ? undefined : item.label,
+      archetypeData: item.isNone ? undefined : item.archetypeData,
     });
   };
 

@@ -459,7 +459,7 @@ function applyGrantsCompanionFormula(spec: GrantsCompanionSpec, characterLevel: 
 }
 
 function effectiveLevelFromClass(classEntry: ClassEntry): number {
-  const archetypes = classEntry.archetype ?? [];
+  const archetypes = classEntry.archetypes?.map((a) => a.name) ?? classEntry.archetype ?? [];
   switch (classEntry.name) {
     case 'Druid':
       return classEntry.level;
@@ -494,7 +494,8 @@ function effectiveLevelFromClass(classEntry: ClassEntry): number {
  */
 export function effectiveLevelFromDraftClass(cls: ClassEntry | undefined): number {
   if (!cls) return 0;
-  const archetypes = cls.archetypeName ? [cls.archetypeName] : [];
+  const archetypes =
+    cls.archetypes?.map((a) => a.name) ?? (cls.archetypeName ? [cls.archetypeName] : []);
   switch (cls.name) {
     case 'Druid':
     case 'Hunter':
