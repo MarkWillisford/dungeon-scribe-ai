@@ -662,6 +662,14 @@ const characterEntrySlice = createSlice({
           (id) => id !== removedId,
         );
       }
+
+      // Remove manual feature bonuses tied to the removed class entry.
+      if (state.character.manualFeatureBonuses) {
+        state.character.manualFeatureBonuses = state.character.manualFeatureBonuses.filter(
+          (b) => b.classEntryId !== removedId,
+        );
+      }
+
       syncFeatSlotsFromClasses(state.character);
       syncLevelIncrementSlots(state.character);
       state.isDirty = true;

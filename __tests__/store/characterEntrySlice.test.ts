@@ -970,6 +970,17 @@ describe('characterEntrySlice — classes', () => {
       expect(adv.perLevel[0].arcaneBaseClassEntryId).toBe('');
       expect(adv.perLevel[0].divineBaseClassEntryId).toBe('other');
     });
+
+    it('cascades: removes manualFeatureBonuses tied to the removed class entry', () => {
+      let state = reducer(makeInitialState(), addClass(makeClass('cls-1')));
+      state = reducer(
+        state,
+        setManualFeatureBonus({ classEntryId: 'cls-1', featureName: 'Sneak Attack', value: 2 }),
+      );
+      expect(state.character.manualFeatureBonuses).toHaveLength(1);
+      state = reducer(state, removeClass('cls-1'));
+      expect(state.character.manualFeatureBonuses).toHaveLength(0);
+    });
   });
 
   describe('updateClassLevel', () => {
