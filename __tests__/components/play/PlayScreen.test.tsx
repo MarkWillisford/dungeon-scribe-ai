@@ -352,6 +352,7 @@ describe('Play screen — starting a new session', () => {
     }>;
     const startBtn = alertButtons.find((b) => b.text === 'Start New Session');
     expect(startBtn).toBeDefined();
+    expect(startBtn?.onPress).toBeDefined();
     await startBtn!.onPress!();
     await flushPromises();
 
