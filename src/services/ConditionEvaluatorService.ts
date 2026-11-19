@@ -25,6 +25,9 @@ export class ConditionEvaluatorService {
       case 'target_type':
       case 'custom':
         return false;
+
+      default:
+        return false;
     }
   }
 
