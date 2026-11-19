@@ -44,7 +44,7 @@ export class ConditionEvaluatorService {
       if (type === 'light') return 0;
       if (type === 'medium') return 1;
       if (type === 'heavy') return 2;
-      return 0;
+      return 2;
     };
 
     const maxEquippedWeight = Math.max(...equippedArmor.map((a) => armorWeight(a.type)));
