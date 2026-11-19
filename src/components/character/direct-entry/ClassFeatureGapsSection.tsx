@@ -104,7 +104,13 @@ function UnmodelledFeatureRow({ classEntryId, feature, existing }: UnmodelledFea
 
   const handleApply = () => {
     const v = parseInt(rawValue, 10);
-    if (isNaN(v) || v === 0) return;
+    if (isNaN(v)) return;
+    if (v === 0) {
+      if (hasEntry) {
+        dispatch(clearManualFeatureBonus({ classEntryId, featureName: feature.name }));
+      }
+      return;
+    }
     dispatch(
       setManualFeatureBonus({
         classEntryId,
