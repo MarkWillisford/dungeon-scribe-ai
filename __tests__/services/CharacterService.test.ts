@@ -3,8 +3,13 @@ import { CreateCharacterParams, AbilityScoreMethod } from '@/types/character';
 import { Size, Alignment, BonusType } from '@/types/base';
 import { Race } from '@/types/race';
 import { getClassByName } from '@data/classes/index';
+import { GameDataService } from '@services/GameDataService';
+import { StaticGameDataConnector } from '@services/StaticGameDataConnector';
 
 describe('CharacterService', () => {
+  beforeEach(() => {
+    GameDataService.setConnector(new StaticGameDataConnector());
+  });
   const mockRace: Race = {
     name: 'Human',
     sizeMod: Size.Medium,
@@ -34,8 +39,8 @@ describe('CharacterService', () => {
   };
 
   describe('createDefaultCharacter', () => {
-    test('should create valid character with racial bonuses applied', () => {
-      const character = CharacterService.createDefaultCharacter(mockCreateParams);
+    test('should create valid character with racial bonuses applied', async () => {
+      const character = await CharacterService.createDefaultCharacter(mockCreateParams);
 
       expect(character.info.name).toBe('Test Character');
       expect(character.info.race.name).toBe('Human');
@@ -47,8 +52,8 @@ describe('CharacterService', () => {
       expect(character.lastUpdated).toBeInstanceOf(Date);
     });
 
-    test('should set correct ability modifiers', () => {
-      const character = CharacterService.createDefaultCharacter(mockCreateParams);
+    test('should set correct ability modifiers', async () => {
+      const character = await CharacterService.createDefaultCharacter(mockCreateParams);
 
       expect(character.abilityScores.str.modifier).toBe(2);
       expect(character.abilityScores.dex.modifier).toBe(2);
@@ -56,16 +61,16 @@ describe('CharacterService', () => {
       expect(character.abilityScores.cha.modifier).toBe(-1);
     });
 
-    test('should assign unique ID', () => {
-      const char1 = CharacterService.createDefaultCharacter(mockCreateParams);
-      const char2 = CharacterService.createDefaultCharacter(mockCreateParams);
+    test('should assign unique ID', async () => {
+      const char1 = await CharacterService.createDefaultCharacter(mockCreateParams);
+      const char2 = await CharacterService.createDefaultCharacter(mockCreateParams);
 
       expect(char1.info.id).toBeDefined();
       expect(char2.info.id).toBeDefined();
       expect(char1.info.id).not.toBe(char2.info.id);
     });
 
-    test('should apply racial ability modifiers', () => {
+    test('should apply racial ability modifiers', async () => {
       const elfRace: Race = {
         ...mockRace,
         name: 'Elf',
@@ -73,7 +78,7 @@ describe('CharacterService', () => {
       };
 
       const elfParams = { ...mockCreateParams, race: elfRace };
-      const character = CharacterService.createDefaultCharacter(elfParams);
+      const character = await CharacterService.createDefaultCharacter(elfParams);
 
       expect(character.abilityScores.dex.racial).toBe(2);
       expect(character.abilityScores.con.racial).toBe(-2);
@@ -81,24 +86,24 @@ describe('CharacterService', () => {
       expect(character.abilityScores.con.total).toBe(11);
     });
 
-    test('should handle missing optional fields', () => {
+    test('should handle missing optional fields', async () => {
       const minimalParams = { ...mockCreateParams, deity: undefined };
-      const character = CharacterService.createDefaultCharacter(minimalParams);
+      const character = await CharacterService.createDefaultCharacter(minimalParams);
       expect(character.info.deity).toBe('');
     });
   });
 
   describe('validateCharacter', () => {
-    test('should validate correct character', () => {
-      const character = CharacterService.createDefaultCharacter(mockCreateParams);
+    test('should validate correct character', async () => {
+      const character = await CharacterService.createDefaultCharacter(mockCreateParams);
       const validation = CharacterService.validateCharacter(character);
 
       expect(validation.valid).toBe(true);
       expect(validation.errors).toHaveLength(0);
     });
 
-    test('should catch invalid ability scores', () => {
-      const character = CharacterService.createDefaultCharacter(mockCreateParams);
+    test('should catch invalid ability scores', async () => {
+      const character = await CharacterService.createDefaultCharacter(mockCreateParams);
       character.abilityScores.str.base = -5;
 
       const validation = CharacterService.validateCharacter(character);
@@ -106,8 +111,8 @@ describe('CharacterService', () => {
       expect(validation.errors.some((e) => e.includes('STR'))).toBe(true);
     });
 
-    test('should catch missing required fields', () => {
-      const character = CharacterService.createDefaultCharacter(mockCreateParams);
+    test('should catch missing required fields', async () => {
+      const character = await CharacterService.createDefaultCharacter(mockCreateParams);
       character.info.name = '';
 
       const validation = CharacterService.validateCharacter(character);
@@ -115,8 +120,8 @@ describe('CharacterService', () => {
       expect(validation.errors).toContain('Character name is required');
     });
 
-    test('should catch level inconsistencies', () => {
-      const character = CharacterService.createDefaultCharacter(mockCreateParams);
+    test('should catch level inconsistencies', async () => {
+      const character = await CharacterService.createDefaultCharacter(mockCreateParams);
       character.classes.totalLevel = 5;
 
       const validation = CharacterService.validateCharacter(character);
@@ -126,8 +131,8 @@ describe('CharacterService', () => {
       ).toBe(true);
     });
 
-    test('should catch characters without classes', () => {
-      const character = CharacterService.createDefaultCharacter(mockCreateParams);
+    test('should catch characters without classes', async () => {
+      const character = await CharacterService.createDefaultCharacter(mockCreateParams);
       character.classes.classes = [];
 
       const validation = CharacterService.validateCharacter(character);
@@ -135,8 +140,8 @@ describe('CharacterService', () => {
       expect(validation.errors).toContain('Character must have at least one class');
     });
 
-    test('should warn about old schema versions', () => {
-      const character = CharacterService.createDefaultCharacter(mockCreateParams);
+    test('should warn about old schema versions', async () => {
+      const character = await CharacterService.createDefaultCharacter(mockCreateParams);
       character.schemaVersion = '0.9.0';
 
       const validation = CharacterService.validateCharacter(character);
@@ -150,8 +155,8 @@ describe('CharacterService', () => {
   });
 
   describe('calculateAbilityModifiers', () => {
-    test('should calculate modifiers correctly', () => {
-      const character = CharacterService.createDefaultCharacter(mockCreateParams);
+    test('should calculate modifiers correctly', async () => {
+      const character = await CharacterService.createDefaultCharacter(mockCreateParams);
       const scores = CharacterService.calculateAbilityModifiers(character.abilityScores);
 
       expect(scores.str.modifier).toBe(2);
@@ -162,8 +167,8 @@ describe('CharacterService', () => {
       expect(scores.cha.modifier).toBe(-1);
     });
 
-    test('should handle bonuses correctly', () => {
-      const character = CharacterService.createDefaultCharacter(mockCreateParams);
+    test('should handle bonuses correctly', async () => {
+      const character = await CharacterService.createDefaultCharacter(mockCreateParams);
 
       character.abilityScores.str.bonuses.enhancement.push({
         type: BonusType.ENHANCEMENT,
@@ -177,8 +182,8 @@ describe('CharacterService', () => {
       expect(scores.str.modifier).toBe(3);
     });
 
-    test('should handle untyped bonuses stacking', () => {
-      const character = CharacterService.createDefaultCharacter(mockCreateParams);
+    test('should handle untyped bonuses stacking', async () => {
+      const character = await CharacterService.createDefaultCharacter(mockCreateParams);
 
       character.abilityScores.str.bonuses.untyped.push(
         { type: BonusType.UNTYPED, value: 1, source: 'Source 1', active: true },
@@ -189,8 +194,8 @@ describe('CharacterService', () => {
       expect(scores.str.total).toBe(18);
     });
 
-    test('should handle typed bonuses not stacking', () => {
-      const character = CharacterService.createDefaultCharacter(mockCreateParams);
+    test('should handle typed bonuses not stacking', async () => {
+      const character = await CharacterService.createDefaultCharacter(mockCreateParams);
 
       character.abilityScores.str.bonuses.enhancement.push(
         { type: BonusType.ENHANCEMENT, value: 2, source: 'Belt +2', active: true },
@@ -201,8 +206,8 @@ describe('CharacterService', () => {
       expect(scores.str.total).toBe(19);
     });
 
-    test('should handle inactive bonuses', () => {
-      const character = CharacterService.createDefaultCharacter(mockCreateParams);
+    test('should handle inactive bonuses', async () => {
+      const character = await CharacterService.createDefaultCharacter(mockCreateParams);
 
       character.abilityScores.str.bonuses.enhancement.push({
         type: BonusType.ENHANCEMENT,
@@ -217,7 +222,7 @@ describe('CharacterService', () => {
   });
 
   describe('applyRacialModifiers', () => {
-    test('should apply racial ability modifiers', () => {
+    test('should apply racial ability modifiers', async () => {
       const halfOrcRace: Race = {
         ...mockRace,
         name: 'Half-Orc',
@@ -225,7 +230,7 @@ describe('CharacterService', () => {
       };
 
       const params = { ...mockCreateParams, race: halfOrcRace };
-      const character = CharacterService.createDefaultCharacter(params);
+      const character = await CharacterService.createDefaultCharacter(params);
 
       expect(character.abilityScores.str.racial).toBe(2);
       expect(character.abilityScores.con.racial).toBe(2);
@@ -233,7 +238,7 @@ describe('CharacterService', () => {
       expect(character.abilityScores.str.total).toBe(17);
     });
 
-    test('should update size from race', () => {
+    test('should update size from race', async () => {
       const gnomeRace: Race = {
         ...mockRace,
         name: 'Gnome',
@@ -241,7 +246,7 @@ describe('CharacterService', () => {
       };
 
       const params = { ...mockCreateParams, race: gnomeRace };
-      const character = CharacterService.createDefaultCharacter(params);
+      const character = await CharacterService.createDefaultCharacter(params);
 
       expect(character.info.size).toBe(Size.Small);
     });
@@ -263,8 +268,8 @@ describe('CharacterService', () => {
   });
 
   describe('exportToJSON and importFromJSON', () => {
-    test('should export and import character correctly', () => {
-      const originalCharacter = CharacterService.createDefaultCharacter(mockCreateParams);
+    test('should export and import character correctly', async () => {
+      const originalCharacter = await CharacterService.createDefaultCharacter(mockCreateParams);
       const json = CharacterService.exportToJSON(originalCharacter);
       const importedCharacter = CharacterService.importFromJSON(json);
 
@@ -293,8 +298,8 @@ describe('CharacterService', () => {
       }).toThrow();
     });
 
-    test('should update schema version on import', () => {
-      const character = CharacterService.createDefaultCharacter(mockCreateParams);
+    test('should update schema version on import', async () => {
+      const character = await CharacterService.createDefaultCharacter(mockCreateParams);
       character.schemaVersion = '0.9.0';
 
       const json = JSON.stringify(character);
@@ -305,8 +310,8 @@ describe('CharacterService', () => {
   });
 
   describe('getLevel1ClassFeatures snapshot', () => {
-    test('snapshots all ClassFeatureData fields including id, activationMode, and effects', () => {
-      const character = CharacterService.createDefaultCharacter({
+    test('snapshots all ClassFeatureData fields including id, activationMode, and effects', async () => {
+      const character = await CharacterService.createDefaultCharacter({
         ...mockCreateParams,
         selectedClass: 'Barbarian',
       });
@@ -326,8 +331,8 @@ describe('CharacterService', () => {
       expect(features.length).toBe(level1StaticCount);
     });
 
-    test('features are not reduced to name/description/level/empty-effects when class data has richer fields', () => {
-      const character = CharacterService.createDefaultCharacter(mockCreateParams);
+    test('features are not reduced to name/description/level/empty-effects when class data has richer fields', async () => {
+      const character = await CharacterService.createDefaultCharacter(mockCreateParams);
       const features = character.classes.classes[0].classFeatures;
 
       // Every stored feature must at minimum carry the mandatory fields.
@@ -339,11 +344,11 @@ describe('CharacterService', () => {
       }
     });
 
-    test('feature with id in static data retains id on the character', () => {
+    test('feature with id in static data retains id on the character', async () => {
       // Compare stored features directly against the static class data to verify that
       // optional fields (id, activationMode, resourcePool) present in the source are
       // not stripped during snapshotting.
-      const character = CharacterService.createDefaultCharacter(mockCreateParams);
+      const character = await CharacterService.createDefaultCharacter(mockCreateParams);
       const storedFeatures = character.classes.classes[0].classFeatures;
 
       const staticClass = getClassByName('Fighter');
@@ -351,7 +356,9 @@ describe('CharacterService', () => {
       const level1StaticFeatures = staticClass!.classFeatures.filter((f) => f.level === 1);
 
       for (const staticFeature of level1StaticFeatures) {
-        const stored = storedFeatures.find((f) => f.name === staticFeature.name && f.level === staticFeature.level);
+        const stored = storedFeatures.find(
+          (f) => f.name === staticFeature.name && f.level === staticFeature.level,
+        );
         expect(stored).toBeDefined();
 
         if (staticFeature.id !== undefined) {
@@ -368,7 +375,7 @@ describe('CharacterService', () => {
   });
 
   describe('edge cases', () => {
-    test('should handle extreme ability scores', () => {
+    test('should handle extreme ability scores', async () => {
       const extremeParams = {
         ...mockCreateParams,
         abilityScores: {
@@ -381,43 +388,42 @@ describe('CharacterService', () => {
         },
       };
 
-      const character = CharacterService.createDefaultCharacter(extremeParams);
+      const character = await CharacterService.createDefaultCharacter(extremeParams);
       expect(character.abilityScores.str.modifier).toBe(7);
       expect(character.abilityScores.dex.modifier).toBe(-5);
     });
 
-    test('should handle empty character name gracefully', () => {
+    test('should handle empty character name gracefully', async () => {
       const params = { ...mockCreateParams, name: '' };
-      const character = CharacterService.createDefaultCharacter(params);
+      const character = await CharacterService.createDefaultCharacter(params);
 
       expect(character.info.name).toBe('New Character');
     });
 
-    test('should handle unknown class gracefully', () => {
+    test('throws when class is not found', async () => {
       const params = { ...mockCreateParams, selectedClass: 'UnknownClass' };
-      const character = CharacterService.createDefaultCharacter(params);
-
-      expect(character.classes.classes[0].name).toBe('UnknownClass');
-      expect(character.classes.classes[0].hitDieSize).toBe(8);
+      await expect(CharacterService.createDefaultCharacter(params)).rejects.toThrow(
+        'Class not found: "UnknownClass"',
+      );
     });
   });
 
   describe('createDefaultCharacter — skillRanks', () => {
-    test('applies valid skill ranks from creation params', () => {
+    test('applies valid skill ranks from creation params', async () => {
       const params: CreateCharacterParams = {
         ...mockCreateParams,
         skillRanks: { perception: 1 },
       };
-      const character = CharacterService.createDefaultCharacter(params);
+      const character = await CharacterService.createDefaultCharacter(params);
       expect(character.skills.totalRanks).toBeGreaterThanOrEqual(1);
     });
 
-    test('ignores skill ranks of 0 or keys not in skills', () => {
+    test('ignores skill ranks of 0 or keys not in skills', async () => {
       const params: CreateCharacterParams = {
         ...mockCreateParams,
         skillRanks: { perception: 0, nonExistentSkill: 5 },
       };
-      const character = CharacterService.createDefaultCharacter(params);
+      const character = await CharacterService.createDefaultCharacter(params);
       expect(character.skills.totalRanks).toBe(0);
     });
   });

@@ -1,5 +1,7 @@
 import { CombatService } from '@services/CombatService';
 import { CharacterService } from '@services/CharacterService';
+import { GameDataService } from '@services/GameDataService';
+import { StaticGameDataConnector } from '@services/StaticGameDataConnector';
 import { ModifierPipelineService } from '@services/ModifierPipelineService';
 import { CreateCharacterParams, AbilityScoreMethod } from '@/types/character';
 import { Size, Alignment, BonusType } from '@/types/base';
@@ -42,8 +44,10 @@ function makeFighterParams(
   };
 }
 
-function makeFighter(overrides?: Partial<{ str: number; dex: number; con: number }>): Character {
-  const char = CharacterService.createDefaultCharacter(makeFighterParams(overrides));
+async function makeFighter(
+  overrides?: Partial<{ str: number; dex: number; con: number }>,
+): Promise<Character> {
+  const char = await CharacterService.createDefaultCharacter(makeFighterParams(overrides));
   return ModifierPipelineService.recalculate(char);
 }
 
@@ -84,7 +88,12 @@ describe('CombatService.getDeadlyAimValues', () => {
 // ----------------------------------------------------------------
 
 describe('CombatService.getCombatAbilityEffects', () => {
-  const fighter = makeFighter();
+  let fighter: Character;
+
+  beforeEach(async () => {
+    GameDataService.setConnector(new StaticGameDataConnector());
+    fighter = await makeFighter();
+  });
 
   it('returns empty array when all abilities off', () => {
     const effects = CombatService.getCombatAbilityEffects(fighter, defaultAbilities);
@@ -182,8 +191,8 @@ describe('CombatService.getCombatAbilityEffects', () => {
   });
 
   describe('Smite Evil', () => {
-    function makePaladin(chaScore = 16): Character {
-      const char = CharacterService.createDefaultCharacter({
+    async function makePaladin(chaScore = 16): Promise<Character> {
+      const char = await CharacterService.createDefaultCharacter({
         name: 'Test Paladin',
         race: mockRace,
         selectedClass: 'Paladin',
@@ -194,15 +203,15 @@ describe('CombatService.getCombatAbilityEffects', () => {
       return ModifierPipelineService.recalculate(char);
     }
 
-    it('produces no effects when smite-evil toggle is off', () => {
-      const paladin = makePaladin();
+    it('produces no effects when smite-evil toggle is off', async () => {
+      const paladin = await makePaladin();
       const effects = CombatService.getCombatAbilityEffects(paladin, defaultAbilities);
       expect(effects.every((e) => e.source !== 'Smite Evil')).toBe(true);
     });
 
-    it('produces attack, damage, and deflection effects when toggle is on and CHA is positive', () => {
+    it('produces attack, damage, and deflection effects when toggle is on and CHA is positive', async () => {
       // CHA 16 → modifier +3; Paladin level 1
-      const paladin = makePaladin(16);
+      const paladin = await makePaladin(16);
       const effects = CombatService.getCombatAbilityEffects(paladin, {
         ...defaultAbilities,
         activeToggles: { 'smite-evil': true },
@@ -231,9 +240,9 @@ describe('CombatService.getCombatAbilityEffects', () => {
       expect(deflectionEffect!.bonusType).toBe(BonusType.DEFLECTION);
     });
 
-    it('omits attack and deflection effects when CHA modifier is not positive', () => {
+    it('omits attack and deflection effects when CHA modifier is not positive', async () => {
       // CHA 8 → modifier -1
-      const paladin = makePaladin(8);
+      const paladin = await makePaladin(8);
       const effects = CombatService.getCombatAbilityEffects(paladin, {
         ...defaultAbilities,
         activeToggles: { 'smite-evil': true },
@@ -264,8 +273,12 @@ describe('CombatService.getCombatAbilityEffects', () => {
 // ----------------------------------------------------------------
 
 describe('CombatService.calculateAllTotals', () => {
-  it('returns base stats when no buffs or abilities active', () => {
-    const fighter = makeFighter();
+  beforeEach(() => {
+    GameDataService.setConnector(new StaticGameDataConnector());
+  });
+
+  it('returns base stats when no buffs or abilities active', async () => {
+    const fighter = await makeFighter();
     const totals = CombatService.calculateAllTotals(fighter, [], defaultAbilities);
 
     // Fighter level 1, STR 16 (+3), DEX 14 (+2), CON 14 (+2)
@@ -282,8 +295,8 @@ describe('CombatService.calculateAllTotals', () => {
     expect(totals.will).toBe(0);
   });
 
-  it('applies a morale buff to Will saves', () => {
-    const fighter = makeFighter();
+  it('applies a morale buff to Will saves', async () => {
+    const fighter = await makeFighter();
     const blessBuff: Buff = {
       id: 'bless',
       name: 'Bless',
@@ -316,8 +329,8 @@ describe('CombatService.calculateAllTotals', () => {
     expect(with_.meleeAttack[0]).toBe(without.meleeAttack[0] + 1);
   });
 
-  it('two morale buffs to same stat — only highest applies', () => {
-    const fighter = makeFighter();
+  it('two morale buffs to same stat — only highest applies', async () => {
+    const fighter = await makeFighter();
 
     const buffA: Buff = {
       id: 'buff_a',
@@ -362,8 +375,8 @@ describe('CombatService.calculateAllTotals', () => {
     expect(result.will).toBe(base.will + 5);
   });
 
-  it('two dodge bonuses both apply (dodge stacks)', () => {
-    const fighter = makeFighter();
+  it('two dodge bonuses both apply (dodge stacks)', async () => {
+    const fighter = await makeFighter();
 
     const dodge1: Buff = {
       id: 'dodge_1',
@@ -407,8 +420,8 @@ describe('CombatService.calculateAllTotals', () => {
     expect(result.ac.total).toBe(base.ac.total + 3); // both apply
   });
 
-  it('inactive buffs are ignored', () => {
-    const fighter = makeFighter();
+  it('inactive buffs are ignored', async () => {
+    const fighter = await makeFighter();
     const inactiveBuff: Buff = {
       id: 'inactive',
       name: 'Inactive',
@@ -433,8 +446,8 @@ describe('CombatService.calculateAllTotals', () => {
     expect(result.will).toBe(base.will);
   });
 
-  it('Power Attack reduces melee attack and increases damage', () => {
-    const fighter = makeFighter();
+  it('Power Attack reduces melee attack and increases damage', async () => {
+    const fighter = await makeFighter();
     const base = CombatService.calculateAllTotals(fighter, [], defaultAbilities);
     const withPA = CombatService.calculateAllTotals(fighter, [], {
       ...defaultAbilities,
@@ -443,8 +456,8 @@ describe('CombatService.calculateAllTotals', () => {
     expect(withPA.meleeAttack[0]).toBeLessThan(base.meleeAttack[0]);
   });
 
-  it('Rage increases melee attack (via STR bonus)', () => {
-    const fighter = makeFighter();
+  it('Rage increases melee attack (via STR bonus)', async () => {
+    const fighter = await makeFighter();
     const base = CombatService.calculateAllTotals(fighter, [], defaultAbilities);
     const withRage = CombatService.calculateAllTotals(fighter, [], {
       ...defaultAbilities,
@@ -454,8 +467,8 @@ describe('CombatService.calculateAllTotals', () => {
     expect(withRage.meleeAttack[0]).toBe(base.meleeAttack[0] + 2);
   });
 
-  it('Rage reduces AC by 2', () => {
-    const fighter = makeFighter();
+  it('Rage reduces AC by 2', async () => {
+    const fighter = await makeFighter();
     const base = CombatService.calculateAllTotals(fighter, [], defaultAbilities);
     const withRage = CombatService.calculateAllTotals(fighter, [], {
       ...defaultAbilities,
@@ -464,8 +477,8 @@ describe('CombatService.calculateAllTotals', () => {
     expect(withRage.ac.total).toBe(base.ac.total - 2);
   });
 
-  it('skill buffs are included in skill totals', () => {
-    const fighter = makeFighter();
+  it('skill buffs are included in skill totals', async () => {
+    const fighter = await makeFighter();
     const perceptionBuff: Buff = {
       id: 'guidance',
       name: 'Guidance',
@@ -550,31 +563,35 @@ describe('CombatService.getHPState', () => {
 // ----------------------------------------------------------------
 
 describe('CombatService.calculateRageEndHPAdjustment', () => {
-  it('level 1 fighter loses 2 HP (2 HP per level)', () => {
-    const fighter = makeFighter();
+  beforeEach(() => {
+    GameDataService.setConnector(new StaticGameDataConnector());
+  });
+
+  it('level 1 fighter loses 2 HP (2 HP per level)', async () => {
+    const fighter = await makeFighter();
     const result = CombatService.calculateRageEndHPAdjustment(fighter, 15, 0);
     expect(result.hpLost).toBe(2);
     expect(result.newCurrentHP).toBe(13);
     expect(result.newTempHP).toBe(0);
   });
 
-  it('temp HP absorbs loss first', () => {
-    const fighter = makeFighter();
+  it('temp HP absorbs loss first', async () => {
+    const fighter = await makeFighter();
     const result = CombatService.calculateRageEndHPAdjustment(fighter, 15, 5);
     expect(result.hpLost).toBe(2);
     expect(result.newTempHP).toBe(3); // 5 - 2 = 3
     expect(result.newCurrentHP).toBe(15); // unaffected
   });
 
-  it('temp HP partially absorbs — overflow hits current HP', () => {
-    const fighter = makeFighter();
+  it('temp HP partially absorbs — overflow hits current HP', async () => {
+    const fighter = await makeFighter();
     const result = CombatService.calculateRageEndHPAdjustment(fighter, 15, 1);
     expect(result.newTempHP).toBe(0); // 1 temp absorbed
     expect(result.newCurrentHP).toBe(14); // 1 remaining loss hits current
   });
 
-  it('can leave character dying', () => {
-    const fighter = makeFighter();
+  it('can leave character dying', async () => {
+    const fighter = await makeFighter();
     const result = CombatService.calculateRageEndHPAdjustment(fighter, 1, 0);
     expect(result.newCurrentHP).toBe(-1);
   });
@@ -585,15 +602,19 @@ describe('CombatService.calculateRageEndHPAdjustment', () => {
 // ----------------------------------------------------------------
 
 describe('CombatService.calculateSkill', () => {
-  it('returns a numeric total for a valid skill key', () => {
-    const fighter = makeFighter();
+  beforeEach(() => {
+    GameDataService.setConnector(new StaticGameDataConnector());
+  });
+
+  it('returns a numeric total for a valid skill key', async () => {
+    const fighter = await makeFighter();
     const result = CombatService.calculateSkill(fighter, [], 'acrobatics');
     expect(typeof result.total).toBe('number');
     expect(Array.isArray(result.breakdown)).toBe(true);
   });
 
-  it('returns 0 for an unknown skill key', () => {
-    const fighter = makeFighter();
+  it('returns 0 for an unknown skill key', async () => {
+    const fighter = await makeFighter();
     const result = CombatService.calculateSkill(fighter, [], 'nonexistent_skill');
     expect(result.total).toBe(0);
   });

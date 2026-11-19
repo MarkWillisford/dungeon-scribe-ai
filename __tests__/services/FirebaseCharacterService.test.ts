@@ -1,6 +1,8 @@
 import { FirebaseCharacterService } from '@services/FirebaseCharacterService';
 import { Character, AppliedTemplate } from '@/types';
 import { CharacterService } from '@services/CharacterService';
+import { GameDataService } from '@services/GameDataService';
+import { StaticGameDataConnector } from '@services/StaticGameDataConnector';
 import { Size, Alignment } from '@/types/base';
 import { AbilityScoreMethod } from '@/types/character';
 
@@ -36,7 +38,7 @@ jest.mock('@config/firebase', () => ({
 
 const mockFirestore = require('firebase/firestore');
 
-const createTestCharacter = (): Character => {
+const createTestCharacter = (): Promise<Character> => {
   return CharacterService.createDefaultCharacter({
     name: 'Firestore Test Character',
     race: {
@@ -59,12 +61,13 @@ const createTestCharacter = (): Character => {
 
 describe('FirebaseCharacterService', () => {
   beforeEach(() => {
+    GameDataService.setConnector(new StaticGameDataConnector());
     jest.clearAllMocks();
   });
 
   describe('create', () => {
     test('should create character in Firestore', async () => {
-      const character = createTestCharacter();
+      const character = await createTestCharacter();
 
       mockFirestore.addDoc.mockResolvedValue({ id: 'firebase-doc-id' });
 
@@ -116,7 +119,7 @@ describe('FirebaseCharacterService', () => {
 
   describe('getCharacter', () => {
     test('should return character by ID', async () => {
-      const character = createTestCharacter();
+      const character = await createTestCharacter();
       const serialized = JSON.parse(JSON.stringify(character));
       mockFirestore.getDoc.mockResolvedValue({
         exists: () => true,
@@ -146,7 +149,7 @@ describe('FirebaseCharacterService', () => {
       // createTestCharacter() creates a character with non-empty classFeatures
       // (getLevel1ClassFeatures returns at least the level-1 features for Fighter).
       // The merge guard must skip the Firestore class-doc fetch in this case.
-      const character = createTestCharacter();
+      const character = await createTestCharacter();
       const serialized = JSON.parse(JSON.stringify(character));
       serialized.equipment.equippedSlots = {};
 
@@ -167,7 +170,7 @@ describe('FirebaseCharacterService', () => {
     });
 
     test('still fetches class docs when a class entry has empty features (legacy backfill)', async () => {
-      const character = createTestCharacter();
+      const character = await createTestCharacter();
       const serialized = JSON.parse(JSON.stringify(character));
       serialized.equipment.equippedSlots = {};
       // Simulate a legacy character whose classFeatures were never persisted.
@@ -200,7 +203,7 @@ describe('FirebaseCharacterService', () => {
 
   describe('update', () => {
     test('calls updateDoc and returns the refreshed character', async () => {
-      const character = createTestCharacter();
+      const character = await createTestCharacter();
       const serialized = JSON.parse(JSON.stringify(character));
       serialized.equipment.equippedSlots = {};
 
@@ -220,7 +223,7 @@ describe('FirebaseCharacterService', () => {
 
   describe('serializeForFirestore — companion equippedSlots', () => {
     test('passes companion equippedSlots Record through to Firestore', async () => {
-      const character = createTestCharacter();
+      const character = await createTestCharacter();
       // Add a companion with a Record for equippedSlots (type changed from Map)
       (character as unknown as Record<string, unknown>).companions = [
         {
@@ -260,7 +263,7 @@ describe('FirebaseCharacterService', () => {
     });
 
     test('serializes character-level lastUpdated Date to ISO string', async () => {
-      const character = createTestCharacter();
+      const character = await createTestCharacter();
       (character as unknown as Record<string, unknown>).lastUpdated = new Date(
         '2024-06-01T00:00:00.000Z',
       );
@@ -283,7 +286,7 @@ describe('FirebaseCharacterService', () => {
     }
 
     test('deserializes companion equippedSlots plain object as Record', async () => {
-      const character = createTestCharacter();
+      const character = await createTestCharacter();
       const base = JSON.parse(JSON.stringify(character));
       base.equipment.equippedSlots = {};
       base.companions = [
@@ -322,7 +325,7 @@ describe('FirebaseCharacterService', () => {
     });
 
     test('converts lastUpdated Firestore Timestamp to Date', async () => {
-      const character = createTestCharacter();
+      const character = await createTestCharacter();
       const base = JSON.parse(JSON.stringify(character));
       base.equipment.equippedSlots = {};
       base.lastUpdated = { toDate: () => new Date('2024-03-15') };
@@ -334,7 +337,7 @@ describe('FirebaseCharacterService', () => {
     });
 
     test('converts lastUpdated ISO string to Date', async () => {
-      const character = createTestCharacter();
+      const character = await createTestCharacter();
       const base = JSON.parse(JSON.stringify(character));
       base.equipment.equippedSlots = {};
       base.lastUpdated = '2024-05-20T12:00:00.000Z';
@@ -345,7 +348,7 @@ describe('FirebaseCharacterService', () => {
     });
 
     test('converts createdAt ISO string to Date', async () => {
-      const character = createTestCharacter();
+      const character = await createTestCharacter();
       const base = JSON.parse(JSON.stringify(character));
       base.equipment.equippedSlots = {};
       base.createdAt = '2024-01-10T08:00:00.000Z';
@@ -356,7 +359,7 @@ describe('FirebaseCharacterService', () => {
     });
 
     test('converts createdAt Firestore Timestamp to Date', async () => {
-      const character = createTestCharacter();
+      const character = await createTestCharacter();
       const base = JSON.parse(JSON.stringify(character));
       base.equipment.equippedSlots = {};
       base.createdAt = { toDate: () => new Date(1706745600000) }; // 2024-02-01 UTC
@@ -368,7 +371,7 @@ describe('FirebaseCharacterService', () => {
     });
 
     test('backfills missing ruleset with PF1e standard preset', async () => {
-      const character = createTestCharacter();
+      const character = await createTestCharacter();
       const base = JSON.parse(JSON.stringify(character));
       base.equipment.equippedSlots = {};
       delete base.ruleset;
@@ -380,7 +383,7 @@ describe('FirebaseCharacterService', () => {
     });
 
     test('backfills missing equipment for pre-equipment legacy documents', async () => {
-      const character = createTestCharacter();
+      const character = await createTestCharacter();
       const base = JSON.parse(JSON.stringify(character));
       delete base.equipment;
       mockGetDoc(base);
@@ -392,7 +395,7 @@ describe('FirebaseCharacterService', () => {
     });
 
     test('backfills missing companion equipment for pre-equipment legacy documents', async () => {
-      const character = createTestCharacter();
+      const character = await createTestCharacter();
       const base = JSON.parse(JSON.stringify(character));
       base.equipment.equippedSlots = {};
       base.companions = [{ instanceId: 'c1', equipment: undefined }];
@@ -405,7 +408,9 @@ describe('FirebaseCharacterService', () => {
   });
 
   describe('template choice round-trip', () => {
-    function buildCharacterWithTemplate(tplOverrides: Partial<AppliedTemplate> = {}): Character {
+    async function buildCharacterWithTemplate(
+      tplOverrides: Partial<AppliedTemplate> = {},
+    ): Promise<Character> {
       const base: AppliedTemplate = {
         id: 'tpl-round-trip',
         templateId: 'celestial',
@@ -418,11 +423,11 @@ describe('FirebaseCharacterService', () => {
         sourceRev: 1,
         ...tplOverrides,
       };
-      return { ...createTestCharacter(), appliedTemplates: [base] };
+      return { ...(await createTestCharacter()), appliedTemplates: [base] };
     }
 
     test('resolved template choice and injected feature survive the round-trip', async () => {
-      const character = buildCharacterWithTemplate({
+      const character = await buildCharacterWithTemplate({
         templateChoices: [{ choiceId: 'celestial-type', selection: 'astral-deva' }],
         features: [
           {
@@ -458,7 +463,7 @@ describe('FirebaseCharacterService', () => {
     });
 
     test('unresolved template choice loads back with no resolution (placeholder "— choose —" would render)', async () => {
-      const character = buildCharacterWithTemplate({
+      const character = await buildCharacterWithTemplate({
         // no templateChoices, no features — fully unresolved
       });
 
@@ -483,7 +488,7 @@ describe('FirebaseCharacterService', () => {
     });
 
     test('saving a character with unresolved template choices succeeds without blocking', async () => {
-      const character = buildCharacterWithTemplate({
+      const character = await buildCharacterWithTemplate({
         // no templateChoices — unresolved choice left pending
       });
 

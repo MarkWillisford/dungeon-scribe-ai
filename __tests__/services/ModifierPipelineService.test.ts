@@ -2,6 +2,8 @@ import { ModifierPipelineService } from '@services/ModifierPipelineService';
 import { FeatRegistryService } from '@services/FeatRegistryService';
 import { FlawRegistryService } from '@services/FlawRegistryService';
 import { CharacterService } from '@services/CharacterService';
+import { GameDataService } from '@services/GameDataService';
+import { StaticGameDataConnector } from '@services/StaticGameDataConnector';
 import { Size, Alignment, BonusType } from '@/types/base';
 import { AbilityScoreMethod } from '@/types/character';
 import type { Character } from '@/types';
@@ -29,7 +31,7 @@ function createTestCharacter(overrides?: {
   wis?: number;
   cha?: number;
   className?: string;
-}): Character {
+}): Promise<Character> {
   return CharacterService.createDefaultCharacter({
     name: 'Test Character',
     race: mockRace,
@@ -154,6 +156,7 @@ const testFeats: FeatDefinition[] = [
 
 describe('ModifierPipelineService', () => {
   beforeEach(() => {
+    GameDataService.setConnector(new StaticGameDataConnector());
     FeatRegistryService.clear();
     FeatRegistryService.registerBatch(testFeats);
   });
@@ -164,8 +167,8 @@ describe('ModifierPipelineService', () => {
   });
 
   describe('recalculate', () => {
-    test('calculates ability scores correctly', () => {
-      const char = createTestCharacter({ str: 16, dex: 14, con: 13 });
+    test('calculates ability scores correctly', async () => {
+      const char = await createTestCharacter({ str: 16, dex: 14, con: 13 });
       const result = ModifierPipelineService.recalculate(char);
 
       expect(result.abilityScores.str.total).toBe(16);
@@ -176,8 +179,8 @@ describe('ModifierPipelineService', () => {
       expect(result.abilityScores.con.modifier).toBe(1);
     });
 
-    test('applies passive feat effects', () => {
-      const char = createTestCharacter();
+    test('applies passive feat effects', async () => {
+      const char = await createTestCharacter();
       char.feats.feats.push({
         featId: 'lightning_reflexes',
         name: 'Lightning Reflexes',
@@ -187,7 +190,7 @@ describe('ModifierPipelineService', () => {
         choices: {},
       });
 
-      const before = ModifierPipelineService.recalculate(createTestCharacter());
+      const before = ModifierPipelineService.recalculate(await createTestCharacter());
       const after = ModifierPipelineService.recalculate(char);
 
       expect(after.combatStats.savingThrows.reflex.misc).toBe(
@@ -195,8 +198,8 @@ describe('ModifierPipelineService', () => {
       );
     });
 
-    test('applies initiative bonus from feat', () => {
-      const char = createTestCharacter();
+    test('applies initiative bonus from feat', async () => {
+      const char = await createTestCharacter();
       char.feats.feats.push({
         featId: 'improved_initiative',
         name: 'Improved Initiative',
@@ -211,8 +214,8 @@ describe('ModifierPipelineService', () => {
       expect(result.combatStats.initiative.misc).toBe(4);
     });
 
-    test('applies dodge AC bonus', () => {
-      const char = createTestCharacter({ dex: 14 });
+    test('applies dodge AC bonus', async () => {
+      const char = await createTestCharacter({ dex: 14 });
       char.feats.feats.push({
         featId: 'dodge',
         name: 'Dodge',
@@ -226,8 +229,8 @@ describe('ModifierPipelineService', () => {
       expect(result.combatStats.armorClass.dodge).toBe(1);
     });
 
-    test('toggle feat inactive does not apply effects', () => {
-      const char = createTestCharacter({ str: 16 });
+    test('toggle feat inactive does not apply effects', async () => {
+      const char = await createTestCharacter({ str: 16 });
       char.feats.feats.push({
         featId: 'power_attack',
         name: 'Power Attack',
@@ -237,7 +240,7 @@ describe('ModifierPipelineService', () => {
         choices: {},
       });
 
-      const baseline = ModifierPipelineService.recalculate(createTestCharacter({ str: 16 }));
+      const baseline = ModifierPipelineService.recalculate(await createTestCharacter({ str: 16 }));
       const result = ModifierPipelineService.recalculate(char);
 
       expect(result.combatStats.attackBonuses.meleeTotal).toBe(
@@ -245,8 +248,8 @@ describe('ModifierPipelineService', () => {
       );
     });
 
-    test('toggle feat active applies effects', () => {
-      const char = createTestCharacter({ str: 16 });
+    test('toggle feat active applies effects', async () => {
+      const char = await createTestCharacter({ str: 16 });
       char.feats.feats.push({
         featId: 'power_attack',
         name: 'Power Attack',
@@ -256,7 +259,7 @@ describe('ModifierPipelineService', () => {
         choices: {},
       });
 
-      const baseline = ModifierPipelineService.recalculate(createTestCharacter({ str: 16 }));
+      const baseline = ModifierPipelineService.recalculate(await createTestCharacter({ str: 16 }));
       const result = ModifierPipelineService.recalculate(char);
 
       // Power Attack at BAB 1: -(floor(1/4)+1) = -1 attack
@@ -265,8 +268,8 @@ describe('ModifierPipelineService', () => {
       );
     });
 
-    test('formula-based HP feat (Toughness) works', () => {
-      const char = createTestCharacter();
+    test('formula-based HP feat (Toughness) works', async () => {
+      const char = await createTestCharacter();
       char.feats.feats.push({
         featId: 'toughness',
         name: 'Toughness',
@@ -276,30 +279,30 @@ describe('ModifierPipelineService', () => {
         choices: {},
       });
 
-      const baseline = ModifierPipelineService.recalculate(createTestCharacter());
+      const baseline = ModifierPipelineService.recalculate(await createTestCharacter());
       const result = ModifierPipelineService.recalculate(char);
 
       // Toughness at level 1: max(3, 1) = 3 bonus HP
       expect(result.combatStats.hitPoints.other).toBe(baseline.combatStats.hitPoints.other + 3);
     });
 
-    test('recalculate is pure (does not mutate input)', () => {
-      const char = createTestCharacter();
+    test('recalculate is pure (does not mutate input)', async () => {
+      const char = await createTestCharacter();
       const originalStr = char.abilityScores.str.total;
       ModifierPipelineService.recalculate(char);
       expect(char.abilityScores.str.total).toBe(originalStr);
     });
 
-    test('calculates BAB and iterative attacks', () => {
-      const char = createTestCharacter();
+    test('calculates BAB and iterative attacks', async () => {
+      const char = await createTestCharacter();
       const result = ModifierPipelineService.recalculate(char);
 
       // Fighter level 1 = BAB +1
       expect(result.combatStats.attackBonuses.baseAttack).toEqual([1]);
     });
 
-    test('calculates saving throws from class progression', () => {
-      const char = createTestCharacter();
+    test('calculates saving throws from class progression', async () => {
+      const char = await createTestCharacter();
       const result = ModifierPipelineService.recalculate(char);
 
       // Fighter: Fort Good, Ref Poor, Will Poor
@@ -312,19 +315,19 @@ describe('ModifierPipelineService', () => {
   // missing its traits array did not merely lose racial effects, it rolled back
   // the loading flag too and left the create-character screen stuck forever.
   //
-  // NOTE: createTestCharacter() passes the module-level mockRace by reference,
+  // NOTE: await createTestCharacter() passes the module-level mockRace by reference,
   // so these tests detach info.race with a shallow copy before mutating it.
   // Mutating it directly corrupts the fixture for every later test in this file.
   describe('tolerates incomplete race data (#356)', () => {
-    test('does not throw when the race has no traits array', () => {
-      const char = createTestCharacter();
+    test('does not throw when the race has no traits array', async () => {
+      const char = await createTestCharacter();
       char.info.race = { ...char.info.race };
       delete (char.info.race as { traits?: unknown }).traits;
       expect(() => ModifierPipelineService.recalculate(char)).not.toThrow();
     });
 
-    test('does not throw when a racial trait has no effects array', () => {
-      const char = createTestCharacter();
+    test('does not throw when a racial trait has no effects array', async () => {
+      const char = await createTestCharacter();
       char.info.race = {
         ...char.info.race,
         traits: [
@@ -334,8 +337,8 @@ describe('ModifierPipelineService', () => {
       expect(() => ModifierPipelineService.recalculate(char)).not.toThrow();
     });
 
-    test('a race with no traits still produces valid derived stats', () => {
-      const char = createTestCharacter({ str: 16 });
+    test('a race with no traits still produces valid derived stats', async () => {
+      const char = await createTestCharacter({ str: 16 });
       char.info.race = { ...char.info.race };
       delete (char.info.race as { traits?: unknown }).traits;
       const result = ModifierPipelineService.recalculate(char);
@@ -344,8 +347,8 @@ describe('ModifierPipelineService', () => {
   });
 
   describe('getBreakdown', () => {
-    test('returns breakdown for a stat with bonuses', () => {
-      const char = createTestCharacter();
+    test('returns breakdown for a stat with bonuses', async () => {
+      const char = await createTestCharacter();
       char.feats.feats.push({
         featId: 'improved_initiative',
         name: 'Improved Initiative',
@@ -361,8 +364,8 @@ describe('ModifierPipelineService', () => {
       expect(breakdown.bonuses.some((b) => b.source === 'Improved Initiative')).toBe(true);
     });
 
-    test('returns empty breakdown for stat with no bonuses', () => {
-      const char = createTestCharacter();
+    test('returns empty breakdown for stat with no bonuses', async () => {
+      const char = await createTestCharacter();
       const breakdown = ModifierPipelineService.getBreakdown(char, 'speed.fly');
       expect(breakdown.total).toBe(0);
       expect(breakdown.bonuses).toHaveLength(0);
@@ -370,10 +373,10 @@ describe('ModifierPipelineService', () => {
   });
 
   describe('recalculate — Date preservation', () => {
-    test('keeps lastUpdated a Date across the clone', () => {
+    test('keeps lastUpdated a Date across the clone', async () => {
       // The JSON round-trip in recalculate turned Dates into ISO strings, which
       // is how saving crashed the character list (#376).
-      const char = createTestCharacter();
+      const char = await createTestCharacter();
       char.lastUpdated = new Date('2026-08-19T12:00:00.000Z');
 
       const result = ModifierPipelineService.recalculate(char);
@@ -382,8 +385,8 @@ describe('ModifierPipelineService', () => {
       expect(result.lastUpdated.toISOString()).toBe('2026-08-19T12:00:00.000Z');
     });
 
-    test('keeps createdAt a Date across the clone', () => {
-      const char = createTestCharacter();
+    test('keeps createdAt a Date across the clone', async () => {
+      const char = await createTestCharacter();
       char.createdAt = new Date('2026-01-02T03:04:05.000Z');
 
       const result = ModifierPipelineService.recalculate(char);
@@ -391,8 +394,8 @@ describe('ModifierPipelineService', () => {
       expect(result.createdAt).toBeInstanceOf(Date);
     });
 
-    test('leaves the value callable as a Date, which is what the list needs', () => {
-      const char = createTestCharacter();
+    test('leaves the value callable as a Date, which is what the list needs', async () => {
+      const char = await createTestCharacter();
       char.lastUpdated = new Date('2026-08-19T12:00:00.000Z');
 
       const result = ModifierPipelineService.recalculate(char);
@@ -400,8 +403,8 @@ describe('ModifierPipelineService', () => {
       expect(() => result.lastUpdated.toLocaleDateString()).not.toThrow();
     });
 
-    test('tolerates an absent createdAt', () => {
-      const char = createTestCharacter();
+    test('tolerates an absent createdAt', async () => {
+      const char = await createTestCharacter();
       delete char.createdAt;
 
       expect(() => ModifierPipelineService.recalculate(char)).not.toThrow();
@@ -409,8 +412,8 @@ describe('ModifierPipelineService', () => {
   });
 
   describe('stacking rules', () => {
-    test('dodge bonuses stack', () => {
-      const char = createTestCharacter({ dex: 14 });
+    test('dodge bonuses stack', async () => {
+      const char = await createTestCharacter({ dex: 14 });
       // Add Dodge feat and a racial dodge bonus
       char.feats.feats.push({
         featId: 'dodge',
@@ -439,8 +442,8 @@ describe('ModifierPipelineService', () => {
       expect(result.combatStats.armorClass.dodge).toBe(3);
     });
 
-    test('typed bonuses take highest only', () => {
-      const char = createTestCharacter();
+    test('typed bonuses take highest only', async () => {
+      const char = await createTestCharacter();
       // Add two armor bonuses — only highest should apply
       char.info.race.traits.push({
         name: 'Natural Armor 1',
@@ -474,9 +477,9 @@ describe('ModifierPipelineService', () => {
       expect(result.combatStats.armorClass.natural).toBe(3);
     });
 
-    test('morale bonus from two sources takes highest (not stacked)', () => {
-      const char = createTestCharacter();
-      const baseline = ModifierPipelineService.recalculate(createTestCharacter());
+    test('morale bonus from two sources takes highest (not stacked)', async () => {
+      const char = await createTestCharacter();
+      const baseline = ModifierPipelineService.recalculate(await createTestCharacter());
 
       // Add two morale buffs to attack.all — Bless (+1) and Inspire Courage (+2)
       char.buffs.push({
@@ -525,10 +528,10 @@ describe('ModifierPipelineService', () => {
   });
 
   describe('recalculate — level increment slots', () => {
-    test('counts allocated +1s toward the ability total', () => {
+    test('counts allocated +1s toward the ability total', async () => {
       // The UI showed a "Level +1s" row all along; the total ignored it, so
       // CHA 13 base +2 racial +4 template +4 increments displayed as 19, not 23.
-      const char = createTestCharacter({ cha: 13 });
+      const char = await createTestCharacter({ cha: 13 });
       char.abilityScores.cha.racial = 2;
       char.abilityScores.cha.levelIncrements = 4;
 
@@ -537,8 +540,8 @@ describe('ModifierPipelineService', () => {
       expect(result.abilityScores.cha.total).toBe(19);
     });
 
-    test('adds increments on top of pipeline bonuses rather than instead of them', () => {
-      const char = createTestCharacter({ cha: 13 });
+    test('adds increments on top of pipeline bonuses rather than instead of them', async () => {
+      const char = await createTestCharacter({ cha: 13 });
       char.abilityScores.cha.racial = 2;
       char.abilityScores.cha.levelIncrements = 4;
       char.appliedTemplates = [
@@ -561,8 +564,8 @@ describe('ModifierPipelineService', () => {
       expect(result.abilityScores.cha.modifier).toBe(6);
     });
 
-    test('leaves a score alone when no increments are allocated', () => {
-      const char = createTestCharacter({ cha: 13 });
+    test('leaves a score alone when no increments are allocated', async () => {
+      const char = await createTestCharacter({ cha: 13 });
       char.abilityScores.cha.levelIncrements = 0;
 
       const result = ModifierPipelineService.recalculate(char);
@@ -570,9 +573,9 @@ describe('ModifierPipelineService', () => {
       expect(result.abilityScores.cha.total).toBe(13);
     });
 
-    test('carries increments through to the stats derived from the score', () => {
+    test('carries increments through to the stats derived from the score', async () => {
       // An increment that does not reach AC is not really applied.
-      const char = createTestCharacter({ dex: 14 });
+      const char = await createTestCharacter({ dex: 14 });
       const before = ModifierPipelineService.recalculate(char);
 
       char.abilityScores.dex.levelIncrements = 2;
@@ -586,9 +589,9 @@ describe('ModifierPipelineService', () => {
   });
 
   describe('BAB progressions', () => {
-    test('Rogue (medium BAB) has lower BAB than Fighter (full BAB) at level 1', () => {
-      const fighter = createTestCharacter({ className: 'Fighter' });
-      const rogue = createTestCharacter({ className: 'Rogue' });
+    test('Rogue (medium BAB) has lower BAB than Fighter (full BAB) at level 1', async () => {
+      const fighter = await createTestCharacter({ className: 'Fighter' });
+      const rogue = await createTestCharacter({ className: 'Rogue' });
       const recalcFighter = ModifierPipelineService.recalculate(fighter);
       const recalcRogue = ModifierPipelineService.recalculate(rogue);
       // Both level 1: Fighter BAB = 1, Rogue BAB = 0 (floor(1*0.75)=0)
@@ -597,16 +600,16 @@ describe('ModifierPipelineService', () => {
       );
     });
 
-    test('Wizard (low BAB) has BAB of 0 at level 1', () => {
-      const wizard = createTestCharacter({ className: 'Wizard' });
+    test('Wizard (low BAB) has BAB of 0 at level 1', async () => {
+      const wizard = await createTestCharacter({ className: 'Wizard' });
       const result = ModifierPipelineService.recalculate(wizard);
       expect(result.classes.baseAttackBonus[0]).toBe(0);
     });
   });
 
   describe('collectEquipmentEffects — editorEquipment magic items', () => {
-    test('applies ability enhancement bonus from equipped magic item', () => {
-      const char = createTestCharacter({ cha: 10 });
+    test('applies ability enhancement bonus from equipped magic item', async () => {
+      const char = await createTestCharacter({ cha: 10 });
       char.editorEquipment = [
         {
           id: 'item-1',
@@ -629,8 +632,8 @@ describe('ModifierPipelineService', () => {
       expect(result.abilityScores.cha.total).toBe(16);
     });
 
-    test('populates bonuses.enhancement breakdown for equipped magic item', () => {
-      const char = createTestCharacter({ int: 10 });
+    test('populates bonuses.enhancement breakdown for equipped magic item', async () => {
+      const char = await createTestCharacter({ int: 10 });
       char.editorEquipment = [
         {
           id: 'item-2',
@@ -654,8 +657,8 @@ describe('ModifierPipelineService', () => {
       expect(result.abilityScores.int.bonuses.enhancement[0].value).toBe(6);
     });
 
-    test('applies effects from orbiting ioun stones (isOrbiting:true, slot:undefined)', () => {
-      const char = createTestCharacter({ int: 10 });
+    test('applies effects from orbiting ioun stones (isOrbiting:true, slot:undefined)', async () => {
+      const char = await createTestCharacter({ int: 10 });
       char.editorEquipment = [
         {
           id: 'ioun-1',
@@ -678,8 +681,8 @@ describe('ModifierPipelineService', () => {
       expect(result.combatStats.armorClass.misc).toBe(1);
     });
 
-    test('does not apply effects from unequipped (no slot) items', () => {
-      const char = createTestCharacter({ int: 10 });
+    test('does not apply effects from unequipped (no slot) items', async () => {
+      const char = await createTestCharacter({ int: 10 });
       const baseInt = char.abilityScores.int.total;
       char.editorEquipment = [
         {
@@ -701,8 +704,8 @@ describe('ModifierPipelineService', () => {
       expect(result.abilityScores.int.total).toBe(baseInt);
     });
 
-    test('stacks deflection AC from Ring of Protection through pipeline', () => {
-      const char = createTestCharacter();
+    test('stacks deflection AC from Ring of Protection through pipeline', async () => {
+      const char = await createTestCharacter();
       char.editorEquipment = [
         {
           id: 'item-4',
@@ -726,8 +729,8 @@ describe('ModifierPipelineService', () => {
   });
 
   describe('collectEquipmentEffects — armor, shields, weapons', () => {
-    test('equipped armor with enhancement contributes armor+enhancement to AC', () => {
-      const char = createTestCharacter();
+    test('equipped armor with enhancement contributes armor+enhancement to AC', async () => {
+      const char = await createTestCharacter();
       char.equipment.armor = [
         { acBonus: 6, enhancement: 1, equipped: true, name: 'Chainmail +1' },
       ] as unknown as typeof char.equipment.armor;
@@ -735,8 +738,8 @@ describe('ModifierPipelineService', () => {
       expect(result.combatStats.armorClass.armor).toBe(7);
     });
 
-    test('unequipped armor is not counted', () => {
-      const char = createTestCharacter();
+    test('unequipped armor is not counted', async () => {
+      const char = await createTestCharacter();
       char.equipment.armor = [
         { acBonus: 6, enhancement: 0, equipped: false, name: 'Chainmail' },
       ] as unknown as typeof char.equipment.armor;
@@ -744,8 +747,8 @@ describe('ModifierPipelineService', () => {
       expect(result.combatStats.armorClass.armor).toBe(0);
     });
 
-    test('equipped shield with enhancement contributes to AC', () => {
-      const char = createTestCharacter();
+    test('equipped shield with enhancement contributes to AC', async () => {
+      const char = await createTestCharacter();
       char.equipment.shields = [
         { acBonus: 2, enhancement: 2, equipped: true, name: 'Heavy Shield +2' },
       ] as unknown as typeof char.equipment.shields;
@@ -753,20 +756,20 @@ describe('ModifierPipelineService', () => {
       expect(result.combatStats.armorClass.shield).toBe(4);
     });
 
-    test('equipped weapon with enhancement adds to melee attack', () => {
-      const char = createTestCharacter();
+    test('equipped weapon with enhancement adds to melee attack', async () => {
+      const char = await createTestCharacter();
       char.equipment.weapons = [
         { enhancement: 1, equipped: true, masterwork: true, isRanged: false, name: 'Longsword +1' },
       ] as unknown as typeof char.equipment.weapons;
-      const baseline = ModifierPipelineService.recalculate(createTestCharacter());
+      const baseline = ModifierPipelineService.recalculate(await createTestCharacter());
       const result = ModifierPipelineService.recalculate(char);
       expect(result.combatStats.attackBonuses.meleeTotal).toBe(
         baseline.combatStats.attackBonuses.meleeTotal + 1,
       );
     });
 
-    test('masterwork weapon with no enhancement gives +1 melee attack', () => {
-      const char = createTestCharacter();
+    test('masterwork weapon with no enhancement gives +1 melee attack', async () => {
+      const char = await createTestCharacter();
       char.equipment.weapons = [
         {
           enhancement: 0,
@@ -776,19 +779,19 @@ describe('ModifierPipelineService', () => {
           name: 'Longsword (masterwork)',
         },
       ] as unknown as typeof char.equipment.weapons;
-      const baseline = ModifierPipelineService.recalculate(createTestCharacter());
+      const baseline = ModifierPipelineService.recalculate(await createTestCharacter());
       const result = ModifierPipelineService.recalculate(char);
       expect(result.combatStats.attackBonuses.meleeTotal).toBe(
         baseline.combatStats.attackBonuses.meleeTotal + 1,
       );
     });
 
-    test('equipped ranged weapon with enhancement adds to ranged attack', () => {
-      const char = createTestCharacter();
+    test('equipped ranged weapon with enhancement adds to ranged attack', async () => {
+      const char = await createTestCharacter();
       char.equipment.weapons = [
         { enhancement: 1, equipped: true, masterwork: true, isRanged: true, name: 'Longbow +1' },
       ] as unknown as typeof char.equipment.weapons;
-      const baseline = ModifierPipelineService.recalculate(createTestCharacter());
+      const baseline = ModifierPipelineService.recalculate(await createTestCharacter());
       const result = ModifierPipelineService.recalculate(char);
       expect(result.combatStats.attackBonuses.rangedTotal).toBe(
         baseline.combatStats.attackBonuses.rangedTotal + 1,
@@ -797,8 +800,8 @@ describe('ModifierPipelineService', () => {
   });
 
   describe('collectEquipmentEffects — item-granted feats', () => {
-    test('passive granted feat effects appear in computed stats', () => {
-      const char = createTestCharacter();
+    test('passive granted feat effects appear in computed stats', async () => {
+      const char = await createTestCharacter();
       char.editorEquipment = [
         {
           id: 'item-feat-1',
@@ -808,15 +811,15 @@ describe('ModifierPipelineService', () => {
           grantedFeats: [{ featId: 'lightning_reflexes', choices: {}, active: true }],
         },
       ];
-      const baseline = ModifierPipelineService.recalculate(createTestCharacter());
+      const baseline = ModifierPipelineService.recalculate(await createTestCharacter());
       const result = ModifierPipelineService.recalculate(char);
       expect(result.combatStats.savingThrows.reflex.total).toBe(
         baseline.combatStats.savingThrows.reflex.total + 2,
       );
     });
 
-    test('toggle granted feat does not apply effects when active is false', () => {
-      const char = createTestCharacter();
+    test('toggle granted feat does not apply effects when active is false', async () => {
+      const char = await createTestCharacter();
       char.editorEquipment = [
         {
           id: 'item-feat-2',
@@ -826,15 +829,15 @@ describe('ModifierPipelineService', () => {
           grantedFeats: [{ featId: 'power_attack', choices: {}, active: false }],
         },
       ];
-      const baseline = ModifierPipelineService.recalculate(createTestCharacter());
+      const baseline = ModifierPipelineService.recalculate(await createTestCharacter());
       const result = ModifierPipelineService.recalculate(char);
       expect(result.combatStats.attackBonuses.meleeTotal).toBe(
         baseline.combatStats.attackBonuses.meleeTotal,
       );
     });
 
-    test('toggle granted feat applies effects when active is true', () => {
-      const char = createTestCharacter();
+    test('toggle granted feat applies effects when active is true', async () => {
+      const char = await createTestCharacter();
       char.editorEquipment = [
         {
           id: 'item-feat-3',
@@ -844,7 +847,7 @@ describe('ModifierPipelineService', () => {
           grantedFeats: [{ featId: 'power_attack', choices: {}, active: true }],
         },
       ];
-      const baseline = ModifierPipelineService.recalculate(createTestCharacter());
+      const baseline = ModifierPipelineService.recalculate(await createTestCharacter());
       const result = ModifierPipelineService.recalculate(char);
       // Power Attack at BAB 1: -(floor(1/4)+1) = -1 attack penalty
       expect(result.combatStats.attackBonuses.meleeTotal).toBeLessThan(
@@ -852,7 +855,7 @@ describe('ModifierPipelineService', () => {
       );
     });
 
-    test('granted feat source is set to item.name in ability score breakdowns', () => {
+    test('granted feat source is set to item.name in ability score breakdowns', async () => {
       const abilityFeat: FeatDefinition = {
         id: 'str_bonus_test',
         name: 'Strength Bonus',
@@ -875,7 +878,7 @@ describe('ModifierPipelineService', () => {
       FeatRegistryService.register(abilityFeat);
 
       const itemName = 'Belt of Strength Bonus';
-      const char = createTestCharacter();
+      const char = await createTestCharacter();
       char.editorEquipment = [
         {
           id: 'item-feat-source',
@@ -891,8 +894,8 @@ describe('ModifierPipelineService', () => {
       expect(moraleBonuses[0].source).toBe(itemName);
     });
 
-    test('unequipped item (no slot, not orbiting) granted feats do not apply', () => {
-      const char = createTestCharacter();
+    test('unequipped item (no slot, not orbiting) granted feats do not apply', async () => {
+      const char = await createTestCharacter();
       char.editorEquipment = [
         {
           id: 'item-feat-5',
@@ -901,14 +904,14 @@ describe('ModifierPipelineService', () => {
           grantedFeats: [{ featId: 'lightning_reflexes', choices: {}, active: true }],
         },
       ];
-      const baseline = ModifierPipelineService.recalculate(createTestCharacter());
+      const baseline = ModifierPipelineService.recalculate(await createTestCharacter());
       const result = ModifierPipelineService.recalculate(char);
       expect(result.combatStats.savingThrows.reflex.total).toBe(
         baseline.combatStats.savingThrows.reflex.total,
       );
     });
 
-    test('choice placeholder in target is substituted from grant.choices', () => {
+    test('choice placeholder in target is substituted from grant.choices', async () => {
       const choiceFeat: FeatDefinition = {
         id: 'weapon_focus_test',
         name: 'Weapon Focus',
@@ -931,7 +934,7 @@ describe('ModifierPipelineService', () => {
       };
       FeatRegistryService.register(choiceFeat);
 
-      const char = createTestCharacter();
+      const char = await createTestCharacter();
       char.editorEquipment = [
         {
           id: 'item-feat-6',
@@ -943,7 +946,7 @@ describe('ModifierPipelineService', () => {
           ],
         },
       ];
-      const baseline = ModifierPipelineService.recalculate(createTestCharacter());
+      const baseline = ModifierPipelineService.recalculate(await createTestCharacter());
       const result = ModifierPipelineService.recalculate(char);
       expect(result.combatStats.attackBonuses.meleeTotal).toBe(
         baseline.combatStats.attackBonuses.meleeTotal + 1,
@@ -952,8 +955,8 @@ describe('ModifierPipelineService', () => {
   });
 
   describe('resource pools', () => {
-    test('recalculate computes resource pools from class features', () => {
-      const char = createTestCharacter();
+    test('recalculate computes resource pools from class features', async () => {
+      const char = await createTestCharacter();
       char.classes.classes[0].classFeatures.push({
         name: 'Rage',
         description: 'Barbarian rage',
@@ -978,8 +981,8 @@ describe('ModifierPipelineService', () => {
   });
 
   describe('conditions effects', () => {
-    test('active condition effects are applied to stats', () => {
-      const char = createTestCharacter();
+    test('active condition effects are applied to stats', async () => {
+      const char = await createTestCharacter();
       char.conditions.activeConditions.push({
         name: 'Blessed',
         description: 'Morale bonus to attacks',
@@ -993,7 +996,7 @@ describe('ModifierPipelineService', () => {
           },
         ],
       });
-      const baseline = ModifierPipelineService.recalculate(createTestCharacter());
+      const baseline = ModifierPipelineService.recalculate(await createTestCharacter());
       const result = ModifierPipelineService.recalculate(char);
       expect(result.combatStats.attackBonuses.meleeTotal).toBe(
         baseline.combatStats.attackBonuses.meleeTotal + 1,
@@ -1018,21 +1021,21 @@ describe('ModifierPipelineService', () => {
       ],
     };
 
-    test('equipped flaw effects are applied to stats', () => {
+    test('equipped flaw effects are applied to stats', async () => {
       FlawRegistryService.register(meleeFlawDef);
-      const char = createTestCharacter();
+      const char = await createTestCharacter();
       char.flaws.flaws.push({ flawId: 'melee_penalty_flaw', name: 'Melee Penalty Flaw' });
-      const baseline = ModifierPipelineService.recalculate(createTestCharacter());
+      const baseline = ModifierPipelineService.recalculate(await createTestCharacter());
       const result = ModifierPipelineService.recalculate(char);
       expect(result.combatStats.attackBonuses.meleeTotal).toBe(
         baseline.combatStats.attackBonuses.meleeTotal - 2,
       );
     });
 
-    test('flaw with no registry entry is silently skipped', () => {
-      const char = createTestCharacter();
+    test('flaw with no registry entry is silently skipped', async () => {
+      const char = await createTestCharacter();
       char.flaws.flaws.push({ flawId: 'unknown_flaw', name: 'Unknown Flaw' });
-      const baseline = ModifierPipelineService.recalculate(createTestCharacter());
+      const baseline = ModifierPipelineService.recalculate(await createTestCharacter());
       const result = ModifierPipelineService.recalculate(char);
       expect(result.combatStats.attackBonuses.meleeTotal).toBe(
         baseline.combatStats.attackBonuses.meleeTotal,
@@ -1041,7 +1044,7 @@ describe('ModifierPipelineService', () => {
   });
 
   describe('getBreakdown — typed bonus stacking', () => {
-    test('applies best-of stacking for typed (non-DODGE, non-UNTYPED) bonuses', () => {
+    test('applies best-of stacking for typed (non-DODGE, non-UNTYPED) bonuses', async () => {
       // Register a feat with a MORALE bonus so the reduce path in getBreakdown is exercised
       const moraleWillFeat: FeatDefinition = {
         id: 'indomitable_will',
@@ -1064,7 +1067,7 @@ describe('ModifierPipelineService', () => {
       };
       FeatRegistryService.registerBatch([...testFeats, moraleWillFeat]);
 
-      const char = createTestCharacter();
+      const char = await createTestCharacter();
       char.feats.feats.push({
         featId: 'indomitable_will',
         name: 'Indomitable Will',
@@ -1102,8 +1105,8 @@ describe('ModifierPipelineService', () => {
   });
 
   describe('recalculate — maximum hit points', () => {
-    function rogueAtLevel(level: number, dice: number[]): Character {
-      const char = createTestCharacter({ con: 12, className: 'Rogue' });
+    async function rogueAtLevel(level: number, dice: number[]): Promise<Character> {
+      const char = await createTestCharacter({ con: 12, className: 'Rogue' });
       char.classes.classes = [
         {
           ...char.classes.classes[0],
@@ -1140,24 +1143,24 @@ describe('ModifierPipelineService', () => {
       };
     }
 
-    test('sums the per-level hit die values into base HP', () => {
-      const char = rogueAtLevel(3, [8, 5, 4]);
+    test('sums the per-level hit die values into base HP', async () => {
+      const char = await rogueAtLevel(3, [8, 5, 4]);
       const result = ModifierPipelineService.recalculate(char);
       expect(result.combatStats.hitPoints.base).toBe(17);
     });
 
-    test('applies the Constitution modifier once per Hit Die', () => {
+    test('applies the Constitution modifier once per Hit Die', async () => {
       // CON 12 → +1, three levels → +3.
-      const char = rogueAtLevel(3, [8, 5, 4]);
+      const char = await rogueAtLevel(3, [8, 5, 4]);
       const result = ModifierPipelineService.recalculate(char);
       expect(result.combatStats.hitPoints.constitution).toBe(3);
       expect(result.combatStats.hitPoints.max).toBe(20);
     });
 
-    test('raises max HP retroactively when the Constitution modifier goes up', () => {
+    test('raises max HP retroactively when the Constitution modifier goes up', async () => {
       // Doug's worked example: 20 HP at CON 12, then a +4 CON belt takes the
       // modifier from +1 to +3, worth another 2 HP on each of 3 Hit Dice.
-      const char = rogueAtLevel(3, [8, 5, 4]);
+      const char = await rogueAtLevel(3, [8, 5, 4]);
       const before = ModifierPipelineService.recalculate(char);
       expect(before.combatStats.hitPoints.max).toBe(20);
 
@@ -1169,8 +1172,8 @@ describe('ModifierPipelineService', () => {
       expect(after.combatStats.hitPoints.max).toBe(26);
     });
 
-    test('gives back the HP when the Constitution boost is removed', () => {
-      const char = rogueAtLevel(3, [8, 5, 4]);
+    test('gives back the HP when the Constitution boost is removed', async () => {
+      const char = await rogueAtLevel(3, [8, 5, 4]);
       char.buffs.push(conBelt());
       const boosted = ModifierPipelineService.recalculate(char);
       expect(boosted.combatStats.hitPoints.max).toBe(26);
@@ -1180,31 +1183,31 @@ describe('ModifierPipelineService', () => {
       expect(removed.combatStats.hitPoints.max).toBe(20);
     });
 
-    test('never falls below one HP per Hit Die', () => {
-      const char = rogueAtLevel(4, [1, 1, 1, 1]);
+    test('never falls below one HP per Hit Die', async () => {
+      const char = await rogueAtLevel(4, [1, 1, 1, 1]);
       char.abilityScores.con.base = 4; // -3 modifier
       const result = ModifierPipelineService.recalculate(char);
       expect(result.combatStats.hitPoints.max).toBe(4);
     });
 
-    test('honours a manual max HP override', () => {
-      const char = rogueAtLevel(3, [8, 5, 4]);
+    test('honours a manual max HP override', async () => {
+      const char = await rogueAtLevel(3, [8, 5, 4]);
       char.combatStats.hitPoints.manualMax = 99;
       const result = ModifierPipelineService.recalculate(char);
       expect(result.combatStats.hitPoints.max).toBe(99);
     });
 
-    test('an override does not erase the calculated components', () => {
+    test('an override does not erase the calculated components', async () => {
       // The user has to be able to see what they would revert to.
-      const char = rogueAtLevel(3, [8, 5, 4]);
+      const char = await rogueAtLevel(3, [8, 5, 4]);
       char.combatStats.hitPoints.manualMax = 99;
       const result = ModifierPipelineService.recalculate(char);
       expect(result.combatStats.hitPoints.base).toBe(17);
       expect(result.combatStats.hitPoints.constitution).toBe(3);
     });
 
-    test('clearing the override returns to the calculated value', () => {
-      const char = rogueAtLevel(3, [8, 5, 4]);
+    test('clearing the override returns to the calculated value', async () => {
+      const char = await rogueAtLevel(3, [8, 5, 4]);
       char.combatStats.hitPoints.manualMax = 99;
       const overridden = ModifierPipelineService.recalculate(char);
       expect(overridden.combatStats.hitPoints.max).toBe(99);
@@ -1214,57 +1217,57 @@ describe('ModifierPipelineService', () => {
       expect(reverted.combatStats.hitPoints.max).toBe(20);
     });
 
-    test('does not overwrite hitPoints.other, which effects own', () => {
+    test('does not overwrite hitPoints.other, which effects own', async () => {
       // The Max HP box used to write here, and the pipeline reset it every pass.
-      const char = rogueAtLevel(3, [8, 5, 4]);
+      const char = await rogueAtLevel(3, [8, 5, 4]);
       char.combatStats.hitPoints.other = 42;
       const result = ModifierPipelineService.recalculate(char);
       expect(result.combatStats.hitPoints.other).toBe(0);
       expect(result.combatStats.hitPoints.max).toBe(20);
     });
 
-    test('seeds a fresh character at full health', () => {
-      const char = rogueAtLevel(3, [8, 5, 4]);
+    test('seeds a fresh character at full health', async () => {
+      const char = await rogueAtLevel(3, [8, 5, 4]);
       const result = ModifierPipelineService.recalculate(char);
       expect(result.combatStats.hitPoints.current).toBe(20);
       expect(result.combatStats.hitPoints.currentInitialized).toBe(true);
     });
 
-    test('leaves a character with no levels un-seeded', () => {
+    test('leaves a character with no levels un-seeded', async () => {
       // calculatedMax special-cases totalHD === 0, so max stays 0 and the
       // seeding branch must not fire. Otherwise a half-built character would
       // be marked initialized at 0 HP, and the real seed would never happen
       // once levels were added.
-      const char = rogueAtLevel(0, []);
+      const char = await rogueAtLevel(0, []);
       const result = ModifierPipelineService.recalculate(char);
       expect(result.combatStats.hitPoints.max).toBe(0);
       expect(result.combatStats.hitPoints.current).toBe(0);
       expect(result.combatStats.hitPoints.currentInitialized).toBe(false);
     });
 
-    test('keeps a deliberately entered current HP below maximum', () => {
-      const char = rogueAtLevel(3, [8, 5, 4]);
+    test('keeps a deliberately entered current HP below maximum', async () => {
+      const char = await rogueAtLevel(3, [8, 5, 4]);
       char.combatStats.hitPoints.current = 7;
       char.combatStats.hitPoints.currentInitialized = true;
       const result = ModifierPipelineService.recalculate(char);
       expect(result.combatStats.hitPoints.current).toBe(7);
     });
 
-    test('keeps a character recorded at 0 current HP', () => {
+    test('keeps a character recorded at 0 current HP', async () => {
       // The old rule read 0 as "unset" and snapped the character back to full,
       // which made a downed character impossible to record.
-      const char = rogueAtLevel(3, [8, 5, 4]);
+      const char = await rogueAtLevel(3, [8, 5, 4]);
       char.combatStats.hitPoints.current = 0;
       char.combatStats.hitPoints.currentInitialized = true;
       const result = ModifierPipelineService.recalculate(char);
       expect(result.combatStats.hitPoints.current).toBe(0);
     });
 
-    test('raises current HP by the same amount maximum rises', () => {
+    test('raises current HP by the same amount maximum rises', async () => {
       // Editing Constitution or a hit die moved max while current sat still, so
       // a character quietly drifted further from full every time the build
       // changed. In Pathfinder both ends move together.
-      const char = rogueAtLevel(3, [8, 5, 4]);
+      const char = await rogueAtLevel(3, [8, 5, 4]);
       const seeded = ModifierPipelineService.recalculate(char);
       expect(seeded.combatStats.hitPoints.max).toBe(20);
 
@@ -1277,8 +1280,8 @@ describe('ModifierPipelineService', () => {
       expect(after.combatStats.hitPoints.current).toBe(18);
     });
 
-    test('lowers current HP by the same amount maximum falls', () => {
-      const char = rogueAtLevel(3, [8, 5, 4]);
+    test('lowers current HP by the same amount maximum falls', async () => {
+      const char = await rogueAtLevel(3, [8, 5, 4]);
       char.buffs.push(conBelt());
       const boosted = ModifierPipelineService.recalculate(char);
       expect(boosted.combatStats.hitPoints.max).toBe(26);
@@ -1291,8 +1294,8 @@ describe('ModifierPipelineService', () => {
       expect(removed.combatStats.hitPoints.current).toBe(12);
     });
 
-    test('does not heal a wounded character to full when maximum rises', () => {
-      const char = rogueAtLevel(3, [8, 5, 4]);
+    test('does not heal a wounded character to full when maximum rises', async () => {
+      const char = await rogueAtLevel(3, [8, 5, 4]);
       const seeded = ModifierPipelineService.recalculate(char);
       seeded.combatStats.hitPoints.current = 3;
       seeded.buffs.push(conBelt());
@@ -1303,8 +1306,8 @@ describe('ModifierPipelineService', () => {
       expect(after.combatStats.hitPoints.current).toBeLessThan(after.combatStats.hitPoints.max);
     });
 
-    test('never drives current HP below zero when maximum falls hard', () => {
-      const char = rogueAtLevel(3, [8, 5, 4]);
+    test('never drives current HP below zero when maximum falls hard', async () => {
+      const char = await rogueAtLevel(3, [8, 5, 4]);
       char.buffs.push(conBelt());
       const boosted = ModifierPipelineService.recalculate(char);
       boosted.combatStats.hitPoints.current = 1;
@@ -1315,8 +1318,8 @@ describe('ModifierPipelineService', () => {
       expect(removed.combatStats.hitPoints.current).toBe(0);
     });
 
-    test('leaves current HP alone when maximum does not move', () => {
-      const char = rogueAtLevel(3, [8, 5, 4]);
+    test('leaves current HP alone when maximum does not move', async () => {
+      const char = await rogueAtLevel(3, [8, 5, 4]);
       const seeded = ModifierPipelineService.recalculate(char);
       seeded.combatStats.hitPoints.current = 7;
 
@@ -1325,8 +1328,8 @@ describe('ModifierPipelineService', () => {
       expect(again.combatStats.hitPoints.current).toBe(7);
     });
 
-    test('clamps current HP down when maximum falls', () => {
-      const char = rogueAtLevel(3, [8, 5, 4]);
+    test('clamps current HP down when maximum falls', async () => {
+      const char = await rogueAtLevel(3, [8, 5, 4]);
       char.combatStats.hitPoints.current = 20;
       char.combatStats.hitPoints.currentInitialized = true;
       char.combatStats.hitPoints.manualMax = 12;
@@ -1334,8 +1337,8 @@ describe('ModifierPipelineService', () => {
       expect(result.combatStats.hitPoints.current).toBe(12);
     });
 
-    test('tolerates a class entry with no hitDieResults array', () => {
-      const char = rogueAtLevel(3, [8, 5, 4]);
+    test('tolerates a class entry with no hitDieResults array', async () => {
+      const char = await rogueAtLevel(3, [8, 5, 4]);
       delete (char.classes.classes[0] as { hitDieResults?: number[] }).hitDieResults;
       expect(() => ModifierPipelineService.recalculate(char)).not.toThrow();
     });
@@ -1345,8 +1348,8 @@ describe('ModifierPipelineService', () => {
     // Once a session writes its result back to the character, the pipeline must
     // treat that number as authoritative. Reseeding it from max would silently
     // heal a wounded character on the next recalculate (#400).
-    it('leaves a deliberately set current HP alone', () => {
-      const char = createTestCharacter({ con: 12 });
+    it('leaves a deliberately set current HP alone', async () => {
+      const char = await createTestCharacter({ con: 12 });
       char.combatStats.hitPoints.currentInitialized = true;
       char.combatStats.hitPoints.current = 12;
       char.combatStats.hitPoints.manualMax = 40;
@@ -1357,8 +1360,8 @@ describe('ModifierPipelineService', () => {
       expect(result.combatStats.hitPoints.current).toBe(12);
     });
 
-    it('still seeds a character that has never had current HP set', () => {
-      const char = createTestCharacter({ con: 12 });
+    it('still seeds a character that has never had current HP set', async () => {
+      const char = await createTestCharacter({ con: 12 });
       char.combatStats.hitPoints.currentInitialized = false;
       char.combatStats.hitPoints.current = 0;
       char.combatStats.hitPoints.manualMax = 40;
@@ -1371,18 +1374,18 @@ describe('ModifierPipelineService', () => {
   });
 
   describe('recalculate — favored class HP bonus', () => {
-    test('includes HP favored class bonus in hitPoints.favoredClass', () => {
-      const char = createTestCharacter();
+    test('includes HP favored class bonus in hitPoints.favoredClass', async () => {
+      const char = await createTestCharacter();
       char.classes.favoredClassBonuses = [{ className: 'Fighter', bonusType: 'HP', value: 3 }];
       const result = ModifierPipelineService.recalculate(char);
       expect(result.combatStats.hitPoints.favoredClass).toBe(3);
     });
 
-    test('counts the per-level hp selections the UI actually writes', () => {
+    test('counts the per-level hp selections the UI actually writes', async () => {
       // setFavoredClassBonuses stores these on the class entry. The pipeline was
       // reading classes.favoredClassBonuses, a top-level aggregate nothing
       // writes, so picking "+1 hit point" moved nothing.
-      const char = createTestCharacter();
+      const char = await createTestCharacter();
       char.classes.classes[0].favoredClassBonuses = [
         { level: 1, type: 'hp' },
         { level: 2, type: 'hp' },
@@ -1394,8 +1397,8 @@ describe('ModifierPipelineService', () => {
       expect(result.combatStats.hitPoints.favoredClass).toBe(2);
     });
 
-    test('sums hp selections across every class entry', () => {
-      const char = createTestCharacter();
+    test('sums hp selections across every class entry', async () => {
+      const char = await createTestCharacter();
       const base = char.classes.classes[0];
       char.classes.classes = [
         { ...base, name: 'Rogue (Unchained)', favoredClassBonuses: [{ level: 1, type: 'hp' }] },
@@ -1407,8 +1410,8 @@ describe('ModifierPipelineService', () => {
       expect(result.combatStats.hitPoints.favoredClass).toBe(2);
     });
 
-    test('ignores skill and alternate selections', () => {
-      const char = createTestCharacter();
+    test('ignores skill and alternate selections', async () => {
+      const char = await createTestCharacter();
       char.classes.classes[0].favoredClassBonuses = [
         { level: 1, type: 'skill' },
         { level: 2, type: 'alternate', optionId: 'rogue-gnome-1' },
@@ -1419,9 +1422,9 @@ describe('ModifierPipelineService', () => {
       expect(result.combatStats.hitPoints.favoredClass).toBe(0);
     });
 
-    test('carries the favored class hp through to maximum HP', () => {
+    test('carries the favored class hp through to maximum HP', async () => {
       // A bonus that does not reach max HP has not been applied.
-      const char = createTestCharacter();
+      const char = await createTestCharacter();
       const before = ModifierPipelineService.recalculate(char);
       const beforeMax =
         before.combatStats.hitPoints.base +
@@ -1440,8 +1443,8 @@ describe('ModifierPipelineService', () => {
       expect(afterMax).toBe(beforeMax + 1);
     });
 
-    test('ignores non-HP favored class bonuses', () => {
-      const char = createTestCharacter();
+    test('ignores non-HP favored class bonuses', async () => {
+      const char = await createTestCharacter();
       char.classes.favoredClassBonuses = [
         { className: 'Fighter', bonusType: 'skill_rank', value: 1 },
       ];

@@ -1,4 +1,6 @@
 import { CharacterService } from '@/services/CharacterService';
+import { GameDataService } from '@services/GameDataService';
+import { StaticGameDataConnector } from '@services/StaticGameDataConnector';
 import { AbilityScoreService } from '@/services/AbilityScoreService';
 import { ValidationService } from '@/services/ValidationService';
 import { CORE_RACES, getRaceByName } from '@/data/races';
@@ -44,6 +46,10 @@ function raceDataToRace(name: string): Race {
 const ABILITIES = ['str', 'dex', 'con', 'int', 'wis', 'cha'] as const;
 
 describe('Character Creation Flow Integration', () => {
+  beforeAll(() => {
+    GameDataService.setConnector(new StaticGameDataConnector());
+  });
+
   // =========================================================================
   // 1. Full creation flow: Human Fighter with point buy
   // =========================================================================
@@ -53,7 +59,7 @@ describe('Character Creation Flow Integration', () => {
     // Point buy scores that fit within 20-point budget
     const scores = { str: 15, dex: 14, con: 13, int: 12, wis: 10, cha: 8 };
 
-    beforeAll(() => {
+    beforeAll(async () => {
       // Step 1: Set name
       const name = 'Gareth the Bold';
 
@@ -73,7 +79,7 @@ describe('Character Creation Flow Integration', () => {
         alignment: Alignment.LawfulGood,
       };
 
-      character = CharacterService.createDefaultCharacter(params);
+      character = await CharacterService.createDefaultCharacter(params);
     });
 
     test('character name is set correctly', () => {
@@ -133,7 +139,7 @@ describe('Character Creation Flow Integration', () => {
     let character: Character;
     let rolledResults: { [key: string]: { total: number; rolls: number[] } };
 
-    beforeAll(() => {
+    beforeAll(async () => {
       // Step 1: Roll ability scores using 4d6 drop lowest
       rolledResults = AbilityScoreService.rollAllAbilities(AbilityScoreMethod.Roll4d6DropLowest);
 
@@ -159,7 +165,7 @@ describe('Character Creation Flow Integration', () => {
         deity: 'Torag',
       };
 
-      character = CharacterService.createDefaultCharacter(params);
+      character = await CharacterService.createDefaultCharacter(params);
     });
 
     test('racial CON+2 and CHA-2 are applied', () => {
@@ -214,7 +220,7 @@ describe('Character Creation Flow Integration', () => {
     let character: Character;
     let rolledResults: { [key: string]: { total: number; rolls: number[] } };
 
-    beforeAll(() => {
+    beforeAll(async () => {
       // Step 1: Roll ability scores using 3d6
       rolledResults = AbilityScoreService.rollAllAbilities(AbilityScoreMethod.Roll3d6);
 
@@ -238,7 +244,7 @@ describe('Character Creation Flow Integration', () => {
         alignment: Alignment.ChaoticNeutral,
       };
 
-      character = CharacterService.createDefaultCharacter(params);
+      character = await CharacterService.createDefaultCharacter(params);
     });
 
     test('racial DEX+2 and INT+2 are applied', () => {
@@ -308,9 +314,9 @@ describe('Character Creation Flow Integration', () => {
   // 4. Verify racial traits are preserved (darkvision, weapon familiarity, etc.)
   // =========================================================================
   describe('4 - Racial traits are preserved on the character', () => {
-    test('Dwarf has darkvision and weapon familiarity traits', () => {
+    test('Dwarf has darkvision and weapon familiarity traits', async () => {
       const race = raceDataToRace('Dwarf');
-      const character = CharacterService.createDefaultCharacter({
+      const character = await CharacterService.createDefaultCharacter({
         name: 'Trait Test Dwarf',
         race,
         selectedClass: 'Fighter',
@@ -326,9 +332,9 @@ describe('Character Creation Flow Integration', () => {
       expect(traitNames.some((t) => t.includes('Stonecunning'))).toBe(true);
     });
 
-    test('Elf has low-light vision and elven immunities traits', () => {
+    test('Elf has low-light vision and elven immunities traits', async () => {
       const race = raceDataToRace('Elf');
-      const character = CharacterService.createDefaultCharacter({
+      const character = await CharacterService.createDefaultCharacter({
         name: 'Trait Test Elf',
         race,
         selectedClass: 'Wizard',
@@ -343,9 +349,9 @@ describe('Character Creation Flow Integration', () => {
       expect(traitNames.some((t) => t.includes('Weapon Familiarity'))).toBe(true);
     });
 
-    test('Halfling has fearless and halfling luck traits', () => {
+    test('Halfling has fearless and halfling luck traits', async () => {
       const race = raceDataToRace('Halfling');
-      const character = CharacterService.createDefaultCharacter({
+      const character = await CharacterService.createDefaultCharacter({
         name: 'Trait Test Halfling',
         race,
         selectedClass: 'Rogue',
@@ -360,12 +366,12 @@ describe('Character Creation Flow Integration', () => {
       expect(traitNames.some((t) => t.includes('Sure-Footed'))).toBe(true);
     });
 
-    test('all 7 core races preserve their traits on created characters', () => {
+    test('all 7 core races preserve their traits on created characters', async () => {
       expect(CORE_RACES).toHaveLength(7);
 
       for (const raceData of CORE_RACES) {
         const race = raceDataToRace(raceData.name);
-        const character = CharacterService.createDefaultCharacter({
+        const character = await CharacterService.createDefaultCharacter({
           name: `${raceData.name} Trait Check`,
           race,
           selectedClass: 'Fighter',
@@ -388,9 +394,9 @@ describe('Character Creation Flow Integration', () => {
   // 5. Verify class features are set (Fighter bonus feat, etc.)
   // =========================================================================
   describe('5 - Class features are set correctly', () => {
-    test('Fighter has Bonus Feat at level 1', () => {
+    test('Fighter has Bonus Feat at level 1', async () => {
       const race = raceDataToRace('Human');
-      const character = CharacterService.createDefaultCharacter({
+      const character = await CharacterService.createDefaultCharacter({
         name: 'Fighter Feature Test',
         race,
         selectedClass: 'Fighter',
@@ -403,9 +409,9 @@ describe('Character Creation Flow Integration', () => {
       expect(featureNames).toContain('Bonus Feat');
     });
 
-    test('Rogue has Sneak Attack and Trapfinding at level 1', () => {
+    test('Rogue has Sneak Attack and Trapfinding at level 1', async () => {
       const race = raceDataToRace('Halfling');
-      const character = CharacterService.createDefaultCharacter({
+      const character = await CharacterService.createDefaultCharacter({
         name: 'Rogue Feature Test',
         race,
         selectedClass: 'Rogue',
@@ -419,9 +425,9 @@ describe('Character Creation Flow Integration', () => {
       expect(featureNames).toContain('Trapfinding');
     });
 
-    test('Barbarian has Rage and Fast Movement at level 1', () => {
+    test('Barbarian has Rage and Fast Movement at level 1', async () => {
       const race = raceDataToRace('Half-Orc');
-      const character = CharacterService.createDefaultCharacter({
+      const character = await CharacterService.createDefaultCharacter({
         name: 'Barbarian Feature Test',
         race,
         selectedClass: 'Barbarian',
@@ -435,13 +441,13 @@ describe('Character Creation Flow Integration', () => {
       expect(featureNames).toContain('Fast Movement');
     });
 
-    test('all 11 core classes have at least one level-1 feature', () => {
+    test('all 11 core classes have at least one level-1 feature', async () => {
       expect(CORE_CLASSES).toHaveLength(11);
 
       const race = raceDataToRace('Human');
 
       for (const classData of CORE_CLASSES) {
-        const character = CharacterService.createDefaultCharacter({
+        const character = await CharacterService.createDefaultCharacter({
           name: `${classData.name} Feature Check`,
           race,
           selectedClass: classData.name,
@@ -465,12 +471,12 @@ describe('Character Creation Flow Integration', () => {
   // 6. Test changing race mid-creation (Elf -> Dwarf)
   // =========================================================================
   describe('6 - Changing race mid-creation: Elf to Dwarf', () => {
-    test('switching race correctly updates racial modifiers', () => {
+    test('switching race correctly updates racial modifiers', async () => {
       // Step 1: Create character as Elf
       const elfRace = raceDataToRace('Elf');
       const scores = { str: 12, dex: 14, con: 12, int: 14, wis: 10, cha: 10 };
 
-      let character = CharacterService.createDefaultCharacter({
+      let character = await CharacterService.createDefaultCharacter({
         name: 'Indecisive Hero',
         race: elfRace,
         selectedClass: 'Fighter',
@@ -489,7 +495,7 @@ describe('Character Creation Flow Integration', () => {
       // Step 2: "Change" race by re-creating with Dwarf
       const dwarfRace = raceDataToRace('Dwarf');
 
-      character = CharacterService.createDefaultCharacter({
+      character = await CharacterService.createDefaultCharacter({
         name: 'Indecisive Hero',
         race: dwarfRace,
         selectedClass: 'Fighter',
@@ -506,11 +512,11 @@ describe('Character Creation Flow Integration', () => {
       expect(character.abilityScores.cha.racial).toBe(-2); // Dwarf CHA-2
     });
 
-    test('totals and modifiers correctly reflect the new race', () => {
+    test('totals and modifiers correctly reflect the new race', async () => {
       const dwarfRace = raceDataToRace('Dwarf');
       const scores = { str: 12, dex: 14, con: 12, int: 14, wis: 10, cha: 10 };
 
-      const character = CharacterService.createDefaultCharacter({
+      const character = await CharacterService.createDefaultCharacter({
         name: 'Now a Dwarf',
         race: dwarfRace,
         selectedClass: 'Fighter',
@@ -536,12 +542,12 @@ describe('Character Creation Flow Integration', () => {
       expect(character.abilityScores.int.total).toBe(14);
     });
 
-    test('size updates when switching from Medium race to Small race', () => {
+    test('size updates when switching from Medium race to Small race', async () => {
       const elfRace = raceDataToRace('Elf');
       const gnomeRace = raceDataToRace('Gnome');
       const scores = { str: 10, dex: 12, con: 12, int: 12, wis: 10, cha: 12 };
 
-      const elfChar = CharacterService.createDefaultCharacter({
+      const elfChar = await CharacterService.createDefaultCharacter({
         name: 'Size Test',
         race: elfRace,
         selectedClass: 'Wizard',
@@ -551,7 +557,7 @@ describe('Character Creation Flow Integration', () => {
       });
       expect(elfChar.info.size).toBe(Size.Medium);
 
-      const gnomeChar = CharacterService.createDefaultCharacter({
+      const gnomeChar = await CharacterService.createDefaultCharacter({
         name: 'Size Test',
         race: gnomeRace,
         selectedClass: 'Wizard',
@@ -562,9 +568,9 @@ describe('Character Creation Flow Integration', () => {
       expect(gnomeChar.info.size).toBe(Size.Small);
     });
 
-    test('switched character still passes full validation', () => {
+    test('switched character still passes full validation', async () => {
       const dwarfRace = raceDataToRace('Dwarf');
-      const character = CharacterService.createDefaultCharacter({
+      const character = await CharacterService.createDefaultCharacter({
         name: 'Valid After Switch',
         race: dwarfRace,
         selectedClass: 'Fighter',
@@ -583,12 +589,12 @@ describe('Character Creation Flow Integration', () => {
   // 7. Test changing class mid-creation
   // =========================================================================
   describe('7 - Changing class mid-creation', () => {
-    test('switching from Fighter to Wizard updates class features', () => {
+    test('switching from Fighter to Wizard updates class features', async () => {
       const race = raceDataToRace('Elf');
       const scores = { str: 8, dex: 14, con: 12, int: 16, wis: 12, cha: 10 };
 
       // Start as Fighter
-      const fighterChar = CharacterService.createDefaultCharacter({
+      const fighterChar = await CharacterService.createDefaultCharacter({
         name: 'Class Switcher',
         race,
         selectedClass: 'Fighter',
@@ -602,7 +608,7 @@ describe('Character Creation Flow Integration', () => {
       expect(fighterChar.classes.classes[0].hitDieSize).toBe(10);
 
       // Switch to Wizard
-      const wizardChar = CharacterService.createDefaultCharacter({
+      const wizardChar = await CharacterService.createDefaultCharacter({
         name: 'Class Switcher',
         race,
         selectedClass: 'Wizard',
@@ -620,12 +626,12 @@ describe('Character Creation Flow Integration', () => {
       expect(wizardChar.classes.classes[0].hitDieSize).toBe(6);
     });
 
-    test('switching class updates BAB and save progressions', () => {
+    test('switching class updates BAB and save progressions', async () => {
       const race = raceDataToRace('Human');
       const scores = { str: 14, dex: 12, con: 12, int: 10, wis: 14, cha: 12 };
 
       // Fighter: Full BAB, Good Fort, Poor Ref, Poor Will
-      const fighterChar = CharacterService.createDefaultCharacter({
+      const fighterChar = await CharacterService.createDefaultCharacter({
         name: 'Progression Test',
         race,
         selectedClass: 'Fighter',
@@ -639,7 +645,7 @@ describe('Character Creation Flow Integration', () => {
       expect(fighterChar.classes.classes[0].willProgression).toBe(SaveProgression.Poor);
 
       // Cleric: Medium BAB, Good Fort, Poor Ref, Good Will
-      const clericChar = CharacterService.createDefaultCharacter({
+      const clericChar = await CharacterService.createDefaultCharacter({
         name: 'Progression Test',
         race,
         selectedClass: 'Cleric',
@@ -653,11 +659,11 @@ describe('Character Creation Flow Integration', () => {
       expect(clericChar.classes.classes[0].willProgression).toBe(SaveProgression.Good);
     });
 
-    test('switching class updates skill ranks per level', () => {
+    test('switching class updates skill ranks per level', async () => {
       const race = raceDataToRace('Human');
       const scores = { str: 10, dex: 10, con: 10, int: 10, wis: 10, cha: 10 };
 
-      const fighterChar = CharacterService.createDefaultCharacter({
+      const fighterChar = await CharacterService.createDefaultCharacter({
         name: 'Skill Ranks Test',
         race,
         selectedClass: 'Fighter',
@@ -668,7 +674,7 @@ describe('Character Creation Flow Integration', () => {
       // Fighter: 2 skill ranks
       expect(fighterChar.classes.classes[0].skillRanks).toBe(2);
 
-      const rogueChar = CharacterService.createDefaultCharacter({
+      const rogueChar = await CharacterService.createDefaultCharacter({
         name: 'Skill Ranks Test',
         race,
         selectedClass: 'Rogue',
@@ -680,9 +686,9 @@ describe('Character Creation Flow Integration', () => {
       expect(rogueChar.classes.classes[0].skillRanks).toBe(8);
     });
 
-    test('switched character passes full validation', () => {
+    test('switched character passes full validation', async () => {
       const race = raceDataToRace('Human');
-      const character = CharacterService.createDefaultCharacter({
+      const character = await CharacterService.createDefaultCharacter({
         name: 'Valid Wizard',
         race,
         selectedClass: 'Wizard',
@@ -701,11 +707,11 @@ describe('Character Creation Flow Integration', () => {
   // 8. Verify point buy validation: can't exceed point total
   // =========================================================================
   describe('8 - Point buy validation: cannot exceed point total', () => {
-    test('all-18 allocation exceeds 20-point budget', () => {
+    test('all-18 allocation exceeds 20-point budget', async () => {
       const race = raceDataToRace('Human');
       const scores = { str: 18, dex: 18, con: 18, int: 18, wis: 18, cha: 18 };
 
-      const character = CharacterService.createDefaultCharacter({
+      const character = await CharacterService.createDefaultCharacter({
         name: 'Over Budget',
         race,
         selectedClass: 'Fighter',
@@ -724,12 +730,12 @@ describe('Character Creation Flow Integration', () => {
       expect(vsValidation.errors.some((e) => e.includes('exceeds'))).toBe(true);
     });
 
-    test('15-point budget allocation is rejected against 10-point limit', () => {
+    test('15-point budget allocation is rejected against 10-point limit', async () => {
       const race = raceDataToRace('Human');
       // Cost: 7 + 5 + 3 + 2 + 0 + (-2) = 15
       const scores = { str: 15, dex: 14, con: 13, int: 12, wis: 10, cha: 8 };
 
-      const character = CharacterService.createDefaultCharacter({
+      const character = await CharacterService.createDefaultCharacter({
         name: 'Over Small Budget',
         race,
         selectedClass: 'Fighter',
@@ -742,12 +748,12 @@ describe('Character Creation Flow Integration', () => {
       expect(validation.isValid).toBe(false);
     });
 
-    test('exact budget allocation is valid', () => {
+    test('exact budget allocation is valid', async () => {
       const race = raceDataToRace('Human');
       // All 10s: cost = 0 each = 0 total, fits in 20
       const scores = { str: 10, dex: 10, con: 10, int: 10, wis: 10, cha: 10 };
 
-      const character = CharacterService.createDefaultCharacter({
+      const character = await CharacterService.createDefaultCharacter({
         name: 'Balanced',
         race,
         selectedClass: 'Fighter',
@@ -776,11 +782,11 @@ describe('Character Creation Flow Integration', () => {
   // =========================================================================
   describe('9 - Ability score boundaries', () => {
     describe('Point buy boundaries: min 7, max 18', () => {
-      test('score of 7 is the minimum valid point buy score', () => {
+      test('score of 7 is the minimum valid point buy score', async () => {
         const race = raceDataToRace('Human');
         const scores = { str: 7, dex: 7, con: 7, int: 7, wis: 7, cha: 7 };
 
-        const character = CharacterService.createDefaultCharacter({
+        const character = await CharacterService.createDefaultCharacter({
           name: 'All Sevens',
           race,
           selectedClass: 'Fighter',
@@ -796,11 +802,11 @@ describe('Character Creation Flow Integration', () => {
         expect(validation.isValid).toBe(true);
       });
 
-      test('score of 18 is the maximum valid point buy score', () => {
+      test('score of 18 is the maximum valid point buy score', async () => {
         const race = raceDataToRace('Human');
         const scores = { str: 18, dex: 18, con: 18, int: 18, wis: 18, cha: 18 };
 
-        const character = CharacterService.createDefaultCharacter({
+        const character = await CharacterService.createDefaultCharacter({
           name: 'All Eighteens',
           race,
           selectedClass: 'Fighter',
@@ -817,11 +823,11 @@ describe('Character Creation Flow Integration', () => {
         expect(validation.isValid).toBe(true);
       });
 
-      test('score below 7 is invalid for point buy', () => {
+      test('score below 7 is invalid for point buy', async () => {
         const race = raceDataToRace('Human');
         const scores = { str: 6, dex: 10, con: 10, int: 10, wis: 10, cha: 10 };
 
-        const character = CharacterService.createDefaultCharacter({
+        const character = await CharacterService.createDefaultCharacter({
           name: 'Below Min',
           race,
           selectedClass: 'Fighter',
@@ -838,11 +844,11 @@ describe('Character Creation Flow Integration', () => {
         expect(validation.errors.some((e) => e.includes('STR'))).toBe(true);
       });
 
-      test('score above 18 is invalid for point buy', () => {
+      test('score above 18 is invalid for point buy', async () => {
         const race = raceDataToRace('Human');
         const scores = { str: 19, dex: 10, con: 10, int: 10, wis: 10, cha: 10 };
 
-        const character = CharacterService.createDefaultCharacter({
+        const character = await CharacterService.createDefaultCharacter({
           name: 'Above Max',
           race,
           selectedClass: 'Fighter',
@@ -879,11 +885,11 @@ describe('Character Creation Flow Integration', () => {
         }
       });
 
-      test('score of 2 is invalid for 3d6 method', () => {
+      test('score of 2 is invalid for 3d6 method', async () => {
         const race = raceDataToRace('Human');
         const scores = { str: 2, dex: 10, con: 10, int: 10, wis: 10, cha: 10 };
 
-        const character = CharacterService.createDefaultCharacter({
+        const character = await CharacterService.createDefaultCharacter({
           name: 'Below Roll Min',
           race,
           selectedClass: 'Fighter',
@@ -900,11 +906,11 @@ describe('Character Creation Flow Integration', () => {
         expect(validation.errors.some((e) => e.includes('STR'))).toBe(true);
       });
 
-      test('score of 19 is invalid for 4d6 method', () => {
+      test('score of 19 is invalid for 4d6 method', async () => {
         const race = raceDataToRace('Human');
         const scores = { str: 19, dex: 10, con: 10, int: 10, wis: 10, cha: 10 };
 
-        const character = CharacterService.createDefaultCharacter({
+        const character = await CharacterService.createDefaultCharacter({
           name: 'Above Roll Max',
           race,
           selectedClass: 'Fighter',
@@ -943,7 +949,7 @@ describe('Character Creation Flow Integration', () => {
   // 10. Complete flow produces a character that passes full validation
   // =========================================================================
   describe('10 - Complete end-to-end flows pass full validation', () => {
-    test('Dwarf Fighter with point buy passes all validation checks', () => {
+    test('Dwarf Fighter with point buy passes all validation checks', async () => {
       // Step 1: Name
       const name = 'Thorin Oakenshield';
       const nameResult = ValidationService.validateCharacterName(name);
@@ -959,7 +965,7 @@ describe('Character Creation Flow Integration', () => {
 
       // Step 4: Ability scores via point buy
       const scores = { str: 16, dex: 12, con: 14, int: 10, wis: 12, cha: 8 };
-      const character = CharacterService.createDefaultCharacter({
+      const character = await CharacterService.createDefaultCharacter({
         name,
         race,
         selectedClass,
@@ -1000,7 +1006,7 @@ describe('Character Creation Flow Integration', () => {
       expect(character.abilityScores.cha.modifier).toBe(-2);
     });
 
-    test('Half-Elf Bard with 4d6 drop lowest passes all validation', () => {
+    test('Half-Elf Bard with 4d6 drop lowest passes all validation', async () => {
       const name = 'Lyra Songweaver';
       const nameResult = ValidationService.validateCharacterName(name);
       expect(nameResult.isValid).toBe(true);
@@ -1011,7 +1017,7 @@ describe('Character Creation Flow Integration', () => {
 
       const rolls = AbilityScoreService.rollAllAbilities(AbilityScoreMethod.Roll4d6DropLowest);
 
-      const character = CharacterService.createDefaultCharacter({
+      const character = await CharacterService.createDefaultCharacter({
         name,
         race,
         selectedClass: 'Bard',
@@ -1053,13 +1059,13 @@ describe('Character Creation Flow Integration', () => {
       expect(character.abilityScores.cha.racial).toBe(2);
     });
 
-    test('Gnome Sorcerer with 3d6 passes all validation', () => {
+    test('Gnome Sorcerer with 3d6 passes all validation', async () => {
       const name = 'Fizwick Sparkletop';
       const race = raceDataToRace('Gnome');
 
       const rolls = AbilityScoreService.rollAllAbilities(AbilityScoreMethod.Roll3d6);
 
-      const character = CharacterService.createDefaultCharacter({
+      const character = await CharacterService.createDefaultCharacter({
         name,
         race,
         selectedClass: 'Sorcerer',
@@ -1095,9 +1101,9 @@ describe('Character Creation Flow Integration', () => {
       expect(charValidation.errors).toHaveLength(0);
     });
 
-    test('character can round-trip through JSON export/import', () => {
+    test('character can round-trip through JSON export/import', async () => {
       const race = raceDataToRace('Dwarf');
-      const character = CharacterService.createDefaultCharacter({
+      const character = await CharacterService.createDefaultCharacter({
         name: 'JSON Round Trip',
         race,
         selectedClass: 'Cleric',

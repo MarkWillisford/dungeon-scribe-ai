@@ -1,4 +1,6 @@
 import { CharacterService } from '@/services/CharacterService';
+import { GameDataService } from '@services/GameDataService';
+import { StaticGameDataConnector } from '@services/StaticGameDataConnector';
 import { AbilityScoreService } from '@/services/AbilityScoreService';
 import { ValidationService } from '@/services/ValidationService';
 import { FLEXIBLE_ABILITY_RACES, getRaceByName } from '@/data/races';
@@ -42,6 +44,10 @@ function raceDataToRace(name: string): Race {
 const STANDARD_SCORES = { str: 15, dex: 14, con: 13, int: 12, wis: 10, cha: 8 };
 
 describe('Character CRUD Integration', () => {
+  beforeAll(() => {
+    GameDataService.setConnector(new StaticGameDataConnector());
+  });
+
   // -----------------------------------------------------------------
   // 1. Create a default character, verify structure and defaults
   // -----------------------------------------------------------------
@@ -59,8 +65,8 @@ describe('Character CRUD Integration', () => {
 
     let character: Character;
 
-    beforeAll(() => {
-      character = CharacterService.createDefaultCharacter(params);
+    beforeAll(async () => {
+      character = await CharacterService.createDefaultCharacter(params);
     });
 
     test('has a unique id starting with "char_"', () => {
@@ -111,9 +117,9 @@ describe('Character CRUD Integration', () => {
   // 2. Set basic info (name, alignment), validate passes
   // -----------------------------------------------------------------
   describe('2 - Set basic info and validate', () => {
-    test('character with valid name and alignment passes CharacterService validation', () => {
+    test('character with valid name and alignment passes CharacterService validation', async () => {
       const race = raceDataToRace('Human');
-      const character = CharacterService.createDefaultCharacter({
+      const character = await CharacterService.createDefaultCharacter({
         name: 'Branwen Stormcloak',
         race,
         selectedClass: 'Fighter',
@@ -141,8 +147,8 @@ describe('Character CRUD Integration', () => {
     const dwarfRace = raceDataToRace('Dwarf');
     let character: Character;
 
-    beforeAll(() => {
-      character = CharacterService.createDefaultCharacter({
+    beforeAll(async () => {
+      character = await CharacterService.createDefaultCharacter({
         name: 'Durak Ironbeard',
         race: dwarfRace,
         selectedClass: 'Fighter',
@@ -190,9 +196,9 @@ describe('Character CRUD Integration', () => {
     let character: Character;
     const fighterData = getClassByName('Fighter')!;
 
-    beforeAll(() => {
+    beforeAll(async () => {
       const race = raceDataToRace('Human');
-      character = CharacterService.createDefaultCharacter({
+      character = await CharacterService.createDefaultCharacter({
         name: 'Caelum Brightshield',
         race,
         selectedClass: 'Fighter',
@@ -256,12 +262,12 @@ describe('Character CRUD Integration', () => {
   // 5. Use point buy to set ability scores, verify points calculation
   // -----------------------------------------------------------------
   describe('5 - Point buy ability scores', () => {
-    test('standard fantasy 20-point buy validates correctly', () => {
+    test('standard fantasy 20-point buy validates correctly', async () => {
       const race = raceDataToRace('Human');
       const scores = { str: 15, dex: 14, con: 13, int: 12, wis: 10, cha: 8 };
       // Cost: 7 + 5 + 3 + 2 + 0 + (-2) = 15  (not 20 -- let us check)
 
-      const character = CharacterService.createDefaultCharacter({
+      const character = await CharacterService.createDefaultCharacter({
         name: 'Point Buy Hero',
         race,
         selectedClass: 'Fighter',
@@ -285,11 +291,11 @@ describe('Character CRUD Integration', () => {
       expect(validation.errors).toHaveLength(0);
     });
 
-    test('ValidationService.validatePointBuy agrees with AbilityScoreService', () => {
+    test('ValidationService.validatePointBuy agrees with AbilityScoreService', async () => {
       const race = raceDataToRace('Human');
       const scores = { str: 16, dex: 14, con: 12, int: 10, wis: 10, cha: 8 };
 
-      const character = CharacterService.createDefaultCharacter({
+      const character = await CharacterService.createDefaultCharacter({
         name: 'Cross Validation',
         race,
         selectedClass: 'Fighter',
@@ -305,12 +311,12 @@ describe('Character CRUD Integration', () => {
       expect(asResult.isValid).toBe(vsResult.isValid);
     });
 
-    test('over-budget allocation is caught as invalid', () => {
+    test('over-budget allocation is caught as invalid', async () => {
       const race = raceDataToRace('Human');
       // All 18s would cost 17*6 = 102 points, way over budget
       const scores = { str: 18, dex: 18, con: 18, int: 18, wis: 18, cha: 18 };
 
-      const character = CharacterService.createDefaultCharacter({
+      const character = await CharacterService.createDefaultCharacter({
         name: 'Overpowered',
         race,
         selectedClass: 'Fighter',
@@ -393,11 +399,11 @@ describe('Character CRUD Integration', () => {
       expect(validation.errors).toHaveLength(0);
     });
 
-    test('a character can be created from rolled scores and passes validation', () => {
+    test('a character can be created from rolled scores and passes validation', async () => {
       const results = AbilityScoreService.rollAllAbilities(AbilityScoreMethod.Roll4d6DropLowest);
       const race = raceDataToRace('Elf');
 
-      const character = CharacterService.createDefaultCharacter({
+      const character = await CharacterService.createDefaultCharacter({
         name: 'Rolled Elf',
         race,
         selectedClass: 'Wizard',
@@ -424,9 +430,9 @@ describe('Character CRUD Integration', () => {
   describe('7 - Full valid character creation and validation', () => {
     let character: Character;
 
-    beforeAll(() => {
+    beforeAll(async () => {
       const dwarfRace = raceDataToRace('Dwarf');
-      character = CharacterService.createDefaultCharacter({
+      character = await CharacterService.createDefaultCharacter({
         name: 'Gimbal Stoneforge',
         race: dwarfRace,
         selectedClass: 'Cleric',
@@ -493,9 +499,9 @@ describe('Character CRUD Integration', () => {
       expect(result.errors).toContain('Character name is required');
     });
 
-    test('empty name on character fails CharacterService.validateCharacter', () => {
+    test('empty name on character fails CharacterService.validateCharacter', async () => {
       const race = raceDataToRace('Human');
-      const character = CharacterService.createDefaultCharacter({
+      const character = await CharacterService.createDefaultCharacter({
         name: '',
         race,
         selectedClass: 'Fighter',
@@ -513,9 +519,9 @@ describe('Character CRUD Integration', () => {
       expect(result.errors).toContain('Character name is required');
     });
 
-    test('character without classes fails validation', () => {
+    test('character without classes fails validation', async () => {
       const race = raceDataToRace('Human');
-      const character = CharacterService.createDefaultCharacter({
+      const character = await CharacterService.createDefaultCharacter({
         name: 'No Class',
         race,
         selectedClass: 'Fighter',
@@ -538,9 +544,9 @@ describe('Character CRUD Integration', () => {
   describe('9 - Update character fields after creation', () => {
     let character: Character;
 
-    beforeEach(() => {
+    beforeEach(async () => {
       const race = raceDataToRace('Elf');
-      character = CharacterService.createDefaultCharacter({
+      character = await CharacterService.createDefaultCharacter({
         name: 'Elowen Starfall',
         race,
         selectedClass: 'Wizard',
@@ -640,9 +646,9 @@ describe('Character CRUD Integration', () => {
       expect(mods.charisma).toBeUndefined();
     });
 
-    test('Human character created without explicit racial mods has zero racial on all scores', () => {
+    test('Human character created without explicit racial mods has zero racial on all scores', async () => {
       const humanRace = raceDataToRace('Human');
-      const character = CharacterService.createDefaultCharacter({
+      const character = await CharacterService.createDefaultCharacter({
         name: 'Gareth the Versatile',
         race: humanRace,
         selectedClass: 'Fighter',
@@ -657,12 +663,12 @@ describe('Character CRUD Integration', () => {
       }
     });
 
-    test('flexible +2 can be applied manually to any one ability and passes validation', () => {
+    test('flexible +2 can be applied manually to any one ability and passes validation', async () => {
       const humanRace = raceDataToRace('Human');
       // Simulate the user choosing +2 STR for their Human
       humanRace.abilityModifiers = { str: 2 };
 
-      const character = CharacterService.createDefaultCharacter({
+      const character = await CharacterService.createDefaultCharacter({
         name: 'Strong Human',
         race: humanRace,
         selectedClass: 'Fighter',
@@ -686,13 +692,13 @@ describe('Character CRUD Integration', () => {
       expect(result.valid).toBe(true);
     });
 
-    test('each flexible race can apply +2 to different abilities', () => {
+    test('each flexible race can apply +2 to different abilities', async () => {
       for (const raceName of FLEXIBLE_ABILITY_RACES) {
         const race = raceDataToRace(raceName);
         // Apply +2 to WIS for variety
         race.abilityModifiers = { wis: 2 };
 
-        const character = CharacterService.createDefaultCharacter({
+        const character = await CharacterService.createDefaultCharacter({
           name: `${raceName} Sage`,
           race,
           selectedClass: 'Cleric',
