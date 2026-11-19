@@ -168,6 +168,10 @@ export class FirebaseCharacterService {
       if (cls.archetype !== undefined && cls.archetype.length > 0) {
         return {
           ...cls,
+          // Backfill deprecated scalars so consumers like EidolonPoolService
+          // that read archetypeId directly are not broken by the coercion.
+          archetypeId: cls.archetypeId ?? cls.archetype[0],
+          archetypeName: cls.archetypeName ?? cls.archetype[0],
           archetypes: cls.archetype.map((name) => ({
             id: name,
             name,
