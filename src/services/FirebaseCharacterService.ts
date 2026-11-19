@@ -250,8 +250,14 @@ export class FirebaseCharacterService {
         ...f,
         effects: f.effects ?? [],
       }));
+      // Features intentionally removed by an applied archetype must not be
+      // re-injected from the class doc — that would undo the archetype on load.
+      const archetypeReplacedNames = new Set(
+        (cls.archetypes ?? []).flatMap((a) => a.replacedFeatures),
+      );
       const missingFeatures = (firestoreFeatures ?? [])
         .filter((f) => f.level <= cls.level)
+        .filter((f) => !archetypeReplacedNames.has(f.name))
         .filter(
           (f) =>
             !normalizedStored.some(
