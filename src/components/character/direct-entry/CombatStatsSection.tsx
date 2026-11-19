@@ -35,7 +35,7 @@ interface SaveBonusRow {
   conditional: boolean;
 }
 
-function getSaveBonusRows(
+export function getSaveBonusRows(
   allSaveBreakdown: ReturnType<typeof ModifierPipelineService.getBreakdown>,
   specificBreakdown: ReturnType<typeof ModifierPipelineService.getBreakdown>,
 ): SaveBonusRow[] {
