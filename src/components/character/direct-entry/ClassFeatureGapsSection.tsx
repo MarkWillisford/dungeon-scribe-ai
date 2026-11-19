@@ -125,6 +125,7 @@ function UnmodelledFeatureRow({ classEntryId, feature, existing }: UnmodelledFea
   const handleClear = () => {
     dispatch(clearManualFeatureBonus({ classEntryId, featureName: feature.name }));
     setRawValue('');
+    setExpanded(false);
   };
 
   const targetLabel = STAT_TARGET_OPTIONS.find((o) => o.value === target)?.label ?? target;
