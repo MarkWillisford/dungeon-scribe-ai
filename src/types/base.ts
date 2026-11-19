@@ -285,6 +285,10 @@ export interface Effect {
   value: number | string; // numeric value or formula string; for ability_substitution use AbilityScoreRef
   source: string;
 
+  // Propagated from the source game-data entity (ClassFeature, FeatDefinition, etc.)
+  // so the breakdown can label machine-generated contributions as unverified.
+  verificationStatus?: VerificationStatus;
+
   condition?: EffectCondition;
   duration?: EffectDuration;
   activation?: EffectActivation;
