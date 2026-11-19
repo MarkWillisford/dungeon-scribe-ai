@@ -1001,6 +1001,90 @@ describe('ModifierPipelineService', () => {
     });
   });
 
+  describe('conditional effects — armor_type regression', () => {
+    const nimbleFeature = {
+      name: 'Nimble',
+      description: '+1 dodge AC in light/no armor',
+      level: 3,
+      effects: [
+        {
+          type: 'bonus' as const,
+          bonusType: BonusType.DODGE,
+          target: 'ac.dodge' as const,
+          value: 1,
+          source: 'Nimble',
+          condition: {
+            type: 'armor_type' as const,
+            params: { maxArmor: 'light' },
+            description: 'While wearing light or no armor',
+          },
+        },
+      ],
+    };
+
+    test('armor_type condition applies when character is unarmored', () => {
+      const baseline = createTestCharacter();
+      baseline.equipment.armor = [];
+      const baselineDodge =
+        ModifierPipelineService.recalculate(baseline).combatStats.armorClass.dodge;
+
+      const char = createTestCharacter();
+      char.equipment.armor = [];
+      char.classes.classes[0].classFeatures.push(nimbleFeature);
+
+      const result = ModifierPipelineService.recalculate(char);
+      expect(result.combatStats.armorClass.dodge).toBe(baselineDodge + 1);
+    });
+
+    test('armor_type condition does not apply when character wears medium armor', () => {
+      const mediumArmor = [
+        {
+          acBonus: 5,
+          enhancement: 0,
+          equipped: true,
+          type: 'medium',
+          name: 'Chainmail',
+        } as unknown as ReturnType<typeof createTestCharacter>['equipment']['armor'][0],
+      ];
+
+      const baseline = createTestCharacter();
+      baseline.equipment.armor = mediumArmor;
+      const baselineDodge =
+        ModifierPipelineService.recalculate(baseline).combatStats.armorClass.dodge;
+
+      const char = createTestCharacter();
+      char.equipment.armor = mediumArmor;
+      char.classes.classes[0].classFeatures.push(nimbleFeature);
+
+      const result = ModifierPipelineService.recalculate(char);
+      expect(result.combatStats.armorClass.dodge).toBe(baselineDodge);
+    });
+
+    test('armor_type condition does not apply when character wears heavy armor', () => {
+      const heavyArmor = [
+        {
+          acBonus: 8,
+          enhancement: 0,
+          equipped: true,
+          type: 'heavy',
+          name: 'Full Plate',
+        } as unknown as ReturnType<typeof createTestCharacter>['equipment']['armor'][0],
+      ];
+
+      const baseline = createTestCharacter();
+      baseline.equipment.armor = heavyArmor;
+      const baselineDodge =
+        ModifierPipelineService.recalculate(baseline).combatStats.armorClass.dodge;
+
+      const char = createTestCharacter();
+      char.equipment.armor = heavyArmor;
+      char.classes.classes[0].classFeatures.push(nimbleFeature);
+
+      const result = ModifierPipelineService.recalculate(char);
+      expect(result.combatStats.armorClass.dodge).toBe(baselineDodge);
+    });
+  });
+
   describe('flaw effects', () => {
     const meleeFlawDef: FlawDefinition = {
       id: 'melee_penalty_flaw',

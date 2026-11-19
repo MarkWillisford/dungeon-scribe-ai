@@ -1,5 +1,5 @@
 import type { Character } from '@/types';
-import { BonusType, type Bonus, type Effect } from '@/types/base';
+import { BonusType, type Bonus, type Effect, type EffectCondition } from '@/types/base';
 import type { AbilityScores } from '@/types/abilities';
 import { Size, SaveProgression } from '@/types/base';
 import { FormulaService, type FormulaContext } from './FormulaService';
@@ -7,6 +7,7 @@ import { FeatRegistryService } from './FeatRegistryService';
 import { FlawRegistryService } from './FlawRegistryService';
 import { ResourcePoolService } from './ResourcePoolService';
 import { HitDiceService } from './HitDiceService';
+import { ConditionEvaluatorService } from './ConditionEvaluatorService';
 
 // ---- Resolved Effect (after formula evaluation) ----
 
@@ -15,6 +16,7 @@ export interface ResolvedEffect {
   bonusType: BonusType;
   value: number;
   source: string;
+  condition?: EffectCondition;
 }
 
 // ---- Stat Breakdown (for UI tooltips) ----
@@ -83,7 +85,7 @@ export class ModifierPipelineService {
     const context = this.buildBaseContext(c);
 
     // Phase 3: Resolve formulas to numbers
-    const resolved = this.resolveEffects(allEffects, context);
+    const resolved = this.resolveEffects(allEffects, context, c);
 
     // Phase 4: Apply stacking rules per target
     const stacked = this.applyStackingRules(resolved);
@@ -114,7 +116,9 @@ export class ModifierPipelineService {
   static getBreakdown(character: Character, target: string): StatBreakdown {
     const allEffects = this.collectAllEffects(character);
     const context = this.buildBaseContext(character);
-    const resolved = this.resolveEffects(allEffects, context).filter((e) => e.target === target);
+    const resolved = this.resolveEffects(allEffects, context, character).filter(
+      (e) => e.target === target,
+    );
 
     // Group by bonus type and apply stacking
     const byType = new Map<BonusType, ResolvedEffect[]>();
@@ -394,7 +398,11 @@ export class ModifierPipelineService {
   // Phase 3: Resolve Formulas
   // ============================================================
 
-  private static resolveEffects(effects: Effect[], context: FormulaContext): ResolvedEffect[] {
+  private static resolveEffects(
+    effects: Effect[],
+    context: FormulaContext,
+    character: Character,
+  ): ResolvedEffect[] {
     const resolved: ResolvedEffect[] = [];
 
     for (const effect of effects) {
@@ -403,6 +411,9 @@ export class ModifierPipelineService {
       if (effect.duration && effect.duration.remaining <= 0 && effect.duration.type !== 'permanent')
         continue;
 
+      // Skip effects whose condition is not satisfied for this character
+      if (!ConditionEvaluatorService.evaluate(effect.condition, character)) continue;
+
       try {
         const value = FormulaService.resolveValue(effect.value, context);
         resolved.push({
@@ -410,6 +421,7 @@ export class ModifierPipelineService {
           bonusType: (effect.bonusType as BonusType) ?? BonusType.UNTYPED,
           value,
           source: effect.source,
+          condition: effect.condition,
         });
       } catch {
         // Skip effects with invalid formulas rather than crashing
