@@ -495,7 +495,8 @@ function effectiveLevelFromClass(classEntry: ClassEntry): number {
 export function effectiveLevelFromDraftClass(cls: ClassEntry | undefined): number {
   if (!cls) return 0;
   const archetypes =
-    cls.archetypes?.map((a) => a.name) ?? (cls.archetypeName ? [cls.archetypeName] : []);
+    cls.archetypes?.map((a) => a.name) ??
+    (cls.archetypeName ? [cls.archetypeName] : (cls.archetype ?? []));
   switch (cls.name) {
     case 'Druid':
     case 'Hunter':
