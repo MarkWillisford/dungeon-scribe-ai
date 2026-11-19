@@ -253,6 +253,9 @@ export function ClassFeatureGapsSection({ entry }: ClassFeatureGapsSectionProps)
     (state) => state.characterEntry.character.manualFeatureBonuses ?? [],
   );
 
+  // entry.id is guaranteed for entries added via addClass (which assigns a UUID if absent).
+  // The name fallback covers legacy characters persisted before that guarantee existed;
+  // those entries never acquire an id on load, so name-keyed bonuses stay consistent.
   const entryId = entry.id ?? entry.name;
 
   const featureKey = entry.classFeatures?.map((f) => f.id ?? f.name).join(',') ?? '';
