@@ -56,15 +56,19 @@ jest.mock('@/utils/crossPlatformAlert', () => ({
   showAlert: (...a: unknown[]) => mockShowAlert(...a),
 }));
 
+const mockPlaySessionService = {
+  create: jest.fn().mockResolvedValue(undefined),
+  delete: jest.fn().mockResolvedValue(undefined),
+  get: jest.fn().mockResolvedValue(null),
+  listActive: jest.fn().mockResolvedValue([]),
+  cancelPendingUpdate: jest.fn(),
+  scheduleUpdate: jest.fn(),
+  flushPendingUpdate: jest.fn().mockResolvedValue(undefined),
+  listActiveSessionCharacterIds: jest.fn().mockResolvedValue([]),
+  scheduleDebouncedUpdate: jest.fn(),
+};
 jest.mock('@services/PlaySessionService', () => ({
-  PlaySessionService: {
-    create: jest.fn().mockResolvedValue(undefined),
-    delete: jest.fn().mockResolvedValue(undefined),
-    get: jest.fn().mockResolvedValue(null),
-    listActive: jest.fn().mockResolvedValue([]),
-    cancelPendingUpdate: jest.fn(),
-    scheduleUpdate: jest.fn(),
-  },
+  PlaySessionService: mockPlaySessionService,
 }));
 
 jest.mock('@services/CombatService', () => ({
@@ -207,13 +211,13 @@ describe('Play screen — maximum hit points', () => {
   });
 });
 
-describe('Play screen — ending a session', () => {
+describe('Play screen — pausing a session', () => {
   it('writes the session hit points back to the character', async () => {
     mockCharacter = characterWith({ max: 40, manualMax: 40, current: 40, nonlethal: 0 });
     mockCombat = inSession({ currentHP: 12, nonlethalDamage: 5 });
 
     const { getByLabelText } = render(React.createElement(PlayScreen));
-    fireEvent.press(getByLabelText('End combat'));
+    fireEvent.press(getByLabelText('Pause session'));
     await flushPromises();
 
     expect(mockUpdateCharacter).toHaveBeenCalledTimes(1);
@@ -231,7 +235,7 @@ describe('Play screen — ending a session', () => {
     mockCombat = inSession({ currentHP: 12, tempHP: 9 });
 
     const { getByLabelText } = render(React.createElement(PlayScreen));
-    fireEvent.press(getByLabelText('End combat'));
+    fireEvent.press(getByLabelText('Pause session'));
     await flushPromises();
 
     const arg = mockUpdateCharacter.mock.calls[0][0] as { data: Character };
@@ -243,7 +247,7 @@ describe('Play screen — ending a session', () => {
     mockCombat = inSession({ currentHP: 12, tempHP: 0 });
 
     const { getByLabelText } = render(React.createElement(PlayScreen));
-    fireEvent.press(getByLabelText('End combat'));
+    fireEvent.press(getByLabelText('Pause session'));
     await flushPromises();
 
     const arg = mockUpdateCharacter.mock.calls[0][0] as { data: Character };
@@ -257,10 +261,32 @@ describe('Play screen — ending a session', () => {
     const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
 
     const { getByLabelText } = render(React.createElement(PlayScreen));
-    fireEvent.press(getByLabelText('End combat'));
+    fireEvent.press(getByLabelText('Pause session'));
     await flushPromises();
 
     expect(mockShowAlert).toHaveBeenCalledWith('Hit Points Not Saved', expect.any(String));
     errorSpy.mockRestore();
+  });
+
+  it('does not delete the session document — resources must survive pause', async () => {
+    mockCharacter = characterWith({ max: 40, manualMax: 40, current: 40 });
+    mockCombat = inSession({ currentHP: 12 });
+
+    const { getByLabelText } = render(React.createElement(PlayScreen));
+    fireEvent.press(getByLabelText('Pause session'));
+    await flushPromises();
+
+    expect(mockPlaySessionService.delete).not.toHaveBeenCalled();
+  });
+
+  it('flushes the debounced session write so Firestore has the latest state', async () => {
+    mockCharacter = characterWith({ max: 40, manualMax: 40, current: 40 });
+    mockCombat = inSession({ currentHP: 12 });
+
+    const { getByLabelText } = render(React.createElement(PlayScreen));
+    fireEvent.press(getByLabelText('Pause session'));
+    await flushPromises();
+
+    expect(mockPlaySessionService.flushPendingUpdate).toHaveBeenCalled();
   });
 });
