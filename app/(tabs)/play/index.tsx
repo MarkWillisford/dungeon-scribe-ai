@@ -158,7 +158,13 @@ export default function CombatTrackerScreen() {
         if (ids.length === 1 && ids[0] === (character?.info.firebaseId ?? character?.info.id)) {
           const sessionDoc = await PlaySessionService.get(userId, ids[0]);
           if (sessionDoc) {
-            dispatch(initFromSession(sessionDoc));
+            const migratedCast = character
+              ? migrateIndexKeyedCastMarks(
+                  character.spellcasting.preparedSpells,
+                  sessionDoc.preparedSpellsCast as Record<string, boolean | number>,
+                )
+              : sessionDoc.preparedSpellsCast;
+            dispatch(initFromSession({ ...sessionDoc, preparedSpellsCast: migratedCast }));
             setSessionCharacterId(ids[0]);
             return;
           }
