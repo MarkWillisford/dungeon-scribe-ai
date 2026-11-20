@@ -502,7 +502,11 @@ const combatSlice = createSlice({
       const { spellKey } = action.payload;
       const current = state.preparedSpellsCast[spellKey] ?? 0;
       if (current > 0) {
-        state.preparedSpellsCast[spellKey] = current - 1;
+        if (current === 1) {
+          delete state.preparedSpellsCast[spellKey];
+        } else {
+          state.preparedSpellsCast[spellKey] = current - 1;
+        }
       }
     },
 

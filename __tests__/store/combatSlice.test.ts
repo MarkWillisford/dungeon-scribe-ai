@@ -987,7 +987,7 @@ describe('uncastPreparedSpell', () => {
       castPreparedSpell({ spellKey: 'Fireball|3|wizard|', maxCasts: 2 }),
     );
     state = combatReducer(state, uncastPreparedSpell({ spellKey: 'Fireball|3|wizard|' }));
-    expect(state.preparedSpellsCast['Fireball|3|wizard|']).toBe(0);
+    expect(state.preparedSpellsCast['Fireball|3|wizard|']).toBeUndefined();
   });
 
   it('does not go below 0', () => {
