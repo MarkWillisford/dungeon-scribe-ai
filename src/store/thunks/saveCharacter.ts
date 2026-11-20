@@ -48,6 +48,17 @@ export const saveCharacter = createAsyncThunk<
       dispatch(markSaved({ characterId: savedCharacterId }));
     }
     dispatch(setSaving(false));
+
+    // If there is an active play session with conditions, merge them back so
+    // saving from Character Entry doesn't silently clear toggled conditions.
+    const combatState = getState().combat;
+    const sessionConditions = combatState?.activeConditions ?? [];
+    if ((combatState?.currentHP ?? null) !== null && sessionConditions.length > 0) {
+      return {
+        ...saved,
+        conditions: { ...saved.conditions, activeConditions: sessionConditions },
+      };
+    }
     return saved;
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Save failed';

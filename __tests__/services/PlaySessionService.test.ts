@@ -38,6 +38,7 @@ function makeSessionDoc(overrides: Partial<PlaySessionDoc> = {}): PlaySessionDoc
     nonlethalDamage: 0,
     tempHP: 5,
     activeBuffs: [],
+    activeConditions: [],
     combatAbilities: {
       activeToggles: {},
       twoWeaponFighting: false,
@@ -72,6 +73,7 @@ describe('PlaySessionService', () => {
         nonlethalDamage: 0,
         tempHP: 0,
         activeBuffs: [],
+        activeConditions: [],
         combatAbilities: {
           activeToggles: {},
           twoWeaponFighting: false,
@@ -98,6 +100,7 @@ describe('PlaySessionService', () => {
         nonlethalDamage: 0,
         tempHP: 0,
         activeBuffs: [],
+        activeConditions: [],
         combatAbilities: {
           activeToggles: {},
           twoWeaponFighting: false,
@@ -165,9 +168,36 @@ describe('PlaySessionService', () => {
 
       const result = await PlaySessionService.get('user-1', 'char-2');
       expect(result!.activeBuffs).toEqual([]);
+      expect(result!.activeConditions).toEqual([]);
       expect(result!.spellSlotsUsed).toEqual({});
       expect(result!.resourcePools).toEqual({});
       expect(result!.round).toBe(0);
+    });
+
+    it('deserializes activeConditions from the stored array', async () => {
+      const session = makeSessionDoc({
+        activeConditions: [{ name: 'Shaken', description: 'penalty to attacks', effects: [] }],
+      });
+      mockFirestore.getDoc.mockResolvedValue({
+        exists: () => true,
+        id: 'char-1',
+        data: () => session,
+      });
+
+      const result = await PlaySessionService.get('user-1', 'char-1');
+      expect(result!.activeConditions).toHaveLength(1);
+      expect(result!.activeConditions[0].name).toBe('Shaken');
+    });
+
+    it('defaults activeConditions to empty array when field is missing', async () => {
+      mockFirestore.getDoc.mockResolvedValue({
+        exists: () => true,
+        id: 'char-1',
+        data: () => ({ userId: 'user-1', currentHP: 20 }),
+      });
+
+      const result = await PlaySessionService.get('user-1', 'char-1');
+      expect(result!.activeConditions).toEqual([]);
     });
 
     it('returns null for corrupt documents with non-numeric currentHP', async () => {

@@ -44,7 +44,7 @@ import { FormulaService } from '@services/FormulaService';
 import { PlaySessionService } from '@services/PlaySessionService';
 import { updateCharacter } from '@store/slices/charactersSlice';
 import { endTurn, startTurn } from '@store/thunks/turnThunks';
-import { toggleCondition } from '@store/thunks/conditionThunks';
+import { toggleCondition, restoreSessionConditions } from '@store/thunks/conditionThunks';
 import { RollRecord, Buff, SavedBuff } from '@/types/buff';
 import type { PlaySessionDoc } from '@/types/playSession';
 import { BuffedTotals } from '@/types/combat';
@@ -92,6 +92,7 @@ export default function CombatTrackerScreen() {
   const userId = useAppSelector((s) => s.auth.user?.uid);
   const {
     activeBuffs,
+    activeConditions,
     combatAbilities,
     currentHP,
     tempHP,
@@ -157,6 +158,7 @@ export default function CombatTrackerScreen() {
           const sessionDoc = await PlaySessionService.get(userId, ids[0]);
           if (sessionDoc) {
             dispatch(initFromSession(sessionDoc));
+            dispatch(restoreSessionConditions());
             setSessionCharacterId(ids[0]);
             return;
           }
@@ -202,6 +204,7 @@ export default function CombatTrackerScreen() {
       nonlethalDamage,
       isStabilized,
       activeBuffs,
+      activeConditions,
       combatAbilities,
       round,
       preparedSpellsCast,
@@ -217,6 +220,7 @@ export default function CombatTrackerScreen() {
     nonlethalDamage,
     isStabilized,
     activeBuffs,
+    activeConditions,
     combatAbilities,
     round,
     preparedSpellsCast,
@@ -336,6 +340,7 @@ export default function CombatTrackerScreen() {
                     nonlethalDamage: charNonlethal,
                     tempHP: charTempHP,
                     activeBuffs: [],
+                    activeConditions: [],
                     combatAbilities: {
                       activeToggles: {},
                       twoWeaponFighting: false,
@@ -382,6 +387,7 @@ export default function CombatTrackerScreen() {
         const sessionDoc = await PlaySessionService.get(userId, characterId);
         if (sessionDoc) {
           dispatch(initFromSession(sessionDoc));
+          dispatch(restoreSessionConditions());
           setSessionCharacterId(characterId);
           // playView → 'tracker' automatically because currentHP becomes non-null
         } else {

@@ -1,4 +1,5 @@
 import { Buff, CombatAbilityState } from './buff';
+import type { Condition } from './character';
 
 /**
  * Firestore document stored at users/{userId}/sessions/{characterId}.
@@ -12,6 +13,8 @@ export interface PlaySessionDoc {
   isStabilized?: boolean;
   tempHP: number;
   activeBuffs: Buff[];
+  /** Manually toggled combat conditions (Shaken, Sickened, etc.) — session-scoped */
+  activeConditions: Condition[];
   combatAbilities: CombatAbilityState;
   /** pool.id ?? pool.baseClass → used slot count per spell level (index = level, 0 = cantrips) */
   spellSlotsUsed: Record<string, number[]>;

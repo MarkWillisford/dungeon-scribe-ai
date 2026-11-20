@@ -156,6 +156,9 @@ export class PlaySessionService {
     const activeBuffs = Array.isArray(data.activeBuffs)
       ? (data.activeBuffs as PlaySessionDoc['activeBuffs'])
       : [];
+    const activeConditions = Array.isArray(data.activeConditions)
+      ? (data.activeConditions as PlaySessionDoc['activeConditions'])
+      : [];
     const combatAbilities = PlaySessionService.isPlainObject(data.combatAbilities)
       ? PlaySessionService.normalizeCombatAbilities(data.combatAbilities)
       : PlaySessionService.defaultCombatAbilities();
@@ -181,6 +184,7 @@ export class PlaySessionService {
       nonlethalDamage: (data.nonlethalDamage as number) ?? 0,
       tempHP: (data.tempHP as number) ?? 0,
       activeBuffs,
+      activeConditions,
       combatAbilities,
       spellSlotsUsed,
       preparedSpellsCast: PlaySessionService.isPlainObject(data.preparedSpellsCast)

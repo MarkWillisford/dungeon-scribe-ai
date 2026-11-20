@@ -1,5 +1,6 @@
-import { toggleCondition } from '@store/thunks/conditionThunks';
+import { toggleCondition, restoreSessionConditions } from '@store/thunks/conditionThunks';
 import { setActiveCharacter } from '@store/slices/charactersSlice';
+import { setSessionConditions } from '@store/slices/combatSlice';
 import { ModifierPipelineService } from '@/services/ModifierPipelineService';
 import type { Character } from '@/types';
 import type { RootState } from '@store/store';
@@ -23,9 +24,13 @@ function makeCharacter(conditions: Condition[] = []): Character {
   } as unknown as Character;
 }
 
-function makeState(character: Character | null): RootState {
+function makeState(character: Character | null, sessionConditions: Condition[] = []): RootState {
   return {
     characters: { activeCharacter: character, characters: [], loading: false, error: null },
+    combat: {
+      currentHP: sessionConditions.length > 0 ? 30 : null,
+      activeConditions: sessionConditions,
+    },
   } as unknown as RootState;
 }
 
@@ -96,5 +101,67 @@ describe('toggleCondition thunk', () => {
     const updatedChar = dispatched.payload as Character;
     const shaken = updatedChar.conditions.activeConditions.find((c) => c.name === 'Shaken');
     expect(shaken?.effects.length).toBeGreaterThan(0);
+  });
+
+  it('dispatches setSessionConditions with the updated conditions when adding', () => {
+    const character = makeCharacter([]);
+    const { dispatch } = runThunk(toggleCondition('Shaken'), makeState(character));
+    const types = (dispatch.mock.calls as Array<[{ type: string }]>).map(([a]) => a.type);
+    expect(types).toContain(setSessionConditions([]).type);
+    const setConditionsCall = dispatch.mock.calls.find(
+      ([a]: [{ type: string }]) => a.type === setSessionConditions([]).type,
+    );
+    const payload = setConditionsCall![0].payload as Condition[];
+    expect(payload.some((c) => c.name === 'Shaken')).toBe(true);
+  });
+
+  it('dispatches setSessionConditions with empty array when removing', () => {
+    const character = makeCharacter([makeCondition('Shaken')]);
+    const { dispatch } = runThunk(toggleCondition('Shaken'), makeState(character));
+    const setConditionsCall = dispatch.mock.calls.find(
+      ([a]: [{ type: string }]) => a.type === setSessionConditions([]).type,
+    );
+    const payload = setConditionsCall![0].payload as Condition[];
+    expect(payload).toHaveLength(0);
+  });
+});
+
+describe('restoreSessionConditions thunk', () => {
+  beforeEach(() => {
+    (ModifierPipelineService.recalculate as jest.Mock).mockImplementation((char: Character) => ({
+      ...char,
+      _recalculated: true,
+    }));
+  });
+
+  it('does nothing when no session conditions', () => {
+    const character = makeCharacter([]);
+    const { dispatch } = runThunk(restoreSessionConditions(), makeState(character, []));
+    expect(dispatch).not.toHaveBeenCalled();
+  });
+
+  it('does nothing when no active character', () => {
+    const state = makeState(null, [makeCondition('Shaken')]);
+    const { dispatch } = runThunk(restoreSessionConditions(), state);
+    expect(dispatch).not.toHaveBeenCalled();
+  });
+
+  it('applies session conditions to the active character', () => {
+    const character = makeCharacter([]);
+    const sessionConditions = [makeCondition('Shaken')];
+    const { dispatch } = runThunk(
+      restoreSessionConditions(),
+      makeState(character, sessionConditions),
+    );
+    expect(dispatch).toHaveBeenCalledTimes(1);
+    const dispatched = dispatch.mock.calls[0][0];
+    const updatedChar = dispatched.payload as Character;
+    expect(updatedChar.conditions.activeConditions.some((c) => c.name === 'Shaken')).toBe(true);
+  });
+
+  it('calls recalculate when restoring conditions', () => {
+    const character = makeCharacter([]);
+    runThunk(restoreSessionConditions(), makeState(character, [makeCondition('Fatigued')]));
+    expect(ModifierPipelineService.recalculate).toHaveBeenCalled();
   });
 });

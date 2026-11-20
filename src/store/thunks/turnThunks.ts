@@ -1,6 +1,6 @@
 import { ModifierPipelineService } from '@/services/ModifierPipelineService';
 import { setActiveCharacter } from '../slices/charactersSlice';
-import { endTurnDecrement, startTurnApply } from '../slices/combatSlice';
+import { endTurnDecrement, setSessionConditions, startTurnApply } from '../slices/combatSlice';
 import type { AppDispatch, RootState } from '../store';
 
 export const endTurn = () => (dispatch: AppDispatch, getState: () => RootState) => {
@@ -26,6 +26,7 @@ export const endTurn = () => (dispatch: AppDispatch, getState: () => RootState) 
 
   const recalculated = ModifierPipelineService.recalculate(updatedCharacter);
   dispatch(setActiveCharacter(recalculated));
+  dispatch(setSessionConditions(recalculated.conditions.activeConditions));
 };
 
 export const startTurn = () => (dispatch: AppDispatch) => {
