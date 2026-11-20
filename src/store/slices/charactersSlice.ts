@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk, type PayloadAction } from '@reduxjs/toolkit';
 import type { Character, CharacterSummary, CreateCharacterParams } from '@/types';
 import type { CharacterFeat } from '@/types/feats';
+import type { Condition } from '@/types/character';
 import { FirebaseCharacterService } from '@/services/FirebaseCharacterService';
 import { CharacterService } from '@/services/CharacterService';
 import { ModifierPipelineService } from '@/services/ModifierPipelineService';
@@ -57,9 +58,22 @@ export const fetchCharacters = createAsyncThunk<CharacterSummary[], string>(
 
 export const fetchCharacter = createAsyncThunk<Character, string>(
   'characters/fetchCharacter',
-  async (characterId, { rejectWithValue }) => {
+  async (characterId, { rejectWithValue, getState }) => {
     try {
-      return await FirebaseCharacterService.getCharacter(characterId);
+      const character = await FirebaseCharacterService.getCharacter(characterId);
+      // If there is an active play session with conditions, merge them back so a
+      // sheet reload doesn't silently clear toggled conditions.
+      const state = getState() as {
+        combat?: { currentHP: number | null; activeConditions: Condition[] };
+      };
+      const sessionConditions = state.combat?.activeConditions ?? [];
+      if ((state.combat?.currentHP ?? null) !== null && sessionConditions.length > 0) {
+        return {
+          ...character,
+          conditions: { ...character.conditions, activeConditions: sessionConditions },
+        };
+      }
+      return character;
     } catch (error) {
       return rejectWithValue(error instanceof Error ? error.message : 'Failed to fetch character');
     }

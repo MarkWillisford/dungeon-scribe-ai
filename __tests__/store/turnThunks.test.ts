@@ -1,6 +1,7 @@
 import combatReducer, {
   addBuff,
   endTurnDecrement,
+  setSessionConditions,
   startTurnApply,
 } from '@store/slices/combatSlice';
 import { endTurn, startTurn } from '@store/thunks/turnThunks';
@@ -215,6 +216,36 @@ describe('endTurn thunk', () => {
     );
     const updatedChar = setActiveCall![0].payload as Character;
     expect(updatedChar.conditions.activeConditions).toHaveLength(1);
+  });
+
+  it('dispatches setSessionConditions with surviving conditions', () => {
+    const combatState = combatReducer(undefined, { type: '@@INIT' });
+    const character = makeMinimalCharacter({
+      conditions: {
+        activeConditions: [
+          { name: 'Shaken', description: '', effects: [] },
+          {
+            name: 'Fatigued',
+            description: '',
+            effects: [],
+            duration: { type: 'rounds', value: 1, remaining: 1 },
+          },
+        ],
+      },
+    });
+    const state = makeState(combatState, character);
+
+    const { dispatch } = runThunk(endTurn(), state);
+
+    const types = (dispatch.mock.calls as Array<[{ type: string }]>).map(([a]) => a.type);
+    expect(types).toContain(setSessionConditions([]).type);
+    const setConditionsCall = dispatch.mock.calls.find(
+      ([a]: [{ type: string }]) => a.type === setSessionConditions([]).type,
+    );
+    // Fatigued had 1 round remaining → removed; Shaken (no duration) → survives
+    const payload = setConditionsCall![0].payload as Array<{ name: string }>;
+    expect(payload.some((c) => c.name === 'Shaken')).toBe(true);
+    expect(payload.some((c) => c.name === 'Fatigued')).toBe(false);
   });
 });
 

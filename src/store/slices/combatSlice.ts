@@ -8,12 +8,16 @@ import {
   SavedBuff,
 } from '@/types/buff';
 import type { PlaySessionDoc } from '@/types/playSession';
+import type { Condition } from '@/types/character';
 import type { ResourcePool } from '@/types/resources';
 import { NonLethalService } from '@/services/NonLethalService';
 
 interface CombatState {
   // Session buffs (lost when combat ends or app closes)
   activeBuffs: Buff[];
+
+  // Manually toggled conditions (Shaken, Sickened, etc.) — session-scoped
+  activeConditions: Condition[];
 
   // Combat ability toggles
   combatAbilities: CombatAbilityState;
@@ -63,6 +67,7 @@ const defaultCombatAbilities: CombatAbilityState = {
 
 const initialState: CombatState = {
   activeBuffs: [],
+  activeConditions: [],
   combatAbilities: defaultCombatAbilities,
   currentHP: null,
   tempHP: 0,
@@ -115,6 +120,12 @@ const combatSlice = createSlice({
 
     clearAllBuffs(state) {
       state.activeBuffs = [];
+    },
+
+    // ---- Session conditions ----
+
+    setSessionConditions(state, action: PayloadAction<Condition[]>) {
+      state.activeConditions = action.payload;
     },
 
     // ---- Combat abilities ----
@@ -381,6 +392,7 @@ const combatSlice = createSlice({
 
     resetCombat(state) {
       state.activeBuffs = [];
+      state.activeConditions = [];
       state.combatAbilities = { ...defaultCombatAbilities };
       state.currentHP = null;
       state.tempHP = 0;
@@ -433,6 +445,7 @@ const combatSlice = createSlice({
       state.isStabilized = false;
       state.pendingStabilizationPrompt = false;
       state.activeBuffs = [];
+      state.activeConditions = [];
       state.combatAbilities = { ...defaultCombatAbilities };
       state.round = 0;
       state.resourcePools = {};
@@ -449,6 +462,7 @@ const combatSlice = createSlice({
       state.tempHP = s.tempHP;
       state.nonlethalDamage = s.nonlethalDamage;
       state.activeBuffs = s.activeBuffs.map((buff) => ({ ...buff }));
+      state.activeConditions = Array.isArray(s.activeConditions) ? [...s.activeConditions] : [];
       const raw = (s.combatAbilities ?? {}) as unknown as Record<string, unknown>;
       let activeToggles: Record<string, boolean> = {};
       if (raw.activeToggles && typeof raw.activeToggles === 'object') {
@@ -560,6 +574,7 @@ export const {
   toggleBuff,
   updateBuffDuration,
   clearAllBuffs,
+  setSessionConditions,
   toggleCombatAbility,
   initHP,
   setCurrentHP,

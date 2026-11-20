@@ -3,6 +3,7 @@ import combatReducer, {
   removeBuff,
   toggleBuff,
   clearAllBuffs,
+  setSessionConditions,
   toggleCombatAbility,
   initHP,
   adjustHP,
@@ -31,6 +32,7 @@ import combatReducer, {
 import { BonusType } from '@/types/base';
 import { Buff, RollRecord, SavedBuff } from '@/types/buff';
 import type { PlaySessionDoc } from '@/types/playSession';
+import type { Condition } from '@/types/character';
 import type { ResourcePool } from '@/types/resources';
 
 // ----------------------------------------------------------------
@@ -78,6 +80,10 @@ describe('combatSlice initial state', () => {
     expect(getInitialState().activeBuffs).toHaveLength(0);
   });
 
+  it('starts with empty activeConditions', () => {
+    expect(getInitialState().activeConditions).toHaveLength(0);
+  });
+
   it('starts with all combat abilities off', () => {
     const state = getInitialState();
     expect(state.combatAbilities.activeToggles).toEqual({});
@@ -90,6 +96,41 @@ describe('combatSlice initial state', () => {
 
   it('round starts at 0', () => {
     expect(getInitialState().round).toBe(0);
+  });
+});
+
+// ----------------------------------------------------------------
+// setSessionConditions
+// ----------------------------------------------------------------
+
+describe('setSessionConditions', () => {
+  it('stores provided conditions', () => {
+    const condition: Condition = { name: 'Shaken', description: '', effects: [] };
+    const state = combatReducer(undefined, setSessionConditions([condition]));
+    expect(state.activeConditions).toHaveLength(1);
+    expect(state.activeConditions[0].name).toBe('Shaken');
+  });
+
+  it('replaces existing conditions', () => {
+    let state = combatReducer(
+      undefined,
+      setSessionConditions([{ name: 'Shaken', description: '', effects: [] }]),
+    );
+    state = combatReducer(
+      state,
+      setSessionConditions([{ name: 'Fatigued', description: '', effects: [] }]),
+    );
+    expect(state.activeConditions).toHaveLength(1);
+    expect(state.activeConditions[0].name).toBe('Fatigued');
+  });
+
+  it('clears conditions when given an empty array', () => {
+    let state = combatReducer(
+      undefined,
+      setSessionConditions([{ name: 'Shaken', description: '', effects: [] }]),
+    );
+    state = combatReducer(state, setSessionConditions([]));
+    expect(state.activeConditions).toHaveLength(0);
   });
 });
 
@@ -626,6 +667,10 @@ describe('initNewSession', () => {
 // initFromSession
 // ----------------------------------------------------------------
 
+function makeCondition(name: string): Condition {
+  return { name, description: '', effects: [] };
+}
+
 function makeSessionDoc(overrides: Partial<PlaySessionDoc> = {}): PlaySessionDoc {
   return {
     characterId: 'char-1',
@@ -634,6 +679,7 @@ function makeSessionDoc(overrides: Partial<PlaySessionDoc> = {}): PlaySessionDoc
     nonlethalDamage: 3,
     tempHP: 5,
     activeBuffs: [makeBuff({ id: 'session_buff', name: 'Session Buff', duration: 4 })],
+    activeConditions: [],
     combatAbilities: {
       activeToggles: { power_attack: true },
       twoWeaponFighting: false,
@@ -1245,6 +1291,45 @@ describe('confirmStabilization', () => {
     state = combatReducer(state, { type: 'combat/endTurnDecrement' });
     expect(state.currentHP).toBe(hpBeforeEndTurn); // no change
     expect(state.pendingStabilizationPrompt).toBe(false);
+  });
+});
+
+// ----------------------------------------------------------------
+// activeConditions persistence
+// ----------------------------------------------------------------
+
+describe('initFromSession activeConditions', () => {
+  it('restores conditions from the session doc', () => {
+    const doc = makeSessionDoc({
+      activeConditions: [{ name: 'Shaken', description: '', effects: [] }],
+    });
+    const state = combatReducer(undefined, initFromSession(doc));
+    expect(state.activeConditions).toHaveLength(1);
+    expect(state.activeConditions[0].name).toBe('Shaken');
+  });
+
+  it('defaults to empty array when session doc has no activeConditions field', () => {
+    const doc = makeSessionDoc();
+    // Simulate a legacy doc that pre-dates the activeConditions field
+    const { activeConditions: _, ...legacyDoc } = doc;
+    const state = combatReducer(undefined, initFromSession(legacyDoc as unknown as PlaySessionDoc));
+    expect(state.activeConditions).toHaveLength(0);
+  });
+});
+
+describe('initNewSession clears activeConditions', () => {
+  it('starts with empty conditions regardless of prior state', () => {
+    let state = combatReducer(undefined, setSessionConditions([makeCondition('Shaken')]));
+    state = combatReducer(state, initNewSession({ maxHP: 40 }));
+    expect(state.activeConditions).toHaveLength(0);
+  });
+});
+
+describe('resetCombat clears activeConditions', () => {
+  it('removes all conditions when combat resets', () => {
+    let state = combatReducer(undefined, setSessionConditions([makeCondition('Shaken')]));
+    state = combatReducer(state, resetCombat());
+    expect(state.activeConditions).toHaveLength(0);
   });
 });
 
