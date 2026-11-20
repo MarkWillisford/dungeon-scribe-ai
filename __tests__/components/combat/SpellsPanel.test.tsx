@@ -2,6 +2,7 @@ import React from 'react';
 import { render, type RenderedNode } from '../../helpers/testUtils';
 import { SpellsPanel } from '@/components/combat/SpellsPanel';
 import type { SpellcastingPool, PreparedSpell } from '@/types/spells';
+import { preparedSpellKey } from '@/utils/spellUtils';
 
 // ----------------------------------------------------------------
 // Helpers
@@ -40,7 +41,12 @@ function makeBasePool(baseClass: string, total: number[]): SpellcastingPool {
   };
 }
 
-function makePreparedSpell(name: string, className: string, level: number): PreparedSpell {
+function makePreparedSpell(
+  name: string,
+  className: string,
+  level: number,
+  prepared = 1,
+): PreparedSpell {
   return {
     name,
     className,
@@ -59,7 +65,7 @@ function makePreparedSpell(name: string, className: string, level: number): Prep
     spellResistance: 'Yes',
     description: 'Deals fire damage.',
     source: 'Core Rulebook',
-    prepared: 1,
+    prepared,
     cast: 0,
   };
 }
@@ -70,7 +76,8 @@ function makeProps(overrides: Partial<React.ComponentProps<typeof SpellsPanel>> 
     preparedSpells: [],
     preparedSpellsCast: {},
     spellSlotsUsed: {},
-    onTogglePreparedSpell: jest.fn(),
+    onCastPreparedSpell: jest.fn(),
+    onUncastPreparedSpell: jest.fn(),
     onUseSpellSlot: jest.fn(),
     ...overrides,
   };
@@ -130,49 +137,66 @@ describe('SpellsPanel — prepared caster (wizard)', () => {
     expect(castCount).toBe(3);
   });
 
-  it('shows Uncast button for a cast spell', () => {
+  it('shows Uncast button for a cast spell (castCount > 0)', () => {
+    const castKey = preparedSpellKey(preparedSpells[1]); // Fireball
     const { getByText } = render(
       <SpellsPanel
         {...makeProps({
           pools: [wizardPool],
           preparedSpells,
-          preparedSpellsCast: { '1': true }, // Fireball at index 1 is cast
+          preparedSpellsCast: { [castKey]: 1 },
         })}
       />,
     );
     expect(getByText('Uncast')).toBeTruthy();
   });
 
-  it('calls onTogglePreparedSpell with correct index when Cast is pressed', () => {
-    const onToggle = jest.fn();
-    const { tree } = render(
+  it('hides Cast button for a fully-cast spell (castCount >= prepared)', () => {
+    const castKey = preparedSpellKey(preparedSpells[0]); // Magic Missile (prepared=1)
+    const { getAllText } = render(
       <SpellsPanel
-        {...makeProps({ pools: [wizardPool], preparedSpells, onTogglePreparedSpell: onToggle })}
+        {...makeProps({
+          pools: [wizardPool],
+          preparedSpells,
+          preparedSpellsCast: { [castKey]: 1 },
+        })}
       />,
     );
-    // "Cast Magic Missile" is spell at index 0
+    // Magic Missile is fully cast — no Cast button for it; Fireball and Mage Armor still have Cast
+    const castCount = getAllText().filter((t) => t === 'Cast').length;
+    expect(castCount).toBe(2);
+  });
+
+  it('calls onCastPreparedSpell with stable key and maxCasts when Cast is pressed', () => {
+    const onCast = jest.fn();
+    const { tree } = render(
+      <SpellsPanel
+        {...makeProps({ pools: [wizardPool], preparedSpells, onCastPreparedSpell: onCast })}
+      />,
+    );
     const btn = findByLabel(tree, 'Cast Magic Missile');
     expect(btn).toBeTruthy();
     if (btn?.props?.onPress) btn.props.onPress();
-    expect(onToggle).toHaveBeenCalledWith(0);
+    expect(onCast).toHaveBeenCalledWith('Magic Missile|1|wizard|', 1);
   });
 
-  it('calls onTogglePreparedSpell with correct index when Uncast is pressed', () => {
-    const onToggle = jest.fn();
+  it('calls onUncastPreparedSpell with stable key when Uncast is pressed', () => {
+    const onUncast = jest.fn();
+    const castKey = preparedSpellKey(preparedSpells[0]); // Magic Missile
     const { tree } = render(
       <SpellsPanel
         {...makeProps({
           pools: [wizardPool],
           preparedSpells,
-          preparedSpellsCast: { '0': true },
-          onTogglePreparedSpell: onToggle,
+          preparedSpellsCast: { [castKey]: 1 },
+          onUncastPreparedSpell: onUncast,
         })}
       />,
     );
     const btn = findByLabel(tree, 'Uncast Magic Missile');
     expect(btn).toBeTruthy();
     if (btn?.props?.onPress) btn.props.onPress();
-    expect(onToggle).toHaveBeenCalledWith(0);
+    expect(onUncast).toHaveBeenCalledWith('Magic Missile|1|wizard|');
   });
 
   it('shows empty prepared message when pool has no matching spells', () => {
@@ -180,6 +204,128 @@ describe('SpellsPanel — prepared caster (wizard)', () => {
       <SpellsPanel {...makeProps({ pools: [wizardPool], preparedSpells: [] })} />,
     );
     expect(getByText('No prepared spells.')).toBeTruthy();
+  });
+
+  it('cast mark follows the spell when list order changes', () => {
+    // Start: [A, B, C], cast B at stable key
+    const A = makePreparedSpell('Magic Missile', 'wizard', 1);
+    const B = makePreparedSpell('Fireball', 'wizard', 3);
+    const C = makePreparedSpell('Mage Armor', 'wizard', 1);
+    const castKey = preparedSpellKey(B);
+
+    // Simulate removing A — new list is [B, C]
+    const reorderedSpells = [B, C];
+    const { getAllText } = render(
+      <SpellsPanel
+        {...makeProps({
+          pools: [wizardPool],
+          preparedSpells: reorderedSpells,
+          preparedSpellsCast: { [castKey]: 1 },
+        })}
+      />,
+    );
+    // B (Fireball) is still cast after reorder; C (Mage Armor) is not cast
+    const uncastCount = getAllText().filter((t) => t === 'Uncast').length;
+    const castCount = getAllText().filter((t) => t === 'Cast').length;
+    expect(uncastCount).toBe(1); // only Fireball
+    expect(castCount).toBe(1); // only Mage Armor
+
+    // Confirm Fireball shows Uncast and Mage Armor shows Cast (not swapped)
+    const { tree } = render(
+      <SpellsPanel
+        {...makeProps({
+          pools: [wizardPool],
+          preparedSpells: reorderedSpells,
+          preparedSpellsCast: { [castKey]: 1 },
+        })}
+      />,
+    );
+    expect(findByLabel(tree, 'Uncast Fireball')).toBeTruthy();
+    expect(findByLabel(tree, 'Cast Mage Armor')).toBeTruthy();
+    // Confirm regression: without fix, Cast Fireball (index 0 of reordered list) would show
+    // After fix: Cast Fireball is NOT present (Fireball is marked cast)
+    expect(findByLabel(tree, 'Cast Fireball')).toBeNull();
+  });
+});
+
+// ----------------------------------------------------------------
+// Multi-prepared spell tracking
+// ----------------------------------------------------------------
+
+describe('SpellsPanel — multi-prepared spell', () => {
+  const wizardPool = makeBasePool('wizard', [4, 3, 2]);
+  const multiSpell = makePreparedSpell('Magic Missile', 'wizard', 1, 2);
+  const spellKey = preparedSpellKey(multiSpell);
+
+  it('shows cast count in meta text when partially cast', () => {
+    const { getByText } = render(
+      <SpellsPanel
+        {...makeProps({
+          pools: [wizardPool],
+          preparedSpells: [multiSpell],
+          preparedSpellsCast: { [spellKey]: 1 },
+        })}
+      />,
+    );
+    expect(getByText('(1/2 cast)')).toBeTruthy();
+  });
+
+  it('shows both Cast and Uncast buttons when partially cast', () => {
+    const { getAllText } = render(
+      <SpellsPanel
+        {...makeProps({
+          pools: [wizardPool],
+          preparedSpells: [multiSpell],
+          preparedSpellsCast: { [spellKey]: 1 },
+        })}
+      />,
+    );
+    expect(getAllText().filter((t) => t === 'Cast').length).toBe(1);
+    expect(getAllText().filter((t) => t === 'Uncast').length).toBe(1);
+  });
+
+  it('shows only Uncast when all copies are cast', () => {
+    const { getAllText } = render(
+      <SpellsPanel
+        {...makeProps({
+          pools: [wizardPool],
+          preparedSpells: [multiSpell],
+          preparedSpellsCast: { [spellKey]: 2 },
+        })}
+      />,
+    );
+    expect(getAllText().filter((t) => t === 'Cast').length).toBe(0);
+    expect(getAllText().filter((t) => t === 'Uncast').length).toBe(1);
+  });
+
+  it('shows only Cast when none are cast', () => {
+    const { getAllText } = render(
+      <SpellsPanel
+        {...makeProps({
+          pools: [wizardPool],
+          preparedSpells: [multiSpell],
+          preparedSpellsCast: {},
+        })}
+      />,
+    );
+    expect(getAllText().filter((t) => t === 'Cast').length).toBe(1);
+    expect(getAllText().filter((t) => t === 'Uncast').length).toBe(0);
+  });
+
+  it('calls onCastPreparedSpell with correct maxCasts for multi-prepared', () => {
+    const onCast = jest.fn();
+    const { tree } = render(
+      <SpellsPanel
+        {...makeProps({
+          pools: [wizardPool],
+          preparedSpells: [multiSpell],
+          onCastPreparedSpell: onCast,
+        })}
+      />,
+    );
+    const btn = findByLabel(tree, 'Cast Magic Missile');
+    if (btn?.props?.onPress) btn.props.onPress();
+    expect(onCast).toHaveBeenCalledWith(spellKey, 2);
   });
 });
 
@@ -256,6 +402,20 @@ describe('SpellsPanel — spontaneous caster (sorcerer)', () => {
     const emptyPool = makeBasePool('sorcerer', [0, 0, 0]);
     const { getByText } = render(<SpellsPanel {...makeProps({ pools: [emptyPool] })} />);
     expect(getByText('No spell slots available.')).toBeTruthy();
+  });
+
+  it('never displays used above the current maximum when stored count exceeds total', () => {
+    // used=6 for a pool with total=5 — remaining must display 0, not negative
+    const { getByText } = render(
+      <SpellsPanel
+        {...makeProps({
+          pools: [sorcererPool],
+          spellSlotsUsed: { sorcerer: [0, 6, 0] }, // 6 used but total is 5
+        })}
+      />,
+    );
+    // Remaining = max(0, 5-5) = 0 after capping used to total
+    expect(getByText('0/5')).toBeTruthy();
   });
 });
 

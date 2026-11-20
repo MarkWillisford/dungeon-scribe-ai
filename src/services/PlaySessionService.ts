@@ -184,7 +184,7 @@ export class PlaySessionService {
       combatAbilities,
       spellSlotsUsed,
       preparedSpellsCast: PlaySessionService.isPlainObject(data.preparedSpellsCast)
-        ? (data.preparedSpellsCast as Record<string, boolean>)
+        ? (data.preparedSpellsCast as Record<string, number>)
         : {},
       resourcePools,
       round: PlaySessionService.asNumber(data.round),
