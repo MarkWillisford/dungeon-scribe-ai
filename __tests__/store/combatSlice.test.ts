@@ -23,7 +23,8 @@ import combatReducer, {
   resetCombat,
   initNewSession,
   initFromSession,
-  togglePreparedSpell,
+  castPreparedSpell,
+  uncastPreparedSpell,
   useSpellSlot,
   confirmStabilization,
   clearStabilizationPrompt,
@@ -640,7 +641,7 @@ function makeSessionDoc(overrides: Partial<PlaySessionDoc> = {}): PlaySessionDoc
       twoWeaponFightingLightOffhand: false,
     },
     spellSlotsUsed: { wizard: [0, 2, 1] },
-    preparedSpellsCast: { '0': true },
+    preparedSpellsCast: { 'Magic Missile|1|wizard|': 1 },
     resourcePools: { rage: 5 },
     round: 7,
     createdAt: '2026-01-01T00:00:00.000Z',
@@ -887,7 +888,7 @@ describe('initFromSession resource pools', () => {
 
   it('restores preparedSpellsCast from the session doc', () => {
     const state = combatReducer(undefined, initFromSession(makeSessionDoc()));
-    expect(state.preparedSpellsCast['0']).toBe(true);
+    expect(state.preparedSpellsCast['Magic Missile|1|wizard|']).toBe(1);
   });
 
   it('restores spellSlotsUsed from the session doc', () => {
@@ -902,37 +903,110 @@ describe('initFromSession resource pools', () => {
     expect(state.preparedSpellsCast).toEqual({});
     expect(state.spellSlotsUsed).toEqual({});
   });
+
+  it('normalises legacy boolean true values to 1 on load', () => {
+    const doc = makeSessionDoc({
+      preparedSpellsCast: { 'Fireball|3|wizard|': true as unknown as number },
+    });
+    const state = combatReducer(undefined, initFromSession(doc));
+    expect(state.preparedSpellsCast['Fireball|3|wizard|']).toBe(1);
+  });
+
+  it('normalises legacy boolean false values to 0 on load', () => {
+    const doc = makeSessionDoc({
+      preparedSpellsCast: { 'Fireball|3|wizard|': false as unknown as number },
+    });
+    const state = combatReducer(undefined, initFromSession(doc));
+    expect(state.preparedSpellsCast['Fireball|3|wizard|']).toBe(0);
+  });
 });
 
 // ----------------------------------------------------------------
-// togglePreparedSpell
+// castPreparedSpell / uncastPreparedSpell
 // ----------------------------------------------------------------
 
-describe('togglePreparedSpell', () => {
-  it('marks a spell as cast (false → true)', () => {
-    const state = combatReducer(undefined, togglePreparedSpell({ spellIndex: 0 }));
-    expect(state.preparedSpellsCast['0']).toBe(true);
+describe('castPreparedSpell', () => {
+  it('increments cast count from 0 to 1', () => {
+    const state = combatReducer(
+      undefined,
+      castPreparedSpell({ spellKey: 'Fireball|3|wizard|', maxCasts: 1 }),
+    );
+    expect(state.preparedSpellsCast['Fireball|3|wizard|']).toBe(1);
   });
 
-  it('unmarks a cast spell (true → false)', () => {
-    let state = combatReducer(undefined, togglePreparedSpell({ spellIndex: 2 }));
-    state = combatReducer(state, togglePreparedSpell({ spellIndex: 2 }));
-    expect(state.preparedSpellsCast['2']).toBe(false);
+  it('increments again up to maxCasts', () => {
+    let state = combatReducer(
+      undefined,
+      castPreparedSpell({ spellKey: 'Fireball|3|wizard|', maxCasts: 2 }),
+    );
+    state = combatReducer(
+      state,
+      castPreparedSpell({ spellKey: 'Fireball|3|wizard|', maxCasts: 2 }),
+    );
+    expect(state.preparedSpellsCast['Fireball|3|wizard|']).toBe(2);
   });
 
-  it('toggles different spell indices independently', () => {
-    let state = combatReducer(undefined, togglePreparedSpell({ spellIndex: 0 }));
-    state = combatReducer(state, togglePreparedSpell({ spellIndex: 3 }));
-    expect(state.preparedSpellsCast['0']).toBe(true);
-    expect(state.preparedSpellsCast['3']).toBe(true);
-    state = combatReducer(state, togglePreparedSpell({ spellIndex: 0 }));
-    expect(state.preparedSpellsCast['0']).toBe(false);
-    expect(state.preparedSpellsCast['3']).toBe(true);
+  it('does not exceed maxCasts', () => {
+    let state = combatReducer(
+      undefined,
+      castPreparedSpell({ spellKey: 'Fireball|3|wizard|', maxCasts: 1 }),
+    );
+    state = combatReducer(
+      state,
+      castPreparedSpell({ spellKey: 'Fireball|3|wizard|', maxCasts: 1 }),
+    );
+    expect(state.preparedSpellsCast['Fireball|3|wizard|']).toBe(1);
   });
 
-  it('starts from false when the key is absent', () => {
-    const state = combatReducer(undefined, togglePreparedSpell({ spellIndex: 99 }));
-    expect(state.preparedSpellsCast['99']).toBe(true);
+  it('tracks multiple different spells independently', () => {
+    let state = combatReducer(
+      undefined,
+      castPreparedSpell({ spellKey: 'Magic Missile|1|wizard|', maxCasts: 1 }),
+    );
+    state = combatReducer(
+      state,
+      castPreparedSpell({ spellKey: 'Fireball|3|wizard|', maxCasts: 1 }),
+    );
+    expect(state.preparedSpellsCast['Magic Missile|1|wizard|']).toBe(1);
+    expect(state.preparedSpellsCast['Fireball|3|wizard|']).toBe(1);
+  });
+
+  it('starts from 0 when the key is absent', () => {
+    const state = combatReducer(
+      undefined,
+      castPreparedSpell({ spellKey: 'NewSpell|1|wizard|', maxCasts: 1 }),
+    );
+    expect(state.preparedSpellsCast['NewSpell|1|wizard|']).toBe(1);
+  });
+});
+
+describe('uncastPreparedSpell', () => {
+  it('decrements cast count', () => {
+    let state = combatReducer(
+      undefined,
+      castPreparedSpell({ spellKey: 'Fireball|3|wizard|', maxCasts: 2 }),
+    );
+    state = combatReducer(state, uncastPreparedSpell({ spellKey: 'Fireball|3|wizard|' }));
+    expect(state.preparedSpellsCast['Fireball|3|wizard|']).toBeUndefined();
+  });
+
+  it('does not go below 0', () => {
+    const state = combatReducer(undefined, uncastPreparedSpell({ spellKey: 'Fireball|3|wizard|' }));
+    expect(state.preparedSpellsCast['Fireball|3|wizard|']).toBeUndefined();
+  });
+
+  it('allows partial uncast of a multi-prepared spell', () => {
+    let state = combatReducer(
+      undefined,
+      castPreparedSpell({ spellKey: 'Fireball|3|wizard|', maxCasts: 2 }),
+    );
+    state = combatReducer(
+      state,
+      castPreparedSpell({ spellKey: 'Fireball|3|wizard|', maxCasts: 2 }),
+    );
+    expect(state.preparedSpellsCast['Fireball|3|wizard|']).toBe(2);
+    state = combatReducer(state, uncastPreparedSpell({ spellKey: 'Fireball|3|wizard|' }));
+    expect(state.preparedSpellsCast['Fireball|3|wizard|']).toBe(1);
   });
 });
 
@@ -1040,8 +1114,14 @@ describe('applyLongRest', () => {
 
   it('resets preparedSpellsCast to empty', () => {
     let state = combatReducer(undefined, initHP(20));
-    state = combatReducer(state, togglePreparedSpell({ spellIndex: 0 }));
-    state = combatReducer(state, togglePreparedSpell({ spellIndex: 3 }));
+    state = combatReducer(
+      state,
+      castPreparedSpell({ spellKey: 'Fireball|3|wizard|', maxCasts: 1 }),
+    );
+    state = combatReducer(
+      state,
+      castPreparedSpell({ spellKey: 'Mage Armor|1|wizard|', maxCasts: 1 }),
+    );
     state = combatReducer(state, restAction());
     expect(state.preparedSpellsCast).toEqual({});
   });

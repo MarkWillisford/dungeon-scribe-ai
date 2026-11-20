@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, Pressable } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import type { SpellcastingPool, PreparedSpell } from '@/types/spells';
+import { preparedSpellKey } from '@/utils/spellUtils';
 
 // Classes that cast spontaneously (slot-based, no spell preparation)
 const SPONTANEOUS_CLASSES = new Set([
@@ -22,11 +23,12 @@ function isSpontaneous(baseClass: string): boolean {
 export interface SpellsPanelProps {
   pools: SpellcastingPool[];
   preparedSpells: PreparedSpell[];
-  /** stringified index into preparedSpells → cast state */
-  preparedSpellsCast: Record<string, boolean>;
+  /** stable spell key (preparedSpellKey) → number of castings used (0 = not cast) */
+  preparedSpellsCast: Record<string, number>;
   /** pool baseClass → used slot count per spell level (index = level) */
   spellSlotsUsed: Record<string, number[]>;
-  onTogglePreparedSpell: (spellIndex: number) => void;
+  onCastPreparedSpell: (spellKey: string, maxCasts: number) => void;
+  onUncastPreparedSpell: (spellKey: string) => void;
   onUseSpellSlot: (poolKey: string, level: number) => void;
   testID?: string;
 }
@@ -36,7 +38,8 @@ export function SpellsPanel({
   preparedSpells,
   preparedSpellsCast,
   spellSlotsUsed,
-  onTogglePreparedSpell,
+  onCastPreparedSpell,
+  onUncastPreparedSpell,
   onUseSpellSlot,
   testID,
 }: SpellsPanelProps) {
@@ -61,7 +64,8 @@ export function SpellsPanel({
           preparedSpells={preparedSpells}
           preparedSpellsCast={preparedSpellsCast}
           spellSlotsUsed={spellSlotsUsed}
-          onTogglePreparedSpell={onTogglePreparedSpell}
+          onCastPreparedSpell={onCastPreparedSpell}
+          onUncastPreparedSpell={onUncastPreparedSpell}
           onUseSpellSlot={onUseSpellSlot}
           colors={colors}
           fantasy={fantasy}
@@ -74,9 +78,10 @@ export function SpellsPanel({
 interface PoolSectionProps {
   pool: SpellcastingPool;
   preparedSpells: PreparedSpell[];
-  preparedSpellsCast: Record<string, boolean>;
+  preparedSpellsCast: Record<string, number>;
   spellSlotsUsed: Record<string, number[]>;
-  onTogglePreparedSpell: (spellIndex: number) => void;
+  onCastPreparedSpell: (spellKey: string, maxCasts: number) => void;
+  onUncastPreparedSpell: (spellKey: string) => void;
   onUseSpellSlot: (poolKey: string, level: number) => void;
   colors: ReturnType<typeof useTheme>['colors'];
   fantasy: ReturnType<typeof useTheme>['fantasy'];
@@ -87,7 +92,8 @@ function PoolSection({
   preparedSpells,
   preparedSpellsCast,
   spellSlotsUsed,
-  onTogglePreparedSpell,
+  onCastPreparedSpell,
+  onUncastPreparedSpell,
   onUseSpellSlot,
   colors,
   fantasy,
@@ -118,7 +124,8 @@ function PoolSection({
           pool={pool}
           preparedSpells={preparedSpells}
           preparedSpellsCast={preparedSpellsCast}
-          onTogglePreparedSpell={onTogglePreparedSpell}
+          onCastPreparedSpell={onCastPreparedSpell}
+          onUncastPreparedSpell={onUncastPreparedSpell}
           colors={colors}
           fantasy={fantasy}
         />
@@ -151,7 +158,9 @@ function SpontaneousView({
   for (let lvl = 0; lvl < pool.spellsPerDay.total.length; lvl++) {
     const total = pool.spellsPerDay.total[lvl] ?? 0;
     if (total > 0) {
-      levels.push({ level: lvl, total, used: usedForPool[lvl] ?? 0 });
+      // Cap used at total so stored counts never display above the current maximum
+      const used = Math.min(usedForPool[lvl] ?? 0, total);
+      levels.push({ level: lvl, total, used });
     }
   }
 
@@ -216,8 +225,9 @@ function SpontaneousView({
 interface PreparedViewProps {
   pool: SpellcastingPool;
   preparedSpells: PreparedSpell[];
-  preparedSpellsCast: Record<string, boolean>;
-  onTogglePreparedSpell: (spellIndex: number) => void;
+  preparedSpellsCast: Record<string, number>;
+  onCastPreparedSpell: (spellKey: string, maxCasts: number) => void;
+  onUncastPreparedSpell: (spellKey: string) => void;
   colors: ReturnType<typeof useTheme>['colors'];
   fantasy: ReturnType<typeof useTheme>['fantasy'];
 }
@@ -226,15 +236,16 @@ function PreparedView({
   pool,
   preparedSpells,
   preparedSpellsCast,
-  onTogglePreparedSpell,
+  onCastPreparedSpell,
+  onUncastPreparedSpell,
   colors,
   fantasy,
 }: PreparedViewProps) {
-  // Collect prepared spells for this pool's class with their original indices
-  const poolSpells: { spell: PreparedSpell; index: number }[] = [];
-  preparedSpells.forEach((spell, index) => {
+  // Collect prepared spells for this pool's class with their stable keys
+  const poolSpells: { spell: PreparedSpell; key: string }[] = [];
+  preparedSpells.forEach((spell) => {
     if (spell.className.toLowerCase() === pool.baseClass.toLowerCase()) {
-      poolSpells.push({ spell, index });
+      poolSpells.push({ spell, key: preparedSpellKey(spell) });
     }
   });
 
@@ -246,17 +257,20 @@ function PreparedView({
 
   return (
     <View style={styles.spellList}>
-      {poolSpells.map(({ spell, index }) => {
-        const isCast = preparedSpellsCast[String(index)] ?? false;
+      {poolSpells.map(({ spell, key }) => {
+        const castCount = preparedSpellsCast[key] ?? 0;
+        const allCast = castCount >= spell.prepared;
+        const noneCast = castCount === 0;
+        const isMulti = spell.prepared > 1;
         const spellLevel = spell.classLevels[pool.baseClass.toLowerCase()] ?? 0;
         return (
           <View
-            key={index}
+            key={key}
             style={[
               styles.spellRow,
               {
                 borderColor: colors.border.DEFAULT,
-                backgroundColor: isCast ? colors.bg.primary : colors.bg.tertiary,
+                backgroundColor: allCast ? colors.bg.primary : colors.bg.tertiary,
               },
             ]}
           >
@@ -264,7 +278,7 @@ function PreparedView({
               <Text
                 style={[
                   styles.spellName,
-                  { color: isCast ? colors.text.tertiary : colors.text.primary },
+                  { color: allCast ? colors.text.tertiary : colors.text.primary },
                 ]}
                 numberOfLines={1}
               >
@@ -273,30 +287,40 @@ function PreparedView({
               <Text style={[styles.spellMeta, { color: colors.text.tertiary }]}>
                 {spell.domain ? `${spell.domain} · ` : ''}
                 {spellLevel === 0 ? 'Cantrip' : `Level ${spellLevel}`}
-                {spell.prepared > 1 ? ` (×${spell.prepared})` : ''}
+                {isMulti ? ` (${castCount}/${spell.prepared} cast)` : ''}
               </Text>
             </View>
 
-            <Pressable
-              style={[
-                styles.castToggle,
-                isCast
-                  ? { backgroundColor: colors.bg.secondary, borderColor: colors.border.DEFAULT }
-                  : { backgroundColor: fantasy.bronze, borderColor: fantasy.bronze },
-              ]}
-              onPress={() => onTogglePreparedSpell(index)}
-              accessibilityLabel={isCast ? `Uncast ${spell.name}` : `Cast ${spell.name}`}
-              accessibilityState={{ selected: isCast }}
-            >
-              <Text
-                style={[
-                  styles.castToggleText,
-                  { color: isCast ? colors.text.secondary : '#FFFFFF' },
-                ]}
-              >
-                {isCast ? 'Uncast' : 'Cast'}
-              </Text>
-            </Pressable>
+            <View style={styles.castButtons}>
+              {!allCast && (
+                <Pressable
+                  style={[
+                    styles.castToggle,
+                    { backgroundColor: fantasy.bronze, borderColor: fantasy.bronze },
+                  ]}
+                  onPress={() => onCastPreparedSpell(key, spell.prepared)}
+                  accessibilityLabel={`Cast ${spell.name}`}
+                  accessibilityState={{ selected: false }}
+                >
+                  <Text style={[styles.castToggleText, { color: '#FFFFFF' }]}>Cast</Text>
+                </Pressable>
+              )}
+              {!noneCast && (
+                <Pressable
+                  style={[
+                    styles.castToggle,
+                    { backgroundColor: colors.bg.secondary, borderColor: colors.border.DEFAULT },
+                  ]}
+                  onPress={() => onUncastPreparedSpell(key)}
+                  accessibilityLabel={`Uncast ${spell.name}`}
+                  accessibilityState={{ selected: true }}
+                >
+                  <Text style={[styles.castToggleText, { color: colors.text.secondary }]}>
+                    Uncast
+                  </Text>
+                </Pressable>
+              )}
+            </View>
           </View>
         );
       })}
@@ -394,6 +418,10 @@ const styles = StyleSheet.create({
   spellMeta: {
     fontFamily: 'LibreBaskerville',
     fontSize: 11,
+  },
+  castButtons: {
+    flexDirection: 'row',
+    gap: 4,
   },
   castToggle: {
     borderWidth: 1,

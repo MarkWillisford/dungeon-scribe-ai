@@ -15,8 +15,8 @@ export interface PlaySessionDoc {
   combatAbilities: CombatAbilityState;
   /** pool.id ?? pool.baseClass → used slot count per spell level (index = level, 0 = cantrips) */
   spellSlotsUsed: Record<string, number[]>;
-  /** stringified index into character.spellcasting.preparedSpells → cast state */
-  preparedSpellsCast: Record<string, boolean>;
+  /** stable spell key (preparedSpellKey) → number of castings used (0 = not cast) */
+  preparedSpellsCast: Record<string, number>;
   /** resource pool id → current remaining value */
   resourcePools: Record<string, number>;
   round: number;

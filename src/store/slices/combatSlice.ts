@@ -51,7 +51,8 @@ interface CombatState {
   resourcePools: Record<string, number>;
 
   // Spell tracking
-  preparedSpellsCast: Record<string, boolean>;
+  /** stable spell key (from preparedSpellKey) → number of castings used (0 = not cast) */
+  preparedSpellsCast: Record<string, number>;
   spellSlotsUsed: Record<string, number[]>;
 }
 
@@ -469,7 +470,11 @@ const combatSlice = createSlice({
       };
       state.round = s.round;
       state.resourcePools = s.resourcePools ?? {};
-      state.preparedSpellsCast = s.preparedSpellsCast ?? {};
+      // Normalize: older sessions stored boolean values; new format is a cast count (number).
+      const rawCast = (s.preparedSpellsCast ?? {}) as Record<string, boolean | number>;
+      state.preparedSpellsCast = Object.fromEntries(
+        Object.entries(rawCast).map(([k, v]) => [k, typeof v === 'boolean' ? (v ? 1 : 0) : v]),
+      );
       state.spellSlotsUsed = s.spellSlotsUsed ?? {};
       // Re-derive staggered from restored HP state
       const staggered =
@@ -485,9 +490,24 @@ const combatSlice = createSlice({
       // Roll log and buff library are not session-scoped — leave them as-is
     },
 
-    togglePreparedSpell(state, action: PayloadAction<{ spellIndex: number }>) {
-      const key = String(action.payload.spellIndex);
-      state.preparedSpellsCast[key] = !state.preparedSpellsCast[key];
+    castPreparedSpell(state, action: PayloadAction<{ spellKey: string; maxCasts: number }>) {
+      const { spellKey, maxCasts } = action.payload;
+      const current = state.preparedSpellsCast[spellKey] ?? 0;
+      if (current < maxCasts) {
+        state.preparedSpellsCast[spellKey] = current + 1;
+      }
+    },
+
+    uncastPreparedSpell(state, action: PayloadAction<{ spellKey: string }>) {
+      const { spellKey } = action.payload;
+      const current = state.preparedSpellsCast[spellKey] ?? 0;
+      if (current > 0) {
+        if (current === 1) {
+          delete state.preparedSpellsCast[spellKey];
+        } else {
+          state.preparedSpellsCast[spellKey] = current - 1;
+        }
+      }
     },
 
     useSpellSlot(state, action: PayloadAction<{ poolKey: string; level: number }>) {
@@ -587,7 +607,8 @@ export const {
   resetCombat,
   initNewSession,
   initFromSession,
-  togglePreparedSpell,
+  castPreparedSpell,
+  uncastPreparedSpell,
   useSpellSlot,
   applyLongRest,
 } = combatSlice.actions;

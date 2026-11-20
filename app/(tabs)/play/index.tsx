@@ -35,7 +35,8 @@ import {
   setBuffLibrary,
   toggleBuff,
   toggleCombatAbility,
-  togglePreparedSpell,
+  castPreparedSpell,
+  uncastPreparedSpell,
   toggleStaggered,
   useSpellSlot as expendSpellSlot,
 } from '@store/slices/combatSlice';
@@ -50,6 +51,7 @@ import type { PlaySessionDoc } from '@/types/playSession';
 import { BuffedTotals } from '@/types/combat';
 import type { CharacterSummary } from '@/types/character';
 import { BUFF_PRESETS } from '@/data/buffs/presets';
+import { migrateIndexKeyedCastMarks } from '@/utils/spellUtils';
 
 import { HPTracker } from '@/components/combat/HPTracker';
 import { InitiativeRow } from '@/components/combat/InitiativeRow';
@@ -156,7 +158,13 @@ export default function CombatTrackerScreen() {
         if (ids.length === 1 && ids[0] === (character?.info.firebaseId ?? character?.info.id)) {
           const sessionDoc = await PlaySessionService.get(userId, ids[0]);
           if (sessionDoc) {
-            dispatch(initFromSession(sessionDoc));
+            const migratedCast = character
+              ? migrateIndexKeyedCastMarks(
+                  character.spellcasting.preparedSpells,
+                  sessionDoc.preparedSpellsCast as Record<string, boolean | number>,
+                )
+              : sessionDoc.preparedSpellsCast;
+            dispatch(initFromSession({ ...sessionDoc, preparedSpellsCast: migratedCast }));
             setSessionCharacterId(ids[0]);
             return;
           }
@@ -381,7 +389,11 @@ export default function CombatTrackerScreen() {
       try {
         const sessionDoc = await PlaySessionService.get(userId, characterId);
         if (sessionDoc) {
-          dispatch(initFromSession(sessionDoc));
+          const migratedCast = migrateIndexKeyedCastMarks(
+            character.spellcasting.preparedSpells,
+            sessionDoc.preparedSpellsCast as Record<string, boolean | number>,
+          );
+          dispatch(initFromSession({ ...sessionDoc, preparedSpellsCast: migratedCast }));
           setSessionCharacterId(characterId);
           // playView → 'tracker' automatically because currentHP becomes non-null
         } else {
@@ -725,7 +737,10 @@ export default function CombatTrackerScreen() {
             preparedSpells={character.spellcasting.preparedSpells}
             preparedSpellsCast={preparedSpellsCast}
             spellSlotsUsed={spellSlotsUsed}
-            onTogglePreparedSpell={(spellIndex) => dispatch(togglePreparedSpell({ spellIndex }))}
+            onCastPreparedSpell={(spellKey, maxCasts) =>
+              dispatch(castPreparedSpell({ spellKey, maxCasts }))
+            }
+            onUncastPreparedSpell={(spellKey) => dispatch(uncastPreparedSpell({ spellKey }))}
             onUseSpellSlot={(poolKey, level) => dispatch(expendSpellSlot({ poolKey, level }))}
             testID="spells-panel"
           />
