@@ -38,6 +38,43 @@ function ruleCollectionNames(rules: string): Set<string> {
   return names;
 }
 
+/** Extract the body of a specific subcollection match block. */
+function userSubcollectionRuleBody(rules: string, subcollection: string): string | null {
+  // Match: match /users/{userId}/<subcollection>/{docId} { ... }
+  const re = new RegExp(
+    `match\\s+/users/\\{userId\\}/${subcollection}/\\{[^}]*\\}\\s*\\{([^}]*)\\}`,
+  );
+  const m = re.exec(rules);
+  return m ? m[1] : null;
+}
+
+describe('firestore.rules — users/{userId}/rulesets/{rulesetId} owner-only rule (#428)', () => {
+  const rules = readFileSync(resolve(__dirname, '../../firestore.rules'), 'utf8');
+
+  it('has a match block for users/{userId}/rulesets/{rulesetId}', () => {
+    const body = userSubcollectionRuleBody(rules, 'rulesets');
+    expect(body).not.toBeNull();
+  });
+
+  it('grants read access only to the owner', () => {
+    const body = userSubcollectionRuleBody(rules, 'rulesets');
+    expect(body).toMatch(/allow\s+.*\bread\b/);
+    expect(body).toMatch(/isUser\(userId\)/);
+  });
+
+  it('grants write access only to the owner', () => {
+    const body = userSubcollectionRuleBody(rules, 'rulesets');
+    expect(body).toMatch(/allow\s+.*\bwrite\b/);
+    expect(body).toMatch(/isUser\(userId\)/);
+  });
+
+  it('does not grant unconditional access', () => {
+    const body = userSubcollectionRuleBody(rules, 'rulesets');
+    // Rule body must reference a function, not just "if true"
+    expect(body).not.toMatch(/if\s+true\b/);
+  });
+});
+
 describe('firestore.rules — seeded collections have matching read rules (#244)', () => {
   const rules = readFileSync(resolve(__dirname, '../../firestore.rules'), 'utf8');
   const ruleNames = ruleCollectionNames(rules);

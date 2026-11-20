@@ -41,6 +41,11 @@ service cloud.firestore {
       allow read, write: if isUser(userId);
     }
 
+    // User rulesets — owner-only custom rulesets
+    match /users/{userId}/rulesets/{rulesetId} {
+      allow read, write: if isUser(userId);
+    }
+
     // Characters collection — ownership-based access
     match /characters/{characterId} {
       allow read: if isAuthenticated() && resource.data.userId == request.auth.uid;
