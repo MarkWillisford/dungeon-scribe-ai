@@ -394,15 +394,19 @@ export default function CombatTrackerScreen() {
     [dispatch, userId, character],
   );
 
-  const handleEndCombat = useCallback(async () => {
-    PlaySessionService.cancelPendingUpdate();
+  const handlePause = useCallback(async () => {
+    // Flush any pending debounced writes first so Firestore has the latest
+    // spell slots, resource pools, and buffs before we clear Redux state.
+    await PlaySessionService.flushPendingUpdate().catch((error) => {
+      console.error('Failed to flush play session on pause', error);
+    });
 
     // The session owns hit points while it runs; the character document owns
-    // them between sessions. Write the result back before tearing the session
-    // down, or every point of damage taken in play is discarded.
+    // them between sessions. Write the result back so the character sheet and
+    // any new session see the correct current HP.
     //
     // Temporary HP persists too. It lasts as long as the effect that granted it
-    // — false life runs for hours — so ending a session must not spend it. It is
+    // — false life runs for hours — so pausing must not spend it. It is
     // depleted by damage, cleared by a long rest, or cleared deliberately.
     const writeBackId = character?.info.firebaseId ?? character?.info.id;
     if (character && writeBackId && currentHP !== null) {
@@ -435,18 +439,17 @@ export default function CombatTrackerScreen() {
       }
     }
 
-    if (userId && sessionCharacterId) {
-      PlaySessionService.delete(userId, sessionCharacterId).catch((error) => {
-        console.error('Failed to end play session', error);
-      });
-      setActiveSessionIds((ids) => ids.filter((id) => id !== sessionCharacterId));
-    }
+    // Clear in-memory Redux state to transition back to the session picker.
+    // The session document is intentionally NOT deleted — it holds spell slots,
+    // resource pools, and active buffs so the player can resume where they left
+    // off. Only a Long Rest or explicit New Session resets those resources.
     dispatch(resetCombat());
     setSessionCharacterId(null);
-    sessionInitRef.current = false;
+    // Keep the session-init guard set so the auto-resume effect does not
+    // immediately re-load the session we just paused.
+    sessionInitRef.current = true;
     setSessionCheckDone(true);
-    sessionInitRef.current = false;
-  }, [dispatch, userId, sessionCharacterId, character, currentHP, nonlethalDamage, tempHP]);
+  }, [dispatch, character, currentHP, nonlethalDamage, tempHP]);
 
   const handleLongRest = useCallback(() => {
     if (!character || currentHP === null) return;
@@ -547,10 +550,10 @@ export default function CombatTrackerScreen() {
           </Pressable>
           <Pressable
             style={[styles.endBtn, { borderColor: colors.error.DEFAULT }]}
-            onPress={handleEndCombat}
-            accessibilityLabel="End combat"
+            onPress={handlePause}
+            accessibilityLabel="Pause session"
           >
-            <Text style={[styles.endBtnText, { color: colors.error.DEFAULT }]}>End</Text>
+            <Text style={[styles.endBtnText, { color: colors.error.DEFAULT }]}>Pause</Text>
           </Pressable>
         </View>
       </View>
